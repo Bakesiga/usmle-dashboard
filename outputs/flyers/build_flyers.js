@@ -267,10 +267,10 @@ function buildFlyer(pres, config) {
   });
 
   // ── CTA + contact ───────────────────────────────────
-  // Anchored near the bottom rule so the bottom of every flyer looks identical;
-  // the gap above CTA varies (Step 2 has more breathing room) but the bottom
-  // strip stays visually anchored.
-  const ctaY = 9.55;
+  // Pull CTA up to follow callout when there's empty space (Step 2),
+  // capped at 9.55 so Step 1 (taller topics block) still fits above the bottom rule.
+  const calloutEnd = calloutY + calloutH;
+  const ctaY = Math.min(calloutEnd + 0.25, 9.55);
   slide.addText("SIGN UP", {
     x: MARGIN, y: ctaY, w: CONTENT_W, h: 0.22,
     fontSize: 11, fontFace: "Calibri", color: deep,
