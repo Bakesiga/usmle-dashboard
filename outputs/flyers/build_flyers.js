@@ -141,9 +141,9 @@ function buildFlyer(pres, config) {
     x: MARGIN + 1.15, y: stripY + 0.46, w: CONTENT_W - 1.2, h: 0.30,
     fontSize: 12, fontFace: "Calibri", color: C.ink2, margin: 0,
   });
-  slide.addText("Epidemiology & biostatistics teaching assistant", {
+  slide.addText("Teaching Assistant  |  Epidemiology & Biostatistics, Duke Global Health Institute", {
     x: MARGIN + 1.15, y: stripY + 0.76, w: CONTENT_W - 1.2, h: 0.28,
-    fontSize: 11, fontFace: "Calibri", italic: true, color: deep, margin: 0,
+    fontSize: 10.5, fontFace: "Calibri", italic: true, color: deep, margin: 0,
   });
 
   // ── Stats row ───────────────────────────────────────
@@ -181,7 +181,7 @@ function buildFlyer(pres, config) {
     { title: "Daily classes",      body: "Monday to Sunday. Topic-by-topic flow that keeps you in the material every single day." },
     { title: "Active community",   body: "Off-class peer discussions, accountability, and rapid Q&A between sessions." },
     { title: "Textbook + Qbank",   body: "Full review of the recommended textbook plus USMLE-style questions from the recommended Qbank." },
-    { title: "End-to-end mentorship", body: "Guidance through ECFMG, CV, personal statement, interview prep, and residency application." },
+    { title: "End-to-end mentorship", body: "Guidance through the ECFMG application, CV, personal statement, interview prep, and the residency match." },
   ];
   cards.forEach((c, i) => {
     const col = i % 2;
