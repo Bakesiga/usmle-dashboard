@@ -1,15 +1,30 @@
 [
   {
-    "id": "example-2026-05-01",
+    "id": "example-step1",
+    "track": "step1",
     "date": "2026-05-01",
-    "topic": "Example: Cardiology — High-Yield Pharmacology",
+    "topic": "Step 1 — Cardiology Pharm (example)",
     "duration": "90 min",
     "tag": "Step 1",
     "tagColor": "pill-blue",
     "recording_url": "https://us02web.zoom.us/rec/share/EXAMPLE",
-    "slides_url": "https://drive.google.com/file/d/EXAMPLE/view",
+    "slides_url": "",
     "notes_url": "",
     "qbank_url": "",
-    "notes": "Replace this with a real session. Use ./admin.py session add to add new entries quickly. Recording must be set to 'Only authenticated users' in Zoom."
+    "notes": "Example Step 1 session. Replace with real entries via ./admin.py session add."
+  },
+  {
+    "id": "example-step2",
+    "track": "step2",
+    "date": "2026-05-02",
+    "topic": "Step 2 CK — Approach to Chest Pain (example)",
+    "duration": "90 min",
+    "tag": "Step 2 CK",
+    "tagColor": "pill-amber",
+    "recording_url": "https://us02web.zoom.us/rec/share/EXAMPLE",
+    "slides_url": "",
+    "notes_url": "",
+    "qbank_url": "",
+    "notes": "Example Step 2 CK session. Replace with real entries."
   }
 ]

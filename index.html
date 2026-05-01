@@ -17,11 +17,39 @@
   </div>
 </div>
 
-<main id="signin">
-  <div class="signin-card">
-    <div class="logo-big">U</div>
-    <h2>Welcome</h2>
-    <p>Sign in with the Gmail address Allan used to enrol you. Recordings, materials, and the schedule live inside.</p>
+<main id="signin-page">
+  <div class="signin-hero">
+    <h1 class="hero-title">Two classes, one dashboard.</h1>
+    <p class="hero-sub">Pick your track. Recordings, materials, and the schedule live behind a sign-in.</p>
+  </div>
+
+  <div class="track-cards">
+    <div class="track-card track-card-step1">
+      <div class="track-tag">Step 1</div>
+      <h2>USMLE Step 1</h2>
+      <p>Foundational sciences: anatomy, physiology, pathology, pharmacology, and biostatistics. High-yield concepts and rapid-review pearls.</p>
+      <ul class="track-feat">
+        <li>Recorded discussions</li>
+        <li>Slide decks &amp; cheat sheets</li>
+        <li>Practice questions</li>
+      </ul>
+    </div>
+
+    <div class="track-card track-card-step2">
+      <div class="track-tag">Step 2 CK</div>
+      <h2>USMLE Step 2 CK</h2>
+      <p>Clinical reasoning across IM, surgery, OB-GYN, peds, psych, and ethics. Case-based teaching with high-yield management algorithms.</p>
+      <ul class="track-feat">
+        <li>Recorded clinical sessions</li>
+        <li>Algorithm summaries</li>
+        <li>Practice questions</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="signin-card signin-unified">
+    <h2>Sign in to your dashboard</h2>
+    <p>Use the Gmail address Allan used to enrol you. You'll only see the track(s) you're enrolled in.</p>
 
     <div class="gbtn">
       <div id="g_id_onload"
@@ -40,7 +68,7 @@
 
     <div id="auth-error"></div>
 
-    <p class="note">Access is limited to enrolled students. If your Gmail isn't recognised, message Allan.</p>
+    <p class="note">Not enrolled yet? Message Allan to be added to either or both tracks.</p>
   </div>
 </main>
 
@@ -48,10 +76,7 @@
 
 <script src="js/auth.js"></script>
 <script>
-  // If already signed in, send straight to dashboard
   if (USMLE_AUTH.getSession()) location.replace('dashboard.html');
-
-  // Wire the Google client ID into the GSI div once config.js has loaded
   document.getElementById('g_id_onload').setAttribute('data-client_id', USMLE_CONFIG.GOOGLE_CLIENT_ID);
 
   function onGoogleSignIn(response) {

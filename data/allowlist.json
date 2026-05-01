@@ -1,6 +1,6 @@
 {
-  "_comment": "Lowercase Gmail addresses of enrolled students. Edit this file to add or remove access. Allan's address is included so he can always view the dashboard.",
-  "emails": [
-    "allanbakesiga@gmail.com"
+  "_comment": "Per-student access. tracks = subset of ['step1','step2']. Allan has both. Edit via ./admin.py student add --track step1 foo@gmail.com",
+  "students": [
+    { "email": "allanbakesiga@gmail.com", "tracks": ["step1", "step2"] }
   ]
 }

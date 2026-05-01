@@ -1,9 +1,9 @@
-/* Google Sign-In + gmail allowlist gate.
- * The allowlist lives in data/allowlist.json. Adding/removing students = editing that file.
+/* Google Sign-In + per-student track allowlist.
+ * The allowlist lives in data/allowlist.json. Each student has tracks: a subset of ["step1","step2"].
  */
 const USMLE_AUTH = (() => {
-  const SESSION_KEY = "usmle.session.v1";
-  const ALLOW_CACHE_KEY = "usmle.allowlist.v1";
+  const SESSION_KEY = "usmle.session.v2";
+  const ALLOW_CACHE_KEY = "usmle.allowlist.v2";
 
   function decodeJWT(token) {
     const payload = token.split(".")[1];
@@ -11,26 +11,39 @@ const USMLE_AUTH = (() => {
     return JSON.parse(decodeURIComponent(escape(atob(padded))));
   }
 
+  function normalizeAllowlist(json) {
+    // Accept v2 ({students:[{email,tracks}]}) or legacy v1 ({emails:[]}, gives all tracks)
+    if (Array.isArray(json.students)) {
+      return json.students.map((s) => ({
+        email: String(s.email || "").toLowerCase().trim(),
+        tracks: Array.isArray(s.tracks) && s.tracks.length ? s.tracks : ["step1", "step2"],
+      }));
+    }
+    if (Array.isArray(json.emails)) {
+      return json.emails.map((e) => ({ email: String(e).toLowerCase().trim(), tracks: ["step1", "step2"] }));
+    }
+    return [];
+  }
+
   async function loadAllowlist() {
     try {
       const res = await fetch(USMLE_CONFIG.DATA.allowlist, { cache: "no-store" });
       if (!res.ok) throw new Error("allowlist fetch failed");
       const json = await res.json();
-      const emails = (json.emails || []).map((e) => e.toLowerCase().trim());
-      sessionStorage.setItem(ALLOW_CACHE_KEY, JSON.stringify(emails));
-      return emails;
+      const students = normalizeAllowlist(json);
+      sessionStorage.setItem(ALLOW_CACHE_KEY, JSON.stringify(students));
+      return students;
     } catch (e) {
       const cached = sessionStorage.getItem(ALLOW_CACHE_KEY);
       return cached ? JSON.parse(cached) : [];
     }
   }
 
-  // Synchronous allow check used in the sign-in callback.
-  // We pre-load the allowlist on page load so it's cached by the time GSI fires.
-  function isAllowed(email) {
+  function lookup(email) {
     const cached = sessionStorage.getItem(ALLOW_CACHE_KEY);
-    const emails = cached ? JSON.parse(cached) : [];
-    return emails.includes(email.toLowerCase().trim());
+    const students = cached ? JSON.parse(cached) : [];
+    const e = email.toLowerCase().trim();
+    return students.find((s) => s.email === e) || null;
   }
 
   function handleCredential(jwt) {
@@ -43,12 +56,14 @@ const USMLE_AUTH = (() => {
     if (!claims.email_verified) {
       return { ok: false, error: "Your Google email is not verified." };
     }
-    if (!isAllowed(claims.email)) {
+    const entry = lookup(claims.email);
+    if (!entry) {
       return { ok: false, error: `${claims.email} is not on the class allowlist. Message Allan to be added.` };
     }
     const session = {
-      email: claims.email,
-      name: claims.name || claims.email,
+      email: entry.email,
+      tracks: entry.tracks,
+      name: claims.name || entry.email,
       picture: claims.picture || "",
       signedInAt: Date.now(),
     };
@@ -70,15 +85,13 @@ const USMLE_AUTH = (() => {
     location.replace("index.html");
   }
 
-  // Pre-warm allowlist cache on script load
-  loadAllowlist();
-
-  // On the gated page, enforce session presence
   function requireSession() {
     const s = getSession();
     if (!s) { location.replace("index.html"); return null; }
     return s;
   }
+
+  loadAllowlist();
 
   return { handleCredential, getSession, signOut, requireSession, loadAllowlist };
 })();

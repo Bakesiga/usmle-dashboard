@@ -1,8 +1,17 @@
 [
   {
+    "track": "step1",
     "category": "Cardiology",
     "title": "Example: Murmurs Cheat Sheet",
-    "description": "Replace this with a real material entry.",
+    "description": "Replace with a real Step 1 material.",
+    "url": "https://drive.google.com/file/d/EXAMPLE/view",
+    "type": "pdf"
+  },
+  {
+    "track": "step2",
+    "category": "Internal Medicine",
+    "title": "Example: Chest Pain Algorithm",
+    "description": "Replace with a real Step 2 CK material.",
     "url": "https://drive.google.com/file/d/EXAMPLE/view",
     "type": "pdf"
   }

@@ -1,13 +1,15 @@
 # Allan's USMLE Class — Student Dashboard
 
-A static, dark-themed dashboard where enrolled students sign in with Google and access:
+A static dashboard where enrolled students sign in with Google and access:
 
-- **Sessions** — Zoom-cloud recordings with passcodes, slides, notes, practice Qs
+- **Sessions** — Zoom-cloud recordings, slides, notes, practice Qs
 - **Materials** — high-yield PDFs and links, grouped by topic
 - **Schedule** — embedded Google Calendar of upcoming classes
 - **Announcements** — short notes pinned to the top
 
-Access is gated by a Gmail allowlist you control (`data/allowlist.json`). No backend — hosts free on GitHub Pages or Netlify.
+**Two tracks: Step 1 and Step 2 CK.** Each student is enrolled in one or both. The dashboard only shows content for the track(s) a student is on; students enrolled in both get a switcher at the top.
+
+Access is gated by a per-student allowlist (`data/allowlist.json`) with track tags. No backend — hosts free on GitHub Pages or Netlify.
 
 ---
 
@@ -49,9 +51,25 @@ With this in place, the JSON files on the dashboard are safe to be public: a str
 
 ### 3. Add yourself + first students
 
+Specify the track(s) each student is enrolled in. Allan defaults to both.
+
 ```bash
 cd ~/.claude/usmle-dashboard
-./admin.py student add allanbakesiga@gmail.com student1@gmail.com student2@gmail.com
+
+# Step 1 only
+./admin.py student add --tracks step1 alice@gmail.com bob@gmail.com
+
+# Step 2 CK only
+./admin.py student add --tracks step2 carol@gmail.com
+
+# Both tracks
+./admin.py student add --tracks step1,step2 dave@gmail.com
+
+# Add an existing student to the second track later
+./admin.py student tracks alice@gmail.com step1,step2
+
+./admin.py student list
+./admin.py student remove alice@gmail.com
 ```
 
 ### 4. Preview locally
@@ -67,20 +85,23 @@ Sign in with your Gmail. You should land on the dashboard.
 
 ## Ongoing use (after every class)
 
+Every interactive `add` command will ask for a **track** first (`step1`, `step2`, or `both`).
+
 ```bash
 cd ~/.claude/usmle-dashboard
 
-# Add a new recording (interactive — paste Zoom share URL + passcode)
+# Add a new recording (interactive — track, Zoom share URL, etc.)
 ./admin.py session add
 
 # Drop a new high-yield material
 ./admin.py material add
 
-# Post an announcement
+# Post an announcement (default track is "both")
 ./admin.py announce add
 
 # Manage students
-./admin.py student add  newstudent@gmail.com
+./admin.py student add --tracks step1 newstudent@gmail.com
+./admin.py student tracks  alice@gmail.com  step1,step2
 ./admin.py student remove  someone@gmail.com
 ./admin.py student list
 ```

@@ -1,12 +1,44 @@
-/* Dashboard app: gates the page, renders sessions / materials / schedule / announcements. */
+/* Dashboard app: gates the page, renders sessions / materials / schedule / announcements,
+ * filtered by the student's enrolled track(s).
+ */
 (() => {
   const session = USMLE_AUTH.requireSession();
   if (!session) return;
+
+  const TRACK_LABELS = { step1: "Step 1", step2: "Step 2 CK" };
+  const STORAGE_TRACK = "usmle.activeTrack.v1";
+
+  // Determine active track. If student is in only one, force that one.
+  let activeTrack = session.tracks.length === 1
+    ? session.tracks[0]
+    : (localStorage.getItem(STORAGE_TRACK) || session.tracks[0] || "step1");
+  if (!session.tracks.includes(activeTrack)) activeTrack = session.tracks[0];
 
   // Top-bar user chip
   document.getElementById("user-name").textContent = session.name;
   if (session.picture) document.getElementById("user-pic").src = session.picture;
   document.getElementById("signout-btn").addEventListener("click", USMLE_AUTH.signOut);
+
+  // Track switcher (only if enrolled in >1 track)
+  const switcher = document.getElementById("track-switcher");
+  if (session.tracks.length > 1) {
+    switcher.style.display = "flex";
+    switcher.innerHTML = session.tracks.map((t) => `
+      <button class="track-btn ${t === activeTrack ? "active" : ""}" data-track="${t}">${TRACK_LABELS[t] || t}</button>
+    `).join("");
+    switcher.querySelectorAll(".track-btn").forEach((b) => {
+      b.addEventListener("click", () => {
+        activeTrack = b.dataset.track;
+        localStorage.setItem(STORAGE_TRACK, activeTrack);
+        switcher.querySelectorAll(".track-btn").forEach((x) => x.classList.toggle("active", x === b));
+        renderAll();
+      });
+    });
+  } else {
+    // Single track — show a label instead of a switcher
+    switcher.style.display = "flex";
+    switcher.innerHTML = `<div class="track-badge">${TRACK_LABELS[activeTrack] || activeTrack}</div>`;
+  }
 
   // Tabs
   document.querySelectorAll(".tab").forEach((t) => {
@@ -27,6 +59,13 @@
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[c]));
   const safeUrl = (u) => /^https?:\/\//i.test(String(u || "")) ? u : "#";
 
+  // Track filter: an item matches if its track is "both", missing, or === activeTrack.
+  const matchesTrack = (item) => {
+    const t = item.track;
+    if (!t || t === "both") return true;
+    return t === activeTrack;
+  };
+
   async function loadJSON(url, fallback) {
     try {
       const r = await fetch(url, { cache: "no-store" });
@@ -35,15 +74,16 @@
     } catch (e) { return fallback; }
   }
 
-  // ── Sessions (recordings) ────────────────────────────
+  // ── Sessions ────────────────────────────────────────
   function renderSessions(items) {
     const root = document.getElementById("sessions-list");
-    if (!items || !items.length) {
-      root.innerHTML = `<div class="empty">No recordings posted yet. Check back after the next class.</div>`;
+    const filtered = (items || []).filter(matchesTrack);
+    if (!filtered.length) {
+      root.innerHTML = `<div class="empty">No recordings posted yet for ${TRACK_LABELS[activeTrack]}. Check back after the next class.</div>`;
       return;
     }
-    items.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-    root.innerHTML = items.map((s) => `
+    filtered.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+    root.innerHTML = filtered.map((s) => `
       <div class="card">
         <div class="row">
           <div>
@@ -66,16 +106,16 @@
     `).join("");
   }
 
-  // ── Materials ────────────────────────────────────────
+  // ── Materials ───────────────────────────────────────
   function renderMaterials(items) {
     const root = document.getElementById("materials-list");
-    if (!items || !items.length) {
-      root.innerHTML = `<div class="empty">No materials yet.</div>`;
+    const filtered = (items || []).filter(matchesTrack);
+    if (!filtered.length) {
+      root.innerHTML = `<div class="empty">No materials posted yet for ${TRACK_LABELS[activeTrack]}.</div>`;
       return;
     }
-    // Group by category
     const groups = {};
-    items.forEach((m) => {
+    filtered.forEach((m) => {
       const cat = m.category || "General";
       (groups[cat] = groups[cat] || []).push(m);
     });
@@ -91,7 +131,7 @@
     `).join("");
   }
 
-  // ── Schedule (Google Calendar embed) ─────────────────
+  // ── Schedule ────────────────────────────────────────
   function renderSchedule() {
     const url = USMLE_CONFIG.CALENDAR_EMBED_URL;
     const iframe = document.getElementById("cal-iframe");
@@ -103,15 +143,16 @@
     iframe.src = url;
   }
 
-  // ── Announcements ────────────────────────────────────
+  // ── Announcements ───────────────────────────────────
   function renderAnnouncements(items) {
     const root = document.getElementById("announcements-list");
-    if (!items || !items.length) {
+    const filtered = (items || []).filter(matchesTrack);
+    if (!filtered.length) {
       root.innerHTML = `<div class="empty">No announcements right now.</div>`;
       return;
     }
-    items.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-    root.innerHTML = items.map((a) => `
+    filtered.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+    root.innerHTML = filtered.map((a) => `
       <div class="announce">
         <div class="date">${esc(fmtDate(a.date))}</div>
         <h4>${esc(a.title)}</h4>
@@ -120,16 +161,22 @@
     `).join("");
   }
 
-  // ── Boot ─────────────────────────────────────────────
+  // ── Boot / re-render ────────────────────────────────
+  let DATA = { sessions: [], materials: [], announcements: [] };
+  function renderAll() {
+    renderSessions(DATA.sessions);
+    renderMaterials(DATA.materials);
+    renderAnnouncements(DATA.announcements);
+  }
+
   (async function () {
     const [sessions, materials, announcements] = await Promise.all([
       loadJSON(USMLE_CONFIG.DATA.sessions, []),
       loadJSON(USMLE_CONFIG.DATA.materials, []),
       loadJSON(USMLE_CONFIG.DATA.announcements, []),
     ]);
-    renderSessions(sessions);
-    renderMaterials(materials);
+    DATA = { sessions, materials, announcements };
+    renderAll();
     renderSchedule();
-    renderAnnouncements(announcements);
   })();
 })();
