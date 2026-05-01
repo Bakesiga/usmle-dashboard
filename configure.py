@@ -50,6 +50,12 @@ def set_oauth(client_id: str) -> None:
 
 
 def set_calendar(url: str) -> None:
+    # Accept either the bare URL or the full <iframe src="..."> HTML
+    m = re.search(r'src=["\']([^"\']+)["\']', url)
+    if m:
+        url = m.group(1)
+    # Decode any HTML entities (e.g. &amp; → &) that get pasted from the embed code
+    url = url.replace("&amp;", "&")
     if "calendar.google.com" not in url:
         print("✗ That doesn't look like a Google Calendar URL.")
         sys.exit(1)
@@ -59,7 +65,7 @@ def set_calendar(url: str) -> None:
         print("✗ Could not find CALENDAR_EMBED_URL line in config.js")
         sys.exit(1)
     write(new)
-    print("Calendar embed URL set.")
+    print(f"Calendar embed URL set:\n  {url}")
 
 
 def status() -> None:
