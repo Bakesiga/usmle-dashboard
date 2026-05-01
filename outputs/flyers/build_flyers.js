@@ -137,7 +137,7 @@ function buildFlyer(pres, config) {
     x: MARGIN + 1.15, y: stripY + 0.10, w: CONTENT_W - 1.2, h: 0.36,
     fontSize: 18, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
   });
-  slide.addText("MD (Makerere)  ·  MScGH (Duke)  ·  Incoming PGY-1 Neurology, Creighton", {
+  slide.addText("MD (Makerere)  ·  MScGH (Duke)  ·  PGY-1 Neurology Resident, Creighton", {
     x: MARGIN + 1.15, y: stripY + 0.46, w: CONTENT_W - 1.2, h: 0.30,
     fontSize: 12, fontFace: "Calibri", color: C.ink2, margin: 0,
   });
