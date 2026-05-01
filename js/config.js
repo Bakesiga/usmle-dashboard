@@ -2,7 +2,7 @@
 const USMLE_CONFIG = {
   // Get this from Google Cloud Console → APIs & Services → Credentials → Create OAuth client (Web)
   // Authorized JS origins must include your hosted URL (e.g. https://bakesiga.github.io) and http://localhost:5151 for local preview.
-  GOOGLE_CLIENT_ID: "REPLACE_WITH_YOUR_GOOGLE_OAUTH_CLIENT_ID.apps.googleusercontent.com",
+  GOOGLE_CLIENT_ID: "269521341031-mjkthkigvhiltjd9p8v6ogsiri0hfeqh.apps.googleusercontent.com",
 
   // Public Google Calendar embed URL. Make a calendar (e.g. "USMLE Class"), set it public, then
   // copy the "Embed code" iframe `src` and paste below. Theme params keep it dark-friendly.
