@@ -55,18 +55,23 @@ function buildFlyer(pres, config) {
   });
 
   slide.addText("Enrolling now · July–October cohort", {
-    x: MARGIN, y: 0.35, w: CONTENT_W * 0.65, h: 0.3,
-    fontSize: 11, fontFace: "Calibri", color: "FFFFFF",
+    x: MARGIN, y: 0.28, w: CONTENT_W * 0.65, h: 0.22,
+    fontSize: 10, fontFace: "Calibri", color: "FFFFFF",
     bold: true, charSpacing: 4, margin: 0,
   });
+  slide.addText("USMLE", {
+    x: MARGIN, y: 0.50, w: CONTENT_W * 0.65, h: 0.30,
+    fontSize: 22, fontFace: "Arial Black", color: "FFFFFF",
+    bold: true, charSpacing: 8, margin: 0,
+  });
   slide.addText(title, {
-    x: MARGIN, y: 0.62, w: CONTENT_W * 0.65, h: 0.85,
-    fontSize: 56, fontFace: "Arial Black", color: "FFFFFF",
+    x: MARGIN, y: 0.82, w: CONTENT_W * 0.65, h: 0.78,
+    fontSize: 48, fontFace: "Arial Black", color: "FFFFFF",
     bold: true, margin: 0,
   });
   slide.addText(subtitle, {
-    x: MARGIN, y: 1.46, w: CONTENT_W * 0.85, h: 0.32,
-    fontSize: 14, fontFace: "Calibri", color: "FFFFFF",
+    x: MARGIN, y: 1.58, w: CONTENT_W * 0.85, h: 0.24,
+    fontSize: 12, fontFace: "Calibri", color: "FFFFFF",
     italic: true, margin: 0,
   });
 
