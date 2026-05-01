@@ -6,7 +6,7 @@ const USMLE_CONFIG = {
 
   // Public Google Calendar embed URL. Make a calendar (e.g. "USMLE Class"), set it public, then
   // copy the "Embed code" iframe `src` and paste below. Theme params keep it dark-friendly.
-  CALENDAR_EMBED_URL: "https://calendar.google.com/calendar/embed?src=PASTE_CALENDAR_ID&ctz=America%2FNew_York&bgcolor=%230b0f17&color=%235eead4&showTitle=0&showPrint=0&showCalendars=0",
+  CALENDAR_EMBED_URL: "https://calendar.google.com/calendar/embed?src=54aef5b7d76c45980812c13fefef1095298082a8ee4818d831e71eddec424ced%40group.calendar.google.com&ctz=America%2FNew_York",
 
   // Where data files live, relative to the page
   DATA: {
