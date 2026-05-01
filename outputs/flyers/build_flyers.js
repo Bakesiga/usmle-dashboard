@@ -243,9 +243,11 @@ function buildFlyer(pres, config) {
       fontSize: 12.5, fontFace: "Calibri", margin: 0,
     });
   });
+  const topicsEnd = groupYStart + groups.length * groupHeight;
 
   // ── Combined-prep callout ───────────────────────────
-  const calloutY = 8.65;
+  // Hug whichever topics block is above (Step 1 has 2 lines, Step 2 has 1).
+  const calloutY = topicsEnd + 0.05;
   const calloutH = 0.85;
   slide.addShape(pres.shapes.RECTANGLE, {
     x: MARGIN, y: calloutY, w: CONTENT_W, h: calloutH,
@@ -265,6 +267,9 @@ function buildFlyer(pres, config) {
   });
 
   // ── CTA + contact ───────────────────────────────────
+  // Anchored near the bottom rule so the bottom of every flyer looks identical;
+  // the gap above CTA varies (Step 2 has more breathing room) but the bottom
+  // strip stays visually anchored.
   const ctaY = 9.55;
   slide.addText("SIGN UP", {
     x: MARGIN, y: ctaY, w: CONTENT_W, h: 0.22,
@@ -301,9 +306,9 @@ function buildFlyer(pres, config) {
     fontSize: 12.5, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
   });
 
-  // Limited-cohort note (small, centered under contacts)
+  // Limited-cohort note (small italic, snug above bottom rule)
   slide.addText("Limited cohort · Sign in with the Gmail Allan adds you under", {
-    x: MARGIN, y: contactsY + 0.34, w: CONTENT_W, h: 0.20,
+    x: MARGIN, y: contactsY + 0.32, w: CONTENT_W, h: 0.18,
     fontSize: 9.5, fontFace: "Calibri", italic: true, color: C.muted,
     align: "left", margin: 0,
   });
