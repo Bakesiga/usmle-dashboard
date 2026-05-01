@@ -4,3 +4,9 @@ __pycache__/
 .vscode/
 .idea/
 *.log
+
+# Build artifacts (PPTX flyers, PDFs, exported images)
+outputs/flyers/*.pdf
+outputs/flyers/*.jpg
+outputs/flyers/*.png
+outputs/flyers/node_modules
