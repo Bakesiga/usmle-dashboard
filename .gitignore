@@ -6,7 +6,7 @@ __pycache__/
 *.log
 
 # Build artifacts (PPTX flyers, PDFs, exported images)
-outputs/flyers/*.pdf
-outputs/flyers/*.jpg
-outputs/flyers/*.png
+outputs/flyers/USMLE_*.pdf
+outputs/flyers/USMLE_*.jpg
+outputs/flyers/USMLE_*.png
 outputs/flyers/node_modules
