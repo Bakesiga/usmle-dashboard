@@ -1,0 +1,15 @@
+[
+  {
+    "id": "example-2026-05-01",
+    "date": "2026-05-01",
+    "topic": "Example: Cardiology — High-Yield Pharmacology",
+    "duration": "90 min",
+    "tag": "Step 1",
+    "tagColor": "pill-blue",
+    "recording_url": "https://us02web.zoom.us/rec/share/EXAMPLE",
+    "slides_url": "https://drive.google.com/file/d/EXAMPLE/view",
+    "notes_url": "",
+    "qbank_url": "",
+    "notes": "Replace this with a real session. Use ./admin.py session add to add new entries quickly. Recording must be set to 'Only authenticated users' in Zoom."
+  }
+]
