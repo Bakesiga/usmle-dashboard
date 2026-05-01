@@ -42,7 +42,9 @@ function shadow() {
 }
 
 // Renders one flyer slide.
-function buildFlyer(pres, { track, title, subtitle, primary, soft, deep, accent, accentLabel, topics }) {
+function buildFlyer(pres, config) {
+  const { track, title, subtitle, primary, soft, deep, accent, accentLabel, topics, topicGroups } = config;
+  const groups = topicGroups || [{ label: null, items: topics }];
   const slide = pres.addSlide();
   slide.background = { color: C.bg };
 
@@ -52,7 +54,7 @@ function buildFlyer(pres, { track, title, subtitle, primary, soft, deep, accent,
     fill: { color: primary }, line: { color: primary },
   });
 
-  slide.addText("USMLE Tutoring · 2026 Cohort", {
+  slide.addText("Enrolling now · July–October cohort", {
     x: MARGIN, y: 0.35, w: CONTENT_W * 0.65, h: 0.3,
     fontSize: 11, fontFace: "Calibri", color: "FFFFFF",
     bold: true, charSpacing: 4, margin: 0,
@@ -106,17 +108,17 @@ function buildFlyer(pres, { track, title, subtitle, primary, soft, deep, accent,
     fontSize: 22, fontFace: "Arial Black", color: "FFFFFF",
     bold: true, align: "center", valign: "middle", margin: 0,
   });
-  slide.addText("Allan Bakesiga", {
-    x: MARGIN + 1.05, y: stripY + 0.10, w: CONTENT_W - 1.1, h: 0.34,
+  slide.addText("Allan Bakesiga, MD", {
+    x: MARGIN + 1.05, y: stripY + 0.08, w: CONTENT_W - 1.1, h: 0.32,
     fontSize: 16, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
   });
-  slide.addText("MD candidate · Duke University · Daily USMLE study lead", {
-    x: MARGIN + 1.05, y: stripY + 0.42, w: CONTENT_W - 1.1, h: 0.26,
-    fontSize: 11, fontFace: "Calibri", color: C.ink2, margin: 0,
+  slide.addText("MD (Makerere)  ·  MScGH (Duke)  ·  Incoming PGY-1 Neurology, Creighton", {
+    x: MARGIN + 1.05, y: stripY + 0.40, w: CONTENT_W - 1.1, h: 0.26,
+    fontSize: 10.5, fontFace: "Calibri", color: C.ink2, margin: 0,
   });
-  slide.addText("Neurology / neurosurgery research · Active residency applicant", {
-    x: MARGIN + 1.05, y: stripY + 0.65, w: CONTENT_W - 1.1, h: 0.24,
-    fontSize: 10, fontFace: "Calibri", color: C.muted, margin: 0,
+  slide.addText("Epidemiology & biostatistics teaching assistant", {
+    x: MARGIN + 1.05, y: stripY + 0.64, w: CONTENT_W - 1.1, h: 0.24,
+    fontSize: 10, fontFace: "Calibri", italic: true, color: deep, margin: 0,
   });
 
   // ── Stats row ───────────────────────────────────────
@@ -201,9 +203,20 @@ function buildFlyer(pres, { track, title, subtitle, primary, soft, deep, accent,
     fontSize: 10, fontFace: "Calibri", color: deep,
     bold: true, charSpacing: 4, margin: 0,
   });
-  slide.addText(topics.join("  ·  "), {
-    x: MARGIN, y: topicsY + 0.30, w: CONTENT_W, h: 0.85,
-    fontSize: 12, fontFace: "Calibri", color: C.ink, margin: 0,
+  // Render each group on its own labeled line
+  const groupYStart = topicsY + 0.32;
+  const groupHeight = 0.55;
+  groups.forEach((g, gi) => {
+    const y = groupYStart + gi * groupHeight;
+    const runs = [];
+    if (g.label) {
+      runs.push({ text: g.label + ":  ", options: { bold: true, color: deep } });
+    }
+    runs.push({ text: g.items.join("  ·  "), options: { color: C.ink } });
+    slide.addText(runs, {
+      x: MARGIN, y, w: CONTENT_W, h: groupHeight,
+      fontSize: 11.5, fontFace: "Calibri", margin: 0,
+    });
   });
 
   // ── Combined-prep callout ───────────────────────────
@@ -266,10 +279,23 @@ buildFlyer(p1, {
   subtitle: "Master the foundational sciences. Build the base every step rests on.",
   primary: C.step1, soft: C.step1Soft, deep: C.step1Deep,
   accent: C.step2, accentLabel: "Step 2 CK",
-  topics: [
-    "Anatomy", "Physiology", "Biochemistry", "Pathology",
-    "Pharmacology", "Microbiology", "Immunology",
-    "Behavioral science", "Biostatistics", "Genetics",
+  topicGroups: [
+    {
+      label: "Disciplines",
+      items: [
+        "Anatomy", "Physiology", "Biochemistry", "Pathology",
+        "Pharmacology", "Microbiology", "Immunology",
+        "Behavioral science", "Biostatistics", "Genetics",
+      ],
+    },
+    {
+      label: "Organ systems",
+      items: [
+        "Cardiovascular", "Respiratory", "Gastrointestinal", "Renal",
+        "Reproductive", "Endocrine", "Musculoskeletal",
+        "Nervous system", "Heme/Onc", "Skin",
+      ],
+    },
   ],
 });
 
