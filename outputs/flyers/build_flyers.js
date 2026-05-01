@@ -3,6 +3,12 @@
 // Run:  node build_flyers.js
 
 const pptxgen = require("pptxgenjs");
+const fs = require("fs");
+
+// If you drop a square-ish photo at outputs/flyers/allan.jpg or allan.png,
+// it'll be used instead of the "AB" initials. Otherwise the avatar shows AB.
+const PHOTO_CANDIDATES = ["allan.jpg", "allan.jpeg", "allan.png", "allan.webp"];
+const PHOTO_PATH = PHOTO_CANDIDATES.find((p) => fs.existsSync(p)) || null;
 
 function newPres(title) {
   const p = new pptxgen();
@@ -103,16 +109,30 @@ function buildFlyer(pres, config) {
     x: MARGIN, y: stripY, w: CONTENT_W, h: 1.10,
     fill: { color: C.bgTint }, line: { color: C.border, width: 0.75 },
   });
-  // Avatar circle
-  slide.addShape(pres.shapes.OVAL, {
-    x: MARGIN + 0.20, y: stripY + 0.18, w: 0.78, h: 0.78,
-    fill: { color: primary }, line: { color: primary },
-  });
-  slide.addText("AB", {
-    x: MARGIN + 0.20, y: stripY + 0.18, w: 0.78, h: 0.78,
-    fontSize: 24, fontFace: "Arial Black", color: "FFFFFF",
-    bold: true, align: "center", valign: "middle", margin: 0,
-  });
+  // Avatar — photo if available, otherwise "AB" initials
+  if (PHOTO_PATH) {
+    // Coloured ring behind the photo for brand polish
+    slide.addShape(pres.shapes.OVAL, {
+      x: MARGIN + 0.16, y: stripY + 0.14, w: 0.86, h: 0.86,
+      fill: { color: primary }, line: { color: primary },
+    });
+    slide.addImage({
+      path: PHOTO_PATH,
+      x: MARGIN + 0.20, y: stripY + 0.18, w: 0.78, h: 0.78,
+      sizing: { type: "cover", w: 0.78, h: 0.78 },
+      rounding: true,
+    });
+  } else {
+    slide.addShape(pres.shapes.OVAL, {
+      x: MARGIN + 0.20, y: stripY + 0.18, w: 0.78, h: 0.78,
+      fill: { color: primary }, line: { color: primary },
+    });
+    slide.addText("AB", {
+      x: MARGIN + 0.20, y: stripY + 0.18, w: 0.78, h: 0.78,
+      fontSize: 24, fontFace: "Arial Black", color: "FFFFFF",
+      bold: true, align: "center", valign: "middle", margin: 0,
+    });
+  }
   slide.addText("Allan Bakesiga, MD", {
     x: MARGIN + 1.15, y: stripY + 0.10, w: CONTENT_W - 1.2, h: 0.36,
     fontSize: 18, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
@@ -321,7 +341,7 @@ buildFlyer(p1, {
       items: [
         "Cardiovascular", "Respiratory", "Gastrointestinal", "Renal",
         "Reproductive", "Endocrine", "Musculoskeletal",
-        "Nervous system", "Heme/Onc", "Skin",
+        "Nervous system", "Psychiatry", "Heme/Onc", "Skin",
       ],
     },
   ],
