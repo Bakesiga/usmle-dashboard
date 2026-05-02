@@ -344,17 +344,18 @@ buildFlyer(p1, {
     {
       label: "Disciplines",
       items: [
-        "Anatomy", "Physiology", "Biochemistry", "Pathology",
-        "Pharmacology", "Microbiology", "Immunology",
-        "Behavioral science", "Biostatistics", "Genetics",
+        "Pathology", "Physiology", "Biochemistry", "Pharmacology",
+        "Anatomy & Embryology", "Microbiology", "Histology",
+        "Behavioral Sciences", "Immunology", "Genetics",
       ],
     },
     {
-      label: "Organ systems",
+      label: "Systems",
       items: [
-        "Cardiovascular", "Respiratory", "Gastrointestinal", "Renal",
-        "Reproductive", "Endocrine", "Musculoskeletal",
-        "Nervous system", "Psychiatry", "Heme/Onc", "Skin",
+        "General Principles", "Cardiovascular", "Respiratory",
+        "Gastrointestinal", "Renal/Urinary", "Reproductive & Endocrine",
+        "MSK & Skin", "Nervous & Behavioral", "Heme & Immune",
+        "Biostatistics & Epi",
       ],
     },
   ],
@@ -368,10 +369,23 @@ buildFlyer(p2, {
   subtitle: "Sharpen clinical reasoning. Move from facts to bedside decisions.",
   primary: C.step2, soft: C.step2Soft, deep: C.step2Deep,
   accent: C.step1, accentLabel: "Step 1",
-  topics: [
-    "Internal Medicine", "Surgery", "OB-GYN", "Pediatrics",
-    "Psychiatry", "Family Medicine", "Preventive Medicine",
-    "Ethics", "Biostatistics", "Patient Safety",
+  topicGroups: [
+    {
+      label: "Disciplines",
+      items: [
+        "Internal Medicine", "Surgery", "Pediatrics",
+        "Obstetrics & Gynecology", "Psychiatry", "Family Medicine",
+      ],
+    },
+    {
+      label: "Systems",
+      items: [
+        "Cardiovascular", "Gastrointestinal", "Respiratory",
+        "MSK & Skin", "Nervous & Behavioral", "Endocrine",
+        "Reproductive & Pregnancy", "Renal", "Heme & Immune",
+        "Multisystem", "Ethics & Patient Safety",
+      ],
+    },
   ],
 });
 
