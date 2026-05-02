@@ -274,7 +274,7 @@ function buildFlyer(pres, config) {
   slide.addText("TO SIGN UP, CONTACT ALLAN", {
     x: MARGIN, y: ctaY, w: CONTENT_W, h: 0.22,
     fontSize: 11, fontFace: "Calibri", color: deep,
-    bold: true, charSpacing: 4, align: "center", margin: 0,
+    bold: true, charSpacing: 4, margin: 0,
   });
 
   // Contact row (email | WhatsApp | call) right under the label.
