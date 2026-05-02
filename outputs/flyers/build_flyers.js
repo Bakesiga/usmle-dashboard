@@ -98,8 +98,8 @@ function buildFlyer(pres, config) {
     bold: true, align: "center", valign: "middle", margin: 0,
   });
   slide.addText("· daily classes ·", {
-    x: stampX, y: 1.20, w: 2.00, h: 0.30,
-    fontSize: 10.5, fontFace: "Calibri", color: "FFFFFF",
+    x: stampX, y: 1.18, w: 2.00, h: 0.34,
+    fontSize: 13, fontFace: "Calibri", color: "FFFFFF",
     italic: true, align: "center", valign: "middle", margin: 0,
   });
 
