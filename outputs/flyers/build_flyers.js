@@ -277,25 +277,35 @@ function buildFlyer(pres, config) {
     bold: true, charSpacing: 4, margin: 0,
   });
 
-  // Contact row (email | WhatsApp) right under the label
+  // Contact row (email | WhatsApp | call) right under the label
   const contactsY = ctaY + 0.24;
-  const colW = (CONTENT_W - 0.20) / 2;
+  const colGap = 0.18;
+  const colW = (CONTENT_W - 2 * colGap) / 3;
   const emailIcon = track === "step2" ? "email-amber.png" : "email-blue.png";
-  slide.addImage({
-    path: emailIcon,
-    x: MARGIN, y: contactsY + 0.04, w: 0.26, h: 0.26,
-  });
+  const phoneIcon = track === "step2" ? "phone-amber.png" : "phone-blue.png";
+
+  // Email
+  let cx = MARGIN;
+  slide.addImage({ path: emailIcon, x: cx, y: contactsY + 0.04, w: 0.26, h: 0.26 });
   slide.addText("allanbakesiga@gmail.com", {
-    x: MARGIN + 0.34, y: contactsY, w: colW - 0.34, h: 0.32,
-    fontSize: 13, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
+    x: cx + 0.32, y: contactsY, w: colW - 0.32, h: 0.32,
+    fontSize: 12, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
   });
-  slide.addImage({
-    path: "whatsapp.png",
-    x: MARGIN + colW + 0.20, y: contactsY + 0.02, w: 0.28, h: 0.28,
-  });
+
+  // WhatsApp
+  cx = MARGIN + colW + colGap;
+  slide.addImage({ path: "whatsapp.png", x: cx, y: contactsY + 0.02, w: 0.28, h: 0.28 });
   slide.addText("+256 705 571 443", {
-    x: MARGIN + colW + 0.54, y: contactsY, w: colW - 0.54, h: 0.32,
-    fontSize: 13, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
+    x: cx + 0.34, y: contactsY, w: colW - 0.34, h: 0.32,
+    fontSize: 12, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
+  });
+
+  // Phone (US line)
+  cx = MARGIN + 2 * (colW + colGap);
+  slide.addImage({ path: phoneIcon, x: cx, y: contactsY + 0.04, w: 0.26, h: 0.26 });
+  slide.addText("+1 984 710 2902", {
+    x: cx + 0.32, y: contactsY, w: colW - 0.32, h: 0.32,
+    fontSize: 12, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
   });
 
   // Follow-up explainer + dashboard URL
