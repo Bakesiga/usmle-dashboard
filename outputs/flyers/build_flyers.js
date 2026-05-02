@@ -271,18 +271,19 @@ function buildFlyer(pres, config) {
   const calloutEnd = calloutY + calloutH;
   const ctaY = Math.min(calloutEnd + 0.30, 9.55);
 
-  // QR code on the right (anchored against the right margin)
-  const qrSize = 1.20;
+  // QR code on the right with a readable caption below it.
+  // QR sized so the caption + bottom rule fit cleanly underneath.
+  const qrSize = 1.00;
   const qrX = PAGE_W - MARGIN - qrSize;
   const qrY = ctaY;
   slide.addImage({
     path: "forms_qr.png",
     x: qrX, y: qrY, w: qrSize, h: qrSize,
   });
-  slide.addText("scan to sign up", {
-    x: qrX, y: qrY + qrSize - 0.04, w: qrSize, h: 0.16,
-    fontSize: 8, fontFace: "Calibri", color: deep, italic: true,
-    align: "center", valign: "middle", margin: 0,
+  slide.addText("Scan to sign up", {
+    x: qrX, y: qrY + qrSize + 0.04, w: qrSize, h: 0.20,
+    fontSize: 10, fontFace: "Calibri", color: deep, italic: true,
+    bold: true, align: "center", valign: "middle", margin: 0,
   });
 
   // Left column: SIGN UP HERE label + form URL
