@@ -169,23 +169,23 @@ const cardH = 1.30;
 const agenda = [
   {
     accent: C.step1,
-    title: "The USMLE & residency path",
-    body: "What Step 1 & Step 2 CK actually test, eligibility for IMGs, and the prep + match timeline overview.",
+    title: "The residency journey",
+    body: "From MD to US residency: ECFMG eligibility, the exam timeline, and how the match cycle works.",
   },
   {
     accent: C.step2,
-    title: "Course structure",
-    body: "Daily Mon–Sun classes, 4-month roadmap, how the syllabus flows topic-by-topic.",
+    title: "How the classes work",
+    body: "Daily Mon–Sun sessions, 4-month roadmap, full textbook + Qbank walkthrough, office hours outside class.",
   },
   {
     accent: C.step1,
-    title: "Materials & resources",
-    body: "Recommended textbook, Qbank, and curated supplements walked through together.",
+    title: "Step 1 prep",
+    body: "Foundational sciences (Pathology, Physiology, Pharm, and the rest) across all the high-yield organ systems.",
   },
   {
     accent: C.step2,
-    title: "End-to-end mentorship",
-    body: "Through ECFMG application, CV, personal statement, interview prep, and the residency match itself.",
+    title: "Step 2 CK prep",
+    body: "Clinical reasoning across Medicine, Surgery, Pediatrics, OB/GYN, Psychiatry, and Family Medicine — case-based.",
   },
 ];
 
@@ -244,28 +244,51 @@ slide.addShape(pres.shapes.RECTANGLE, {
   fill: { color: C.step2 }, line: { color: C.step2 },
 });
 
+// Zoom info text occupies the left side; QR code sits on the right
+const qrSize = 1.30;
+const qrPad  = 0.12;
+const qrX    = PAGE_W - MARGIN - qrSize - qrPad;
+const qrY    = calloutY + (calloutH - qrSize) / 2;
+const textRightLimit = qrX - 0.20;
+const textW = textRightLimit - (MARGIN + 0.30);
+
 slide.addText("JOIN THE ZOOM SESSION", {
-  x: MARGIN + 0.30, y: calloutY + 0.12, w: CONTENT_W - 0.40, h: 0.26,
+  x: MARGIN + 0.30, y: calloutY + 0.12, w: textW, h: 0.26,
   fontSize: 11, fontFace: "Calibri", color: "FFFFFF",
   bold: true, charSpacing: 4, margin: 0,
 });
-slide.addText(SESSION.fullDate + "  ·  " + SESSION.time, {
-  x: MARGIN + 0.30, y: calloutY + 0.36, w: CONTENT_W - 0.40, h: 0.30,
-  fontSize: 14, fontFace: "Calibri", bold: true, color: "FFFFFF", margin: 0,
+slide.addText(SESSION.fullDate, {
+  x: MARGIN + 0.30, y: calloutY + 0.36, w: textW, h: 0.28,
+  fontSize: 13, fontFace: "Calibri", bold: true, color: "FFFFFF", margin: 0,
+});
+slide.addText(SESSION.time, {
+  x: MARGIN + 0.30, y: calloutY + 0.62, w: textW, h: 0.26,
+  fontSize: 12, fontFace: "Calibri", color: "FFFFFF", margin: 0,
 });
 slide.addText(SESSION.zoomUrl, {
-  x: MARGIN + 0.30, y: calloutY + 0.68, w: CONTENT_W - 0.40, h: 0.42,
-  fontSize: 22, fontFace: "Arial Black", color: "FFFFFF", bold: true, margin: 0,
+  x: MARGIN + 0.30, y: calloutY + 0.90, w: textW, h: 0.36,
+  fontSize: 18, fontFace: "Arial Black", color: "FFFFFF", bold: true, margin: 0,
 });
 slide.addText(
   SESSION.zoomPass
-    ? "Meeting ID: " + SESSION.zoomId + "    ·    Passcode: " + SESSION.zoomPass
+    ? "Meeting ID: " + SESSION.zoomId + "  ·  Passcode: " + SESSION.zoomPass
     : "Meeting ID: " + SESSION.zoomId,
   {
-    x: MARGIN + 0.30, y: calloutY + 1.12, w: CONTENT_W - 0.40, h: 0.30,
-    fontSize: 12, fontFace: "Calibri", color: "FFFFFF", margin: 0,
+    x: MARGIN + 0.30, y: calloutY + 1.24, w: textW, h: 0.24,
+    fontSize: 10.5, fontFace: "Calibri", color: "FFFFFF", margin: 0,
   }
 );
+
+// QR code on the right (white background already baked in)
+slide.addImage({
+  path: "zoom_qr.png",
+  x: qrX, y: qrY, w: qrSize, h: qrSize,
+});
+slide.addText("scan to join", {
+  x: qrX, y: qrY + qrSize - 0.05, w: qrSize, h: 0.18,
+  fontSize: 8, fontFace: "Calibri", color: C.step1Deep, italic: true,
+  align: "center", valign: "middle", margin: 0,
+});
 
 // ── Contacts (3-up) ───────────────────────────────────
 const ctaY = 8.55;
