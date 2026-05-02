@@ -274,39 +274,41 @@ function buildFlyer(pres, config) {
   slide.addText("TO SIGN UP, CONTACT ALLAN", {
     x: MARGIN, y: ctaY, w: CONTENT_W, h: 0.22,
     fontSize: 11, fontFace: "Calibri", color: deep,
-    bold: true, charSpacing: 4, margin: 0,
+    bold: true, charSpacing: 4, align: "center", margin: 0,
   });
 
-  // Contact row (email | WhatsApp | call) right under the label
+  // Contact row (email | WhatsApp | call) right under the label.
+  // Each cell's icon+text pair is centred horizontally within its column.
   const contactsY = ctaY + 0.24;
   const colGap = 0.18;
   const colW = (CONTENT_W - 2 * colGap) / 3;
   const emailIcon = track === "step2" ? "email-amber.png" : "email-blue.png";
   const phoneIcon = track === "step2" ? "phone-amber.png" : "phone-blue.png";
 
-  // Email
-  let cx = MARGIN;
-  slide.addImage({ path: emailIcon, x: cx, y: contactsY + 0.04, w: 0.26, h: 0.26 });
-  slide.addText("allanbakesiga@gmail.com", {
-    x: cx + 0.32, y: contactsY, w: colW - 0.32, h: 0.32,
-    fontSize: 12, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
-  });
+  // Approximate 12pt Calibri char width in inches; used to compute label widths.
+  // Set generously so text never wraps; a little extra padding is fine.
+  const charW = 0.092;
+  const iconGap = 0.08;
 
-  // WhatsApp
-  cx = MARGIN + colW + colGap;
-  slide.addImage({ path: "whatsapp.png", x: cx, y: contactsY + 0.02, w: 0.28, h: 0.28 });
-  slide.addText("+256 705 571 443", {
-    x: cx + 0.34, y: contactsY, w: colW - 0.34, h: 0.32,
-    fontSize: 12, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
-  });
+  function contact(colIndex, iconPath, iconW, label) {
+    const labelW = label.length * charW;
+    const contentW = iconW + iconGap + labelW;
+    const cellLeft = MARGIN + colIndex * (colW + colGap);
+    const padLeft = Math.max(0, (colW - contentW) / 2);
+    const iconX = cellLeft + padLeft;
+    const textX = iconX + iconW + iconGap;
+    const iconYNudge = (0.32 - iconW) / 2;  // vertically centre icon to text row
+    slide.addImage({ path: iconPath, x: iconX, y: contactsY + iconYNudge, w: iconW, h: iconW });
+    slide.addText(label, {
+      x: textX, y: contactsY, w: labelW + 0.10, h: 0.32,
+      fontSize: 12, fontFace: "Calibri", bold: true, color: C.ink,
+      align: "left", valign: "middle", margin: 0,
+    });
+  }
 
-  // Phone (US line)
-  cx = MARGIN + 2 * (colW + colGap);
-  slide.addImage({ path: phoneIcon, x: cx, y: contactsY + 0.04, w: 0.26, h: 0.26 });
-  slide.addText("+1 984 710 2902", {
-    x: cx + 0.32, y: contactsY, w: colW - 0.32, h: 0.32,
-    fontSize: 12, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
-  });
+  contact(0, emailIcon,       0.26, "allanbakesiga@gmail.com");
+  contact(1, "whatsapp.png",  0.28, "+256 705 571 443");
+  contact(2, phoneIcon,       0.26, "+1 984 710 2902");
 
   // Follow-up explainer + dashboard URL
   slide.addText("Once enrolled, you'll be granted access to all course materials at:", {
