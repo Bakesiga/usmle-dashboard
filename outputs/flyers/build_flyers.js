@@ -150,7 +150,7 @@ function buildFlyer(pres, config) {
   const statsY = 3.40;
   const stats = [
     { big: "Mon–Sun", small: "Daily classes" },
-    { big: "4 mo",     small: "Structured roadmap" },
+    { big: "4 months", small: "Structured roadmap" },
     { big: "Step 1+2", small: "Combined option" },
   ];
   const statW = (CONTENT_W - 0.4) / 3;
