@@ -325,12 +325,12 @@ contact(0, "email-blue.png", 0.26, "allanbakesiga@gmail.com");
 contact(1, "whatsapp.png",   0.28, "+256 705 571 443");
 contact(2, "phone-blue.png", 0.26, "+1 984 710 2902");
 
-// ── Closing line + dashboard URL ──────────────────────
-slide.addText("Course materials and class recordings live at:", {
+// ── Closing line + sign-up form URL ───────────────────
+slide.addText("Ready to enrol? Drop your details here and Allan will follow up:", {
   x: MARGIN, y: ctaY + 0.86, w: CONTENT_W, h: 0.22,
   fontSize: 10.5, fontFace: "Calibri", italic: true, color: C.ink2, margin: 0,
 });
-slide.addText("bakesiga.github.io/usmle-dashboard", {
+slide.addText("forms.gle/Pj4tB985kpZGBKN59", {
   x: MARGIN, y: ctaY + 1.08, w: CONTENT_W, h: 0.42,
   fontSize: 22, fontFace: "Arial Black", color: C.step1, bold: true, margin: 0,
 });
