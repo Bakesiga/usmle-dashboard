@@ -271,7 +271,7 @@ function buildFlyer(pres, config) {
   const calloutEnd = calloutY + calloutH;
   const ctaY = Math.min(calloutEnd + 0.25, 9.50);
 
-  slide.addText("TO SIGN UP, CONTACT ALLAN", {
+  slide.addText("TO SIGN UP, CONTACT ALLAN ON:", {
     x: MARGIN, y: ctaY, w: CONTENT_W, h: 0.22,
     fontSize: 11, fontFace: "Calibri", color: deep,
     bold: true, charSpacing: 4, margin: 0,
