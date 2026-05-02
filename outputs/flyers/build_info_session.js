@@ -9,14 +9,14 @@ const fs = require("fs");
 
 // ── Edit these, then rebuild ───────────────────────────
 const SESSION = {
-  weekdayShort: "SAT",          // Header stamp top line
-  monthDay:     "MAY 9",        // Header stamp big line
+  weekdayShort: "SAT",
+  monthDay:     "MAY 9",
   fullDate:     "Saturday, May 9, 2026",
-  time:         "7:00 PM EAT  ·  12:00 PM EDT",
+  time:         "11:00 AM EDT  ·  6:00 PM EAT",
   duration:     "60 min · open Q&A",
-  zoomUrl:      "https://us02web.zoom.us/j/PLACEHOLDER",
-  zoomId:       "PLACEHOLDER",
-  zoomPass:     "PLACEHOLDER",
+  zoomUrl:      "duke.zoom.us/j/96991939005",
+  zoomId:       "969 9193 9005",
+  zoomPass:     "",
 };
 
 // ── Photo (uses same allan.jpg as flyers) ──────────────
@@ -255,12 +255,17 @@ slide.addText(SESSION.fullDate + "  ·  " + SESSION.time, {
 });
 slide.addText(SESSION.zoomUrl, {
   x: MARGIN + 0.30, y: calloutY + 0.68, w: CONTENT_W - 0.40, h: 0.42,
-  fontSize: 18, fontFace: "Arial Black", color: "FFFFFF", bold: true, margin: 0,
+  fontSize: 22, fontFace: "Arial Black", color: "FFFFFF", bold: true, margin: 0,
 });
-slide.addText("Meeting ID: " + SESSION.zoomId + "    ·    Passcode: " + SESSION.zoomPass, {
-  x: MARGIN + 0.30, y: calloutY + 1.12, w: CONTENT_W - 0.40, h: 0.30,
-  fontSize: 11.5, fontFace: "Calibri", color: "FFFFFF", margin: 0,
-});
+slide.addText(
+  SESSION.zoomPass
+    ? "Meeting ID: " + SESSION.zoomId + "    ·    Passcode: " + SESSION.zoomPass
+    : "Meeting ID: " + SESSION.zoomId,
+  {
+    x: MARGIN + 0.30, y: calloutY + 1.12, w: CONTENT_W - 0.40, h: 0.30,
+    fontSize: 12, fontFace: "Calibri", color: "FFFFFF", margin: 0,
+  }
+);
 
 // ── Contacts (3-up) ───────────────────────────────────
 const ctaY = 8.55;
