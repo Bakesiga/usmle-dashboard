@@ -104,7 +104,7 @@ function buildFlyer(pres, config) {
   });
 
   // ── Instructor strip ────────────────────────────────
-  const stripY = 2.15;
+  const stripY = 2.05;
   slide.addShape(pres.shapes.RECTANGLE, {
     x: MARGIN, y: stripY, w: CONTENT_W, h: 1.10,
     fill: { color: C.bgTint }, line: { color: C.border, width: 0.75 },
@@ -147,7 +147,7 @@ function buildFlyer(pres, config) {
   });
 
   // ── Stats row ───────────────────────────────────────
-  const statsY = 3.40;
+  const statsY = 3.30;
   const stats = [
     { big: "Mon–Sun", small: "Daily classes" },
     { big: "4 months", small: "Structured roadmap" },
@@ -174,7 +174,7 @@ function buildFlyer(pres, config) {
   });
 
   // ── Value-prop cards (2x2) ──────────────────────────
-  const cardsY = 4.55;
+  const cardsY = 4.45;
   const cardW = (CONTENT_W - 0.25) / 2;
   const cardH = 1.20;
   const cards = [
@@ -222,7 +222,7 @@ function buildFlyer(pres, config) {
   });
 
   // ── Topics row ──────────────────────────────────────
-  const topicsY = 7.20;
+  const topicsY = 7.10;
   slide.addText("WHAT WE COVER", {
     x: MARGIN, y: topicsY, w: CONTENT_W, h: 0.30,
     fontSize: 11, fontFace: "Calibri", color: deep,
@@ -248,7 +248,7 @@ function buildFlyer(pres, config) {
   // ── Combined-prep callout ───────────────────────────
   // Hug whichever topics block is above (Step 1 has 2 lines, Step 2 has 1).
   const calloutY = topicsEnd + 0.05;
-  const calloutH = 0.85;
+  const calloutH = 0.80;
   slide.addShape(pres.shapes.RECTANGLE, {
     x: MARGIN, y: calloutY, w: CONTENT_W, h: calloutH,
     fill: { color: deep }, line: { color: deep },
@@ -258,18 +258,18 @@ function buildFlyer(pres, config) {
     fill: { color: accent }, line: { color: accent },
   });
   slide.addText("Doing both Step 1 & 2?", {
-    x: MARGIN + 0.30, y: calloutY + 0.08, w: CONTENT_W - 0.40, h: 0.30,
+    x: MARGIN + 0.30, y: calloutY + 0.08, w: CONTENT_W - 0.40, h: 0.28,
     fontSize: 14, fontFace: "Calibri", bold: true, color: "FFFFFF", margin: 0,
   });
   slide.addText("Take the expedited combined prep — overlapping topics taught once, reinforced across both Steps. Save time, retain more.", {
-    x: MARGIN + 0.30, y: calloutY + 0.38, w: CONTENT_W - 0.40, h: 0.42,
+    x: MARGIN + 0.30, y: calloutY + 0.36, w: CONTENT_W - 0.40, h: 0.40,
     fontSize: 11.5, fontFace: "Calibri", color: "FFFFFF", margin: 0,
   });
 
   // ── CTA + contact ───────────────────────────────────
   // Two-step narrative: contact Allan -> get dashboard access.
   const calloutEnd = calloutY + calloutH;
-  const ctaY = Math.min(calloutEnd + 0.25, 9.50);
+  const ctaY = Math.min(calloutEnd + 0.30, 9.55);
 
   slide.addText("TO SIGN UP, CONTACT ALLAN ON:", {
     x: MARGIN, y: ctaY, w: CONTENT_W, h: 0.22,
@@ -316,7 +316,7 @@ function buildFlyer(pres, config) {
     fontSize: 10.5, fontFace: "Calibri", italic: true, color: C.ink2, margin: 0,
   });
   slide.addText("bakesiga.github.io/usmle-dashboard", {
-    x: MARGIN, y: ctaY + 0.84, w: CONTENT_W, h: 0.44,
+    x: MARGIN, y: ctaY + 0.82, w: CONTENT_W, h: 0.40,
     fontSize: 22, fontFace: "Arial Black", color: primary,
     bold: true, margin: 0,
   });
