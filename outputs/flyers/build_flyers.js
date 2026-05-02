@@ -180,7 +180,7 @@ function buildFlyer(pres, config) {
   const cards = [
     { title: "Daily classes",      body: "Monday to Sunday. Topic-by-topic flow that keeps you in the material every single day." },
     { title: "Active community",   body: "Off-class peer discussions, accountability, and rapid Q&A between sessions." },
-    { title: "Textbook, Qbank & more", body: "Full review of the high-yield USMLE resources (textbook, Qbank, and curated supplements), with USMLE-style practice questions woven throughout." },
+    { title: "Textbook, Qbank & more", body: "Full review of textbook, Qbank, and high-yield supplements, with practice questions in every session." },
     { title: "End-to-end mentorship", body: "Guidance through the ECFMG application, CV, personal statement, interview prep, and the residency match." },
   ];
   cards.forEach((c, i) => {
