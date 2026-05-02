@@ -169,23 +169,23 @@ const cardH = 1.30;
 const agenda = [
   {
     accent: C.step1,
+    title: "The USMLE & residency path",
+    body: "What Step 1 & Step 2 CK actually test, eligibility for IMGs, and the prep + match timeline overview.",
+  },
+  {
+    accent: C.step2,
     title: "Course structure",
     body: "Daily Mon–Sun classes, 4-month roadmap, how the syllabus flows topic-by-topic.",
   },
   {
-    accent: C.step2,
+    accent: C.step1,
     title: "Materials & resources",
     body: "Recommended textbook, Qbank, and curated supplements walked through together.",
   },
   {
-    accent: C.step1,
-    title: "End-to-end mentorship",
-    body: "USMLE Steps 1 & 2 CK, ECFMG application, CV, personal statement, interviews, and the residency match.",
-  },
-  {
     accent: C.step2,
-    title: "Cost & enrollment",
-    body: "Pricing, payment options, the combined Step 1+2 expedited track, and how to join the July–October cohort.",
+    title: "End-to-end mentorship",
+    body: "Through ECFMG application, CV, personal statement, interview prep, and the residency match itself.",
   },
 ];
 
