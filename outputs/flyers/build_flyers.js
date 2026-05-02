@@ -271,24 +271,47 @@ function buildFlyer(pres, config) {
   const calloutEnd = calloutY + calloutH;
   const ctaY = Math.min(calloutEnd + 0.30, 9.55);
 
-  slide.addText("TO SIGN UP, CONTACT ALLAN ON:", {
-    x: MARGIN, y: ctaY, w: CONTENT_W, h: 0.22,
+  // QR code on the right (anchored against the right margin)
+  const qrSize = 1.20;
+  const qrX = PAGE_W - MARGIN - qrSize;
+  const qrY = ctaY;
+  slide.addImage({
+    path: "forms_qr.png",
+    x: qrX, y: qrY, w: qrSize, h: qrSize,
+  });
+  slide.addText("scan to sign up", {
+    x: qrX, y: qrY + qrSize - 0.04, w: qrSize, h: 0.16,
+    fontSize: 8, fontFace: "Calibri", color: deep, italic: true,
+    align: "center", valign: "middle", margin: 0,
+  });
+
+  // Left column: SIGN UP HERE label + form URL
+  const textW = qrX - MARGIN - 0.20;
+  slide.addText("SIGN UP HERE", {
+    x: MARGIN, y: ctaY, w: textW, h: 0.22,
     fontSize: 11, fontFace: "Calibri", color: deep,
     bold: true, charSpacing: 4, margin: 0,
   });
+  slide.addText("forms.gle/Pj4tB985kpZGBKN59", {
+    x: MARGIN, y: ctaY + 0.20, w: textW, h: 0.46,
+    fontSize: 22, fontFace: "Arial Black", color: primary,
+    bold: true, margin: 0,
+  });
 
-  // Contact row (email | WhatsApp | call) right under the label.
-  // Each cell's icon+text pair is centred horizontally within its column.
-  const contactsY = ctaY + 0.24;
-  const colGap = 0.18;
-  const colW = (CONTENT_W - 2 * colGap) / 3;
+  // "Questions? Reach out:" subtitle
+  slide.addText("Questions? Reach out to Allan:", {
+    x: MARGIN, y: ctaY + 0.72, w: textW, h: 0.22,
+    fontSize: 10.5, fontFace: "Calibri", italic: true, color: C.ink2, margin: 0,
+  });
+
+  // Compact 3-up contacts row (smaller fallback under the form CTA)
+  const contactsY = ctaY + 0.94;
+  const colGap = 0.10;
+  const colW = (textW - 2 * colGap) / 3;
   const emailIcon = track === "step2" ? "email-amber.png" : "email-blue.png";
   const phoneIcon = track === "step2" ? "phone-amber.png" : "phone-blue.png";
-
-  // Approximate 12pt Calibri char width in inches; used to compute label widths.
-  // Set generously so text never wraps; a little extra padding is fine.
-  const charW = 0.092;
-  const iconGap = 0.08;
+  const charW = 0.075;
+  const iconGap = 0.06;
 
   function contact(colIndex, iconPath, iconW, label) {
     const labelW = label.length * charW;
@@ -297,29 +320,18 @@ function buildFlyer(pres, config) {
     const padLeft = Math.max(0, (colW - contentW) / 2);
     const iconX = cellLeft + padLeft;
     const textX = iconX + iconW + iconGap;
-    const iconYNudge = (0.32 - iconW) / 2;  // vertically centre icon to text row
+    const iconYNudge = (0.24 - iconW) / 2;
     slide.addImage({ path: iconPath, x: iconX, y: contactsY + iconYNudge, w: iconW, h: iconW });
     slide.addText(label, {
-      x: textX, y: contactsY, w: labelW + 0.10, h: 0.32,
-      fontSize: 12, fontFace: "Calibri", bold: true, color: C.ink,
+      x: textX, y: contactsY, w: labelW + 0.10, h: 0.24,
+      fontSize: 10, fontFace: "Calibri", bold: true, color: C.ink,
       align: "left", valign: "middle", margin: 0,
     });
   }
 
-  contact(0, emailIcon,       0.26, "allanbakesiga@gmail.com");
-  contact(1, "whatsapp.png",  0.28, "+256 705 571 443");
-  contact(2, phoneIcon,       0.26, "+1 984 710 2902");
-
-  // Follow-up explainer + dashboard URL
-  slide.addText("Once enrolled, you'll be granted access to all course materials at:", {
-    x: MARGIN, y: ctaY + 0.62, w: CONTENT_W, h: 0.22,
-    fontSize: 10.5, fontFace: "Calibri", italic: true, color: C.ink2, margin: 0,
-  });
-  slide.addText("bakesiga.github.io/usmle-dashboard", {
-    x: MARGIN, y: ctaY + 0.82, w: CONTENT_W, h: 0.40,
-    fontSize: 22, fontFace: "Arial Black", color: primary,
-    bold: true, margin: 0,
-  });
+  contact(0, emailIcon,      0.20, "allanbakesiga@gmail.com");
+  contact(1, "whatsapp.png", 0.22, "+256 705 571 443");
+  contact(2, phoneIcon,      0.20, "+1 984 710 2902");
 
   // ── Bottom rule (taller, brand gradient look via two stacked bars) ──
   slide.addShape(pres.shapes.RECTANGLE, {
