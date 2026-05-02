@@ -267,50 +267,46 @@ function buildFlyer(pres, config) {
   });
 
   // ── CTA + contact ───────────────────────────────────
-  // Pull CTA up to follow callout when there's empty space (Step 2),
-  // capped at 9.55 so Step 1 (taller topics block) still fits above the bottom rule.
+  // Two-step narrative: contact Allan -> get dashboard access.
   const calloutEnd = calloutY + calloutH;
-  const ctaY = Math.min(calloutEnd + 0.25, 9.55);
-  slide.addText("SIGN UP", {
+  const ctaY = Math.min(calloutEnd + 0.25, 9.50);
+
+  slide.addText("TO SIGN UP, CONTACT ALLAN", {
     x: MARGIN, y: ctaY, w: CONTENT_W, h: 0.22,
     fontSize: 11, fontFace: "Calibri", color: deep,
     bold: true, charSpacing: 4, margin: 0,
   });
-  slide.addText("bakesiga.github.io/usmle-dashboard", {
-    x: MARGIN, y: ctaY + 0.20, w: CONTENT_W, h: 0.44,
-    fontSize: 24, fontFace: "Arial Black", color: primary,
-    bold: true, margin: 0,
-  });
 
-  // Two contact rows: email + WhatsApp on a 2-column layout
-  const contactsY = ctaY + 0.70;
+  // Contact row (email | WhatsApp) right under the label
+  const contactsY = ctaY + 0.24;
   const colW = (CONTENT_W - 0.20) / 2;
-
-  // Email column (left): blue dot + address
-  slide.addShape(pres.shapes.OVAL, {
-    x: MARGIN, y: contactsY + 0.06, w: 0.18, h: 0.18,
-    fill: { color: primary }, line: { color: primary },
+  const emailIcon = track === "step2" ? "email-amber.png" : "email-blue.png";
+  slide.addImage({
+    path: emailIcon,
+    x: MARGIN, y: contactsY + 0.04, w: 0.26, h: 0.26,
   });
   slide.addText("allanbakesiga@gmail.com", {
-    x: MARGIN + 0.26, y: contactsY, w: colW - 0.26, h: 0.30,
-    fontSize: 12.5, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
+    x: MARGIN + 0.34, y: contactsY, w: colW - 0.34, h: 0.32,
+    fontSize: 13, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
   });
-
-  // WhatsApp column (right): real WhatsApp logo + number
   slide.addImage({
     path: "whatsapp.png",
-    x: MARGIN + colW + 0.20, y: contactsY + 0.02, w: 0.26, h: 0.26,
+    x: MARGIN + colW + 0.20, y: contactsY + 0.02, w: 0.28, h: 0.28,
   });
-  slide.addText("WhatsApp · +256 705 571 443", {
-    x: MARGIN + colW + 0.54, y: contactsY, w: colW - 0.54, h: 0.30,
-    fontSize: 12.5, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
+  slide.addText("+256 705 571 443", {
+    x: MARGIN + colW + 0.54, y: contactsY, w: colW - 0.54, h: 0.32,
+    fontSize: 13, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
   });
 
-  // Limited-cohort note (small italic, snug above bottom rule)
-  slide.addText("Limited cohort · Sign in with the Gmail Allan adds you under", {
-    x: MARGIN, y: contactsY + 0.32, w: CONTENT_W, h: 0.18,
-    fontSize: 9.5, fontFace: "Calibri", italic: true, color: C.muted,
-    align: "left", margin: 0,
+  // Follow-up explainer + dashboard URL
+  slide.addText("Once enrolled, you'll be granted access to all course materials at:", {
+    x: MARGIN, y: ctaY + 0.62, w: CONTENT_W, h: 0.22,
+    fontSize: 10.5, fontFace: "Calibri", italic: true, color: C.ink2, margin: 0,
+  });
+  slide.addText("bakesiga.github.io/usmle-dashboard", {
+    x: MARGIN, y: ctaY + 0.84, w: CONTENT_W, h: 0.44,
+    fontSize: 22, fontFace: "Arial Black", color: primary,
+    bold: true, margin: 0,
   });
 
   // ── Bottom rule (taller, brand gradient look via two stacked bars) ──
