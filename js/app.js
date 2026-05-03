@@ -79,31 +79,65 @@
     const root = document.getElementById("sessions-list");
     const filtered = (items || []).filter(matchesTrack);
     if (!filtered.length) {
-      root.innerHTML = `<div class="empty">No recordings posted yet for ${TRACK_LABELS[activeTrack]}. Check back after the next class.</div>`;
+      root.innerHTML = `<div class="empty">No schedule posted yet for ${TRACK_LABELS[activeTrack]}. Check back soon.</div>`;
       return;
     }
-    filtered.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-    root.innerHTML = filtered.map((s) => `
-      <div class="card">
-        <div class="row">
-          <div>
-            <h3>${esc(s.topic || "Untitled session")}</h3>
-            <div class="meta">${esc(fmtDate(s.date))} ${s.duration ? "· " + esc(s.duration) : ""}</div>
+
+    const todayISO = new Date().toISOString().slice(0, 10);
+    const upcoming = filtered.filter((s) => (s.date || "") >= todayISO);
+    const past     = filtered.filter((s) => (s.date || "") <  todayISO);
+    upcoming.sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+    past.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+
+    function statusFor(s) {
+      if (!s.date) return { label: "TBD",      cls: "pill-muted"  };
+      if (s.date === todayISO) return { label: "TODAY",    cls: "pill-amber"  };
+      if (s.date >  todayISO)  return { label: "UPCOMING", cls: "pill-blue"   };
+      return s.recording_url
+        ? { label: "RECORDED", cls: "pill-muted" }
+        : { label: "PAST",     cls: "pill-muted" };
+    }
+
+    function cardHtml(s) {
+      const status = statusFor(s);
+      const dayPrefix = s.day ? `<strong>Day ${esc(s.day)}</strong> · ` : "";
+      const isUpcoming = (s.date || "") >= todayISO;
+      return `
+        <div class="card">
+          <div class="row">
+            <div>
+              <h3>${esc(s.topic || "Untitled session")}</h3>
+              <div class="meta">${dayPrefix}${esc(fmtDate(s.date))}${s.duration ? " · " + esc(s.duration) : ""}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;">
+              <span class="pill ${status.cls}">${esc(status.label)}</span>
+              ${s.tag ? `<span class="pill ${s.tagColor || ""}">${esc(s.tag)}</span>` : ""}
+            </div>
           </div>
-          <div>
-            ${s.tag ? `<span class="pill ${s.tagColor || ""}">${esc(s.tag)}</span>` : ""}
+          ${s.notes ? `<p>${esc(s.notes)}</p>` : ""}
+          <div class="actions">
+            ${s.recording_url ? `<a class="primary" href="${esc(safeUrl(s.recording_url))}" target="_blank" rel="noopener">▶ Watch recording</a>` : ""}
+            ${s.slides_url   ? `<a href="${esc(safeUrl(s.slides_url))}" target="_blank" rel="noopener">📑 Slides</a>` : ""}
+            ${s.notes_url    ? `<a href="${esc(safeUrl(s.notes_url))}"  target="_blank" rel="noopener">📝 Notes</a>` : ""}
+            ${s.qbank_url    ? `<a href="${esc(safeUrl(s.qbank_url))}"  target="_blank" rel="noopener">❓ Practice Qs</a>` : ""}
           </div>
+          ${s.recording_url
+            ? `<p style="color:var(--muted);font-size:11.5px;margin-top:10px;">Sign in to Zoom with the email Allan added you under to view.</p>`
+            : (isUpcoming ? `<p style="color:var(--muted);font-size:11.5px;margin-top:10px;">Recording, slides, and notes will appear here after class.</p>` : "")}
         </div>
-        ${s.notes ? `<p>${esc(s.notes)}</p>` : ""}
-        <div class="actions">
-          ${s.recording_url ? `<a class="primary" href="${esc(safeUrl(s.recording_url))}" target="_blank" rel="noopener">▶ Watch recording</a>` : ""}
-          ${s.slides_url ? `<a href="${esc(safeUrl(s.slides_url))}" target="_blank" rel="noopener">📑 Slides</a>` : ""}
-          ${s.notes_url ? `<a href="${esc(safeUrl(s.notes_url))}" target="_blank" rel="noopener">📝 Notes</a>` : ""}
-          ${s.qbank_url ? `<a href="${esc(safeUrl(s.qbank_url))}" target="_blank" rel="noopener">❓ Practice Qs</a>` : ""}
-        </div>
-        <p style="color:var(--muted);font-size:11.5px;margin-top:10px;">Sign in to Zoom with the email Allan added you under to view.</p>
-      </div>
-    `).join("");
+      `;
+    }
+
+    let html = "";
+    if (upcoming.length) {
+      html += `<h2 class="section-title" style="margin-top:6px;">Upcoming</h2>`;
+      html += upcoming.map(cardHtml).join("");
+    }
+    if (past.length) {
+      html += `<h2 class="section-title" style="margin-top:22px;">Past classes</h2>`;
+      html += past.map(cardHtml).join("");
+    }
+    root.innerHTML = html;
   }
 
   // ── Materials ───────────────────────────────────────
