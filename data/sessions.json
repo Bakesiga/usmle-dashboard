@@ -12,7 +12,8 @@
     "slides_url": "",
     "notes_url": "",
     "qbank_url": "",
-    "notes": "Heart morphogenesis, fetal/postnatal circulation, congenital heart defects (5 T's; VSD/ASD/PDA, Eisenmenger), coarctation of aorta, persistent pHTN of newborn, defect-syndrome associations. UWorld questions."
+    "notes": "Heart morphogenesis, fetal/postnatal circulation, congenital heart defects (5 T's; VSD/ASD/PDA, Eisenmenger), coarctation of aorta, persistent pHTN of newborn, defect-syndrome associations. UWorld questions.",
+    "chapter": "Cardiovascular"
   },
   {
     "id": "step1-jun-02",
@@ -27,7 +28,8 @@
     "slides_url": "",
     "notes_url": "",
     "qbank_url": "",
-    "notes": "UWorld questions on cardiac anatomy."
+    "notes": "UWorld questions on cardiac anatomy.",
+    "chapter": "Cardiovascular"
   },
   {
     "id": "step1-jun-03",
@@ -42,7 +44,8 @@
     "slides_url": "",
     "notes_url": "",
     "qbank_url": "",
-    "notes": "UWorld questions on cardiac physiology."
+    "notes": "UWorld questions on cardiac physiology.",
+    "chapter": "Cardiovascular"
   },
   {
     "id": "step1-jun-04",
@@ -57,7 +60,8 @@
     "slides_url": "",
     "notes_url": "",
     "qbank_url": "",
-    "notes": "Splitting of S2, full auscultation map, systolic and diastolic murmurs, maneuvers. UWorld questions."
+    "notes": "Splitting of S2, full auscultation map, systolic and diastolic murmurs, maneuvers. UWorld questions.",
+    "chapter": "Cardiovascular"
   },
   {
     "id": "step1-jun-05",
@@ -72,7 +76,8 @@
     "slides_url": "",
     "notes_url": "",
     "qbank_url": "",
-    "notes": "Myocyte + pacemaker APs, ECG, baroreceptor and chemoreceptor reflexes, normal cardiac pressures, autoregulation by organ, capillary fluid exchange (Starling), atrial fib/flutter, ventricular arrhythmias, torsades, conduction blocks. UWorld questions."
+    "notes": "Myocyte + pacemaker APs, ECG, baroreceptor and chemoreceptor reflexes, normal cardiac pressures, autoregulation by organ, capillary fluid exchange (Starling), atrial fib/flutter, ventricular arrhythmias, torsades, conduction blocks. UWorld questions.",
+    "chapter": "Cardiovascular"
   },
   {
     "id": "step1-jun-06",
@@ -87,7 +92,8 @@
     "slides_url": "",
     "notes_url": "",
     "qbank_url": "",
-    "notes": "CAD, IHD manifestations, MI evolution and histology, biomarkers, ECG localisation by lead, MI complications. UWorld questions."
+    "notes": "CAD, IHD manifestations, MI evolution and histology, biomarkers, ECG localisation by lead, MI complications. UWorld questions.",
+    "chapter": "Cardiovascular"
   },
   {
     "id": "step1-jun-07",
@@ -102,7 +108,8 @@
     "slides_url": "",
     "notes_url": "",
     "qbank_url": "",
-    "notes": "Hyperlipidemia signs, atherosclerosis pathogenesis, arteriolosclerosis (hyaline + hyperplastic), abdominal and thoracic aortic aneurysms, aortic dissection (Stanford A vs B), subclavian steal. UWorld questions."
+    "notes": "Hyperlipidemia signs, atherosclerosis pathogenesis, arteriolosclerosis (hyaline + hyperplastic), abdominal and thoracic aortic aneurysms, aortic dissection (Stanford A vs B), subclavian steal. UWorld questions.",
+    "chapter": "Cardiovascular"
   },
   {
     "id": "step1-jun-08",
@@ -117,7 +124,8 @@
     "slides_url": "",
     "notes_url": "",
     "qbank_url": "",
-    "notes": "DCM, HCM, RCM, takotsubo, peripartum CMP. Left and right heart failure (HFrEF / HFpEF). Shock (hypovolemic, cardiogenic, obstructive, distributive). Sudden cardiac death and syncope. UWorld questions."
+    "notes": "DCM, HCM, RCM, takotsubo, peripartum CMP. Left and right heart failure (HFrEF / HFpEF). Shock (hypovolemic, cardiogenic, obstructive, distributive). Sudden cardiac death and syncope. UWorld questions.",
+    "chapter": "Cardiovascular"
   },
   {
     "id": "step1-jun-09",
@@ -132,7 +140,8 @@
     "slides_url": "",
     "notes_url": "",
     "qbank_url": "",
-    "notes": "Acute rheumatic fever, rheumatic heart disease, infective endocarditis (acute, subacute, Libman-Sacks, marantic), acute pericarditis + tamponade, myocarditis, cardiac tumors (myxoma, rhabdomyoma, mets), large/medium/small vessel vasculitides, vascular tumors. UWorld questions."
+    "notes": "Acute rheumatic fever, rheumatic heart disease, infective endocarditis (acute, subacute, Libman-Sacks, marantic), acute pericarditis + tamponade, myocarditis, cardiac tumors (myxoma, rhabdomyoma, mets), large/medium/small vessel vasculitides, vascular tumors. UWorld questions.",
+    "chapter": "Cardiovascular"
   },
   {
     "id": "step1-jun-10",
@@ -147,7 +156,8 @@
     "slides_url": "",
     "notes_url": "",
     "qbank_url": "",
-    "notes": "Hypertension treatment by comorbidity, ACE inhibitors / ARBs, β-blockers, calcium channel blockers (CCBs), hydralazine, ranolazine, sacubitril/valsartan, lipid-lowering agents (statins, fibrates, niacin, ezetimibe, PCSK9, BAS), digoxin, antiarrhythmics (Class I A/B/C, II, III, IV, adenosine, magnesium), pulmonary hypertension drugs. UWorld questions."
+    "notes": "Hypertension treatment by comorbidity, ACE inhibitors / ARBs, β-blockers, calcium channel blockers (CCBs), hydralazine, ranolazine, sacubitril/valsartan, lipid-lowering agents (statins, fibrates, niacin, ezetimibe, PCSK9, BAS), digoxin, antiarrhythmics (Class I A/B/C, II, III, IV, adenosine, magnesium), pulmonary hypertension drugs. UWorld questions.",
+    "chapter": "Cardiovascular"
   },
   {
     "id": "step1-jun-11",

@@ -203,6 +203,28 @@ h2.section-title {
   border-radius: var(--radius); background: rgba(255,255,255,.6);
 }
 
+/* ── Chapter sub-tabs (Sessions panel) ──────────────── */
+.chapter-tabs {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.chapter-tab {
+  padding: 6px 14px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--border2); background: var(--bg2);
+  color: var(--text2); font-size: 12.5px; font-weight: 600;
+  letter-spacing: .2px;
+  transition: all .15s ease;
+}
+.chapter-tab:hover { background: var(--bg3); color: var(--text); border-color: var(--accent); }
+.chapter-tab.active {
+  background: linear-gradient(135deg, var(--accent), var(--amber));
+  color: #ffffff; border-color: transparent;
+  box-shadow: 0 4px 12px rgba(2,132,199,.20);
+}
+.chapter-tab .count {
+  font-weight: 500; opacity: .85; margin-left: 4px;
+}
+
 /* ── Track switcher (in-dashboard) ───────────────────── */
 #track-switcher {
   display: flex; gap: 8px; align-items: center;

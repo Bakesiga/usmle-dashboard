@@ -74,12 +74,75 @@
     } catch (e) { return fallback; }
   }
 
+  // ── Chapter sub-tabs (within Sessions panel) ─────────
+  const CHAPTER_KEY = "usmle.activeChapter.v1";
+  let activeChapter = sessionStorage.getItem(CHAPTER_KEY) || "__auto__";
+
+  function renderChapterTabs(items) {
+    const root = document.getElementById("chapter-tabs");
+    if (!root) return;
+    const trackItems = (items || []).filter(matchesTrack);
+
+    // Build chapter inventory in date order: chapters appear in the order
+    // their first session falls.
+    const chapterFirstDate = {};
+    trackItems.forEach((s) => {
+      const ch = s.chapter || "Other";
+      if (!(ch in chapterFirstDate) || (s.date || "") < chapterFirstDate[ch]) {
+        chapterFirstDate[ch] = s.date || "9999-12-31";
+      }
+    });
+    const chapters = Object.keys(chapterFirstDate)
+      .sort((a, b) => chapterFirstDate[a].localeCompare(chapterFirstDate[b]));
+
+    if (chapters.length <= 1) { root.style.display = "none"; return; }
+    root.style.display = "flex";
+
+    // Auto-pick the chapter containing today or the next upcoming session
+    if (activeChapter === "__auto__") {
+      const todayISO = new Date().toISOString().slice(0, 10);
+      const upcoming = trackItems
+        .filter((s) => (s.date || "") >= todayISO)
+        .sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+      activeChapter = (upcoming[0] && upcoming[0].chapter) || chapters[0];
+    }
+    if (!chapters.includes(activeChapter) && activeChapter !== "all") activeChapter = chapters[0];
+
+    // Counts per chapter
+    const counts = { all: trackItems.length };
+    chapters.forEach((ch) => {
+      counts[ch] = trackItems.filter((s) => (s.chapter || "Other") === ch).length;
+    });
+
+    const pill = (key, label) => `
+      <div class="chapter-tab ${activeChapter === key ? "active" : ""}" data-chapter="${esc(key)}">
+        ${esc(label)}<span class="count">(${counts[key] || 0})</span>
+      </div>`;
+
+    root.innerHTML =
+      pill("all", "All") +
+      chapters.map((ch) => pill(ch, ch)).join("");
+
+    root.querySelectorAll(".chapter-tab").forEach((t) => {
+      t.addEventListener("click", () => {
+        activeChapter = t.dataset.chapter;
+        sessionStorage.setItem(CHAPTER_KEY, activeChapter);
+        renderChapterTabs(items);
+        renderSessions(items);
+      });
+    });
+  }
+
   // ── Sessions ────────────────────────────────────────
   function renderSessions(items) {
+    renderChapterTabs(items);
     const root = document.getElementById("sessions-list");
-    const filtered = (items || []).filter(matchesTrack);
+    let filtered = (items || []).filter(matchesTrack);
+    if (activeChapter && activeChapter !== "all" && activeChapter !== "__auto__") {
+      filtered = filtered.filter((s) => (s.chapter || "Other") === activeChapter);
+    }
     if (!filtered.length) {
-      root.innerHTML = `<div class="empty">No schedule posted yet for ${TRACK_LABELS[activeTrack]}. Check back soon.</div>`;
+      root.innerHTML = `<div class="empty">No schedule posted yet for ${TRACK_LABELS[activeTrack]}${activeChapter && activeChapter !== "all" ? " · " + esc(activeChapter) : ""}. Check back soon.</div>`;
       return;
     }
 
