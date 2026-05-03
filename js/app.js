@@ -234,11 +234,12 @@
 
   // ── Schedule (month grid generated from sessions.json) ──
   const CHAPTER_COLOR = {
-    "Cardiovascular":    "#0284c7",
-    "Respiratory":       "#059669",
-    "General Pathology": "#7c3aed",
+    "Cardiovascular":               "#0284c7",
+    "Respiratory":                  "#059669",
+    "General Pathology":            "#7c3aed",
+    "Epidemiology & Biostatistics": "#d97706",
   };
-  const CHAPTER_FALLBACK = "#d97706";
+  const CHAPTER_FALLBACK = "#db2777";
   const monthLabel = (y, m) =>
     new Date(y, m, 1).toLocaleDateString(undefined, { month: "long", year: "numeric" });
   const isoDate = (y, m, d) =>

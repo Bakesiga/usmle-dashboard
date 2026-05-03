@@ -398,5 +398,53 @@
     "notes_url": "",
     "qbank_url": "",
     "notes": "Tumor markers (AFP, CA-125, CEA, PSA, CA 19-9, β-hCG, etc.), key immunohistochemical stains, oncogenic microbes (HPV, EBV, HBV/HCV, HTLV-1, H. pylori, HHV-8), chemical and environmental carcinogens. Physiologic aging changes. UWorld questions."
+  },
+  {
+    "id": "step1-jun-26",
+    "track": "step1",
+    "chapter": "Epidemiology & Biostatistics",
+    "date": "2026-06-26",
+    "day": 1,
+    "topic": "Study designs — observational, clinical trials, evaluating studies",
+    "tag": "Step 1 · Epi Day 1",
+    "tagColor": "pill-amber",
+    "fa_pages": "256–258",
+    "recording_url": "",
+    "slides_url": "",
+    "notes_url": "",
+    "qbank_url": "",
+    "notes": "Observational studies (case series, cross-sectional, case-control, cohort, twin concordance, adoption, ecological). Clinical trial phases I–IV. Study evaluation (Cochrane, hierarchy of evidence). UWorld questions."
+  },
+  {
+    "id": "step1-jun-27",
+    "track": "step1",
+    "chapter": "Epidemiology & Biostatistics",
+    "date": "2026-06-27",
+    "day": 2,
+    "topic": "Risk quantification + test evaluation + intro to statistics",
+    "tag": "Step 1 · Epi Day 2",
+    "tagColor": "pill-amber",
+    "fa_pages": "259–262",
+    "recording_url": "",
+    "slides_url": "",
+    "notes_url": "",
+    "qbank_url": "",
+    "notes": "Incidence vs prevalence, mortality rate, attack rate, RR, OR, AR, ARR, NNT, NNH, likelihood ratios, Kaplan–Meier curves. Test evaluation: sensitivity, specificity, PPV, NPV, ROC. Distributions, confidence intervals, p-values. UWorld questions."
+  },
+  {
+    "id": "step1-jun-28",
+    "track": "step1",
+    "chapter": "Epidemiology & Biostatistics",
+    "date": "2026-06-28",
+    "day": 3,
+    "topic": "Hypothesis testing, bias & confounding, disease prevention + screening",
+    "tag": "Step 1 · Epi Day 3",
+    "tagColor": "pill-amber",
+    "fa_pages": "263–266",
+    "recording_url": "",
+    "slides_url": "",
+    "notes_url": "",
+    "qbank_url": "",
+    "notes": "Type I and II error, statistical power, regression, ANOVA, chi-squared, t-test. Bias and confounding (selection, measurement, recall, observer/Hawthorne, lead-time, length-time, confounding) and how to reduce them. Disease prevention (1°/2°/3°/4°) and screening tests. UWorld questions."
   }
 ]
