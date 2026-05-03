@@ -47,9 +47,19 @@
 
   <!-- Schedule -->
   <section class="panel" id="panel-schedule">
-    <h2 class="section-title">Upcoming classes</h2>
+    <h2 class="section-title">Calendar</h2>
     <div id="schedule-wrap" class="calendar-wrap">
-      <iframe id="cal-iframe" src="" loading="lazy"></iframe>
+      <div class="cal-toolbar">
+        <button id="cal-prev" class="cal-nav" title="Previous month">‹</button>
+        <h3 id="cal-month">—</h3>
+        <button id="cal-next" class="cal-nav" title="Next month">›</button>
+        <button id="cal-today" class="cal-today">Today</button>
+      </div>
+      <div class="cal-weekdays">
+        <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
+      </div>
+      <div id="cal-grid" class="cal-grid"></div>
+      <div id="cal-legend" class="cal-legend"></div>
     </div>
   </section>
 

@@ -31,6 +31,10 @@
         activeTrack = b.dataset.track;
         localStorage.setItem(STORAGE_TRACK, activeTrack);
         switcher.querySelectorAll(".track-btn").forEach((x) => x.classList.toggle("active", x === b));
+        // Reset chapter and calendar view so they re-auto-pick for the new track
+        activeChapter = "__auto__";
+        sessionStorage.removeItem("usmle.activeChapter.v1");
+        calView = null;
         renderAll();
       });
     });
@@ -228,17 +232,160 @@
     `).join("");
   }
 
-  // ── Schedule ────────────────────────────────────────
+  // ── Schedule (month grid generated from sessions.json) ──
+  const CHAPTER_COLOR = {
+    "Cardiovascular":    "#0284c7",
+    "Respiratory":       "#059669",
+    "General Pathology": "#7c3aed",
+  };
+  const CHAPTER_FALLBACK = "#d97706";
+  const monthLabel = (y, m) =>
+    new Date(y, m, 1).toLocaleDateString(undefined, { month: "long", year: "numeric" });
+  const isoDate = (y, m, d) =>
+    `${y}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+
+  let calView = null; // { year, month } — set on first render
+
+  function pickInitialMonth(items) {
+    const todayISO = new Date().toISOString().slice(0, 10);
+    const trackItems = (items || []).filter(matchesTrack).filter((s) => s.date);
+    const upcoming = trackItems
+      .filter((s) => (s.date || "") >= todayISO)
+      .sort((a, b) => a.date.localeCompare(b.date));
+    const target = upcoming[0]
+      ? upcoming[0].date
+      : (trackItems.sort((a, b) => b.date.localeCompare(a.date))[0] || {}).date;
+    if (target) {
+      const [y, m] = target.split("-").map(Number);
+      return { year: y, month: m - 1 };
+    }
+    const now = new Date();
+    return { year: now.getFullYear(), month: now.getMonth() };
+  }
+
   function renderSchedule() {
-    const url = USMLE_CONFIG.CALENDAR_EMBED_URL;
-    const iframe = document.getElementById("cal-iframe");
-    const wrap = document.getElementById("schedule-wrap");
-    if (!url || url.includes("PASTE_CALENDAR_ID")) {
-      wrap.innerHTML = `<div class="empty">Schedule not connected yet. Allan can paste a Google Calendar embed URL into <code>js/config.js</code>.</div>`;
+    const items = (DATA.sessions || []).filter(matchesTrack).filter((s) => s.date);
+    if (!items.length) {
+      document.getElementById("cal-grid").innerHTML =
+        `<div class="empty" style="grid-column:1/-1;">No schedule posted yet for ${TRACK_LABELS[activeTrack]}.</div>`;
+      document.getElementById("cal-month").textContent = "—";
+      document.getElementById("cal-legend").innerHTML = "";
       return;
     }
-    iframe.src = url;
+    if (!calView) calView = pickInitialMonth(DATA.sessions);
+    drawCalendar(items);
   }
+
+  function drawCalendar(items) {
+    const { year, month } = calView;
+    document.getElementById("cal-month").textContent = monthLabel(year, month);
+
+    // Index sessions by date for fast lookup
+    const byDate = {};
+    items.forEach((s) => { byDate[s.date] = s; });
+
+    // Build the grid: start on Monday of the week containing day 1.
+    const firstOfMonth = new Date(year, month, 1);
+    const startOffset = (firstOfMonth.getDay() + 6) % 7; // 0=Mon..6=Sun
+    const gridStart = new Date(year, month, 1 - startOffset);
+    const lastOfMonth = new Date(year, month + 1, 0);
+    const totalDaysAcross = startOffset + lastOfMonth.getDate();
+    const totalCells = Math.ceil(totalDaysAcross / 7) * 7;
+
+    const todayISO = new Date().toISOString().slice(0, 10);
+
+    let html = "";
+    for (let i = 0; i < totalCells; i++) {
+      const d = new Date(gridStart);
+      d.setDate(gridStart.getDate() + i);
+      const dy = d.getFullYear(), dm = d.getMonth(), dd = d.getDate();
+      const cellISO = isoDate(dy, dm, dd);
+      const inMonth = (dm === month);
+      const session = byDate[cellISO];
+      const chapter = session && session.chapter ? session.chapter : null;
+      const accent = chapter && CHAPTER_COLOR[chapter] ? CHAPTER_COLOR[chapter] : CHAPTER_FALLBACK;
+
+      const classes = [
+        "cal-cell",
+        inMonth ? "" : "outside-month",
+        cellISO === todayISO ? "today" : "",
+        session ? "has-session" : "",
+      ].filter(Boolean).join(" ");
+
+      const styleVar = session ? `style="--cell-accent:${accent};"` : "";
+      const dayLabel = session && session.day ? `Day ${session.day}` : "";
+      const topicShort = session
+        ? esc(session.topic || "").split(/[—:;]/)[0].slice(0, 64)
+        : "";
+
+      html += `
+        <div class="${classes}" ${styleVar} data-iso="${cellISO}" data-id="${session ? esc(session.id) : ""}">
+          <div class="cal-day-num">${dd}</div>
+          ${session ? `<div class="cal-day-label">${esc(dayLabel)}</div>` : ""}
+          ${session ? `<div class="cal-day-topic">${topicShort}</div>` : ""}
+        </div>`;
+    }
+    document.getElementById("cal-grid").innerHTML = html;
+
+    // Legend (only chapters that exist for active track)
+    const presentChapters = [...new Set(items.map((s) => s.chapter).filter(Boolean))];
+    const legend = presentChapters
+      .map((ch) => `<span class="cal-legend-item" style="--legend-color:${CHAPTER_COLOR[ch] || CHAPTER_FALLBACK};">${esc(ch)}</span>`)
+      .join("");
+    document.getElementById("cal-legend").innerHTML = legend;
+
+    // Click a cell with a session → switch to Sessions tab
+    document.getElementById("cal-grid").querySelectorAll(".cal-cell.has-session")
+      .forEach((cell) => {
+        cell.addEventListener("click", () => {
+          // Switch to Sessions tab
+          document.querySelectorAll(".tab").forEach((x) => x.classList.remove("active"));
+          document.querySelectorAll(".panel").forEach((x) => x.classList.remove("active"));
+          const sessionsTab = document.querySelector('.tab[data-panel="sessions"]');
+          sessionsTab && sessionsTab.classList.add("active");
+          document.getElementById("panel-sessions").classList.add("active");
+          // Make sure the chapter filter shows the chapter we're switching to
+          const ch = cell.style.getPropertyValue("--cell-accent");
+          // If the active chapter pill doesn't match, switch it
+          const chapterName = (DATA.sessions.find((s) => s.id === cell.dataset.id) || {}).chapter || "all";
+          activeChapter = chapterName;
+          sessionStorage.setItem(CHAPTER_KEY, activeChapter);
+          renderSessions(DATA.sessions);
+          // Scroll to the matching card (best effort — wait a tick for re-render)
+          setTimeout(() => {
+            const cards = document.getElementById("sessions-list").querySelectorAll(".card h3");
+            const target = (DATA.sessions.find((s) => s.id === cell.dataset.id) || {}).topic;
+            for (const h of cards) {
+              if (h.textContent === target) {
+                h.closest(".card").scrollIntoView({ behavior: "smooth", block: "center" });
+                h.closest(".card").style.outline = `2px solid ${CHAPTER_COLOR[chapterName] || CHAPTER_FALLBACK}`;
+                setTimeout(() => h.closest(".card").style.outline = "", 1600);
+                break;
+              }
+            }
+          }, 60);
+        });
+      });
+  }
+
+  // Calendar nav buttons
+  document.getElementById("cal-prev").addEventListener("click", () => {
+    if (!calView) return;
+    calView = { year: calView.year + (calView.month === 0 ? -1 : 0),
+                month: (calView.month + 11) % 12 };
+    renderSchedule();
+  });
+  document.getElementById("cal-next").addEventListener("click", () => {
+    if (!calView) return;
+    calView = { year: calView.year + (calView.month === 11 ? 1 : 0),
+                month: (calView.month + 1) % 12 };
+    renderSchedule();
+  });
+  document.getElementById("cal-today").addEventListener("click", () => {
+    const now = new Date();
+    calView = { year: now.getFullYear(), month: now.getMonth() };
+    renderSchedule();
+  });
 
   // ── Announcements ───────────────────────────────────
   function renderAnnouncements(items) {
@@ -264,6 +411,7 @@
     renderSessions(DATA.sessions);
     renderMaterials(DATA.materials);
     renderAnnouncements(DATA.announcements);
+    renderSchedule();
   }
 
   (async function () {
@@ -274,6 +422,5 @@
     ]);
     DATA = { sessions, materials, announcements };
     renderAll();
-    renderSchedule();
   })();
 })();
