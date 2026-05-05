@@ -157,18 +157,17 @@
     past.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 
     function statusFor(s) {
-      if (!s.date) return { label: "TBD",      cls: "pill-muted"  };
-      if (s.date === todayISO) return { label: "TODAY",    cls: "pill-amber"  };
-      if (s.date >  todayISO)  return { label: "UPCOMING", cls: "pill-blue"   };
-      return s.recording_url
-        ? { label: "RECORDED", cls: "pill-muted" }
-        : { label: "PAST",     cls: "pill-muted" };
+      if (!s.date) return { label: "TBD",      cls: "pill-muted" };
+      if (s.date === todayISO) return { label: "TODAY",    cls: "pill-amber" };
+      if (s.date >  todayISO)  return { label: "UPCOMING", cls: "pill-blue"  };
+      return { label: "COVERED", cls: "pill-muted" };
     }
 
     function cardHtml(s) {
       const status = statusFor(s);
       const dayPrefix = s.day ? `<strong>Day ${esc(s.day)}</strong> · ` : "";
       const isUpcoming = (s.date || "") >= todayISO;
+      const hasAction = s.slides_url || s.notes_url || s.qbank_url;
       return `
         <div class="card">
           <div class="row">
@@ -182,15 +181,15 @@
             </div>
           </div>
           ${s.notes ? `<p>${esc(s.notes)}</p>` : ""}
-          <div class="actions">
-            ${s.recording_url ? `<a class="primary" href="${esc(safeUrl(s.recording_url))}" target="_blank" rel="noopener">▶ Watch recording</a>` : ""}
-            ${s.slides_url   ? `<a href="${esc(safeUrl(s.slides_url))}" target="_blank" rel="noopener">📑 Slides</a>` : ""}
-            ${s.notes_url    ? `<a href="${esc(safeUrl(s.notes_url))}"  target="_blank" rel="noopener">📝 Notes</a>` : ""}
-            ${s.qbank_url    ? `<a href="${esc(safeUrl(s.qbank_url))}"  target="_blank" rel="noopener">❓ Practice Qs</a>` : ""}
-          </div>
-          ${s.recording_url
-            ? `<p style="color:var(--muted);font-size:11.5px;margin-top:10px;">Sign in to Zoom with the email Allan added you under to view.</p>`
-            : (isUpcoming ? `<p style="color:var(--muted);font-size:11.5px;margin-top:10px;">Recording, slides, and notes will appear here after class.</p>` : "")}
+          ${hasAction ? `
+            <div class="actions">
+              ${s.slides_url ? `<a class="primary" href="${esc(safeUrl(s.slides_url))}" target="_blank" rel="noopener">📑 Slides</a>` : ""}
+              ${s.notes_url  ? `<a href="${esc(safeUrl(s.notes_url))}"  target="_blank" rel="noopener">📝 Notes</a>` : ""}
+              ${s.qbank_url  ? `<a href="${esc(safeUrl(s.qbank_url))}"  target="_blank" rel="noopener">❓ Practice Qs</a>` : ""}
+            </div>` : ""}
+          ${isUpcoming && !hasAction
+            ? `<p style="color:var(--muted);font-size:11.5px;margin-top:10px;">Slides and notes will appear here after class.</p>`
+            : ""}
         </div>
       `;
     }
