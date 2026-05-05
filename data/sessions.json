@@ -2,10 +2,26 @@
   {
     "id": "step1-jun-01",
     "track": "step1",
+    "chapter": "Cardiovascular",
     "date": "2026-06-01",
     "day": 1,
-    "topic": "Cardiac embryology, fetal circulation, and congenital heart defects",
+    "topic": "Orientation and overview",
     "tag": "Step 1 · Day 1",
+    "tagColor": "pill-blue",
+    "fa_pages": "—",
+    "recording_url": "",
+    "slides_url": "",
+    "notes_url": "",
+    "qbank_url": "",
+    "notes": "Welcome and course logistics. USMLE Step 1 overview (what's tested, scoring, IMG eligibility). Daily class flow Mon–Sun, FA + UWorld pacing, study-plan walkthrough. ECFMG and residency match preview. Dashboard walkthrough, expectations and Q&A."
+  },
+  {
+    "id": "step1-jun-02",
+    "track": "step1",
+    "date": "2026-06-02",
+    "day": 2,
+    "topic": "Cardiac embryology, fetal circulation, and congenital heart defects",
+    "tag": "Step 1 · Day 2",
     "tagColor": "pill-blue",
     "fa_pages": "284–287, 302–304",
     "recording_url": "",
@@ -16,12 +32,12 @@
     "chapter": "Cardiovascular"
   },
   {
-    "id": "step1-jun-02",
+    "id": "step1-jun-03",
     "track": "step1",
-    "date": "2026-06-02",
-    "day": 2,
+    "date": "2026-06-03",
+    "day": 3,
     "topic": "Anatomy: chambers, surface anatomy, CT/CXR correlates, and pericardium",
-    "tag": "Step 1 · Day 2",
+    "tag": "Step 1 · Day 3",
     "tagColor": "pill-blue",
     "fa_pages": "288",
     "recording_url": "",
@@ -32,12 +48,12 @@
     "chapter": "Cardiovascular"
   },
   {
-    "id": "step1-jun-03",
+    "id": "step1-jun-04",
     "track": "step1",
-    "date": "2026-06-03",
-    "day": 3,
+    "date": "2026-06-04",
+    "day": 4,
     "topic": "Physiology: Cardiac output (variables + equations); cardiac and vascular function curves; pressure-volume loops and the cardiac cycle",
-    "tag": "Step 1 · Day 3",
+    "tag": "Step 1 · Day 4",
     "tagColor": "pill-blue",
     "fa_pages": "289–293",
     "recording_url": "",
@@ -48,12 +64,12 @@
     "chapter": "Cardiovascular"
   },
   {
-    "id": "step1-jun-04",
+    "id": "step1-jun-05",
     "track": "step1",
-    "date": "2026-06-04",
-    "day": 4,
+    "date": "2026-06-05",
+    "day": 5,
     "topic": "Heart sounds and splitting; murmurs and the maneuvers that change their intensity",
-    "tag": "Step 1 · Day 4",
+    "tag": "Step 1 · Day 5",
     "tagColor": "pill-blue",
     "fa_pages": "294–296",
     "recording_url": "",
@@ -64,12 +80,12 @@
     "chapter": "Cardiovascular"
   },
   {
-    "id": "step1-jun-05",
+    "id": "step1-jun-06",
     "track": "step1",
-    "date": "2026-06-05",
-    "day": 5,
+    "date": "2026-06-06",
+    "day": 6,
     "topic": "Cardiac action potentials; ECG (narrow- and wide-complex arrhythmias, conduction blocks); BP control, autoregulation, and Starling forces",
-    "tag": "Step 1 · Day 5",
+    "tag": "Step 1 · Day 6",
     "tagColor": "pill-blue",
     "fa_pages": "297–301, 311–313",
     "recording_url": "",
@@ -80,12 +96,12 @@
     "chapter": "Cardiovascular"
   },
   {
-    "id": "step1-jun-06",
+    "id": "step1-jun-07",
     "track": "step1",
-    "date": "2026-06-06",
-    "day": 6,
+    "date": "2026-06-07",
+    "day": 7,
     "topic": "Coronary vessels, coronary artery disease, ischemic heart disease, evolution of MI, and MI complications",
-    "tag": "Step 1 · Day 6",
+    "tag": "Step 1 · Day 7",
     "tagColor": "pill-blue",
     "fa_pages": "308–310, 314",
     "recording_url": "",
@@ -96,12 +112,12 @@
     "chapter": "Cardiovascular"
   },
   {
-    "id": "step1-jun-07",
+    "id": "step1-jun-08",
     "track": "step1",
-    "date": "2026-06-07",
-    "day": 7,
+    "date": "2026-06-08",
+    "day": 8,
     "topic": "Hypertension, hyperlipidemia, atherosclerosis, aortic aneurysms, and aortic dissection",
-    "tag": "Step 1 · Day 7",
+    "tag": "Step 1 · Day 8",
     "tagColor": "pill-blue",
     "fa_pages": "305–307",
     "recording_url": "",
@@ -112,12 +128,12 @@
     "chapter": "Cardiovascular"
   },
   {
-    "id": "step1-jun-08",
+    "id": "step1-jun-09",
     "track": "step1",
-    "date": "2026-06-08",
-    "day": 8,
+    "date": "2026-06-09",
+    "day": 9,
     "topic": "Cardiomyopathies, heart failure, shock, and sudden cardiac death",
-    "tag": "Step 1 · Day 8",
+    "tag": "Step 1 · Day 9",
     "tagColor": "pill-blue",
     "fa_pages": "315–318",
     "recording_url": "",
@@ -128,12 +144,12 @@
     "chapter": "Cardiovascular"
   },
   {
-    "id": "step1-jun-09",
+    "id": "step1-jun-10",
     "track": "step1",
-    "date": "2026-06-09",
-    "day": 9,
+    "date": "2026-06-10",
+    "day": 10,
     "topic": "Rheumatic fever, infective endocarditis, pericardial disease, myocarditis, cardiac tumors, and vasculitis",
-    "tag": "Step 1 · Day 9",
+    "tag": "Step 1 · Day 10",
     "tagColor": "pill-blue",
     "fa_pages": "319–320",
     "recording_url": "",
@@ -144,12 +160,12 @@
     "chapter": "Cardiovascular"
   },
   {
-    "id": "step1-jun-10",
+    "id": "step1-jun-11",
     "track": "step1",
-    "date": "2026-06-10",
-    "day": 10,
+    "date": "2026-06-11",
+    "day": 11,
     "topic": "Cardiovascular pharmacology — antihypertensives, antianginals, lipid-lowering, antiarrhythmics, and heart-failure agents",
-    "tag": "Step 1 · Day 10",
+    "tag": "Step 1 · Day 11",
     "tagColor": "pill-blue",
     "fa_pages": "321–328",
     "recording_url": "",
@@ -160,13 +176,13 @@
     "chapter": "Cardiovascular"
   },
   {
-    "id": "step1-jun-11",
+    "id": "step1-jun-12",
     "track": "step1",
     "chapter": "Cardiovascular",
-    "date": "2026-06-11",
-    "day": 11,
+    "date": "2026-06-12",
+    "day": 12,
     "topic": "Epidemiology & Biostatistics applied to Cardiovascular medicine",
-    "tag": "Step 1 · Day 11",
+    "tag": "Step 1 · Day 12",
     "tagColor": "pill-blue",
     "fa_pages": "256–261 (cardio-applied)",
     "recording_url": "",
@@ -176,10 +192,10 @@
     "notes": "Study designs through cardio examples (Framingham cohort, HOPE, MERIT-HF, PROVE-IT trials). Risk quantification: ASCVD 10-year risk calculators, NNT/NNH for statins, RR/OR/AR worked through CV outcomes. Test characteristics: troponins, ECG sensitivity/specificity, ETT predictive values. UWorld questions."
   },
   {
-    "id": "step1-jun-12",
+    "id": "step1-jun-13",
     "track": "step1",
     "chapter": "Respiratory",
-    "date": "2026-06-12",
+    "date": "2026-06-13",
     "day": 1,
     "topic": "Respiratory embryology — lung development, alveolar cells, surfactant, branching, congenital anomalies",
     "tag": "Step 1 · Resp Day 1",
@@ -192,10 +208,10 @@
     "notes": "Lung development phases (embryonic, pseudoglandular, canalicular, saccular, alveolar), bronchial branching, alveolar cell types (Type I/II, club cells), surfactant, congenital anomalies (TE fistula, pulmonary hypoplasia). UWorld questions."
   },
   {
-    "id": "step1-jun-13",
+    "id": "step1-jun-14",
     "track": "step1",
     "chapter": "Respiratory",
-    "date": "2026-06-13",
+    "date": "2026-06-14",
     "day": 2,
     "topic": "Respiratory anatomy — respiratory tree, bronchopulmonary segments, diaphragm, pleura",
     "tag": "Step 1 · Resp Day 2",
@@ -208,10 +224,10 @@
     "notes": "Conducting vs respiratory zones, bronchopulmonary segments, lung relations, diaphragm + accessory muscles of breathing, pleural anatomy. UWorld questions."
   },
   {
-    "id": "step1-jun-14",
+    "id": "step1-jun-15",
     "track": "step1",
     "chapter": "Respiratory",
-    "date": "2026-06-14",
+    "date": "2026-06-15",
     "day": 3,
     "topic": "Physiology I — lung volumes, mechanics, compliance, surface tension, O₂–Hb dissociation",
     "tag": "Step 1 · Resp Day 3",
@@ -224,10 +240,10 @@
     "notes": "TLC/FRC/VC/RV, important pulmonary equations, lung-chest wall mechanics, compliance and hysteresis, surface tension and Laplace's law, oxygen-hemoglobin dissociation curve, methemoglobin and carboxyhemoglobin. UWorld questions."
   },
   {
-    "id": "step1-jun-15",
+    "id": "step1-jun-16",
     "track": "step1",
     "chapter": "Respiratory",
-    "date": "2026-06-15",
+    "date": "2026-06-16",
     "day": 4,
     "topic": "Physiology II — A–a gradient, V/Q mismatch, pulmonary circulation, high altitude",
     "tag": "Step 1 · Resp Day 4",
@@ -240,10 +256,10 @@
     "notes": "O₂ content equation, A–a gradient, oxygen delivery, V/Q ratios across the lung and how shunt vs dead space behave, pulmonary circulation, hypoxic pulmonary vasoconstriction, response to high altitude. UWorld questions."
   },
   {
-    "id": "step1-jun-16",
+    "id": "step1-jun-17",
     "track": "step1",
     "chapter": "Respiratory",
-    "date": "2026-06-16",
+    "date": "2026-06-17",
     "day": 5,
     "topic": "Physiology III — control of breathing, response to exercise / hypoxia / hypercapnia, sleep apnea, breathing patterns",
     "tag": "Step 1 · Resp Day 5",
@@ -256,10 +272,10 @@
     "notes": "Central + peripheral chemoreceptors, ventilation control, response to exercise, hypoxia, hypercapnia. Breathing patterns (Cheyne-Stokes, Kussmaul, ataxic). Sleep apnea physiology. UWorld questions."
   },
   {
-    "id": "step1-jun-17",
+    "id": "step1-jun-18",
     "track": "step1",
     "chapter": "Respiratory",
-    "date": "2026-06-17",
+    "date": "2026-06-18",
     "day": 6,
     "topic": "Pathology I — upper airway and obstructive lung disease",
     "tag": "Step 1 · Resp Day 6",
@@ -272,10 +288,10 @@
     "notes": "Rhinosinusitis, deviated septum, epistaxis, head and neck cancer, sleep apnea (obstructive vs central), asthma, COPD (emphysema and chronic bronchitis), bronchiectasis. UWorld questions."
   },
   {
-    "id": "step1-jun-18",
+    "id": "step1-jun-19",
     "track": "step1",
     "chapter": "Respiratory",
-    "date": "2026-06-18",
+    "date": "2026-06-19",
     "day": 7,
     "topic": "Pathology II — restrictive lung disease, ARDS, pulmonary vascular, pneumonia",
     "tag": "Step 1 · Resp Day 7",
@@ -288,10 +304,10 @@
     "notes": "Restrictive lung disease (intrinsic vs extrinsic), idiopathic pulmonary fibrosis, sarcoidosis, pneumoconioses, hypersensitivity pneumonitis, ARDS, neonatal RDS, pulmonary embolism, pulmonary edema, pulmonary hypertension. Pneumonia overview (lobar, bronchopneumonia, interstitial), specific pneumonias by organism, lung abscess. UWorld questions."
   },
   {
-    "id": "step1-jun-19",
+    "id": "step1-jun-20",
     "track": "step1",
     "chapter": "Respiratory",
-    "date": "2026-06-19",
+    "date": "2026-06-20",
     "day": 8,
     "topic": "Pathology III + Pharmacology — TB, fungal, pleural, mediastinal, lung cancer; respiratory drugs",
     "tag": "Step 1 · Resp Day 8",
@@ -304,10 +320,10 @@
     "notes": "Tuberculosis (primary, secondary, miliary, latent), fungal pneumonias, pleural diseases (pneumothorax, effusion, mesothelioma, hemothorax), mediastinal masses, lung cancer (small cell vs non-small cell, paraneoplastic syndromes, Pancoast tumor). Respiratory pharmacology — asthma drugs (β2 agonists, ICS, LTRAs, biologics), COPD drugs, methylxanthines, antitussives, decongestants, antihistamines. UWorld questions."
   },
   {
-    "id": "step1-jun-20",
+    "id": "step1-jun-21",
     "track": "step1",
     "chapter": "Respiratory",
-    "date": "2026-06-20",
+    "date": "2026-06-21",
     "day": 9,
     "topic": "Epidemiology & Biostatistics applied to Respiratory medicine",
     "tag": "Step 1 · Resp Day 9",
@@ -320,10 +336,26 @@
     "notes": "Hypothesis testing and bias through respiratory examples. Lung cancer screening (LDCT) — sens/spec, lead-time and length-time bias. Smoking cessation RCTs. TB epidemiology and contact tracing. Asthma/COPD epidemiology. Disease prevention (vaccination, smoking cessation, occupational exposures). UWorld questions."
   },
   {
-    "id": "step1-jun-21",
+    "id": "step1-jun-22",
+    "track": "step1",
+    "chapter": "Respiratory",
+    "date": "2026-06-22",
+    "day": 10,
+    "topic": "Respiratory review and high-yield practice",
+    "tag": "Step 1 · Resp Day 10",
+    "tagColor": "pill-blue",
+    "fa_pages": "678–706 (review)",
+    "recording_url": "",
+    "slides_url": "",
+    "notes_url": "",
+    "qbank_url": "",
+    "notes": "Whole-chapter review: rapid-fire concept check, integration questions across embryology / physiology / pathology / pharm. Mixed UWorld block with debrief."
+  },
+  {
+    "id": "step1-jun-23",
     "track": "step1",
     "chapter": "General Pathology",
-    "date": "2026-06-21",
+    "date": "2026-06-23",
     "day": 1,
     "topic": "Cellular adaptations, reversible cell injury, and apoptosis",
     "tag": "Step 1 · Path Day 1",
@@ -336,10 +368,10 @@
     "notes": "Hypertrophy, hyperplasia, atrophy, metaplasia, dysplasia. Reversible vs irreversible cell injury. Intrinsic and extrinsic apoptosis pathways. UWorld questions."
   },
   {
-    "id": "step1-jun-22",
+    "id": "step1-jun-24",
     "track": "step1",
     "chapter": "General Pathology",
-    "date": "2026-06-22",
+    "date": "2026-06-24",
     "day": 2,
     "topic": "Necrosis, ischemia, infarcts, and free radicals",
     "tag": "Step 1 · Path Day 2",
@@ -352,10 +384,10 @@
     "notes": "Necrosis types (coagulative, liquefactive, caseous, fat, fibrinoid, gangrenous). Ischemia and infarcts (red vs pale). Free radical injury, oxidative stress, and antioxidant defences. UWorld questions."
   },
   {
-    "id": "step1-jun-23",
+    "id": "step1-jun-25",
     "track": "step1",
     "chapter": "General Pathology",
-    "date": "2026-06-23",
+    "date": "2026-06-25",
     "day": 3,
     "topic": "Acute inflammation — vascular events, leukocyte recruitment, mediators",
     "tag": "Step 1 · Path Day 3",
@@ -368,10 +400,10 @@
     "notes": "Acute inflammation cardinal signs, vasodilation and increased permeability, leukocyte margination, rolling, adhesion, transmigration. Inflammatory mediators (histamine, bradykinin, complement, cytokines, prostaglandins, leukotrienes). Exudate vs transudate. UWorld questions."
   },
   {
-    "id": "step1-jun-24",
+    "id": "step1-jun-26",
     "track": "step1",
     "chapter": "General Pathology",
-    "date": "2026-06-24",
+    "date": "2026-06-26",
     "day": 4,
     "topic": "Chronic + granulomatous inflammation, tissue repair, wound healing",
     "tag": "Step 1 · Path Day 4",
@@ -384,10 +416,10 @@
     "notes": "Chronic inflammation cell types and outcomes. Granulomatous inflammation (caseating vs non-caseating, causes, Th1/IFN-γ axis). Tissue repair phases — hemostasis, inflammation, proliferation, remodelling. Wound healing by primary, secondary, tertiary intention. Scar formation (hypertrophic vs keloid), fibrosis. UWorld questions."
   },
   {
-    "id": "step1-jun-25",
+    "id": "step1-jun-27",
     "track": "step1",
     "chapter": "General Pathology",
-    "date": "2026-06-25",
+    "date": "2026-06-27",
     "day": 5,
     "topic": "Neoplasia I — progression, nomenclature, hallmarks of cancer, grade vs stage, metastases",
     "tag": "Step 1 · Path Day 5",
@@ -400,10 +432,10 @@
     "notes": "Neoplastic progression (dysplasia → carcinoma in situ → invasive). Tumor nomenclature (benign vs malignant, epithelial vs mesenchymal). Hallmarks of cancer. Tumor grade vs stage. Common metastases by primary site. UWorld questions."
   },
   {
-    "id": "step1-jun-26",
+    "id": "step1-jun-28",
     "track": "step1",
     "chapter": "General Pathology",
-    "date": "2026-06-26",
+    "date": "2026-06-28",
     "day": 6,
     "topic": "Neoplasia II — oncogenes, tumor suppressors, key gene–tumor pairings, epidemiology, paraneoplastic syndromes",
     "tag": "Step 1 · Path Day 6",
@@ -416,10 +448,10 @@
     "notes": "Oncogenes (RAS, MYC, HER2, BCR-ABL, etc.) and tumor suppressors (Rb, p53, BRCA, APC, NF1/NF2, VHL, MEN1). Inherited cancer syndromes. Cancer epidemiology by site. Paraneoplastic syndromes (endocrine, neurologic, dermatologic, hematologic). UWorld questions."
   },
   {
-    "id": "step1-jun-27",
+    "id": "step1-jun-29",
     "track": "step1",
     "chapter": "General Pathology",
-    "date": "2026-06-27",
+    "date": "2026-06-29",
     "day": 7,
     "topic": "Neoplasia III + Aging — tumor markers, IHC, oncogenic microbes, chemical carcinogens, aging changes",
     "tag": "Step 1 · Path Day 7",
@@ -430,5 +462,21 @@
     "notes_url": "",
     "qbank_url": "",
     "notes": "Tumor markers (AFP, CA-125, CEA, PSA, CA 19-9, β-hCG, etc.), key immunohistochemical stains, oncogenic microbes (HPV, EBV, HBV/HCV, HTLV-1, H. pylori, HHV-8), chemical and environmental carcinogens. Physiologic aging changes. UWorld questions."
+  },
+  {
+    "id": "step1-jun-30",
+    "track": "step1",
+    "chapter": "General Pathology",
+    "date": "2026-06-30",
+    "day": 8,
+    "topic": "General Pathology review and high-yield practice",
+    "tag": "Step 1 · Path Day 8",
+    "tagColor": "pill-blue",
+    "fa_pages": "201–226 (review)",
+    "recording_url": "",
+    "slides_url": "",
+    "notes_url": "",
+    "qbank_url": "",
+    "notes": "Whole-chapter review: cellular injury, inflammation, neoplasia, aging — integrated across organ systems. Mixed UWorld block with debrief."
   }
 ]
