@@ -82,6 +82,7 @@ const USMLE_AUTH = (() => {
     if (window.google && google.accounts && google.accounts.id) {
       try { google.accounts.id.disableAutoSelect(); } catch (e) {}
     }
+    // Sign-out lands on the public home page; sign-in page is for re-entry only.
     location.replace("index.html");
   }
 
