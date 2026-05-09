@@ -66,7 +66,7 @@ function slideTitle(slide, kicker, title, primary) {
   });
 }
 
-const TOTAL = 7;
+const TOTAL = 8;
 
 // ─────────────────────────────────────────────────────
 // SLIDE 1 — Title
@@ -225,7 +225,84 @@ const TOTAL = 7;
 }
 
 // ─────────────────────────────────────────────────────
-// SLIDE 3 — Step 1 Prep
+// SLIDE 3 — Application roadmap: MyIntealth → Step 2 CK
+// ─────────────────────────────────────────────────────
+{
+  const s = pres.addSlide();
+  s.background = { color: C.bg };
+  titleBand(s, C.step1Deep, C.step2Deep);
+  slideTitle(s, "APPLICATION ROADMAP  ·  MYINTEALTH → STEP 2 CK",
+    "From account to exam — 8 concrete steps", C.step1Deep);
+
+  const steps = [
+    { n: 1, h: "Establish MyIntealth account",  ref: "p. 10",
+       d: "Required first. Name as on passport, DOB, address, school info, plus identity verification. One MyIntealth ID, forever." },
+    { n: 2, h: "Confirm name of record",         ref: "p. 12",
+       d: "Must match your passport exactly. Different name on diploma → submit verification documentation." },
+    { n: 3, h: "Application for ECFMG Cert.",    ref: "p. 21",
+       d: "Pay fee. Medical school must be in the World Directory with ECFMG Sponsor Note (Graduation Years: Current). Track in My Cases." },
+    { n: 4, h: "Submit medical credentials",     ref: "p. 34",
+       d: "Final diploma + transcript (+ English translations). ECFMG verifies with the issuing institution before the application is accepted." },
+    { n: 5, h: "Receive your USMLE ID",          ref: "p. 10",
+       d: "Since Jan 2026 USMLE Service Transition, FSMB issues this when you register for your first Step. View in My Profile." },
+    { n: 6, h: "Apply for USMLE Step 1",         ref: "p. 26",
+       d: "Through FSMB. FSMB confirms with ECFMG that you're eligible. Students need school official to certify enrollment." },
+    { n: 7, h: "Take Step 1  ·  Pass / Fail",    ref: "—",
+       d: "USMLE shares the outcome directly with ECFMG. You don't need to forward the result yourself." },
+    { n: 8, h: "Apply for USMLE Step 2 CK",      ref: "p. 26",
+       d: "Same eligibility chain. Plan timing carefully — NRMP and GME programs have deadlines, and ECFMG warns slot availability isn't guaranteed." },
+  ];
+
+  const colW = (CW - 0.30) / 2;
+  const rowH = 1.12;
+  steps.forEach((step, i) => {
+    const col = i % 2, row = Math.floor(i / 2);
+    const x = M + col * (colW + 0.30);
+    const y = 2.05 + row * (rowH + 0.10);
+
+    s.addShape(pres.shapes.RECTANGLE, {
+      x, y, w: colW, h: rowH,
+      fill: { color: C.bgTint }, line: { color: C.border, width: 0.75 },
+    });
+    s.addShape(pres.shapes.RECTANGLE, {
+      x, y, w: 0.10, h: rowH,
+      fill: { color: i < 4 ? C.step1 : C.step2 },
+      line:  { color: i < 4 ? C.step1 : C.step2 },
+    });
+    s.addShape(pres.shapes.OVAL, {
+      x: x + 0.22, y: y + 0.30, w: 0.45, h: 0.45,
+      fill: { color: i < 4 ? C.step1Deep : C.step2Deep },
+      line:  { color: i < 4 ? C.step1Deep : C.step2Deep },
+    });
+    s.addText(String(step.n), {
+      x: x + 0.22, y: y + 0.30, w: 0.45, h: 0.45,
+      fontSize: 18, fontFace: "Arial Black", color: "FFFFFF",
+      bold: true, align: "center", valign: "middle", margin: 0,
+    });
+    s.addText(step.h, {
+      x: x + 0.78, y: y + 0.10, w: colW - 1.50, h: 0.36,
+      fontSize: 14, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
+    });
+    s.addText(step.ref, {
+      x: x + colW - 0.78, y: y + 0.10, w: 0.70, h: 0.30,
+      fontSize: 10, fontFace: "Calibri", italic: true, color: C.muted,
+      align: "right", margin: 0,
+    });
+    s.addText(step.d, {
+      x: x + 0.78, y: y + 0.46, w: colW - 0.92, h: rowH - 0.50,
+      fontSize: 11, fontFace: "Calibri", color: C.ink2, margin: 0,
+    });
+  });
+
+  s.addText("Source: ECFMG 2026 Information Booklet (page references in upper right of each card).", {
+    x: M, y: H - 0.70, w: CW, h: 0.24,
+    fontSize: 10, fontFace: "Calibri", italic: true, color: C.muted, margin: 0,
+  });
+  footer(s, 3, TOTAL);
+}
+
+// ─────────────────────────────────────────────────────
+// SLIDE 4 — Step 1 Prep
 // ─────────────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -317,11 +394,11 @@ const TOTAL = 7;
     x: M, y: H - 0.65, w: CW, h: 0.24,
     fontSize: 10, fontFace: "Calibri", italic: true, color: C.muted, margin: 0,
   });
-  footer(s, 3, TOTAL);
+  footer(s, 4, TOTAL);
 }
 
 // ─────────────────────────────────────────────────────
-// SLIDE 4 — Step 2 CK Prep
+// SLIDE 5 — Step 2 CK Prep
 // ─────────────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -414,11 +491,11 @@ const TOTAL = 7;
     x: M, y: H - 0.65, w: CW, h: 0.24,
     fontSize: 10, fontFace: "Calibri", italic: true, color: C.muted, margin: 0,
   });
-  footer(s, 4, TOTAL);
+  footer(s, 5, TOTAL);
 }
 
 // ─────────────────────────────────────────────────────
-// SLIDE 5 — How Classes Work I (Daily structure)
+// SLIDE 6 — How Classes Work I (Daily structure)
 // ─────────────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -495,11 +572,11 @@ const TOTAL = 7;
     });
   });
 
-  footer(s, 5, TOTAL);
+  footer(s, 6, TOTAL);
 }
 
 // ─────────────────────────────────────────────────────
-// SLIDE 6 — How Classes Work II (Roadmap & mentorship)
+// SLIDE 7 — How Classes Work II (Roadmap & mentorship)
 // ─────────────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -563,11 +640,11 @@ const TOTAL = 7;
     });
   });
 
-  footer(s, 6, TOTAL);
+  footer(s, 7, TOTAL);
 }
 
 // ─────────────────────────────────────────────────────
-// SLIDE 7 — Sign up + link
+// SLIDE 8 — Sign up + link
 // ─────────────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -612,7 +689,7 @@ const TOTAL = 7;
     align: "center", margin: 0,
   });
 
-  footer(s, 7, TOTAL, { color: "B8D6EC" });
+  footer(s, 8, TOTAL, { color: "B8D6EC" });
 }
 
 // Output
