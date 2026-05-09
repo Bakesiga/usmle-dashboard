@@ -54,7 +54,7 @@ slide.addShape(pres.shapes.RECTANGLE, {
 });
 
 // Top kicker label (across the split)
-slide.addText("FREE  ·  JULY–OCTOBER COHORT", {
+slide.addText("JUNE COHORT  ·  SIGN UP  ·  LIMITED SLOTS", {
   x: MARGIN, y: 0.18, w: PAGE_W - MARGIN - 2.10, h: 0.34,
   fontSize: 14, fontFace: "Calibri", color: "FFFFFF",
   bold: true, charSpacing: 3, margin: 0,
