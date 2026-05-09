@@ -66,7 +66,7 @@ function slideTitle(slide, kicker, title, primary) {
   });
 }
 
-const TOTAL = 7;
+const TOTAL = 8;
 
 // ─────────────────────────────────────────────────────
 // SLIDE 1 — Title
@@ -331,7 +331,133 @@ const TOTAL = 7;
 }
 
 // ─────────────────────────────────────────────────────
-// SLIDE 4 — Step 2 CK Prep
+// SLIDE 4 — What we'll cover in June (Step 1)
+// ─────────────────────────────────────────────────────
+{
+  const s = pres.addSlide();
+  s.background = { color: C.bg };
+  titleBand(s, C.step1, "059669");
+  slideTitle(s, "WHAT WE'LL COVER IN JUNE  ·  STEP 1",
+    "30 days, 3 chapters, mapped page-by-page to FA 2025", C.step1);
+
+  const chapters = [
+    {
+      name: "Cardiovascular",
+      meta: "12 days  ·  Jun 1–12",
+      color: C.step1,
+      colorDeep: C.step1Deep,
+      tint: C.step1Soft,
+      days: [
+        "1  · Orientation & overview",
+        "2  · Embryology, fetal circulation, CHDs",
+        "3  · Anatomy: CT, CXR, pericardium",
+        "4  · Pump physiology, PV loops, cycle",
+        "5  · Heart sounds, splitting, murmurs",
+        "6  · Action potentials, ECG, BP control",
+        "7  · CAD, IHD, MI evolution + complications",
+        "8  · HTN, atherosclerosis, aneurysms",
+        "9  · Cardiomyopathies, HF, shock",
+        "10 · Rheumatic, IE, myocarditis, vasculitis",
+        "11 · Cardiovascular pharmacology",
+        "12 · Epi/Biostats applied to CV",
+      ],
+    },
+    {
+      name: "Respiratory",
+      meta: "10 days  ·  Jun 13–22",
+      color: "059669",
+      colorDeep: "065F46",
+      tint: "D1FAE5",
+      days: [
+        "1  · Embryology, surfactant, anomalies",
+        "2  · Anatomy: tree, segments, diaphragm",
+        "3  · Volumes, mechanics, O₂–Hb curve",
+        "4  · A–a gradient, V/Q, pulmonary circ",
+        "5  · Control of breathing, sleep apnea",
+        "6  · Upper airway + obstructive disease",
+        "7  · Restrictive, ARDS, vascular, pneumonia",
+        "8  · TB, pleural, lung cancer, pharm",
+        "9  · Epi/Biostats applied to Respiratory",
+        "10 · Chapter review + practice",
+      ],
+    },
+    {
+      name: "General Pathology",
+      meta: "8 days  ·  Jun 23–30",
+      color: "7C3AED",
+      colorDeep: "5B21B6",
+      tint: "EDE9FE",
+      days: [
+        "1 · Cellular adaptations, apoptosis",
+        "2 · Necrosis, ischemia, free radicals",
+        "3 · Acute inflammation",
+        "4 · Chronic inflammation, tissue repair",
+        "5 · Neoplasia I — hallmarks, grade/stage",
+        "6 · Neoplasia II — oncogenes, TSGs",
+        "7 · Neoplasia III + Aging",
+        "8 · Chapter review + practice",
+      ],
+    },
+  ];
+
+  const colGap = 0.30;
+  const colW = (CW - 2 * colGap) / 3;
+  const colTop = 2.05;
+  const colBottom = H - 0.80;
+  const colH = colBottom - colTop;
+
+  chapters.forEach((ch, i) => {
+    const x = M + i * (colW + colGap);
+
+    // Card
+    s.addShape(pres.shapes.RECTANGLE, {
+      x, y: colTop, w: colW, h: colH,
+      fill: { color: C.bg }, line: { color: C.border, width: 0.75 },
+      shadow: { type: "outer", color: "0C2A3D", blur: 10, offset: 1, angle: 90, opacity: 0.08 },
+    });
+    // Top accent bar
+    s.addShape(pres.shapes.RECTANGLE, {
+      x, y: colTop, w: colW, h: 0.10,
+      fill: { color: ch.color }, line: { color: ch.color },
+    });
+    // Header block
+    s.addText(ch.name, {
+      x: x + 0.20, y: colTop + 0.20, w: colW - 0.40, h: 0.40,
+      fontSize: 18, fontFace: "Calibri", bold: true, color: ch.colorDeep, margin: 0,
+    });
+    s.addText(ch.meta, {
+      x: x + 0.20, y: colTop + 0.60, w: colW - 0.40, h: 0.28,
+      fontSize: 11, fontFace: "Calibri", color: C.muted, italic: true, margin: 0,
+    });
+
+    // Days list
+    const listY = colTop + 1.00;
+    const listH = colH - 1.10;
+    const lineH = listH / Math.max(ch.days.length, 1);
+    ch.days.forEach((day, j) => {
+      const y = listY + j * lineH;
+      // tiny accent dot
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: x + 0.18, y: y + lineH / 2 - 0.05, w: 0.06, h: 0.06,
+        fill: { color: ch.color }, line: { color: ch.color },
+      });
+      s.addText(day, {
+        x: x + 0.32, y, w: colW - 0.40, h: lineH,
+        fontSize: 11, fontFace: "Calibri", color: C.ink,
+        valign: "middle", margin: 0,
+      });
+    });
+  });
+
+  s.addText("Each day comes with the relevant FA 2025 pages and a UWorld block. Recordings and summaries land on the dashboard.", {
+    x: M, y: H - 0.70, w: CW, h: 0.24,
+    fontSize: 10, fontFace: "Calibri", italic: true, color: C.muted, margin: 0,
+  });
+  footer(s, 4, TOTAL);
+}
+
+// ─────────────────────────────────────────────────────
+// SLIDE 5 — Step 2 CK Prep
 // ─────────────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -424,11 +550,11 @@ const TOTAL = 7;
     x: M, y: H - 0.65, w: CW, h: 0.24,
     fontSize: 10, fontFace: "Calibri", italic: true, color: C.muted, margin: 0,
   });
-  footer(s, 4, TOTAL);
+  footer(s, 5, TOTAL);
 }
 
 // ─────────────────────────────────────────────────────
-// SLIDE 5 — How Classes Work I (Daily structure)
+// SLIDE 6 — How Classes Work I (Daily structure)
 // ─────────────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -505,11 +631,11 @@ const TOTAL = 7;
     });
   });
 
-  footer(s, 5, TOTAL);
+  footer(s, 6, TOTAL);
 }
 
 // ─────────────────────────────────────────────────────
-// SLIDE 6 — How Classes Work II (Roadmap & mentorship)
+// SLIDE 7 — How Classes Work II (Roadmap & mentorship)
 // ─────────────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -573,11 +699,11 @@ const TOTAL = 7;
     });
   });
 
-  footer(s, 6, TOTAL);
+  footer(s, 7, TOTAL);
 }
 
 // ─────────────────────────────────────────────────────
-// SLIDE 7 — Sign up + link
+// SLIDE 8 — Sign up + link
 // ─────────────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -622,7 +748,7 @@ const TOTAL = 7;
     align: "center", margin: 0,
   });
 
-  footer(s, 7, TOTAL, { color: "B8D6EC" });
+  footer(s, 8, TOTAL, { color: "B8D6EC" });
 }
 
 // Output
