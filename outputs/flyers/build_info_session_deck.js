@@ -66,7 +66,7 @@ function slideTitle(slide, kicker, title, primary) {
   });
 }
 
-const TOTAL = 8;
+const TOTAL = 7;
 
 // ─────────────────────────────────────────────────────
 // SLIDE 1 — Title
@@ -158,74 +158,7 @@ const TOTAL = 8;
 }
 
 // ─────────────────────────────────────────────────────
-// SLIDE 2 — The Residency Journey (ECFMG)
-// ─────────────────────────────────────────────────────
-{
-  const s = pres.addSlide();
-  s.background = { color: C.bg };
-  titleBand(s, C.step1, C.step2);
-  slideTitle(s, "THE RESIDENCY JOURNEY  ·  IMG PATH",
-    "From medical school to Match Day", C.step1);
-
-  // 8 steps in a 2-column grid
-  const steps = [
-    { n: 1, h: "ECFMG eligibility",
-       d: "Medical school listed in the World Directory of Medical Schools with appropriate ECFMG Sponsor Note. Submit credentials to ECFMG." },
-    { n: 2, h: "USMLE Step 1",
-       d: "Pass (currently reported as Pass / Fail). Required for ECFMG Certification." },
-    { n: 3, h: "USMLE Step 2 CK",
-       d: "Pass with a strong scaled score. Reported scores range 1–300 (mean ≈ 248). Required for ECFMG Certification." },
-    { n: 4, h: "English proficiency (OET Medicine)",
-       d: "Score 350+ on each of the 4 subtests within a single test administration." },
-    { n: 5, h: "ECFMG Certification",
-       d: "Issued after Step 1, Step 2 CK, OET, and verified medical credentials." },
-    { n: 6, h: "ERAS application",
-       d: "Apply through ERAS (opens early September). Personal statement, CV, LoRs, MSPE." },
-    { n: 7, h: "Interview season",
-       d: "October to January. Programs review, interview, and rank applicants." },
-    { n: 8, h: "NRMP Match Day",
-       d: "Submit rank-order list in late February. Match results in mid-March." },
-  ];
-
-  const colW = (CW - 0.30) / 2;
-  const rowH = 1.05;
-  steps.forEach((step, i) => {
-    const col = i % 2, row = Math.floor(i / 2);
-    const x = M + col * (colW + 0.30);
-    const y = 2.05 + row * (rowH + 0.10);
-
-    s.addShape(pres.shapes.RECTANGLE, {
-      x, y, w: colW, h: rowH,
-      fill: { color: C.bgTint }, line: { color: C.border, width: 0.75 },
-    });
-    s.addShape(pres.shapes.OVAL, {
-      x: x + 0.15, y: y + 0.30, w: 0.45, h: 0.45,
-      fill: { color: C.step1Deep }, line: { color: C.step1Deep },
-    });
-    s.addText(String(step.n), {
-      x: x + 0.15, y: y + 0.30, w: 0.45, h: 0.45,
-      fontSize: 18, fontFace: "Arial Black", color: "FFFFFF",
-      bold: true, align: "center", valign: "middle", margin: 0,
-    });
-    s.addText(step.h, {
-      x: x + 0.72, y: y + 0.12, w: colW - 0.85, h: 0.35,
-      fontSize: 14, fontFace: "Calibri", bold: true, color: C.ink, margin: 0,
-    });
-    s.addText(step.d, {
-      x: x + 0.72, y: y + 0.46, w: colW - 0.85, h: rowH - 0.50,
-      fontSize: 11, fontFace: "Calibri", color: C.ink2, margin: 0,
-    });
-  });
-
-  s.addText("Source: ecfmg.org · USMLE.org · NRMP.org", {
-    x: M, y: H - 0.70, w: CW, h: 0.24,
-    fontSize: 10, fontFace: "Calibri", italic: true, color: C.muted, margin: 0,
-  });
-  footer(s, 2, TOTAL);
-}
-
-// ─────────────────────────────────────────────────────
-// SLIDE 3 — Application roadmap: MyIntealth → Step 2 CK
+// SLIDE 2 — Application roadmap: MyIntealth → Step 2 CK
 // ─────────────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -298,11 +231,11 @@ const TOTAL = 8;
     x: M, y: H - 0.70, w: CW, h: 0.24,
     fontSize: 10, fontFace: "Calibri", italic: true, color: C.muted, margin: 0,
   });
-  footer(s, 3, TOTAL);
+  footer(s, 2, TOTAL);
 }
 
 // ─────────────────────────────────────────────────────
-// SLIDE 4 — Step 1 Prep
+// SLIDE 3 — Step 1 Prep
 // ─────────────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -394,11 +327,11 @@ const TOTAL = 8;
     x: M, y: H - 0.65, w: CW, h: 0.24,
     fontSize: 10, fontFace: "Calibri", italic: true, color: C.muted, margin: 0,
   });
-  footer(s, 4, TOTAL);
+  footer(s, 3, TOTAL);
 }
 
 // ─────────────────────────────────────────────────────
-// SLIDE 5 — Step 2 CK Prep
+// SLIDE 4 — Step 2 CK Prep
 // ─────────────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -491,11 +424,11 @@ const TOTAL = 8;
     x: M, y: H - 0.65, w: CW, h: 0.24,
     fontSize: 10, fontFace: "Calibri", italic: true, color: C.muted, margin: 0,
   });
-  footer(s, 5, TOTAL);
+  footer(s, 4, TOTAL);
 }
 
 // ─────────────────────────────────────────────────────
-// SLIDE 6 — How Classes Work I (Daily structure)
+// SLIDE 5 — How Classes Work I (Daily structure)
 // ─────────────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -572,11 +505,11 @@ const TOTAL = 8;
     });
   });
 
-  footer(s, 6, TOTAL);
+  footer(s, 5, TOTAL);
 }
 
 // ─────────────────────────────────────────────────────
-// SLIDE 7 — How Classes Work II (Roadmap & mentorship)
+// SLIDE 6 — How Classes Work II (Roadmap & mentorship)
 // ─────────────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -640,11 +573,11 @@ const TOTAL = 8;
     });
   });
 
-  footer(s, 7, TOTAL);
+  footer(s, 6, TOTAL);
 }
 
 // ─────────────────────────────────────────────────────
-// SLIDE 8 — Sign up + link
+// SLIDE 7 — Sign up + link
 // ─────────────────────────────────────────────────────
 {
   const s = pres.addSlide();
@@ -689,7 +622,7 @@ const TOTAL = 8;
     align: "center", margin: 0,
   });
 
-  footer(s, 8, TOTAL, { color: "B8D6EC" });
+  footer(s, 7, TOTAL, { color: "B8D6EC" });
 }
 
 // Output
