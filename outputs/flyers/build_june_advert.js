@@ -34,45 +34,41 @@ pres.title = "USMLE Step 1 · June Cohort";
 const slide = pres.addSlide();
 slide.background = { color: C.bg };
 
-// ── 1. HERO BAND (sky-blue) ───────────────────────────
+// ── 1. HERO TILE (white, calm) ────────────────────────
 const HERO_H = 2.00;
+// White hero background (already the page bg, just add a subtle bottom rule)
 slide.addShape(pres.shapes.RECTANGLE, {
-  x: 0, y: 0, w: PAGE_W, h: HERO_H,
-  fill: { color: C.cvs }, line: { color: C.cvs },
-});
-// subtle deeper-blue bottom strip for depth
-slide.addShape(pres.shapes.RECTANGLE, {
-  x: 0, y: HERO_H - 0.18, w: PAGE_W, h: 0.18,
-  fill: { color: C.cvsDeep }, line: { color: C.cvsDeep },
+  x: 0, y: HERO_H - 0.04, w: PAGE_W, h: 0.04,
+  fill: { color: C.border }, line: { color: C.border },
 });
 
-// Kicker pill (top-left)
+// Kicker pill (top-left) — light blue tint
 slide.addShape(pres.shapes.ROUNDED_RECTANGLE, {
-  x: MARGIN, y: 0.30, w: 3.2, h: 0.36,
-  fill: { color: C.white }, line: { color: C.white },
+  x: MARGIN, y: 0.30, w: 3.65, h: 0.36,
+  fill: { color: C.cvsSoft }, line: { color: C.cvsSoft },
   rectRadius: 0.18,
 });
-slide.addText("JUNE COHORT  ·  LIMITED SLOTS", {
-  x: MARGIN, y: 0.30, w: 3.2, h: 0.36,
-  fontSize: 11, fontFace: "Calibri", color: C.cvsDeep,
-  bold: true, charSpacing: 3, align: "center", valign: "middle", margin: 0,
+slide.addText("JUNE SCHEDULE  ·  LIMITED SLOTS", {
+  x: MARGIN, y: 0.30, w: 3.65, h: 0.36,
+  fontSize: 10.5, fontFace: "Calibri", color: C.cvsDeep,
+  bold: true, charSpacing: 2, align: "center", valign: "middle", margin: 0,
 });
 
 // Hero text column (leaves room for photo on the right)
 const HERO_TEXT_W = CONTENT_W - 1.95;
 
-// Main headline
+// Main headline (deep blue on white)
 slide.addText("STARTS JUNE 1", {
   x: MARGIN, y: 0.74, w: HERO_TEXT_W, h: 0.82,
-  fontSize: 52, fontFace: "Calibri", color: C.white,
+  fontSize: 52, fontFace: "Calibri", color: C.cvsDeep,
   bold: true, charSpacing: -1, margin: 0,
 });
 
 // Subtitle
 slide.addText([
-  { text: "USMLE Step 1", options: { bold: true, color: C.white } },
-  { text: "   ·   ", options: { color: "BFE3F7" } },
-  { text: "Daily, Mon to Sun", options: { color: "E0F2FE" } },
+  { text: "USMLE Step 1", options: { bold: true, color: C.ink } },
+  { text: "   ·   ", options: { color: C.muted } },
+  { text: "Daily, Mon to Sun", options: { color: C.ink2 } },
 ], {
   x: MARGIN, y: 1.52, w: HERO_TEXT_W, h: 0.40,
   fontSize: 18, fontFace: "Calibri", margin: 0,
@@ -82,13 +78,13 @@ slide.addText([
 const PHOTO_SIZE = 1.65;
 const PHOTO_X = PAGE_W - MARGIN - PHOTO_SIZE;
 const PHOTO_Y = (HERO_H - PHOTO_SIZE) / 2 - 0.05;
-const RING = 0.06;
+const RING = 0.04;
 
-// White ring background (slightly larger circle for the rim effect)
+// Thin blue ring for definition on white background
 slide.addShape(pres.shapes.OVAL, {
   x: PHOTO_X - RING, y: PHOTO_Y - RING,
   w: PHOTO_SIZE + 2 * RING, h: PHOTO_SIZE + 2 * RING,
-  fill: { color: C.white }, line: { color: C.white },
+  fill: { color: C.cvs }, line: { color: C.cvs },
 });
 
 // Circular photo
@@ -144,14 +140,14 @@ const cards = [
       "Control of breathing & sleep apnea",
       "Asthma & COPD",
       "Restrictive disease, ARDS, pneumonia",
-      "TB, lung cancer & pharmacology",
+      "TB, lung cancer & respiratory pharmacology",
     ],
   },
   {
     title: "EPI & BIOSTATS", days: 4, dates: "Jun 19 – 22",
     accent: C.amber, soft: "FEF3C7", deep: "B45309",
     items: [
-      "Study designs & levels of evidence",
+      "Study designs, evidence, Sens/Spec/PPV/NPV",
       "Quantifying risk, transitions & survival analysis",
       "Bias, confounding & effect modification",
       "Statistical distributions, testing & CIs",
@@ -215,7 +211,7 @@ cards.forEach((c, i) => {
   const ITEM_W = CARD_W - 0.28;
   const isEpi = c.items.length === 4;
   const ITEM_H = isEpi ? 0.42 : 0.19;
-  const ITEM_FS = isEpi ? 11 : 9.5;
+  const ITEM_FS = isEpi ? 10 : 9.5;
   const ITEM_Y_START = cy + HEADER_H + (isEpi ? 0.20 : 0.10);
 
   c.items.forEach((item, idx) => {

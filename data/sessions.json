@@ -293,15 +293,15 @@
     "chapter": "Epidemiology & Biostatistics",
     "date": "2026-06-19",
     "day": 1,
-    "topic": "Study designs and levels of evidence",
+    "topic": "Study designs, levels of evidence, and diagnostic test characteristics",
     "tag": "Step 1 · Epi Day 1",
     "tagColor": "pill-amber",
-    "fa_pages": "256–259",
+    "fa_pages": "256–262",
     "recording_url": "",
     "slides_url": "",
     "notes_url": "",
     "qbank_url": "",
-    "notes": "Observational vs experimental designs: case reports, case series, cross-sectional, case-control, cohort, RCTs, meta-analyses. Levels of evidence pyramid. Clinical trial phases (I–IV). Worked examples from major USMLE-relevant trials across cardiology, pulmonary, and oncology. UWorld questions."
+    "notes": "Observational vs experimental designs: case reports, case series, cross-sectional, case-control, cohort, RCTs, meta-analyses. Levels of evidence pyramid. Clinical trial phases (I–IV). Diagnostic test characteristics: 2×2 tables, sensitivity, specificity, positive and negative predictive values (PPV/NPV), likelihood ratios, prevalence effects, ROC curves, pre- and post-test probability, Bayes' theorem. Screening principles and worked examples (troponins, D-dimer, common screening tests). UWorld questions."
   },
   {
     "id": "step1-jun-20",
