@@ -147,7 +147,7 @@ const cards = [
     title: "EPI & BIOSTATS", days: 4, dates: "Jun 19 – 22",
     accent: C.amber, soft: "FEF3C7", deep: "B45309",
     items: [
-      "Study designs, evidence, Sens/Spec/PPV/NPV",
+      "Study designs, evidence & diagnostic testing",
       "Quantifying risk, transitions & survival analysis",
       "Bias, confounding & effect modification",
       "Statistical distributions, testing & CIs",
