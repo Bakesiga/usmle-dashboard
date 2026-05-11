@@ -35,7 +35,7 @@ const slide = pres.addSlide();
 slide.background = { color: C.bg };
 
 // ── 1. HERO TILE (white, calm) ────────────────────────
-const HERO_H = 2.45;
+const HERO_H = 2.60;
 // White hero background (already the page bg, just add a subtle bottom rule)
 slide.addShape(pres.shapes.RECTANGLE, {
   x: 0, y: HERO_H - 0.04, w: PAGE_W, h: 0.04,
@@ -104,13 +104,18 @@ slide.addText("Allan Bakesiga", {
   bold: true, align: "center", valign: "middle", margin: 0,
 });
 slide.addText("MD (Makerere)  ·  MScGH (Duke)", {
-  x: CAP_X, y: CAP_Y_START + 0.22, w: CAP_W, h: 0.20,
-  fontSize: 9.5, fontFace: "Calibri", color: C.ink2,
+  x: CAP_X, y: CAP_Y_START + 0.22, w: CAP_W, h: 0.19,
+  fontSize: 9, fontFace: "Calibri", color: C.ink2,
+  bold: true, align: "center", valign: "middle", margin: 0,
+});
+slide.addText("Past TA · Epi & Biostats (Duke)", {
+  x: CAP_X, y: CAP_Y_START + 0.41, w: CAP_W, h: 0.19,
+  fontSize: 9, fontFace: "Calibri", color: C.ink2,
   bold: true, align: "center", valign: "middle", margin: 0,
 });
 slide.addText("PGY-1 Neurology, Creighton", {
-  x: CAP_X, y: CAP_Y_START + 0.42, w: CAP_W, h: 0.20,
-  fontSize: 9.5, fontFace: "Calibri", color: C.ink2,
+  x: CAP_X, y: CAP_Y_START + 0.60, w: CAP_W, h: 0.19,
+  fontSize: 9, fontFace: "Calibri", color: C.ink2,
   bold: true, align: "center", valign: "middle", margin: 0,
 });
 
