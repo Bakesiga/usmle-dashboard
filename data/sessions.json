@@ -309,15 +309,15 @@
     "chapter": "Epidemiology & Biostatistics",
     "date": "2026-06-20",
     "day": 2,
-    "topic": "Sensitivity, specificity, and predictive values",
+    "topic": "Quantifying risk, demographic transitions, and survival analysis",
     "tag": "Step 1 · Epi Day 2",
     "tagColor": "pill-amber",
-    "fa_pages": "260–262",
+    "fa_pages": "260–263",
     "recording_url": "",
     "slides_url": "",
     "notes_url": "",
     "qbank_url": "",
-    "notes": "2×2 tables, sensitivity and specificity, PPV and NPV, likelihood ratios, prevalence effects, ROC curves. Screening principles, pre- and post-test probability, Bayes' theorem in clinical practice. Worked examples (troponins, D-dimer, screening tests). UWorld questions."
+    "notes": "Risk quantification: incidence, prevalence, relative risk (RR), odds ratio (OR), absolute risk reduction (ARR), number needed to treat (NNT) and NNH, attributable risk. Demographic transition theory and the epidemiologic transition through the stages of population health. Survival analysis: Kaplan-Meier curves, log-rank test, Cox proportional hazards / hazard ratios, censoring. UWorld questions."
   },
   {
     "id": "step1-jun-21",
@@ -325,15 +325,15 @@
     "chapter": "Epidemiology & Biostatistics",
     "date": "2026-06-21",
     "day": 3,
-    "topic": "Risk measures, bias, and confounding",
+    "topic": "Bias, confounding, and effect modification",
     "tag": "Step 1 · Epi Day 3",
     "tagColor": "pill-amber",
-    "fa_pages": "263–265",
+    "fa_pages": "263–264",
     "recording_url": "",
     "slides_url": "",
     "notes_url": "",
     "qbank_url": "",
-    "notes": "Risk quantification: incidence, prevalence, RR, OR, AR, NNT, NNH, hazard ratios. Types of bias (selection, recall, observer, lead-time, length-time, attrition) and how to minimize. Confounding vs effect modification. UWorld questions."
+    "notes": "Types of bias and how to minimize them — selection bias, recall bias, observer/measurement bias, lead-time bias, length-time bias, attrition bias, Hawthorne effect, publication bias. Confounding: definition, recognition, control strategies (randomization, restriction, matching, stratification, multivariable adjustment). Effect modification (interaction) — how it differs from confounding and how to detect it. UWorld questions."
   },
   {
     "id": "step1-jun-22",
@@ -341,15 +341,15 @@
     "chapter": "Epidemiology & Biostatistics",
     "date": "2026-06-22",
     "day": 4,
-    "topic": "Statistical tests and confidence intervals",
+    "topic": "Statistical distributions, statistical testing, and confidence intervals",
     "tag": "Step 1 · Epi Day 4",
     "tagColor": "pill-amber",
-    "fa_pages": "266",
+    "fa_pages": "265–266",
     "recording_url": "",
     "slides_url": "",
     "notes_url": "",
     "qbank_url": "",
-    "notes": "Hypothesis testing, p-values, type I and II errors, power, confidence intervals. Common statistical tests (t-test, paired t, ANOVA, chi-squared, Fisher's, regression, Kaplan-Meier). Interpreting forest plots and meta-analyses. UWorld questions."
+    "notes": "Statistical distributions — normal/Gaussian, binomial, Poisson, t-distribution; measures of central tendency and dispersion; standard error vs standard deviation. Statistical testing: hypothesis testing, p-values, type I (α) and type II (β) errors, statistical power. Confidence intervals — construction and interpretation. Common tests by data type (t-test, paired t, ANOVA, chi-squared, Fisher's exact, correlation and regression). Interpreting forest plots and meta-analyses. UWorld questions."
   },
   {
     "id": "step1-jun-23",

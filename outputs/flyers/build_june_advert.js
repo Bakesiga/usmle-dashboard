@@ -121,7 +121,7 @@ const cards = [
     title: "CARDIOVASCULAR", days: 10, dates: "Jun 1 – 10",
     accent: C.cvs, soft: C.cvsSoft, deep: C.cvsDeep,
     items: [
-      "Orientation, embryology & congenital",
+      "Orientation, embryology & congenital heart defects",
       "Anatomy & cardiac imaging",
       "Cardiac output & PV loops",
       "Heart sounds & murmurs",
@@ -137,7 +137,7 @@ const cards = [
     title: "RESPIRATORY", days: 8, dates: "Jun 11 – 18",
     accent: C.resp, soft: C.respSoft, deep: C.respDeep,
     items: [
-      "Embryology, surfactant & congenital",
+      "Embryology, surfactant & congenital anomalies",
       "Anatomy & muscles of breathing",
       "Lung volumes & ventilation",
       "Gas exchange & V/Q mismatch",
@@ -152,9 +152,9 @@ const cards = [
     accent: C.amber, soft: "FEF3C7", deep: "B45309",
     items: [
       "Study designs & levels of evidence",
-      "Sensitivity, specificity & predictive values",
-      "Risk measures, bias & confounding",
-      "Statistical tests & confidence intervals",
+      "Quantifying risk, transitions & survival analysis",
+      "Bias, confounding & effect modification",
+      "Statistical distributions, testing & CIs",
     ],
   },
   {
