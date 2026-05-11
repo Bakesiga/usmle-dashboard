@@ -35,7 +35,7 @@ const slide = pres.addSlide();
 slide.background = { color: C.bg };
 
 // ── 1. HERO TILE (white, calm) ────────────────────────
-const HERO_H = 2.00;
+const HERO_H = 2.45;
 // White hero background (already the page bg, just add a subtle bottom rule)
 slide.addShape(pres.shapes.RECTANGLE, {
   x: 0, y: HERO_H - 0.04, w: PAGE_W, h: 0.04,
@@ -74,10 +74,10 @@ slide.addText([
   fontSize: 18, fontFace: "Calibri", margin: 0,
 });
 
-// ── Circular headshot, right side of hero ────────────
-const PHOTO_SIZE = 1.65;
-const PHOTO_X = PAGE_W - MARGIN - PHOTO_SIZE;
-const PHOTO_Y = (HERO_H - PHOTO_SIZE) / 2 - 0.05;
+// ── Circular headshot + credentials, right side of hero
+const PHOTO_SIZE = 1.45;
+const PHOTO_X = PAGE_W - MARGIN - PHOTO_SIZE - 0.18;
+const PHOTO_Y = 0.18;
 const RING = 0.04;
 
 // Thin blue ring for definition on white background
@@ -91,6 +91,27 @@ slide.addShape(pres.shapes.OVAL, {
 slide.addImage({
   path: "allan_circle.png",
   x: PHOTO_X, y: PHOTO_Y, w: PHOTO_SIZE, h: PHOTO_SIZE,
+});
+
+// Credentials caption beneath the photo
+const CAP_W = 2.05;
+const CAP_X = PHOTO_X + PHOTO_SIZE / 2 - CAP_W / 2;
+const CAP_Y_START = PHOTO_Y + PHOTO_SIZE + 0.06;
+
+slide.addText("Allan Bakesiga, MD", {
+  x: CAP_X, y: CAP_Y_START, w: CAP_W, h: 0.22,
+  fontSize: 11, fontFace: "Calibri", color: C.ink,
+  bold: true, align: "center", valign: "middle", margin: 0,
+});
+slide.addText("MD (Makerere)  ·  MScGH (Duke)", {
+  x: CAP_X, y: CAP_Y_START + 0.22, w: CAP_W, h: 0.20,
+  fontSize: 8.5, fontFace: "Calibri", color: C.muted,
+  align: "center", valign: "middle", margin: 0,
+});
+slide.addText("PGY-1 Neurology, Creighton", {
+  x: CAP_X, y: CAP_Y_START + 0.42, w: CAP_W, h: 0.20,
+  fontSize: 8.5, fontFace: "Calibri", color: C.muted,
+  align: "center", valign: "middle", margin: 0,
 });
 
 // ── 2. SECTION LABEL ──────────────────────────────────
@@ -307,21 +328,6 @@ contacts.forEach((ct, i) => {
     fontSize: 9.5, fontFace: "Calibri", color: C.ink,
     bold: true, margin: 0, valign: "middle",
   });
-});
-
-// ── 6. FOOTER: Allan badge ────────────────────────────
-const FOOT_Y = PAGE_H - 0.42;
-slide.addShape(pres.shapes.LINE, {
-  x: MARGIN, y: FOOT_Y - 0.05, w: CONTENT_W, h: 0,
-  line: { color: C.border, width: 0.75 },
-});
-slide.addText([
-  { text: "ALLAN BAKESIGA, MD", options: { bold: true, color: C.ink, charSpacing: 2 } },
-  { text: "   MD (Makerere) · MScGH (Duke) · PGY-1 Neurology, Creighton",
-    options: { color: C.muted } },
-], {
-  x: MARGIN, y: FOOT_Y, w: CONTENT_W, h: 0.32,
-  fontSize: 9.5, fontFace: "Calibri", margin: 0, valign: "middle",
 });
 
 // ── Write ─────────────────────────────────────────────
