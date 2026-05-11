@@ -242,8 +242,8 @@ cards.forEach((c, i) => {
   c.items.forEach((item, idx) => {
     slide.addText([
       { text: String(idx + 1).padStart(2, "0") + "  ",
-        options: { color: c.accent, bold: true } },
-      { text: item, options: { color: C.ink2 } },
+        options: { color: c.deep, bold: true } },
+      { text: item, options: { color: C.ink, bold: true } },
     ], {
       x: ITEM_X, y: ITEM_Y_START + idx * ITEM_H, w: ITEM_W, h: ITEM_H,
       fontSize: ITEM_FS, fontFace: "Calibri", margin: 0, valign: "middle",
