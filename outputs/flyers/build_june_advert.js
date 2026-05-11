@@ -98,7 +98,7 @@ const CAP_W = 2.05;
 const CAP_X = PHOTO_X + PHOTO_SIZE / 2 - CAP_W / 2;
 const CAP_Y_START = PHOTO_Y + PHOTO_SIZE + 0.06;
 
-slide.addText("Allan Bakesiga, MD", {
+slide.addText("Allan Bakesiga", {
   x: CAP_X, y: CAP_Y_START, w: CAP_W, h: 0.22,
   fontSize: 11, fontFace: "Calibri", color: C.ink,
   bold: true, align: "center", valign: "middle", margin: 0,
