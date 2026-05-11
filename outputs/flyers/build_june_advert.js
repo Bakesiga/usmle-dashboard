@@ -303,10 +303,13 @@ slide.addText("Limited slots · June cohort", {
   fontSize: 12, fontFace: "Calibri", color: C.amber,
   bold: true, margin: 0,
 });
-slide.addText("bakesiga.github.io/usmle-dashboard", {
+slide.addText([
+  { text: "Or find the sign-up link on ", options: { color: C.ink } },
+  { text: "bakesiga.github.io/usmle-dashboard",
+    options: { color: C.cvs, bold: true } },
+], {
   x: ctaTextX, y: CTA_Y + 0.84, w: ctaTextW, h: 0.24,
-  fontSize: 11, fontFace: "Calibri", color: C.cvs,
-  bold: true, margin: 0,
+  fontSize: 10.5, fontFace: "Calibri", margin: 0,
 });
 
 // ── Contact row: email · WhatsApp · call ─────────────
