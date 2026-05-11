@@ -235,10 +235,10 @@ slide.addShape(pres.shapes.ROUNDED_RECTANGLE, {
   rectRadius: 0.10,
 });
 slide.addText([
-  { text: "FIRST AID 2025 + UWORLD",
-    options: { bold: true, color: C.white, fontSize: 15, charSpacing: 2 } },
-  { text: "  every single day  ",
-    options: { color: "BFE3F7", fontSize: 13, italic: true } },
+  { text: "HIGH-YIELD MATERIAL + TEST QUESTIONS",
+    options: { bold: true, color: C.white, fontSize: 14, charSpacing: 2 } },
+  { text: "  similar to exam day  ·  every day",
+    options: { color: "BFE3F7", fontSize: 12, italic: true } },
 ], {
   x: MARGIN + 0.30, y: STRIPE_Y, w: CONTENT_W - 0.60, h: 0.72,
   fontFace: "Calibri", valign: "middle", margin: 0,
@@ -278,21 +278,35 @@ slide.addText("Limited slots · June cohort", {
   fontSize: 12, fontFace: "Calibri", color: C.amber,
   bold: true, margin: 0,
 });
-slide.addText([
-  { text: "Full plan + class details: ", options: { color: C.ink2 } },
-  { text: "bakesiga.github.io/usmle-dashboard",
-    options: { color: C.cvs, bold: true } },
-], {
-  x: ctaTextX, y: CTA_Y + 0.85, w: ctaTextW, h: 0.26,
-  fontSize: 10.5, fontFace: "Calibri", margin: 0,
+slide.addText("bakesiga.github.io/usmle-dashboard", {
+  x: ctaTextX, y: CTA_Y + 0.84, w: ctaTextW, h: 0.24,
+  fontSize: 10, fontFace: "Calibri", color: C.cvs,
+  bold: true, margin: 0,
 });
-slide.addText([
-  { text: "or message ", options: { color: C.muted } },
-  { text: "+256 705 571 443", options: { color: C.ink, bold: true } },
-  { text: "  ·  WhatsApp", options: { color: C.muted } },
-], {
-  x: ctaTextX, y: CTA_Y + 1.12, w: ctaTextW, h: 0.24,
-  fontSize: 10, fontFace: "Calibri", margin: 0,
+
+// ── Contact row: email · WhatsApp · call ─────────────
+const contacts = [
+  { icon: "email-blue.png",  text: "allanbakesiga@gmail.com" },
+  { icon: "whatsapp.png",    text: "+256 705 571 443" },
+  { icon: "phone-blue.png",  text: "+1 984 710 2902" },
+];
+const CONTACT_Y = CTA_Y + 1.15;
+const CONTACT_ITEM_W = ctaTextW / 3;
+const ICON_SIZE = 0.20;
+
+contacts.forEach((ct, i) => {
+  const cx_i = ctaTextX + i * CONTACT_ITEM_W;
+  slide.addImage({
+    path: ct.icon,
+    x: cx_i, y: CONTACT_Y + 0.03,
+    w: ICON_SIZE, h: ICON_SIZE,
+  });
+  slide.addText(ct.text, {
+    x: cx_i + ICON_SIZE + 0.06, y: CONTACT_Y,
+    w: CONTACT_ITEM_W - ICON_SIZE - 0.10, h: 0.28,
+    fontSize: 9.5, fontFace: "Calibri", color: C.ink,
+    bold: true, margin: 0, valign: "middle",
+  });
 });
 
 // ── 6. FOOTER: Allan badge ────────────────────────────
