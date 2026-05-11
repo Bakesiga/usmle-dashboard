@@ -35,7 +35,7 @@ const slide = pres.addSlide();
 slide.background = { color: C.bg };
 
 // ── 1. HERO BAND (sky-blue) ───────────────────────────
-const HERO_H = 2.20;
+const HERO_H = 2.00;
 slide.addShape(pres.shapes.RECTANGLE, {
   x: 0, y: 0, w: PAGE_W, h: HERO_H,
   fill: { color: C.cvs }, line: { color: C.cvs },
@@ -99,120 +99,124 @@ slide.addImage({
 
 // ── 2. SECTION LABEL ──────────────────────────────────
 slide.addText("WHAT WE'RE COVERING IN JUNE", {
-  x: MARGIN, y: HERO_H + 0.24, w: CONTENT_W, h: 0.28,
+  x: MARGIN, y: HERO_H + 0.22, w: CONTENT_W, h: 0.26,
   fontSize: 11, fontFace: "Calibri", color: C.muted,
   bold: true, charSpacing: 4, margin: 0,
 });
 slide.addShape(pres.shapes.LINE, {
-  x: MARGIN, y: HERO_H + 0.58, w: 1.10, h: 0,
+  x: MARGIN, y: HERO_H + 0.55, w: 1.10, h: 0,
   line: { color: C.cvs, width: 2 },
 });
 
-// ── 3. FOUR DETAILED SCHEDULE CARDS (side-by-side) ────
-const CARD_GAP = 0.12;
-const CARD_W = (CONTENT_W - 3 * CARD_GAP) / 4;
-const CARD_Y = HERO_H + 0.75;
-const CARD_H = 4.95;
-const HEADER_H = 0.78;
+// ── 3. FOUR DETAILED SCHEDULE CARDS (2 × 2 grid) ──────
+const CARD_GAP_H = 0.15;
+const CARD_GAP_V = 0.15;
+const CARD_W = (CONTENT_W - CARD_GAP_H) / 2;
+const CARD_H = 2.60;
+const HEADER_H = 0.62;
+const GRID_Y_START = HERO_H + 0.55;
 
 const cards = [
   {
-    title: "CARDIOVASCULAR", days: 11, dates: "Jun 1 – 11",
+    title: "CARDIOVASCULAR", days: 10, dates: "Jun 1 – 10",
     accent: C.cvs, soft: C.cvsSoft, deep: C.cvsDeep,
     items: [
-      "Orientation & overview",
-      "Embryology · congenital",
-      "Anatomy · pericardium",
-      "Pump physiology · PV",
-      "Heart sounds · murmurs",
-      "ECG · action potentials",
-      "CAD · IHD · MI",
-      "HTN · atherosclerosis",
-      "HF · cardiomyopathies",
-      "Rheumatic · IE · vasc",
-      "CV pharmacology",
+      "Orientation, embryology & congenital",
+      "Anatomy & cardiac imaging",
+      "Cardiac output & PV loops",
+      "Heart sounds & murmurs",
+      "ECG & action potentials",
+      "CAD, IHD & myocardial infarction",
+      "Hypertension & atherosclerosis",
+      "Heart failure & cardiomyopathies",
+      "Endocarditis, myocarditis & vasculitis",
+      "Cardiovascular pharmacology",
     ],
   },
   {
-    title: "RESPIRATORY", days: 9, dates: "Jun 12 – 20",
+    title: "RESPIRATORY", days: 8, dates: "Jun 11 – 18",
     accent: C.resp, soft: C.respSoft, deep: C.respDeep,
     items: [
-      "Embryology · surfactant",
-      "Anatomy · diaphragm",
-      "Volumes · mechanics",
-      "V/Q · A–a · pulm circ",
-      "Control · sleep apnea",
-      "Upper airway · obstr",
-      "Restrictive · ARDS",
-      "TB · pleural · cancer",
-      "Chapter review",
+      "Embryology, surfactant & congenital",
+      "Anatomy & muscles of breathing",
+      "Lung volumes & ventilation",
+      "Gas exchange & V/Q mismatch",
+      "Control of breathing & sleep apnea",
+      "Asthma & COPD",
+      "Restrictive disease, ARDS, pneumonia",
+      "TB, lung cancer & pharmacology",
     ],
   },
   {
-    title: "EPI / BIOSTATS", days: 4, dates: "Jun 21 – 24",
+    title: "EPI & BIOSTATS", days: 4, dates: "Jun 19 – 22",
     accent: C.amber, soft: "FEF3C7", deep: "B45309",
     items: [
-      "Study design · trials",
-      "Sens/spec · PPV/NPV",
-      "Bias · confounding",
-      "Ethics · health policy",
+      "Study designs & levels of evidence",
+      "Sensitivity, specificity & predictive values",
+      "Risk measures, bias & confounding",
+      "Statistical tests & confidence intervals",
     ],
   },
   {
-    title: "GEN. PATHOLOGY", days: 8, dates: "Jun 25 – Jul 2",
+    title: "GENERAL PATHOLOGY", days: 8, dates: "Jun 23 – 30",
     accent: C.path, soft: C.pathSoft, deep: C.pathDeep,
     items: [
-      "Adaptations · apoptosis",
-      "Necrosis · free radicals",
+      "Cellular adaptations & apoptosis",
+      "Necrosis, ischemia & free radicals",
       "Acute inflammation",
-      "Chronic inflam · repair",
-      "Neoplasia I · hallmarks",
-      "Neoplasia II · oncogenes",
-      "Neoplasia III · aging",
-      "Chapter review",
+      "Chronic inflammation & repair",
+      "Neoplasia I — hallmarks & metastases",
+      "Neoplasia II — oncogenes & TSGs",
+      "Neoplasia III — markers & aging",
+      "General pathology review",
     ],
   },
 ];
 
 cards.forEach((c, i) => {
-  const cx = MARGIN + i * (CARD_W + CARD_GAP);
+  const col = i % 2;
+  const row = Math.floor(i / 2);
+  const cx = MARGIN + col * (CARD_W + CARD_GAP_H);
+  const cy = GRID_Y_START + row * (CARD_H + CARD_GAP_V);
 
   // Card background (soft tint)
   slide.addShape(pres.shapes.ROUNDED_RECTANGLE, {
-    x: cx, y: CARD_Y, w: CARD_W, h: CARD_H,
+    x: cx, y: cy, w: CARD_W, h: CARD_H,
     fill: { color: c.soft }, line: { color: c.soft },
     rectRadius: 0.10,
   });
 
-  // Solid color header band (covers top portion, edges align with rounded card)
+  // Solid color header band
   slide.addShape(pres.shapes.RECTANGLE, {
-    x: cx, y: CARD_Y + 0.10, w: CARD_W, h: HEADER_H - 0.10,
+    x: cx, y: cy + 0.08, w: CARD_W, h: HEADER_H - 0.08,
     fill: { color: c.accent }, line: { color: c.accent },
   });
   slide.addShape(pres.shapes.ROUNDED_RECTANGLE, {
-    x: cx, y: CARD_Y, w: CARD_W, h: HEADER_H,
+    x: cx, y: cy, w: CARD_W, h: HEADER_H,
     fill: { color: c.accent }, line: { color: c.accent },
     rectRadius: 0.10,
   });
 
-  // Chapter title
+  // Chapter title (left side of header)
   slide.addText(c.title, {
-    x: cx + 0.10, y: CARD_Y + 0.10, w: CARD_W - 0.20, h: 0.30,
-    fontSize: 11, fontFace: "Calibri", color: C.white,
+    x: cx + 0.14, y: cy + 0.06, w: CARD_W - 0.28, h: 0.28,
+    fontSize: 13, fontFace: "Calibri", color: C.white,
     bold: true, charSpacing: 1, margin: 0,
   });
   // Days · Dates
   slide.addText(`${c.days} days  ·  ${c.dates}`, {
-    x: cx + 0.10, y: CARD_Y + 0.42, w: CARD_W - 0.20, h: 0.28,
-    fontSize: 9.5, fontFace: "Calibri", color: "FFFFFF",
+    x: cx + 0.14, y: cy + 0.34, w: CARD_W - 0.28, h: 0.24,
+    fontSize: 10, fontFace: "Calibri", color: "FFFFFF",
     margin: 0,
   });
 
-  // Day items
-  const ITEM_X = cx + 0.10;
-  const ITEM_W = CARD_W - 0.20;
-  const ITEM_Y_START = CARD_Y + HEADER_H + 0.10;
-  const ITEM_H = 0.30;
+  // Day items — Epi block (4 items) gets taller rows to fill space
+  const ITEM_X = cx + 0.14;
+  const ITEM_W = CARD_W - 0.28;
+  const isEpi = c.items.length === 4;
+  const ITEM_H = isEpi ? 0.42 : 0.19;
+  const ITEM_FS = isEpi ? 11 : 9.5;
+  const ITEM_Y_START = cy + HEADER_H + (isEpi ? 0.20 : 0.10);
 
   c.items.forEach((item, idx) => {
     slide.addText([
@@ -221,13 +225,13 @@ cards.forEach((c, i) => {
       { text: item, options: { color: C.ink2 } },
     ], {
       x: ITEM_X, y: ITEM_Y_START + idx * ITEM_H, w: ITEM_W, h: ITEM_H,
-      fontSize: 8.5, fontFace: "Calibri", margin: 0, valign: "middle",
+      fontSize: ITEM_FS, fontFace: "Calibri", margin: 0, valign: "middle",
     });
   });
 });
 
 // ── 4. METHODOLOGY STRIPE ─────────────────────────────
-const STRIPE_Y = CARD_Y + CARD_H + 0.18;
+const STRIPE_Y = GRID_Y_START + 2 * CARD_H + CARD_GAP_V + 0.18;
 
 slide.addShape(pres.shapes.ROUNDED_RECTANGLE, {
   x: MARGIN, y: STRIPE_Y, w: CONTENT_W, h: 0.72,
