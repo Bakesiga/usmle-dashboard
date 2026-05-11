@@ -357,7 +357,8 @@ h2.section-title {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
-  margin-bottom: 36px;
+  margin: 0 auto 36px;
+  max-width: 560px;
 }
 .track-card {
   background: var(--bg2);
