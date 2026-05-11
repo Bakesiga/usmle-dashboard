@@ -9,7 +9,7 @@ const fs = require("fs");
 const C = {
   ink:    "0C2A3D",
   ink2:   "345671",
-  muted:  "6B87A3",
+  muted:  "3D5E80",
   bg:     "FFFFFF",
   bgTint: "F5FBFF",
   border: "D6E8F5",
@@ -105,19 +105,19 @@ slide.addText("Allan Bakesiga, MD", {
 });
 slide.addText("MD (Makerere)  ·  MScGH (Duke)", {
   x: CAP_X, y: CAP_Y_START + 0.22, w: CAP_W, h: 0.20,
-  fontSize: 8.5, fontFace: "Calibri", color: C.muted,
-  align: "center", valign: "middle", margin: 0,
+  fontSize: 9.5, fontFace: "Calibri", color: C.ink2,
+  bold: true, align: "center", valign: "middle", margin: 0,
 });
 slide.addText("PGY-1 Neurology, Creighton", {
   x: CAP_X, y: CAP_Y_START + 0.42, w: CAP_W, h: 0.20,
-  fontSize: 8.5, fontFace: "Calibri", color: C.muted,
-  align: "center", valign: "middle", margin: 0,
+  fontSize: 9.5, fontFace: "Calibri", color: C.ink2,
+  bold: true, align: "center", valign: "middle", margin: 0,
 });
 
 // ── 2. SECTION LABEL ──────────────────────────────────
 slide.addText("WHAT WE'RE COVERING IN JUNE", {
   x: MARGIN, y: HERO_H + 0.22, w: CONTENT_W, h: 0.26,
-  fontSize: 11, fontFace: "Calibri", color: C.muted,
+  fontSize: 11, fontFace: "Calibri", color: C.ink2,
   bold: true, charSpacing: 4, margin: 0,
 });
 slide.addShape(pres.shapes.LINE, {
@@ -232,8 +232,8 @@ cards.forEach((c, i) => {
   const ITEM_W = CARD_W - 0.28;
   const isEpi = c.items.length === 4;
   const ITEM_H = isEpi ? 0.42 : 0.19;
-  const ITEM_FS = isEpi ? 10 : 9.5;
-  const ITEM_Y_START = cy + HEADER_H + (isEpi ? 0.20 : 0.10);
+  const ITEM_FS = isEpi ? 10.5 : 10;
+  const ITEM_Y_START = cy + HEADER_H + (isEpi ? 0.20 : 0.08);
 
   c.items.forEach((item, idx) => {
     slide.addText([
@@ -281,8 +281,8 @@ slide.addImage({
 });
 slide.addText("scan to sign up", {
   x: MARGIN, y: CTA_Y + QR_SIZE + 0.02, w: QR_SIZE, h: 0.22,
-  fontSize: 9.5, fontFace: "Calibri", color: C.muted,
-  align: "center", valign: "top", charSpacing: 2, margin: 0,
+  fontSize: 10, fontFace: "Calibri", color: C.ink2,
+  bold: true, align: "center", valign: "top", charSpacing: 2, margin: 0,
 });
 
 // CTA text block
@@ -301,7 +301,7 @@ slide.addText("Limited slots · June cohort", {
 });
 slide.addText("bakesiga.github.io/usmle-dashboard", {
   x: ctaTextX, y: CTA_Y + 0.84, w: ctaTextW, h: 0.24,
-  fontSize: 10, fontFace: "Calibri", color: C.cvs,
+  fontSize: 11, fontFace: "Calibri", color: C.cvs,
   bold: true, margin: 0,
 });
 
@@ -325,7 +325,7 @@ contacts.forEach((ct, i) => {
   slide.addText(ct.text, {
     x: cx_i + ICON_SIZE + 0.06, y: CONTACT_Y,
     w: CONTACT_ITEM_W - ICON_SIZE - 0.10, h: 0.28,
-    fontSize: 9.5, fontFace: "Calibri", color: C.ink,
+    fontSize: 10, fontFace: "Calibri", color: C.ink,
     bold: true, margin: 0, valign: "middle",
   });
 });
