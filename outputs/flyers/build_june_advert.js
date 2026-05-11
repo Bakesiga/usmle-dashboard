@@ -230,10 +230,14 @@ cards.forEach((c, i) => {
   // Day items — Epi block (4 items) gets taller rows to fill space
   const ITEM_X = cx + 0.14;
   const ITEM_W = CARD_W - 0.28;
-  const isEpi = c.items.length === 4;
-  const ITEM_H = isEpi ? 0.42 : 0.19;
-  const ITEM_FS = isEpi ? 10.5 : 10;
-  const ITEM_Y_START = cy + HEADER_H + (isEpi ? 0.20 : 0.08);
+  // Distribute items evenly across the card's body so each tile fills its space.
+  const N = c.items.length;
+  const BODY_TOP_PAD = 0.10;
+  const BODY_BOTTOM_PAD = 0.08;
+  const BODY_H = CARD_H - HEADER_H - BODY_TOP_PAD - BODY_BOTTOM_PAD;
+  const ITEM_H = BODY_H / N;
+  const ITEM_FS = N <= 4 ? 10.5 : 10;
+  const ITEM_Y_START = cy + HEADER_H + BODY_TOP_PAD;
 
   c.items.forEach((item, idx) => {
     slide.addText([
