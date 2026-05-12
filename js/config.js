@@ -15,9 +15,8 @@ const USMLE_CONFIG = {
   CLASS_TZ:           "Africa/Kampala",
   ZOOM_URL:           "https://duke.zoom.us/j/96991939005",
   ZOOM_ID:            "969 9193 9005",
-  // WhatsApp class group invite — fill this in once Allan creates the group.
-  // Until then a falsy value hides the WhatsApp button in the nav.
-  WHATSAPP_GROUP_URL: "",
+  // WhatsApp class group invite — students click the nav button to join.
+  WHATSAPP_GROUP_URL: "https://chat.whatsapp.com/JvaTpyDt9loGZjomAVwi42?mode=gi_t",
   // Direct WhatsApp to Allan (used as fallback contact)
   WHATSAPP_ALLAN_URL: "https://wa.me/256705571443",
 
