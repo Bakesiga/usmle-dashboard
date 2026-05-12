@@ -19,6 +19,43 @@
   if (session.picture) document.getElementById("user-pic").src = session.picture;
   document.getElementById("signout-btn").addEventListener("click", USMLE_AUTH.signOut);
 
+  // ── Nav action buttons (Zoom / WhatsApp / Subscribe) ──
+  (function setupNavActions() {
+    const zoomBtn = document.getElementById("nav-zoom");
+    if (zoomBtn) {
+      if (USMLE_CONFIG.ZOOM_URL) {
+        zoomBtn.href = USMLE_CONFIG.ZOOM_URL;
+      } else {
+        zoomBtn.style.display = "none";
+      }
+    }
+    const waBtn = document.getElementById("nav-whatsapp");
+    if (waBtn) {
+      const url = USMLE_CONFIG.WHATSAPP_GROUP_URL || USMLE_CONFIG.WHATSAPP_ALLAN_URL;
+      if (url) {
+        waBtn.href = url;
+        // Re-label if the group URL isn't set yet — link to Allan directly.
+        if (!USMLE_CONFIG.WHATSAPP_GROUP_URL) {
+          waBtn.querySelector(".nav-label").textContent = "WhatsApp Allan";
+          waBtn.title = "Direct WhatsApp to Allan (class group link coming soon)";
+        }
+      } else {
+        waBtn.style.display = "none";
+      }
+    }
+    const subBtn = document.getElementById("nav-subscribe");
+    if (subBtn) {
+      // webcal:// makes calendar apps prompt to subscribe rather than just download.
+      const u = USMLE_CONFIG.SCHEDULE_ICS_URL;
+      try {
+        const abs = new URL(u, window.location.href);
+        subBtn.href = abs.toString().replace(/^https?:/, "webcal:");
+      } catch (e) {
+        subBtn.href = u || "#";
+      }
+    }
+  })();
+
   // Track switcher (only if enrolled in >1 track)
   const switcher = document.getElementById("track-switcher");
   if (session.tracks.length > 1) {
@@ -62,6 +99,65 @@
   };
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[c]));
   const safeUrl = (u) => /^https?:\/\//i.test(String(u || "")) ? u : "#";
+
+  // ── Class-time helpers (EAT → student's local zone) ──
+  function sessionStartDate(sess) {
+    if (!sess || !sess.date) return null;
+    const [y, m, d] = sess.date.split("-").map(Number);
+    const [hh, mm] = (USMLE_CONFIG.CLASS_TIME_EAT || "19:00").split(":").map(Number);
+    // EAT is UTC+3 with no DST.
+    return new Date(Date.UTC(y, m - 1, d, hh - 3, mm));
+  }
+  function sessionEndDate(sess) {
+    const start = sessionStartDate(sess);
+    if (!start) return null;
+    return new Date(start.getTime() + (USMLE_CONFIG.CLASS_DURATION_MIN || 90) * 60000);
+  }
+  function formatLocalTime(sess) {
+    const start = sessionStartDate(sess);
+    if (!start) return "";
+    return start.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+  }
+  function formatLocalTzAbbr() {
+    try {
+      const parts = new Intl.DateTimeFormat(undefined, { timeZoneName: "short" })
+        .formatToParts(new Date());
+      const tz = parts.find((p) => p.type === "timeZoneName");
+      return tz ? tz.value : "";
+    } catch (e) { return ""; }
+  }
+  function eatTimeLabel() {
+    const t = USMLE_CONFIG.CLASS_TIME_EAT || "19:00";
+    const [hh, mm] = t.split(":").map(Number);
+    const ampm = hh >= 12 ? "PM" : "AM";
+    const h12 = ((hh + 11) % 12) + 1;
+    return `${h12}:${String(mm).padStart(2, "0")} ${ampm} EAT`;
+  }
+
+  // ── Mark-as-watched (per-user, localStorage) ─────────
+  const REVIEWED_KEY = "usmle.reviewed.v1." + (session && session.email || "anon");
+  function loadReviewed() {
+    try { return new Set(JSON.parse(localStorage.getItem(REVIEWED_KEY) || "[]")); }
+    catch (e) { return new Set(); }
+  }
+  function saveReviewed(set) {
+    localStorage.setItem(REVIEWED_KEY, JSON.stringify([...set]));
+  }
+  let REVIEWED = loadReviewed();
+  function toggleReviewed(sessionId) {
+    if (REVIEWED.has(sessionId)) REVIEWED.delete(sessionId);
+    else REVIEWED.add(sessionId);
+    saveReviewed(REVIEWED);
+  }
+
+  // ── ICS options shared across the page ───────────────
+  const ICS_OPTS = {
+    classTime:   USMLE_CONFIG.CLASS_TIME_EAT || "19:00",
+    durationMin: USMLE_CONFIG.CLASS_DURATION_MIN || 90,
+    tzid:        USMLE_CONFIG.CLASS_TZ || "Africa/Kampala",
+    zoomUrl:     USMLE_CONFIG.ZOOM_URL || "",
+    zoomId:      USMLE_CONFIG.ZOOM_ID || "",
+  };
 
   // Track filter: an item matches if its track is "both", missing, or === activeTrack.
   const matchesTrack = (item) => {
@@ -138,6 +234,16 @@
   }
 
   // ── Sessions ────────────────────────────────────────
+  let SEARCH_TERM = "";
+
+  function sessionMatchesSearch(s) {
+    if (!SEARCH_TERM) return true;
+    const q = SEARCH_TERM.toLowerCase();
+    return [s.topic, s.notes, s.chapter, s.fa_pages, s.tag]
+      .map((v) => String(v || "").toLowerCase())
+      .some((v) => v.includes(q));
+  }
+
   function renderSessions(items) {
     renderChapterTabs(items);
     const root = document.getElementById("sessions-list");
@@ -145,8 +251,13 @@
     if (activeChapter && activeChapter !== "all" && activeChapter !== "__auto__") {
       filtered = filtered.filter((s) => (s.chapter || "Other") === activeChapter);
     }
+    filtered = filtered.filter(sessionMatchesSearch);
     if (!filtered.length) {
-      root.innerHTML = `<div class="empty">No schedule posted yet for ${TRACK_LABELS[activeTrack]}${activeChapter && activeChapter !== "all" ? " · " + esc(activeChapter) : ""}. Check back soon.</div>`;
+      root.innerHTML = `<div class="empty">${
+        SEARCH_TERM
+          ? `No sessions match "${esc(SEARCH_TERM)}". Try a different keyword.`
+          : `No schedule posted yet for ${TRACK_LABELS[activeTrack]}${activeChapter && activeChapter !== "all" ? " · " + esc(activeChapter) : ""}. Check back soon.`
+      }</div>`;
       return;
     }
 
@@ -168,12 +279,18 @@
       const dayPrefix = s.day ? `<strong>Day ${esc(s.day)}</strong> · ` : "";
       const isUpcoming = (s.date || "") >= todayISO;
       const hasAction = s.slides_url || s.notes_url || s.qbank_url;
+      const reviewed = REVIEWED.has(s.id);
+      const localTime = formatLocalTime(s);
+      const tz = formatLocalTzAbbr();
+      const timeBadge = localTime
+        ? `<span class="time-badge" title="Local time (your timezone). Class is ${eatTimeLabel()}.">${esc(localTime)}${tz ? " " + esc(tz) : ""}</span>`
+        : "";
       return `
-        <div class="card">
+        <div class="card session-card" data-id="${esc(s.id)}">
           <div class="row">
             <div>
               <h3>${esc(s.topic || "Untitled session")}</h3>
-              <div class="meta">${dayPrefix}${esc(fmtDate(s.date))}${s.duration ? " · " + esc(s.duration) : ""}</div>
+              <div class="meta">${dayPrefix}${esc(fmtDate(s.date))}${timeBadge ? " · " + timeBadge : ""}${s.fa_pages && s.fa_pages !== "—" ? " · <em>FA " + esc(s.fa_pages) + "</em>" : ""}</div>
             </div>
             <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;">
               <span class="pill ${status.cls}">${esc(status.label)}</span>
@@ -181,15 +298,25 @@
             </div>
           </div>
           ${s.notes ? `<p>${esc(s.notes)}</p>` : ""}
-          ${hasAction ? `
-            <div class="actions">
-              ${s.slides_url ? `<a class="primary" href="${esc(safeUrl(s.slides_url))}" target="_blank" rel="noopener">📑 Slides</a>` : ""}
-              ${s.notes_url  ? `<a href="${esc(safeUrl(s.notes_url))}"  target="_blank" rel="noopener">📝 Notes</a>` : ""}
-              ${s.qbank_url  ? `<a href="${esc(safeUrl(s.qbank_url))}"  target="_blank" rel="noopener">❓ Practice Qs</a>` : ""}
-            </div>` : ""}
+          <div class="session-actions">
+            ${isUpcoming && USMLE_CONFIG.ZOOM_URL ? `<a class="action-pill action-zoom" href="${esc(USMLE_CONFIG.ZOOM_URL)}" target="_blank" rel="noopener">🎥 Join class</a>` : ""}
+            <button type="button" class="action-pill action-cal" data-action="cal-google" data-id="${esc(s.id)}">📅 Google Calendar</button>
+            <button type="button" class="action-pill action-cal" data-action="cal-ics" data-id="${esc(s.id)}">📥 Download .ics</button>
+            ${s.slides_url ? `<a class="action-pill" href="${esc(safeUrl(s.slides_url))}" target="_blank" rel="noopener">📑 Slides</a>` : ""}
+            ${s.notes_url  ? `<a class="action-pill" href="${esc(safeUrl(s.notes_url))}"  target="_blank" rel="noopener">📝 Notes</a>` : ""}
+            ${s.qbank_url  ? `<a class="action-pill" href="${esc(safeUrl(s.qbank_url))}"  target="_blank" rel="noopener">❓ Practice Qs</a>` : ""}
+            <label class="action-pill reviewed-toggle">
+              <input type="checkbox" data-action="reviewed" data-id="${esc(s.id)}" ${reviewed ? "checked" : ""} />
+              <span>${reviewed ? "Reviewed ✓" : "Mark reviewed"}</span>
+            </label>
+          </div>
           ${isUpcoming && !hasAction
             ? `<p style="color:var(--muted);font-size:11.5px;margin-top:10px;">Slides and notes will appear here after class.</p>`
             : ""}
+          <details class="session-discussion">
+            <summary>💭 Discussion & Q&amp;A</summary>
+            <div class="session-discussion-body" data-id="${esc(s.id)}"></div>
+          </details>
         </div>
       `;
     }
@@ -204,7 +331,175 @@
       html += past.map(cardHtml).join("");
     }
     root.innerHTML = html;
+
+    // Wire up per-card actions
+    root.querySelectorAll('[data-action="cal-google"]').forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const s = DATA.sessions.find((x) => x.id === btn.dataset.id);
+        if (!s) return;
+        window.open(USMLE_ICS.googleCalendarUrl(s, ICS_OPTS), "_blank", "noopener");
+      });
+    });
+    root.querySelectorAll('[data-action="cal-ics"]').forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const s = DATA.sessions.find((x) => x.id === btn.dataset.id);
+        if (!s) return;
+        USMLE_ICS.downloadOneSession(s, ICS_OPTS);
+      });
+    });
+    root.querySelectorAll('[data-action="reviewed"]').forEach((cb) => {
+      cb.addEventListener("change", () => {
+        toggleReviewed(cb.dataset.id);
+        const span = cb.parentElement.querySelector("span");
+        if (span) span.textContent = cb.checked ? "Reviewed ✓" : "Mark reviewed";
+        cb.parentElement.classList.toggle("is-reviewed", cb.checked);
+      });
+      cb.parentElement.classList.toggle("is-reviewed", cb.checked);
+    });
+
+    // Lazy-load Giscus into each session's discussion drawer the first time it opens.
+    root.querySelectorAll(".session-discussion").forEach((det) => {
+      det.addEventListener("toggle", () => {
+        if (!det.open) return;
+        const body = det.querySelector(".session-discussion-body");
+        if (!body || body.dataset.loaded) return;
+        body.dataset.loaded = "1";
+        loadGiscusInto(body, body.dataset.id);
+      });
+    });
   }
+
+  // ── Today's-class hero card (top of Sessions panel) ──
+  function renderTodayCard(items) {
+    const root = document.getElementById("today-card");
+    if (!root) return;
+    const todayISO = new Date().toISOString().slice(0, 10);
+    const trackItems = (items || []).filter(matchesTrack).filter((s) => s.date);
+
+    // "Now/next" is: today's session if any, otherwise the soonest future one.
+    const todays = trackItems.find((s) => s.date === todayISO);
+    const upcoming = trackItems
+      .filter((s) => s.date > todayISO)
+      .sort((a, b) => a.date.localeCompare(b.date));
+    const target = todays || upcoming[0];
+    if (!target) { root.innerHTML = ""; return; }
+
+    const start = sessionStartDate(target);
+    const end   = sessionEndDate(target);
+    const now   = new Date();
+    let stateLabel, stateCls;
+    if (start && end && now >= start && now < end) {
+      stateLabel = "LIVE NOW";
+      stateCls = "pill-amber";
+    } else if (target.date === todayISO) {
+      stateLabel = "TODAY";
+      stateCls = "pill-amber";
+    } else {
+      stateLabel = "NEXT CLASS";
+      stateCls = "pill-blue";
+    }
+
+    const localT = formatLocalTime(target);
+    const tz = formatLocalTzAbbr();
+    const countdownTarget = start ? start.getTime() : 0;
+
+    root.innerHTML = `
+      <div class="today-hero">
+        <div class="today-hero-head">
+          <span class="pill ${stateCls}">${stateLabel}</span>
+          <span class="today-hero-countdown" data-target="${countdownTarget}">…</span>
+        </div>
+        <h2>${esc(target.topic || "Class")}</h2>
+        <div class="today-hero-meta">
+          ${target.chapter ? `<span>${esc(target.chapter)}</span>` : ""}
+          ${target.day ? `<span>Day ${esc(target.day)}</span>` : ""}
+          <span>${esc(fmtDate(target.date))}</span>
+          ${localT ? `<span>${esc(localT)}${tz ? " " + esc(tz) : ""}<small class="dim"> · ${esc(eatTimeLabel())}</small></span>` : ""}
+          ${target.fa_pages && target.fa_pages !== "—" ? `<span><em>FA ${esc(target.fa_pages)}</em></span>` : ""}
+        </div>
+        <div class="today-hero-actions">
+          ${USMLE_CONFIG.ZOOM_URL ? `<a class="action-pill primary" href="${esc(USMLE_CONFIG.ZOOM_URL)}" target="_blank" rel="noopener">🎥 Join class on Zoom</a>` : ""}
+          <button type="button" class="action-pill" data-action="hero-cal-google" data-id="${esc(target.id)}">📅 Add to Google Calendar</button>
+          <button type="button" class="action-pill" data-action="hero-cal-ics" data-id="${esc(target.id)}">📥 Download .ics</button>
+        </div>
+      </div>
+    `;
+
+    root.querySelectorAll('[data-action="hero-cal-google"]').forEach((btn) => {
+      btn.addEventListener("click", () =>
+        window.open(USMLE_ICS.googleCalendarUrl(target, ICS_OPTS), "_blank", "noopener"));
+    });
+    root.querySelectorAll('[data-action="hero-cal-ics"]').forEach((btn) => {
+      btn.addEventListener("click", () => USMLE_ICS.downloadOneSession(target, ICS_OPTS));
+    });
+  }
+
+  // ── Countdown ticker (updates the today-hero label every minute) ──
+  function tickCountdowns() {
+    document.querySelectorAll(".today-hero-countdown").forEach((el) => {
+      const t = Number(el.dataset.target || 0);
+      if (!t) { el.textContent = ""; return; }
+      const ms = t - Date.now();
+      if (ms <= 0) {
+        const endMs = ms + (USMLE_CONFIG.CLASS_DURATION_MIN || 90) * 60000;
+        if (endMs > 0) {
+          const mins = Math.ceil(endMs / 60000);
+          el.textContent = `class in progress — ${mins} min left`;
+        } else {
+          el.textContent = "class has ended";
+        }
+        return;
+      }
+      const totalMin = Math.floor(ms / 60000);
+      const days = Math.floor(totalMin / (60 * 24));
+      const hours = Math.floor((totalMin % (60 * 24)) / 60);
+      const mins = totalMin % 60;
+      if (days > 0) el.textContent = `starts in ${days}d ${hours}h`;
+      else if (hours > 0) el.textContent = `starts in ${hours}h ${mins}m`;
+      else el.textContent = `starts in ${mins}m`;
+    });
+  }
+  setInterval(tickCountdowns, 30 * 1000);
+
+  // ── Giscus loader (per-session discussion drawer) ────
+  function loadGiscusInto(host, sessionId) {
+    const g = USMLE_CONFIG.GISCUS || {};
+    if (!g.repoId || !g.categoryId) {
+      host.innerHTML = `<p class="discussion-disabled">Discussion is being set up. For now, ping the class WhatsApp group or message Allan directly.</p>`;
+      return;
+    }
+    const s = document.createElement("script");
+    s.src = "https://giscus.app/client.js";
+    s.async = true;
+    s.crossOrigin = "anonymous";
+    s.setAttribute("data-repo", g.repo);
+    s.setAttribute("data-repo-id", g.repoId);
+    s.setAttribute("data-category", g.category);
+    s.setAttribute("data-category-id", g.categoryId);
+    s.setAttribute("data-mapping", "specific");
+    s.setAttribute("data-term", sessionId);
+    s.setAttribute("data-strict", "0");
+    s.setAttribute("data-reactions-enabled", "1");
+    s.setAttribute("data-emit-metadata", "0");
+    s.setAttribute("data-input-position", "top");
+    s.setAttribute("data-theme", g.theme || "light");
+    s.setAttribute("data-lang", "en");
+    host.appendChild(s);
+  }
+
+  // ── Search input ────────────────────────────────────
+  (function setupSearch() {
+    const inp = document.getElementById("sessions-search");
+    if (!inp) return;
+    let t = null;
+    inp.addEventListener("input", () => {
+      clearTimeout(t);
+      t = setTimeout(() => {
+        SEARCH_TERM = inp.value.trim();
+        renderSessions(DATA.sessions);
+      }, 120);
+    });
+  })();
 
   // ── Materials ───────────────────────────────────────
   function renderMaterials(items) {
@@ -408,10 +703,12 @@
   // ── Boot / re-render ────────────────────────────────
   let DATA = { sessions: [], materials: [], announcements: [] };
   function renderAll() {
+    renderTodayCard(DATA.sessions);
     renderSessions(DATA.sessions);
     renderMaterials(DATA.materials);
     renderAnnouncements(DATA.announcements);
     renderSchedule();
+    tickCountdowns();
   }
 
   (async function () {

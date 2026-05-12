@@ -1,0 +1,686 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Allan Bakesiga USMLE//USMLE Step 1 Cohort//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:USMLE Step 1 (June cohort)
+X-WR-CALDESC:Daily USMLE Step 1 class schedule with Allan Bakesiga.
+X-WR-TIMEZONE:Africa/Kampala
+BEGIN:VTIMEZONE
+TZID:Africa/Kampala
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0300
+TZOFFSETTO:+0300
+TZNAME:EAT
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:step1-jun-01@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260601T190000
+DTEND;TZID=Africa/Kampala:20260601T203000
+SUMMARY:USMLE Step 1 · Cardiovascular · Day 1: Orientation\, embryology\, 
+ and congenital heart defects
+DESCRIPTION:Welcome and course logistics (Step 1 overview\, daily Mon–Sun 
+ flow\, FA + UWorld pacing\, dashboard walkthrough). Cardiac embryology and
+  fetal/postnatal circulation. Congenital heart defects (5 T's\; VSD/ASD/PD
+ A\, Eisenmenger)\, coarctation of the aorta\, persistent pulmonary HTN of 
+ the newborn\, defect-syndrome associations. UWorld questions.\n\nFirst Aid
+ : 284–287\, 302–304\n\nJoin Zoom: https://duke.zoom.us/j/96991939005\n\nMe
+ eting ID: 969 9193 9005\n\nDashboard: https://bakesiga.github.io/usmle-das
+ hboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Cardiovascular · Day 1: Orientation\, embryolog
+ y\, and congenital heart defects
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-02@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260602T190000
+DTEND;TZID=Africa/Kampala:20260602T203000
+SUMMARY:USMLE Step 1 · Cardiovascular · Day 2: Cardiac anatomy and imaging
+DESCRIPTION:Chambers\, surface anatomy\, CT/CXR correlates\, pericardial a
+ natomy. UWorld questions on cardiac anatomy.\n\nFirst Aid: 288\n\nJoin Zoo
+ m: https://duke.zoom.us/j/96991939005\n\nMeeting ID: 969 9193 9005\n\nDash
+ board: https://bakesiga.github.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Cardiovascular · Day 2: Cardiac anatomy and ima
+ ging
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-03@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260603T190000
+DTEND;TZID=Africa/Kampala:20260603T203000
+SUMMARY:USMLE Step 1 · Cardiovascular · Day 3: Cardiac output and pressure
+ -volume loops
+DESCRIPTION:Cardiac output (variables and equations)\, cardiac and vascula
+ r function curves\, pressure-volume loops\, the cardiac cycle. UWorld ques
+ tions on cardiac physiology.\n\nFirst Aid: 289–293\n\nJoin Zoom: https://d
+ uke.zoom.us/j/96991939005\n\nMeeting ID: 969 9193 9005\n\nDashboard: https
+ ://bakesiga.github.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Cardiovascular · Day 3: Cardiac output and pres
+ sure-volume loops
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-04@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260604T190000
+DTEND;TZID=Africa/Kampala:20260604T203000
+SUMMARY:USMLE Step 1 · Cardiovascular · Day 4: Heart sounds and murmurs
+DESCRIPTION:Splitting of S2\, full auscultation map\, systolic and diastol
+ ic murmurs\, maneuvers that change their intensity. UWorld questions.\n\nF
+ irst Aid: 294–296\n\nJoin Zoom: https://duke.zoom.us/j/96991939005\n\nMeet
+ ing ID: 969 9193 9005\n\nDashboard: https://bakesiga.github.io/usmle-dashb
+ oard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Cardiovascular · Day 4: Heart sounds and murmurs
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-05@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260605T190000
+DTEND;TZID=Africa/Kampala:20260605T203000
+SUMMARY:USMLE Step 1 · Cardiovascular · Day 5: ECG\, action potentials\, a
+ nd BP control
+DESCRIPTION:Myocyte + pacemaker action potentials\, ECG (narrow- and wide-
+ complex arrhythmias\, conduction blocks)\, baroreceptor and chemoreceptor 
+ reflexes\, normal cardiac pressures\, autoregulation by organ\, capillary 
+ fluid exchange (Starling)\, atrial fib/flutter\, ventricular arrhythmias\,
+  torsades\, conduction blocks. UWorld questions.\n\nFirst Aid: 297–301\, 3
+ 11–313\n\nJoin Zoom: https://duke.zoom.us/j/96991939005\n\nMeeting ID: 969
+  9193 9005\n\nDashboard: https://bakesiga.github.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Cardiovascular · Day 5: ECG\, action potentials
+ \, and BP control
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-06@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260606T190000
+DTEND;TZID=Africa/Kampala:20260606T203000
+SUMMARY:USMLE Step 1 · Cardiovascular · Day 6: Coronary artery disease\, I
+ HD\, and myocardial infarction
+DESCRIPTION:Coronary vessels\, CAD\, IHD manifestations\, MI evolution and
+  histology\, biomarkers\, ECG localisation by lead\, MI complications. UWo
+ rld questions.\n\nFirst Aid: 308–310\, 314\n\nJoin Zoom: https://duke.zoom
+ .us/j/96991939005\n\nMeeting ID: 969 9193 9005\n\nDashboard: https://bakes
+ iga.github.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Cardiovascular · Day 6: Coronary artery disease
+ \, IHD\, and myocardial infarction
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-07@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260607T190000
+DTEND;TZID=Africa/Kampala:20260607T203000
+SUMMARY:USMLE Step 1 · Cardiovascular · Day 7: Hypertension and atheroscle
+ rosis
+DESCRIPTION:Hypertension\, hyperlipidemia signs\, atherosclerosis pathogen
+ esis\, arteriolosclerosis (hyaline + hyperplastic)\, abdominal and thoraci
+ c aortic aneurysms\, aortic dissection (Stanford A vs B)\, subclavian stea
+ l. UWorld questions.\n\nFirst Aid: 305–307\n\nJoin Zoom: https://duke.zoom
+ .us/j/96991939005\n\nMeeting ID: 969 9193 9005\n\nDashboard: https://bakes
+ iga.github.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Cardiovascular · Day 7: Hypertension and athero
+ sclerosis
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-08@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260608T190000
+DTEND;TZID=Africa/Kampala:20260608T203000
+SUMMARY:USMLE Step 1 · Cardiovascular · Day 8: Heart failure and cardiomyo
+ pathies
+DESCRIPTION:DCM\, HCM\, RCM\, takotsubo\, peripartum cardiomyopathy. Left 
+ and right heart failure (HFrEF / HFpEF). Shock (hypovolemic\, cardiogenic\
+ , obstructive\, distributive). Sudden cardiac death and syncope. UWorld qu
+ estions.\n\nFirst Aid: 315–318\n\nJoin Zoom: https://duke.zoom.us/j/969919
+ 39005\n\nMeeting ID: 969 9193 9005\n\nDashboard: https://bakesiga.github.i
+ o/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Cardiovascular · Day 8: Heart failure and cardi
+ omyopathies
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-09@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260609T190000
+DTEND;TZID=Africa/Kampala:20260609T203000
+SUMMARY:USMLE Step 1 · Cardiovascular · Day 9: Endocarditis\, myocarditis\
+ , and vasculitis
+DESCRIPTION:Acute rheumatic fever\, rheumatic heart disease\, infective en
+ docarditis (acute\, subacute\, Libman-Sacks\, marantic)\, acute pericardit
+ is + tamponade\, myocarditis\, cardiac tumors (myxoma\, rhabdomyoma\, mets
+ )\, large/medium/small vessel vasculitides\, vascular tumors. UWorld quest
+ ions.\n\nFirst Aid: 319–320\n\nJoin Zoom: https://duke.zoom.us/j/969919390
+ 05\n\nMeeting ID: 969 9193 9005\n\nDashboard: https://bakesiga.github.io/u
+ smle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Cardiovascular · Day 9: Endocarditis\, myocardi
+ tis\, and vasculitis
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-10@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260610T190000
+DTEND;TZID=Africa/Kampala:20260610T203000
+SUMMARY:USMLE Step 1 · Cardiovascular · Day 10: Cardiovascular pharmacology
+DESCRIPTION:Hypertension treatment by comorbidity\, ACE inhibitors / ARBs\
+ , β-blockers\, calcium channel blockers (CCBs)\, hydralazine\, ranolazine\
+ , sacubitril/valsartan\, lipid-lowering agents (statins\, fibrates\, niaci
+ n\, ezetimibe\, PCSK9\, BAS)\, digoxin\, antiarrhythmics (Class I A/B/C\, 
+ II\, III\, IV\, adenosine\, magnesium)\, pulmonary hypertension drugs. UWo
+ rld questions.\n\nFirst Aid: 321–328\n\nJoin Zoom: https://duke.zoom.us/j/
+ 96991939005\n\nMeeting ID: 969 9193 9005\n\nDashboard: https://bakesiga.gi
+ thub.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Cardiovascular · Day 10: Cardiovascular pharmac
+ ology
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-11@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260611T190000
+DTEND;TZID=Africa/Kampala:20260611T203000
+SUMMARY:USMLE Step 1 · Respiratory · Day 1: Embryology\, surfactant\, and 
+ congenital anomalies
+DESCRIPTION:Lung development phases (embryonic\, pseudoglandular\, canalic
+ ular\, saccular\, alveolar)\, bronchial branching\, alveolar cell types (T
+ ype I/II\, club cells)\, surfactant\, congenital anomalies (TE fistula\, p
+ ulmonary hypoplasia). UWorld questions.\n\nFirst Aid: 678–679\n\nJoin Zoom
+ : https://duke.zoom.us/j/96991939005\n\nMeeting ID: 969 9193 9005\n\nDashb
+ oard: https://bakesiga.github.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Respiratory · Day 1: Embryology\, surfactant\, 
+ and congenital anomalies
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-12@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260612T190000
+DTEND;TZID=Africa/Kampala:20260612T203000
+SUMMARY:USMLE Step 1 · Respiratory · Day 2: Anatomy and muscles of breathi
+ ng
+DESCRIPTION:Conducting vs respiratory zones\, bronchopulmonary segments\, 
+ lung relations\, diaphragm + accessory muscles of breathing\, pleural anat
+ omy. UWorld questions.\n\nFirst Aid: 680–681\n\nJoin Zoom: https://duke.zo
+ om.us/j/96991939005\n\nMeeting ID: 969 9193 9005\n\nDashboard: https://bak
+ esiga.github.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Respiratory · Day 2: Anatomy and muscles of bre
+ athing
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-13@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260613T190000
+DTEND;TZID=Africa/Kampala:20260613T203000
+SUMMARY:USMLE Step 1 · Respiratory · Day 3: Lung volumes and ventilation m
+ echanics
+DESCRIPTION:TLC/FRC/VC/RV\, important pulmonary equations\, lung-chest wal
+ l mechanics\, compliance and hysteresis\, surface tension and Laplace's la
+ w\, oxygen-hemoglobin dissociation curve\, methemoglobin and carboxyhemogl
+ obin. UWorld questions.\n\nFirst Aid: 682–684\n\nJoin Zoom: https://duke.z
+ oom.us/j/96991939005\n\nMeeting ID: 969 9193 9005\n\nDashboard: https://ba
+ kesiga.github.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Respiratory · Day 3: Lung volumes and ventilati
+ on mechanics
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-14@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260614T190000
+DTEND;TZID=Africa/Kampala:20260614T203000
+SUMMARY:USMLE Step 1 · Respiratory · Day 4: Gas exchange and V/Q mismatch
+DESCRIPTION:O₂ content equation\, A–a gradient\, oxygen delivery\, V/Q rat
+ ios across the lung and how shunt vs dead space behave\, pulmonary circula
+ tion\, hypoxic pulmonary vasoconstriction\, response to high altitude. UWo
+ rld questions.\n\nFirst Aid: 685–687\n\nJoin Zoom: https://duke.zoom.us/j/
+ 96991939005\n\nMeeting ID: 969 9193 9005\n\nDashboard: https://bakesiga.gi
+ thub.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Respiratory · Day 4: Gas exchange and V/Q misma
+ tch
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-15@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260615T190000
+DTEND;TZID=Africa/Kampala:20260615T203000
+SUMMARY:USMLE Step 1 · Respiratory · Day 5: Control of breathing and sleep
+  apnea
+DESCRIPTION:Central + peripheral chemoreceptors\, ventilation control\, re
+ sponse to exercise\, hypoxia\, hypercapnia. Breathing patterns (Cheyne-Sto
+ kes\, Kussmaul\, ataxic). Sleep apnea (obstructive vs central). UWorld que
+ stions.\n\nFirst Aid: 688–689\n\nJoin Zoom: https://duke.zoom.us/j/9699193
+ 9005\n\nMeeting ID: 969 9193 9005\n\nDashboard: https://bakesiga.github.io
+ /usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Respiratory · Day 5: Control of breathing and s
+ leep apnea
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-16@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260616T190000
+DTEND;TZID=Africa/Kampala:20260616T203000
+SUMMARY:USMLE Step 1 · Respiratory · Day 6: Asthma and COPD
+DESCRIPTION:Upper-airway conditions (rhinosinusitis\, deviated septum\, ep
+ istaxis\, head and neck cancer). Obstructive lung disease — asthma\, COPD 
+ (emphysema and chronic bronchitis)\, bronchiectasis. UWorld questions.\n\n
+ First Aid: 690–693\n\nJoin Zoom: https://duke.zoom.us/j/96991939005\n\nMee
+ ting ID: 969 9193 9005\n\nDashboard: https://bakesiga.github.io/usmle-dash
+ board
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Respiratory · Day 6: Asthma and COPD
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-17@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260617T190000
+DTEND;TZID=Africa/Kampala:20260617T203000
+SUMMARY:USMLE Step 1 · Respiratory · Day 7: Restrictive disease\, ARDS\, a
+ nd pneumonia
+DESCRIPTION:Restrictive lung disease (intrinsic vs extrinsic)\, idiopathic
+  pulmonary fibrosis\, sarcoidosis\, pneumoconioses\, hypersensitivity pneu
+ monitis\, ARDS\, neonatal RDS\, pulmonary embolism\, pulmonary edema\, pul
+ monary hypertension. Pneumonia overview (lobar\, bronchopneumonia\, inters
+ titial)\, specific pneumonias by organism\, lung abscess. UWorld questions
+ .\n\nFirst Aid: 694–699\n\nJoin Zoom: https://duke.zoom.us/j/96991939005\n
+ \nMeeting ID: 969 9193 9005\n\nDashboard: https://bakesiga.github.io/usmle
+ -dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Respiratory · Day 7: Restrictive disease\, ARDS
+ \, and pneumonia
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-18@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260618T190000
+DTEND;TZID=Africa/Kampala:20260618T203000
+SUMMARY:USMLE Step 1 · Respiratory · Day 8: TB\, lung cancer\, and respira
+ tory pharmacology
+DESCRIPTION:Tuberculosis (primary\, secondary\, miliary\, latent)\, fungal
+  pneumonias\, pleural diseases (pneumothorax\, effusion\, mesothelioma\, h
+ emothorax)\, mediastinal masses\, lung cancer (small cell vs non-small cel
+ l\, paraneoplastic syndromes\, Pancoast tumor). Respiratory pharmacology —
+  asthma drugs (β2 agonists\, ICS\, LTRAs\, biologics)\, COPD drugs\, methy
+ lxanthines\, antitussives\, decongestants\, antihistamines. UWorld questio
+ ns.\n\nFirst Aid: 700–706\n\nJoin Zoom: https://duke.zoom.us/j/96991939005
+ \n\nMeeting ID: 969 9193 9005\n\nDashboard: https://bakesiga.github.io/usm
+ le-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Respiratory · Day 8: TB\, lung cancer\, and res
+ piratory pharmacology
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-19@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260619T190000
+DTEND;TZID=Africa/Kampala:20260619T203000
+SUMMARY:USMLE Step 1 · Epidemiology & Biostatistics · Day 1: Study designs
+ \, levels of evidence\, and diagnostic testing
+DESCRIPTION:Observational vs experimental designs: case reports\, case ser
+ ies\, cross-sectional\, case-control\, cohort\, RCTs\, meta-analyses. Leve
+ ls of evidence pyramid. Clinical trial phases (I–IV). Diagnostic test char
+ acteristics: 2×2 tables\, sensitivity\, specificity\, positive and negativ
+ e predictive values (PPV/NPV)\, likelihood ratios\, prevalence effects\, R
+ OC curves\, pre- and post-test probability\, Bayes' theorem. Screening pri
+ nciples and worked examples (troponins\, D-dimer\, common screening tests)
+ . UWorld questions.\n\nFirst Aid: 256–262\n\nJoin Zoom: https://duke.zoom.
+ us/j/96991939005\n\nMeeting ID: 969 9193 9005\n\nDashboard: https://bakesi
+ ga.github.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Epidemiology & Biostatistics · Day 1: Study des
+ igns\, levels of evidence\, and diagnostic testing
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-20@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260620T190000
+DTEND;TZID=Africa/Kampala:20260620T203000
+SUMMARY:USMLE Step 1 · Epidemiology & Biostatistics · Day 2: Quantifying r
+ isk\, demographic transitions\, and survival analysis
+DESCRIPTION:Risk quantification: incidence\, prevalence\, relative risk (R
+ R)\, odds ratio (OR)\, absolute risk reduction (ARR)\, number needed to tr
+ eat (NNT) and NNH\, attributable risk. Demographic transition theory and t
+ he epidemiologic transition through the stages of population health. Survi
+ val analysis: Kaplan-Meier curves\, log-rank test\, Cox proportional hazar
+ ds / hazard ratios\, censoring. UWorld questions.\n\nFirst Aid: 260–263\n\
+ nJoin Zoom: https://duke.zoom.us/j/96991939005\n\nMeeting ID: 969 9193 900
+ 5\n\nDashboard: https://bakesiga.github.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Epidemiology & Biostatistics · Day 2: Quantifyi
+ ng risk\, demographic transitions\, and survival analysis
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-21@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260621T190000
+DTEND;TZID=Africa/Kampala:20260621T203000
+SUMMARY:USMLE Step 1 · Epidemiology & Biostatistics · Day 3: Bias\, confou
+ nding\, and effect modification
+DESCRIPTION:Types of bias and how to minimize them — selection bias\, reca
+ ll bias\, observer/measurement bias\, lead-time bias\, length-time bias\, 
+ attrition bias\, Hawthorne effect\, publication bias. Confounding: definit
+ ion\, recognition\, control strategies (randomization\, restriction\, matc
+ hing\, stratification\, multivariable adjustment). Effect modification (in
+ teraction) — how it differs from confounding and how to detect it. UWorld 
+ questions.\n\nFirst Aid: 263–264\n\nJoin Zoom: https://duke.zoom.us/j/9699
+ 1939005\n\nMeeting ID: 969 9193 9005\n\nDashboard: https://bakesiga.github
+ .io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Epidemiology & Biostatistics · Day 3: Bias\, co
+ nfounding\, and effect modification
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-22@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260622T190000
+DTEND;TZID=Africa/Kampala:20260622T203000
+SUMMARY:USMLE Step 1 · Epidemiology & Biostatistics · Day 4: Statistical d
+ istributions\, statistical testing\, and confidence intervals
+DESCRIPTION:Statistical distributions — normal/Gaussian\, binomial\, Poiss
+ on\, t-distribution\; measures of central tendency and dispersion\; standa
+ rd error vs standard deviation. Statistical testing: hypothesis testing\, 
+ p-values\, type I (α) and type II (β) errors\, statistical power. Confiden
+ ce intervals — construction and interpretation. Common tests by data type 
+ (t-test\, paired t\, ANOVA\, chi-squared\, Fisher's exact\, correlation an
+ d regression). Interpreting forest plots and meta-analyses. UWorld questio
+ ns.\n\nFirst Aid: 265–266\n\nJoin Zoom: https://duke.zoom.us/j/96991939005
+ \n\nMeeting ID: 969 9193 9005\n\nDashboard: https://bakesiga.github.io/usm
+ le-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · Epidemiology & Biostatistics · Day 4: Statistic
+ al distributions\, statistical testing\, and confidence intervals
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-23@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260623T190000
+DTEND;TZID=Africa/Kampala:20260623T203000
+SUMMARY:USMLE Step 1 · General Pathology · Day 1: Cellular adaptations and
+  apoptosis
+DESCRIPTION:Hypertrophy\, hyperplasia\, atrophy\, metaplasia\, dysplasia. 
+ Reversible vs irreversible cell injury. Intrinsic and extrinsic apoptosis 
+ pathways. UWorld questions.\n\nFirst Aid: 202–204\n\nJoin Zoom: https://du
+ ke.zoom.us/j/96991939005\n\nMeeting ID: 969 9193 9005\n\nDashboard: https:
+ //bakesiga.github.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · General Pathology · Day 1: Cellular adaptations
+  and apoptosis
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-24@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260624T190000
+DTEND;TZID=Africa/Kampala:20260624T203000
+SUMMARY:USMLE Step 1 · General Pathology · Day 2: Necrosis\, ischemia\, an
+ d free radicals
+DESCRIPTION:Necrosis types (coagulative\, liquefactive\, caseous\, fat\, f
+ ibrinoid\, gangrenous). Ischemia and infarcts (red vs pale). Free radical 
+ injury\, oxidative stress\, and antioxidant defences. UWorld questions.\n\
+ nFirst Aid: 205–208\n\nJoin Zoom: https://duke.zoom.us/j/96991939005\n\nMe
+ eting ID: 969 9193 9005\n\nDashboard: https://bakesiga.github.io/usmle-das
+ hboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · General Pathology · Day 2: Necrosis\, ischemia\
+ , and free radicals
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-25@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260625T190000
+DTEND;TZID=Africa/Kampala:20260625T203000
+SUMMARY:USMLE Step 1 · General Pathology · Day 3: Acute inflammation
+DESCRIPTION:Acute inflammation cardinal signs\, vasodilation and increased
+  permeability\, leukocyte margination\, rolling\, adhesion\, transmigratio
+ n. Inflammatory mediators (histamine\, bradykinin\, complement\, cytokines
+ \, prostaglandins\, leukotrienes). Exudate vs transudate. UWorld questions
+ .\n\nFirst Aid: 209–211\n\nJoin Zoom: https://duke.zoom.us/j/96991939005\n
+ \nMeeting ID: 969 9193 9005\n\nDashboard: https://bakesiga.github.io/usmle
+ -dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · General Pathology · Day 3: Acute inflammation
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-26@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260626T190000
+DTEND;TZID=Africa/Kampala:20260626T203000
+SUMMARY:USMLE Step 1 · General Pathology · Day 4: Chronic inflammation and
+  tissue repair
+DESCRIPTION:Chronic inflammation cell types and outcomes. Granulomatous in
+ flammation (caseating vs non-caseating\, causes\, Th1/IFN-γ axis). Tissue 
+ repair phases — hemostasis\, inflammation\, proliferation\, remodelling. W
+ ound healing by primary\, secondary\, tertiary intention. Scar formation (
+ hypertrophic vs keloid)\, fibrosis. UWorld questions.\n\nFirst Aid: 212–21
+ 4\n\nJoin Zoom: https://duke.zoom.us/j/96991939005\n\nMeeting ID: 969 9193
+  9005\n\nDashboard: https://bakesiga.github.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · General Pathology · Day 4: Chronic inflammation
+  and tissue repair
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-27@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260627T190000
+DTEND;TZID=Africa/Kampala:20260627T203000
+SUMMARY:USMLE Step 1 · General Pathology · Day 5: Neoplasia I — hallmarks 
+ and metastases
+DESCRIPTION:Neoplastic progression (dysplasia → carcinoma in situ → invasi
+ ve). Tumor nomenclature (benign vs malignant\, epithelial vs mesenchymal).
+  Hallmarks of cancer. Tumor grade vs stage. Common metastases by primary s
+ ite. UWorld questions.\n\nFirst Aid: 215–217\n\nJoin Zoom: https://duke.zo
+ om.us/j/96991939005\n\nMeeting ID: 969 9193 9005\n\nDashboard: https://bak
+ esiga.github.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · General Pathology · Day 5: Neoplasia I — hallma
+ rks and metastases
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-28@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260628T190000
+DTEND;TZID=Africa/Kampala:20260628T203000
+SUMMARY:USMLE Step 1 · General Pathology · Day 6: Neoplasia II — oncogenes
+  and tumor suppressors
+DESCRIPTION:Oncogenes (RAS\, MYC\, HER2\, BCR-ABL\, etc.) and tumor suppre
+ ssors (Rb\, p53\, BRCA\, APC\, NF1/NF2\, VHL\, MEN1). Inherited cancer syn
+ dromes. Cancer epidemiology by site. Paraneoplastic syndromes (endocrine\,
+  neurologic\, dermatologic\, hematologic). UWorld questions.\n\nFirst Aid:
+  218–222\n\nJoin Zoom: https://duke.zoom.us/j/96991939005\n\nMeeting ID: 9
+ 69 9193 9005\n\nDashboard: https://bakesiga.github.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · General Pathology · Day 6: Neoplasia II — oncog
+ enes and tumor suppressors
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-29@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260629T190000
+DTEND;TZID=Africa/Kampala:20260629T203000
+SUMMARY:USMLE Step 1 · General Pathology · Day 7: Neoplasia III — tumor ma
+ rkers and aging
+DESCRIPTION:Tumor markers (AFP\, CA-125\, CEA\, PSA\, CA 19-9\, β-hCG\, et
+ c.)\, key immunohistochemical stains\, oncogenic microbes (HPV\, EBV\, HBV
+ /HCV\, HTLV-1\, H. pylori\, HHV-8)\, chemical and environmental carcinogen
+ s. Physiologic aging changes. UWorld questions.\n\nFirst Aid: 223–226\n\nJ
+ oin Zoom: https://duke.zoom.us/j/96991939005\n\nMeeting ID: 969 9193 9005\
+ n\nDashboard: https://bakesiga.github.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · General Pathology · Day 7: Neoplasia III — tumo
+ r markers and aging
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:step1-jun-30@bakesiga.github.io
+DTSTAMP:20260511T235901Z
+DTSTART;TZID=Africa/Kampala:20260630T190000
+DTEND;TZID=Africa/Kampala:20260630T203000
+SUMMARY:USMLE Step 1 · General Pathology · Day 8: General pathology review
+DESCRIPTION:Whole-chapter review: cellular injury\, inflammation\, neoplas
+ ia\, aging — integrated across organ systems. Mixed UWorld block with debr
+ ief.\n\nFirst Aid: 201–226 (review)\n\nJoin Zoom: https://duke.zoom.us/j/9
+ 6991939005\n\nMeeting ID: 969 9193 9005\n\nDashboard: https://bakesiga.git
+ hub.io/usmle-dashboard
+URL:https://duke.zoom.us/j/96991939005
+LOCATION:https://duke.zoom.us/j/96991939005
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:USMLE Step 1 · General Pathology · Day 8: General pathology re
+ view
+END:VALARM
+END:VEVENT
+END:VCALENDAR
