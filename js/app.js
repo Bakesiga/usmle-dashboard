@@ -369,6 +369,28 @@
     });
   }
 
+  // ── WhatsApp join card (only renders if a group URL is set) ──
+  function renderWhatsAppCard() {
+    const root = document.getElementById("whatsapp-card");
+    if (!root) return;
+    const url = USMLE_CONFIG.WHATSAPP_GROUP_URL;
+    if (!url) { root.innerHTML = ""; return; }
+    root.innerHTML = `
+      <div class="wa-join">
+        <div class="wa-join-text">
+          <div class="wa-join-eyebrow">CLASS CHAT</div>
+          <h3>Join the cohort WhatsApp group</h3>
+          <p>Daily peer Q&amp;A, study buddies, quick reach to Allan between sessions. Tap to open WhatsApp, or scan with another phone.</p>
+          <a class="action-pill primary wa-join-btn" href="${esc(url)}" target="_blank" rel="noopener">💬 Open in WhatsApp</a>
+        </div>
+        <div class="wa-join-qr" aria-hidden="true">
+          <img src="images/whatsapp_qr.png" alt="WhatsApp class group QR code" />
+          <span class="wa-join-qr-cap">scan with another phone</span>
+        </div>
+      </div>
+    `;
+  }
+
   // ── Today's-class hero card (top of Sessions panel) ──
   function renderTodayCard(items) {
     const root = document.getElementById("today-card");
@@ -749,6 +771,7 @@
   let DATA = { sessions: [], materials: [], announcements: [] };
   function renderAll() {
     renderTodayCard(DATA.sessions);
+    renderWhatsAppCard();
     renderSessions(DATA.sessions);
     renderMaterials(DATA.materials);
     renderAnnouncements(DATA.announcements);

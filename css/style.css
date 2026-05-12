@@ -609,6 +609,53 @@ footer {
   color: var(--muted); font-size: 12.5px; font-style: italic; margin: 0;
 }
 
+/* ── Class WhatsApp join card ───────────────────────── */
+.wa-join {
+  display: flex; align-items: center; gap: 18px;
+  padding: 16px 18px;
+  margin: 14px 0 16px;
+  background: linear-gradient(135deg, rgba(37,211,102,.10), rgba(37,211,102,.04));
+  border: 1px solid rgba(37,211,102,.30);
+  border-radius: 14px;
+}
+.wa-join-text { flex: 1 1 auto; min-width: 0; }
+.wa-join-eyebrow {
+  font-size: 10.5px; letter-spacing: 3px; font-weight: 700;
+  color: #128c4d; margin-bottom: 4px;
+}
+.wa-join h3 {
+  font-size: 16px; font-weight: 700; margin: 0 0 4px;
+  color: var(--text);
+}
+.wa-join p {
+  font-size: 13px; line-height: 1.5;
+  color: var(--text2);
+  margin: 0 0 10px;
+}
+.wa-join-btn {
+  background: #25D366 !important; color: #fff !important;
+  border-color: transparent !important;
+}
+.wa-join-qr {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 4px; flex: 0 0 auto;
+}
+.wa-join-qr img {
+  width: 112px; height: 112px;
+  background: #fff; padding: 6px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  display: block;
+}
+.wa-join-qr-cap {
+  font-size: 10.5px; color: var(--muted);
+  letter-spacing: 1px;
+}
+@media (max-width: 520px) {
+  .wa-join { flex-direction: column; align-items: flex-start; }
+  .wa-join-qr { align-self: center; }
+}
+
 /* ── Office hours panel (Calendly embed) ────────────── */
 .office-hours-intro {
   color: var(--text2); font-size: 13.5px; line-height: 1.55;
