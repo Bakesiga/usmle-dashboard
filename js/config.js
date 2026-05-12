@@ -37,6 +37,11 @@ const USMLE_CONFIG = {
   // by outputs/scripts/build_ics.js and served at this static path).
   SCHEDULE_ICS_URL:   "data/schedule.ics",
 
+  // Calendly booking page for 1-on-1 office hours. e.g.
+  //   "https://calendly.com/allanbakesiga/office-hours"
+  // Leave blank until set up — the Office Hours tab will show a fallback.
+  CALENDLY_URL:       "",
+
   // Where data files live, relative to the page
   DATA: {
     sessions:      "data/sessions.json",

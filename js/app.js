@@ -700,6 +700,51 @@
     `).join("");
   }
 
+  // ── Office hours (Calendly embed) ───────────────────
+  let officeHoursMounted = false;
+  function renderOfficeHours() {
+    const mount = document.getElementById("office-hours-mount");
+    if (!mount || officeHoursMounted) return;
+    officeHoursMounted = true;
+    const url = USMLE_CONFIG.CALENDLY_URL;
+    if (!url) {
+      mount.innerHTML = `
+        <div class="office-hours-fallback">
+          <p><strong>The booking calendar is being set up.</strong></p>
+          <p>In the meantime, reach out directly and we'll find a time:</p>
+          <ul>
+            <li>📧 <a href="mailto:allanbakesiga@gmail.com">allanbakesiga@gmail.com</a></li>
+            <li>💬 <a href="${esc(USMLE_CONFIG.WHATSAPP_ALLAN_URL || '#')}" target="_blank" rel="noopener">WhatsApp +256 705 571 443</a></li>
+            <li>📞 <a href="tel:+19847102902">Call +1 984 710 2902</a></li>
+          </ul>
+        </div>
+      `;
+      return;
+    }
+    // Calendly inline widget. Their script lazy-instantiates any
+    // .calendly-inline-widget it finds in the DOM.
+    mount.innerHTML = `
+      <div class="calendly-inline-widget" data-url="${esc(url)}" style="min-width:320px;height:720px;"></div>
+    `;
+    if (!document.querySelector('script[src*="calendly.com/assets/external/widget.js"]')) {
+      const s = document.createElement("script");
+      s.src = "https://assets.calendly.com/assets/external/widget.js";
+      s.async = true;
+      document.head.appendChild(s);
+    }
+    // Also pull in their widget stylesheet for the inline embed.
+    if (!document.querySelector('link[href*="calendly.com/assets/external/widget.css"]')) {
+      const l = document.createElement("link");
+      l.rel = "stylesheet";
+      l.href = "https://assets.calendly.com/assets/external/widget.css";
+      document.head.appendChild(l);
+    }
+  }
+  // Mount on first tab activation (lazy — avoids loading Calendly assets
+  // for students who never open the tab).
+  document.querySelector('.tab[data-panel="office-hours"]')
+    ?.addEventListener("click", renderOfficeHours);
+
   // ── Boot / re-render ────────────────────────────────
   let DATA = { sessions: [], materials: [], announcements: [] };
   function renderAll() {
@@ -709,6 +754,10 @@
     renderAnnouncements(DATA.announcements);
     renderSchedule();
     tickCountdowns();
+    // If the user is already on the Office Hours tab, render it now.
+    if (document.getElementById("panel-office-hours")?.classList.contains("active")) {
+      renderOfficeHours();
+    }
   }
 
   (async function () {
