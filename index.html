@@ -1,202 +1,553 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Allan's USMLE Class — Step 1 · June cohort</title>
-<meta name="description" content="A daily, mentor-led USMLE Step 1 cohort starting June 1. Full First Aid + UWorld walkthrough and end-to-end mentorship through ECFMG and the residency match." />
-<link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/site.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>USMLE Classes · Step 1 prep with Allan Bakesiga</title>
+  <meta name="description" content="A mentor-led USMLE Step 1 cohort starting June 1, 2026. Daily live Zoom classes Monday to Sunday with Allan Bakesiga, MD (Makerere), MScGH (Duke)." />
+  <meta name="theme-color" content="#0C2A3D" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+
+  <link rel="stylesheet" href="css/design-tokens.css" />
+  <link rel="stylesheet" href="css/site.css" />
 </head>
-<body class="site">
+<body data-screen-label="01 Marketing Home">
+  <a href="#main" class="skip-link">Skip to main content</a>
 
-<!-- Top nav -->
-<header id="site-nav">
-  <a href="#top" class="brand">
-    <div class="logo">U</div>
-    <div>
-      <strong>Allan's <span>USMLE</span> Class</strong>
-      <small>Step 1 · Starts June 1</small>
-    </div>
-  </a>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#what">What you get</a>
-    <a href="#plan">Sample plan</a>
-    <a href="#signup">Sign up</a>
-    <a href="signin.html" class="nav-login">Student login →</a>
-  </nav>
-</header>
-
-<a id="top"></a>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-copy">
-      <div class="kicker">ENROLLING NOW · STEP 1 · JUNE COHORT</div>
-      <h1>USMLE prep that <span class="grad">keeps you on it daily.</span></h1>
-      <p class="lede">A mentor-led USMLE Step 1 cohort starting June 1. Daily classes Monday to Sunday, full First Aid 2025 walkthrough paired with UWorld clinical vignettes, and end-to-end mentorship through ECFMG and the residency match.</p>
-      <div class="hero-cta">
-        <a href="#signup" class="btn primary">Sign up for Step 1 →</a>
-        <a href="#what" class="btn ghost">What's included</a>
-      </div>
-      <ul class="hero-stats">
-        <li><strong>Mon–Sun</strong><span>Daily classes</span></li>
-        <li><strong>First Aid + UWorld</strong><span>Page-by-page</span></li>
-        <li><strong>Starts Jun 1</strong><span>Limited slots</span></li>
-      </ul>
-    </div>
-    <div class="hero-photo">
-      <div class="photo-ring">
-        <img src="images/allan.jpg" alt="Allan Bakesiga, MD" />
-      </div>
-      <div class="photo-caption">
-        <strong>Allan Bakesiga</strong>
-        <span>MD (Makerere) · MScGH (Duke)</span>
-        <span>PGY-1 Neurology Resident, Creighton University</span>
-        <em>Past Teaching Assistant | Epidemiology &amp; Biostatistics, Duke Global Health Institute</em>
+  <!-- ============================ NAV ============================ -->
+  <header class="nav" role="banner">
+    <div class="container">
+      <a class="brand" href="/" aria-label="USMLE Classes home">
+        <span class="brand-mark" aria-hidden="true">U</span>
+        <span>USMLE Classes <small>· with Allan</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Main">
+        <a href="#outline">Curriculum</a>
+        <a href="#included">What's included</a>
+        <a href="#passes">Recent passes</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-primary btn-sm" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign up</a>
+        <button class="nav-hamburger" aria-label="Open menu" type="button">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        </button>
       </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- ABOUT -->
-<section id="about" class="band">
-  <h2 class="section-h">About Allan</h2>
-  <p class="prose">
-    Allan finished medical school at Makerere University, completed a Master's in Global Health at Duke,
-    and is starting PGY-1 Neurology training at Creighton University this summer. While at Duke he served
-    as a teaching assistant for Epidemiology &amp; Biostatistics, and has spent the last two years
-    leading daily USMLE study groups. He has walked the IMG path himself — from ECFMG application through
-    the residency match — and built this cohort around the lessons he wished someone had handed him at the start.
-  </p>
-</section>
+  <aside class="nav-drawer" aria-label="Mobile menu">
+    <button class="nav-drawer-close" aria-label="Close menu" type="button">×</button>
+    <a href="#outline">Curriculum</a>
+    <a href="#included">What's included</a>
+    <a href="#passes">Recent passes</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a class="btn btn-gold" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign up for Step 1</a>
+  </aside>
+  <div class="scrim" aria-hidden="true"></div>
 
-<!-- WHAT YOU GET -->
-<section id="what" class="band band-tint">
-  <h2 class="section-h">What's included</h2>
-  <div class="features">
-    <div class="feature">
-      <div class="num">1</div>
-      <h3>Daily classes</h3>
-      <p>Monday to Sunday. A topic-by-topic flow that keeps you in the material every day so the exam window is short, not stretched.</p>
-    </div>
-    <div class="feature">
-      <div class="num">2</div>
-      <h3>Active community</h3>
-      <p>Off-class peer discussions, accountability, and rapid Q&amp;A between sessions so you're not studying alone.</p>
-    </div>
-    <div class="feature">
-      <div class="num">3</div>
-      <h3>First Aid + UWorld, every day</h3>
-      <p>We read <em>First Aid 2025</em> page-by-page and end every session inside UWorld, dissecting the day's clinical vignettes so you learn to think the way the exam tests you.</p>
-    </div>
-    <div class="feature">
-      <div class="num">4</div>
-      <h3>End-to-end mentorship</h3>
-      <p>Through the ECFMG application, CV, personal statement, interview prep, and the residency match itself.</p>
-    </div>
-  </div>
-</section>
+  <main id="main">
 
-<!-- SAMPLE PLAN -->
-<section id="plan" class="band">
-  <h2 class="section-h">Sample June plan — Step 1</h2>
-  <p class="prose">
-    Every chapter is mapped page-by-page to <em>First Aid 2025</em>, broken into daily blocks
-    with practice questions. Here's how the first month looks:
-  </p>
-  <div class="plan-grid">
-    <div class="plan-card" style="--plan-accent:#0284c7">
-      <div class="plan-head">Cardiovascular <span>10 days · Jun 1–10</span></div>
-      <ul>
-        <li>Day 1 — Orientation, embryology, and congenital heart defects</li>
-        <li>Day 2 — Cardiac anatomy and imaging</li>
-        <li>Day 3 — Cardiac output and pressure-volume loops</li>
-        <li>Day 4 — Heart sounds and murmurs</li>
-        <li>Day 5 — ECG, action potentials, and BP control</li>
-        <li>Day 6 — Coronary artery disease, IHD, and myocardial infarction</li>
-        <li>Day 7 — Hypertension and atherosclerosis</li>
-        <li>Day 8 — Heart failure and cardiomyopathies</li>
-        <li>Day 9 — Endocarditis, myocarditis, and vasculitis</li>
-        <li>Day 10 — Cardiovascular pharmacology</li>
-      </ul>
-    </div>
-    <div class="plan-card" style="--plan-accent:#059669">
-      <div class="plan-head">Respiratory <span>8 days · Jun 11–18</span></div>
-      <ul>
-        <li>Day 1 — Embryology, surfactant, and congenital anomalies</li>
-        <li>Day 2 — Anatomy and muscles of breathing</li>
-        <li>Day 3 — Lung volumes and ventilation mechanics</li>
-        <li>Day 4 — Gas exchange and V/Q mismatch</li>
-        <li>Day 5 — Control of breathing and sleep apnea</li>
-        <li>Day 6 — Asthma and COPD</li>
-        <li>Day 7 — Restrictive disease, ARDS, and pneumonia</li>
-        <li>Day 8 — TB, lung cancer, and respiratory pharmacology</li>
-      </ul>
-    </div>
-    <div class="plan-card" style="--plan-accent:#d97706">
-      <div class="plan-head">Epi &amp; Biostats <span>4 days · Jun 19–22</span></div>
-      <ul>
-        <li>Day 1 — Study designs, levels of evidence, and diagnostic testing</li>
-        <li>Day 2 — Quantifying risk, demographic transitions, and survival analysis</li>
-        <li>Day 3 — Bias, confounding, and effect modification</li>
-        <li>Day 4 — Statistical distributions, statistical testing, and confidence intervals</li>
-      </ul>
-    </div>
-    <div class="plan-card" style="--plan-accent:#7c3aed">
-      <div class="plan-head">General Pathology <span>8 days · Jun 23–30</span></div>
-      <ul>
-        <li>Day 1 — Cellular adaptations and apoptosis</li>
-        <li>Day 2 — Necrosis, ischemia, and free radicals</li>
-        <li>Day 3 — Acute inflammation</li>
-        <li>Day 4 — Chronic inflammation and tissue repair</li>
-        <li>Day 5 — Neoplasia I — hallmarks and metastases</li>
-        <li>Day 6 — Neoplasia II — oncogenes and tumor suppressors</li>
-        <li>Day 7 — Neoplasia III — tumor markers and aging</li>
-        <li>Day 8 — General pathology review</li>
-      </ul>
-    </div>
-  </div>
-  <p class="prose-note">Endocrine, GI, Heme/Onc, MSK, Neuro, Psych, Renal, Reproductive, and Immunology blocks follow July onward. The full month-by-month schedule is visible on the student dashboard once enrolled.</p>
-</section>
+    <!-- ============================ HERO ============================ -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-copy">
+          <p class="eyebrow" data-anim="fade-up">Enrolling now · Step 1 · June cohort</p>
+          <h1 data-anim="fade-up" data-delay="80">
+            USMLE prep that<br/>
+            <span class="accent">keeps you on it daily.</span>
+          </h1>
+          <p class="hero-lede" data-anim="fade-up" data-delay="160">
+            A mentor-led USMLE Step 1 cohort starting <strong>June 1, 2026</strong>. Daily live Zoom classes Monday to Sunday, a full First Aid walkthrough paired with UWorld vignettes, and end-to-end mentorship through ECFMG and the residency match.
+          </p>
+          <div class="hero-ctas" data-anim="fade-up" data-delay="240">
+            <a class="btn btn-primary" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">
+              Sign up for Step 1
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a class="btn btn-ghost" href="#included">What's included</a>
+          </div>
+          <div class="hero-stats" data-stagger="80">
+            <div class="hero-stat"><div class="num">Mon – Sun</div><div class="label">DAILY CLASSES, 2.5 HRS</div></div>
+            <div class="hero-stat"><div class="num">30 days</div><div class="label">FULL FIRST AID WALKTHROUGH</div></div>
+            <div class="hero-stat"><div class="num">1 : 12</div><div class="label">MENTOR : COHORT RATIO</div></div>
+          </div>
+        </div>
 
-<!-- UWORLD CALLOUT -->
-<section class="band band-callout">
-  <div class="callout">
-    <div class="callout-tag">WHY THIS COHORT WORKS</div>
-    <h2>Reading First Aid isn't the same as passing Step 1.</h2>
-    <p>The exam tests how you <em>apply</em> facts under a clinical vignette. So every session ends inside UWorld, working through that day's questions together — ruling options in and out, surfacing the test-writer's logic. By exam day you've seen the patterns, not just the pages.</p>
-  </div>
-</section>
+        <aside class="allan-block" data-anim="fade-up" data-delay="100" aria-label="About the instructor">
+          <div class="allan-portrait" aria-hidden="false">
+            <img src="images/allan-headshot.jpg" alt="Allan Bakesiga, MD, headshot." loading="eager" decoding="async" />
+          </div>
+          <div>
+            <div class="allan-name">Allan Bakesiga</div>
+            <p class="allan-creds">
+              <strong>MD (Makerere)</strong> · MScGH (Duke)<br/>
+              PGY-1 Neurology, Creighton<br/>
+              Past TA, Epi &amp; Biostats, Duke GHI
+            </p>
+          </div>
+          <div class="inst-logos" aria-label="Affiliations">
+            <span>Makerere</span><span>Duke</span><span>Creighton</span>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-<!-- SIGN UP -->
-<section id="signup" class="band">
-  <h2 class="section-h">Sign up</h2>
-  <p class="prose">Drop your details and Allan will follow up with the next steps and your dashboard access.</p>
-  <div class="signup-row">
-    <div class="signup-form">
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLSdmoYaxWW600qNe8rHZJybuCFqG12nhPW2nV5T-5s2As6XWmQ/viewform?embedded=true"
-        width="100%" height="780" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    <!-- ============================ COUNTDOWN STRIP ============================ -->
+    <section class="countdown-strip" aria-label="Cohort countdown">
+      <div class="container">
+        <div class="countdown-label">
+          <em data-days-to-go>12</em> days to go · Cohort starts June 1, 2026 · 5 AM EAT
+        </div>
+        <div class="countdown" data-countdown role="timer" aria-live="off">
+          <span class="unit"><span class="val d-val tnum">12</span><span class="lab">days</span></span>
+          <span class="unit"><span class="val h-val tnum">08</span><span class="lab">hrs</span></span>
+          <span class="unit"><span class="val m-val tnum">42</span><span class="lab">min</span></span>
+          <span class="unit"><span class="val sec-val tnum" aria-hidden="true">00</span><span class="lab">sec</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ JUNE OUTLINE ============================ -->
+    <section class="section" id="outline">
+      <div class="container">
+        <header class="section-head" data-anim="fade-up">
+          <p class="eyebrow">The June outline</p>
+          <h2>Thirty days. Four chapters. One thread per day.</h2>
+          <p>Every session ties First Aid to UWorld vignettes you'll do alongside class. Click a chapter to see the day-by-day breakdown.</p>
+        </header>
+
+        <div class="outline-grid" data-stagger="80">
+
+          <article class="subject-card subject-cvs" tabindex="0" data-anim="fade-up">
+            <header class="subject-card-head">
+              <div class="subject-card-icon">
+                <!-- heart -->
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+              <h3>Cardiovascular</h3>
+              <div class="subject-card-meta"><span>10 days</span><span class="dot"></span><span>Jun 1 – Jun 10</span></div>
+            </header>
+            <div class="subject-card-body">
+              <ol class="subject-card-list">
+                <li>Cardiac anatomy &amp; embryology</li>
+                <li>The cardiac cycle &amp; PV loops</li>
+                <li>Cardiac output &amp; Frank-Starling</li>
+                <li>Vascular biology &amp; hemodynamics</li>
+                <li>EKG fundamentals</li>
+                <li>Arrhythmias I &amp; II</li>
+                <li>Heart failure &amp; cardiomyopathies</li>
+                <li>Valvular heart disease</li>
+                <li>Hypertension &amp; vasculitis</li>
+                <li>Congenital heart disease</li>
+              </ol>
+            </div>
+          </article>
+
+          <article class="subject-card subject-resp" tabindex="0" data-anim="fade-up">
+            <header class="subject-card-head">
+              <div class="subject-card-icon">
+                <!-- lungs -->
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v10"/><path d="M9 4h6"/><path d="M6.5 9C3 11 2 15 3 19c.5 2 3 2 4 1l2-3V9.5C9 7 8 6 6.5 9z"/><path d="M17.5 9C21 11 22 15 21 19c-.5 2-3 2-4 1l-2-3V9.5C15 7 16 6 17.5 9z"/></svg>
+              </div>
+              <h3>Respiratory</h3>
+              <div class="subject-card-meta"><span>8 days</span><span class="dot"></span><span>Jun 11 – Jun 18</span></div>
+            </header>
+            <div class="subject-card-body">
+              <ol class="subject-card-list">
+                <li>Lung anatomy &amp; development</li>
+                <li>Ventilation &amp; perfusion</li>
+                <li>Gas exchange &amp; transport</li>
+                <li>Pulmonary function tests</li>
+                <li>Obstructive lung disease</li>
+                <li>Restrictive lung disease</li>
+                <li>Pulmonary vascular disease</li>
+                <li>Pneumonia, TB, ARDS</li>
+              </ol>
+            </div>
+          </article>
+
+          <article class="subject-card subject-epi" tabindex="0" data-anim="fade-up">
+            <header class="subject-card-head">
+              <div class="subject-card-icon">
+                <!-- chart -->
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="20" x2="21" y2="20"/><rect x="6" y="12" width="3" height="8" rx="1"/><rect x="11" y="8" width="3" height="12" rx="1"/><rect x="16" y="4" width="3" height="16" rx="1"/></svg>
+              </div>
+              <h3>Epi &amp; Biostats</h3>
+              <div class="subject-card-meta"><span>4 days</span><span class="dot"></span><span>Jun 19 – Jun 22</span></div>
+            </header>
+            <div class="subject-card-body">
+              <ol class="subject-card-list">
+                <li>Study design</li>
+                <li>Diagnostic tests</li>
+                <li>Bias, confounding &amp; error</li>
+                <li>Statistical tests</li>
+              </ol>
+            </div>
+          </article>
+
+          <article class="subject-card subject-path" tabindex="0" data-anim="fade-up">
+            <header class="subject-card-head">
+              <div class="subject-card-icon">
+                <!-- microscope -->
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="3"/><line x1="9" y1="9" x2="9" y2="15"/><path d="M5 17h8"/><path d="M3 21h18"/><path d="M14 9l4-4 2 2-4 4z"/></svg>
+              </div>
+              <h3>Pathology</h3>
+              <div class="subject-card-meta"><span>8 days</span><span class="dot"></span><span>Jun 23 – Jun 30</span></div>
+            </header>
+            <div class="subject-card-body">
+              <ol class="subject-card-list">
+                <li>Cell injury, death &amp; adaptation</li>
+                <li>Inflammation &amp; wound healing</li>
+                <li>Neoplasia</li>
+                <li>Genetic disease</li>
+                <li>Immunology essentials</li>
+                <li>Hematologic pathology</li>
+                <li>Endocrine pathology</li>
+                <li>Renal &amp; GU pathology</li>
+              </ol>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ INCLUDED ============================ -->
+    <section class="section" id="included" style="background: var(--bg-cream);">
+      <div class="container">
+        <header class="section-head" data-anim="fade-up">
+          <p class="eyebrow">What's included</p>
+          <h2>Daily class. Real mentorship. Quiet study tools.</h2>
+        </header>
+
+        <div class="included-grid" data-stagger="60">
+          <article class="feature" data-anim="fade-up">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><polygon points="22 8 16 12 22 16 22 8"/></svg></div>
+            <h3>Daily live Zoom classes</h3>
+            <p>2.5 hours, every day, Monday to Sunday. 5:00 to 7:30 AM EAT.</p>
+          </article>
+          <article class="feature" data-anim="fade-up">
+            <div class="feature-icon" style="background: var(--resp-tint); color: var(--resp-deep);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2z"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="14" y2="12"/></svg></div>
+            <h3>Full First Aid 2025 walkthrough</h3>
+            <p>Every chapter, every annotation. We read it together, not at you.</p>
+          </article>
+          <article class="feature" data-anim="fade-up">
+            <div class="feature-icon" style="background: var(--path-tint); color: var(--path-deep);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+            <h3>UWorld vignettes, page-by-page</h3>
+            <p>Daily question sets tied to each class. Reviewed live the next morning.</p>
+          </article>
+          <article class="feature" data-anim="fade-up">
+            <div class="feature-icon" style="background: var(--amber-tint); color: var(--amber-deep);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <h3>Class dashboard, slides &amp; notes</h3>
+            <p>Your home base for the daily link, deck, notes, and recordings.</p>
+          </article>
+          <article class="feature" data-anim="fade-up">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <h3>ECFMG &amp; match mentorship</h3>
+            <p>Through registration, scheduling, and residency interview prep.</p>
+          </article>
+          <article class="feature" data-anim="fade-up">
+            <div class="feature-icon" style="background: var(--resp-tint); color: var(--resp-deep);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-1 4 8.5 8.5 0 0 1-7.5 4.5 8.4 8.4 0 0 1-4-1L3 21l2-5.5a8.4 8.4 0 0 1-1-4 8.5 8.5 0 0 1 4.5-7.5 8.4 8.4 0 0 1 4-1h.5a8.5 8.5 0 0 1 8 8z"/></svg></div>
+            <h3>WhatsApp cohort group</h3>
+            <p>Daily Q&amp;A with Allan and the rest of the cohort.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ SAMPLE WEEK ============================ -->
+    <section class="section" id="sample-week">
+      <div class="container">
+        <header class="section-head" data-anim="fade-up">
+          <p class="eyebrow">A sample week</p>
+          <h2>Week one of June. Cardio, every day.</h2>
+          <p>The first ten days walk through every cardiovascular topic in First Aid. Here's how week one looks on the calendar.</p>
+        </header>
+
+        <div class="week-wrap" data-anim="fade-up">
+          <div class="week-grid">
+            <div class="week-cell subject-cvs today">
+              <div class="dow">Mon</div>
+              <div class="date">1</div>
+              <span class="subject-chip">CVS</span>
+              <div class="topic">Cardiac anatomy &amp; embryology</div>
+            </div>
+            <div class="week-cell subject-cvs">
+              <div class="dow">Tue</div>
+              <div class="date">2</div>
+              <span class="subject-chip">CVS</span>
+              <div class="topic">The cardiac cycle &amp; PV loops</div>
+            </div>
+            <div class="week-cell subject-cvs">
+              <div class="dow">Wed</div>
+              <div class="date">3</div>
+              <span class="subject-chip">CVS</span>
+              <div class="topic">Cardiac output &amp; Frank-Starling</div>
+            </div>
+            <div class="week-cell subject-cvs">
+              <div class="dow">Thu</div>
+              <div class="date">4</div>
+              <span class="subject-chip">CVS</span>
+              <div class="topic">Vascular biology &amp; hemodynamics</div>
+            </div>
+            <div class="week-cell subject-cvs">
+              <div class="dow">Fri</div>
+              <div class="date">5</div>
+              <span class="subject-chip">CVS</span>
+              <div class="topic">EKG fundamentals</div>
+            </div>
+            <div class="week-cell subject-cvs">
+              <div class="dow">Sat</div>
+              <div class="date">6</div>
+              <span class="subject-chip">CVS</span>
+              <div class="topic">Arrhythmias I &amp; II</div>
+            </div>
+            <div class="week-cell subject-cvs">
+              <div class="dow">Sun</div>
+              <div class="date">7</div>
+              <span class="subject-chip">CVS</span>
+              <div class="topic">Heart failure &amp; cardiomyopathies</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ TESTIMONIALS ============================ -->
+    <section class="section" id="passes" style="background: var(--bg-cream);">
+      <div class="container">
+        <header class="section-head" data-anim="fade-up">
+          <p class="eyebrow">Recent passes</p>
+          <h2>The first graduate.</h2>
+          <p>This is the test the program exists for. Rosemary sat Step 1 on May 5, 2026.</p>
+        </header>
+
+        <div class="passes-wrap">
+          <article class="pass-hero" data-anim="fade-up">
+            <div class="pass-portrait">
+              <img src="images/rosemary-portrait.jpg" alt="Dr. Rosemary Njambi Githinji on her Duke graduation day." loading="lazy" decoding="async" />
+            </div>
+            <span class="pass-badge">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Passed · Step 1
+            </span>
+            <p class="pass-quote">Allan is the most patient teacher I have ever had. He breaks every concept down so clearly that even a non-medic could follow. I would not have passed Step 1 without him.</p>
+            <p class="pass-attr">Dr. Rosemary Njambi Githinji · Tested 5 May 2026 · Coached Feb – May 2026</p>
+          </article>
+
+          <article class="pass-placeholder" data-anim="fade-up">
+            <div class="ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <strong>More passes coming</strong>
+            <span>June cohort tests Oct &ndash; Nov 2026</span>
+          </article>
+
+          <article class="pass-placeholder" data-anim="fade-up">
+            <div class="ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <strong>Your name here</strong>
+            <span>The next testimonial is the one you'll write.</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ PRICING ============================ -->
+    <section class="section" id="pricing">
+      <div class="container">
+        <header class="section-head" data-anim="fade-up">
+          <p class="eyebrow">Pricing</p>
+          <h2>Honest pricing, paid the way you actually can.</h2>
+          <p>Tuition is the same program. Two payment regions because two payment rails are easy and a third would not be.</p>
+        </header>
+
+        <div class="pricing-grid">
+          <article class="price-card popular" data-anim="fade-up">
+            <div class="price-head">
+              <span class="flag flag-ug" aria-hidden="true"><span></span><span></span><span></span></span>
+              <h3>Uganda</h3>
+            </div>
+            <div class="price">
+              <span class="from">From</span>UGX 350,000<span class="per"> / month</span>
+            </div>
+            <ul class="price-list">
+              <li>30 days of live Zoom classes</li>
+              <li>Class dashboard, slides, notes</li>
+              <li>UWorld vignette walkthroughs</li>
+              <li>WhatsApp cohort group</li>
+              <li>ECFMG &amp; match mentorship</li>
+            </ul>
+            <div class="price-pay">
+              <strong>Pay by Mobile Money</strong>
+              0705 571 443 · Bakesiga Allan
+            </div>
+            <a class="btn btn-primary" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign up &rarr;</a>
+          </article>
+
+          <article class="price-card" data-anim="fade-up">
+            <div class="price-head">
+              <span class="flag flag-intl" aria-hidden="true"></span>
+              <h3>International</h3>
+            </div>
+            <div class="price">
+              <span class="from">From</span>USD 150<span class="per"> / month</span>
+            </div>
+            <ul class="price-list">
+              <li>30 days of live Zoom classes</li>
+              <li>Class dashboard, slides, notes</li>
+              <li>UWorld vignette walkthroughs</li>
+              <li>WhatsApp cohort group</li>
+              <li>ECFMG &amp; match mentorship</li>
+            </ul>
+            <div class="price-pay">
+              <strong>Pay by Wise, PayPal, or M-Pesa</strong>
+              +256 705 571 443 · reply to confirm rail
+            </div>
+            <a class="btn btn-ghost" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign up &rarr;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ FAQ ============================ -->
+    <section class="section" id="faq" style="background: var(--bg-cream);">
+      <div class="container">
+        <header class="section-head" style="text-align: center; margin-inline: auto;" data-anim="fade-up">
+          <p class="eyebrow">Common questions</p>
+          <h2>Honest answers.</h2>
+        </header>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q" type="button">
+              <span>I have not finished medical school. Can I still join?</span>
+              <span class="chev" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+            <div class="faq-a">Yes. Several current students are still in their final year. The pace assumes basic clinical sciences are familiar, but the daily walkthrough re-grounds every concept.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">
+              <span>Do I need my own copy of First Aid?</span>
+              <span class="chev" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+            <div class="faq-a">A copy of First Aid 2025 is recommended but not strictly required. Class slides reproduce the structure of every chapter and link out to the relevant figures.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">
+              <span>What if I miss a class?</span>
+              <span class="chev" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+            <div class="faq-a">Every class is recorded and posted to the dashboard within a few hours. The session card on the dashboard always shows the latest recording link.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">
+              <span>Can I pay weekly?</span>
+              <span class="chev" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+            <div class="faq-a">Yes. Weekly and bi-weekly plans are arranged case-by-case. Reply on the signup form with what works for you and Allan will respond personally.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">
+              <span>Is the class recorded?</span>
+              <span class="chev" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+            <div class="faq-a">Yes. Each Zoom session is recorded; the link is added to that day's session card on the dashboard alongside the slides.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">
+              <span>How is this different from a large course like Kaplan or USMLE-Rx?</span>
+              <span class="chev" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+            <div class="faq-a">It is small, daily, and led by one physician who knows you. The big courses are libraries of recorded content. This is a class. You show up every morning and so does Allan.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ CTA banner ============================ -->
+    <section class="section" style="padding-block: var(--s-64);">
+      <div class="container">
+        <div class="cta-banner" data-anim="fade-up">
+          <div>
+            <h2>You don't have to <em>do this alone.</em></h2>
+            <p>The June 2026 cohort is enrolling now. Sign up takes two minutes; Allan replies within a day.</p>
+          </div>
+          <div class="cta-actions">
+            <a class="btn btn-gold btn-lg" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign up for Step 1 &rarr;</a>
+            <a class="link" href="mailto:allanbakesiga@gmail.com">or email Allan first</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-cols">
+        <div class="footer-col footer-brand">
+          <a class="brand" href="/" aria-label="USMLE Classes home">
+            <span class="brand-mark" aria-hidden="true">U</span>
+            <span>USMLE Classes</span>
+          </a>
+          <p>A mentor-led Step 1 cohort for East African IMGs and international students preparing through 2026.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Class</h4>
+          <ul>
+            <li><a href="https://chat.whatsapp.com/JvaTpyDt9loGZjomAVwi42" target="_blank" rel="noopener">WhatsApp group</a></li>
+            <li><a href="https://calendly.com/allanbakesiga/usmle-office-hours" target="_blank" rel="noopener">Calendly office hours</a></li>
+            <li><a href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign-up form</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Allan</h4>
+          <ul>
+            <li><a href="#passes">Recent passes</a></li>
+            <li><a href="#outline">Curriculum</a></li>
+            <li><a href="mailto:allanbakesiga@gmail.com">Email Allan</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Materials</h4>
+          <ul>
+            <li><a href="signin.html">Student sign-in</a></li>
+            <li><a href="dashboard.html">Dashboard preview</a></li>
+            <li><a href="data/schedule.ics">Calendar (.ics)</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Allan Bakesiga · Site by Claude Design</span>
+        <span>Made with quiet motion, no trackers.</span>
+      </div>
     </div>
-    <aside class="signup-aside">
-      <h3>Or contact Allan directly</h3>
-      <ul>
-        <li><span class="ico ico-mail"></span><a href="mailto:allanbakesiga@gmail.com">allanbakesiga@gmail.com</a></li>
-        <li><span class="ico ico-wa"></span><a href="https://wa.me/256705571443" target="_blank" rel="noopener">WhatsApp +256 705 571 443</a></li>
-        <li><span class="ico ico-phone"></span><a href="tel:+19847102902">Call +1 984 710 2902</a></li>
-      </ul>
-      <p class="aside-note">Already enrolled? <a href="signin.html">Student login →</a></p>
-    </aside>
-  </div>
-</section>
+  </footer>
 
-<footer class="site-foot">
-  <div>© Allan Bakesiga · USMLE Step 1 cohort · Starts June 1, 2026</div>
-  <div><a href="signin.html">Student login</a> · <a href="mailto:allanbakesiga@gmail.com">Contact</a></div>
-</footer>
+  <script src="js/data.js"></script>
+  <script src="js/motion.js"></script>
 
+  <!-- Tweaks panel mount point (loaded by tweaks.js) -->
+  <script src="js/tweaks.js"></script>
 </body>
 </html>

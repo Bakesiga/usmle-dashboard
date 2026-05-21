@@ -1,107 +1,415 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Allan's USMLE Class — Dashboard</title>
-<link rel="stylesheet" href="css/style.css" />
-<script src="js/config.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Dashboard · USMLE Classes</title>
+  <meta name="theme-color" content="#0C2A3D" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+
+  <link rel="stylesheet" href="css/design-tokens.css" />
+  <link rel="stylesheet" href="css/site.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
 </head>
-<body>
+<body data-screen-label="03 Dashboard">
 
-<div id="topbar">
-  <div class="brand">
-    <div class="logo">U</div>
-    <h1>Allan's <span>USMLE</span> Class</h1>
-  </div>
-  <div id="nav-actions">
-    <a id="nav-zoom" class="nav-action zoom" target="_blank" rel="noopener" title="Join the live class on Zoom">
-      <span class="nav-icon">🎥</span><span class="nav-label">Join class</span>
-    </a>
-    <a id="nav-whatsapp" class="nav-action whatsapp" target="_blank" rel="noopener" title="Class WhatsApp group">
-      <span class="nav-icon">💬</span><span class="nav-label">Class WhatsApp</span>
-    </a>
-    <a id="nav-subscribe" class="nav-action subscribe" target="_blank" rel="noopener" title="Subscribe to the class schedule in your calendar app">
-      <span class="nav-icon">📅</span><span class="nav-label">Subscribe</span>
-    </a>
-  </div>
-  <div id="user-chip">
-    <img id="user-pic" alt="" />
-    <span id="user-name"></span>
-    <button id="signout-btn">Sign out</button>
-  </div>
-</div>
+  <!-- ============================ TOP BAR ============================ -->
+  <header class="dash-nav">
+    <div class="container">
+      <a class="brand" href="/" aria-label="USMLE Classes home">
+        <span class="brand-mark" aria-hidden="true">U</span>
+        <span>USMLE Class</span>
+      </a>
 
-<main id="layout">
-
-  <div id="track-switcher" style="display:none;"></div>
-
-  <div id="tabs">
-    <div class="tab active" data-panel="sessions">Sessions</div>
-    <div class="tab" data-panel="materials">Materials</div>
-    <div class="tab" data-panel="schedule">Schedule</div>
-    <div class="tab" data-panel="office-hours">Office hours</div>
-    <div class="tab" data-panel="announcements">Announcements</div>
-  </div>
-
-  <!-- Sessions -->
-  <section class="panel active" id="panel-sessions">
-    <div id="today-card"></div>
-    <div id="whatsapp-card"></div>
-    <h2 class="section-title">Class schedule</h2>
-    <div class="sessions-toolbar">
-      <input type="search" id="sessions-search" placeholder="Search topics, notes, or FA pages…" />
-    </div>
-    <div id="chapter-tabs" class="chapter-tabs"></div>
-    <div id="sessions-list"></div>
-  </section>
-
-  <!-- Materials -->
-  <section class="panel" id="panel-materials">
-    <h2 class="section-title">High-yield materials</h2>
-    <div id="materials-list" class="materials-grid"></div>
-  </section>
-
-  <!-- Schedule -->
-  <section class="panel" id="panel-schedule">
-    <h2 class="section-title">Calendar</h2>
-    <div id="schedule-wrap" class="calendar-wrap">
-      <div class="cal-toolbar">
-        <button id="cal-prev" class="cal-nav" title="Previous month">‹</button>
-        <h3 id="cal-month">—</h3>
-        <button id="cal-next" class="cal-nav" title="Next month">›</button>
-        <button id="cal-today" class="cal-today">Today</button>
+      <div class="dash-chips">
+        <a class="chip chip-zoom" data-link="zoom" target="_blank" rel="noopener">
+          <span class="dot" aria-hidden="true"></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><polygon points="22 8 16 12 22 16 22 8"/></svg>
+          Join class
+        </a>
+        <a class="chip" data-link="whatsapp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-1 4 8.5 8.5 0 0 1-7.5 4.5 8.4 8.4 0 0 1-4-1L3 21l2-5.5a8.4 8.4 0 0 1-1-4 8.5 8.5 0 0 1 4.5-7.5 8.4 8.4 0 0 1 4-1h.5a8.5 8.5 0 0 1 8 8z"/></svg>
+          Class WhatsApp
+        </a>
+        <a class="chip" data-link="ics" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Subscribe
+        </a>
       </div>
-      <div class="cal-weekdays">
-        <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
+
+      <div class="user-chip" tabindex="0" aria-haspopup="menu">
+        <span class="user-avatar">RA</span>
+        <span>Rosemary</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        <nav class="user-menu" role="menu">
+          <a href="#" role="menuitem">Account &amp; profile</a>
+          <a href="#" role="menuitem">Notification settings</a>
+          <button type="button" role="menuitem" data-action="toggle-theme">Switch theme</button>
+          <a href="signin.html" role="menuitem">Sign out</a>
+        </nav>
       </div>
-      <div id="cal-grid" class="cal-grid"></div>
-      <div id="cal-legend" class="cal-legend"></div>
     </div>
-  </section>
+  </header>
 
-  <!-- Office hours -->
-  <section class="panel" id="panel-office-hours">
-    <h2 class="section-title">Book a 1-on-1 with Allan</h2>
-    <p class="office-hours-intro">
-      Use this for anything you'd rather not ask in the group chat: a stuck topic, study-plan
-      check-in, ECFMG questions, or just to talk. Pick a slot that works in your time zone.
-    </p>
-    <div id="office-hours-mount"></div>
-  </section>
+  <div class="dash-shell">
 
-  <!-- Announcements -->
-  <section class="panel" id="panel-announcements">
-    <h2 class="section-title">Announcements</h2>
-    <div id="announcements-list"></div>
-  </section>
+    <!-- ============================ TABS ============================ -->
+    <nav class="dash-tabs" role="tablist" aria-label="Dashboard sections">
+      <button class="dash-tab active" data-tab="today" role="tab" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+        Today
+      </button>
+      <button class="dash-tab" data-tab="sessions" role="tab" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
+        Sessions
+      </button>
+      <button class="dash-tab" data-tab="schedule" role="tab" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Schedule
+      </button>
+      <button class="dash-tab" data-tab="news" role="tab" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-9h4"/><path d="M18 14H10"/><path d="M15 18H10"/><path d="M10 6h8v4h-8z"/></svg>
+        News
+        <span style="display:inline-flex;align-items:center;justify-content:center;background:var(--gold);color:var(--ink);font-size:10px;font-family:var(--font-display);font-weight:700;padding:1px 6px;border-radius:999px;letter-spacing:0.04em;">NEW</span>
+      </button>
+      <button class="dash-tab" data-tab="resources" role="tab" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Resources
+      </button>
+      <button class="dash-tab" data-tab="office" role="tab" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9.5a3 3 0 0 1 6 0c0 2-3 3-3 3"/><line x1="12" y1="16" x2="12" y2="16.5"/></svg>
+        Office hours
+      </button>
+    </nav>
 
-</main>
+    <div class="dash-grid">
 
-<footer>© Allan Bakesiga · USMLE prep</footer>
+      <!-- ====================================================== -->
+      <!-- TODAY PANEL                                            -->
+      <!-- ====================================================== -->
+      <div>
+      <section class="panel active" data-panel="today" role="tabpanel" aria-label="Today's session">
+        <article class="today-card subject-cvs">
+          <div class="today-head">
+            <div class="today-meta">
+              <span class="day-pill" data-today-day>Day 3</span>
+              <span class="day-date" data-today-date>Wednesday, June 3, 2026</span>
+              <span class="live-pill" data-live-pill>
+                <span class="dot" aria-hidden="true"></span>
+                <span class="lab">Not yet live</span>
+              </span>
+            </div>
+            <h1 class="today-title" data-today-title>Cardiac output &amp; Frank-Starling</h1>
+            <p class="today-sub" data-today-sub>Preload, afterload, contractility, SV</p>
+            <div class="today-countdown">
+              <span class="lab">Countdown</span>
+              <span data-countdown-line>Class starts in 47 min</span>
+            </div>
+          </div>
 
-<script src="js/auth.js"></script>
-<script src="js/ics.js"></script>
-<script src="js/app.js"></script>
+          <div class="today-actions">
+            <a class="action-tile primary" data-link="zoom" target="_blank" rel="noopener">
+              <span class="action-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><polygon points="22 8 16 12 22 16 22 8"/></svg>
+              </span>
+              <span class="action-text">
+                Join class on Zoom
+                <small>5:00 – 7:30 AM EAT · live, with Allan</small>
+              </span>
+            </a>
+            <a class="action-tile" href="#" data-action="open-deck">
+              <span class="action-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </span>
+              <span class="action-text">
+                Today's deck
+                <small>Google Slides · 38 slides</small>
+              </span>
+            </a>
+            <a class="action-tile" href="#notes" data-action="open-notes">
+              <span class="action-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+              </span>
+              <span class="action-text">
+                Today's notes
+                <small>4-min read · UWorld set 3</small>
+              </span>
+            </a>
+          </div>
+        </article>
+
+        <article class="notes-card" id="notes">
+          <header class="notes-head">
+            <h3>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Notes &mdash; Cardiac output &amp; Frank-Starling
+            </h3>
+            <span class="meta">Updated 4:12 AM EAT</span>
+          </header>
+          <div class="notes-body">
+            <h4>What we're covering</h4>
+            <ul>
+              <li>Cardiac output: <code>CO = SV × HR</code>. We'll derive every term.</li>
+              <li>Stroke volume: preload, afterload, contractility. The three knobs.</li>
+              <li>The Frank-Starling curve. Why a healthy heart pumps what it gets.</li>
+              <li>Pressure-volume loops, fast: isovolumetric phases, ESPVR, EDPVR.</li>
+            </ul>
+            <h4>What to do before class</h4>
+            <ul>
+              <li>Skim First Aid 2025, Cardio pp. 296&ndash;299.</li>
+              <li>If you can, glance at UWorld set 3 (vignettes 1&ndash;6) so the cases land faster.</li>
+            </ul>
+            <h4>What to do after class</h4>
+            <ul>
+              <li>Finish UWorld set 3 (6 vignettes, ~15 min).</li>
+              <li>Re-draw a PV loop from memory. It's the single most-tested figure in cardio.</li>
+            </ul>
+          </div>
+        </article>
+
+        <div class="adj-cards">
+          <a class="adj-card subject-cvs" data-prev-card href="#">
+            <span class="adj-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></span>
+            <span class="adj-card-info">
+              <small data-prev-label>Yesterday · Day 2</small>
+              <strong data-prev-title>The cardiac cycle &amp; PV loops</strong>
+            </span>
+          </a>
+          <a class="adj-card subject-cvs" data-next-card href="#" data-dir="next">
+            <span class="adj-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+            <span class="adj-card-info">
+              <small data-next-label>Tomorrow · Day 4</small>
+              <strong data-next-title>Vascular biology &amp; hemodynamics</strong>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ====================================================== -->
+      <!-- SESSIONS PANEL                                         -->
+      <!-- ====================================================== -->
+      <section class="panel" data-panel="sessions" role="tabpanel" aria-label="All sessions">
+        <div class="sessions-toolbar">
+          <button class="filter-pill active" data-filter="all" type="button">All 30 days</button>
+          <button class="filter-pill subject-cvs"  data-filter="cvs"  type="button"><span class="swatch"></span>Cardiovascular</button>
+          <button class="filter-pill subject-resp" data-filter="resp" type="button"><span class="swatch"></span>Respiratory</button>
+          <button class="filter-pill subject-epi"  data-filter="epi"  type="button"><span class="swatch"></span>Epi &amp; Biostats</button>
+          <button class="filter-pill subject-path" data-filter="path" type="button"><span class="swatch"></span>Pathology</button>
+        </div>
+        <div class="sessions-table" data-sessions-table></div>
+      </section>
+
+      <!-- ====================================================== -->
+      <!-- SCHEDULE PANEL                                         -->
+      <!-- ====================================================== -->
+      <section class="panel" data-panel="schedule" role="tabpanel" aria-label="June schedule">
+        <div class="cal-wrap">
+          <div class="cal-header">
+            <h3>June 2026</h3>
+            <span style="font-family:var(--font-display);font-size:var(--fs-13);color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;">30 sessions · Mon &ndash; Sun</span>
+          </div>
+          <div class="cal-grid" data-cal-grid></div>
+          <div class="cal-legend">
+            <span class="subject-cvs"><i></i>Cardiovascular</span>
+            <span class="subject-resp"><i></i>Respiratory</span>
+            <span class="subject-epi"><i></i>Epi &amp; Biostats</span>
+            <span class="subject-path"><i></i>Pathology</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================== -->
+      <!-- NEWS PANEL                                             -->
+      <!-- ====================================================== -->
+      <section class="panel" data-panel="news" role="tabpanel" aria-label="News &amp; class wins">
+        <article style="background: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 60%); border:1px solid color-mix(in srgb, var(--gold) 35%, transparent); border-radius: var(--r-card); padding: var(--s-32); display:grid; grid-template-columns: 1fr; gap: var(--s-32); box-shadow: var(--shadow-2);">
+
+          <!-- Header strip -->
+          <header style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap: var(--s-12);">
+            <div style="display:flex; align-items:center; gap: var(--s-12);">
+              <span style="display:inline-flex; align-items:center; gap:6px; background: var(--gold); color: #5a3e00; padding: 5px 12px; border-radius: var(--r-pill); font-family: var(--font-display); font-size: 11px; font-weight:700; letter-spacing:0.14em;">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                COHORT WIN · STEP 1
+              </span>
+              <span style="font-family: var(--font-display); font-size: var(--fs-13); color: var(--ink-2); font-weight: 500;">Posted 20 May 2026 by Allan</span>
+            </div>
+            <span style="font-family:var(--font-mono); font-size: var(--fs-12); color: var(--gold-deep); letter-spacing:0.06em; text-transform:uppercase;">1 of 1 graduates · 100% pass</span>
+          </header>
+
+          <!-- Headline -->
+          <div style="display: grid; grid-template-columns: 1fr; gap: var(--s-24); align-items: center;">
+            <div>
+              <h2 style="font-family: var(--font-display); font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1;">
+                Congratulations, <span style="background: linear-gradient(135deg, var(--gold), var(--gold-deep)); -webkit-background-clip: text; background-clip: text; color: transparent;">Dr. Rosemary Njambi Githinji</span>.
+              </h2>
+              <p style="font-size: var(--fs-18); color: var(--ink-2); line-height: 1.55; margin-top: var(--s-12); max-width: 620px;">
+                Rosemary tested on <strong>5 May 2026</strong> and passed Step 1 on her first attempt. She is the first graduate of the cohort. The whole class lifted her over the finish line and she lifted us right back.
+              </p>
+              <p style="font-family: var(--font-display); font-size: var(--fs-14); color: var(--muted); margin-top: var(--s-16); letter-spacing: 0.02em;">
+                &mdash; Allan
+              </p>
+            </div>
+          </div>
+
+          <!-- Two photos: portrait + score report -->
+          <div style="display:grid; grid-template-columns: 1fr; gap: var(--s-20);">
+            <figure style="margin:0; background: var(--bg); border-radius: var(--r-card); padding: var(--s-20); border: 1px solid var(--border-2); display:grid; grid-template-columns: 1fr; gap: var(--s-20);" data-rose-figure>
+              <div style="display:flex; gap: var(--s-20); flex-wrap: wrap; align-items:flex-start;">
+                <div style="flex: 0 0 220px; max-width: 100%;">
+                  <div style="aspect-ratio: 4/5; border-radius: var(--r-soft); overflow: hidden; border: 4px solid var(--gold); box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold) 22%, transparent), var(--shadow-1);">
+                    <img src="images/rosemary-portrait.jpg" alt="Dr. Rosemary Njambi Githinji on her Duke graduation day." loading="lazy" decoding="async" style="width:100%; height:100%; object-fit: cover;" />
+                  </div>
+                  <p style="font-family: var(--font-display); font-size: var(--fs-13); color: var(--muted); margin-top: var(--s-12); text-align: center; letter-spacing: 0.04em;">
+                    Duke graduation · 2026
+                  </p>
+                </div>
+                <blockquote style="margin:0; flex:1; min-width: 240px; font-family: var(--font-display); font-size: var(--fs-18); font-weight: 500; line-height: 1.45; color: var(--ink); letter-spacing: -0.005em;">
+                  <span style="font-family: Georgia, serif; font-size: 2.5em; color: var(--gold-deep); line-height: 0; vertical-align: -0.3em; margin-right: 4px;">&ldquo;</span>Allan is the most patient teacher I have ever had. He breaks every concept down so clearly that even a non-medic could follow. I would not have passed Step 1 without him.
+                  <footer style="font-family: var(--font-body); font-weight: 500; font-size: var(--fs-14); color: var(--ink-2); margin-top: var(--s-16);">
+                    &mdash; Rosemary · tested 5 May 2026
+                  </footer>
+                </blockquote>
+              </div>
+            </figure>
+
+            <figure style="margin:0; background: var(--bg); border-radius: var(--r-card); padding: var(--s-20); border: 1px solid var(--border-2);">
+              <figcaption style="display:flex; align-items:center; justify-content: space-between; margin-bottom: var(--s-12); flex-wrap: wrap; gap: var(--s-8);">
+                <span style="font-family: var(--font-display); font-size: var(--fs-14); font-weight: 600; color: var(--ink);">Official USMLE Step 1 Score Report</span>
+                <span style="display:inline-flex; align-items:center; gap:6px; padding: 3px 10px; border-radius: var(--r-pill); background: var(--resp-tint); color: var(--resp-deep); border: 1px solid var(--resp-soft); font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.08em;">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  VERIFIED · PASS
+                </span>
+              </figcaption>
+              <div style="border-radius: var(--r-soft); overflow: hidden; border: 1px solid var(--border-2); background: #fff;">
+                <img src="images/rosemary-score-report.jpg" alt="USMLE Step 1 Score Report for Githinji, Rosemary Njambi. Test date May 5, 2026. Result: PASS." loading="lazy" decoding="async" style="width:100%; height:auto; display:block;" />
+              </div>
+              <p style="font-family: var(--font-mono); font-size: var(--fs-12); color: var(--muted); margin-top: var(--s-12); text-align: center; letter-spacing: 0.02em;">
+                Name &amp; USMLE ID partially redacted at student's request.
+              </p>
+            </figure>
+          </div>
+
+          <!-- Footer strip — context & call-out -->
+          <footer style="background: var(--ink); color: #fff; padding: var(--s-20) var(--s-24); border-radius: var(--r-soft); display: grid; grid-template-columns: 1fr; gap: var(--s-16);">
+            <div style="display:flex; align-items:center; gap: var(--s-16); flex-wrap: wrap;">
+              <span style="font-family: var(--font-display); font-size: var(--fs-13); color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700;">For the cohort</span>
+              <span style="font-family: var(--font-body); font-size: var(--fs-14); color: rgba(255,255,255,0.85); line-height: 1.55;">
+                If you want to send Rosemary a note, drop it in the <strong style="color:#fff;">#wins channel</strong> of the WhatsApp group. She'll see it.
+              </span>
+            </div>
+            <div style="display: flex; gap: var(--s-12); flex-wrap: wrap;">
+              <a class="btn btn-gold btn-sm" data-link="whatsapp" target="_blank" rel="noopener">Open WhatsApp group</a>
+              <a class="btn btn-sm" style="background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.25);" href="#">Share this post</a>
+            </div>
+          </footer>
+        </article>
+
+        <!-- Older news placeholder -->
+        <div style="margin-top: var(--s-24); display: flex; align-items:center; justify-content: center; padding: var(--s-32); border: 1px dashed var(--border); border-radius: var(--r-card); background: var(--bg-cream); color: var(--muted); font-family: var(--font-display); font-size: var(--fs-13); letter-spacing: 0.04em; text-transform: uppercase;">
+          That's all the news for now. Class wins, schedule changes, and announcements will land here.
+        </div>
+      </section>
+
+      <!-- ====================================================== -->
+      <!-- RESOURCES PANEL                                        -->
+      <!-- ====================================================== -->
+      <section class="panel" data-panel="resources" role="tabpanel" aria-label="Resources">
+        <div class="res-grid">
+          <a class="res-card subject-cvs" href="#">
+            <span class="res-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2z"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="14" y2="12"/></svg></span>
+            <div><h4>First Aid 2025 (open mirror)</h4><p>Searchable, page-aligned to the class deck. Updated weekly.</p></div>
+          </a>
+          <a class="res-card subject-resp" href="#">
+            <span class="res-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg></span>
+            <div><h4>UWorld vignette plan</h4><p>Daily question targets mapped to each day's session.</p></div>
+          </a>
+          <a class="res-card subject-path" href="#">
+            <span class="res-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+            <div><h4>Allan's mnemonic packs</h4><p>Hand-written, photo-scanned. The ones the cohort actually uses.</p></div>
+          </a>
+          <a class="res-card subject-epi" href="#">
+            <span class="res-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="20" x2="21" y2="20"/><rect x="6" y="12" width="3" height="8" rx="1"/><rect x="11" y="8" width="3" height="12" rx="1"/><rect x="16" y="4" width="3" height="16" rx="1"/></svg></span>
+            <div><h4>Biostats one-pager</h4><p>The cheat sheet that took 3 cohorts to refine. Print it.</p></div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ====================================================== -->
+      <!-- OFFICE HOURS PANEL                                     -->
+      <!-- ====================================================== -->
+      <section class="panel" data-panel="office" role="tabpanel" aria-label="Office hours">
+        <div class="office-card">
+          <div class="office-info">
+            <h3>Office hours with Allan</h3>
+            <p>Book a 1:1 for anything not solved in WhatsApp. Pacing trouble, application questions, panic about a chapter. Show up with one specific thing.</p>
+            <a class="btn btn-primary" data-link="calendly" target="_blank" rel="noopener">Open Calendly</a>
+            <ul class="office-times">
+              <li><strong>Tue &amp; Thu</strong>9:00 – 10:00 PM EAT</li>
+              <li><strong>Sat</strong>2:00 – 4:00 PM EAT</li>
+              <li><strong>Match prep</strong>by appointment</li>
+            </ul>
+          </div>
+          <div class="office-embed">
+            calendly.com/allanbakesiga/usmle-office-hours<br/>(embed renders here on live site)
+          </div>
+        </div>
+      </section>
+      </div>
+
+      <!-- ====================================================== -->
+      <!-- SIDE RAIL                                              -->
+      <!-- ====================================================== -->
+      <aside class="side-rail" aria-label="Cohort sidebar">
+        <div class="rail-card">
+          <h4>Cohort progress</h4>
+          <div class="progress-grid">
+            <div class="progress-pie">
+              <div class="pie subject-cvs"  data-pie="cvs"  style="--pct: 30;"><span class="pie-val">0/10</span></div>
+              <div class="lab">CVS<small>10 days</small></div>
+            </div>
+            <div class="progress-pie">
+              <div class="pie subject-resp" data-pie="resp" style="--pct: 0;"><span class="pie-val">0/8</span></div>
+              <div class="lab">Resp<small>8 days</small></div>
+            </div>
+            <div class="progress-pie">
+              <div class="pie subject-epi"  data-pie="epi"  style="--pct: 0;"><span class="pie-val">0/4</span></div>
+              <div class="lab">Epi<small>4 days</small></div>
+            </div>
+            <div class="progress-pie">
+              <div class="pie subject-path" data-pie="path" style="--pct: 0;"><span class="pie-val">0/8</span></div>
+              <div class="lab">Path<small>8 days</small></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rail-card">
+          <h4>Instructor</h4>
+          <div class="allan-presence" data-allan-presence>
+            <div class="avatar"><img src="images/allan-headshot.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" /></div>
+            <div class="info">
+              <strong>Allan Bakesiga</strong>
+              <small><span class="status-dot"></span><span data-presence-text>Offline · next at 5:00 AM EAT</span></small>
+            </div>
+          </div>
+        </div>
+
+        <div class="rail-card">
+          <h4>Next 7 days</h4>
+          <div class="mini-cal" data-mini-cal></div>
+          <p style="margin-top: var(--s-12); font-size: var(--fs-12); color: var(--muted); line-height: 1.4;">
+            Mon &mdash; Sun · 5:00 AM EAT
+          </p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/tweaks.js"></script>
 </body>
 </html>
