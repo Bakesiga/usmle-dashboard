@@ -22,7 +22,7 @@
   // -- state (rewritten by host between markers) --
   const DEFAULTS = /*EDITMODE-BEGIN*/{
     "theme": "light",
-    "simState": "live",
+    "simState": "now",
     "showCountdownStrip": true,
     "heroPhotoSize": 240
   }/*EDITMODE-END*/;
