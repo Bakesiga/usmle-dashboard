@@ -41,14 +41,14 @@
       </div>
 
       <div class="user-chip" tabindex="0" aria-haspopup="menu">
-        <span class="user-avatar">RA</span>
-        <span>Rosemary</span>
+        <span class="user-avatar" data-user-avatar>–</span>
+        <span data-user-name>Loading…</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         <nav class="user-menu" role="menu">
           <a href="#" role="menuitem">Account &amp; profile</a>
           <a href="#" role="menuitem">Notification settings</a>
           <button type="button" role="menuitem" data-action="toggle-theme">Switch theme</button>
-          <a href="signin.html" role="menuitem">Sign out</a>
+          <button type="button" role="menuitem" data-action="sign-out">Sign out</button>
         </nav>
       </div>
     </div>
@@ -412,6 +412,52 @@
     </div>
   </div>
 
+  <!-- Auth: must load BEFORE dashboard.js so the session is checked
+       and the user-chip is populated before other code runs. -->
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    (function () {
+      var session = USMLE_AUTH.requireSession();
+      if (!session) return; // requireSession already redirected
+      function initials(name) {
+        if (!name) return "?";
+        var parts = String(name).trim().split(/\s+/);
+        var a = parts[0] ? parts[0][0] : "";
+        var b = parts.length > 1 ? parts[parts.length - 1][0] : "";
+        return (a + b).toUpperCase();
+      }
+      function paint() {
+        var nameEl = document.querySelector("[data-user-name]");
+        var avatarEl = document.querySelector("[data-user-avatar]");
+        var firstName = (session.name || session.email).split(/\s+/)[0];
+        if (nameEl) nameEl.textContent = firstName;
+        if (avatarEl) {
+          if (session.picture) {
+            avatarEl.textContent = "";
+            avatarEl.style.backgroundImage = "url(" + session.picture + ")";
+            avatarEl.style.backgroundSize = "cover";
+            avatarEl.style.backgroundPosition = "center";
+          } else {
+            avatarEl.textContent = initials(session.name || session.email);
+          }
+        }
+      }
+      function bindSignOut() {
+        var btn = document.querySelector('[data-action="sign-out"]');
+        if (btn) btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          USMLE_AUTH.signOut();
+        });
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { paint(); bindSignOut(); });
+      } else {
+        paint();
+        bindSignOut();
+      }
+    })();
+  </script>
   <script src="js/data.js"></script>
   <script src="js/dashboard.js"></script>
   <script src="js/tweaks.js"></script>

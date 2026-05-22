@@ -88,7 +88,7 @@ const USMLE_AUTH = (() => {
 
   function requireSession() {
     const s = getSession();
-    if (!s) { location.replace("index.html"); return null; }
+    if (!s) { location.replace("signin.html"); return null; }
     return s;
   }
 
