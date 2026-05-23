@@ -47,7 +47,15 @@
   }
 
   // ---------------- Find today's session ----------------
+  // window.DASH_SELECTED_IDX, when set, overrides the auto-pick so prev/next
+  // adjacent cards can navigate the Today panel without leaving the tab.
   function pickToday(now) {
+    if (Number.isInteger(window.DASH_SELECTED_IDX)) {
+      const i = window.DASH_SELECTED_IDX;
+      if (i >= 0 && i < window.SESSIONS.length) {
+        return { session: window.SESSIONS[i], idx: i, exact: ymd(now) === window.SESSIONS[i].date };
+      }
+    }
     const today = ymd(now);
     const exact = window.SESSIONS.find(s => s.date === today);
     if (exact) return { session: exact, idx: window.SESSIONS.indexOf(exact), exact: true };
@@ -122,25 +130,55 @@
     // Course outline / FA read-ahead (one block per session that has one)
     renderOutline(root, s);
 
-    // Adjacent cards
+    // Adjacent cards — clickable to navigate the Today panel without leaving the tab
     const prev = window.SESSIONS[pick.idx - 1];
     const next = window.SESSIONS[pick.idx + 1];
     const prevEl = root.querySelector('[data-prev-card]');
     const nextEl = root.querySelector('[data-next-card]');
+    // helper: label is "Previous · Day N" / "Next · Day N" except when the
+    // user is on the auto-pick (then yesterday/tomorrow read naturally).
+    function adjLabel(side, day) {
+      if (pick.exact && side === 'prev') return 'Yesterday · Day ' + day;
+      if (pick.exact && side === 'next') return 'Tomorrow · Day '  + day;
+      return (side === 'prev' ? 'Previous · Day ' : 'Next · Day ') + day;
+    }
     if (prev) {
       prevEl.style.display = '';
       prevEl.className = 'adj-card subject-' + prev.subject;
       prevEl.dataset.dir = 'prev';
+      prevEl.dataset.sessionIdx = String(pick.idx - 1);
+      prevEl.setAttribute('role', 'button');
+      prevEl.setAttribute('href', '#today');
       prevEl.querySelector('[data-prev-title]').textContent = prev.title;
-      prevEl.querySelector('[data-prev-label]').textContent = 'Yesterday · Day ' + prev.day;
+      prevEl.querySelector('[data-prev-label]').textContent = adjLabel('prev', prev.day);
     } else { prevEl.style.display = 'none'; }
     if (next) {
       nextEl.style.display = '';
       nextEl.className = 'adj-card subject-' + next.subject;
       nextEl.dataset.dir = 'next';
+      nextEl.dataset.sessionIdx = String(pick.idx + 1);
+      nextEl.setAttribute('role', 'button');
+      nextEl.setAttribute('href', '#today');
       nextEl.querySelector('[data-next-title]').textContent = next.title;
-      nextEl.querySelector('[data-next-label]').textContent = 'Tomorrow · Day ' + next.day;
+      nextEl.querySelector('[data-next-label]').textContent = adjLabel('next', next.day);
     } else { nextEl.style.display = 'none'; }
+
+    // Add a small "Back to today" link if the user is viewing a non-today session
+    let backLink = root.querySelector('[data-back-to-today]');
+    if (!pick.exact && Number.isInteger(window.DASH_SELECTED_IDX)) {
+      if (!backLink) {
+        backLink = document.createElement('a');
+        backLink.setAttribute('data-back-to-today', '');
+        backLink.href = '#today';
+        backLink.className = 'back-to-today';
+        backLink.textContent = '← Back to today';
+        const card = root.querySelector('.today-card');
+        if (card && card.parentNode) card.parentNode.insertBefore(backLink, card);
+      }
+      backLink.hidden = false;
+    } else if (backLink) {
+      backLink.hidden = true;
+    }
 
     // Top bar chip — turn green when soon/live
     const chip = document.querySelector('.chip-zoom');
@@ -375,6 +413,34 @@
     document.querySelectorAll('[data-link="calendly"]').forEach(a => a.href = L.calendly);
   }
 
+  // ---------------- Prev/Next session navigation on the Today panel ----------------
+  // Click delegation so we don't have to rebind after every renderToday.
+  function bindAdjacentNav() {
+    const root = document.querySelector('[data-panel="today"]');
+    if (!root) return;
+    root.addEventListener('click', e => {
+      const card = e.target.closest('[data-prev-card], [data-next-card]');
+      const back = e.target.closest('[data-back-to-today]');
+      if (back) {
+        e.preventDefault();
+        window.DASH_SELECTED_IDX = null;
+        renderToday();
+        root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+      if (!card) return;
+      const idxStr = card.dataset.sessionIdx;
+      if (!idxStr) return;
+      e.preventDefault();
+      const idx = parseInt(idxStr, 10);
+      if (Number.isInteger(idx) && idx >= 0 && idx < window.SESSIONS.length) {
+        window.DASH_SELECTED_IDX = idx;
+        renderToday();
+        root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
   // Expose for tweaks panel re-rendering
   window.__dashRerender = function () {
     renderToday();
@@ -387,6 +453,7 @@
     bindTabs();
     bindFilters();
     bindUserMenu();
+    bindAdjacentNav();
     renderToday();
     renderSessions();
     renderCalendar();
