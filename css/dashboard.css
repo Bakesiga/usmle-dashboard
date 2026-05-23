@@ -884,3 +884,139 @@
   from { opacity: 0; transform: translateY(4px); }
   to   { opacity: 1; transform: none; }
 }
+
+/* ============================================================
+   Course outline / FA read-ahead card
+   Rendered per-session, hidden when the session has no outline.
+   ============================================================ */
+.outline-card {
+  margin-top: var(--s-20);
+  padding: var(--s-20) var(--s-20) var(--s-16);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  border-left: 4px solid var(--cvs);
+  box-shadow: 0 1px 0 rgba(12, 42, 61, 0.04),
+              0 8px 20px -12px rgba(12, 42, 61, 0.10);
+}
+.outline-card.subject-cvs  { border-left-color: var(--cvs); }
+.outline-card.subject-resp { border-left-color: var(--resp); }
+.outline-card.subject-path { border-left-color: var(--path); }
+.outline-card.subject-epi  { border-left-color: var(--amber); }
+
+.outline-head { margin-bottom: var(--s-16); }
+.outline-eyebrow {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: var(--fs-12);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold-deep);
+  background: var(--gold-soft, #FFF4D6);
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  margin-bottom: var(--s-8);
+}
+.outline-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-20);
+  font-weight: 700;
+  margin: 0 0 var(--s-6);
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.outline-intro {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: var(--fs-14);
+  line-height: 1.5;
+}
+
+.outline-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--s-12) 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+  counter-reset: outline;
+}
+.outline-item {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: start;
+  gap: var(--s-12);
+  padding: var(--s-10) var(--s-12);
+  background: var(--bg-cream, #FFF8EC);
+  border-radius: var(--r-soft);
+  border: 1px solid var(--border);
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+}
+.outline-item:hover {
+  border-color: var(--cvs);
+  background: var(--cvs-soft);
+}
+.outline-num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-13);
+  font-weight: 700;
+  color: var(--cvs-deep);
+  background: #ffffff;
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  letter-spacing: 0;
+}
+.outline-card.subject-resp .outline-num { color: var(--resp-deep); }
+.outline-card.subject-path .outline-num { color: var(--path-deep); }
+.outline-card.subject-epi  .outline-num { color: var(--amber-deep); }
+
+.outline-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.outline-topic {
+  font-size: var(--fs-14);
+  color: var(--ink);
+  line-height: 1.42;
+  font-weight: 500;
+}
+.outline-section {
+  font-family: var(--font-display);
+  font-size: var(--fs-12);
+  color: var(--ink-2);
+  letter-spacing: 0.02em;
+  font-weight: 600;
+}
+.outline-pages {
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+  color: var(--ink);
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 10px;
+  white-space: nowrap;
+  align-self: center;
+}
+.outline-pages-blank {
+  color: var(--muted);
+  background: transparent;
+  border-style: dashed;
+}
+
+.outline-foot {
+  margin-top: var(--s-12);
+  padding-top: var(--s-12);
+  border-top: 1px dashed var(--border);
+}
+.outline-foot small {
+  font-size: var(--fs-12);
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.4;
+}

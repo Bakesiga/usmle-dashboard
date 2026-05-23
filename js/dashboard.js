@@ -119,6 +119,9 @@
     // Dynamic resource tiles (one per item in session.resources)
     renderResourceTiles(root, s);
 
+    // Course outline / FA read-ahead (one block per session that has one)
+    renderOutline(root, s);
+
     // Adjacent cards
     const prev = window.SESSIONS[pick.idx - 1];
     const next = window.SESSIONS[pick.idx + 1];
@@ -175,6 +178,44 @@
           '<small>' + (res.meta || 'Open in Drive') + '</small>' +
         '</span>';
       actions.appendChild(a);
+    });
+  }
+
+  // ---------------- Course outline / FA read-ahead ----------------
+  function renderOutline(root, session) {
+    const card = root.querySelector('[data-outline-card]');
+    if (!card) return;
+    const outline = session.outline;
+    if (!outline || !Array.isArray(outline.items) || outline.items.length === 0) {
+      card.hidden = true;
+      return;
+    }
+    card.hidden = false;
+    // Use the session's subject for the accent
+    card.className = 'outline-card subject-' + session.subject;
+    const eyebrow = card.querySelector('[data-outline-eyebrow]');
+    if (eyebrow) {
+      eyebrow.textContent = 'Read ahead · ' + (outline.edition || 'First Aid');
+    }
+    const intro = card.querySelector('[data-outline-intro]');
+    if (intro) intro.textContent = outline.intro || '';
+    const list = card.querySelector('[data-outline-list]');
+    if (!list) return;
+    list.innerHTML = '';
+    outline.items.forEach((it, idx) => {
+      const li = document.createElement('li');
+      li.className = 'outline-item';
+      const pagesHtml = it.pages
+        ? '<span class="outline-pages">' + it.pages + '</span>'
+        : '<span class="outline-pages outline-pages-blank">pp. — </span>';
+      li.innerHTML =
+        '<span class="outline-num">' + String(idx + 1).padStart(2, '0') + '</span>' +
+        '<span class="outline-body">' +
+          '<span class="outline-topic">' + it.topic + '</span>' +
+          '<span class="outline-section">' + (it.section || '') + '</span>' +
+        '</span>' +
+        pagesHtml;
+      list.appendChild(li);
     });
   }
 

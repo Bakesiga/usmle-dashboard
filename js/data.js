@@ -14,7 +14,23 @@ window.SESSIONS = [
       { kind: "flashcards", label: "Flashcards",
         url: "https://drive.google.com/file/d/1AqtifaPbieNdMnBHbP_nsqu-NlEkBv_F/view",
         meta: "PDF · 65 cards" }
-    ]
+    ],
+    outline: {
+      intro: "Read ahead in First Aid 2025 (Cardiovascular chapter) so class lands faster. Cover the sections below; the Q-bank for Day 1 only asks about material in these areas.",
+      edition: "First Aid 2025 · Cardiovascular chapter",
+      items: [
+        { topic: "Heart embryology — tube formation, looping, atrial & ventricular septation, aorticopulmonary septum (neural crest)", section: "CVS · Embryology", pages: "" },
+        { topic: "Pharyngeal arch arteries + their cranial-nerve pairings (1st, 2nd, 3rd, 4th, 6th)", section: "Anatomy · Pharyngeal arches & pouches", pages: "" },
+        { topic: "Fetal circulation, three in-utero shunts, and the neonatal flip (↑ SVR / ↓ PVR; PGE1 vs indomethacin)", section: "CVS · Embryology (fetal circulation)", pages: "" },
+        { topic: "Cardiac chambers, surface anatomy, X-ray borders, silhouette sign, LA appendage stasis", section: "CVS · Anatomy", pages: "" },
+        { topic: "Coronary arteries, coronary dominance, AV-nodal artery rule, posteromedial papillary muscle, coronary sinus & biventricular pacing", section: "CVS · Anatomy (coronary blood supply)", pages: "" },
+        { topic: "Conduction system: SA node, AV node (triangle of Koch), His-Purkinje, conduction speed order", section: "CVS · Anatomy + Physiology (conduction)", pages: "" },
+        { topic: "Pericardium, effusion, tamponade (water-bottle silhouette, electrical alternans, Beck's triad)", section: "CVS · Pathology (pericardial disease)", pages: "" },
+        { topic: "Aorta in the adult: arch branches, Stanford A vs B dissection, blunt aortic injury at the isthmus, ICA → ophthalmic → CRA atheroemboli, subclavian steal", section: "CVS · Pathology + Anatomy (great vessels)", pages: "" },
+        { topic: "Abdominal & pelvic vascular anatomy: IVC formation at L4–L5, renal-vein asymmetry, gonadal drainage, nutcracker syndrome, femoral triangle access", section: "Renal · Anatomy (renal vasculature) + Reproductive · Anatomy (gonadal venous drainage)", pages: "" },
+        { topic: "Upper-body venous anatomy: SVC formation, brachiocephalic vs SVC obstruction patterns; CABG conduit landmarks (LIMA, great saphenous vein)", section: "CVS · Anatomy + Surgery cross-reference", pages: "" }
+      ]
+    }
   },
   { day: 2,  date: "2026-06-02", subject: "cvs",  title: "The cardiac cycle & PV loops",       sub: "Wiggers diagram, pressure-volume relationships" },
   { day: 3,  date: "2026-06-03", subject: "cvs",  title: "Cardiac output & Frank-Starling",    sub: "Preload, afterload, contractility, SV" },
