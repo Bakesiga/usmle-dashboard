@@ -116,6 +116,9 @@
     const joinTile = root.querySelector('.action-tile.primary');
     joinTile.classList.toggle('live', status.state === 'live');
 
+    // Dynamic resource tiles (one per item in session.resources)
+    renderResourceTiles(root, s);
+
     // Adjacent cards
     const prev = window.SESSIONS[pick.idx - 1];
     const next = window.SESSIONS[pick.idx + 1];
@@ -142,6 +145,37 @@
 
     // Side rail presence
     renderSideRail(now, pick);
+  }
+
+  // ---------------- Resource tiles (driven by session.resources) ----------------
+  // Icons per resource kind — kept inline so we don't ship an extra SVG file
+  const RESOURCE_ICONS = {
+    highYield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>',
+    flashcards: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="13" height="14" rx="2"/><path d="M8 9h13v10a2 2 0 0 1-2 2H8a2 2 0 0 1 0-4z"/></svg>',
+    slides:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+    notes:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><line x1="8" y1="9"  x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>',
+    link:      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.5-1.5"/></svg>'
+  };
+
+  function renderResourceTiles(root, session) {
+    const actions = root.querySelector('[data-today-actions]');
+    if (!actions) return;
+    // Remove any tiles we previously appended
+    actions.querySelectorAll('.action-tile.resource-tile').forEach(el => el.remove());
+    const list = (session.resources || []);
+    list.forEach(res => {
+      const a = document.createElement('a');
+      a.className = 'action-tile resource-tile';
+      a.href = res.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.innerHTML =
+        '<span class="action-icon">' + (RESOURCE_ICONS[res.kind] || RESOURCE_ICONS.link) + '</span>' +
+        '<span class="action-text">' + res.label +
+          '<small>' + (res.meta || 'Open in Drive') + '</small>' +
+        '</span>';
+      actions.appendChild(a);
+    });
   }
 
   // ---------------- Side rail ----------------

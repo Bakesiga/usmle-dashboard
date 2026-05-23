@@ -6,7 +6,16 @@
 
 window.SESSIONS = [
   // ---- Cardiovascular (10) — June 1-10 ----
-  { day: 1,  date: "2026-06-01", subject: "cvs",  title: "Cardiac anatomy & embryology",      sub: "Heart tubes, septation, fetal circulation" },
+  { day: 1,  date: "2026-06-01", subject: "cvs",  title: "Cardiac anatomy & embryology",      sub: "Heart tubes, septation, fetal circulation",
+    resources: [
+      { kind: "highYield", label: "High-yield 1-pager",
+        url: "https://drive.google.com/file/d/1htaSuaclSoxn-TtvTZ9DB61svmESBZSS/view",
+        meta: "PDF · 2 pages" },
+      { kind: "flashcards", label: "Flashcards",
+        url: "https://drive.google.com/file/d/1AqtifaPbieNdMnBHbP_nsqu-NlEkBv_F/view",
+        meta: "PDF · 65 cards" }
+    ]
+  },
   { day: 2,  date: "2026-06-02", subject: "cvs",  title: "The cardiac cycle & PV loops",       sub: "Wiggers diagram, pressure-volume relationships" },
   { day: 3,  date: "2026-06-03", subject: "cvs",  title: "Cardiac output & Frank-Starling",    sub: "Preload, afterload, contractility, SV" },
   { day: 4,  date: "2026-06-04", subject: "cvs",  title: "Vascular biology & hemodynamics",    sub: "Poiseuille, capillary exchange, lymphatics" },
