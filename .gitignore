@@ -10,3 +10,7 @@ outputs/flyers/USMLE_*.pdf
 outputs/flyers/USMLE_*.jpg
 outputs/flyers/USMLE_*.png
 outputs/flyers/node_modules
+
+# Allan-only teaching-prep + teaching-flow notes (NEVER deploy these to students)
+outputs/study-notes/*-teaching-prep.md
+outputs/study-notes/*-teaching-flow.md

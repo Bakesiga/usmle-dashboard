@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CVS Day 4 — High-Yield 1-Pager</title>
+<style>
+  :root {
+    --ink: #0C2A3D; --ink-2: #345671; --muted: #5B7A95;
+    --bg: #FFFFFF; --bg-cream: #FFF8EC; --border: #D6E8F5;
+    --gold: #E5A823; --gold-deep: #B8851C; --gold-soft: #FFF4D6;
+    --cvs: #0284C7; --cvs-soft: #E0F2FE; --cvs-deep: #075985;
+    --resp: #059669; --resp-soft: #D1FAE5; --resp-deep: #065F46;
+    --path: #7C3AED; --path-soft: #EDE9FE; --path-deep: #5B21B6;
+    --amber: #D97706; --amber-soft: #FEF3C7; --amber-deep: #B45309;
+  }
+  @page { size: A4; margin: 12mm 10mm; }
+  * { box-sizing: border-box; } html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif; color: var(--ink); background: var(--bg); font-size: 9pt; line-height: 1.3; }
+  .ribbon { background: var(--ink); color: #FFF; padding: 6px 12px; border-radius: 6px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .ribbon h1 { margin: 0; font-size: 14pt; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; }
+  .ribbon .meta { font-size: 8.5pt; color: #BFE3F7; letter-spacing: 0.06em; }
+  .byline { background: linear-gradient(90deg, var(--gold) 0%, var(--gold-deep) 100%); color: var(--ink); padding: 4px 12px; border-radius: 5px; font-size: 8.5pt; letter-spacing: 0.06em; text-align: center; margin: -4px 0 8px; font-weight: 700; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; }
+  .byline .author { font-weight: 800; }
+  .byline .home { font-weight: 500; font-style: italic; text-transform: none; letter-spacing: 0.02em; color: var(--ink); }
+  .cohort-line { font-size: 8.5pt; color: var(--ink-2); margin: 0 0 8px; text-align: center; font-style: italic; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .card { border-radius: 6px; padding: 6px 8px 7px; page-break-inside: avoid; break-inside: avoid; }
+  .card h2 { margin: 0 0 4px; font-size: 9pt; letter-spacing: 0.06em; text-transform: uppercase; color: #FFF; padding: 3px 7px; margin: -6px -8px 5px; border-top-left-radius: 6px; border-top-right-radius: 6px; display: flex; justify-content: space-between; align-items: center; }
+  .card h2 .tag { font-size: 7pt; background: rgba(255,255,255,0.22); padding: 1px 6px; border-radius: 999px; letter-spacing: 0.06em; }
+  .card ul { margin: 0; padding-left: 14px; } .card li { margin-bottom: 2px; } .card li::marker { color: var(--ink-2); }
+  .card.walls { background: var(--cvs-soft); } .card.walls h2 { background: var(--cvs-deep); }
+  .card.htn { background: var(--gold-soft); } .card.htn h2 { background: var(--gold-deep); }
+  .card.ras { background: var(--amber-soft); } .card.ras h2 { background: var(--amber-deep); }
+  .card.aaa { background: var(--cvs-soft); } .card.aaa h2 { background: var(--cvs); }
+  .card.dissection { background: var(--path-soft); } .card.dissection h2 { background: var(--path-deep); }
+  .card.cmd { background: var(--resp-soft); } .card.cmd h2 { background: var(--resp-deep); }
+  .card.vasc { background: var(--path-soft); } .card.vasc h2 { background: var(--path); }
+  .card.pad { background: var(--amber-soft); } .card.pad h2 { background: var(--amber-deep); }
+  .card.venous { background: var(--resp-soft); } .card.venous h2 { background: var(--resp-deep); }
+  .card.coarct { background: var(--gold-soft); } .card.coarct h2 { background: var(--gold-deep); }
+  .card.span { grid-column: span 2; }
+  table.compact { border-collapse: collapse; width: 100%; margin-top: 3px; font-size: 8pt; }
+  table.compact th, table.compact td { border: 1px solid var(--ink-2); padding: 2px 4px; text-align: left; }
+  table.compact th { background: var(--ink); color: #FFF; font-weight: 700; }
+  table.compact tr:nth-child(even) { background: rgba(255,255,255,0.55); }
+  .traps { background: var(--ink); color: #FFF; border-radius: 6px; padding: 7px 10px; grid-column: span 2; page-break-inside: avoid; }
+  .traps h2 { margin: 0 0 4px; font-size: 10pt; color: var(--gold); letter-spacing: 0.06em; text-transform: uppercase; }
+  .traps ol { margin: 0; padding-left: 18px; columns: 2; column-gap: 14px; }
+  .traps li { margin-bottom: 2px; } .traps li::marker { color: var(--gold); font-weight: 700; }
+  .footer-stamp { text-align: center; font-size: 7.5pt; color: var(--muted); font-style: italic; margin-top: 8px; }
+  strong { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="ribbon">
+  <h1>CVS · Day 4 · HTN &amp; Vascular Pathology</h1>
+  <div class="meta">USMLE Step 1 · June Cohort · FA pp. 302–308</div>
+</div>
+<div class="byline">
+  <span class="author">Prepared by Allan Bakesiga · USMLE Step 1 Prep</span>
+  <span class="home">bakesiga.github.io/usmle-dashboard</span>
+</div>
+<p class="cohort-line">HTN, atherosclerosis, vasculitis &amp; aortic disease · Print and stick on your wall</p>
+
+<div class="grid">
+
+  <div class="card walls span">
+    <h2>Vascular wall pathology — 5 patterns <span class="tag">recognise on histology</span></h2>
+    <table class="compact">
+      <tr><th>Pattern</th><th>Cause</th><th>Histology</th></tr>
+      <tr><td><strong>Hyaline arteriolosclerosis</strong></td><td>Chronic HTN, DM</td><td>Homogeneous pink protein in intima + inner media of arterioles</td></tr>
+      <tr><td><strong>Hyperplastic arteriolosclerosis</strong></td><td>Malignant HTN</td><td>"Onion-skin" concentric thickening; often with fibrinoid necrosis</td></tr>
+      <tr><td><strong>Fibrinoid necrosis</strong></td><td>Malignant HTN, PAN, preeclampsia</td><td>Bright pink amorphous material in vessel wall; endothelial death</td></tr>
+      <tr><td><strong>Atherosclerosis</strong></td><td>Dyslipidemia, smoking, HTN, DM</td><td>Lipid-laden intimal plaque; foam cells; cholesterol clefts; fibrous cap</td></tr>
+      <tr><td><strong>Monckeberg</strong></td><td>Aging</td><td>Medial calcification in concentric rings; lumen NOT narrowed</td></tr>
+    </table>
+  </div>
+
+  <div class="card htn">
+    <h2>Hypertension <span class="tag">primary vs secondary</span></h2>
+    <ul>
+      <li><strong>Primary (~90%)</strong>: no identifiable cause; age, obesity, salt, family history.</li>
+      <li><strong>Secondary (~10%)</strong>: search list when young / refractory / abrupt onset / disproportionate end-organ damage.</li>
+      <li>Renal parenchymal disease (CKD) — most common secondary.</li>
+      <li><strong>Renovascular (RAS)</strong>: atherosclerotic plaque at renal artery origin (older); FMD "string-of-beads" (younger women).</li>
+      <li>1° aldosteronism (Conn): HTN + ↓ K + ↓ renin + ↑ aldo.</li>
+      <li>Pheochromocytoma: paroxysmal HTN + headache + sweating + palpitations.</li>
+      <li>Cushing, hyperthyroid, coarctation, OSA, NSAIDs/OCP.</li>
+    </ul>
+  </div>
+
+  <div class="card ras">
+    <h2>RAS clinical anchors <span class="tag">renovascular HTN</span></h2>
+    <ul>
+      <li>Refractory HTN, flash pulmonary edema, abdominal bruit.</li>
+      <li><strong>AKI after starting ACE-i</strong> (efferent constriction was holding GFR up).</li>
+      <li>Atrophic stenotic kidney (cortical thinning, tubular atrophy, crowded glomeruli).</li>
+      <li><strong>Contralateral kidney</strong> develops <strong>hyaline arteriolosclerosis</strong> from systemic HTN exposure.</li>
+      <li>Imaging: Doppler US; CTA/MRA confirm.</li>
+    </ul>
+  </div>
+
+  <div class="card htn">
+    <h2>HTN emergency <span class="tag">end-organ damage</span></h2>
+    <ul>
+      <li>BP &gt; 180/120 + end-organ damage (encephalopathy, ICH, ACS, pulm edema, AKI, MAHA, papilledema).</li>
+      <li><strong>Malignant nephrosclerosis</strong>: fibrinoid necrosis + onion-skin + MAHA (schistocytes).</li>
+      <li>Lower MAP <strong>≤ 20–25%</strong> in first hour — autoregulation right-shifted; rapid drop = ATN.</li>
+      <li>Flat PRA on ARB+thiazide = nonadherence (renin should surge).</li>
+      <li>Concentric LVH from chronic HTN: ↑ mass, small cavity, ↑ angiotensin II local trophic signal, β-MHC upregulation.</li>
+      <li>Endpoint: HFpEF → AFib → flash pulmonary edema.</li>
+    </ul>
+  </div>
+
+  <div class="card aaa">
+    <h2>AAA <span class="tag">infrarenal · MMP-driven</span></h2>
+    <ul>
+      <li>Focal dilation &gt; 50% normal (or &gt; 3 cm abdominal aorta).</li>
+      <li>Infrarenal; tenuous vasa vasorum + chronic inflammation → MMPs degrade elastin/collagen.</li>
+      <li><strong>Risks</strong>: age &gt; 60, male, smoking (strongest), HTN, family hx. <strong>DM is mildly protective</strong>.</li>
+      <li>Screening: one-time abdominal US for men 65–75 ever-smokers.</li>
+      <li>Repair: &gt; 5.5 cm, expanding &gt; 0.5 cm/6 mo, symptomatic, ruptured.</li>
+      <li>Ruptured AAA: sudden abdo/back pain + syncope + hypotension + pulsatile mass.</li>
+      <li>Posterior rupture → Grey-Turner (flank) or Cullen (periumbilical) ecchymosis.</li>
+    </ul>
+  </div>
+
+  <div class="card cmd">
+    <h2>Thoracic aortic aneurysm <span class="tag">cystic medial degeneration</span></h2>
+    <ul>
+      <li>Ascending aorta predominantly.</li>
+      <li>CMD histology: <strong>elastic lamellae fragmentation + mucopolysaccharide pools</strong> in media.</li>
+      <li>Risks: chronic HTN (aging CMD); Marfan, Loeys-Dietz, EDS vascular; bicuspid AV; syphilitic aortitis.</li>
+      <li>Compression triad: <strong>cough + dysphagia + hoarseness</strong> (trachea, esophagus, recurrent laryngeal nerve).</li>
+      <li>CXR: wide mediastinum, prominent knob.</li>
+      <li><strong>Lathyrism / BAPN</strong> inhibits lysyl oxidase → defective collagen/elastin cross-links → CMD.</li>
+    </ul>
+  </div>
+
+  <div class="card dissection span">
+    <h2>Aortic dissection <span class="tag">intimal tear + false lumen</span></h2>
+    <ul>
+      <li>Intimal tear → blood enters media → false lumen propagates.</li>
+      <li><strong>Strongest risk: chronic HTN</strong>; CMD substrate (Marfan etc.).</li>
+      <li>Sudden tearing chest/back pain; <strong>BP discrepancy &gt; 20 mmHg between arms</strong>; widened mediastinum on CXR.</li>
+      <li><strong>Stanford A</strong> (ascending) → surgical emergency. <strong>Stanford B</strong> (distal to L subclavian) → medical (BP control).</li>
+      <li>Complications cascade: <strong>tamponade</strong> (pericardial rupture); <strong>acute AR</strong> (root extension); MI (coronary ostium); stroke (carotid); limb/renal/mesenteric ischemia.</li>
+      <li><strong>Treatment ordering: β-blocker (esmolol) FIRST</strong> to reduce dP/dt → then add nitroprusside. Never start vasodilator alone.</li>
+    </ul>
+  </div>
+
+  <div class="card vasc span">
+    <h2>Vasculitis by vessel size <span class="tag">memorise the table</span></h2>
+    <table class="compact">
+      <tr><th>Size</th><th>Disease</th><th>Anchor</th></tr>
+      <tr><td>Large</td><td><strong>Giant cell (temporal) arteritis</strong></td><td>&gt; 50yo, HA + jaw claudication + vision loss; ESR &gt; 100; granulomatous</td></tr>
+      <tr><td>Large</td><td><strong>Takayasu</strong></td><td>&lt; 40 Asian female; BP discrepancy; pulseless; granulomatous</td></tr>
+      <tr><td>Medium</td><td><strong>PAN</strong></td><td>HBV link; <strong>ANCA−, spares lungs</strong>; fibrinoid necrosis + microaneurysms; mononeuritis multiplex</td></tr>
+      <tr><td>Medium</td><td><strong>Kawasaki</strong></td><td>&lt; 5yo; CRASH+burn; coronary aneurysms; IVIG + aspirin</td></tr>
+      <tr><td>Med/sm</td><td><strong>Buerger</strong></td><td>Young male heavy smoker; digital ulcers; <strong>vein + nerve involvement</strong>; smoking cessation only</td></tr>
+      <tr><td>Small</td><td><strong>GPA (Wegener)</strong></td><td><strong>c-ANCA</strong>; upper + lower airway + renal; granulomas; RPGN</td></tr>
+      <tr><td>Small</td><td><strong>MPA</strong></td><td>p-ANCA; renal + lung; <strong>no granulomas</strong>, no airway</td></tr>
+      <tr><td>Small</td><td><strong>EGPA (Churg-Strauss)</strong></td><td>p-ANCA; <strong>asthma + eosinophilia</strong>; granulomas; neuropathy</td></tr>
+      <tr><td>Small</td><td><strong>IgA vasculitis (HSP)</strong></td><td>Kids; palpable purpura legs + abdominal pain + IgA nephropathy</td></tr>
+    </table>
+  </div>
+
+  <div class="card pad">
+    <h2>Atherosclerosis + PAD <span class="tag">intimal lipid plaques</span></h2>
+    <ul>
+      <li>Atherogenesis: endothelial injury → LDL → oxidation → foam cells (macrophages) → fatty streak → SMC migration (PDGF from platelets) → fibrous plaque → complicated.</li>
+      <li>Burden: abdominal aorta &gt; coronaries &gt; popliteal &gt; carotid &gt; circle of Willis.</li>
+      <li><strong>Internal mammary arteries protected</strong> → CABG conduit of choice.</li>
+      <li><strong>Leriche syndrome</strong>: aortoiliac occlusion → bilateral claudication + impotence + diminished femoral pulses.</li>
+      <li>Acute limb ischemia <strong>6 Ps</strong>: Pain, Pallor, Poikilothermia, Paresthesia, Paralysis, Pulselessness.</li>
+      <li>Embolic sources: AFib (LA appendage), LV thrombus, IE vegetations, atrial myxoma (gelatinous mass; LA fossa ovalis area).</li>
+      <li>Reperfusion injury: ROS + mito permeability + neutrophils + complement → CK surge.</li>
+    </ul>
+  </div>
+
+  <div class="card venous">
+    <h2>Venous disease <span class="tag">valves + hemosiderin</span></h2>
+    <ul>
+      <li><strong>Varicose veins</strong>: incompetent valves → reflux → dilation. Risks: standing job, pregnancy, obesity.</li>
+      <li><strong>Chronic venous insufficiency</strong>: stasis dermatitis, lipodermatosclerosis ("inverted champagne bottle"), hemosiderin pigmentation.</li>
+      <li><strong>Bronze-brown skin</strong> = hemosiderin from RBC extravasation across leaky capillaries.</li>
+      <li>Stasis ulcers at <strong>medial malleolus</strong> (arterial ulcers at lateral malleolus/toes).</li>
+    </ul>
+  </div>
+
+  <div class="card coarct">
+    <h2>Coarctation cross-ref <span class="tag">Day 10 preview</span></h2>
+    <ul>
+      <li>Narrowing near ligamentum arteriosum.</li>
+      <li>Upper-body HTN + brachial-femoral delay; rib notching on CXR.</li>
+      <li>Associations: <strong>Turner syndrome</strong>, bicuspid AV, <strong>berry aneurysm</strong> → SAH.</li>
+      <li>Neonate critical coarct: shock when ductus closes; PGE1 keeps it open.</li>
+    </ul>
+  </div>
+
+  <div class="traps">
+    <h2>Top 15 traps</h2>
+    <ol>
+      <li>Malignant HTN renal histology: fibrinoid necrosis + onion-skin + MAHA.</li>
+      <li>Lower BP gradually in HTN emergency — autoregulation right-shifted.</li>
+      <li>Flat PRA on ARB+thiazide = nonadherence.</li>
+      <li>Diabetes is mildly <strong>protective</strong> against AAA.</li>
+      <li>Internal mammary arteries are atherosclerosis-resistant → LIMA = CABG conduit.</li>
+      <li>Marfan: ectopia lentis <strong>upward</strong>; homocystinuria: <strong>downward</strong>.</li>
+      <li>Lathyrism / Menkes / EDS kyphoscoliotic = lysyl oxidase defect → CMD.</li>
+      <li>Dissection treatment: β-blocker FIRST, then vasodilator.</li>
+      <li>PAN is <strong>ANCA-negative</strong> + spares lungs.</li>
+      <li>Buerger involves veins + nerves; treatment = smoking cessation only.</li>
+      <li>c-ANCA → GPA (airway + granulomas + renal); p-ANCA → MPA or EGPA.</li>
+      <li>Carotid sinus → CN IX; aortic arch → CN X.</li>
+      <li>L gonadal → L renal → IVC; nutcracker syndrome at L renal.</li>
+      <li>Right adult varicocele = RCC invading IVC.</li>
+      <li>Subclavian steal: retrograde vertebral flow + interarm SBP &gt; 15 mmHg difference.</li>
+    </ol>
+  </div>
+
+</div>
+
+<p class="footer-stamp">© Allan Bakesiga · USMLE Step 1 Prep · Original wording. Single page — carry it and review before every Q-bank block.</p>
+
+</body>
+</html>

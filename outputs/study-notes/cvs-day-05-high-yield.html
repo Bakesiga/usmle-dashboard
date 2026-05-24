@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CVS Day 5 — High-Yield 1-Pager</title>
+<style>
+  :root {
+    --ink: #0C2A3D; --ink-2: #345671; --muted: #5B7A95;
+    --bg: #FFFFFF; --bg-cream: #FFF8EC; --border: #D6E8F5;
+    --gold: #E5A823; --gold-deep: #B8851C; --gold-soft: #FFF4D6;
+    --cvs: #0284C7; --cvs-soft: #E0F2FE; --cvs-deep: #075985;
+    --resp: #059669; --resp-soft: #D1FAE5; --resp-deep: #065F46;
+    --path: #7C3AED; --path-soft: #EDE9FE; --path-deep: #5B21B6;
+    --amber: #D97706; --amber-soft: #FEF3C7; --amber-deep: #B45309;
+  }
+  @page { size: A4; margin: 12mm 10mm; }
+  * { box-sizing: border-box; } html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif; color: var(--ink); background: var(--bg); font-size: 9pt; line-height: 1.3; }
+  .ribbon { background: var(--ink); color: #FFF; padding: 6px 12px; border-radius: 6px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .ribbon h1 { margin: 0; font-size: 14pt; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; }
+  .ribbon .meta { font-size: 8.5pt; color: #BFE3F7; letter-spacing: 0.06em; }
+  .byline { background: linear-gradient(90deg, var(--gold) 0%, var(--gold-deep) 100%); color: var(--ink); padding: 4px 12px; border-radius: 5px; font-size: 8.5pt; letter-spacing: 0.06em; text-align: center; margin: -4px 0 8px; font-weight: 700; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; }
+  .byline .author { font-weight: 800; }
+  .byline .home { font-weight: 500; font-style: italic; text-transform: none; letter-spacing: 0.02em; color: var(--ink); }
+  .cohort-line { font-size: 8.5pt; color: var(--ink-2); margin: 0 0 8px; text-align: center; font-style: italic; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .card { border-radius: 6px; padding: 6px 8px 7px; page-break-inside: avoid; break-inside: avoid; }
+  .card h2 { margin: 0 0 4px; font-size: 9pt; letter-spacing: 0.06em; text-transform: uppercase; color: #FFF; padding: 3px 7px; margin: -6px -8px 5px; border-top-left-radius: 6px; border-top-right-radius: 6px; display: flex; justify-content: space-between; align-items: center; }
+  .card h2 .tag { font-size: 7pt; background: rgba(255,255,255,0.22); padding: 1px 6px; border-radius: 999px; letter-spacing: 0.06em; }
+  .card ul { margin: 0; padding-left: 14px; } .card li { margin-bottom: 2px; } .card li::marker { color: var(--ink-2); }
+  .card.atherogen { background: var(--cvs-soft); } .card.atherogen h2 { background: var(--cvs-deep); }
+  .card.stable { background: var(--resp-soft); } .card.stable h2 { background: var(--resp-deep); }
+  .card.acs { background: var(--amber-soft); } .card.acs h2 { background: var(--amber-deep); }
+  .card.timing { background: var(--path-soft); } .card.timing h2 { background: var(--path-deep); }
+  .card.rv { background: var(--cvs-soft); } .card.rv h2 { background: var(--cvs); }
+  .card.mech { background: var(--gold-soft); } .card.mech h2 { background: var(--gold-deep); }
+  .card.special { background: var(--path-soft); } .card.special h2 { background: var(--path); }
+  .card.ischemia { background: var(--amber-soft); } .card.ischemia h2 { background: var(--amber-deep); }
+  .card.viability { background: var(--resp-soft); } .card.viability h2 { background: var(--resp-deep); }
+  .card.embolic { background: var(--gold-soft); } .card.embolic h2 { background: var(--gold-deep); }
+  .card.span { grid-column: span 2; }
+  table.compact { border-collapse: collapse; width: 100%; margin-top: 3px; font-size: 8pt; }
+  table.compact th, table.compact td { border: 1px solid var(--ink-2); padding: 2px 4px; text-align: left; }
+  table.compact th { background: var(--ink); color: #FFF; font-weight: 700; }
+  table.compact tr:nth-child(even) { background: rgba(255,255,255,0.55); }
+  .traps { background: var(--ink); color: #FFF; border-radius: 6px; padding: 7px 10px; grid-column: span 2; page-break-inside: avoid; }
+  .traps h2 { margin: 0 0 4px; font-size: 10pt; color: var(--gold); letter-spacing: 0.06em; text-transform: uppercase; }
+  .traps ol { margin: 0; padding-left: 18px; columns: 2; column-gap: 14px; }
+  .traps li { margin-bottom: 2px; } .traps li::marker { color: var(--gold); font-weight: 700; }
+  .footer-stamp { text-align: center; font-size: 7.5pt; color: var(--muted); font-style: italic; margin-top: 8px; }
+  strong { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="ribbon">
+  <h1>CVS · Day 5 · Ischemic Heart Disease</h1>
+  <div class="meta">USMLE Step 1 · June Cohort · FA pp. 308–313</div>
+</div>
+<div class="byline">
+  <span class="author">Prepared by Allan Bakesiga · USMLE Step 1 Prep</span>
+  <span class="home">bakesiga.github.io/usmle-dashboard</span>
+</div>
+<p class="cohort-line">Angina → ACS → MI → complications · Print and stick on your wall</p>
+
+<div class="grid">
+
+  <div class="card atherogen span">
+    <h2>Atherogenesis cellular cast <span class="tag">9 steps</span></h2>
+    <ul>
+      <li><strong>Step 1 — endothelial injury</strong> (HTN, dyslipidemia, smoking, hyperglycemia) → ↑ permeability + ↑ adhesion molecules.</li>
+      <li><strong>Step 2 — LDL enters intima</strong> → oxidized by ROS.</li>
+      <li><strong>Step 3 — monocytes adhere</strong>, migrate, become macrophages.</li>
+      <li><strong>Step 4 — foam cells</strong> form via SR-A/CD36 uptake of oxLDL (NOT downregulated by intracellular cholesterol).</li>
+      <li><strong>Step 5 — T cells</strong> recruited, secrete IFN-γ, sustain inflammation.</li>
+      <li><strong>Step 6 — fatty streak</strong> (yellow intimal patch, age 10–20, reversible).</li>
+      <li><strong>Step 7 — platelets adhere</strong> to dysfunctional endothelium → release <strong>PDGF</strong>.</li>
+      <li><strong>Step 8 — smooth muscle cells migrate</strong> from media → intima → proliferate + lay down collagen → <strong>fibrous cap</strong>.</li>
+      <li><strong>Step 9 — mature plaque</strong>: stable (slow growth, collaterals develop) OR vulnerable (macrophages release MMPs → rupture cap → thrombosis → ACS).</li>
+    </ul>
+  </div>
+
+  <div class="card stable">
+    <h2>Stable angina <span class="tag">fixed stenosis</span></h2>
+    <ul>
+      <li>Pathology: <strong>fixed atherosclerotic stenosis ≥ 70% lumen, NO thrombus</strong>.</li>
+      <li>Exertional, reproducible, relieved by rest or sublingual NTG.</li>
+      <li>ECG: normal at rest; ST↓ on stress.</li>
+      <li>Symptom threshold = ~70% stenosis (collaterals preserve resting flow).</li>
+      <li>Treatment: lifestyle + β-blocker + statin + aspirin + sublingual NTG.</li>
+      <li>Revascularization: PCI or CABG depending on anatomy + LV function.</li>
+    </ul>
+  </div>
+
+  <div class="card stable">
+    <h2>Stress testing <span class="tag">modality choice</span></h2>
+    <ul>
+      <li><strong>Exercise ECG</strong>: if patient can exercise + baseline ECG normal.</li>
+      <li><strong>Stress echo</strong>: baseline ECG abnormal.</li>
+      <li><strong>Dobutamine stress echo</strong>: can't exercise (β1 agonist mimics exercise).</li>
+      <li><strong>Adenosine/regadenoson nuclear</strong>: can't exercise; "coronary steal" diverts flow away from stenosed segments.</li>
+      <li>Wall motion localization: apical → LAD; inferior → RCA; lateral → LCx.</li>
+    </ul>
+  </div>
+
+  <div class="card acs span">
+    <h2>ACS spectrum <span class="tag">depth × ECG × troponin</span></h2>
+    <table class="compact">
+      <tr><th>Type</th><th>Coronary lesion</th><th>Necrosis</th><th>ECG</th><th>Troponin</th></tr>
+      <tr><td>Stable angina</td><td>Fixed ≥ 70% stenosis</td><td>None</td><td>Normal / ST↓ on stress</td><td>Normal</td></tr>
+      <tr><td><strong>Unstable angina</strong></td><td>Plaque rupture + partial thrombus</td><td>None</td><td>ST↓ ± T inversion</td><td><strong>Normal</strong></td></tr>
+      <tr><td><strong>NSTEMI</strong></td><td>Partial occlusion or transient complete</td><td>Subendocardial</td><td>ST↓ ± T inversion</td><td><strong>Elevated</strong></td></tr>
+      <tr><td><strong>STEMI</strong></td><td>Plaque rupture + occlusive thrombus</td><td><strong>Transmural</strong></td><td>ST elevation → Q waves</td><td>Elevated</td></tr>
+    </table>
+    <ul>
+      <li>STEMI ECG evolution: hyperacute T → ST↑ → Q waves → T inversion → ST normalizes.</li>
+      <li>Persistent ST↑ &gt; 6 weeks → LV aneurysm.</li>
+      <li>Treatment: STEMI = emergent PCI &lt; 90 min door-to-balloon. NSTEMI/UA = cath within 24–72 h.</li>
+    </ul>
+  </div>
+
+  <div class="card timing span">
+    <h2>MI histology timeline <span class="tag">memorise the table</span></h2>
+    <table class="compact">
+      <tr><th>Time post-MI</th><th>Light microscopy</th><th>Complications peak</th></tr>
+      <tr><td><strong>0–4 h</strong></td><td>Minimal change (wavy fibers at margin only)</td><td>Reperfusion arrhythmias</td></tr>
+      <tr><td>4–12 h</td><td>Early coagulation necrosis, edema, hemorrhage</td><td>Cardiogenic shock</td></tr>
+      <tr><td>12–24 h</td><td>Coag necrosis + contraction band necrosis</td><td>VT/VF peak first 24h</td></tr>
+      <tr><td>1–5 d</td><td>Coag necrosis + <strong>neutrophilic infiltrate</strong></td><td>Fibrinous pericarditis</td></tr>
+      <tr><td><strong>5–10 d</strong></td><td><strong>Macrophage phagocytosis</strong>, hyperemic edge</td><td><strong>Free wall / papillary / IVS rupture</strong></td></tr>
+      <tr><td>10–14 d</td><td>Granulation tissue + neovascularization</td><td>Wall still weak; rupture possible</td></tr>
+      <tr><td>2 wk – 2 mo</td><td><strong>Collagen scar</strong> (TGF-β driven)</td><td>LV aneurysm, mural thrombus, Dressler</td></tr>
+    </table>
+  </div>
+
+  <div class="card rv">
+    <h2>RV infarction <span class="tag">unique profile</span></h2>
+    <ul>
+      <li><strong>Inferior STEMI + JVD + clear lungs + hypotension</strong> = RV involvement.</li>
+      <li>Cath: <strong>↑ CVP, ↓ PCWP</strong>, ↓ CO, ↑ SVR. The ↑ CVP + ↓ PCWP combination is pathognomonic.</li>
+      <li>V4R lead ST↑ confirms.</li>
+      <li>Why RV recovers: low O₂ extraction reserve, perfused both systole + diastole, more collaterals.</li>
+      <li><strong>Treatment: IV FLUIDS</strong> (preload-dependent).</li>
+      <li><strong>AVOID nitroglycerin, diuretics, morphine</strong> (all drop preload → cardiogenic shock).</li>
+      <li>Emergent PCI of RCA.</li>
+    </ul>
+  </div>
+
+  <div class="card mech span">
+    <h2>Post-MI mechanical complications <span class="tag">by timing + vessel</span></h2>
+    <table class="compact">
+      <tr><th>Complication</th><th>Timing</th><th>Vessel</th><th>Clinical clue</th></tr>
+      <tr><td><strong>Papillary muscle rupture</strong></td><td>Acute or 3–5 d</td><td>RCA (posteromedial — single PDA supply)</td><td>New early systolic MR murmur, pulmonary edema, shock</td></tr>
+      <tr><td><strong>IV septum rupture</strong></td><td>Acute or 3–5 d</td><td>LAD or RCA</td><td>New holosystolic murmur, shock, O₂ step-up RA → RV</td></tr>
+      <tr><td><strong>Free wall rupture</strong></td><td><strong>5 d to 2 weeks</strong></td><td>LAD</td><td>Distant heart sounds, sudden hypotension + JVD + clear lungs, PEA</td></tr>
+      <tr><td><strong>LV aneurysm</strong></td><td>Weeks – months</td><td>LAD</td><td>HF, angina, V-arrhythmias, persistent ST elevation</td></tr>
+      <tr><td>Papillary <em>dysfunction</em> (Q25)</td><td>Acute</td><td>Any</td><td>Transient MR, <strong>resolves with revascularization</strong></td></tr>
+      <tr><td>Fibrinous pericarditis</td><td>1–3 d</td><td>Transmural anterior MI</td><td>Friction rub, resolves spontaneously</td></tr>
+      <tr><td>Dressler syndrome</td><td>2–10 wk</td><td>—</td><td>Autoimmune pericarditis + fever + pleurisy + effusion</td></tr>
+    </table>
+  </div>
+
+  <div class="card ischemia">
+    <h2>Ischemia biochemistry <span class="tag">cell death timeline</span></h2>
+    <ul>
+      <li>&lt; 60 s: aerobic → anaerobic; lactate ↑; contraction stops.</li>
+      <li>1–20 min: cell swelling from ↑ intracellular Na⁺ + Ca²⁺ (osmotic).</li>
+      <li><strong>20–30 min: irreversible threshold</strong> — mitochondrial permeability transition + severe membrane damage.</li>
+      <li>EM marker of irreversibility: <strong>mitochondrial vacuolization with flocculent densities</strong>.</li>
+      <li>&gt; 30 min: coagulative necrosis; troponin leaks (rises ~3 h, peaks 24 h).</li>
+    </ul>
+  </div>
+
+  <div class="card viability">
+    <h2>Stunned vs hibernating vs scarred <span class="tag">recoverability</span></h2>
+    <ul>
+      <li><strong>Stunned</strong>: brief acute ischemia + reperfusion → transient dysfunction → <em>spontaneously reversible</em>.</li>
+      <li><strong>Hibernating</strong>: chronic underperfusion → adaptive ↓ contractility/metabolism → <em>reversible with revascularization</em>.</li>
+      <li><strong>Scarred</strong>: post-MI fibrosis (TGF-β driven) → <em>irreversible</em>.</li>
+      <li>Viability testing (PET, dobutamine echo, cardiac MRI delayed gadolinium) distinguishes hibernating from scarred → guides revascularization decision.</li>
+    </ul>
+  </div>
+
+  <div class="card special">
+    <h2>Special angina syndromes <span class="tag">Prinzmetal + cocaine</span></h2>
+    <ul>
+      <li><strong>Vasospastic (Prinzmetal) angina</strong>: young woman, rest pain at night, transient ST↑, no fixed CAD on cath. Migraine + Raynaud comorbidities. Treatment: <strong>CCB</strong> + nitrates. AVOID β-blockers, sumatriptan, ergots.</li>
+      <li><strong>Cocaine-induced</strong>: young patient, sympathomimetic (dilated pupils, HTN, tachy, sweat). α1 vasoconstriction + β1 demand. Treatment: <strong>benzodiazepines + nitroglycerin</strong>. AVOID pure β-blockers (unopposed α). Phentolamine or labetalol acceptable.</li>
+    </ul>
+  </div>
+
+  <div class="card embolic">
+    <h2>Embolic + watershed <span class="tag">cross-references</span></h2>
+    <ul>
+      <li><strong>Atheroembolism</strong> post cath: needle-shaped cholesterol clefts + multinucleated giant cells. Blue toe, livedo, Hollenhorst plaques (retina), AKI with eosinophilia.</li>
+      <li><strong>Renal infarction</strong>: wedge lesion + flank pain + ↑ LDH; cardioembolic from AFib (LA appendage thrombus).</li>
+      <li><strong>Watershed colonic ischemia</strong>: splenic flexure (SMA-IMA border) after hypotensive event.</li>
+      <li><strong>Watershed brain</strong>: parasagittal cortex → "man-in-the-barrel" (proximal arm weakness).</li>
+      <li>CA1 hippocampus + Purkinje cells = selectively vulnerable to global hypoperfusion.</li>
+    </ul>
+  </div>
+
+  <div class="card timing">
+    <h2>Sudden cardiac death post-MI <span class="tag">arrhythmic + mechanical</span></h2>
+    <ul>
+      <li><strong>~50% of MI deaths occur out-of-hospital in the first hour</strong> — usually <strong>VF</strong>.</li>
+      <li>Ischemic AP shortens unevenly → reentrant circuits → VT → VF.</li>
+      <li>Days 5–14: free wall rupture / papillary rupture / IVS rupture.</li>
+      <li>Long-term SCD prevention: <strong>ICD if EF &lt; 35%</strong> post-MI; β-blockers reduce arrhythmic death.</li>
+    </ul>
+  </div>
+
+  <div class="traps">
+    <h2>Top 15 traps</h2>
+    <ol>
+      <li>Plaque rupture risk = STABILITY, not stenosis size.</li>
+      <li>Internal mammary arteries resist atherosclerosis → LIMA = CABG conduit.</li>
+      <li>Atherogenesis first step = endothelial injury.</li>
+      <li>Fibrous cap built by smooth muscle cells; lipid core built by foam cells.</li>
+      <li>Cap rupture mediated by macrophage-released MMPs.</li>
+      <li>Stable angina symptom threshold ≈ 70% stenosis.</li>
+      <li>STEMI = transmural; NSTEMI = subendocardial; both = troponin positive.</li>
+      <li>RV infarction cath: ↑ CVP + ↓ PCWP — pathognomonic combo.</li>
+      <li><strong>NEVER give NTG in RV infarction</strong>; give IV fluids.</li>
+      <li>Papillary rupture 3–5 d (RCA, posteromedial single supply); free wall rupture 5–14 d (LAD).</li>
+      <li>Light microscopy normal until 4+ h post-MI; troponin rises ~3 h.</li>
+      <li>Stunned: brief, spontaneously recovers. Hibernating: chronic, recovers with revascularization. Scarred: permanent.</li>
+      <li>Mitochondrial vacuolization with flocculent densities = irreversibility marker.</li>
+      <li>TGF-β drives post-MI scar collagen deposition.</li>
+      <li>Cocaine MI: benzos + NTG; avoid β-blockers. Prinzmetal: CCB first-line, avoid β-blockers.</li>
+    </ol>
+  </div>
+
+</div>
+
+<p class="footer-stamp">© Allan Bakesiga · USMLE Step 1 Prep · Original wording. Single page — carry it and review before every Q-bank block.</p>
+
+</body>
+</html>
