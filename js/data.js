@@ -86,13 +86,13 @@ window.SESSIONS = [
       ]
     }
   },
-  { day: 4,  date: "2026-06-04", subject: "cvs",  title: "Vascular biology & hemodynamics",    sub: "Poiseuille, capillary exchange, lymphatics" },
-  { day: 5,  date: "2026-06-05", subject: "cvs",  title: "EKG fundamentals",                   sub: "Axis, intervals, chamber enlargement" },
-  { day: 6,  date: "2026-06-06", subject: "cvs",  title: "Arrhythmias I & II",                 sub: "Supraventricular, ventricular, blocks" },
-  { day: 7,  date: "2026-06-07", subject: "cvs",  title: "Heart failure & cardiomyopathies",   sub: "Systolic vs diastolic, dilated, hypertrophic" },
-  { day: 8,  date: "2026-06-08", subject: "cvs",  title: "Valvular heart disease",             sub: "Stenosis, regurgitation, murmurs" },
-  { day: 9,  date: "2026-06-09", subject: "cvs",  title: "Hypertension & vasculitis",          sub: "Primary, secondary, large to small vessel" },
-  { day: 10, date: "2026-06-10", subject: "cvs",  title: "Congenital heart disease",           sub: "Cyanotic, acyanotic, shunt physiology" },
+  { day: 4,  date: "2026-06-04", subject: "cvs",  title: "Vascular biology, atherosclerosis & dyslipidemia", sub: "Capillary exchange, lymphatics, atherogenesis, statins & PCSK9" },
+  { day: 5,  date: "2026-06-05", subject: "cvs",  title: "Ischemic heart disease — angina to MI", sub: "Stable angina, ACS spectrum, ECG localisation, post-MI complications timeline" },
+  { day: 6,  date: "2026-06-06", subject: "cvs",  title: "Hypertension, vasculitis & aortic disease", sub: "Essential & secondary HTN, large/medium/small vasculitis, AAA, dissection" },
+  { day: 7,  date: "2026-06-07", subject: "cvs",  title: "Heart failure & cardiomyopathies in depth", sub: "HFrEF vs HFpEF mgmt, dilated, restrictive, peripartum, takotsubo, ARVC" },
+  { day: 8,  date: "2026-06-08", subject: "cvs",  title: "Valvular & rheumatic heart disease + endocarditis", sub: "Rheumatic HD, IE Duke criteria, prosthetic valves, intervention timing" },
+  { day: 9,  date: "2026-06-09", subject: "cvs",  title: "Pericardial disease, cardiac tumors & inherited arrhythmias", sub: "Effusion, tamponade, constrictive pericarditis, myxoma, WPW, long QT, Brugada" },
+  { day: 10, date: "2026-06-10", subject: "cvs",  title: "Congenital heart disease",           sub: "Acyanotic, cyanotic, TOF, TGA, coarctation, Eisenmenger" },
 
   // ---- Respiratory (8) — June 11-18 ----
   { day: 11, date: "2026-06-11", subject: "resp", title: "Lung anatomy & development",         sub: "Branching, surfactant, fetal lung" },
