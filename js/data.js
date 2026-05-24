@@ -32,7 +32,7 @@ window.SESSIONS = [
       ]
     }
   },
-  { day: 2,  date: "2026-06-02", subject: "cvs",  title: "Cardiac mechanics — PV loops, valves & sounds", sub: "Frank-Starling, PV loops, heart sounds, valvular disease",
+  { day: 2,  date: "2026-06-02", subject: "cvs",  title: "Pumping mechanics — CO, PV loops, sounds & valves", sub: "Cardiac output, Frank-Starling, PV loops, sounds, valvular disease, cardiomyopathy",
     resources: [
       { kind: "highYield", label: "High-yield 1-pager",
         url: "outputs/study-notes/cvs-day-02-high-yield.html",
@@ -58,7 +58,7 @@ window.SESSIONS = [
       ]
     }
   },
-  { day: 3,  date: "2026-06-03", subject: "cvs",  title: "Cardiac electrics & integration",    sub: "Action potentials, arrhythmias, baroreflex, shock physiology",
+  { day: 3,  date: "2026-06-03", subject: "cvs",  title: "Cardiac electrics — APs, ECG, arrhythmias & shock", sub: "Action potentials, conduction, ECG, arrhythmias, coronary autoregulation, baroreflex, shock, HF cascade",
     resources: [
       { kind: "highYield", label: "High-yield 1-pager",
         url: "outputs/study-notes/cvs-day-03-high-yield.html",
