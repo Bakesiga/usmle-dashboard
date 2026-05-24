@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CVS Day 2 — Flashcards</title>
+<style>
+  :root {
+    --ink: #0C2A3D;
+    --ink-2: #345671;
+    --muted: #5B7A95;
+    --bg: #FFFFFF;
+    --bg-cream: #FFF8EC;
+    --border: #D6E8F5;
+
+    --gold: #E5A823;
+    --gold-deep: #B8851C;
+    --gold-soft: #FFF4D6;
+
+    --cvs: #0284C7; --cvs-soft: #E0F2FE; --cvs-deep: #075985;
+    --resp: #059669; --resp-soft: #D1FAE5; --resp-deep: #065F46;
+    --path: #7C3AED; --path-soft: #EDE9FE; --path-deep: #5B21B6;
+    --amber: #D97706; --amber-soft: #FEF3C7; --amber-deep: #B45309;
+  }
+
+  @page { size: A4; margin: 12mm 10mm; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 10pt;
+    line-height: 1.38;
+  }
+
+  .ribbon {
+    background: var(--ink);
+    color: #FFFFFF;
+    padding: 7px 14px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .ribbon h1 {
+    margin: 0;
+    font-size: 16pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+  .ribbon .meta {
+    font-size: 9pt;
+    color: #BFE3F7;
+    letter-spacing: 0.06em;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: var(--ink-2);
+    font-style: italic;
+    margin: 4px 0 12px;
+    font-size: 9.5pt;
+  }
+
+  .byline {
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-deep) 100%);
+    color: var(--ink);
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 9pt;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin: 0 0 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .byline .author { font-weight: 800; }
+  .byline .home {
+    font-weight: 500;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .section {
+    margin-top: 14px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .section-bar {
+    color: #FFFFFF;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 10pt;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .section-bar .group-tag {
+    font-size: 7.5pt;
+    background: rgba(255,255,255,0.22);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  .section.equations .section-bar { background: var(--cvs-deep); }
+  .section.preload .section-bar { background: var(--gold-deep); }
+  .section.pvloop .section-bar { background: var(--cvs); }
+  .section.maneuvers .section-bar { background: var(--amber-deep); }
+  .section.curves .section-bar { background: var(--resp-deep); }
+  .section.wiggers .section-bar { background: var(--path-deep); }
+  .section.sounds .section-bar { background: var(--gold-deep); }
+  .section.valves .section-bar { background: var(--cvs-deep); }
+  .section.cmp .section-bar { background: var(--path); }
+  .section.exercise .section-bar { background: var(--resp-deep); }
+
+  .card {
+    border-radius: 6px;
+    margin-bottom: 7px;
+    padding: 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .q {
+    padding: 6px 10px;
+    font-weight: 600;
+    font-size: 9.5pt;
+    color: var(--ink);
+    display: flex; gap: 8px;
+  }
+  .q .n {
+    flex: 0 0 auto;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: 9pt;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .a {
+    padding: 5px 10px 7px 40px;
+    font-size: 9pt;
+    color: var(--ink-2);
+    border-top: 1px dashed var(--border);
+  }
+  .a strong { color: var(--ink); }
+
+  .section.equations .card { background: var(--cvs-soft); }
+  .section.equations .a { background: #ffffff; }
+  .section.equations .q .n { background: var(--cvs-deep); }
+
+  .section.preload .card { background: var(--gold-soft); }
+  .section.preload .a { background: #ffffff; }
+  .section.preload .q .n { background: var(--gold-deep); }
+
+  .section.pvloop .card { background: var(--cvs-soft); }
+  .section.pvloop .a { background: #ffffff; }
+  .section.pvloop .q .n { background: var(--cvs); }
+
+  .section.maneuvers .card { background: var(--amber-soft); }
+  .section.maneuvers .a { background: #ffffff; }
+  .section.maneuvers .q .n { background: var(--amber-deep); }
+
+  .section.curves .card { background: var(--resp-soft); }
+  .section.curves .a { background: #ffffff; }
+  .section.curves .q .n { background: var(--resp-deep); }
+
+  .section.wiggers .card { background: var(--path-soft); }
+  .section.wiggers .a { background: #ffffff; }
+  .section.wiggers .q .n { background: var(--path-deep); }
+
+  .section.sounds .card { background: var(--gold-soft); }
+  .section.sounds .a { background: #ffffff; }
+  .section.sounds .q .n { background: var(--gold-deep); }
+
+  .section.valves .card { background: var(--cvs-soft); }
+  .section.valves .a { background: #ffffff; }
+  .section.valves .q .n { background: var(--cvs-deep); }
+
+  .section.cmp .card { background: var(--path-soft); }
+  .section.cmp .a { background: #ffffff; }
+  .section.cmp .q .n { background: var(--path); }
+
+  .section.exercise .card { background: var(--resp-soft); }
+  .section.exercise .a { background: #ffffff; }
+  .section.exercise .q .n { background: var(--resp-deep); }
+
+  .footer-stamp {
+    text-align: center;
+    font-size: 8pt;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <h1>CVS · Day 2 · Flashcards</h1>
+  <div class="meta">USMLE Step 1 · June Cohort · 70 cards</div>
+</div>
+<div class="byline">
+  <span class="author">Prepared by Allan Bakesiga · USMLE Step 1 Prep</span>
+  <span class="home">bakesiga.github.io/usmle-dashboard</span>
+</div>
+<p class="subtitle">Cover the answer · attempt aloud · check · re-test the misses tomorrow</p>
+
+<div class="section equations">
+  <div class="section-bar">Core equations <span class="group-tag">7 cards</span></div>
+  <div class="card"><div class="q"><span class="n">1</span><span>Write the equation for cardiac output in two forms.</span></div><div class="a"><strong>CO = SV × HR</strong> and <strong>CO = VO₂ / (CaO₂ − CvO₂)</strong> (Fick principle).</div></div>
+  <div class="card"><div class="q"><span class="n">2</span><span>EDV is 125 mL, ESV is 75 mL, HR is 100/min. Compute SV, EF, and CO.</span></div><div class="a">SV = EDV − ESV = <strong>50 mL</strong>. EF = SV / EDV = <strong>40%</strong>. CO = SV × HR = <strong>5 L/min</strong>.</div></div>
+  <div class="card"><div class="q"><span class="n">3</span><span>What ejection fraction defines HFrEF?</span></div><div class="a">EF &lt; 40%. Borderline 40–49% is sometimes called "HF mid-range EF." Preserved EF (HFpEF) = ≥ 50%.</div></div>
+  <div class="card"><div class="q"><span class="n">4</span><span>Two physiologic determinants of pulse pressure?</span></div><div class="a">(1) Stroke volume — larger SV widens PP. (2) Aortic compliance — stiffer aorta widens PP at the same SV.</div></div>
+  <div class="card"><div class="q"><span class="n">5</span><span>Why does isolated systolic hypertension dominate in the elderly?</span></div><div class="a">Aortic compliance falls with age. The same SV pushed into a stiffer aorta creates a larger systolic pressure swing → high SBP with relatively unchanged DBP → wide pulse pressure.</div></div>
+  <div class="card"><div class="q"><span class="n">6</span><span>Poiseuille's law: which variable dominates resistance and why?</span></div><div class="a">Radius. R ∝ ηL / r⁴ — so halving the radius raises resistance 16-fold. This is why arteriolar tone is the main BP regulator.</div></div>
+  <div class="card"><div class="q"><span class="n">7</span><span>What approximates mean arterial pressure from systolic and diastolic values?</span></div><div class="a">MAP ≈ DBP + 1/3 (SBP − DBP). Also MAP ≈ CO × SVR.</div></div>
+</div>
+
+<div class="section preload">
+  <div class="section-bar">Preload, afterload, contractility <span class="group-tag">8 cards</span></div>
+  <div class="card"><div class="q"><span class="n">8</span><span>Define preload, afterload, and contractility in one line each.</span></div><div class="a"><strong>Preload</strong> = end-diastolic volume (or pressure) — depends on venous return. <strong>Afterload</strong> ≈ aortic DBP — the pressure the LV must exceed to open AV. <strong>Contractility</strong> = intrinsic myocardial force at a given preload.</div></div>
+  <div class="card"><div class="q"><span class="n">9</span><span>State the Frank-Starling law.</span></div><div class="a">Within physiologic range, ↑ end-diastolic sarcomere length → ↑ force of contraction → ↑ stroke volume.</div></div>
+  <div class="card"><div class="q"><span class="n">10</span><span>A patient with hypovolemic shock receives 2 L of normal saline. Which intracellular change in cardiomyocytes most likely follows?</span></div><div class="a">↑ End-diastolic sarcomere length. Fluid raises venous return → ↑ EDV → ↑ stretch → ↑ SV by Frank-Starling.</div></div>
+  <div class="card"><div class="q"><span class="n">11</span><span>A drug delivers nitric oxide selectively to venous smooth muscle and has no direct effect on cardiomyocytes. Effect on cardiomyocyte end-diastolic sarcomere length and SV?</span></div><div class="a">Venodilation → ↑ venous capacitance → ↓ preload → ↓ EDV → <strong>↓ end-diastolic sarcomere length</strong> → ↓ SV via Frank-Starling. Intrinsic contractility unchanged.</div></div>
+  <div class="card"><div class="q"><span class="n">12</span><span>What gene is upregulated in concentric LV hypertrophy from chronic hypertension, and why?</span></div><div class="a"><strong>β-myosin heavy chain</strong>. Pressure overload adds sarcomeres <em>in parallel</em>; the heart thickens to lower wall stress (Laplace). Concentric LVH → ↓ LV compliance → S4 → HFpEF.</div></div>
+  <div class="card"><div class="q"><span class="n">13</span><span>Eccentric vs concentric LVH — how are sarcomeres added and what triggers each?</span></div><div class="a">Eccentric = volume overload (AR, MR, AV fistula); sarcomeres added <strong>in series</strong> → chamber dilates. Concentric = pressure overload (chronic HTN, AS); sarcomeres added <strong>in parallel</strong> → walls thicken.</div></div>
+  <div class="card"><div class="q"><span class="n">14</span><span>Why is angiotensin II elevated in chronic systemic hypertension that has progressed to HFpEF?</span></div><div class="a">Stiff LV → ↓ stroke volume → ↓ forward CO → kidney senses low perfusion → activates RAAS → ↑ angiotensin II (vasoconstriction + aldosterone). Initially compensatory, then maladaptive.</div></div>
+  <div class="card"><div class="q"><span class="n">15</span><span>Frank-Starling explains why post-PVC beats feel like palpitations. Why?</span></div><div class="a">The compensatory pause after a PVC gives the LV extra diastolic filling time → ↑ EDV → ↑ SV → larger ejection on the next beat, which the patient perceives as the "thump."</div></div>
+</div>
+
+<div class="section pvloop">
+  <div class="section-bar">PV loops — points and shifts <span class="group-tag">10 cards</span></div>
+  <div class="card"><div class="q"><span class="n">16</span><span>Label the four corners of the normal LV pressure-volume loop.</span></div><div class="a"><strong>Point 1</strong>: MV closes (S1, end-diastole). <strong>Point 2</strong>: AV opens (start of ejection). <strong>Point 3</strong>: AV closes (S2, end-systole). <strong>Point 4</strong>: MV opens (start of passive filling).</div></div>
+  <div class="card"><div class="q"><span class="n">17</span><span>An opening snap is heard. Which PV-loop point corresponds to its origin?</span></div><div class="a">Point 4 — MV opens. In mitral stenosis the stiff leaflets snap open against the LA-LV gradient just after isovolumetric relaxation.</div></div>
+  <div class="card"><div class="q"><span class="n">18</span><span>A young patient with a bicuspid aortic valve has a soft systolic ejection click. Which valve event does the click coincide with on the LV pressure tracing?</span></div><div class="a">Aortic valve opening at the end of isovolumetric contraction = point B on the LV tracing (equivalent to point 2 on the PV loop).</div></div>
+  <div class="card"><div class="q"><span class="n">19</span><span>Predict the PV-loop change when phenylephrine is given (pure α₁ agonist).</span></div><div class="a">↑ Afterload → loop top shifts higher and to the right at the ESPVR line → ↑ ESV, ↓ SV, EDV slightly ↑ from venoconstriction.</div></div>
+  <div class="card"><div class="q"><span class="n">20</span><span>Predict the PV-loop change when dobutamine is given.</span></div><div class="a">↑ Contractility → ESPVR steepens (top-left line tilts up) → ↓ ESV, ↑ SV. EDV unchanged.</div></div>
+  <div class="card"><div class="q"><span class="n">21</span><span>Compare PV-loop effects of nitroglycerin vs nitroprusside.</span></div><div class="a"><strong>Nitroglycerin</strong> (venous &gt;&gt; arterial) → ↓ EDV, narrow loop, ↓ SV, ↓ wall stress. <strong>Nitroprusside</strong> (balanced) → loop smaller at both ends but <strong>SV preserved</strong> at lower wall stress. Best for acute HF with hypertension.</div></div>
+  <div class="card"><div class="q"><span class="n">22</span><span>PV-loop signature of acute AV fistula?</span></div><div class="a">↑ Preload (more venous return) + ↓ afterload (low-resistance shunt) → loop shifts right and slightly lower; ↑ EDV, ↑ SV. Chronic = high-output cardiac failure.</div></div>
+  <div class="card"><div class="q"><span class="n">23</span><span>What unique PV-loop feature distinguishes mitral regurgitation from other valve lesions?</span></div><div class="a">There is <strong>no true isovolumetric contraction phase</strong> — regurgitant flow into the LA starts at point 1 (S1), so the LV begins to lose volume immediately rather than only at AV opening.</div></div>
+  <div class="card"><div class="q"><span class="n">24</span><span>How does the PV loop in mitral stenosis differ from normal?</span></div><div class="a">The LV loop is normal or slightly small because the LV is under-filled by the obstruction. The pathology lives upstream — the LA is hypertensive. Cath confirms ↑ PCWP with normal LV pressures.</div></div>
+  <div class="card"><div class="q"><span class="n">25</span><span>Aortic stenosis vs aortic regurgitation — PV-loop comparison.</span></div><div class="a"><strong>AS</strong>: peak LV pressure rises well above aortic systolic; tall, narrow loop with persistent LV-aorta gradient. <strong>AR</strong>: low DBP (regurgitant backflow), ↑ EDV (regurgitant return), wide loop with eccentric LVH.</div></div>
+</div>
+
+<div class="section maneuvers">
+  <div class="section-bar">Bedside maneuvers <span class="group-tag">7 cards</span></div>
+  <div class="card"><div class="q"><span class="n">26</span><span>A systolic murmur softens with handgrip and gets louder with Valsalva strain. Diagnosis?</span></div><div class="a"><strong>HCM</strong> (or sometimes MVP). The opposite of AS. Maneuvers that ↓ LV blood volume (Valsalva strain, standing) accentuate dynamic LVOT obstruction; maneuvers that ↑ volume (squat, handgrip, leg raise) relieve obstruction → softer murmur.</div></div>
+  <div class="card"><div class="q"><span class="n">27</span><span>A murmur is louder on inspiration. Side of the heart?</span></div><div class="a"><strong>Right-sided</strong> (Carvallo sign). Inspiration drops intrathoracic pressure → ↑ venous return → ↑ RV preload → louder right-sided murmurs (TR, TS, PR, PS, RV S3/S4).</div></div>
+  <div class="card"><div class="q"><span class="n">28</span><span>How does the murmur of mitral valve prolapse change with Valsalva?</span></div><div class="a">Both the <strong>click and murmur move earlier in systole</strong> with Valsalva (↓ preload makes the redundant leaflets prolapse sooner). The opposite happens with squat.</div></div>
+  <div class="card"><div class="q"><span class="n">29</span><span>A tetralogy-of-Fallot patient improves cyanosis by squatting. Mechanism?</span></div><div class="a">Squat ↑ SVR → ↑ aortic resistance → ↓ R→L shunt across the VSD → more blood through the pulmonary circuit → ↑ O₂ saturation.</div></div>
+  <div class="card"><div class="q"><span class="n">30</span><span>Why does pulsus paradoxus occur in cardiac tamponade?</span></div><div class="a">Pericardial fluid prevents free RV expansion. Inspiratory ↑ venous return is accommodated by the septum bowing into the LV → ↓ LV EDV → ↓ LV SV during inspiration → SBP drop &gt; 10 mmHg.</div></div>
+  <div class="card"><div class="q"><span class="n">31</span><span>Beck's triad?</span></div><div class="a">Hypotension + elevated JVP + muffled heart sounds — classic for cardiac tamponade.</div></div>
+  <div class="card"><div class="q"><span class="n">32</span><span>Distinguish water-hammer pulse from pulsus parvus et tardus.</span></div><div class="a"><strong>Water-hammer / Corrigan</strong> = rapid rise, high amplitude, rapid collapse — aortic regurgitation. <strong>Pulsus parvus et tardus</strong> = small amplitude, slow rise — aortic stenosis. The exam vignette usually contrasts the two.</div></div>
+</div>
+
+<div class="section curves">
+  <div class="section-bar">Cardiac &amp; vascular function curves <span class="group-tag">5 cards</span></div>
+  <div class="card"><div class="q"><span class="n">33</span><span>What does the cardiac function curve plot, and what shifts it up?</span></div><div class="a">It plots CO against CVP (or RAP). Shifts <strong>up</strong> with ↑ contractility (catecholamines, exercise, digoxin), <strong>down</strong> with ↓ contractility (β-blockers, ischemia, HFrEF).</div></div>
+  <div class="card"><div class="q"><span class="n">34</span><span>What does the vascular function curve plot, and what shifts it right?</span></div><div class="a">It plots CVP against CO. Shifts <strong>right</strong> with ↑ blood volume or venoconstriction (saline bolus, exercise, AV fistula). Shifts <strong>left</strong> with hemorrhage or venodilation.</div></div>
+  <div class="card"><div class="q"><span class="n">35</span><span>Predict the operating-point shift in acute hemorrhage.</span></div><div class="a">Vascular curve shifts left → intersection moves left and down → ↓ CO with ↓ CVP. Compensatory sympathetic tone can partially restore CO but at the cost of vasoconstriction.</div></div>
+  <div class="card"><div class="q"><span class="n">36</span><span>Operating-point shift during steady-state exercise?</span></div><div class="a">Cardiac curve shifts <strong>up</strong> (↑ contractility), vascular curve shifts <strong>right</strong> (venoconstriction + skeletal muscle pump). Intersection moves up → ↑ CO with roughly unchanged CVP.</div></div>
+  <div class="card"><div class="q"><span class="n">37</span><span>Operating-point shift in chronic AV fistula?</span></div><div class="a">Vascular curve shifts <strong>right</strong> (effective volume expanded, capacitance falls) + cardiac curve shifts <strong>up</strong> (chronic preload-driven hypertrophy) → ↑ CO with mildly ↑ CVP. Chronic state = high-output cardiac failure.</div></div>
+</div>
+
+<div class="section wiggers">
+  <div class="section-bar">Wiggers and JVP <span class="group-tag">6 cards</span></div>
+  <div class="card"><div class="q"><span class="n">38</span><span>Name the events at S1 and S2.</span></div><div class="a"><strong>S1</strong> = mitral + tricuspid valve closure (start of systole). <strong>S2</strong> = aortic + pulmonic valve closure (start of diastole).</div></div>
+  <div class="card"><div class="q"><span class="n">39</span><span>What does the JVP "a wave" represent and when does it disappear?</span></div><div class="a">Atrial contraction. Disappears in atrial fibrillation (no organized atrial systole).</div></div>
+  <div class="card"><div class="q"><span class="n">40</span><span>What produces cannon "a" waves?</span></div><div class="a">Complete (3°) AV block. Atria contract against a closed tricuspid valve when the ventricles happen to be in systole, producing giant a waves intermittently in the neck veins.</div></div>
+  <div class="card"><div class="q"><span class="n">41</span><span>Big v waves on JVP — likely lesion?</span></div><div class="a">Tricuspid regurgitation. Atrial filling occurs against a closed TV during ventricular systole; with TR the regurgitant jet adds to atrial pressure → towering v wave.</div></div>
+  <div class="card"><div class="q"><span class="n">42</span><span>On Doppler mitral inflow, what do the E and A waves represent, and which one corresponds to S3?</span></div><div class="a"><strong>E wave</strong> = early passive ventricular filling. <strong>A wave</strong> = late atrial-contraction filling. <strong>S3</strong> sound, when present, occurs at the end of the rapid passive filling (E wave) — sudden deceleration in a non-compliant or volume-overloaded LV.</div></div>
+  <div class="card"><div class="q"><span class="n">43</span><span>When is S3 normal vs pathologic?</span></div><div class="a">Normal in children and adults under ~40 (compliant LV). Pathologic in older adults with heart failure or volume-overloaded LV.</div></div>
+</div>
+
+<div class="section sounds">
+  <div class="section-bar">Heart sounds and S2 splitting <span class="group-tag">5 cards</span></div>
+  <div class="card"><div class="q"><span class="n">44</span><span>S4 — timing, location, and the structural problem it implies.</span></div><div class="a">Late diastolic, low-pitched, heard with the bell at the apex. Atrial kick into a stiff, non-compliant LV. Causes: HCM, HFpEF, severe HTN, aging.</div></div>
+  <div class="card"><div class="q"><span class="n">45</span><span>Physiologic splitting of S2 — what is it?</span></div><div class="a">On inspiration, ↑ venous return delays P2 (RV takes longer to empty) while A2 moves slightly earlier → audible A2–P2 split. On expiration, they fuse.</div></div>
+  <div class="card"><div class="q"><span class="n">46</span><span>Why is S2 splitting "fixed" in atrial septal defect?</span></div><div class="a">The constant L→R shunt equalises RA and LA pressures and volumes throughout the respiratory cycle, so P2 is delayed by the same amount regardless of breathing → unchanging A2–P2 gap.</div></div>
+  <div class="card"><div class="q"><span class="n">47</span><span>What causes paradoxical splitting of S2?</span></div><div class="a">A2 is delayed past P2 — usually LBBB or severe AS. On expiration ↓ RV return advances P2; gap widens. Inspiration brings them together.</div></div>
+  <div class="card"><div class="q"><span class="n">48</span><span>Wide (but still respiration-variable) S2 splitting — common causes?</span></div><div class="a">Anything that delays P2 — RBBB, pulmonic stenosis, severe MR (early A2 because LV empties faster into the LA + aorta).</div></div>
+</div>
+
+<div class="section valves">
+  <div class="section-bar">Valvular disease recognition <span class="group-tag">10 cards</span></div>
+  <div class="card"><div class="q"><span class="n">49</span><span>Classic triad of severe aortic stenosis?</span></div><div class="a">Angina, syncope, heart failure. The high LV pressure required to push blood across the narrowed valve eventually causes ischemia, low CO with exertion, and pump failure.</div></div>
+  <div class="card"><div class="q"><span class="n">50</span><span>A 33-year-old with prior endocarditis has bounding peripheral pulses and a systolic-diastolic bruit over the femoral artery on partial compression. Diagnosis and named sign?</span></div><div class="a">Aortic regurgitation. The femoral finding is <strong>Duroziez sign</strong>. Other AR signs: water-hammer / Corrigan pulse, de Musset (head bobbing), Quincke (nail capillary pulsations), Müller (uvula pulse), Traube ("pistol-shot" femoral), Hill (popliteal SBP &gt; brachial by &gt; 60 mmHg).</div></div>
+  <div class="card"><div class="q"><span class="n">51</span><span>Cath data: LVEDP 10, LV peak systolic 110, PCWP 36. Diagnosis?</span></div><div class="a">Mitral stenosis. PCWP reflects LA pressure; a large LA-LV gradient with normal LV pressures means obstruction at the mitral valve.</div></div>
+  <div class="card"><div class="q"><span class="n">52</span><span>How does mitral stenosis affect LV diastolic pressure, afterload, and contractility?</span></div><div class="a">All three are <strong>normal</strong>. The obstruction is upstream of the LV, so the LV is simply under-filled. Pulmonary hypertension develops by retrograde transmission; the LV muscle itself stays unaffected.</div></div>
+  <div class="card"><div class="q"><span class="n">53</span><span>A 35-year-old with IVDU history has a holosystolic murmur at the lower left sternal border that <em>grows louder on inspiration</em>. Diagnosis?</span></div><div class="a">Tricuspid regurgitation (Carvallo sign positive). IVDU classically infects the tricuspid valve.</div></div>
+  <div class="card"><div class="q"><span class="n">54</span><span>Distinguish the holosystolic murmurs of MR, TR, and VSD by location and respiratory response.</span></div><div class="a"><strong>MR</strong>: apex → radiates to axilla; no inspiratory change. <strong>TR</strong>: LLSB; <strong>louder with inspiration</strong>. <strong>VSD</strong>: middle LSB (3rd–4th ICS); often with thrill; no respiratory change.</div></div>
+  <div class="card"><div class="q"><span class="n">55</span><span>Acute MR 3–5 days post-MI with pulmonary edema — anatomic explanation?</span></div><div class="a">Rupture of the <strong>posteromedial papillary muscle</strong>, which is supplied by the PDA alone (single coronary supply makes it vulnerable to inferior MI). Acute regurgitation gives no time for compensatory LV remodeling → flash pulmonary edema.</div></div>
+  <div class="card"><div class="q"><span class="n">56</span><span>Which valve is the most common congenital valvulopathy, and what late complications does it predispose to?</span></div><div class="a"><strong>Bicuspid aortic valve</strong>. Predisposes to early aortic stenosis, aortic regurgitation, and ascending aortic dilation / aneurysm.</div></div>
+  <div class="card"><div class="q"><span class="n">57</span><span>Soft systolic ejection murmur at the left upper sternal border in an athletic teenager — likely cause?</span></div><div class="a">Physiologic / flow murmur across the normal pulmonic valve because of high stroke volume. Common in young, healthy, athletic individuals; no further work-up unless other red flags.</div></div>
+  <div class="card"><div class="q"><span class="n">58</span><span>An adolescent has fixed widely split S2 + a soft mid-systolic murmur at the left upper sternal border. Diagnosis and shunt mechanics?</span></div><div class="a">Atrial septal defect. L→R shunt ↑ pulmonary blood flow → soft flow murmur across the (normal) pulmonic valve; RA-LA equalisation makes the splitting fixed.</div></div>
+</div>
+
+<div class="section cmp">
+  <div class="section-bar">Cardiomyopathy phenotypes <span class="group-tag">5 cards</span></div>
+  <div class="card"><div class="q"><span class="n">59</span><span>An 18-year-old athlete dies suddenly on the basketball court. Autopsy shows asymmetric septal hypertrophy. Most likely pre-mortem auscultatory finding?</span></div><div class="a"><strong>S4</strong> (atrial kick into stiff hypertrophied LV) + a midsystolic murmur at the LSB that <em>softens</em> with squat or handgrip. Diagnosis: HCM.</div></div>
+  <div class="card"><div class="q"><span class="n">60</span><span>Genetic basis of HCM?</span></div><div class="a">Autosomal dominant with incomplete penetrance. Most common mutations affect cardiac sarcomere proteins — <strong>β-myosin heavy chain (MYH7)</strong> and <strong>myosin-binding protein C (MYBPC3)</strong>.</div></div>
+  <div class="card"><div class="q"><span class="n">61</span><span>Echo profile of HCM?</span></div><div class="a">↑ LV mass, ↓ LV cavity size, preserved EF, impaired diastolic relaxation. Asymmetric septal hypertrophy with dynamic LVOT obstruction.</div></div>
+  <div class="card"><div class="q"><span class="n">62</span><span>Distinguish the echo of dilated CMP, HCM, restrictive CMP, and athlete's heart.</span></div><div class="a"><strong>Dilated</strong>: ↑ mass, ↑ cavity, ↓ EF, normal diastole. <strong>HCM</strong>: ↑ mass, ↓ cavity, preserved EF, impaired diastole. <strong>Restrictive</strong>: normal mass, normal cavity, preserved EF, impaired diastole. <strong>Athlete</strong>: ↑ mass, normal/↑ cavity, preserved EF, normal diastole.</div></div>
+  <div class="card"><div class="q"><span class="n">63</span><span>Post-viral dilated cardiomyopathy in a 39-year-old — expected EF, SV, and CO if EDV is 125 mL, ESV 75 mL, HR 100/min?</span></div><div class="a">SV 50, EF 40% (reduced), CO 5 L/min. The patient has HFrEF.</div></div>
+</div>
+
+<div class="section exercise">
+  <div class="section-bar">Exercise · aging · shock fluids <span class="group-tag">7 cards</span></div>
+  <div class="card"><div class="q"><span class="n">64</span><span>Aerobic exercise: changes in SBP, DBP, and pulse pressure?</span></div><div class="a">SBP ↑ (↑ SV + ↑ contractility), DBP roughly unchanged (muscle vasodilation lowers SVR but venoconstriction maintains DBP), pulse pressure ↑.</div></div>
+  <div class="card"><div class="q"><span class="n">65</span><span>During exercise stress, which parameter falls compared to rest?</span></div><div class="a"><strong>Total systemic vascular resistance</strong>. Active skeletal muscle vasodilation overwhelms splanchnic and cutaneous vasoconstriction. HR, contractility, CO, preload, SBP, PA pressures all rise.</div></div>
+  <div class="card"><div class="q"><span class="n">66</span><span>Pattern of LV hypertrophy expected in a competitive distance runner vs an Olympic weightlifter?</span></div><div class="a">Distance runner (volume training): <strong>eccentric LVH</strong> — sarcomeres in series, dilated cavity, ↑ mass with preserved EF and normal diastole. Weightlifter (pressure / isometric): <strong>concentric LVH</strong> — sarcomeres in parallel.</div></div>
+  <div class="card"><div class="q"><span class="n">67</span><span>Why does the aging aorta give isolated systolic hypertension?</span></div><div class="a">Loss of elastin and collagen cross-linking in the media → stiffer aorta → same SV creates higher systolic pressure swing without raising diastolic pressure → ↑ SBP, normal DBP, wide pulse pressure.</div></div>
+  <div class="card"><div class="q"><span class="n">68</span><span>Aging cardiomyocyte — how does it change in number and content?</span></div><div class="a">Hypertrophy without hyperplasia (cells get larger but no new myocytes) + accumulation of <strong>lipofuscin</strong> ("wear-and-tear" pigment) in the cytoplasm.</div></div>
+  <div class="card"><div class="q"><span class="n">69</span><span>In acute hypovolemic shock from trauma, what changes are you likely to see in the hematocrit immediately and later?</span></div><div class="a">Whole-blood loss is initially isovolemic for plasma and cells (hematocrit unchanged in the first minutes). With fluid shifts from interstitium and IV resuscitation, hemoglobin and hematocrit then fall.</div></div>
+  <div class="card"><div class="q"><span class="n">70</span><span>What is the appropriate first-line vasodilator in acute decompensated heart failure with hypertension, and why?</span></div><div class="a"><strong>Sodium nitroprusside</strong>. It is a balanced venous + arterial vasodilator — drops both preload (EDV) and afterload (peak LV pressure) simultaneously while keeping SV essentially preserved, allowing pulmonary venous decompression without ↓ CO.</div></div>
+</div>
+
+<p class="footer-stamp">© Allan Bakesiga · USMLE Step 1 Prep · 70 cards · Day 2 mechanics. Review the misses tomorrow before lecture.</p>
+
+</body>
+</html>

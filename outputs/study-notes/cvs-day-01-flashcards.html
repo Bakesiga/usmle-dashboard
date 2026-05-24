@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CVS Day 1 — Flashcards</title>
+<style>
+  :root {
+    --ink: #0C2A3D;
+    --ink-2: #345671;
+    --muted: #5B7A95;
+    --bg: #FFFFFF;
+    --bg-cream: #FFF8EC;
+    --border: #D6E8F5;
+
+    --gold: #E5A823;
+    --gold-deep: #B8851C;
+    --gold-soft: #FFF4D6;
+
+    --cvs: #0284C7; --cvs-soft: #E0F2FE; --cvs-deep: #075985;
+    --resp: #059669; --resp-soft: #D1FAE5; --resp-deep: #065F46;
+    --path: #7C3AED; --path-soft: #EDE9FE; --path-deep: #5B21B6;
+    --amber: #D97706; --amber-soft: #FEF3C7; --amber-deep: #B45309;
+  }
+
+  @page { size: A4; margin: 12mm 10mm; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 10pt;
+    line-height: 1.38;
+  }
+
+  .ribbon {
+    background: var(--ink);
+    color: #FFFFFF;
+    padding: 7px 14px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .ribbon h1 {
+    margin: 0;
+    font-size: 16pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+  .ribbon .meta {
+    font-size: 9pt;
+    color: #BFE3F7;
+    letter-spacing: 0.06em;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: var(--ink-2);
+    font-style: italic;
+    margin: 4px 0 12px;
+    font-size: 9.5pt;
+  }
+
+  .byline {
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-deep) 100%);
+    color: var(--ink);
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 9pt;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin: 0 0 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .byline .author { font-weight: 800; }
+  .byline .home {
+    font-weight: 500;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .section {
+    margin-top: 14px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .section-bar {
+    color: #FFFFFF;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 10pt;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .section-bar .group-tag {
+    font-size: 7.5pt;
+    background: rgba(255,255,255,0.22);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  .section.embryo .section-bar { background: var(--cvs-deep); }
+  .section.arches .section-bar { background: var(--gold-deep); color: #FFFFFF; }
+  .section.fetal .section-bar { background: var(--resp-deep); }
+  .section.chambers .section-bar { background: var(--cvs); }
+  .section.coronary .section-bar { background: var(--amber-deep); }
+  .section.conduction .section-bar { background: var(--path-deep); }
+  .section.procedures .section-bar { background: var(--ink); }
+  .section.pericardium .section-bar { background: var(--gold-deep); }
+  .section.aorta .section-bar { background: var(--cvs-deep); }
+  .section.abdo .section-bar { background: var(--resp-deep); }
+  .section.upper .section-bar { background: var(--path); }
+
+  .card {
+    border-radius: 6px;
+    margin-bottom: 7px;
+    padding: 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .q {
+    padding: 6px 10px;
+    font-weight: 600;
+    font-size: 9.5pt;
+    color: var(--ink);
+    display: flex; gap: 8px;
+  }
+  .q .n {
+    flex: 0 0 auto;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: 9pt;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .a {
+    padding: 5px 10px 7px 40px;
+    font-size: 9pt;
+    color: var(--ink-2);
+    border-top: 1px dashed var(--border);
+  }
+  .a strong { color: var(--ink); }
+
+  .section.embryo .card { background: var(--cvs-soft); }
+  .section.embryo .a { background: #ffffff; }
+  .section.embryo .q .n { background: var(--cvs-deep); }
+
+  .section.arches .card { background: var(--gold-soft); }
+  .section.arches .a { background: #ffffff; }
+  .section.arches .q .n { background: var(--gold-deep); }
+
+  .section.fetal .card { background: var(--resp-soft); }
+  .section.fetal .a { background: #ffffff; }
+  .section.fetal .q .n { background: var(--resp-deep); }
+
+  .section.chambers .card { background: var(--cvs-soft); }
+  .section.chambers .a { background: #ffffff; }
+  .section.chambers .q .n { background: var(--cvs); }
+
+  .section.coronary .card { background: var(--amber-soft); }
+  .section.coronary .a { background: #ffffff; }
+  .section.coronary .q .n { background: var(--amber-deep); }
+
+  .section.conduction .card { background: var(--path-soft); }
+  .section.conduction .a { background: #ffffff; }
+  .section.conduction .q .n { background: var(--path-deep); }
+
+  .section.procedures .card { background: var(--bg-cream); }
+  .section.procedures .a { background: #ffffff; }
+  .section.procedures .q .n { background: var(--ink); }
+
+  .section.pericardium .card { background: var(--gold-soft); }
+  .section.pericardium .a { background: #ffffff; }
+  .section.pericardium .q .n { background: var(--gold-deep); }
+
+  .section.aorta .card { background: var(--cvs-soft); }
+  .section.aorta .a { background: #ffffff; }
+  .section.aorta .q .n { background: var(--cvs-deep); }
+
+  .section.abdo .card { background: var(--resp-soft); }
+  .section.abdo .a { background: #ffffff; }
+  .section.abdo .q .n { background: var(--resp-deep); }
+
+  .section.upper .card { background: var(--path-soft); }
+  .section.upper .a { background: #ffffff; }
+  .section.upper .q .n { background: var(--path); }
+
+  .footer-stamp {
+    text-align: center;
+    font-size: 8pt;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <h1>CVS · Day 1 · Flashcards</h1>
+  <div class="meta">USMLE Step 1 · June Cohort · 65 cards</div>
+</div>
+<div class="byline">
+  <span class="author">Prepared by Allan Bakesiga · USMLE Step 1 Prep</span>
+  <span class="home">bakesiga.github.io/usmle-dashboard</span>
+</div>
+<p class="subtitle">Cover the answer · attempt aloud · check · re-test the misses tomorrow</p>
+
+<div class="section embryo">
+  <div class="section-bar">Embryology — heart tube, looping, septation <span class="group-tag">10 cards</span></div>
+
+  <div class="card"><div class="q"><span class="n">1</span><span>Which is the first organ to become functional in the human embryo, and at what week does it start beating?</span></div><div class="a">The <strong>heart</strong>. It begins beating around <strong>week 4</strong>.</div></div>
+  <div class="card"><div class="q"><span class="n">2</span><span>What is the embryologic consequence of an L-loop of the heart tube?</span></div><div class="a"><strong>Dextrocardia</strong> — the heart sits on the right side.</div></div>
+  <div class="card"><div class="q"><span class="n">3</span><span>Which septum is the last to close during atrial septation, and what defect results from its failure?</span></div><div class="a">The <strong>foramen ovale</strong> closes last (functionally at birth; anatomic fusion over weeks). Failure = <strong>patent foramen ovale (PFO)</strong>.</div></div>
+  <div class="card"><div class="q"><span class="n">4</span><span>Cryptogenic ischemic stroke. Bubble study shows bubbles in the left heart. Most likely mechanism?</span></div><div class="a">Failed fusion between septum primum and secundum → <strong>patent foramen ovale</strong>; paradoxical embolism.</div></div>
+  <div class="card"><div class="q"><span class="n">5</span><span>Which interventricular septum portion closes last, and where do most VSDs occur?</span></div><div class="a">The <strong>membranous</strong> IVS closes last; most VSDs occur there.</div></div>
+  <div class="card"><div class="q"><span class="n">6</span><span>Which embryologic structure, when it fails to fuse with the primum septum, produces a primum-type ASD? Classic syndrome?</span></div><div class="a">The <strong>endocardial cushions</strong>. Classic in <strong>Down syndrome</strong>.</div></div>
+  <div class="card"><div class="q"><span class="n">7</span><span>Embryologic mechanism of transposition of the great arteries?</span></div><div class="a"><strong>Failed spiraling</strong> of the aorticopulmonary septum. Aorta arises anteriorly from RV, pulmonary trunk posteriorly from LV.</div></div>
+  <div class="card"><div class="q"><span class="n">8</span><span>Embryologic mechanism of persistent truncus arteriosus?</span></div><div class="a">Failure of the AP septum to form/divide — a single outflow vessel persists.</div></div>
+  <div class="card"><div class="q"><span class="n">9</span><span>Embryologic mechanism of tetralogy of Fallot?</span></div><div class="a"><strong>Anterosuperior deviation of the infundibular septum</strong> due to abnormal neural crest cell migration. Yields VSD + overriding aorta + RV outflow obstruction + RV hypertrophy.</div></div>
+  <div class="card"><div class="q"><span class="n">10</span><span>Why does DiGeorge syndrome (22q11.2) cause conotruncal defects?</span></div><div class="a">Outflow tract septation requires <strong>neural crest cells</strong>, which are abnormal. Also explains thymic aplasia and parathyroid hypoplasia.</div></div>
+</div>
+
+<div class="section arches">
+  <div class="section-bar">Pharyngeal arch derivatives <span class="group-tag">5 cards</span></div>
+  <div class="card"><div class="q"><span class="n">11</span><span>Adult artery derived from the 3rd pharyngeal arch?</span></div><div class="a"><strong>Common carotid + proximal internal carotid</strong>.</div></div>
+  <div class="card"><div class="q"><span class="n">12</span><span>Ductus arteriosus is the embryologic derivative of which arch?</span></div><div class="a">The <strong>6th (left)</strong> pharyngeal arch artery.</div></div>
+  <div class="card"><div class="q"><span class="n">13</span><span>Cranial nerve paired with the 6th pharyngeal arch?</span></div><div class="a"><strong>CN X (vagus)</strong> — specifically, the recurrent laryngeal branch.</div></div>
+  <div class="card"><div class="q"><span class="n">14</span><span>Why does the left recurrent laryngeal nerve hook under the aortic arch?</span></div><div class="a">It loops around the 6th arch derivative, which on the left becomes the ligamentum arteriosum, tethered to the arch.</div></div>
+  <div class="card"><div class="q"><span class="n">15</span><span>Which arch gives rise to the proximal right subclavian artery?</span></div><div class="a">The <strong>4th</strong> pharyngeal arch (right side).</div></div>
+</div>
+
+<div class="section fetal">
+  <div class="section-bar">Fetal circulation &amp; neonatal flip <span class="group-tag">6 cards</span></div>
+  <div class="card"><div class="q"><span class="n">16</span><span>Which fetal vessel carries the highest oxygen saturation?</span></div><div class="a">The <strong>umbilical vein</strong> (~80% SpO₂).</div></div>
+  <div class="card"><div class="q"><span class="n">17</span><span>Which large fetal vessel in the body carries the highest SpO₂ once mixed?</span></div><div class="a">The <strong>IVC</strong> (after ductus venosus dumps oxygenated UV blood into it; ~67%).</div></div>
+  <div class="card"><div class="q"><span class="n">18</span><span>Three in utero shunts and their postnatal remnants?</span></div><div class="a">Ductus venosus → ligamentum venosum · foramen ovale → fossa ovalis · ductus arteriosus → ligamentum arteriosum.</div></div>
+  <div class="card"><div class="q"><span class="n">19</span><span>Two physiologic changes that close the ductus arteriosus at birth?</span></div><div class="a"><strong>↑ oxygen tension</strong> and <strong>↓ prostaglandin E₂</strong> (loss of placental PGE source).</div></div>
+  <div class="card"><div class="q"><span class="n">20</span><span>Drug that keeps a PDA open? Drug that closes one?</span></div><div class="a">Keep open: <strong>PGE1 (alprostadil)</strong>. Close: <strong>indomethacin</strong>.</div></div>
+  <div class="card"><div class="q"><span class="n">21</span><span>Three hemodynamic changes at birth?</span></div><div class="a">↓ PVR (lungs inflate, ↑PaO₂); ↑ SVR (placenta removed); ↑ LV contribution to systemic flow.</div></div>
+</div>
+
+<div class="section chambers">
+  <div class="section-bar">Chambers &amp; surface anatomy <span class="group-tag">8 cards</span></div>
+  <div class="card"><div class="q"><span class="n">22</span><span>Most anterior cardiac chamber? Clinical relevance?</span></div><div class="a"><strong>Right ventricle</strong>. Penetrating chest wounds at left sternal border typically injure the RV → tamponade.</div></div>
+  <div class="card"><div class="q"><span class="n">23</span><span>Most posterior cardiac chamber? Symptoms when it enlarges?</span></div><div class="a"><strong>Left atrium</strong>. Compresses esophagus (dysphagia) and left recurrent laryngeal nerve (hoarseness).</div></div>
+  <div class="card"><div class="q"><span class="n">24</span><span>On PA CXR, which chamber forms the right border of the cardiac silhouette?</span></div><div class="a">The <strong>right atrium</strong>.</div></div>
+  <div class="card"><div class="q"><span class="n">25</span><span>Right middle lobe pneumonia obliterates which cardiac border? Name of the sign?</span></div><div class="a">The right atrial (right heart) border — the <strong>silhouette sign</strong>.</div></div>
+  <div class="card"><div class="q"><span class="n">26</span><span>Stab wound at the left 5th ICS at the midclavicular line — what is most likely injured first?</span></div><div class="a">The <strong>left lung</strong>. The cardiac apex is at this landmark but the lung overlies it.</div></div>
+  <div class="card"><div class="q"><span class="n">27</span><span>Where do ~90% of thrombi form in atrial fibrillation, and why?</span></div><div class="a">The <strong>left atrial appendage</strong> — pectinate-muscle stasis with poor atrial contraction.</div></div>
+  <div class="card"><div class="q"><span class="n">28</span><span>Surface landmark for auscultating the tricuspid valve?</span></div><div class="a">Left lower sternal border, 4th–5th ICS.</div></div>
+  <div class="card"><div class="q"><span class="n">29</span><span>IV drug user, new murmur, fever, cavitary lung lesions. Valve and organism?</span></div><div class="a"><strong>Tricuspid endocarditis</strong>, most commonly <em>Staphylococcus aureus</em>.</div></div>
+</div>
+
+<div class="section coronary">
+  <div class="section-bar">Coronary arteries <span class="group-tag">10 cards</span></div>
+  <div class="card"><div class="q"><span class="n">30</span><span>Define coronary dominance.</span></div><div class="a">The vessel that gives rise to the <strong>PDA</strong> is the dominant one. ~75–80% right · ~5–10% left · ~10–20% codominant.</div></div>
+  <div class="card"><div class="q"><span class="n">31</span><span>In left-dominant circulation, which artery supplies the AV node?</span></div><div class="a">The <strong>left circumflex</strong> — whoever feeds the PDA feeds the AV node.</div></div>
+  <div class="card"><div class="q"><span class="n">32</span><span>Isolated RV infarct with a normal LV — vessel? dominance?</span></div><div class="a"><strong>RCA in a left-dominant patient</strong>. RCA still supplies RV; LCx feeds the inferior LV via PDA so it is spared.</div></div>
+  <div class="card"><div class="q"><span class="n">33</span><span>Which papillary muscle has a single arterial supply, and from which vessel?</span></div><div class="a"><strong>Posteromedial</strong> papillary muscle — supplied solely by the <strong>PDA</strong>.</div></div>
+  <div class="card"><div class="q"><span class="n">34</span><span>Acute severe MR + pulmonary edema 3–5 days post-inferior MI. Mechanism?</span></div><div class="a"><strong>Posteromedial papillary muscle rupture</strong> from single PDA-derived supply.</div></div>
+  <div class="card"><div class="q"><span class="n">35</span><span>Where does the coronary sinus lie? Where does it drain?</span></div><div class="a">In the <strong>posterior atrioventricular groove</strong>; drains into the right atrium.</div></div>
+  <div class="card"><div class="q"><span class="n">36</span><span>Embryologic origin of the coronary sinus? What does a dilated CS suggest?</span></div><div class="a"><strong>Left horn of the sinus venosus</strong>. Dilated CS → suspect <strong>persistent left SVC</strong> draining into it.</div></div>
+  <div class="card"><div class="q"><span class="n">37</span><span>Trace a biventricular pacemaker lead from subclavian to the LV.</span></div><div class="a">Subclavian vein → SVC → RA → CS ostium → posterior AV groove → lateral cardiac vein over LV free wall.</div></div>
+  <div class="card"><div class="q"><span class="n">38</span><span>ST elevation in I and aVL — culprit vessel?</span></div><div class="a"><strong>Left circumflex</strong> (lateral wall infarction).</div></div>
+  <div class="card"><div class="q"><span class="n">39</span><span>ST elevation in II, III, aVF — culprit vessel?</span></div><div class="a"><strong>Right coronary artery</strong> (inferior wall).</div></div>
+</div>
+
+<div class="section conduction">
+  <div class="section-bar">Conduction system <span class="group-tag">4 cards</span></div>
+  <div class="card"><div class="q"><span class="n">40</span><span>Location of the SA node?</span></div><div class="a">Right atrium, near the junction with the SVC — subepicardial, at the upper end of the crista terminalis.</div></div>
+  <div class="card"><div class="q"><span class="n">41</span><span>Location of the AV node and the anatomic triangle that defines it?</span></div><div class="a">Interatrial septum just above the septal leaflet of the tricuspid valve, near the coronary sinus ostium. <strong>Triangle of Koch</strong> = tricuspid annulus + tendon of Todaro + CS ostium.</div></div>
+  <div class="card"><div class="q"><span class="n">42</span><span>Speed order of cardiac conduction?</span></div><div class="a">Purkinje &gt; Atria &gt; Ventricles &gt; AV node (<em>Park At Ventura, AV</em>). Slow AV node = atrial kick.</div></div>
+  <div class="card"><div class="q"><span class="n">43</span><span>Inferior MI + Mobitz I AV block. Which artery?</span></div><div class="a">The <strong>RCA</strong> (supplies AV node in ~90% of patients).</div></div>
+</div>
+
+<div class="section procedures">
+  <div class="section-bar">Procedures — anatomy applied <span class="group-tag">3 cards</span></div>
+  <div class="card"><div class="q"><span class="n">44</span><span>PCWP approximates which intracardiac pressure, and why?</span></div><div class="a"><strong>Left atrial pressure</strong>. The inflated balloon creates a static column through pulmonary capillaries → pulmonary veins → LA.</div></div>
+  <div class="card"><div class="q"><span class="n">45</span><span>In transseptal LA catheterization, what structure is punctured?</span></div><div class="a">The interatrial septum at the <strong>fossa ovalis</strong> — the thin remnant of the foramen ovale.</div></div>
+  <div class="card"><div class="q"><span class="n">46</span><span>CABG: surface landmarks for the great saphenous vein?</span></div><div class="a">Distal: anterior to medial malleolus. Proximal: through the saphenous opening to join the femoral vein medial to the pubic tubercle.</div></div>
+</div>
+
+<div class="section pericardium">
+  <div class="section-bar">Pericardium &amp; effusion <span class="group-tag">4 cards</span></div>
+  <div class="card"><div class="q"><span class="n">47</span><span>Classic chest X-ray finding of a large pericardial effusion?</span></div><div class="a">Enlarged "water-bottle" globular cardiac silhouette with clear lung fields.</div></div>
+  <div class="card"><div class="q"><span class="n">48</span><span>Two ECG findings that together suggest large pericardial effusion?</span></div><div class="a">Low-voltage QRS (fluid insulates the leads) + electrical alternans (heart swings in the fluid).</div></div>
+  <div class="card"><div class="q"><span class="n">49</span><span>Most common viral causes of acute pericarditis?</span></div><div class="a">Coxsackievirus B and echovirus.</div></div>
+  <div class="card"><div class="q"><span class="n">50</span><span>Triad of cardiac tamponade?</span></div><div class="a"><strong>Beck's triad</strong>: hypotension + JVD + muffled heart sounds. Add pulsus paradoxus &gt;10 mmHg.</div></div>
+</div>
+
+<div class="section aorta">
+  <div class="section-bar">Aorta &amp; great vessels <span class="group-tag">6 cards</span></div>
+  <div class="card"><div class="q"><span class="n">51</span><span>Branches of the aortic arch in order?</span></div><div class="a">Brachiocephalic → left common carotid → left subclavian.</div></div>
+  <div class="card"><div class="q"><span class="n">52</span><span>Stanford classification of aortic dissection — management for each?</span></div><div class="a"><strong>Type A</strong>: ascending aorta → emergency surgery. <strong>Type B</strong>: distal to L subclavian → medical (IV beta-blocker, then nitroprusside).</div></div>
+  <div class="card"><div class="q"><span class="n">53</span><span>Where does a Stanford type B dissection most commonly originate?</span></div><div class="a">Near the origin of the <strong>left subclavian artery</strong> — site of highest shear stress.</div></div>
+  <div class="card"><div class="q"><span class="n">54</span><span>Where does blunt traumatic aortic injury most commonly occur, and why?</span></div><div class="a">At the <strong>aortic isthmus</strong> (just distal to L subclavian), tethered by the ligamentum arteriosum.</div></div>
+  <div class="card"><div class="q"><span class="n">55</span><span>Path of an atheroembolus that causes monocular vision loss + cherry-red spot?</span></div><div class="a">Internal carotid artery → ophthalmic artery → central retinal artery.</div></div>
+  <div class="card"><div class="q"><span class="n">56</span><span>Describe the flow in subclavian steal syndrome.</span></div><div class="a">Proximal subclavian stenosis → arm activity → <strong>retrograde flow down the ipsilateral vertebral artery</strong> to perfuse the arm. Brain "loses" flow → vertebrobasilar symptoms + &gt;15 mmHg interarm SBP difference.</div></div>
+</div>
+
+<div class="section abdo">
+  <div class="section-bar">Abdominal &amp; pelvic vascular anatomy <span class="group-tag">6 cards</span></div>
+  <div class="card"><div class="q"><span class="n">57</span><span>Vertebral level of IVC formation, and from which veins?</span></div><div class="a"><strong>L4–L5</strong>, by the union of the right and left common iliac veins.</div></div>
+  <div class="card"><div class="q"><span class="n">58</span><span>Why is a left-sided varicocele common but a right-sided varicocele in an adult alarming?</span></div><div class="a">Left gonadal vein drains into the left renal vein, which can be compressed (nutcracker). Right gonadal drains directly into the IVC, so a right varicocele suggests <strong>IVC obstruction</strong> — classically renal cell carcinoma with tumor thrombus.</div></div>
+  <div class="card"><div class="q"><span class="n">59</span><span>Describe nutcracker syndrome.</span></div><div class="a">Compression of the left renal vein between the aorta (posterior) and SMA (anterior) → ↑ pressure in left renal and left gonadal veins → left flank pain + hematuria ± left varicocele.</div></div>
+  <div class="card"><div class="q"><span class="n">60</span><span>Femoral triangle borders + NAVEL acronym?</span></div><div class="a">Inguinal lig. (sup), sartorius (lat), adductor longus (med). N-A-V-E-L lateral → medial: Nerve, Artery, Vein, Empty space, Lymphatics. <strong>Vein is immediately medial to artery</strong>.</div></div>
+  <div class="card"><div class="q"><span class="n">61</span><span>Why is a femoral artery puncture above the inguinal ligament dangerous?</span></div><div class="a">Can lacerate the external iliac artery or inferior epigastric artery → bleeding into the <strong>retroperitoneal space</strong> (not compressible). Post-cath hypotension without external bleeding.</div></div>
+  <div class="card"><div class="q"><span class="n">62</span><span>The inferior epigastric artery branches off which vessel and runs in which direction?</span></div><div class="a">Off the external iliac just proximal to the inguinal ligament. Runs <strong>superomedially</strong> up the anterior abdominal wall.</div></div>
+</div>
+
+<div class="section upper">
+  <div class="section-bar">Upper-body venous anatomy <span class="group-tag">3 cards</span></div>
+  <div class="card"><div class="q"><span class="n">63</span><span>Two veins that unite to form the brachiocephalic vein on each side?</span></div><div class="a">The subclavian vein and the internal jugular vein.</div></div>
+  <div class="card"><div class="q"><span class="n">64</span><span>Unilateral right face and arm swelling but normal left side. Vessel? Classic cause?</span></div><div class="a"><strong>Right brachiocephalic (innominate) vein</strong> — classically apical lung tumor (Pancoast) or central-line thrombus.</div></div>
+  <div class="card"><div class="q"><span class="n">65</span><span>Embryologic origin of the SVC?</span></div><div class="a">The <strong>common cardinal veins</strong>.</div></div>
+</div>
+
+<p class="footer-stamp">© Allan Bakesiga · USMLE Step 1 Prep · 65 cards · Cover · attempt · check · re-test the misses tomorrow.</p>
+
+</body>
+</html>

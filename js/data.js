@@ -9,11 +9,11 @@ window.SESSIONS = [
   { day: 1,  date: "2026-06-01", subject: "cvs",  title: "Cardiac anatomy & embryology",      sub: "Heart tubes, septation, fetal circulation",
     resources: [
       { kind: "highYield", label: "High-yield 1-pager",
-        url: "https://drive.google.com/file/d/1htaSuaclSoxn-TtvTZ9DB61svmESBZSS/view",
-        meta: "PDF · 2 pages" },
+        url: "outputs/study-notes/cvs-day-01-high-yield.html",
+        meta: "Open in browser" },
       { kind: "flashcards", label: "Flashcards",
-        url: "https://drive.google.com/file/d/1AqtifaPbieNdMnBHbP_nsqu-NlEkBv_F/view",
-        meta: "PDF · 65 cards" }
+        url: "outputs/study-notes/cvs-day-01-flashcards.html",
+        meta: "65 cards" }
     ],
     outline: {
       intro: "Read ahead in First Aid 2025 (Cardiovascular chapter) so class lands faster. Cover the sections below; the Q-bank for Day 1 only asks about material in these areas.",
@@ -35,11 +35,11 @@ window.SESSIONS = [
   { day: 2,  date: "2026-06-02", subject: "cvs",  title: "Cardiac mechanics — PV loops, valves & sounds", sub: "Frank-Starling, PV loops, heart sounds, valvular disease",
     resources: [
       { kind: "highYield", label: "High-yield 1-pager",
-        url: "https://drive.google.com/file/d/1QPB06_7f4z76u2JIVyLMZhLG93rh3lB6/view",
-        meta: "PDF · 1 page" },
+        url: "outputs/study-notes/cvs-day-02-high-yield.html",
+        meta: "Open in browser" },
       { kind: "flashcards", label: "Flashcards",
-        url: "https://drive.google.com/file/d/19frYhZg2hHhYlE15VrQJeOBaUlO9dSU7/view",
-        meta: "PDF · 70 cards" }
+        url: "outputs/study-notes/cvs-day-02-flashcards.html",
+        meta: "70 cards" }
     ],
     outline: {
       intro: "Day 2 covers the mechanical half of CVS Physiology — how the heart pumps. Read ahead in First Aid 2025 (Cardiovascular · Physiology section). The Day 2 Q-bank only asks about material in the sections below.",
@@ -61,11 +61,11 @@ window.SESSIONS = [
   { day: 3,  date: "2026-06-03", subject: "cvs",  title: "Cardiac electrics & integration",    sub: "Action potentials, arrhythmias, baroreflex, shock physiology",
     resources: [
       { kind: "highYield", label: "High-yield 1-pager",
-        url: "https://drive.google.com/file/d/1V6T-nc4xRR-E9Nhae-ur7HrMW_Y7q5I5/view",
-        meta: "PDF · 1 page" },
+        url: "outputs/study-notes/cvs-day-03-high-yield.html",
+        meta: "Open in browser" },
       { kind: "flashcards", label: "Flashcards",
-        url: "https://drive.google.com/file/d/1XVWmKiD9oYcbPd6JcaMc8vDttXkD4TJx/view",
-        meta: "PDF · 65 cards" }
+        url: "outputs/study-notes/cvs-day-03-flashcards.html",
+        meta: "65 cards" }
     ],
     outline: {
       intro: "Day 3 covers the electrical half of CVS Physiology plus the body's integrative responses. Read ahead in First Aid 2025 (Cardiovascular · Physiology and Pathology selections below). The Day 3 Q-bank only asks about material in the sections below.",

@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CVS Day 1 — High-Yield 1-Pager</title>
+<style>
+  /* ---------- design tokens, mirrored from the flyer/dashboard palette ---------- */
+  :root {
+    --ink: #0C2A3D;
+    --ink-2: #345671;
+    --muted: #5B7A95;
+    --bg: #FFFFFF;
+    --bg-cream: #FFF8EC;
+    --border: #D6E8F5;
+
+    --gold: #E5A823;
+    --gold-deep: #B8851C;
+    --gold-soft: #FFF4D6;
+
+    --cvs: #0284C7; --cvs-soft: #E0F2FE; --cvs-deep: #075985;
+    --resp: #059669; --resp-soft: #D1FAE5; --resp-deep: #065F46;
+    --path: #7C3AED; --path-soft: #EDE9FE; --path-deep: #5B21B6;
+    --amber: #D97706; --amber-soft: #FEF3C7; --amber-deep: #B45309;
+  }
+
+  @page { size: A4; margin: 12mm 10mm; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 9.5pt;
+    line-height: 1.32;
+  }
+
+  .ribbon {
+    background: var(--ink);
+    color: #FFFFFF;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .ribbon h1 {
+    margin: 0;
+    font-size: 14pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .ribbon .meta {
+    font-size: 8.5pt;
+    color: #BFE3F7;
+    letter-spacing: 0.06em;
+  }
+
+  .cohort-line {
+    font-size: 8.5pt;
+    color: var(--ink-2);
+    margin: 0 0 10px;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .byline {
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-deep) 100%);
+    color: var(--ink);
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 8.5pt;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin: -4px 0 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .byline .author { font-weight: 800; }
+  .byline .home {
+    font-weight: 500;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .card {
+    border-radius: 6px;
+    padding: 7px 9px 8px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .card h2 {
+    margin: 0 0 4px;
+    font-size: 9.5pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 3px 7px;
+    margin: -7px -9px 6px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .card h2 .tag {
+    font-size: 7pt;
+    background: rgba(255,255,255,0.22);
+    padding: 1px 6px;
+    border-radius: 999px;
+    letter-spacing: 0.06em;
+  }
+  .card ul { margin: 0; padding-left: 14px; }
+  .card li { margin-bottom: 2px; }
+  .card li::marker { color: var(--ink-2); }
+
+  .card.embryo { background: var(--cvs-soft); }
+  .card.embryo h2 { background: var(--cvs-deep); }
+  .card.arches { background: var(--gold-soft); }
+  .card.arches h2 { background: var(--gold-deep); }
+  .card.fetal { background: var(--resp-soft); }
+  .card.fetal h2 { background: var(--resp-deep); }
+  .card.chambers { background: var(--cvs-soft); }
+  .card.chambers h2 { background: var(--cvs); }
+  .card.coronary { background: var(--amber-soft); }
+  .card.coronary h2 { background: var(--amber-deep); }
+  .card.conduction { background: var(--path-soft); }
+  .card.conduction h2 { background: var(--path-deep); }
+  .card.pericardium { background: var(--gold-soft); }
+  .card.pericardium h2 { background: var(--gold-deep); }
+  .card.aorta { background: var(--cvs-soft); }
+  .card.aorta h2 { background: var(--cvs-deep); }
+  .card.veins { background: var(--resp-soft); }
+  .card.veins h2 { background: var(--resp-deep); }
+  .card.upper { background: var(--path-soft); }
+  .card.upper h2 { background: var(--path); }
+
+  .card.span { grid-column: span 2; }
+
+  table.arch-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 4px;
+    font-size: 8.5pt;
+  }
+  table.arch-table th, table.arch-table td {
+    border: 1px solid var(--gold-deep);
+    padding: 2px 5px;
+    text-align: left;
+  }
+  table.arch-table th {
+    background: var(--gold);
+    color: var(--ink);
+    font-weight: 700;
+  }
+  table.arch-table tr:nth-child(even) { background: rgba(255,255,255,0.55); }
+
+  .traps {
+    background: var(--ink);
+    color: #FFFFFF;
+    border-radius: 6px;
+    padding: 7px 10px;
+    grid-column: span 2;
+    page-break-inside: avoid;
+  }
+  .traps h2 {
+    margin: 0 0 4px;
+    font-size: 10pt;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .traps ol {
+    margin: 0;
+    padding-left: 18px;
+    columns: 2;
+    column-gap: 14px;
+  }
+  .traps li { margin-bottom: 2px; }
+  .traps li::marker { color: var(--gold); font-weight: 700; }
+
+  .footer-stamp {
+    text-align: center;
+    font-size: 7.5pt;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  strong { color: var(--ink); }
+  em { font-style: italic; }
+  .accent-gold { color: var(--gold-deep); font-weight: 700; }
+  .accent-cvs { color: var(--cvs-deep); font-weight: 700; }
+  .accent-resp { color: var(--resp-deep); font-weight: 700; }
+  .accent-path { color: var(--path-deep); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <h1>CVS · Day 1 · Anatomy &amp; Embryology</h1>
+  <div class="meta">USMLE Step 1 · June Cohort</div>
+</div>
+<div class="byline">
+  <span class="author">Prepared by Allan Bakesiga · USMLE Step 1 Prep</span>
+  <span class="home">bakesiga.github.io/usmle-dashboard</span>
+</div>
+<p class="cohort-line">Print and stick on your wall · All wording original</p>
+
+<div class="grid">
+
+  <div class="card embryo">
+    <h2>Embryology <span class="tag">heart tube → chambers</span></h2>
+    <ul>
+      <li>Tube week 3 · loops <strong>right</strong> week 4 · first beat week 4 · septation 5–8.</li>
+      <li>Septation order: atrial → AV cushions → ventricular → outflow (AP septum, <strong>neural crest</strong>).</li>
+      <li><strong>VSD</strong> = failed membranous IVS closure (most common CHD).</li>
+      <li>Secundum ASD = arrested septum secundum. Primum ASD = primum + cushion failure (<strong>Down</strong>).</li>
+      <li><strong>PFO</strong> = failed primum/secundum fusion → cryptogenic stroke; bubble study.</li>
+      <li><strong>TGA</strong> = failed AP <em>spiraling</em> · <strong>Truncus</strong> = failed AP <em>formation</em> · <strong>TOF</strong> = AP <em>malalignment</em> (anterosuperior infundibular shift).</li>
+      <li>DiGeorge 22q11.2 → conotruncal + thymic aplasia + hypocalcemia.</li>
+      <li>Remnants: ductus venosus → lig. venosum · FO → fossa ovalis · DA → lig. arteriosum.</li>
+    </ul>
+  </div>
+
+  <div class="card arches">
+    <h2>Pharyngeal arches <span class="tag">arteries · nerves</span></h2>
+    <table class="arch-table">
+      <tr><th>Arch</th><th>Artery</th><th>Nerve</th></tr>
+      <tr><td>1</td><td>Maxillary (portion)</td><td>CN V</td></tr>
+      <tr><td>2</td><td>Stapedial / hyoid</td><td>CN VII</td></tr>
+      <tr><td>3</td><td>Common carotid + prox. ICA</td><td>CN IX</td></tr>
+      <tr><td>4</td><td>Aortic arch (L); R subclavian (R)</td><td>CN X (sup. laryng.)</td></tr>
+      <tr><td>6</td><td>Prox. pulm. art.; DA (L)</td><td>CN X (recurrent laryng.)</td></tr>
+    </table>
+  </div>
+
+  <div class="card fetal">
+    <h2>Fetal → neonatal <span class="tag">SpO₂ &amp; the flip</span></h2>
+    <ul>
+      <li>Highest SpO₂: <strong>umbilical vein</strong> (~80%) → <strong>IVC</strong> (highest large vessel).</li>
+      <li>Birth flip: <strong>↑ SVR</strong> (placenta off) · <strong>↓ PVR</strong> (lungs up + ↑O₂) · ↑ LV systemic contribution.</li>
+      <li>DA closes via ↑O₂ + ↓PGE₂.</li>
+      <li><span class="accent-resp">PGE1</span> keeps DA open · <span class="accent-resp">indomethacin</span> closes it.</li>
+    </ul>
+  </div>
+
+  <div class="card chambers">
+    <h2>Chambers · surface anatomy <span class="tag">X-ray · stab wounds</span></h2>
+    <ul>
+      <li>Most anterior: <strong>RV</strong> (stab at left sternal border → tamponade).</li>
+      <li>Most posterior: <strong>LA</strong> (enlargement → dysphagia, hoarseness).</li>
+      <li>Apex: L 5th ICS MCL — but the lung overlies the LV first.</li>
+      <li>PA CXR right border = <strong>RA</strong>; left border = aortic knob → PA → LA appendage → LV.</li>
+      <li>Silhouette: RML opacity silhouettes RA; lingula silhouettes LV.</li>
+      <li><strong>LA appendage</strong> = AF thrombus site (pectinate stasis).</li>
+      <li>Auscultation: aortic R 2nd ICS · pulmonic L 2nd ICS · tricuspid LLSB · mitral apex.</li>
+      <li>IVDU + new murmur + lung cavities → tricuspid IE, <em>S. aureus</em>.</li>
+    </ul>
+  </div>
+
+  <div class="card coronary span">
+    <h2>Coronary arteries <span class="tag">territories · dominance · papillary</span></h2>
+    <ul>
+      <li><strong>RCA</strong> → inferior LV, RV, SA (~60%), AV (~90% right-dominant), PDA.</li>
+      <li><strong>LAD</strong> → ant. LV, ant. 2/3 IVS, apex ("widow-maker").</li>
+      <li><strong>LCx</strong> → lateral LV; <strong>PDA in left-dominant</strong> (~5–10%).</li>
+      <li><strong>Dominance rule:</strong> whoever feeds the PDA feeds the AV node.</li>
+      <li>ECG → territory: II/III/aVF = RCA · I/aVL/V5–V6 = LCx · V1–V4 = LAD.</li>
+      <li><strong>Posteromedial papillary muscle</strong> = single PDA supply → ruptures 3–5 d post-MI → acute MR + pulmonary edema.</li>
+      <li><strong>Coronary sinus</strong> = posterior AV groove → drains to RA (from L horn of sinus venosus). Dilated CS = persistent L SVC. Biventricular pacing lead path: subclavian → SVC → RA → CS → AV groove → lateral cardiac vein → LV.</li>
+    </ul>
+  </div>
+
+  <div class="card conduction">
+    <h2>Conduction <span class="tag">SA · AV · His</span></h2>
+    <ul>
+      <li>SA: RA, near SVC junction (subepicardial).</li>
+      <li>AV: interatrial septum near CS ostium → <strong>triangle of Koch</strong> (tricuspid annulus + tendon of Todaro + CS ostium).</li>
+      <li>Speed: <em>Park At Ventura, AV</em> → Purkinje &gt; Atria &gt; Ventricles &gt; AV node.</li>
+      <li>Inferior MI + Mobitz I → <strong>RCA</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="card pericardium">
+    <h2>Pericardium · effusion <span class="tag">tamponade</span></h2>
+    <ul>
+      <li>"Water-bottle" silhouette + clear lungs.</li>
+      <li>ECG: low-voltage QRS + electrical alternans.</li>
+      <li><strong>Beck's triad</strong>: hypotension + JVD + muffled sounds; pulsus paradoxus &gt;10 mmHg.</li>
+      <li>Viral cause: coxsackie B, echo.</li>
+    </ul>
+  </div>
+
+  <div class="card aorta">
+    <h2>Aorta — adult <span class="tag">Stanford · isthmus · steal</span></h2>
+    <ul>
+      <li>Arch in order: brachiocephalic → L CC → L subclavian.</li>
+      <li>Abdominal: celiac T12 · SMA L1 · renals L1–L2 · gonadal L2 · IMA L3 · iliac bifurcation L4.</li>
+      <li><strong>Stanford A</strong> = ascending → surgery · <strong>Stanford B</strong> = distal to L subclavian → medical.</li>
+      <li><strong>Blunt aortic injury at the isthmus</strong> (lig. arteriosum tethers).</li>
+      <li>ICA atheroembolus → ophthalmic → CRA → painless monocular vision loss + cherry-red spot.</li>
+      <li><strong>Subclavian steal</strong>: retrograde ipsilateral vertebral flow + &gt;15 mmHg interarm SBP difference.</li>
+    </ul>
+  </div>
+
+  <div class="card veins">
+    <h2>Abdominal · pelvic veins <span class="tag">IVC · gonadal · femoral</span></h2>
+    <ul>
+      <li><strong>IVC formed L4–L5</strong> by R+L common iliacs; right of aorta, anterior to vertebra.</li>
+      <li>L renal vein crosses anterior to aorta, posterior to SMA → also receives L gonadal &amp; L adrenal.</li>
+      <li>R gonadal → IVC · L gonadal → L renal → IVC.</li>
+      <li><strong>Nutcracker</strong> → L flank pain + hematuria ± L varicocele.</li>
+      <li><strong>Right adult varicocele = RCC</strong> invading IVC.</li>
+      <li>Femoral triangle (NAVEL lat→med): vein medial to artery.</li>
+      <li>Femoral puncture above inguinal lig → retroperitoneal hematoma (inf. epigastric / external iliac).</li>
+    </ul>
+  </div>
+
+  <div class="card upper">
+    <h2>Upper-body veins <span class="tag">SVC · brachiocephalic</span></h2>
+    <ul>
+      <li>Subclavian + IJ → brachiocephalic; both → SVC → RA.</li>
+      <li><strong>SVC</strong> from common cardinal veins (embryo).</li>
+      <li>Unilateral face/arm swelling = brachiocephalic (apical tumor) · bilateral = SVC syndrome.</li>
+    </ul>
+  </div>
+
+  <div class="traps">
+    <h2>Top 15 traps</h2>
+    <ol>
+      <li>VSD = membranous IVS.</li>
+      <li>PFO + bubble study + cryptogenic stroke.</li>
+      <li>TOF = anterosuperior infundibular shift (neural crest).</li>
+      <li>TGA = failed AP spiraling.</li>
+      <li>PDA = 6th L arch; PGE1 / indomethacin.</li>
+      <li>Coronary sinus = posterior AV groove.</li>
+      <li>Left-dominant → LCx feeds AV node.</li>
+      <li>Posteromedial papillary rupture 3–5 d post-MI.</li>
+      <li>Stanford B near L subclavian.</li>
+      <li>Blunt aortic injury at the isthmus.</li>
+      <li>IVC = L4–L5 from common iliacs.</li>
+      <li>L gonadal → L renal → IVC; nutcracker.</li>
+      <li>Right adult varicocele → RCC + IVC invasion.</li>
+      <li>Subclavian steal: vertebral retrograde.</li>
+      <li>LA appendage = AF clot; fossa ovalis = transseptal puncture site.</li>
+    </ol>
+  </div>
+
+</div>
+
+<p class="footer-stamp">© Allan Bakesiga · USMLE Step 1 Prep · Original wording. Single page — carry it and review before every Q-bank block.</p>
+
+</body>
+</html>

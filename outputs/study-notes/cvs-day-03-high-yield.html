@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CVS Day 3 — High-Yield 1-Pager</title>
+<style>
+  :root {
+    --ink: #0C2A3D;
+    --ink-2: #345671;
+    --muted: #5B7A95;
+    --bg: #FFFFFF;
+    --bg-cream: #FFF8EC;
+    --border: #D6E8F5;
+
+    --gold: #E5A823;
+    --gold-deep: #B8851C;
+    --gold-soft: #FFF4D6;
+
+    --cvs: #0284C7; --cvs-soft: #E0F2FE; --cvs-deep: #075985;
+    --resp: #059669; --resp-soft: #D1FAE5; --resp-deep: #065F46;
+    --path: #7C3AED; --path-soft: #EDE9FE; --path-deep: #5B21B6;
+    --amber: #D97706; --amber-soft: #FEF3C7; --amber-deep: #B45309;
+  }
+
+  @page { size: A4; margin: 12mm 10mm; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 9pt;
+    line-height: 1.3;
+  }
+
+  .ribbon {
+    background: var(--ink);
+    color: #FFFFFF;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .ribbon h1 {
+    margin: 0;
+    font-size: 14pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .ribbon .meta {
+    font-size: 8.5pt;
+    color: #BFE3F7;
+    letter-spacing: 0.06em;
+  }
+
+  .cohort-line {
+    font-size: 8.5pt;
+    color: var(--ink-2);
+    margin: 0 0 8px;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .byline {
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-deep) 100%);
+    color: var(--ink);
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 8.5pt;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin: -4px 0 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .byline .author { font-weight: 800; }
+  .byline .home {
+    font-weight: 500;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .card {
+    border-radius: 6px;
+    padding: 6px 8px 7px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .card h2 {
+    margin: 0 0 4px;
+    font-size: 9pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 3px 7px;
+    margin: -6px -8px 5px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .card h2 .tag {
+    font-size: 7pt;
+    background: rgba(255,255,255,0.22);
+    padding: 1px 6px;
+    border-radius: 999px;
+    letter-spacing: 0.06em;
+  }
+  .card ul { margin: 0; padding-left: 14px; }
+  .card li { margin-bottom: 2px; }
+  .card li::marker { color: var(--ink-2); }
+
+  .card.ventap { background: var(--cvs-soft); }
+  .card.ventap h2 { background: var(--cvs-deep); }
+  .card.pacemaker { background: var(--path-soft); }
+  .card.pacemaker h2 { background: var(--path-deep); }
+  .card.ec { background: var(--amber-soft); }
+  .card.ec h2 { background: var(--amber-deep); }
+  .card.conduction { background: var(--path-soft); }
+  .card.conduction h2 { background: var(--path); }
+  .card.ecg { background: var(--cvs-soft); }
+  .card.ecg h2 { background: var(--cvs); }
+  .card.arrhythmias { background: var(--gold-soft); }
+  .card.arrhythmias h2 { background: var(--gold-deep); }
+  .card.ablation { background: var(--cvs-soft); }
+  .card.ablation h2 { background: var(--cvs-deep); }
+  .card.coronary { background: var(--amber-soft); }
+  .card.coronary h2 { background: var(--amber-deep); }
+  .card.baroreflex { background: var(--resp-soft); }
+  .card.baroreflex h2 { background: var(--resp-deep); }
+  .card.shock { background: var(--ink); color: #FFFFFF; }
+  .card.shock h2 { background: var(--gold-deep); color: #FFFFFF; }
+  .card.shock li::marker { color: var(--gold); }
+  .card.shock strong { color: var(--gold); }
+  .card.hf { background: var(--resp-soft); }
+  .card.hf h2 { background: var(--resp-deep); }
+
+  .card.span { grid-column: span 2; }
+
+  table.compact {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 3px;
+    font-size: 8pt;
+  }
+  table.compact th, table.compact td {
+    border: 1px solid var(--ink-2);
+    padding: 2px 4px;
+    text-align: left;
+  }
+  table.compact th {
+    background: var(--ink);
+    color: #FFFFFF;
+    font-weight: 700;
+  }
+  table.compact tr:nth-child(even) { background: rgba(255,255,255,0.55); }
+  .card.shock table.compact th { background: var(--gold-deep); color: #FFFFFF; }
+  .card.shock table.compact td { color: #FFFFFF; border-color: var(--gold); }
+
+  .traps {
+    background: var(--ink);
+    color: #FFFFFF;
+    border-radius: 6px;
+    padding: 7px 10px;
+    grid-column: span 2;
+    page-break-inside: avoid;
+  }
+  .traps h2 {
+    margin: 0 0 4px;
+    font-size: 10pt;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .traps ol {
+    margin: 0;
+    padding-left: 18px;
+    columns: 2;
+    column-gap: 14px;
+  }
+  .traps li { margin-bottom: 2px; }
+  .traps li::marker { color: var(--gold); font-weight: 700; }
+
+  .footer-stamp {
+    text-align: center;
+    font-size: 7.5pt;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  strong { color: var(--ink); }
+  em { font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <h1>CVS · Day 3 · Electrics + Integration</h1>
+  <div class="meta">USMLE Step 1 · June Cohort · FA pp. 297–301</div>
+</div>
+<div class="byline">
+  <span class="author">Prepared by Allan Bakesiga · USMLE Step 1 Prep</span>
+  <span class="home">bakesiga.github.io/usmle-dashboard</span>
+</div>
+<p class="cohort-line">Action potentials → ECG → shock physiology · Print and stick on your wall</p>
+
+<div class="grid">
+
+  <div class="card ventap">
+    <h2>Ventricular AP — 5 phases <span class="tag">non-pacemaker</span></h2>
+    <ul>
+      <li><strong>Phase 0</strong>: rapid depol, <strong>Na⁺ influx</strong>.</li>
+      <li><strong>Phase 1</strong>: initial repol, Na⁺ inactivates, transient K⁺ out.</li>
+      <li><strong>Phase 2</strong>: plateau, <strong>L-type Ca²⁺ influx</strong> balances K⁺ efflux (unique to cardiac).</li>
+      <li><strong>Phase 3</strong>: rapid repol, K⁺ efflux dominates.</li>
+      <li><strong>Phase 4</strong>: resting at −90 mV via K⁺ leak.</li>
+      <li>ERP = phases 0–3 (Na⁺ channels inactivated).</li>
+    </ul>
+  </div>
+
+  <div class="card pacemaker">
+    <h2>Pacemaker AP — SA, AV <span class="tag">slow-response</span></h2>
+    <ul>
+      <li>No stable resting potential.</li>
+      <li><strong>Phase 4</strong> (spontaneous depol): HCN "funny" Na⁺ → T-type Ca²⁺ → L-type Ca²⁺ approaching threshold.</li>
+      <li><strong>Phase 0</strong>: L-type Ca²⁺ slow upstroke.</li>
+      <li><strong>Phase 3</strong>: K⁺ efflux repol.</li>
+      <li>Drug targets: β-blocker (↓ HCN slope); non-DHP CCB (L-type Ca block); adenosine (↑ K⁺ → hyperpol); ivabradine (HCN only).</li>
+    </ul>
+  </div>
+
+  <div class="card ec">
+    <h2>EC coupling · NCX · digoxin <span class="tag">how Ca couples</span></h2>
+    <ul>
+      <li>AP → L-type Ca²⁺ opens (phase 2) → small Ca²⁺ in.</li>
+      <li>Trigger Ca²⁺ → <strong>Ca²⁺-induced Ca²⁺ release</strong> from SR (ryanodine receptor).</li>
+      <li>Ca²⁺ binds troponin C → tropomyosin moves → actin-myosin cross-bridge cycling.</li>
+      <li>Relaxation: SERCA pumps Ca²⁺ back into SR; <strong>NCX</strong> extrudes Ca²⁺ using Na⁺ gradient.</li>
+      <li><strong>Digoxin</strong>: blocks Na/K ATPase → ↑ Na⁺ in → NCX runs less → ↑ Ca²⁺ in → ↑ contractility.</li>
+    </ul>
+  </div>
+
+  <div class="card conduction">
+    <h2>Conduction system <span class="tag">velocity + escape rates</span></h2>
+    <ul>
+      <li>SA → atria → AV (delay ~100 ms) → His → bundle branches → Purkinje → ventricles.</li>
+      <li>Velocity mnemonic — <strong>Park At Ventura, AV</strong>: Purkinje &gt; atria &gt; ventricles &gt; AV node.</li>
+      <li>Pacemaker rates: SA 60–100 · AV/junctional 40–60 (narrow QRS escape) · Purkinje 20–40 (wide QRS escape).</li>
+      <li>AV node refractoriness = the rate-limiting step in AFib, atrial flutter, PSVT.</li>
+    </ul>
+  </div>
+
+  <div class="card ecg">
+    <h2>ECG read in 4 steps <span class="tag">rate · rhythm · axis · intervals</span></h2>
+    <ul>
+      <li><strong>Rate</strong>: 300 / big boxes; or R in 6 s × 10.</li>
+      <li><strong>Rhythm</strong>: sinus = P before every QRS, upright in II.</li>
+      <li><strong>Axis</strong>: I↑ + aVF↓ = LAD; I↓ + aVF↑ = RAD.</li>
+      <li><strong>Intervals</strong>: PR 0.12–0.20; QRS &lt;0.12; QTc &lt;0.44.</li>
+      <li>Chamber: LAE = wide-notched P (p-mitrale); RAE = tall P (p-pulmonale).</li>
+      <li>Blocks: 1° = long PR · Mobitz I = progressive PR → drop · Mobitz II = constant PR + drops · 3° = AV dissociation.</li>
+    </ul>
+  </div>
+
+  <div class="card arrhythmias span">
+    <h2>Arrhythmia gallery <span class="tag">read · diagnose · treat</span></h2>
+    <table class="compact">
+      <tr><th>Rhythm</th><th>ECG</th><th>Treatment / target</th></tr>
+      <tr><td><strong>AFib</strong></td><td>Irregularly irregular, no P, fibrillatory baseline</td><td>Rate control (β-blocker, non-DHP CCB, digoxin); anticoagulate per CHA₂DS₂-VASc; <strong>PV isolation</strong> if refractory</td></tr>
+      <tr><td><strong>Atrial flutter</strong></td><td>Sawtooth flutter waves, often 2:1 conduction</td><td>Same as AFib; <strong>cavotricuspid isthmus ablation</strong></td></tr>
+      <tr><td><strong>PSVT (AVNRT)</strong></td><td>Regular narrow tachy 150–220, no/retrograde P</td><td>Vagal maneuvers → adenosine; <strong>slow pathway ablation</strong></td></tr>
+      <tr><td><strong>PVC</strong></td><td>Wide QRS premature, opposite T, compensatory pause</td><td>Usually benign; β-blocker if symptomatic</td></tr>
+      <tr><td><strong>VT</strong></td><td>Wide regular, rate 150–250</td><td>Amiodarone or cardiovert; AICD long-term</td></tr>
+      <tr><td><strong>3° heart block</strong></td><td>P-QRS dissociation; narrow or wide escape</td><td>Pacemaker</td></tr>
+    </table>
+  </div>
+
+  <div class="card ablation">
+    <h2>Ablation map <span class="tag">anatomic targets</span></h2>
+    <ul>
+      <li><strong>AFib</strong> → pulmonary vein isolation.</li>
+      <li><strong>Atrial flutter</strong> → cavotricuspid isthmus.</li>
+      <li><strong>AVNRT</strong> → slow pathway of AV node.</li>
+      <li><strong>WPW</strong> → accessory pathway (bundle of Kent).</li>
+      <li><strong>RVOT VT</strong> → right ventricular outflow tract.</li>
+    </ul>
+  </div>
+
+  <div class="card coronary">
+    <h2>Coronary autoregulation + NO <span class="tag">why diastole matters</span></h2>
+    <ul>
+      <li>Heart extracts &gt; 70% O₂ at rest → ↑ demand met by ↑ flow.</li>
+      <li>Autoregulation over MAP 60–140 mmHg via <strong>adenosine + NO</strong>.</li>
+      <li>NO: eNOS uses <strong>L-arginine</strong> → NO → smooth muscle GC → ↑ cGMP → vasodilation.</li>
+      <li>LV perfused mostly in <strong>diastole</strong>; subendocardium most vulnerable to ischemia.</li>
+      <li>Coronary sinus = lowest O₂ saturation in the body.</li>
+    </ul>
+  </div>
+
+  <div class="card baroreflex">
+    <h2>Baroreceptors · chemoreceptors <span class="tag">CN IX vs X</span></h2>
+    <ul>
+      <li><strong>Carotid sinus baro</strong> → CN <strong>IX</strong>.</li>
+      <li><strong>Aortic arch baro</strong> → CN <strong>X</strong>.</li>
+      <li>Same for chemoreceptors: <strong>carotid body → IX, aortic body → X</strong>.</li>
+      <li>↑ BP → ↑ firing → ↑ vagal + ↓ sympathetic → ↓ BP.</li>
+      <li>↓ BP → ↓ firing → ↓ vagal + ↑ sympathetic → ↑ HR, vasoconstriction.</li>
+      <li>Carotid sinus hypersensitivity (tight collar) → exaggerated reflex syncope.</li>
+      <li>Vasovagal syncope: cardioinhibitory (↑ vagal) + vasodepressor (↓ sympathetic) limbs fire together.</li>
+    </ul>
+  </div>
+
+  <div class="card shock span">
+    <h2>Shock — 4 types <span class="tag">cath profile shorthand</span></h2>
+    <table class="compact">
+      <tr><th>Type</th><th>CVP</th><th>PCWP</th><th>CO</th><th>SVR</th><th>SvO₂</th><th>Skin / clue</th></tr>
+      <tr><td>Hypovolemic</td><td>↓</td><td>↓</td><td>↓</td><td>↑</td><td>↓</td><td>Cold; hemorrhage, diarrhea, burns</td></tr>
+      <tr><td>Cardiogenic</td><td>↑</td><td>↑</td><td>↓</td><td>↑</td><td>↓</td><td>Cold; STEMI, S3, crackles</td></tr>
+      <tr><td>Obstructive</td><td>↑</td><td>↓ (PE) / ↑ (tamponade)</td><td>↓</td><td>↑</td><td>↓</td><td>Cold; PE, tamponade, tension PTX</td></tr>
+      <tr><td>Distributive</td><td>↓</td><td>↓</td><td>↑*</td><td>↓</td><td>↑*</td><td>Warm; septic, anaphylactic, neurogenic</td></tr>
+    </table>
+    <ul>
+      <li>*Neurogenic shock: usually low CO + low SvO₂ from impaired sympathetic reflex.</li>
+      <li>Tamponade: pulsus paradoxus &gt; 10 mmHg + RA late-diastolic collapse + Beck's triad (↓ BP + ↑ JVP + muffled sounds).</li>
+      <li>Hypovolemic pediatric: lactic acidosis + Kussmaul respirations (compensatory respiratory alkalosis).</li>
+    </ul>
+  </div>
+
+  <div class="card hf span">
+    <h2>Heart failure cascade + pharmacology <span class="tag">block bad arms, augment good</span></h2>
+    <ul>
+      <li>HFrEF activates maladaptive neurohormonal cascade: ↑ sympathetic, ↑ RAAS, ↑ ADH; ↑ ANP/BNP is the only counter-regulatory arm.</li>
+      <li><strong>ANP</strong> from atria, <strong>BNP</strong> from ventricles, in response to myocardial stretch → guanylate cyclase → ↑ cGMP → vasodilation, natriuresis, ↓ aldosterone, ↓ renin.</li>
+      <li>Four-pillar HFrEF regimen: <strong>β-blocker</strong> (carvedilol, metoprolol succinate, bisoprolol) + <strong>ACE-i / ARB / ARNi</strong> (sacubitril/valsartan blocks neprilysin → ↑ ANP/BNP) + <strong>MRA</strong> (spironolactone, eplerenone) + <strong>SGLT2-i</strong> (dapa, empa).</li>
+      <li>Diuretic = symptom only, no mortality benefit.</li>
+      <li>Acute decompensated HF with HTN: nitroprusside (balanced; preload + afterload ↓, SV preserved).</li>
+    </ul>
+  </div>
+
+  <div class="traps">
+    <h2>Top 15 traps</h2>
+    <ol>
+      <li>Ventricular phase 0 = Na⁺; pacemaker phase 0 = Ca²⁺.</li>
+      <li>HCN "funny" current drives pacemaker phase 4 spontaneous depol.</li>
+      <li>Conduction speed: Park-At-Ventura, AV (Purkinje fastest, AV slowest).</li>
+      <li>Carotid → IX; aortic → X for both baro and chemoreceptors.</li>
+      <li>AFib triggers: pulmonary veins. Atrial flutter: cavotricuspid isthmus.</li>
+      <li>Vagal maneuvers and adenosine break AVNRT by prolonging AV refractoriness.</li>
+      <li>Coronary sinus = lowest O₂ in body; LV perfused in diastole.</li>
+      <li>NO substrate = L-arginine; mediator = cGMP.</li>
+      <li>Digoxin: ↑ Na⁺ inside → NCX runs less → ↑ Ca²⁺ → ↑ contractility.</li>
+      <li>Cardiogenic shock SVR is UP (compensatory), not down.</li>
+      <li>Distributive shock has high CO + low SVR (except neurogenic).</li>
+      <li>Tamponade PCWP appears ↑ (external compression — LA pressure transmitted).</li>
+      <li>Sacubitril blocks neprilysin → ↑ ANP/BNP. Valsartan blocks AT1.</li>
+      <li>Complete AV block: narrow QRS escape from His (better); wide from Purkinje (worse).</li>
+      <li>Vasovagal syncope = cardioinhibitory + vasodepressor combined misfire.</li>
+    </ol>
+  </div>
+
+</div>
+
+<p class="footer-stamp">© Allan Bakesiga · USMLE Step 1 Prep · Original wording. Single page — carry it and review before every Q-bank block.</p>
+
+</body>
+</html>

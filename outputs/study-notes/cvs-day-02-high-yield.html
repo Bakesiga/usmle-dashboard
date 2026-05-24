@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CVS Day 2 — High-Yield 1-Pager</title>
+<style>
+  :root {
+    --ink: #0C2A3D;
+    --ink-2: #345671;
+    --muted: #5B7A95;
+    --bg: #FFFFFF;
+    --bg-cream: #FFF8EC;
+    --border: #D6E8F5;
+
+    --gold: #E5A823;
+    --gold-deep: #B8851C;
+    --gold-soft: #FFF4D6;
+
+    --cvs: #0284C7; --cvs-soft: #E0F2FE; --cvs-deep: #075985;
+    --resp: #059669; --resp-soft: #D1FAE5; --resp-deep: #065F46;
+    --path: #7C3AED; --path-soft: #EDE9FE; --path-deep: #5B21B6;
+    --amber: #D97706; --amber-soft: #FEF3C7; --amber-deep: #B45309;
+  }
+
+  @page { size: A4; margin: 12mm 10mm; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 9pt;
+    line-height: 1.3;
+  }
+
+  .ribbon {
+    background: var(--ink);
+    color: #FFFFFF;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .ribbon h1 {
+    margin: 0;
+    font-size: 14pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .ribbon .meta {
+    font-size: 8.5pt;
+    color: #BFE3F7;
+    letter-spacing: 0.06em;
+  }
+
+  .cohort-line {
+    font-size: 8.5pt;
+    color: var(--ink-2);
+    margin: 0 0 8px;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .byline {
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-deep) 100%);
+    color: var(--ink);
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 8.5pt;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin: -4px 0 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .byline .author { font-weight: 800; }
+  .byline .home {
+    font-weight: 500;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .card {
+    border-radius: 6px;
+    padding: 6px 8px 7px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .card h2 {
+    margin: 0 0 4px;
+    font-size: 9pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 3px 7px;
+    margin: -6px -8px 5px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .card h2 .tag {
+    font-size: 7pt;
+    background: rgba(255,255,255,0.22);
+    padding: 1px 6px;
+    border-radius: 999px;
+    letter-spacing: 0.06em;
+  }
+  .card ul { margin: 0; padding-left: 14px; }
+  .card li { margin-bottom: 2px; }
+  .card li::marker { color: var(--ink-2); }
+
+  .card.equations { background: var(--cvs-soft); }
+  .card.equations h2 { background: var(--cvs-deep); }
+  .card.preload { background: var(--gold-soft); }
+  .card.preload h2 { background: var(--gold-deep); }
+  .card.pvloop { background: var(--cvs-soft); }
+  .card.pvloop h2 { background: var(--cvs); }
+  .card.maneuvers { background: var(--amber-soft); }
+  .card.maneuvers h2 { background: var(--amber-deep); }
+  .card.curves { background: var(--resp-soft); }
+  .card.curves h2 { background: var(--resp-deep); }
+  .card.wiggers { background: var(--path-soft); }
+  .card.wiggers h2 { background: var(--path-deep); }
+  .card.sounds { background: var(--gold-soft); }
+  .card.sounds h2 { background: var(--gold-deep); }
+  .card.valves { background: var(--cvs-soft); }
+  .card.valves h2 { background: var(--cvs-deep); }
+  .card.cmp { background: var(--path-soft); }
+  .card.cmp h2 { background: var(--path); }
+  .card.exercise { background: var(--resp-soft); }
+  .card.exercise h2 { background: var(--resp-deep); }
+
+  .card.span { grid-column: span 2; }
+
+  table.compact {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 3px;
+    font-size: 8pt;
+  }
+  table.compact th, table.compact td {
+    border: 1px solid var(--ink-2);
+    padding: 2px 4px;
+    text-align: left;
+  }
+  table.compact th {
+    background: var(--ink);
+    color: #FFFFFF;
+    font-weight: 700;
+  }
+  table.compact tr:nth-child(even) { background: rgba(255,255,255,0.55); }
+
+  .traps {
+    background: var(--ink);
+    color: #FFFFFF;
+    border-radius: 6px;
+    padding: 7px 10px;
+    grid-column: span 2;
+    page-break-inside: avoid;
+  }
+  .traps h2 {
+    margin: 0 0 4px;
+    font-size: 10pt;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .traps ol {
+    margin: 0;
+    padding-left: 18px;
+    columns: 2;
+    column-gap: 14px;
+  }
+  .traps li { margin-bottom: 2px; }
+  .traps li::marker { color: var(--gold); font-weight: 700; }
+
+  .footer-stamp {
+    text-align: center;
+    font-size: 7.5pt;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  strong { color: var(--ink); }
+  em { font-style: italic; }
+  .accent-gold { color: var(--gold-deep); font-weight: 700; }
+  .accent-cvs { color: var(--cvs-deep); font-weight: 700; }
+  .accent-resp { color: var(--resp-deep); font-weight: 700; }
+  .accent-path { color: var(--path-deep); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <h1>CVS · Day 2 · Mechanics</h1>
+  <div class="meta">USMLE Step 1 · June Cohort · FA pp. 289–296</div>
+</div>
+<div class="byline">
+  <span class="author">Prepared by Allan Bakesiga · USMLE Step 1 Prep</span>
+  <span class="home">bakesiga.github.io/usmle-dashboard</span>
+</div>
+<p class="cohort-line">PV loops, valves &amp; sounds · Print and stick on your wall</p>
+
+<div class="grid">
+
+  <div class="card equations">
+    <h2>Core equations <span class="tag">memorise cold</span></h2>
+    <ul>
+      <li><strong>CO = SV × HR</strong>.</li>
+      <li><strong>SV = EDV − ESV</strong>.</li>
+      <li><strong>EF = SV / EDV</strong>; normal ≥ 50%; &lt;40% = HFrEF.</li>
+      <li><strong>Fick:</strong> CO = VO₂ / (CaO₂ − CvO₂).</li>
+      <li><strong>MAP</strong> ≈ DBP + 1/3 PP ≈ CO × SVR.</li>
+      <li><strong>Pulse pressure</strong> ↑ with ↑ SV or ↓ aortic compliance.</li>
+      <li><strong>Poiseuille</strong>: R ∝ ηL / r⁴ → radius dominates.</li>
+    </ul>
+  </div>
+
+  <div class="card preload">
+    <h2>Preload · afterload · contractility <span class="tag">drivers of SV</span></h2>
+    <ul>
+      <li><strong>Preload</strong> = EDV / EDP; depends on venous return.</li>
+      <li><strong>Afterload</strong> ≈ aortic DBP; LV must exceed to open AV.</li>
+      <li><strong>Contractility</strong> = intrinsic force at a given EDV (independent of preload).</li>
+      <li><strong>Frank-Starling</strong>: ↑ EDV → ↑ sarcomere length → ↑ SV (within range).</li>
+      <li>↑ contractility: catecholamines, digoxin, ↑ Ca²⁺, ↓ extracellular Na⁺.</li>
+      <li>↓ contractility: β-blockers, non-DHP CCBs, acidosis, hypoxia.</li>
+    </ul>
+  </div>
+
+  <div class="card pvloop span">
+    <h2>PV loop — landmarks &amp; shifts <span class="tag">draw it every day</span></h2>
+    <ul>
+      <li>Points: <strong>1</strong> = MV closes (S1) · <strong>2</strong> = AV opens · <strong>3</strong> = AV closes (S2) · <strong>4</strong> = MV opens.</li>
+      <li>Width = SV. Steeper ESPVR (top-left line) = ↑ contractility.</li>
+      <li>↑ <strong>Preload</strong> (saline): shifts right, wider, ↑ EDV, ↑ SV.</li>
+      <li>↑ <strong>Afterload</strong> (phenylephrine): taller, ↑ ESV, ↓ SV.</li>
+      <li>↑ <strong>Contractility</strong> (dobutamine): steeper ESPVR → ↓ ESV, ↑ SV.</li>
+      <li><strong>Nitroglycerin</strong> (venodilator): narrower, ↓ EDV, ↓ EDSL, ↓ SV.</li>
+      <li><strong>Nitroprusside</strong> (balanced): smaller at both ends, <em>SV preserved</em>.</li>
+      <li><strong>AV fistula</strong>: ↑ EDV + ↓ afterload → wide loop, ↑ SV (chronic = high-output HF).</li>
+      <li><strong>AS</strong>: peak LV >> peak aortic; tall loop with persistent gradient.</li>
+      <li><strong>AR</strong>: wide loop, low DBP, ↑ EDV (regurg); eccentric LVH.</li>
+      <li><strong>MS</strong>: LV loop normal/small (LV under-filled); LA hypertension carries the disease. Opening snap at point 4.</li>
+      <li><strong>MR</strong>: no isovolumetric contraction phase; regurg starts at S1.</li>
+    </ul>
+  </div>
+
+  <div class="card maneuvers">
+    <h2>Bedside maneuvers <span class="tag">murmur dynamics</span></h2>
+    <table class="compact">
+      <tr><th>Maneuver</th><th>Preload</th><th>Louder</th></tr>
+      <tr><td>Valsalva strain</td><td>↓</td><td>HCM, MVP</td></tr>
+      <tr><td>Standing</td><td>↓</td><td>HCM, MVP</td></tr>
+      <tr><td>Squat / leg raise</td><td>↑</td><td>AS, MR, AR</td></tr>
+      <tr><td>Handgrip (↑ afterload)</td><td>—</td><td>AR, MR, VSD</td></tr>
+      <tr><td>Inspiration</td><td>↑ R-sided</td><td>TR, TS, PR, PS (Carvallo)</td></tr>
+    </table>
+    <ul>
+      <li>HCM: <strong>handgrip softens it</strong> (opposite of AS).</li>
+      <li>MVP: click + murmur move <em>earlier</em> with ↓ preload.</li>
+    </ul>
+  </div>
+
+  <div class="card curves">
+    <h2>Function curves <span class="tag">cardiac × vascular</span></h2>
+    <ul>
+      <li>Cardiac fn curve: ↑ CVP → ↑ CO; shifts up with ↑ contractility.</li>
+      <li>Vascular fn curve: ↑ CO → ↓ CVP; shifts right with ↑ volume.</li>
+      <li>Intersection = operating point.</li>
+      <li>Hemorrhage → vascular curve <strong>left</strong> → ↓ CO + ↓ CVP.</li>
+      <li>Exercise → cardiac <strong>up</strong> + vascular <strong>right</strong> (venoconstriction).</li>
+      <li>AV fistula → vascular <strong>right</strong> + cardiac <strong>up</strong> → ↑ CO, mild ↑ CVP.</li>
+      <li>HFrEF → cardiac curve <strong>flattens</strong> → ↓ CO + ↑ CVP.</li>
+    </ul>
+  </div>
+
+  <div class="card wiggers">
+    <h2>Wiggers · JVP <span class="tag">timing</span></h2>
+    <ul>
+      <li><strong>S1</strong> = MV/TV closure (start of systole).</li>
+      <li><strong>S2</strong> = AV/PV closure (start of diastole).</li>
+      <li><strong>S3</strong> = early diastolic; rapid filling against dilated/stiff LV.</li>
+      <li><strong>S4</strong> = late diastolic; atrial kick into stiff LV.</li>
+      <li>JVP: <strong>a</strong> = atrial contraction (gone in AF) · <strong>c</strong> = TV bulge · <strong>x</strong> = atrial relax · <strong>v</strong> = atrial fill (giant in TR) · <strong>y</strong> = TV opens.</li>
+      <li>Cannon a waves: complete AV block (atria fire against closed TV).</li>
+    </ul>
+  </div>
+
+  <div class="card sounds">
+    <h2>S2 splitting <span class="tag">recognise 4 patterns</span></h2>
+    <ul>
+      <li><strong>Physiologic</strong>: inspiration splits A2–P2; expiration unifies.</li>
+      <li><strong>Wide</strong>: delayed P2 — RBBB, PS, severe MR.</li>
+      <li><strong>Fixed</strong>: ASD (constant L→R equalises RA pressures).</li>
+      <li><strong>Paradoxical</strong>: A2 after P2 — LBBB, severe AS, HCM. Splits on <em>expiration</em>.</li>
+    </ul>
+  </div>
+
+  <div class="card valves span">
+    <h2>Valvular disease — quick recognition <span class="tag">murmur + signature</span></h2>
+    <table class="compact">
+      <tr><th>Lesion</th><th>Murmur</th><th>Signature</th></tr>
+      <tr><td><strong>AS</strong></td><td>Crescendo-decrescendo systolic, RUSB → carotids</td><td>Pulsus parvus et tardus; triad: angina, syncope, HF; LV pressure >> aortic</td></tr>
+      <tr><td><strong>AR</strong></td><td>Early diastolic decrescendo, LSB</td><td>Wide PP; water-hammer pulse; de Musset, Duroziez, Quincke; eccentric LVH</td></tr>
+      <tr><td><strong>MS</strong></td><td>Opening snap + mid-diastolic rumble at apex (LLD, bell)</td><td>Loud S1; severity tracks S2–OS interval; LA hypertension; normal LV</td></tr>
+      <tr><td><strong>MR</strong></td><td>Holosystolic at apex → axilla</td><td>No isovolumetric contraction on PV loop; LA enlarged; ischemic papillary rupture 3–5 d post-MI</td></tr>
+      <tr><td><strong>MVP</strong></td><td>Mid-systolic click + late systolic murmur</td><td>Click moves earlier with Valsalva; Marfan, Ehlers-Danlos</td></tr>
+      <tr><td><strong>TR</strong></td><td>Holosystolic at LLSB, <strong>louder on inspiration (Carvallo)</strong></td><td>IVDU endocarditis; giant v wave; pulsatile liver</td></tr>
+      <tr><td><strong>VSD</strong></td><td>Holosystolic at LSB w/ thrill</td><td>Most common congenital; membranous IVS; Eisenmenger if untreated</td></tr>
+    </table>
+  </div>
+
+  <div class="card cmp">
+    <h2>Cardiomyopathy echo <span class="tag">4 phenotypes</span></h2>
+    <table class="compact">
+      <tr><th>Type</th><th>Mass</th><th>Cavity</th><th>EF</th><th>Diastole</th></tr>
+      <tr><td>Dilated</td><td>↑</td><td>↑</td><td>↓</td><td>normal</td></tr>
+      <tr><td>HCM</td><td>↑</td><td>↓</td><td>preserved</td><td>impaired</td></tr>
+      <tr><td>Restrictive</td><td>nl</td><td>nl</td><td>preserved</td><td>impaired</td></tr>
+      <tr><td>Athlete</td><td>↑</td><td>nl/↑</td><td>preserved</td><td>normal</td></tr>
+    </table>
+    <ul>
+      <li><strong>HCM</strong>: AD, β-MHC or MyBPC mutations; asymmetric septal hypertrophy; dynamic LVOT obstruction; S4; risk of SCD with exercise.</li>
+      <li>HCM murmur ↓ with squat / handgrip (opposite of AS).</li>
+      <li><strong>Eccentric LVH</strong> = volume overload, sarcomeres <em>in series</em>.</li>
+      <li><strong>Concentric LVH</strong> = pressure overload, sarcomeres <em>in parallel</em>, β-MHC upregulation.</li>
+    </ul>
+  </div>
+
+  <div class="card exercise">
+    <h2>Exercise · aging <span class="tag">hemodynamics</span></h2>
+    <ul>
+      <li>Aerobic exercise: ↑ HR, ↑ SV, ↑ CO; muscle vasodilation &gt; splanchnic vasoconstriction → <strong>↓ SVR</strong>.</li>
+      <li>Net BP: <strong>SBP ↑, DBP unchanged, PP ↑</strong>.</li>
+      <li>Pre-loaded by venoconstriction (capacitance ↓).</li>
+      <li>Aging aorta: ↓ compliance → <strong>ISH</strong> (high SBP, normal DBP, wide PP).</li>
+      <li>Aged myocyte: hypertrophy without hyperplasia; lipofuscin pigment (wear-and-tear).</li>
+      <li>Hypovolemic shock fluids: ↑ EDV → ↑ EDSL → ↑ SV (Frank-Starling).</li>
+    </ul>
+  </div>
+
+  <div class="traps">
+    <h2>Top 15 traps</h2>
+    <ol>
+      <li>EF formula = SV/EDV (not SV/ESV).</li>
+      <li>HCM murmur SOFTER with handgrip — opposite of AS.</li>
+      <li>Fixed split S2 = ASD (the RA pressures are tied to LA across the shunt).</li>
+      <li>Paradoxical split = LBBB or severe AS (split on expiration).</li>
+      <li>MS leaves LV hemodynamics normal — only LA hypertension.</li>
+      <li>Cath profile for MS: ↑ PCWP with normal LV.</li>
+      <li>Opening snap is at point 4 on the PV loop (MV opens).</li>
+      <li>AR signs: wide PP + water-hammer + de Musset + Duroziez + Quincke + Hill + Müller + Traube.</li>
+      <li>TR / right-sided murmurs louder with inspiration (Carvallo sign).</li>
+      <li>Posteromedial papillary rupture 3–5 d post-MI → acute MR.</li>
+      <li>Nitroglycerin = venous only (↓ preload). Nitroprusside = balanced (SV preserved).</li>
+      <li>S3 = early diastole / rapid filling; S4 = late diastole / atrial kick.</li>
+      <li>Eccentric LVH = volume; concentric LVH = pressure.</li>
+      <li>Aging aorta → ISH; pulse pressure widens.</li>
+      <li>Cannon a waves = complete AV block (atria firing against closed TV).</li>
+    </ol>
+  </div>
+
+</div>
+
+<p class="footer-stamp">© Allan Bakesiga · USMLE Step 1 Prep · Original wording. Single page — carry it and review before every Q-bank block.</p>
+
+</body>
+</html>
