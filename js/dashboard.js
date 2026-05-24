@@ -316,11 +316,16 @@
       .filter(s => activeFilter === 'all' || s.subject === activeFilter)
       .forEach(s => {
         const d = parseYMD(s.date);
+        const idx = window.SESSIONS.indexOf(s);
         let status = 'upcoming';
         if (s.date === todayStr) status = 'today';
         else if (s.date < todayStr) status = 'done';
         const row = document.createElement('div');
         row.className = 'sess-row subject-' + s.subject + (status === 'today' ? ' today-row' : '');
+        row.dataset.sessionIdx = idx;
+        row.setAttribute('role', 'link');
+        row.setAttribute('tabindex', '0');
+        row.title = 'Open Day ' + s.day + ' in Today panel';
         row.innerHTML = `
           <div class="sess-day"><span class="num">Day ${s.day}</span></div>
           <div class="sess-date">${fmtDateShort(d)}</div>
@@ -372,7 +377,13 @@
       const session = window.SESSIONS.find(s => s.date === ymdStr);
       const cell = document.createElement('div');
       cell.className = 'cal-day';
-      if (session) cell.classList.add('has-class', 'subject-' + session.subject);
+      if (session) {
+        cell.classList.add('has-class', 'subject-' + session.subject);
+        cell.dataset.sessionIdx = window.SESSIONS.indexOf(session);
+        cell.setAttribute('role', 'link');
+        cell.setAttribute('tabindex', '0');
+        cell.title = 'Open Day ' + session.day + ' (' + session.title + ') in Today panel';
+      }
       if (ymdStr === todayStr) cell.classList.add('today');
       cell.innerHTML = `<span class="d">${day}</span>` + (session ? `<span class="t">${session.title}</span>` : '');
       grid.appendChild(cell);
@@ -380,14 +391,45 @@
   }
 
   // ---------------- TABS ----------------
+  function activateTab(key) {
+    document.querySelectorAll('[data-tab]').forEach(t => t.classList.toggle('active', t.dataset.tab === key));
+    document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.dataset.panel === key));
+    if (key === 'today')      renderToday();
+    if (key === 'sessions')   renderSessions();
+    if (key === 'schedule')   renderCalendar();
+  }
   function bindTabs() {
     document.querySelectorAll('[data-tab]').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const key = tab.dataset.tab;
-        document.querySelectorAll('[data-tab]').forEach(t => t.classList.toggle('active', t === tab));
-        document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.dataset.panel === key));
-        if (key === 'sessions')   renderSessions();
-        if (key === 'schedule')   renderCalendar();
+      tab.addEventListener('click', () => activateTab(tab.dataset.tab));
+    });
+  }
+
+  // ---------------- Jump to a day from Sessions or Schedule ----------------
+  function jumpToSession(idx) {
+    if (!Number.isInteger(idx) || idx < 0 || idx >= window.SESSIONS.length) return;
+    window.DASH_SELECTED_IDX = idx;
+    activateTab('today');
+    const todayPanel = document.querySelector('[data-panel="today"]');
+    if (todayPanel) todayPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function bindDayJumps() {
+    [['sessions', '[data-session-idx]'], ['schedule', '[data-session-idx]']].forEach(([panelKey, selector]) => {
+      const panel = document.querySelector(`[data-panel="${panelKey}"]`);
+      if (!panel) return;
+      panel.addEventListener('click', e => {
+        const target = e.target.closest(selector);
+        if (!target) return;
+        if (e.target.closest('[data-filter]')) return; // don't hijack filter pills
+        const idx = parseInt(target.dataset.sessionIdx, 10);
+        if (Number.isInteger(idx)) jumpToSession(idx);
+      });
+      panel.addEventListener('keydown', e => {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        const target = e.target.closest(selector);
+        if (!target) return;
+        e.preventDefault();
+        const idx = parseInt(target.dataset.sessionIdx, 10);
+        if (Number.isInteger(idx)) jumpToSession(idx);
       });
     });
   }
@@ -454,6 +496,7 @@
     bindFilters();
     bindUserMenu();
     bindAdjacentNav();
+    bindDayJumps();
     renderToday();
     renderSessions();
     renderCalendar();
