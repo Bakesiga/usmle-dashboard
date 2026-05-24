@@ -86,9 +86,9 @@ window.SESSIONS = [
       ]
     }
   },
-  { day: 4,  date: "2026-06-04", subject: "cvs",  title: "HTN, vascular pathology & aortic disease", sub: "Essential & secondary HTN, atherosclerosis, dyslipidemia (statins, PCSK9), vasculitis large/medium/small, AAA, dissection" },
-  { day: 5,  date: "2026-06-05", subject: "cvs",  title: "Ischemic heart disease — angina to MI", sub: "Stable angina, ACS spectrum, ECG localisation, post-MI complications timeline, antianginal pharmacology" },
-  { day: 6,  date: "2026-06-06", subject: "cvs",  title: "Heart failure & shock — clinical management", sub: "HFrEF vs HFpEF clinical mgmt, four-pillar regimen, NYHA staging, shock types applied" },
+  { day: 4,  date: "2026-06-04", subject: "cvs",  title: "HTN, vascular pathology & aortic disease", sub: "Essential & secondary HTN, atherosclerosis, dyslipidemia, vasculitis large/medium/small, AAA, dissection" },
+  { day: 5,  date: "2026-06-05", subject: "cvs",  title: "Ischemic heart disease — angina to MI", sub: "Stable angina, ACS spectrum, ECG localisation, post-MI complications timeline" },
+  { day: 6,  date: "2026-06-06", subject: "cvs",  title: "Heart failure & shock — clinical management", sub: "HFrEF vs HFpEF clinical mgmt, NYHA staging, shock types applied" },
   { day: 7,  date: "2026-06-07", subject: "cvs",  title: "Cardiomyopathies & myocarditis",     sub: "Dilated, hypertrophic, restrictive, ARVC, peripartum, takotsubo, infectious myocarditis" },
   { day: 8,  date: "2026-06-08", subject: "cvs",  title: "Valvular & rheumatic heart disease + endocarditis", sub: "Rheumatic HD, IE Duke criteria, prosthetic valves, valvular intervention timing" },
   { day: 9,  date: "2026-06-09", subject: "cvs",  title: "Pericardial disease, cardiac tumors & inherited arrhythmias", sub: "Effusion, tamponade, constrictive pericarditis, myxoma, WPW, long QT, Brugada, ARVC" },
