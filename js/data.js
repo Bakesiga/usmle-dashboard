@@ -39,7 +39,7 @@ window.SESSIONS = [
         meta: "Open in browser" },
       { kind: "flashcards", label: "Flashcards",
         url: "outputs/study-notes/cvs-day-02-flashcards.html",
-        meta: "70 cards" }
+        meta: "52 cards" }
     ],
     outline: {
       intro: "Day 2 covers the mechanical half of CVS Physiology — how the heart pumps. Read ahead in First Aid 2025 (Cardiovascular · Physiology section). The Day 2 Q-bank only asks about material in the sections below.",
@@ -65,7 +65,7 @@ window.SESSIONS = [
         meta: "Open in browser" },
       { kind: "flashcards", label: "Flashcards",
         url: "outputs/study-notes/cvs-day-03-flashcards.html",
-        meta: "65 cards" }
+        meta: "53 cards" }
     ],
     outline: {
       intro: "Day 3 covers the electrical half of CVS Physiology plus the body's integrative responses. Read ahead in First Aid 2025 (Cardiovascular · Physiology and Pathology selections below). The Day 3 Q-bank only asks about material in the sections below.",
@@ -140,7 +140,37 @@ window.SESSIONS = [
       ]
     }
   },
-  { day: 6,  date: "2026-06-06", subject: "cvs",  title: "Heart failure & shock — clinical management", sub: "HFrEF vs HFpEF clinical mgmt, NYHA staging, shock types applied" },
+  { day: 6,  date: "2026-06-06", subject: "cvs",  title: "Heart failure & shock — clinical management", sub: "HFrEF vs HFpEF clinical mgmt, NYHA staging, shock types applied",
+    resources: [
+      { kind: "highYield", label: "High-yield 1-pager",
+        url: "outputs/study-notes/cvs-day-06-high-yield.html",
+        meta: "Open in browser" },
+      { kind: "flashcards", label: "Flashcards",
+        url: "outputs/study-notes/cvs-day-06-flashcards.html",
+        meta: "52 cards" }
+    ],
+    outline: {
+      intro: "Day 6 pivots from the physiology of HF + shock (Day 3) to clinical recognition + management. Read First Aid 2025 (CVS Pathology — heart failure, cardiomyopathy backdrop, shock) and Pharmacology (HF + antihypertensives + adrenergic agents) before class. The Q-bank for Day 6 only asks about material in the sections below.",
+      edition: "First Aid 2025 · CVS Pathology + Pharmacology",
+      items: [
+        { topic: "Heart failure clinical recognition: HFrEF vs HFpEF; left-sided symptoms (dyspnea, orthopnea, PND, cough); right-sided symptoms (JVD, hepatomegaly, peripheral edema); biventricular failure as a continuum; displaced PMI inferolaterally in HFrEF", section: "CVS · Pathology (heart failure clinical features)", pages: "pp. 318-319" },
+        { topic: "Heart sound integration — S3 vs S4: S3 = volume overload / floppy LV (HFrEF, MR, AR, high-output states; normal under 40); S4 = pressure overload / stiff LV (HFpEF, HTN, HCM, restrictive CMP, acute MI; can be normal in elderly)", section: "CVS · Physiology (S3/S4) cross-ref + Pathology (HF)", pages: "p. 294 + pp. 318-319" },
+        { topic: "Pulmonary congestion histopathology: hemosiderin-laden alveolar macrophages (heart failure cells) from chronic LV failure; Prussian-blue positive ferric iron; pink acellular intraalveolar transudate in acute pulmonary edema", section: "CVS · Pathology (HF histology) + Respiratory cross-ref", pages: "pp. 318-319" },
+        { topic: "Decompensated HF chest X-ray: cephalization of pulmonary vasculature, Kerley B lines (interlobular septal edema), fissure sign, bat-wing perihilar opacification, bilateral pleural effusions (costophrenic angle blunting), cardiomegaly", section: "CVS · Pathology (HF imaging)", pages: "pp. 318-319" },
+        { topic: "BNP and ANP biomarkers: ventricular cardiomyocytes release BNP in response to wall stress (Laplace), atrial cardiomyocytes release ANP from atrial stretch; clinical use of BNP/NT-proBNP — normal value rules out HF (high NPV), elevated values are non-specific (AFib, CKD, PE, advanced age)", section: "CVS · Physiology (natriuretic peptides) + Pathology (HF biomarkers)", pages: "pp. 318-319" },
+        { topic: "HF staging and classification: ACC/AHA stages A (at-risk) → B (structural, asymptomatic) → C (symptomatic) → D (refractory); NYHA functional class I → IV; treat structural disease at stage B with ACE-i + β-blocker even before symptoms", section: "CVS · Pathology (HF classification)", pages: "pp. 318-319" },
+        { topic: "Vicious cycle of decompensated HF: ↓ CO → ↓ baroreceptor stretch + ↓ renal perfusion → SNS + RAAS + ADH activation → ↑ SVR + Na/H₂O retention → ↑ preload + ↑ afterload → worsens HF. ANP / BNP counter-regulatory but eventually overwhelmed; ACE concentrated in pulmonary endothelium (PA → PV AngII conversion)", section: "CVS · Pathology (HF neurohormonal cascade)", pages: "pp. 318-319" },
+        { topic: "HFrEF four-pillar regimen with mortality benefit: (1) β-blocker (carvedilol, metoprolol succinate, bisoprolol), (2) ACE-i / ARB / ARNi (sacubitril-valsartan superior in PARADIGM-HF), (3) MRA (spironolactone, eplerenone), (4) SGLT2-i (dapagliflozin, empagliflozin); plus loop diuretic for symptoms only; ICD if EF ≤ 35%; CRT if QRS ≥ 150 ms + LBBB", section: "CVS · Pharmacology (HF + antihypertensives)", pages: "pp. 324-326" },
+        { topic: "HFpEF management: diuretics for symptom control, SGLT2-i and MRA established mortality benefit, aggressive BP and comorbidity control (AF, OSA, obesity, CKD); no inotrope role; preserved EF reflects diastolic dysfunction from concentric LVH", section: "CVS · Pathology (HFpEF) + Pharmacology", pages: "pp. 318-319 + 324-326" },
+        { topic: "Right HF / cor pulmonale: COPD → chronic hypoxic pulmonary vasoconstriction → pulmonary HTN → RV pressure overload → RV dilation → RV failure. Cardiac ascites = portal capillary hydrostatic ↑ with normal oncotic and permeability (transudate, SAAG > 1.1); lymphatic compensation buffers edema (~10-20× reserve)", section: "CVS · Pathology (right HF / cor pulmonale)", pages: "p. 319 + Respiratory cross-ref" },
+        { topic: "High-output HF: thyrotoxicosis (Graves — ↓ SVR + ↑ CO + wide PP + edema; β-blocker first-line, propranolol blocks T4 → T3), arteriovenous fistula, severe anemia, beriberi, Paget disease", section: "CVS · Pathology (high-output HF) + Endocrine cross-ref", pages: "p. 319" },
+        { topic: "Shock recognition + cath profile (CVP, PCWP, CI, SVR, SvO₂) — 4 types: hypovolemic (↓↓↓↑↓), cardiogenic (↑↑↓↑↓), obstructive (↑ ↓ ↓ ↑ ↓; tamponade exception PCWP paradox-↑), distributive (↓ ↓ ↑ ↓ ↑ warm phase)", section: "CVS · Pathology (shock — clinical) — Day 3 cross-ref", pages: "pp. 320-321" },
+        { topic: "Shock management by type: hypovolemic → rapid crystalloid + source control; cardiogenic → revascularize (PCI) + dobutamine + mechanical support (IABP, Impella, ECMO); obstructive → remove obstruction (pericardiocentesis for tamponade, thrombolytic for massive PE); distributive: anaphylaxis → IM epinephrine, septic shock → early antibiotics + IV fluid + norepinephrine first-line", section: "CVS · Pathology + Pharmacology (shock management)", pages: "pp. 320-321 + 324-326" },
+        { topic: "Lymphatic compensation + edema thresholds: lymphatic system has ~10-20× capacity reserve; ↑ filling pressures do not produce edema until reserve exceeded; edema is a late sign in HF, lymphedema, or hypoalbuminemia — useful framework for explaining why some HF patients lack peripheral edema despite high CVP", section: "CVS · Physiology cross-ref (Starling forces, lymphatics)", pages: "p. 290 + Pathology cross-ref" },
+        { topic: "Specific cardiomyopathies relevant to HF presentation (full coverage Day 7): doxorubicin-induced DCM (dose-dependent, irreversible, presents years post-chemo; dexrazoxane preventive); alcoholic DCM (reversible with abstinence); ischemic CMP from prior MI — most common cause of HFrEF in older adults", section: "CVS · Pathology (cardiomyopathy — preview)", pages: "pp. 314-315 (preview)" }
+      ]
+    }
+  },
   { day: 7,  date: "2026-06-07", subject: "cvs",  title: "Cardiomyopathies & myocarditis",     sub: "Dilated, hypertrophic, restrictive, ARVC, peripartum, takotsubo, infectious myocarditis" },
   { day: 8,  date: "2026-06-08", subject: "cvs",  title: "Valvular & rheumatic heart disease + endocarditis", sub: "Rheumatic HD, IE Duke criteria, prosthetic valves, valvular intervention timing" },
   { day: 9,  date: "2026-06-09", subject: "cvs",  title: "Pericardial disease, cardiac tumors & inherited arrhythmias", sub: "Effusion, tamponade, constrictive pericarditis, myxoma, WPW, long QT, Brugada, ARVC" },

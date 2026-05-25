@@ -109,16 +109,16 @@
     border-radius: 999px;
   }
 
-  .section.ventap .section-bar { background: var(--cvs-deep); }
+  .section.ap .section-bar { background: var(--cvs-deep); }
   .section.pacemaker .section-bar { background: var(--path-deep); }
-  .section.ec .section-bar { background: var(--amber-deep); }
-  .section.conduction .section-bar { background: var(--path); }
+  .section.eccoupling .section-bar { background: var(--gold-deep); color: #FFFFFF; }
+  .section.conduction .section-bar { background: var(--gold-deep); }
   .section.ecg .section-bar { background: var(--cvs); }
-  .section.arrhythmias .section-bar { background: var(--gold-deep); }
-  .section.ablation .section-bar { background: var(--cvs-deep); }
-  .section.coronary .section-bar { background: var(--amber-deep); }
-  .section.baroreflex .section-bar { background: var(--resp-deep); }
-  .section.shock .section-bar { background: var(--ink); }
+  .section.arrhythmia .section-bar { background: var(--amber-deep); }
+  .section.ablation .section-bar { background: var(--resp-deep); }
+  .section.auto .section-bar { background: var(--gold-deep); }
+  .section.baroreflex .section-bar { background: var(--path); }
+  .section.shock .section-bar { background: var(--cvs-deep); }
   .section.hf .section-bar { background: var(--resp-deep); }
 
   .card {
@@ -154,45 +154,45 @@
   }
   .a strong { color: var(--ink); }
 
-  .section.ventap .card { background: var(--cvs-soft); }
-  .section.ventap .a { background: #ffffff; }
-  .section.ventap .q .n { background: var(--cvs-deep); }
+  .section.ap .card { background: var(--cvs-soft); }
+  .section.ap .a { background: #ffffff; }
+  .section.ap .q .n { background: var(--cvs-deep); }
 
   .section.pacemaker .card { background: var(--path-soft); }
   .section.pacemaker .a { background: #ffffff; }
   .section.pacemaker .q .n { background: var(--path-deep); }
 
-  .section.ec .card { background: var(--amber-soft); }
-  .section.ec .a { background: #ffffff; }
-  .section.ec .q .n { background: var(--amber-deep); }
+  .section.eccoupling .card { background: var(--gold-soft); }
+  .section.eccoupling .a { background: #ffffff; }
+  .section.eccoupling .q .n { background: var(--gold-deep); }
 
-  .section.conduction .card { background: var(--path-soft); }
+  .section.conduction .card { background: var(--gold-soft); }
   .section.conduction .a { background: #ffffff; }
-  .section.conduction .q .n { background: var(--path); }
+  .section.conduction .q .n { background: var(--gold-deep); }
 
   .section.ecg .card { background: var(--cvs-soft); }
   .section.ecg .a { background: #ffffff; }
   .section.ecg .q .n { background: var(--cvs); }
 
-  .section.arrhythmias .card { background: var(--gold-soft); }
-  .section.arrhythmias .a { background: #ffffff; }
-  .section.arrhythmias .q .n { background: var(--gold-deep); }
+  .section.arrhythmia .card { background: var(--amber-soft); }
+  .section.arrhythmia .a { background: #ffffff; }
+  .section.arrhythmia .q .n { background: var(--amber-deep); }
 
-  .section.ablation .card { background: var(--cvs-soft); }
+  .section.ablation .card { background: var(--resp-soft); }
   .section.ablation .a { background: #ffffff; }
-  .section.ablation .q .n { background: var(--cvs-deep); }
+  .section.ablation .q .n { background: var(--resp-deep); }
 
-  .section.coronary .card { background: var(--amber-soft); }
-  .section.coronary .a { background: #ffffff; }
-  .section.coronary .q .n { background: var(--amber-deep); }
+  .section.auto .card { background: var(--gold-soft); }
+  .section.auto .a { background: #ffffff; }
+  .section.auto .q .n { background: var(--gold-deep); }
 
-  .section.baroreflex .card { background: var(--resp-soft); }
+  .section.baroreflex .card { background: var(--path-soft); }
   .section.baroreflex .a { background: #ffffff; }
-  .section.baroreflex .q .n { background: var(--resp-deep); }
+  .section.baroreflex .q .n { background: var(--path); }
 
-  .section.shock .card { background: var(--bg-cream); }
+  .section.shock .card { background: var(--cvs-soft); }
   .section.shock .a { background: #ffffff; }
-  .section.shock .q .n { background: var(--ink); }
+  .section.shock .q .n { background: var(--cvs-deep); }
 
   .section.hf .card { background: var(--resp-soft); }
   .section.hf .a { background: #ffffff; }
@@ -211,7 +211,7 @@
 
 <div class="ribbon">
   <h1>CVS · Day 3 · Flashcards</h1>
-  <div class="meta">USMLE Step 1 · June Cohort · 65 cards</div>
+  <div class="meta">USMLE Step 1 · June Cohort · 53 cards</div>
 </div>
 <div class="byline">
   <span class="author">Prepared by Allan Bakesiga · USMLE Step 1 Prep</span>
@@ -219,116 +219,104 @@
 </div>
 <p class="subtitle">Cover the answer · attempt aloud · check · re-test the misses tomorrow</p>
 
-<div class="section ventap">
+<div class="section ap">
   <div class="section-bar">Ventricular action potential <span class="group-tag">6 cards</span></div>
-  <div class="card"><div class="q"><span class="n">1</span><span>List the five phases of the ventricular myocyte action potential and the dominant ion movement of each.</span></div><div class="a">Phase 0 = rapid depolarization, <strong>Na⁺ influx</strong>; phase 1 = initial repolarization, transient K⁺ out / Na⁺ close; phase 2 = plateau, <strong>L-type Ca²⁺ in</strong> balanced by K⁺ out; phase 3 = rapid repolarization, K⁺ efflux dominates; phase 4 = resting at −90 mV via K⁺ leak.</div></div>
-  <div class="card"><div class="q"><span class="n">2</span><span>What unique property of the cardiac action potential gives rise to phase 2?</span></div><div class="a">Simultaneous opening of L-type Ca²⁺ channels and partial closure of K⁺ channels, producing the prolonged plateau. This is the distinctive feature absent in skeletal and smooth muscle APs.</div></div>
-  <div class="card"><div class="q"><span class="n">3</span><span>During which phases of the ventricular AP is the cell in its effective refractory period?</span></div><div class="a">Phases 0–3 — Na⁺ channels are inactivated and cannot re-open until late phase 3 / early 4. This prevents tetanic contraction.</div></div>
-  <div class="card"><div class="q"><span class="n">4</span><span>An ECG shows a wide QRS complex with opposite-direction T wave and a brief compensatory pause. Identify the beat and the LV-volume sequence (less than vs more than normal) of the surrounding beats.</span></div><div class="a">Premature ventricular contraction (PVC). The PVC itself has decreased LV end-diastolic volume (less filling time). The post-PVC beat has <strong>increased</strong> EDV from the compensatory pause → ↑ SV → palpitation.</div></div>
-  <div class="card"><div class="q"><span class="n">5</span><span>How do Vaughan-Williams class IB and class III drugs affect AP duration?</span></div><div class="a">Class IB (lidocaine, mexiletine) <strong>shorten</strong> AP duration; class III (amiodarone, sotalol, dofetilide, ibutilide) <strong>prolong</strong> AP duration via K⁺ channel block.</div></div>
-  <div class="card"><div class="q"><span class="n">6</span><span>Class IC antiarrhythmics (flecainide, propafenone) — main caution?</span></div><div class="a">Avoid in structural heart disease (post-MI, HFrEF, severe LVH) — they can be pro-arrhythmic and increase mortality in those patients. Use only in healthy hearts ("pill-in-the-pocket" AFib).</div></div>
+  <div class="card"><div class="q"><span class="n">1</span><span>Name the five phases of the ventricular action potential.</span></div><div class="a">0 rapid depolarization (Na&#8314; influx) · 1 initial repolarization (Na inactivation + transient K&#8314;) · 2 plateau (L-type Ca&sup2;&#8314; balanced by K&#8314;) · 3 rapid repolarization (delayed-rectifier K&#8314;) · 4 rest at &minus;90 mV (inward-rectifier K&#8314; leak).</div></div>
+  <div class="card"><div class="q"><span class="n">2</span><span>Which ion carries the upstroke of the ventricular AP?</span></div><div class="a"><strong>Na&#8314;</strong>, through fast voltage-gated Na channels.</div></div>
+  <div class="card"><div class="q"><span class="n">3</span><span>Which ion creates the plateau of the ventricular AP?</span></div><div class="a"><strong>L-type Ca&sup2;&#8314;</strong>, balanced by K&#8314; efflux. Cardiac-specific feature that lengthens the AP and supplies the trigger Ca&sup2;&#8314; for EC coupling.</div></div>
+  <div class="card"><div class="q"><span class="n">4</span><span>Define the effective refractory period.</span></div><div class="a">The interval (phases 0&ndash;3) during which Na channels are inactivated and another full AP cannot be triggered &mdash; built-in protection against tetany.</div></div>
+  <div class="card"><div class="q"><span class="n">5</span><span>How do Vaughan-Williams class IB and class III drugs differ in their effect on AP duration?</span></div><div class="a"><strong>Class IB</strong> (lidocaine, mexiletine) <em>shortens</em> the AP and binds preferentially to ischemic tissue. <strong>Class III</strong> (amiodarone, sotalol, dofetilide, ibutilide) blocks K&#8314; channels and <em>prolongs</em> the AP, ERP, and QT.</div></div>
+  <div class="card"><div class="q"><span class="n">6</span><span>Why is the post-PVC sinus beat felt as a palpitation rather than the PVC itself?</span></div><div class="a">The compensatory pause after a PVC gives the LV extra filling time &rarr; larger EDV &rarr; larger SV via Frank-Starling &rarr; the next beat is forceful enough for the patient to feel.</div></div>
 </div>
 
 <div class="section pacemaker">
-  <div class="section-bar">Pacemaker action potential <span class="group-tag">6 cards</span></div>
-  <div class="card"><div class="q"><span class="n">7</span><span>Describe the three relevant phases of an SA-nodal pacemaker action potential.</span></div><div class="a">Phase 4 (spontaneous depolarization) = HCN "funny" Na⁺ current early → T-type Ca²⁺ → L-type Ca²⁺ approaching threshold. Phase 0 = slow upstroke from <strong>L-type Ca²⁺ influx</strong>. Phase 3 = repolarization via K⁺ efflux.</div></div>
-  <div class="card"><div class="q"><span class="n">8</span><span>Which current is responsible for the slope of phase 4 in pacemaker cells?</span></div><div class="a">The HCN ("funny") current — slow Na⁺ inflow activated by hyperpolarization. Steeper slope → faster pacemaker rate.</div></div>
-  <div class="card"><div class="q"><span class="n">9</span><span>How does verapamil alter the pacemaker action potential?</span></div><div class="a">Blocks L-type Ca²⁺ channels → slows the late phase 4 climb (less Ca²⁺ contribution) and slows phase 0 upstroke → ↓ pacemaker firing rate + ↓ AV conduction + prolonged AV refractory period.</div></div>
-  <div class="card"><div class="q"><span class="n">10</span><span>Mechanism of ivabradine?</span></div><div class="a">Selective HCN ("funny") channel blocker. Slows phase 4 depolarization in the SA node → ↓ HR with no effect on contractility, conduction, or BP.</div></div>
-  <div class="card"><div class="q"><span class="n">11</span><span>How does adenosine terminate AVNRT?</span></div><div class="a">Activates A1 adenosine receptors → opens K⁺ channels → hyperpolarizes AV nodal cells + prolongs AV refractoriness → breaks the reentrant circuit. Very short half-life (~10 s).</div></div>
-  <div class="card"><div class="q"><span class="n">12</span><span>Which ionic current dominates AV-nodal phase 0, and what drugs target it for rate control in AFib?</span></div><div class="a"><strong>L-type Ca²⁺</strong> current. Targeted by non-dihydropyridine CCBs (verapamil, diltiazem); β-blockers also indirectly reduce its activity. Both prolong AV refractoriness → slower ventricular rate.</div></div>
+  <div class="section-bar">Pacemaker action potential <span class="group-tag">5 cards</span></div>
+  <div class="card"><div class="q"><span class="n">7</span><span>Name the three phases of the SA/AV nodal action potential.</span></div><div class="a">4 spontaneous depolarization (HCN funny current &rarr; T-type Ca &rarr; L-type Ca) · 0 slow upstroke (L-type Ca&sup2;&#8314;) · 3 repolarization (K&#8314; efflux). No stable resting potential.</div></div>
+  <div class="card"><div class="q"><span class="n">8</span><span>What does the &quot;funny&quot; (HCN) current do, and where?</span></div><div class="a">Hyperpolarization-activated cyclic-nucleotide-gated channels carry a slow Na&#8314; inward current that begins phase 4 depolarization in pacemaker cells. PKA (via &beta;&#8321;-driven cAMP) raises its slope &rarr; faster firing.</div></div>
+  <div class="card"><div class="q"><span class="n">9</span><span>Which drug selectively blocks the HCN current?</span></div><div class="a"><strong>Ivabradine</strong> &mdash; lowers heart rate without changing contractility or AV conduction. Used in HFrEF when &beta;-blockade is not tolerated.</div></div>
+  <div class="card"><div class="q"><span class="n">10</span><span>Why does verapamil slow the SA and AV nodes?</span></div><div class="a">Non-DHP CCB blocks L-type Ca&sup2;&#8314;, which is responsible for both pacemaker phase 4 (late ascent to threshold) and phase 0 (slow upstroke). Result: slower firing + slower AV conduction + prolonged AV refractoriness.</div></div>
+  <div class="card"><div class="q"><span class="n">11</span><span>How does adenosine terminate AVNRT?</span></div><div class="a">Activates A&#8321; receptors on AV nodal cells &rarr; opens K&#8314; channels &rarr; hyperpolarization &rarr; transient AV nodal block that interrupts the reentrant circuit. Half-life ~10 seconds.</div></div>
 </div>
 
-<div class="section ec">
-  <div class="section-bar">Excitation–contraction coupling <span class="group-tag">4 cards</span></div>
-  <div class="card"><div class="q"><span class="n">13</span><span>Walk through cardiomyocyte EC coupling in order.</span></div><div class="a">AP → L-type Ca²⁺ opens → small Ca²⁺ influx → <strong>Ca²⁺-induced Ca²⁺ release</strong> from SR via ryanodine receptor → cytosolic Ca²⁺ binds troponin C → tropomyosin moves → actin-myosin cross-bridge cycling → contraction.</div></div>
-  <div class="card"><div class="q"><span class="n">14</span><span>How is cytosolic Ca²⁺ cleared during relaxation?</span></div><div class="a">SERCA pumps Ca²⁺ back into the SR (consumes ATP). Sarcolemmal <strong>NCX (Na⁺/Ca²⁺ exchanger)</strong> extrudes Ca²⁺ across the cell membrane using the Na⁺ gradient. A smaller amount via plasma-membrane Ca²⁺ ATPase.</div></div>
-  <div class="card"><div class="q"><span class="n">15</span><span>Mechanism by which digoxin increases contractility?</span></div><div class="a">Blocks the Na⁺/K⁺-ATPase → ↑ intracellular Na⁺ → reduces the Na⁺ gradient that drives NCX → NCX extrudes less Ca²⁺ → ↑ intracellular Ca²⁺ → ↑ contractility.</div></div>
-  <div class="card"><div class="q"><span class="n">16</span><span>Why does hypokalemia potentiate digoxin toxicity?</span></div><div class="a">K⁺ and digoxin compete for the same binding site on Na⁺/K⁺-ATPase. Low extracellular K⁺ allows digoxin to bind more readily, intensifying its inhibition and toxic effects.</div></div>
+<div class="section eccoupling">
+  <div class="section-bar">EC coupling &amp; digoxin <span class="group-tag">4 cards</span></div>
+  <div class="card"><div class="q"><span class="n">12</span><span>Outline the five steps of excitation-contraction coupling in ventricular myocytes.</span></div><div class="a">1 AP depolarizes sarcolemma · 2 L-type Ca&sup2;&#8314; channel opens (phase 2) · 3 trigger Ca activates ryanodine receptor &rarr; CICR from SR · 4 cytosolic Ca binds troponin C &rarr; tropomyosin shifts &rarr; cross-bridge cycling · 5 relaxation by SERCA (Ca back into SR) + NCX (Ca out through sarcolemma using the Na gradient).</div></div>
+  <div class="card"><div class="q"><span class="n">13</span><span>Mechanism by which digoxin raises contractility.</span></div><div class="a">Blocks Na/K ATPase &rarr; &uarr; intracellular Na &rarr; reduces the Na gradient that powers NCX &rarr; less Ca extrusion per beat &rarr; &uarr; cytosolic Ca for cross-bridge cycling &rarr; positive inotropy.</div></div>
+  <div class="card"><div class="q"><span class="n">14</span><span>Why does hypokalemia potentiate digoxin toxicity?</span></div><div class="a">Low extracellular K&#8314; leaves more digoxin-binding sites on Na/K ATPase open, increasing inhibition. Common pitfall when loop diuretics are added without K&#8314; repletion.</div></div>
+  <div class="card"><div class="q"><span class="n">15</span><span>Classic clinical features of digoxin toxicity?</span></div><div class="a">GI (nausea, vomiting, anorexia), visual (yellow-green halos = xanthopsia), and almost any arrhythmia (bradycardia, AV block, atrial tachycardia with block). Treat: stop drug, correct K&#8314; carefully, digoxin-specific Fab fragments for severe cases.</div></div>
 </div>
 
 <div class="section conduction">
-  <div class="section-bar">Conduction system <span class="group-tag">5 cards</span></div>
-  <div class="card"><div class="q"><span class="n">17</span><span>Order cardiac conduction velocities from fastest to slowest.</span></div><div class="a"><strong>Park-At-Ventura, AV</strong> — Purkinje &gt; atrial myocardium &gt; ventricular myocardium &gt; AV node.</div></div>
-  <div class="card"><div class="q"><span class="n">18</span><span>Why is AV-nodal delay important?</span></div><div class="a">It separates atrial systole from ventricular systole so that atrial kick can finish filling the ventricles before they contract. It also filters supraventricular tachycardias to a survivable ventricular rate.</div></div>
-  <div class="card"><div class="q"><span class="n">19</span><span>Intrinsic firing rate hierarchy for the cardiac pacemakers?</span></div><div class="a">SA node 60–100/min; AV junction / His ~40–60/min (narrow-QRS escape); Purkinje / ventricular ~20–40/min (wide-QRS escape).</div></div>
-  <div class="card"><div class="q"><span class="n">20</span><span>In third-degree AV block, what determines whether the escape rhythm has a narrow or wide QRS?</span></div><div class="a">Location of the block. Above the bundle bifurcation → narrow QRS escape from the His bundle (better — more stable, 40–60/min). Below the bifurcation → wide QRS ventricular escape (unstable, 20–40/min).</div></div>
-  <div class="card"><div class="q"><span class="n">21</span><span>What anatomic structure determines the ventricular response rate in atrial fibrillation?</span></div><div class="a">The AV node refractory period. Chaotic atrial impulses (400–600/min) bombard the AV node; only those arriving outside refractoriness conduct. Rate-control drugs (β-blockers, non-DHP CCBs, digoxin) prolong AV refractoriness.</div></div>
+  <div class="section-bar">Conduction velocity &amp; escape rhythms <span class="group-tag">4 cards</span></div>
+  <div class="card"><div class="q"><span class="n">16</span><span>Conduction velocity order from fastest to slowest?</span></div><div class="a"><strong>Purkinje &gt; atrial myocardium &gt; ventricular myocardium &gt; AV node</strong>. Mnemonic: <em>Park At Ventura, AV</em>. AV node slowest (~0.05 m/s) by design.</div></div>
+  <div class="card"><div class="q"><span class="n">17</span><span>Two physiologic roles of AV nodal delay?</span></div><div class="a">1 Lets atrial systole finish filling the ventricle (preserves atrial kick). 2 Filters supraventricular tachycardias (AFib, flutter) so the ventricles see a manageable rate.</div></div>
+  <div class="card"><div class="q"><span class="n">18</span><span>Intrinsic rates of the SA node, AV junction, and ventricular pacemakers?</span></div><div class="a">SA 60&ndash;100/min · AV junction / His 40&ndash;60/min · Purkinje / ventricular 20&ndash;40/min.</div></div>
+  <div class="card"><div class="q"><span class="n">19</span><span>Complete heart block with a narrow QRS escape at 45/min &mdash; origin of the escape and what does narrow vs wide tell you?</span></div><div class="a">Narrow QRS &rarr; escape originates in the AV junction / His bundle (above bifurcation), generally more stable. Wide QRS escape &rarr; ventricular pacemaker (below bifurcation), slower and less reliable &rarr; immediate pacing needed.</div></div>
 </div>
 
 <div class="section ecg">
-  <div class="section-bar">ECG basics <span class="group-tag">5 cards</span></div>
-  <div class="card"><div class="q"><span class="n">22</span><span>What does each interval measure: PR, QRS, QT?</span></div><div class="a"><strong>PR</strong> = atrial depolarization + AV delay (normal 0.12–0.20 s). <strong>QRS</strong> = ventricular depolarization (normal &lt; 0.12 s). <strong>QT</strong> = ventricular depolarization + repolarization (rate-corrected QTc &lt; 0.44 s in men, &lt; 0.46 s in women).</div></div>
-  <div class="card"><div class="q"><span class="n">23</span><span>How is electrical axis assessed at a glance?</span></div><div class="a">Look at lead I and lead aVF. Both positive = normal axis. I positive, aVF negative = left axis deviation (–30° to –90°). I negative, aVF positive = right axis deviation (+90° to +180°).</div></div>
-  <div class="card"><div class="q"><span class="n">24</span><span>Distinguish 1°, Mobitz I, Mobitz II, and 3° heart blocks on ECG.</span></div><div class="a"><strong>1°</strong> = constant long PR (&gt; 0.20 s); all P waves conduct. <strong>Mobitz I (Wenckebach)</strong> = progressive PR lengthening until a dropped beat (AV-nodal, benign). <strong>Mobitz II</strong> = constant PR with intermittent dropped beats (infranodal, pacemaker indicated). <strong>3°</strong> = complete dissociation of P waves from QRS; escape rhythm.</div></div>
-  <div class="card"><div class="q"><span class="n">25</span><span>Wide notched "p-mitrale" vs tall "p-pulmonale" — what do they signify?</span></div><div class="a"><strong>P-mitrale</strong> (wide notched P in II, biphasic in V1) = left atrial enlargement, classically from mitral stenosis. <strong>P-pulmonale</strong> (tall peaked P in II ≥ 2.5 mm) = right atrial enlargement, classically from pulmonary hypertension or COPD.</div></div>
-  <div class="card"><div class="q"><span class="n">26</span><span>What localises an inferior MI on ECG, and which artery is usually responsible?</span></div><div class="a">ST elevation in leads II, III, and aVF. Usually the right coronary artery (RCA). Often accompanied by AV-nodal block (Mobitz I or transient 3°) because the RCA also supplies the AV node in most patients.</div></div>
+  <div class="section-bar">ECG basics <span class="group-tag">3 cards</span></div>
+  <div class="card"><div class="q"><span class="n">20</span><span>What does each ECG component represent: P, PR, QRS, QT?</span></div><div class="a"><strong>P</strong> atrial depolarization. <strong>PR</strong> conduction from atria through the AV node into the ventricles. <strong>QRS</strong> ventricular depolarization. <strong>QT</strong> total ventricular depolarization + repolarization.</div></div>
+  <div class="card"><div class="q"><span class="n">21</span><span>Distinguish Mobitz I from Mobitz II.</span></div><div class="a"><strong>Mobitz I (Wenckebach)</strong>: progressive PR lengthening &rarr; dropped beat. Site = AV node. Usually benign. <strong>Mobitz II</strong>: constant PR with intermittent dropped beats. Site = infranodal (His-Purkinje). Pacemaker indicated due to high risk of progression to complete block.</div></div>
+  <div class="card"><div class="q"><span class="n">22</span><span>Sokolow-Lyon criterion for LVH on ECG?</span></div><div class="a">S in V&#8321; + R in V&#8325; or V&#8326; &gt; 35 mm.</div></div>
 </div>
 
-<div class="section arrhythmias">
-  <div class="section-bar">Arrhythmia recognition <span class="group-tag">8 cards</span></div>
-  <div class="card"><div class="q"><span class="n">27</span><span>An irregularly irregular rhythm with no organized P waves, narrow QRS, and rate 138/min in a healthy 56-year-old after a night of heavy drinking — diagnosis and label?</span></div><div class="a">Atrial fibrillation — "holiday heart syndrome." Acute alcohol can trigger AFib in otherwise healthy adults via autonomic shifts and atrial irritation.</div></div>
-  <div class="card"><div class="q"><span class="n">28</span><span>Sawtooth ECG pattern at atrial rate 300/min with ventricular response 150/min — diagnosis and conduction ratio?</span></div><div class="a">Atrial flutter with 2:1 AV conduction. Atrial rate ~300/min is divided by the AV node into ventricular responses of 150 (2:1), 100 (3:1), or 75 (4:1).</div></div>
-  <div class="card"><div class="q"><span class="n">29</span><span>Anatomic origin of paroxysmal atrial fibrillation triggers, and corresponding curative ablation target?</span></div><div class="a">Ectopic foci most often arise in the <strong>pulmonary veins</strong>. Curative ablation = pulmonary vein isolation (circumferential RF lesions around the PV ostia).</div></div>
-  <div class="card"><div class="q"><span class="n">30</span><span>Anatomic substrate of typical atrial flutter and ablation target?</span></div><div class="a">Macroreentrant circuit around the tricuspid annulus with the slow zone at the <strong>cavotricuspid isthmus</strong> (between TV annulus and IVC in the right atrium). RF ablation across this isthmus is curative.</div></div>
-  <div class="card"><div class="q"><span class="n">31</span><span>A 23-year-old with sudden palpitations and a regular narrow tachycardia at 160/min terminates with right carotid sinus massage. Mechanism?</span></div><div class="a">Paroxysmal SVT — most commonly AVNRT. Carotid sinus pressure ↑ baroreceptor firing → ↑ vagal output (via CN IX afferent) → prolonged AV node refractory period → reentrant circuit breaks.</div></div>
-  <div class="card"><div class="q"><span class="n">32</span><span>An older man passes out in the garage. ECG shows complete dissociation of P waves and QRS with a narrow-QRS escape rhythm at 45/min. Where is the escape pacemaker?</span></div><div class="a">Above the bundle bifurcation — the His bundle (junctional escape). Narrow QRS implies the escape uses the normal conduction system below the block.</div></div>
-  <div class="card"><div class="q"><span class="n">33</span><span>An older man passes out, complete heart block with a <em>wide</em>-QRS escape rhythm at 25/min — where is the escape pacemaker?</span></div><div class="a">Below the bundle bifurcation — Purkinje / ventricular escape. Wide QRS, slow rate, less reliable. Needs immediate pacing.</div></div>
-  <div class="card"><div class="q"><span class="n">34</span><span>Adolescent fainted while standing in heat; supine BP 105/60, standing BP 110/65 (no orthostatic drop), normal ECG, brief unresponsiveness with rapid recovery. Mechanism of syncope?</span></div><div class="a">Vasovagal (reflex) syncope. Brainstem misfires <strong>both</strong> autonomic limbs: cardioinhibitory (↑ vagal → ↓ HR + ↓ contractility) and vasodepressor (↓ sympathetic → vasodilation + ↓ preload) → ↓ MAP → cerebral hypoperfusion.</div></div>
+<div class="section arrhythmia">
+  <div class="section-bar">Arrhythmia recognition <span class="group-tag">6 cards</span></div>
+  <div class="card"><div class="q"><span class="n">23</span><span>ECG hallmarks of atrial fibrillation?</span></div><div class="a">Irregularly irregular ventricular response, absent organized P waves, narrow QRS, fibrillatory baseline. Most ectopic foci originate around the <strong>pulmonary veins</strong>.</div></div>
+  <div class="card"><div class="q"><span class="n">24</span><span>Rate-control drug classes for AFib and their shared mechanism?</span></div><div class="a"><strong>&beta;-blocker</strong>, <strong>non-DHP CCB</strong> (verapamil, diltiazem), <strong>digoxin</strong> &mdash; all prolong AV nodal refractoriness so fewer atrial impulses reach the ventricles.</div></div>
+  <div class="card"><div class="q"><span class="n">25</span><span>ECG and ablation target of typical atrial flutter?</span></div><div class="a">ECG: sawtooth flutter waves, atrial rate ~300/min, ventricular response often 150 (2:1). Macroreentrant circuit around the tricuspid annulus with the slow zone at the <strong>cavotricuspid isthmus</strong> (ablation target).</div></div>
+  <div class="card"><div class="q"><span class="n">26</span><span>Acute termination strategy for AVNRT?</span></div><div class="a">Vagal maneuvers first (carotid sinus massage, Valsalva, cold-water face immersion) to prolong AV refractoriness and break the reentrant circuit. If that fails, IV adenosine push.</div></div>
+  <div class="card"><div class="q"><span class="n">27</span><span>Why does &quot;holiday heart&quot; lead to AFib?</span></div><div class="a">Binge alcohol acutely alters atrial conduction and shortens atrial refractoriness, predisposing to ectopic foci and AFib in otherwise structurally normal hearts.</div></div>
+  <div class="card"><div class="q"><span class="n">28</span><span>ECG of complete (third-degree) AV block?</span></div><div class="a">Complete AV dissociation &mdash; P waves and QRS complexes march independently. QRS rate and width depend on the escape pacemaker (junctional vs ventricular).</div></div>
 </div>
 
 <div class="section ablation">
-  <div class="section-bar">Antiarrhythmic + ablation map <span class="group-tag">4 cards</span></div>
-  <div class="card"><div class="q"><span class="n">35</span><span>Match anatomic ablation targets to arrhythmias.</span></div><div class="a">AFib → pulmonary veins; atrial flutter → cavotricuspid isthmus; AVNRT → slow pathway of AV node; WPW → accessory pathway (bundle of Kent); RVOT VT → right ventricular outflow tract.</div></div>
-  <div class="card"><div class="q"><span class="n">36</span><span>Vaughan-Williams classes — one-liner per class.</span></div><div class="a">IA quinidine/procainamide (Na⁺ block, ↑ AP); IB lidocaine/mexiletine (Na⁺ block, ↓ AP, ischemic); IC flecainide/propafenone (strong Na⁺ block, no AP change, healthy hearts only); II β-blockers; III amiodarone/sotalol/dofetilide/ibutilide (K⁺ block, ↑ AP/QT); IV non-DHP CCBs; plus adenosine, magnesium, digoxin.</div></div>
-  <div class="card"><div class="q"><span class="n">37</span><span>Why is amiodarone used cautiously despite broad efficacy?</span></div><div class="a">Multi-organ toxicity profile from its iodine content and lipophilicity: thyroid (hypo or hyper), lung (pulmonary fibrosis), liver (transaminitis), skin (blue-gray discoloration, photosensitivity), eye (corneal microdeposits), heart (bradycardia, QT prolongation).</div></div>
-  <div class="card"><div class="q"><span class="n">38</span><span>First-line rate control agents for AFib in a patient without HFrEF?</span></div><div class="a">β-blocker (metoprolol, atenolol) or non-dihydropyridine CCB (diltiazem, verapamil). Both work by prolonging AV nodal refractoriness. Digoxin is added if rate remains uncontrolled, especially with concomitant HFrEF.</div></div>
+  <div class="section-bar">Ablation targets &amp; antiarrhythmics <span class="group-tag">5 cards</span></div>
+  <div class="card"><div class="q"><span class="n">29</span><span>Ablation target for AFib?</span></div><div class="a"><strong>Pulmonary vein isolation</strong> &mdash; electrically disconnects the ectopic foci most often arising from the pulmonary vein ostia.</div></div>
+  <div class="card"><div class="q"><span class="n">30</span><span>Ablation target for AVNRT?</span></div><div class="a">The <strong>slow pathway</strong> of the AV node. Eliminates one limb of the reentrant circuit.</div></div>
+  <div class="card"><div class="q"><span class="n">31</span><span>Ablation target for WPW?</span></div><div class="a">The <strong>accessory pathway</strong> (bundle of Kent) connecting atrium to ventricle outside the AV node.</div></div>
+  <div class="card"><div class="q"><span class="n">32</span><span>Why is flecainide avoided in patients with structural heart disease?</span></div><div class="a">Class IC drugs strongly block Na channels and are <strong>pro-arrhythmic</strong> in scarred or ischemic myocardium (CAST-trial principle).</div></div>
+  <div class="card"><div class="q"><span class="n">33</span><span>Multi-organ toxicities of amiodarone?</span></div><div class="a">Thyroid (hypo and hyper), pulmonary fibrosis, hepatitis, blue-gray skin + photosensitivity, corneal microdeposits, bradycardia / QT prolongation. Inhibits CYP3A4 + 2C9 &rarr; raises warfarin INR.</div></div>
 </div>
 
-<div class="section coronary">
-  <div class="section-bar">Coronary and vascular biology <span class="group-tag">5 cards</span></div>
-  <div class="card"><div class="q"><span class="n">39</span><span>Why does the heart require flow increases rather than extraction increases to meet ↑ demand?</span></div><div class="a">Resting myocardial O₂ extraction is already &gt; 70% — the highest of any tissue. There is little reserve in the arteriovenous O₂ difference, so meeting ↑ demand requires ↑ coronary blood flow.</div></div>
-  <div class="card"><div class="q"><span class="n">40</span><span>Two main mediators of coronary autoregulation, and the MAP range over which it operates?</span></div><div class="a">Adenosine and nitric oxide. Effective over MAP 60–140 mmHg. Below 60, ischemia; above 140, autoregulation fails and flow rises with pressure.</div></div>
-  <div class="card"><div class="q"><span class="n">41</span><span>Why is LV myocardium perfused mainly in diastole?</span></div><div class="a">During systole the high intramyocardial pressure (especially in the subendocardium) compresses coronary arterioles. In diastole the LV is relaxed → vessels reopen → blood flows. The subendocardium is most vulnerable to ischemia because it experiences the highest systolic pressure.</div></div>
-  <div class="card"><div class="q"><span class="n">42</span><span>Substrate and mediator of endothelial-derived NO?</span></div><div class="a">Substrate = <strong>L-arginine</strong>. Endothelial NOS converts arginine + O₂ + NADPH → NO + L-citrulline. NO diffuses into smooth muscle → activates guanylate cyclase → ↑ cGMP → MLCK dephosphorylation → vasodilation.</div></div>
-  <div class="card"><div class="q"><span class="n">43</span><span>Which vessel in the body has the lowest oxygen saturation?</span></div><div class="a">The <strong>coronary sinus</strong>. Because cardiac O₂ extraction is &gt; 70% at rest, the venous return draining the heart is more desaturated than mixed venous blood anywhere else.</div></div>
+<div class="section auto">
+  <div class="section-bar">Coronary autoregulation &amp; NO biology <span class="group-tag">5 cards</span></div>
+  <div class="card"><div class="q"><span class="n">34</span><span>Two main mediators of coronary autoregulation?</span></div><div class="a"><strong>Adenosine</strong> (from local ATP breakdown, acts at A&#8322;A &rarr; vasodilation) and <strong>nitric oxide</strong> from endothelium.</div></div>
+  <div class="card"><div class="q"><span class="n">35</span><span>Why does the subendocardium fail first under ischemic stress?</span></div><div class="a">It is the most compressed layer during systole (highest intramural pressure) and therefore is perfused only in diastole. Any drop in diastolic perfusion pressure or shortening of diastole (tachycardia) hits the subendocardium first.</div></div>
+  <div class="card"><div class="q"><span class="n">36</span><span>Substrate, enzyme, and second messenger of vascular NO?</span></div><div class="a">Substrate: <strong>L-arginine</strong>. Enzyme: <strong>endothelial NOS (eNOS)</strong>, with O&#8322; and NADPH. Diffuses into smooth muscle &rarr; activates guanylate cyclase &rarr; <strong>&uarr; cGMP</strong> &rarr; MLCK dephosphorylation &rarr; relaxation.</div></div>
+  <div class="card"><div class="q"><span class="n">37</span><span>Why is sildenafil contraindicated with nitrates?</span></div><div class="a">Both raise vascular smooth-muscle cGMP &mdash; sildenafil by blocking PDE5, nitrates by donating NO. Combined use causes catastrophic, refractory hypotension.</div></div>
+  <div class="card"><div class="q"><span class="n">38</span><span>What is the earliest functional defect in atherogenesis?</span></div><div class="a">Loss of endothelial NO bioavailability from smoking, dyslipidemia, hypertension, hyperglycemia. The endothelium loses its anti-inflammatory, anti-thrombotic, vasodilator phenotype.</div></div>
 </div>
 
 <div class="section baroreflex">
-  <div class="section-bar">Baroreceptors and chemoreceptors <span class="group-tag">5 cards</span></div>
-  <div class="card"><div class="q"><span class="n">44</span><span>Afferent cranial nerves for baroreceptors at the carotid sinus vs aortic arch?</span></div><div class="a"><strong>Carotid sinus → CN IX (glossopharyngeal)</strong>. <strong>Aortic arch → CN X (vagus)</strong>. Mnemonic: <em>carotid → IX, aortic → X</em>.</div></div>
-  <div class="card"><div class="q"><span class="n">45</span><span>Same question for peripheral chemoreceptors (carotid body vs aortic body)?</span></div><div class="a">Same pairing — <strong>carotid body → CN IX, aortic body → CN X</strong>.</div></div>
-  <div class="card"><div class="q"><span class="n">46</span><span>An elderly man passes out repeatedly while buttoning a tight shirt collar. Mechanism?</span></div><div class="a">Carotid sinus hypersensitivity. Pressure on the sinus → exaggerated baroreceptor firing → CN IX → medulla → ↑ vagal output + ↓ sympathetic → bradycardia + vasodilation → syncope.</div></div>
-  <div class="card"><div class="q"><span class="n">47</span><span>Hemorrhagic shock baroreflex response — describe baroreceptor firing, contractility, and ANP release.</span></div><div class="a">↓ BP → ↓ arterial stretch → ↓ baroreceptor firing → ↑ sympathetic + ↓ vagal → ↑ HR, ↑ contractility, vasoconstriction. Atrial filling is reduced → <strong>↓ ANP</strong> release.</div></div>
-  <div class="card"><div class="q"><span class="n">48</span><span>Phenylephrine is given to a normal volunteer. Predict the HR change and the responsible reflex.</span></div><div class="a">Phenylephrine (α₁ agonist) ↑ SVR → ↑ MAP. Baroreceptor stretch ↑ → vagal output ↑ → <strong>reflex bradycardia</strong>. This is the classic test of intact baroreflex.</div></div>
+  <div class="section-bar">Baroreflex · chemoreceptors · syncope <span class="group-tag">5 cards</span></div>
+  <div class="card"><div class="q"><span class="n">39</span><span>Afferent CN for the carotid sinus baroreceptor and the aortic arch baroreceptor?</span></div><div class="a">Carotid sinus &rarr; <strong>CN IX (glossopharyngeal)</strong>. Aortic arch &rarr; <strong>CN X (vagus)</strong>. Mnemonic: <em>carotid IX, aortic X</em>.</div></div>
+  <div class="card"><div class="q"><span class="n">40</span><span>Baroreflex response to acute hemorrhage?</span></div><div class="a">&darr; Stretch &rarr; &darr; baroreceptor firing &rarr; &darr; vagal + &uarr; sympathetic outflow &rarr; &uarr; HR + &uarr; contractility + vasoconstriction. ANP falls because atrial stretch is reduced.</div></div>
+  <div class="card"><div class="q"><span class="n">41</span><span>How does phenylephrine produce reflex bradycardia?</span></div><div class="a">Pure &alpha;&#8321; agonist &rarr; vasoconstriction &rarr; &uarr; MAP &rarr; baroreceptor firing rises &rarr; vagal tone to the SA node increases &rarr; HR falls. Classic teaching demonstration of an intact baroreflex.</div></div>
+  <div class="card"><div class="q"><span class="n">42</span><span>What is the dual mechanism of vasovagal syncope?</span></div><div class="a">A simultaneous brainstem misfire of both autonomic limbs: <strong>cardioinhibitory</strong> (&uarr; vagal &rarr; bradycardia and &darr; contractility) <em>and</em> <strong>vasodepressor</strong> (&darr; sympathetic &rarr; peripheral vasodilation and &darr; venous return).</div></div>
+  <div class="card"><div class="q"><span class="n">43</span><span>Carotid sinus hypersensitivity &mdash; classic trigger and presentation?</span></div><div class="a">Tight collar, shaving, or head-turning in an older adult &rarr; mechanical pressure on the carotid sinus &rarr; exaggerated reflex bradycardia and hypotension &rarr; syncope. Pacemaker if cardioinhibitory predominates and the episodes recur.</div></div>
 </div>
 
 <div class="section shock">
-  <div class="section-bar">Shock physiology <span class="group-tag">7 cards</span></div>
-  <div class="card"><div class="q"><span class="n">49</span><span>Hemodynamic profile (CVP, PCWP, CO, SVR, SvO₂) of hypovolemic shock?</span></div><div class="a">CVP ↓, PCWP ↓, CO ↓, SVR ↑, SvO₂ ↓. Skin cold and clammy. Causes: hemorrhage, GI losses (diarrhea, vomiting), burns.</div></div>
-  <div class="card"><div class="q"><span class="n">50</span><span>Hemodynamic profile of cardiogenic shock?</span></div><div class="a">CVP ↑, PCWP ↑, CO ↓, SVR ↑ (compensatory vasoconstriction), SvO₂ ↓. Skin cold. Classic cause: large anterior STEMI with LV failure.</div></div>
-  <div class="card"><div class="q"><span class="n">51</span><span>Hemodynamic profile of distributive shock (septic)?</span></div><div class="a">CVP ↓, PCWP ↓, CO usually ↑, SVR ↓, SvO₂ usually ↑. Skin warm. Inflammatory cytokines cause vasodilation; cardiac output rises to maintain perfusion until late decompensation.</div></div>
-  <div class="card"><div class="q"><span class="n">52</span><span>Why is the PCWP paradoxically elevated in cardiac tamponade despite intrinsically low LV preload?</span></div><div class="a">Pericardial fluid externally compresses the LV; the measured wedge pressure reflects extrinsic compression rather than true LV filling. The LV cavity itself is small (low preload), but the catheter "sees" the high pericardial pressure transmitted through the LA.</div></div>
-  <div class="card"><div class="q"><span class="n">53</span><span>A 2-year-old with 4 days of diarrhea is lethargic with BP 65/42, dry mucous membranes, sunken eyes, hyperactive bowel sounds, and Kussmaul respirations. Acid-base picture and underlying mechanism?</span></div><div class="a">Lactic acidosis from tissue hypoperfusion + bicarbonate loss in stool = metabolic acidosis. Body compensates with <strong>↑ ventilatory rate → compensatory respiratory alkalosis</strong> (Kussmaul breathing).</div></div>
-  <div class="card"><div class="q"><span class="n">54</span><span>A trauma patient receives 2 L of normal saline after a hemorrhagic insult. Which intracellular parameter rises first to improve cardiac output?</span></div><div class="a">End-diastolic sarcomere length. ↑ Venous return → ↑ EDV → ↑ sarcomere stretch → ↑ SV via Frank-Starling. HR, contractility, SVR, and PRA are already maximal from baroreflex.</div></div>
-  <div class="card"><div class="q"><span class="n">55</span><span>Cardinal physical findings of cardiac tamponade?</span></div><div class="a">Beck's triad — hypotension, elevated JVP, muffled heart sounds — plus pulsus paradoxus (&gt; 10 mmHg SBP drop with inspiration). Echo shows right atrial late-diastolic collapse. Treatment: pericardiocentesis.</div></div>
+  <div class="section-bar">Shock physiology <span class="group-tag">5 cards</span></div>
+  <div class="card"><div class="q"><span class="n">44</span><span>Hemodynamic profile of hypovolemic shock?</span></div><div class="a">&darr; CVP, &darr; PCWP, &darr; cardiac index, &uarr; SVR (compensatory vasoconstriction), &darr; mixed venous O&#8322;, cool extremities.</div></div>
+  <div class="card"><div class="q"><span class="n">45</span><span>Hemodynamic profile of cardiogenic shock?</span></div><div class="a"><strong>&uarr; CVP, &uarr; PCWP, &darr; cardiac index, &uarr; SVR, &darr; SvO&#8322;</strong>, cool extremities. SVR is <em>up</em>, not down &mdash; common trap.</div></div>
+  <div class="card"><div class="q"><span class="n">46</span><span>Why does PCWP appear paradoxically high in cardiac tamponade?</span></div><div class="a">External pericardial pressure is transmitted into all chambers, so measured LA pressure reads high &mdash; but effective LV filling is actually low (the pericardium constrains diastolic expansion).</div></div>
+  <div class="card"><div class="q"><span class="n">47</span><span>Why is cardiac output usually high in early septic shock?</span></div><div class="a">Systemic vasodilation from inflammatory mediators (TNF&alpha;, IL-1, IL-6, iNOS-derived NO) drops SVR. Tachycardia and venoconstriction maintain &mdash; or briefly elevate &mdash; CO. Mitochondrial dysfunction also limits O&#8322; extraction, so SvO&#8322; runs high.</div></div>
+  <div class="card"><div class="q"><span class="n">48</span><span>How do you distinguish neurogenic from other distributive shock?</span></div><div class="a">After spinal cord injury, loss of sympathetic outflow produces <strong>vasodilation plus paradoxical bradycardia</strong> (unopposed vagal tone). Most other distributive shocks have compensatory tachycardia.</div></div>
 </div>
 
 <div class="section hf">
-  <div class="section-bar">Heart failure cascade and pharmacology <span class="group-tag">10 cards</span></div>
-  <div class="card"><div class="q"><span class="n">56</span><span>Source cells of ANP and BNP, and the stimulus that triggers their release.</span></div><div class="a">ANP is secreted by atrial cardiomyocytes, BNP by ventricular cardiomyocytes. The stimulus is myocardial wall stretch from volume overload (or pressure overload that distends the chamber).</div></div>
-  <div class="card"><div class="q"><span class="n">57</span><span>Downstream effects of ANP/BNP on the kidney?</span></div><div class="a">↑ GFR (afferent dilation + efferent constriction), ↓ proximal Na⁺ reabsorption, ↓ renin secretion → natriuresis and diuresis. Also vasodilation systemically.</div></div>
-  <div class="card"><div class="q"><span class="n">58</span><span>Why is intravenous saline infusion in a healthy subject expected to ↑ GFR?</span></div><div class="a">Volume load stretches atria and ventricles → ANP and BNP release → activate guanylate cyclase via natriuretic peptide receptors → afferent arteriolar dilation + efferent constriction → ↑ glomerular hydrostatic pressure → ↑ GFR + natriuresis.</div></div>
-  <div class="card"><div class="q"><span class="n">59</span><span>Mechanism of sacubitril and why it is paired with valsartan in HFrEF?</span></div><div class="a">Sacubitril inhibits <strong>neprilysin</strong>, the metalloprotease that degrades ANP and BNP → ↑ endogenous natriuretic peptide activity. Sacubitril alone would also reduce angiotensin II breakdown, so it is paired with an ARB (valsartan) to block the RAAS arm — together they form an "ARNi."</div></div>
-  <div class="card"><div class="q"><span class="n">60</span><span>List the four-pillar guideline-directed medical therapy for HFrEF.</span></div><div class="a">(1) β-blocker (carvedilol, metoprolol succinate, bisoprolol). (2) ACE-i, ARB, or ARNi (sacubitril/valsartan). (3) MRA (spironolactone or eplerenone). (4) SGLT2 inhibitor (dapagliflozin, empagliflozin).</div></div>
-  <div class="card"><div class="q"><span class="n">61</span><span>Why is sympathetic activation in HFrEF considered "maladaptive over time"?</span></div><div class="a">Early ↑ sympathetic tone supports BP via ↑ HR, contractility, and vasoconstriction. Chronically, the same activation drives adverse cardiac remodeling, β-receptor downregulation, arrhythmias, and progressive pump failure. Blocking this arm with β-blockers improves survival.</div></div>
-  <div class="card"><div class="q"><span class="n">62</span><span>First-line vasodilator in acute decompensated heart failure with hypertensive crisis?</span></div><div class="a">Sodium nitroprusside — balanced venous and arterial vasodilator. Drops both preload and afterload while keeping SV essentially preserved. Allows pulmonary venous decompression without dropping CO.</div></div>
-  <div class="card"><div class="q"><span class="n">63</span><span>Why does a chronic AV fistula eventually cause high-output heart failure?</span></div><div class="a">The fistula provides a low-resistance pathway → chronic ↑ preload (↑ venous return) + ↓ effective SVR. Initially CO rises and SV widens (eccentric remodeling). Over years the volume overload exceeds the heart's adaptive capacity → high-output failure with ↑ filling pressures and pulmonary congestion.</div></div>
-  <div class="card"><div class="q"><span class="n">64</span><span>Predict the autonomic response when a tight collar is tightened around the neck of a person with carotid sinus hypersensitivity.</span></div><div class="a">Pressure on the carotid sinus → ↑ baroreceptor stretch → ↑ CN IX firing to medulla → exaggerated ↑ vagal + ↓ sympathetic → bradycardia + vasodilation → cerebral hypoperfusion and syncope.</div></div>
-  <div class="card"><div class="q"><span class="n">65</span><span>Vasovagal vs orthostatic vs cardiogenic syncope — one distinguishing feature each.</span></div><div class="a"><strong>Vasovagal</strong>: prodromal warmth, pallor, nausea; trigger (heat, pain, standing); rapid recovery; no orthostatic BP drop. <strong>Orthostatic</strong>: SBP drops ≥ 20 or DBP ≥ 10 within 3 min of standing. <strong>Cardiogenic</strong>: abrupt without prodrome; abnormal ECG (arrhythmia or structural finding); higher mortality risk.</div></div>
+  <div class="section-bar">Heart failure cascade &amp; ARNi <span class="group-tag">5 cards</span></div>
+  <div class="card"><div class="q"><span class="n">49</span><span>Four neurohormonal arms activated in decompensated HFrEF?</span></div><div class="a">1 Sympathetic (&uarr; HR, contractility, vasoconstriction) · 2 RAAS (AngII + aldosterone + remodeling) · 3 ADH (water retention, hyponatremia) · 4 ANP/BNP counter-regulation.</div></div>
+  <div class="card"><div class="q"><span class="n">50</span><span>Source cells of ANP and BNP, and their effects?</span></div><div class="a"><strong>ANP</strong> from atrial myocytes (atrial stretch), <strong>BNP</strong> from ventricular myocytes (ventricular stretch). Both activate guanylate cyclase &rarr; &uarr; cGMP &rarr; natriuresis, diuresis, vasodilation, &darr; aldosterone, &darr; renin.</div></div>
+  <div class="card"><div class="q"><span class="n">51</span><span>How does sacubitril/valsartan work?</span></div><div class="a"><strong>Sacubitril</strong> inhibits neprilysin (the protease that degrades ANP/BNP) &rarr; raises endogenous natriuretic peptide activity. <strong>Valsartan</strong> blocks the AT&#8321; receptor to neutralize the parallel rise in angiotensin II that sacubitril would otherwise allow.</div></div>
+  <div class="card"><div class="q"><span class="n">52</span><span>Four-pillar regimen for HFrEF with mortality benefit?</span></div><div class="a"><strong>&beta;-blocker</strong> (carvedilol, metoprolol succinate, bisoprolol) · <strong>ACE-i / ARB / ARNi</strong> · <strong>MRA</strong> (spironolactone, eplerenone) · <strong>SGLT2 inhibitor</strong> (dapagliflozin, empagliflozin). Loop diuretics relieve congestion but do not extend life.</div></div>
+  <div class="card"><div class="q"><span class="n">53</span><span>Which vasodilator is preferred for acute decompensated HF with hypertension, and why?</span></div><div class="a"><strong>Sodium nitroprusside</strong> &mdash; balanced venous and arterial NO release drops both preload and afterload simultaneously, lowering wall stress while keeping stroke volume preserved.</div></div>
 </div>
 
-<p class="footer-stamp">© Allan Bakesiga · USMLE Step 1 Prep · 65 cards · Day 3 electrics + integration. Review the misses tomorrow before lecture.</p>
+<p class="footer-stamp">&copy; Allan Bakesiga &middot; USMLE Step 1 Prep &middot; 53 cards &middot; Cover &middot; attempt &middot; check &middot; re-test the misses tomorrow.</p>
 
 </body>
 </html>

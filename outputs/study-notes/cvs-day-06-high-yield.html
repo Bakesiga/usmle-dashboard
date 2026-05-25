@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CVS Day 6 — High-Yield 1-Pager</title>
+<style>
+  /* ---------- design tokens, mirrored from the flyer/dashboard palette ---------- */
+  :root {
+    --ink: #0C2A3D;
+    --ink-2: #345671;
+    --muted: #5B7A95;
+    --bg: #FFFFFF;
+    --bg-cream: #FFF8EC;
+    --border: #D6E8F5;
+
+    --gold: #E5A823;
+    --gold-deep: #B8851C;
+    --gold-soft: #FFF4D6;
+
+    --cvs: #0284C7; --cvs-soft: #E0F2FE; --cvs-deep: #075985;
+    --resp: #059669; --resp-soft: #D1FAE5; --resp-deep: #065F46;
+    --path: #7C3AED; --path-soft: #EDE9FE; --path-deep: #5B21B6;
+    --amber: #D97706; --amber-soft: #FEF3C7; --amber-deep: #B45309;
+  }
+
+  @page { size: A4; margin: 12mm 10mm; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 9.5pt;
+    line-height: 1.32;
+  }
+
+  .ribbon {
+    background: var(--ink);
+    color: #FFFFFF;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .ribbon h1 {
+    margin: 0;
+    font-size: 14pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .ribbon .meta {
+    font-size: 8.5pt;
+    color: #BFE3F7;
+    letter-spacing: 0.06em;
+  }
+
+  .cohort-line {
+    font-size: 8.5pt;
+    color: var(--ink-2);
+    margin: 0 0 10px;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .byline {
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-deep) 100%);
+    color: var(--ink);
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 8.5pt;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin: -4px 0 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .byline .author { font-weight: 800; }
+  .byline .home {
+    font-weight: 500;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .card {
+    border-radius: 6px;
+    padding: 7px 9px 8px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .card h2 {
+    margin: 0 0 4px;
+    font-size: 9.5pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 3px 7px;
+    margin: -7px -9px 6px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .card h2 .tag {
+    font-size: 7pt;
+    background: rgba(255,255,255,0.22);
+    padding: 1px 6px;
+    border-radius: 999px;
+    letter-spacing: 0.06em;
+  }
+  .card ul { margin: 0; padding-left: 14px; }
+  .card li { margin-bottom: 2px; }
+  .card li::marker { color: var(--ink-2); }
+
+  .card.present { background: var(--cvs-soft); }
+  .card.present h2 { background: var(--cvs-deep); }
+  .card.sounds { background: var(--gold-soft); }
+  .card.sounds h2 { background: var(--gold-deep); }
+  .card.types { background: var(--path-soft); }
+  .card.types h2 { background: var(--path-deep); }
+  .card.staging { background: var(--cvs-soft); }
+  .card.staging h2 { background: var(--cvs); }
+  .card.cxr { background: var(--amber-soft); }
+  .card.cxr h2 { background: var(--amber-deep); }
+  .card.bnp { background: var(--resp-soft); }
+  .card.bnp h2 { background: var(--resp-deep); }
+  .card.cycle { background: var(--gold-soft); }
+  .card.cycle h2 { background: var(--gold-deep); }
+  .card.pillars { background: var(--resp-soft); }
+  .card.pillars h2 { background: var(--resp-deep); }
+  .card.hfpef { background: var(--cvs-soft); }
+  .card.hfpef h2 { background: var(--cvs-deep); }
+  .card.cor { background: var(--path-soft); }
+  .card.cor h2 { background: var(--path); }
+  .card.shock { background: var(--amber-soft); }
+  .card.shock h2 { background: var(--amber-deep); }
+  .card.vaso { background: var(--cvs-soft); }
+  .card.vaso h2 { background: var(--cvs-deep); }
+  .card.highout { background: var(--gold-soft); }
+  .card.highout h2 { background: var(--gold-deep); }
+
+  .card.span { grid-column: span 2; }
+
+  table.dx-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 4px;
+    font-size: 8pt;
+  }
+  table.dx-table th, table.dx-table td {
+    border: 1px solid var(--ink-2);
+    padding: 2px 5px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.dx-table th {
+    background: var(--ink-2);
+    color: #FFFFFF;
+    font-weight: 700;
+  }
+  table.dx-table tr:nth-child(even) td { background: rgba(255,255,255,0.55); }
+
+  table.shock-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 4px;
+    font-size: 8pt;
+  }
+  table.shock-table th, table.shock-table td {
+    border: 1px solid var(--amber-deep);
+    padding: 2px 4px;
+    text-align: center;
+  }
+  table.shock-table th {
+    background: var(--amber);
+    color: var(--ink);
+    font-weight: 700;
+  }
+  table.shock-table td:first-child {
+    text-align: left;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  table.shock-table tr:nth-child(even) td { background: rgba(255,255,255,0.55); }
+
+  table.stage-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 4px;
+    font-size: 8pt;
+  }
+  table.stage-table th, table.stage-table td {
+    border: 1px solid var(--cvs);
+    padding: 2px 5px;
+    text-align: left;
+  }
+  table.stage-table th {
+    background: var(--cvs);
+    color: #FFFFFF;
+    font-weight: 700;
+  }
+
+  .traps {
+    background: var(--ink);
+    color: #FFFFFF;
+    border-radius: 6px;
+    padding: 7px 10px;
+    grid-column: span 2;
+    page-break-inside: avoid;
+  }
+  .traps h2 {
+    margin: 0 0 4px;
+    font-size: 10pt;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .traps ol {
+    margin: 0;
+    padding-left: 18px;
+    columns: 2;
+    column-gap: 14px;
+  }
+  .traps li { margin-bottom: 2px; }
+  .traps li::marker { color: var(--gold); font-weight: 700; }
+
+  .footer-stamp {
+    text-align: center;
+    font-size: 7.5pt;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  strong { color: var(--ink); }
+  em { font-style: italic; }
+  .accent-gold { color: var(--gold-deep); font-weight: 700; }
+  .accent-cvs { color: var(--cvs-deep); font-weight: 700; }
+  .accent-resp { color: var(--resp-deep); font-weight: 700; }
+  .accent-path { color: var(--path-deep); font-weight: 700; }
+  .accent-amber { color: var(--amber-deep); font-weight: 700; }
+
+  .cycle-ascii {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 7.5pt;
+    background: #FFFFFF;
+    border-radius: 4px;
+    padding: 5px 7px;
+    margin-top: 4px;
+    color: var(--ink);
+    line-height: 1.25;
+    white-space: pre;
+  }
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <h1>CVS · Day 6 · Heart Failure &amp; Shock — Clinical Management</h1>
+  <div class="meta">USMLE Step 1 · June Cohort</div>
+</div>
+<div class="byline">
+  <span class="author">Prepared by Allan Bakesiga · USMLE Step 1 Prep</span>
+  <span class="home">bakesiga.github.io/usmle-dashboard</span>
+</div>
+<p class="cohort-line">Print and stick on your wall · All wording original · Builds on Day 3 physiology</p>
+
+<div class="grid">
+
+  <div class="card present">
+    <h2>HF clinical presentation <span class="tag">left vs right</span></h2>
+    <ul>
+      <li><strong>HFrEF (left):</strong> orthopnea, PND, exertional dyspnea, fatigue, <strong>S3</strong>, bibasilar crackles, displaced apical impulse (inferolateral PMI).</li>
+      <li><strong>Right HF / cor pulmonale:</strong> JVD, hepatomegaly, peripheral pitting edema, <strong>cardiac ascites</strong> (transudate, <strong>SAAG &gt; 1.1</strong>), Kussmaul sign.</li>
+      <li>#1 cause of right HF = <strong>left HF</strong>. #2 = chronic lung disease (cor pulmonale).</li>
+      <li><strong>Pulmonary edema histology:</strong> pink acellular intra-alveolar transudate; chronic LV failure → <strong>hemosiderin-laden alveolar macrophages</strong> ("HF cells", Prussian blue +).</li>
+      <li><strong>Lymphatic buffer:</strong> ~10–20× normal capacity must be saturated before clinical edema → explains why early ↑ filling pressures may be silent.</li>
+    </ul>
+  </div>
+
+  <div class="card sounds">
+    <h2>S3 vs S4 quick-ref <span class="tag">volume vs pressure</span></h2>
+    <table class="dx-table">
+      <tr><th></th><th>S3</th><th>S4</th></tr>
+      <tr><td><strong>Timing</strong></td><td>Just after S2 (early diastole)</td><td>Just before S1 (late diastole)</td></tr>
+      <tr><td><strong>Loaded with</strong></td><td>Volume — floppy LV</td><td>Pressure — stiff LV</td></tr>
+      <tr><td><strong>Mechanism</strong></td><td>Rapid early-diastolic filling deceleration</td><td>Atrial kick hits a non-compliant wall</td></tr>
+      <tr><td><strong>Seen in</strong></td><td>HFrEF, MR, AR, high-output, normal in &lt; 40 y</td><td>HTN/concentric LVH, HCM, restrictive CMP, acute MI</td></tr>
+    </table>
+  </div>
+
+  <div class="card types">
+    <h2>HFrEF vs HFpEF <span class="tag">EF · LV geometry</span></h2>
+    <table class="dx-table">
+      <tr><th></th><th>HFrEF</th><th>HFpEF</th></tr>
+      <tr><td><strong>EF</strong></td><td>≤ 40%</td><td>≥ 50%</td></tr>
+      <tr><td><strong>LV</strong></td><td>Dilated, eccentric hypertrophy</td><td>Non-dilated, concentric LVH</td></tr>
+      <tr><td><strong>Driver</strong></td><td>Ischemic/DCM — ↓ contractility</td><td>Chronic HTN — diastolic dysfunction (↑ afterload)</td></tr>
+      <tr><td><strong>PV loop</strong></td><td>ESPVR slope ↓; loop shifts right</td><td>EDPVR shifts <strong>up-left</strong> (stiff)</td></tr>
+      <tr><td><strong>Mortality Rx</strong></td><td>4-pillar (β + ARNi + MRA + SGLT2-i)</td><td>SGLT2-i + MRA + BP control</td></tr>
+    </table>
+  </div>
+
+  <div class="card staging">
+    <h2>ACC/AHA stage vs NYHA class <span class="tag">structure vs symptoms</span></h2>
+    <table class="stage-table">
+      <tr><th>ACC/AHA</th><th>What it means</th></tr>
+      <tr><td><strong>A</strong></td><td>At risk (HTN, DM, CAD) — no structural disease</td></tr>
+      <tr><td><strong>B</strong></td><td>Structural disease, <strong>asymptomatic</strong> → start ACE-i + β-blocker NOW</td></tr>
+      <tr><td><strong>C</strong></td><td>Symptomatic HF → 4-pillar GDMT</td></tr>
+      <tr><td><strong>D</strong></td><td>Refractory → LVAD, transplant, hospice</td></tr>
+    </table>
+    <table class="stage-table" style="margin-top:3px;">
+      <tr><th>NYHA</th><th>Functional capacity</th></tr>
+      <tr><td><strong>I</strong></td><td>Asymptomatic with ordinary activity</td></tr>
+      <tr><td><strong>II</strong></td><td>Symptoms with ordinary activity</td></tr>
+      <tr><td><strong>III</strong></td><td>Symptoms with less-than-ordinary activity</td></tr>
+      <tr><td><strong>IV</strong></td><td>Symptoms at rest</td></tr>
+    </table>
+  </div>
+
+  <div class="card cxr">
+    <h2>ADHF chest X-ray <span class="tag">pulmonary edema signs</span></h2>
+    <ul>
+      <li>Bilateral patchy <strong>airspace opacities</strong> (alveolar edema).</li>
+      <li><strong>Kerley B lines</strong> — short horizontal interlobular septal thickening at lung bases.</li>
+      <li><strong>Bat-wing perihilar opacification</strong>.</li>
+      <li>Fissure thickening (sub-pleural fluid).</li>
+      <li>Blunted <strong>costophrenic angles</strong> (pleural effusions).</li>
+      <li><strong>Cardiomegaly</strong> + cephalization of pulmonary vessels.</li>
+      <li>Cardiac/vascular curves: cardiac shifts <em>down-right</em> (↓ contractility) + vascular shifts <em>right</em> (volume retention) → new intersection at <strong>↑ RA pressure</strong> with maintained/slightly ↓ CO.</li>
+    </ul>
+  </div>
+
+  <div class="card bnp">
+    <h2>BNP biomarker <span class="tag">wall stress · NPV</span></h2>
+    <ul>
+      <li><strong>BNP</strong> — released by <strong>ventricular cardiomyocytes</strong> in response to wall stress (Laplace: T = Pr/2h).</li>
+      <li><strong>ANP</strong> — from atrial cardiomyocytes in response to atrial stretch.</li>
+      <li>Both → guanylate cyclase → ↑ cGMP → natriuresis + vasodilation + ↓ aldosterone + ↓ renin.</li>
+      <li><strong>Clinical use:</strong> normal BNP <em>rules out</em> acute HF (high NPV); elevated supports HF.</li>
+      <li><strong>Non-specific</strong>: also ↑ in AFib, CKD, PE, sepsis, advanced age, female sex.</li>
+      <li><strong>Falsely low</strong> in obesity (adipose neprilysin clears BNP).</li>
+      <li>On ARNi, BNP is unreliable for monitoring → use <strong>NT-proBNP</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="card cycle span">
+    <h2>Vicious cycle of decompensated HF <span class="tag">bad arms vs good arm</span></h2>
+    <div class="cycle-ascii">          ↓ CO  →  ↓ baroreceptor stretch + ↓ renal perfusion
+                    │
+        ┌───────────┴───────────┐
+        ▼                       ▼
+  SNS activation         RAAS activation              [BAD ARMS]
+  (↑ HR, ↑ contractility,  (AngII → vasoconstriction
+   vasoconstriction)       + aldosterone → Na/H₂O retention)
+        │                       │
+        └───────────┬───────────┘
+                    ▼
+        ↑ SVR (afterload) + ↑ preload
+                    ▼
+          ↑ wall stress → worsens HF → loop repeats
+                    │
+                    │  countered (but eventually overwhelmed) by
+                    ▼
+   ANP (atrial stretch) + BNP (ventricular stretch)   [GOOD ARM]
+   → cGMP → natriuresis + vasodilation + ↓ aldosterone
+      </div>
+    <ul style="margin-top:5px;">
+      <li><strong>Stage B clue:</strong> all three neurohormones (AngII, NE, ANP) are already ↑ even before symptoms appear → rationale for starting ACE-i + β-blocker at Stage B.</li>
+      <li><strong>4-pillar logic:</strong> β-blocker breaks the SNS arm; ACE-i/ARB/ARNi breaks RAAS (ARNi also augments ANP/BNP via neprilysin block); MRA blocks aldosterone; SGLT2-i adds an independent mortality benefit.</li>
+    </ul>
+  </div>
+
+  <div class="card pillars span">
+    <h2>HFrEF four-pillar regimen <span class="tag">mortality benefit · start at Stage C (β-blocker + ACE-i at Stage B)</span></h2>
+    <table class="dx-table">
+      <tr><th>Pillar</th><th>Examples</th><th>Mechanism / pearl</th></tr>
+      <tr><td><strong>1. β-blocker</strong></td><td><strong>Carvedilol, metoprolol succinate, bisoprolol</strong></td><td>Blocks SNS arm; reverses remodeling. <strong>Start LOW, GO SLOW</strong>. Do not start in acute decompensation.</td></tr>
+      <tr><td><strong>2. ACE-i / ARB / ARNi</strong></td><td>Lisinopril · losartan · <strong>sacubitril/valsartan</strong></td><td>Blocks RAAS. <strong>ARNi superior</strong> to ACE-i in stable HFrEF (PARADIGM-HF). ACE-i → dry cough + angioedema (bradykinin); ARB doesn't. Wash out ACE-i 36 h before starting ARNi.</td></tr>
+      <tr><td><strong>3. MRA</strong></td><td>Spironolactone · eplerenone</td><td>Blocks aldosterone → anti-fibrotic + K⁺/Mg-sparing. Monitor K⁺ + Cr. Spiro = gynecomastia; eplerenone selective.</td></tr>
+      <tr><td><strong>4. SGLT2 inhibitor</strong></td><td>Dapagliflozin · empagliflozin</td><td>Works <strong>regardless of diabetes</strong>; mechanism not fully understood. Reduces HF hospitalization + CV mortality.</td></tr>
+      <tr><td colspan="3"><strong>Symptom add-on:</strong> <strong>loop diuretic</strong> (furosemide) — congestion relief, <em>no mortality benefit</em>.<br><strong>Devices:</strong> <strong>ICD</strong> if EF ≤ 35 % after ≥ 3 mo of optimized GDMT · <strong>CRT</strong> if QRS ≥ 150 ms + LBBB · <strong>LVAD / transplant</strong> at Stage D.</td></tr>
+    </table>
+  </div>
+
+  <div class="card hfpef">
+    <h2>HFpEF management <span class="tag">stiff LV</span></h2>
+    <ul>
+      <li><strong>SGLT2-i</strong> (only class with consistent mortality/hospitalization benefit in HFpEF).</li>
+      <li><strong>MRA</strong> (spironolactone) — symptom + hospitalization benefit, especially EF 45–55 %.</li>
+      <li><strong>Loop diuretic</strong> for congestion.</li>
+      <li><strong>Aggressive BP control</strong> — HTN is the dominant driver.</li>
+      <li>Treat comorbidities: <strong>AF, OSA, obesity, CKD</strong>.</li>
+      <li>β-blockers + ACE-i/ARB are NOT mortality-proven in HFpEF (used for comorbidities).</li>
+    </ul>
+  </div>
+
+  <div class="card cor">
+    <h2>Right HF · cor pulmonale <span class="tag">RV pressure overload</span></h2>
+    <ul>
+      <li><strong>COPD path</strong>: chronic alveolar hypoxia → hypoxic pulmonary vasoconstriction + remodeling → <strong>pulmonary HTN</strong> → RV pressure overload → RV dilation → tricuspid regurgitation → RV failure.</li>
+      <li><strong>Cardiac ascites</strong>: ↑ portal capillary hydrostatic pressure from systemic venous congestion + normal oncotic + normal permeability → <strong>transudate</strong>, <strong>SAAG &gt; 1.1 g/dL</strong>.</li>
+      <li>Distinguish from cirrhotic ascites: both have SAAG &gt; 1.1, but cardiac ascites total protein &gt; 2.5 g/dL (sinusoidal congestion preserves protein leak).</li>
+      <li><strong>Reversible DCMs</strong>: alcohol (abstinence) · peripartum (often resolves) · tachycardia-induced · stress (Takotsubo).</li>
+      <li><strong>Anthracycline (doxorubicin) cardiotoxicity</strong>: dose-dependent <strong>irreversible</strong> DCM presenting years–decades later. Mechanism: free-radical mitochondrial damage + topoisomerase IIβ inhibition. Prevent with <strong>dexrazoxane</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="card shock span">
+    <h2>4-type shock — cath profile + first-line treatment <span class="tag">CVP · PCWP · CI · SVR · SvO₂</span></h2>
+    <table class="shock-table">
+      <tr><th>Type</th><th>CVP</th><th>PCWP</th><th>CI</th><th>SVR</th><th>SvO₂</th><th>Skin</th><th>First-line treatment</th></tr>
+      <tr><td>Hypovolemic</td><td>↓</td><td>↓</td><td>↓</td><td>↑</td><td>↓</td><td>Cold</td><td>IV crystalloid + source control</td></tr>
+      <tr><td>Cardiogenic (MI)</td><td>↑</td><td>↑</td><td>↓</td><td>↑</td><td>↓</td><td>Cold</td><td>Revascularize (PCI) + <strong>dobutamine</strong>; IABP / Impella / ECMO</td></tr>
+      <tr><td>Obstructive (PE)</td><td>↑</td><td>↓</td><td>↓</td><td>↑</td><td>↓</td><td>Cold</td><td>Anticoagulate; <strong>thrombolytics</strong> if unstable; embolectomy</td></tr>
+      <tr><td>Septic (warm)</td><td>↓</td><td>↓</td><td>↑</td><td>↓</td><td>↑</td><td>Warm</td><td>Early antibiotics + crystalloid + <strong>norepinephrine</strong></td></tr>
+      <tr><td>Anaphylactic</td><td>↓</td><td>↓</td><td>↑</td><td>↓</td><td>↑</td><td>Warm</td><td><strong>IM epinephrine</strong> (α₁ + β₁ + β₂ + mast cell stabilization)</td></tr>
+    </table>
+    <ul style="margin-top:5px;">
+      <li><strong>Massive PE pathophysiology</strong>: clot in PA → ↑ RV afterload → RV dilation + ↑ wall tension → RV ischemia (supply-demand mismatch) → ↓ LV preload → cardiogenic collapse. Echo: enlarged RV cavity, septal flattening.</li>
+      <li><strong>Septic cold phase</strong>: CO drops, SvO₂ falls, SVR may rise → looks like cardiogenic shock — context matters.</li>
+      <li><strong>Tamponade quirk</strong>: PCWP often looks ↑ (transmitted pericardial pressure), but LV is actually under-filled.</li>
+    </ul>
+  </div>
+
+  <div class="card vaso">
+    <h2>Vasopressor / inotrope cheat-sheet <span class="tag">match to shock</span></h2>
+    <ul>
+      <li><strong>Norepinephrine</strong> (α₁ &gt;&gt; β₁) — <strong>first-line in septic shock</strong> and most undifferentiated shock with low SVR.</li>
+      <li><strong>Epinephrine</strong> (α₁ + β₁ + β₂) — <strong>IM in anaphylaxis</strong>; IV in cardiac arrest + refractory shock.</li>
+      <li><strong>Dobutamine</strong> (β₁ &gt;&gt; β₂) — inotrope of choice in <strong>cardiogenic shock</strong> with adequate BP.</li>
+      <li><strong>Phenylephrine</strong> (pure α₁) — neurogenic shock, anesthesia-induced hypotension; reflex bradycardia.</li>
+      <li><strong>Vasopressin</strong> — adjunct in septic shock when norepinephrine alone insufficient.</li>
+      <li><strong>Dopamine</strong> (dose-dependent) — largely fallen out of favor (arrhythmias).</li>
+    </ul>
+  </div>
+
+  <div class="card highout">
+    <h2>High-output HF pearl <span class="tag">low SVR + ↑ CO</span></h2>
+    <ul>
+      <li>Etiologies: <strong>hyperthyroidism (Graves)</strong>, severe anemia, large AV fistula, wet beriberi (thiamine deficiency), Paget disease of bone, pregnancy.</li>
+      <li>Findings: <strong>↓ SVR</strong> + <strong>↑ CO</strong> + <strong>wide pulse pressure</strong> + warm extremities + pitting edema + S3.</li>
+      <li><strong>Graves treatment</strong>: <strong>propranolol</strong> (blocks β + peripheral T4→T3 conversion) + definitive Rx (methimazole, radioactive iodine, thyroidectomy).</li>
+      <li>Treat the cause — diuretics + standard HF meds alone do not fix it.</li>
+    </ul>
+  </div>
+
+  <div class="traps">
+    <h2>Top 15 traps</h2>
+    <ol>
+      <li>S3 = floppy LV (volume); S4 = stiff LV (pressure).</li>
+      <li>HFrEF ≤ 40 %; HFpEF ≥ 50 %; 41–49 % = HFmrEF.</li>
+      <li>Start ACE-i + β-blocker at <strong>Stage B</strong> — don't wait for symptoms.</li>
+      <li>4 pillars: β-blocker + ARNi (or ACE-i/ARB) + MRA + SGLT2-i.</li>
+      <li>Loop diuretic = symptoms only, NO mortality benefit.</li>
+      <li>ICD if EF ≤ 35 % after optimized GDMT; CRT if QRS ≥ 150 ms + LBBB.</li>
+      <li>ACE-i cough/angioedema = bradykinin; switch to ARB.</li>
+      <li>ARNi: wash out ACE-i 36 h to avoid angioedema.</li>
+      <li>SGLT2-i works even without diabetes.</li>
+      <li>Septic shock first-line vasopressor = <strong>norepinephrine</strong>.</li>
+      <li>Anaphylaxis = <strong>IM epinephrine</strong>, not IV (unless arrest).</li>
+      <li>Cardiogenic shock inotrope = dobutamine; revascularize early.</li>
+      <li>Massive PE → ↑ CVP + ↓ PCWP + RV dilation on echo.</li>
+      <li>Cardiac ascites: SAAG &gt; 1.1, total protein &gt; 2.5 g/dL.</li>
+      <li>Hemosiderin-laden macrophages = chronic LV failure → Prussian blue +.</li>
+    </ol>
+  </div>
+
+</div>
+
+<p class="footer-stamp">© Allan Bakesiga · USMLE Step 1 Prep · Original wording. Single page — carry it and review before every Q-bank block.</p>
+
+</body>
+</html>

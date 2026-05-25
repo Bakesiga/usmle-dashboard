@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CVS Day 6 — Flashcards</title>
+<style>
+  :root {
+    --ink: #0C2A3D;
+    --ink-2: #345671;
+    --muted: #5B7A95;
+    --bg: #FFFFFF;
+    --bg-cream: #FFF8EC;
+    --border: #D6E8F5;
+
+    --gold: #E5A823;
+    --gold-deep: #B8851C;
+    --gold-soft: #FFF4D6;
+
+    --cvs: #0284C7; --cvs-soft: #E0F2FE; --cvs-deep: #075985;
+    --resp: #059669; --resp-soft: #D1FAE5; --resp-deep: #065F46;
+    --path: #7C3AED; --path-soft: #EDE9FE; --path-deep: #5B21B6;
+    --amber: #D97706; --amber-soft: #FEF3C7; --amber-deep: #B45309;
+  }
+
+  @page { size: A4; margin: 12mm 10mm; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 10pt;
+    line-height: 1.38;
+  }
+
+  .ribbon {
+    background: var(--ink);
+    color: #FFFFFF;
+    padding: 7px 14px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .ribbon h1 {
+    margin: 0;
+    font-size: 16pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+  .ribbon .meta {
+    font-size: 9pt;
+    color: #BFE3F7;
+    letter-spacing: 0.06em;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: var(--ink-2);
+    font-style: italic;
+    margin: 4px 0 12px;
+    font-size: 9.5pt;
+  }
+
+  .byline {
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-deep) 100%);
+    color: var(--ink);
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 9pt;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin: 0 0 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .byline .author { font-weight: 800; }
+  .byline .home {
+    font-weight: 500;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .section {
+    margin-top: 14px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .section-bar {
+    color: #FFFFFF;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 10pt;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .section-bar .group-tag {
+    font-size: 7.5pt;
+    background: rgba(255,255,255,0.22);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  .section.present .section-bar { background: var(--cvs-deep); }
+  .section.sounds .section-bar { background: var(--gold-deep); color: #FFFFFF; }
+  .section.types .section-bar { background: var(--path-deep); }
+  .section.staging .section-bar { background: var(--cvs); }
+  .section.cxr .section-bar { background: var(--amber-deep); }
+  .section.bnp .section-bar { background: var(--resp-deep); }
+  .section.cycle .section-bar { background: var(--gold-deep); }
+  .section.pillars .section-bar { background: var(--resp-deep); }
+  .section.hfpef .section-bar { background: var(--cvs); }
+  .section.cor .section-bar { background: var(--path); }
+  .section.shock .section-bar { background: var(--amber-deep); }
+  .section.vaso .section-bar { background: var(--ink); }
+  .section.highout .section-bar { background: var(--gold-deep); }
+
+  .card {
+    border-radius: 6px;
+    margin-bottom: 7px;
+    padding: 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .q {
+    padding: 6px 10px;
+    font-weight: 600;
+    font-size: 9.5pt;
+    color: var(--ink);
+    display: flex; gap: 8px;
+  }
+  .q .n {
+    flex: 0 0 auto;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: 9pt;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .a {
+    padding: 5px 10px 7px 40px;
+    font-size: 9pt;
+    color: var(--ink-2);
+    border-top: 1px dashed var(--border);
+  }
+  .a strong { color: var(--ink); }
+
+  .section.present .card { background: var(--cvs-soft); }
+  .section.present .a { background: #ffffff; }
+  .section.present .q .n { background: var(--cvs-deep); }
+
+  .section.sounds .card { background: var(--gold-soft); }
+  .section.sounds .a { background: #ffffff; }
+  .section.sounds .q .n { background: var(--gold-deep); }
+
+  .section.types .card { background: var(--path-soft); }
+  .section.types .a { background: #ffffff; }
+  .section.types .q .n { background: var(--path-deep); }
+
+  .section.staging .card { background: var(--cvs-soft); }
+  .section.staging .a { background: #ffffff; }
+  .section.staging .q .n { background: var(--cvs); }
+
+  .section.cxr .card { background: var(--amber-soft); }
+  .section.cxr .a { background: #ffffff; }
+  .section.cxr .q .n { background: var(--amber-deep); }
+
+  .section.bnp .card { background: var(--resp-soft); }
+  .section.bnp .a { background: #ffffff; }
+  .section.bnp .q .n { background: var(--resp-deep); }
+
+  .section.cycle .card { background: var(--gold-soft); }
+  .section.cycle .a { background: #ffffff; }
+  .section.cycle .q .n { background: var(--gold-deep); }
+
+  .section.pillars .card { background: var(--resp-soft); }
+  .section.pillars .a { background: #ffffff; }
+  .section.pillars .q .n { background: var(--resp-deep); }
+
+  .section.hfpef .card { background: var(--cvs-soft); }
+  .section.hfpef .a { background: #ffffff; }
+  .section.hfpef .q .n { background: var(--cvs); }
+
+  .section.cor .card { background: var(--path-soft); }
+  .section.cor .a { background: #ffffff; }
+  .section.cor .q .n { background: var(--path); }
+
+  .section.shock .card { background: var(--amber-soft); }
+  .section.shock .a { background: #ffffff; }
+  .section.shock .q .n { background: var(--amber-deep); }
+
+  .section.vaso .card { background: var(--bg-cream); }
+  .section.vaso .a { background: #ffffff; }
+  .section.vaso .q .n { background: var(--ink); }
+
+  .section.highout .card { background: var(--gold-soft); }
+  .section.highout .a { background: #ffffff; }
+  .section.highout .q .n { background: var(--gold-deep); }
+
+  .footer-stamp {
+    text-align: center;
+    font-size: 8pt;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <h1>CVS · Day 6 · Flashcards</h1>
+  <div class="meta">USMLE Step 1 · June Cohort · 52 cards</div>
+</div>
+<div class="byline">
+  <span class="author">Prepared by Allan Bakesiga · USMLE Step 1 Prep</span>
+  <span class="home">bakesiga.github.io/usmle-dashboard</span>
+</div>
+<p class="subtitle">Cover the answer · attempt aloud · check · re-test the misses tomorrow</p>
+
+<div class="section present">
+  <div class="section-bar">HF clinical presentation <span class="group-tag">6 cards</span></div>
+
+  <div class="card"><div class="q"><span class="n">1</span><span>Classic constellation suggesting decompensated left HF on bedside exam?</span></div><div class="a">Orthopnea + paroxysmal nocturnal dyspnea + bibasilar crackles + <strong>S3 gallop</strong> + JVD + lower-extremity pitting edema, often with an apical impulse displaced <strong>inferolaterally</strong> from LV dilation.</div></div>
+
+  <div class="card"><div class="q"><span class="n">2</span><span>Most common cause of right-sided heart failure?</span></div><div class="a"><strong>Left-sided heart failure</strong>. Second most common is chronic pulmonary disease (cor pulmonale).</div></div>
+
+  <div class="card"><div class="q"><span class="n">3</span><span>Hemosiderin-laden macrophages in alveolar spaces — what do they indicate and what stain confirms?</span></div><div class="a">Chronic left ventricular failure ("<strong>heart failure cells</strong>"). RBCs leak across pulmonary capillaries → ingested by alveolar macrophages → iron stored as hemosiderin → <strong>Prussian blue positive</strong>.</div></div>
+
+  <div class="card"><div class="q"><span class="n">4</span><span>Why might a patient have markedly elevated filling pressures yet minimal peripheral edema?</span></div><div class="a">The <strong>lymphatic system has ~10–20× reserve capacity</strong> for interstitial fluid absorption. Clinical edema only appears once the lymphatics are saturated.</div></div>
+
+  <div class="card"><div class="q"><span class="n">5</span><span>Histology of acute pulmonary edema?</span></div><div class="a"><strong>Pink, acellular intra-alveolar transudate</strong> filling the alveoli, ± distended alveolar capillaries.</div></div>
+
+  <div class="card"><div class="q"><span class="n">6</span><span>Bedside signs distinguishing right HF / cor pulmonale from left HF?</span></div><div class="a">Right-sided: <strong>JVD, hepatomegaly, hepatojugular reflux, lower-extremity edema, ascites</strong>, Kussmaul sign. Left-sided: orthopnea, PND, crackles, S3, displaced PMI.</div></div>
+</div>
+
+<div class="section sounds">
+  <div class="section-bar">S3 vs S4 <span class="group-tag">4 cards</span></div>
+
+  <div class="card"><div class="q"><span class="n">7</span><span>S3: when in the cycle does it fall, what loading condition does it imply, and what causes it mechanically?</span></div><div class="a">Just <strong>after S2</strong>, in early diastole. Implies <strong>volume overload</strong> / floppy non-compliant LV (HFrEF, severe MR, severe AR, high-output states). Caused by rapid early-diastolic ventricular filling decelerating against a dilated LV.</div></div>
+
+  <div class="card"><div class="q"><span class="n">8</span><span>S4: when in the cycle does it fall, what loading condition does it imply, and what causes it mechanically?</span></div><div class="a">Just <strong>before S1</strong>, late diastole. Implies <strong>pressure overload</strong> / stiff LV (chronic HTN with concentric LVH, HCM, restrictive cardiomyopathy, acute MI). Caused by the atrial kick contracting blood into a non-compliant ventricular wall.</div></div>
+
+  <div class="card"><div class="q"><span class="n">9</span><span>In which physiologic population can an S3 be normal?</span></div><div class="a">Healthy individuals <strong>under age 40</strong>, athletes, and pregnant women — a compliant LV can produce a benign S3.</div></div>
+
+  <div class="card"><div class="q"><span class="n">10</span><span>Best position and stethoscope technique to hear S3 and S4?</span></div><div class="a"><strong>Left lateral decubitus</strong> position, with the <strong>bell</strong> of the stethoscope at the cardiac apex.</div></div>
+</div>
+
+<div class="section types">
+  <div class="section-bar">HFrEF vs HFpEF <span class="group-tag">5 cards</span></div>
+
+  <div class="card"><div class="q"><span class="n">11</span><span>Ejection fraction cut-offs for HFrEF, HFmrEF, and HFpEF?</span></div><div class="a">HFrEF ≤ 40 %; HFmrEF 41–49 %; HFpEF ≥ 50 %.</div></div>
+
+  <div class="card"><div class="q"><span class="n">12</span><span>Dominant driver and LV geometry of HFpEF?</span></div><div class="a">Dominant driver: <strong>chronic hypertension</strong> → <strong>concentric LV hypertrophy</strong> with a non-dilated chamber. Reflects increased afterload causing diastolic dysfunction.</div></div>
+
+  <div class="card"><div class="q"><span class="n">13</span><span>How does the pressure-volume loop change in HFpEF compared with normal?</span></div><div class="a">The <strong>end-diastolic pressure-volume relationship (EDPVR) shifts up and to the left</strong> — the ventricle requires much higher diastolic pressures to achieve a given filling volume because of stiffness.</div></div>
+
+  <div class="card"><div class="q"><span class="n">14</span><span>Mechanism of HFrEF on the PV loop?</span></div><div class="a"><strong>ESPVR slope decreases</strong> (↓ contractility) and the whole loop shifts rightward (↑ end-diastolic and end-systolic volumes). Stroke volume falls; ejection fraction falls.</div></div>
+
+  <div class="card"><div class="q"><span class="n">15</span><span>Reversible causes of dilated cardiomyopathy?</span></div><div class="a"><strong>Alcoholic DCM</strong> (with abstinence), peripartum, tachycardia-induced, stress (Takotsubo), hyperthyroid, cocaine, thiamine deficiency.</div></div>
+</div>
+
+<div class="section staging">
+  <div class="section-bar">ACC/AHA stage &amp; NYHA class <span class="group-tag">4 cards</span></div>
+
+  <div class="card"><div class="q"><span class="n">16</span><span>Define ACC/AHA stages A through D.</span></div><div class="a"><strong>A</strong> = at risk (HTN, DM, CAD), no structural disease. <strong>B</strong> = structural disease but asymptomatic. <strong>C</strong> = symptomatic HF. <strong>D</strong> = refractory HF requiring advanced therapy.</div></div>
+
+  <div class="card"><div class="q"><span class="n">17</span><span>At which ACC/AHA stage should ACE-i and β-blocker be started in HFrEF — and why?</span></div><div class="a"><strong>Stage B</strong> — asymptomatic structural disease. By Stage B the neurohormonal cascade (sympathetic, RAAS, ANP) is already activated, so blocking it early slows progression to symptomatic HF.</div></div>
+
+  <div class="card"><div class="q"><span class="n">18</span><span>Define NYHA class I through IV.</span></div><div class="a"><strong>I</strong> = asymptomatic with ordinary activity. <strong>II</strong> = symptoms with ordinary activity. <strong>III</strong> = symptoms with less than ordinary activity. <strong>IV</strong> = symptoms at rest.</div></div>
+
+  <div class="card"><div class="q"><span class="n">19</span><span>Key difference between ACC/AHA staging and NYHA classification?</span></div><div class="a">ACC/AHA stages describe <strong>structural progression</strong> (one-way: A → B → C → D). NYHA describes <strong>current functional status</strong> and can move both directions (e.g., III → II with treatment).</div></div>
+</div>
+
+<div class="section cxr">
+  <div class="section-bar">ADHF chest X-ray <span class="group-tag">3 cards</span></div>
+
+  <div class="card"><div class="q"><span class="n">20</span><span>List the chest X-ray findings of acute decompensated heart failure.</span></div><div class="a">Bilateral patchy <strong>airspace opacities</strong> (alveolar edema); <strong>Kerley B lines</strong>; <strong>bat-wing perihilar opacification</strong>; thickened interlobar fissures; blunted costophrenic angles (effusions); <strong>cardiomegaly</strong>; cephalization (upper-lobe vessel diversion).</div></div>
+
+  <div class="card"><div class="q"><span class="n">21</span><span>What are Kerley B lines and what do they represent?</span></div><div class="a">Short, horizontal lines ≤ 2 cm at the lung bases, perpendicular to the pleural surface. They represent <strong>thickened interlobular septa from interstitial pulmonary edema</strong>.</div></div>
+
+  <div class="card"><div class="q"><span class="n">22</span><span>How do the cardiac and vascular function curves shift in decompensated HFrEF?</span></div><div class="a">Cardiac curve shifts <strong>down and right</strong> (↓ contractility); vascular curve shifts <strong>right</strong> (volume retention raises mean systemic pressure). New intersection: <strong>elevated right atrial pressure with maintained or slightly reduced cardiac output</strong>.</div></div>
+</div>
+
+<div class="section bnp">
+  <div class="section-bar">BNP &amp; natriuretic peptides <span class="group-tag">4 cards</span></div>
+
+  <div class="card"><div class="q"><span class="n">23</span><span>What cells release BNP, and what is the trigger?</span></div><div class="a"><strong>Ventricular cardiomyocytes</strong> release BNP in response to <strong>ventricular wall stress</strong> (Laplace: T = Pr / 2h — wall tension rises with chamber pressure and radius, falls with wall thickness).</div></div>
+
+  <div class="card"><div class="q"><span class="n">24</span><span>Downstream signaling of ANP and BNP?</span></div><div class="a">Both activate <strong>guanylate cyclase</strong> → ↑ cGMP → natriuresis + diuresis + arterial and venous vasodilation + ↓ aldosterone + ↓ renin.</div></div>
+
+  <div class="card"><div class="q"><span class="n">25</span><span>What is the most useful clinical interpretation of a normal BNP in a dyspneic patient?</span></div><div class="a">A normal BNP has a <strong>high negative predictive value</strong> — it effectively rules out acute decompensated heart failure as the cause of dyspnea.</div></div>
+
+  <div class="card"><div class="q"><span class="n">26</span><span>Conditions besides HF that elevate BNP, and one condition that falsely lowers it?</span></div><div class="a">Elevated: AFib, CKD, PE, sepsis, advanced age, female sex. <strong>Falsely low</strong>: <strong>obesity</strong> — adipose tissue expresses neprilysin which clears BNP.</div></div>
+</div>
+
+<div class="section cycle">
+  <div class="section-bar">Neurohormonal cascade <span class="group-tag">3 cards</span></div>
+
+  <div class="card"><div class="q"><span class="n">27</span><span>Trace the neurohormonal vicious cycle of decompensated HF in sequence.</span></div><div class="a">↓ CO → ↓ baroreceptor stretch + ↓ renal perfusion → <strong>SNS</strong> activation (↑ HR, ↑ contractility, vasoconstriction) + <strong>RAAS</strong> activation (AngII vasoconstriction + aldosterone-mediated Na/H₂O retention) → ↑ SVR (afterload) and ↑ preload → worsens HF → loop repeats. ANP/BNP try to counter (natriuresis + vasodilation) but are overwhelmed.</div></div>
+
+  <div class="card"><div class="q"><span class="n">28</span><span>In asymptomatic Stage B HF, which neurohormones are already elevated?</span></div><div class="a">All three: <strong>angiotensin II, norepinephrine, and ANP</strong>. This is the biological argument for starting ACE-i + β-blocker at Stage B before symptoms develop.</div></div>
+
+  <div class="card"><div class="q"><span class="n">29</span><span>Where does ACE convert angiotensin I to angiotensin II, and how does this show up in HF?</span></div><div class="a">In the <strong>pulmonary vascular endothelium</strong>. In HF, the pulmonary vein has measurably higher AngII concentration than the pulmonary artery — pulmonary circulation is the main site of conversion.</div></div>
+</div>
+
+<div class="section pillars">
+  <div class="section-bar">HFrEF four-pillar regimen <span class="group-tag">8 cards</span></div>
+
+  <div class="card"><div class="q"><span class="n">30</span><span>Name the four mortality-reducing pillar classes for HFrEF.</span></div><div class="a">(1) <strong>β-blocker</strong> (carvedilol, metoprolol succinate, bisoprolol); (2) <strong>ACE-i / ARB / ARNi</strong>; (3) <strong>MRA</strong> (spironolactone, eplerenone); (4) <strong>SGLT2 inhibitor</strong> (dapagliflozin, empagliflozin).</div></div>
+
+  <div class="card"><div class="q"><span class="n">31</span><span>Which β-blockers are proven to reduce mortality in HFrEF?</span></div><div class="a"><strong>Carvedilol, metoprolol succinate, and bisoprolol</strong>. Start low, go slow; do not initiate during acute decompensation.</div></div>
+
+  <div class="card"><div class="q"><span class="n">32</span><span>How does sacubitril/valsartan (ARNi) act differently from an ACE inhibitor?</span></div><div class="a"><strong>Sacubitril</strong> inhibits <strong>neprilysin</strong>, the enzyme that degrades natriuretic peptides → ↑ endogenous ANP/BNP activity. Paired with valsartan (ARB) to also block RAAS. <strong>Superior to ACE-i</strong> in stable HFrEF (PARADIGM-HF).</div></div>
+
+  <div class="card"><div class="q"><span class="n">33</span><span>Why must ACE-i be washed out for 36 hours before starting sacubitril/valsartan?</span></div><div class="a">Both block bradykinin breakdown — combining them risks severe <strong>angioedema</strong>.</div></div>
+
+  <div class="card"><div class="q"><span class="n">34</span><span>Mechanism of the dry cough and angioedema seen with ACE inhibitors? Best alternative?</span></div><div class="a"><strong>Bradykinin accumulation</strong> (ACE normally degrades bradykinin). Switch to an <strong>ARB</strong> — angiotensin receptor blockers do not affect bradykinin metabolism.</div></div>
+
+  <div class="card"><div class="q"><span class="n">35</span><span>How do SGLT2 inhibitors benefit HF patients without diabetes?</span></div><div class="a">They reduce HF hospitalization and cardiovascular death <strong>regardless of diabetic status</strong>. Exact mechanism is incompletely understood — proposed contributions include natriuresis, ↓ preload, improved myocardial energetics, and renal protection.</div></div>
+
+  <div class="card"><div class="q"><span class="n">36</span><span>Role of loop diuretics in HFrEF — do they reduce mortality?</span></div><div class="a"><strong>No</strong>. Loop diuretics (furosemide, torsemide, bumetanide) relieve congestion and improve symptoms but have no proven mortality benefit. Use the lowest effective dose.</div></div>
+
+  <div class="card"><div class="q"><span class="n">37</span><span>Indications for ICD and CRT in HFrEF?</span></div><div class="a"><strong>ICD</strong>: EF ≤ 35 % after ≥ 3 months of optimized GDMT (primary prevention of sudden cardiac death). <strong>CRT (biventricular pacing)</strong>: EF ≤ 35 % + <strong>QRS ≥ 150 ms</strong> + <strong>LBBB</strong> morphology, with persistent NYHA II–IV symptoms.</div></div>
+</div>
+
+<div class="section hfpef">
+  <div class="section-bar">HFpEF management <span class="group-tag">2 cards</span></div>
+
+  <div class="card"><div class="q"><span class="n">38</span><span>Which drug classes have the strongest evidence in HFpEF?</span></div><div class="a"><strong>SGLT2 inhibitors</strong> (consistent reduction in HF hospitalization across the full EF spectrum); <strong>MRA</strong> (especially EF 45–55 %); plus aggressive <strong>BP control</strong> and management of comorbidities (AF, OSA, obesity, CKD). Loop diuretics for symptom control.</div></div>
+
+  <div class="card"><div class="q"><span class="n">39</span><span>Why do β-blockers and ACE inhibitors offer less benefit in HFpEF than HFrEF?</span></div><div class="a">HFpEF is driven by diastolic dysfunction and impaired ventricular relaxation, not by reduced contractility or a maximally activated neurohormonal cascade. β-blockade can even worsen exercise capacity by limiting chronotropy.</div></div>
+</div>
+
+<div class="section cor">
+  <div class="section-bar">Right HF · cor pulmonale · cardiotoxic CMP <span class="group-tag">4 cards</span></div>
+
+  <div class="card"><div class="q"><span class="n">40</span><span>Pathophysiology of cor pulmonale in COPD?</span></div><div class="a">Chronic alveolar hypoxia → <strong>hypoxic pulmonary vasoconstriction</strong> + vascular remodeling → pulmonary hypertension → <strong>RV pressure overload</strong> → RV hypertrophy/dilation → tricuspid regurgitation → right heart failure.</div></div>
+
+  <div class="card"><div class="q"><span class="n">41</span><span>Cardiac ascites: SAAG and total-protein profile, and how this distinguishes it from cirrhotic ascites.</span></div><div class="a">Both have <strong>SAAG &gt; 1.1 g/dL</strong> (portal hypertension category). <strong>Cardiac</strong> ascites has <strong>total protein &gt; 2.5 g/dL</strong> (sinusoidal congestion lets protein leak), while cirrhotic ascites has <strong>total protein &lt; 2.5 g/dL</strong>.</div></div>
+
+  <div class="card"><div class="q"><span class="n">42</span><span>Anthracycline (doxorubicin) cardiotoxicity — mechanism, time course, and preventive agent?</span></div><div class="a">Mechanism: <strong>free-radical mitochondrial damage</strong> + <strong>topoisomerase IIβ inhibition</strong> in cardiomyocytes. <strong>Dose-dependent and irreversible</strong>; DCM can present years to decades after exposure. Prevented by <strong>dexrazoxane</strong>.</div></div>
+
+  <div class="card"><div class="q"><span class="n">43</span><span>Why is alcoholic dilated cardiomyopathy potentially reversible while anthracycline DCM is not?</span></div><div class="a">Alcoholic DCM reflects ongoing toxic insult to viable cardiomyocytes — abstinence allows recovery of contractility. Anthracyclines cause <strong>permanent myocyte loss</strong> via mitochondrial and DNA damage; the cells do not regenerate.</div></div>
+</div>
+
+<div class="section shock">
+  <div class="section-bar">Shock — cath profiles &amp; first-line treatment <span class="group-tag">7 cards</span></div>
+
+  <div class="card"><div class="q"><span class="n">44</span><span>Catheter profile of hypovolemic shock (CVP, PCWP, CI, SVR, SvO₂), and first-line treatment?</span></div><div class="a">↓ CVP, ↓ PCWP, ↓ CI, ↑ SVR, ↓ SvO₂; cold extremities. Treatment: <strong>rapid IV crystalloid</strong> + source control (transfusion for hemorrhage, hemostasis, etc.).</div></div>
+
+  <div class="card"><div class="q"><span class="n">45</span><span>Catheter profile of cardiogenic shock and first-line interventions in acute MI?</span></div><div class="a">↑ CVP, ↑ PCWP, ↓ CI, ↑ SVR, ↓ SvO₂; cold. Treatment: <strong>emergency revascularization (PCI)</strong>, inotrope (<strong>dobutamine</strong>), mechanical support (IABP, Impella, ECMO) if refractory.</div></div>
+
+  <div class="card"><div class="q"><span class="n">46</span><span>Catheter profile and pathophysiology of obstructive shock from massive PE?</span></div><div class="a"><strong>↑ CVP, ↓ PCWP, ↓ CI, ↑ SVR, ↓ SvO₂</strong>. Pathway: PA clot → ↑ RV afterload → RV dilation + wall tension → RV ischemia → ↓ LV preload → cardiogenic collapse. Echo shows enlarged RV with septal flattening.</div></div>
+
+  <div class="card"><div class="q"><span class="n">47</span><span>Treatment escalation for massive PE?</span></div><div class="a"><strong>Anticoagulation</strong> in all; <strong>systemic thrombolytics</strong> (tPA) if hemodynamically compromised; catheter-directed therapy or <strong>surgical embolectomy</strong> for refractory or contraindication to lysis.</div></div>
+
+  <div class="card"><div class="q"><span class="n">48</span><span>Catheter profile of warm septic shock and first-line treatment bundle?</span></div><div class="a">↓ CVP, ↓ PCWP, <strong>↑ CI</strong>, ↓ SVR, <strong>↑ SvO₂</strong> (impaired tissue O₂ extraction); warm extremities. Treatment: <strong>early broad-spectrum antibiotics + IV crystalloid + norepinephrine</strong> as first-line vasopressor.</div></div>
+
+  <div class="card"><div class="q"><span class="n">49</span><span>Mechanism of anaphylactic shock and the single most important first-line intervention?</span></div><div class="a"><strong>IgE-mediated mast cell degranulation</strong> → histamine + leukotrienes + tryptase → systemic vasodilation, capillary leak, bronchoconstriction. First-line: <strong>IM epinephrine</strong> (α₁ vasoconstriction + β₁ inotropy + β₂ bronchodilation + mast cell stabilization).</div></div>
+
+  <div class="card"><div class="q"><span class="n">50</span><span>Why might PCWP appear paradoxically elevated in cardiac tamponade despite an under-filled LV?</span></div><div class="a">The high pericardial pressure is <strong>transmitted into all cardiac chambers</strong>, so the catheter reads an elevated wedge pressure. Effective transmural filling pressure (and therefore preload) is actually low.</div></div>
+</div>
+
+<div class="section vaso">
+  <div class="section-bar">Vasopressor / inotrope pairing <span class="group-tag">1 card</span></div>
+
+  <div class="card"><div class="q"><span class="n">51</span><span>First-line vasopressor for each shock type: septic, anaphylactic, cardiogenic with adequate BP, hypovolemic?</span></div><div class="a"><strong>Septic</strong>: <strong>norepinephrine</strong> (α₁ &gt;&gt; β₁). <strong>Anaphylactic</strong>: <strong>IM epinephrine</strong>. <strong>Cardiogenic with adequate BP</strong>: <strong>dobutamine</strong> (β₁ inotrope). <strong>Hypovolemic</strong>: volume first — pressors only as a bridge while volume is being replaced.</div></div>
+</div>
+
+<div class="section highout">
+  <div class="section-bar">High-output HF <span class="group-tag">1 card</span></div>
+
+  <div class="card"><div class="q"><span class="n">52</span><span>Hemodynamic signature of high-output heart failure from hyperthyroidism, and management of the Graves component?</span></div><div class="a"><strong>↓ SVR + ↑ CO + wide pulse pressure + warm extremities + pitting edema</strong>, often with an S3 from volume overload. Graves treatment: <strong>propranolol</strong> (β-blockade + peripheral T4 → T3 conversion block) plus definitive therapy (<strong>methimazole, radioactive iodine, or thyroidectomy</strong>). Standard HF medications alone do not fix the underlying high-output state.</div></div>
+</div>
+
+<p class="footer-stamp">© Allan Bakesiga · USMLE Step 1 Prep · 52 cards · Cover · attempt · check · re-test the misses tomorrow.</p>
+
+</body>
+</html>
