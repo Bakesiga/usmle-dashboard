@@ -1,24 +1,126 @@
 {
   "_comment": "Per-student access. tracks = subset of ['step1','step2']. Allan has both. Edit via ./admin.py student add --track step1 foo@gmail.com",
   "students": [
-    { "email": "allanbakesiga@gmail.com",     "tracks": ["step1", "step2"] },
-    { "email": "namatovulindah332@gmail.com", "tracks": ["step1"] },
-    { "email": "mosestenywa261@gmail.com",    "tracks": ["step1"] },
-    { "email": "fredhaguma@gmail.com",        "tracks": ["step1"] },
-    { "email": "isaacmaiko12@gmail.com",      "tracks": ["step1"] },
-    { "email": "barbaramwebaza@gmail.com",    "tracks": ["step1"] },
-    { "email": "yahyakahiye9@gmail.com",      "tracks": ["step1"] },
-    { "email": "micahmwesigwa@gmail.com",     "tracks": ["step1"] },
-    { "email": "rcsinei@gmail.com",           "tracks": ["step1"] },
-    { "email": "psalmsconsultancy@gmail.com", "tracks": ["step1"] },
-    { "email": "shalomkdi@gmail.com",         "tracks": ["step1"] },
-    { "email": "lklaurakim@gmail.com",        "tracks": ["step1"] },
-    { "email": "juliusmwimo@gmail.com",       "tracks": ["step1"] },
-    { "email": "juliannajjuma@gmail.com",     "tracks": ["step1"] },
-    { "email": "leahnkamara@gmail.com",       "tracks": ["step1"] },
-    { "email": "ivybochaberi@gmail.com",      "tracks": ["step1"] },
-    { "email": "susanchemutai@gmail.com",     "tracks": ["step1"] },
-    { "email": "brigidnina@gmail.com",        "tracks": ["step1"] },
-    { "email": "manziephra@gmail.com",        "tracks": ["step1"] }
+    {
+      "email": "allanbakesiga@gmail.com",
+      "tracks": [
+        "step1",
+        "step2"
+      ]
+    },
+    {
+      "email": "barbaramwebaza@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "brigidnina@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "fredhaguma@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "geoffrey.odong12@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "isaacmaiko12@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "ivybochaberi@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "juliannajjuma@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "juliusmwimo@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "leahnkamara@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "lklaurakim@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "manziephra@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "micahmwesigwa@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "mosestenywa261@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "namatovulindah332@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "psalmsconsultancy@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "rcsinei@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "shalomkdi@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "susanchemutai@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
+      "email": "yahyakahiye9@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    }
   ]
 }
