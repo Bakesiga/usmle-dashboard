@@ -2,6 +2,12 @@
   "_comment": "Per-student access. tracks = subset of ['step1','step2']. Allan has both. Edit via ./admin.py student add --track step1 foo@gmail.com",
   "students": [
     {
+      "email": "alikalthun@gmail.com",
+      "tracks": [
+        "step1"
+      ]
+    },
+    {
       "email": "allanbakesiga@gmail.com",
       "tracks": [
         "step1",
