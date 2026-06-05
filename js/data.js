@@ -213,7 +213,7 @@ window.SUBJECT_META = {
 window.LINKS = {
   zoom:     "https://duke.zoom.us/j/96991939005",
   whatsapp: "https://chat.whatsapp.com/JvaTpyDt9loGZjomAVwi42",
-  calendly: "https://calendly.com/allanbakesiga/usmle-office-hours",
+  calendly: "https://calendly.com/allanbakesiga/30min",
   signup:   "https://forms.gle/iHCdPVjvJeGeGTXy7",
   ics:      "data/schedule.ics"
 };

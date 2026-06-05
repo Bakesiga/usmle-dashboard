@@ -39,7 +39,7 @@ const USMLE_CONFIG = {
   // Calendly booking page for 1-on-1 office hours.
   // Profile URL lets students see every event type; we can swap in a
   // specific event URL later if more types are added.
-  CALENDLY_URL:       "https://calendly.com/allanbakesiga/usmle-office-hours",
+  CALENDLY_URL:       "https://calendly.com/allanbakesiga/30min",
 
   // Where data files live, relative to the page
   DATA: {
