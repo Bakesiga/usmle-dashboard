@@ -1,7 +1,7 @@
 /* ============================================================
    dashboard-vitals.css
    Thin override layer that re-skins the existing dashboard.css
-   with the "Vitals" dark, clinical-telemetry palette.
+   with the "Vitals" LIGHT, clinical-editorial palette.
 
    Strategy: keep every existing dashboard component / class
    working exactly as before. Re-map the shared tokens
@@ -16,39 +16,38 @@
      5. dashboard-vitals.css (THIS FILE, last, wins the cascade)
    ============================================================ */
 
-/* ---- Re-map base tokens to Vitals palette -------------------- */
+/* ---- Re-map base tokens to Vitals LIGHT palette --------------- */
 :root,
 [data-theme="light"],
 [data-theme="dark"] {
-  --bg:        #06141D;   /* monitor background */
-  --bg-soft:   #0A2230;   /* raised dark */
-  --bg-cream:  #0C2A3D;   /* panel / card */
-  --ink:       #E8F4FB;   /* primary text */
-  --ink-2:     #A9C8DA;   /* secondary text */
-  --muted:     #6E93A8;   /* caption text */
-  --border:    rgba(56, 189, 248, 0.13);
-  --border-2:  rgba(56, 189, 248, 0.08);
+  --bg:        #F6F1E7;   /* warm cream page */
+  --bg-soft:   #FBF7EF;   /* lighter cream alt */
+  --bg-cream:  #FFFFFF;   /* paper / card */
+  --ink:       #11252F;   /* primary text */
+  --ink-2:     #3C5868;   /* secondary text */
+  --muted:     #6E8694;   /* caption text on cream */
+  --border:    #E4DBCB;   /* warm hairline */
+  --border-2:  rgba(228, 219, 203, 0.6);
 
-  /* Soft tints for status-pill backgrounds need to stay readable
-     on the dark monitor surface. */
-  --cvs-soft:  rgba(2, 132, 199, 0.22);
-  --cvs-tint:  rgba(2, 132, 199, 0.12);
-  --resp-soft: rgba(5, 150, 105, 0.22);
-  --resp-tint: rgba(5, 150, 105, 0.12);
-  --path-soft: rgba(124, 58, 237, 0.22);
-  --path-tint: rgba(124, 58, 237, 0.12);
-  --amber-soft:rgba(217, 119, 6, 0.22);
-  --amber-tint:rgba(217, 119, 6, 0.12);
+  /* Soft tints for status-pill backgrounds on cream */
+  --cvs-soft:  rgba(2, 132, 199, 0.14);
+  --cvs-tint:  rgba(2, 132, 199, 0.06);
+  --resp-soft: rgba(5, 150, 105, 0.14);
+  --resp-tint: rgba(5, 150, 105, 0.06);
+  --path-soft: rgba(124, 58, 237, 0.14);
+  --path-tint: rgba(124, 58, 237, 0.06);
+  --amber-soft:rgba(184, 133, 28, 0.16);
+  --amber-tint:rgba(184, 133, 28, 0.07);
 
   /* Vitals fonts override design-tokens.css fonts */
   --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
   --font-body:    "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Deeper shadows on dark */
-  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.45);
-  --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.35), 0 6px 16px rgba(0, 0, 0, 0.45);
-  --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.40), 0 12px 32px rgba(0, 0, 0, 0.50);
+  /* Softer shadows on cream */
+  --shadow-1: 0 1px 2px rgba(17, 37, 47, 0.04), 0 1px 3px rgba(17, 37, 47, 0.06);
+  --shadow-2: 0 2px 6px rgba(17, 37, 47, 0.05), 0 8px 20px rgba(17, 37, 47, 0.08);
+  --shadow-3: 0 4px 10px rgba(17, 37, 47, 0.06), 0 14px 36px rgba(17, 37, 47, 0.10);
 }
 
 /* ---- Body type defaults -------------------------------------- */
@@ -78,48 +77,48 @@ h1, h2, h3, h4, h5, h6,
 
 /* ---- Top bar ------------------------------------------------- */
 .dash-nav {
-  background: rgba(6, 20, 29, 0.78);
+  background: rgba(246, 241, 231, 0.85);
   border-bottom-color: var(--border);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
   backdrop-filter: blur(12px) saturate(140%);
 }
 .brand { color: var(--ink); font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.04em; }
 .brand-mark {
-  background: var(--bg-soft);
+  background: var(--bg-cream);
   border: 1px solid var(--border);
-  color: #38BDF8;
+  color: #0284C7;
 }
 
 /* Chip pills */
 .chip {
-  background: var(--bg-soft);
+  background: var(--bg-cream);
   border-color: var(--border);
   color: var(--ink);
 }
 .chip:hover {
-  border-color: #38BDF8;
-  background: rgba(56, 189, 248, 0.08);
-  color: #38BDF8;
+  border-color: #0284C7;
+  background: rgba(2, 132, 199, 0.06);
+  color: #0284C7;
 }
 .chip-zoom.live {
-  background: rgba(5, 150, 105, 0.18);
+  background: rgba(5, 150, 105, 0.10);
   border-color: var(--resp);
-  color: #6EE7B7;
+  color: #047857;
 }
 
 /* User chip */
 .user-chip {
-  background: var(--bg-soft);
+  background: var(--bg-cream);
   border-color: var(--border);
   color: var(--ink);
 }
-.user-chip:hover { background: rgba(56, 189, 248, 0.08); }
+.user-chip:hover { background: rgba(2, 132, 199, 0.06); }
 .user-menu {
-  background: var(--bg-soft);
+  background: var(--bg-cream);
   border-color: var(--border);
 }
 .user-menu button, .user-menu a { color: var(--ink); }
-.user-menu button:hover, .user-menu a:hover { background: rgba(56, 189, 248, 0.10); }
+.user-menu button:hover, .user-menu a:hover { background: rgba(2, 132, 199, 0.08); }
 
 /* ---- Tabs ---------------------------------------------------- */
 .dash-tabs { border-bottom-color: var(--border); }
@@ -132,8 +131,8 @@ h1, h2, h3, h4, h5, h6,
 }
 .dash-tab:hover { color: var(--ink); }
 .dash-tab.active {
-  color: #38BDF8;
-  border-bottom-color: #38BDF8;
+  color: #0284C7;
+  border-bottom-color: #0284C7;
   font-weight: 600;
 }
 
@@ -146,14 +145,14 @@ h1, h2, h3, h4, h5, h6,
 .cal-wrap,
 .res-card,
 .sessions-table {
-  background: var(--bg-cream);    /* --v-panel */
+  background: var(--bg-cream);    /* paper */
   border-color: var(--border);
   box-shadow: var(--shadow-2);
 }
 
-/* Today head gradient: subtle subject tint over panel */
+/* Today head gradient: subtle subject tint over paper */
 .today-head {
-  background: linear-gradient(180deg, var(--c-tint, rgba(56,189,248,0.08)) 0%, var(--bg-cream) 100%);
+  background: linear-gradient(180deg, var(--c-tint, rgba(2,132,199,0.06)) 0%, var(--bg-cream) 100%);
 }
 .today-title { color: var(--ink); }
 .today-sub { color: var(--ink-2); }
@@ -171,13 +170,13 @@ h1, h2, h3, h4, h5, h6,
   color: var(--ink);
 }
 .action-tile:hover {
-  background: rgba(56, 189, 248, 0.10);
-  border-color: rgba(56, 189, 248, 0.45);
+  background: rgba(2, 132, 199, 0.06);
+  border-color: rgba(2, 132, 199, 0.40);
 }
 .action-tile:not(.primary) .action-icon {
-  background: var(--bg);
+  background: var(--bg-cream);
   border-color: var(--border);
-  color: #38BDF8;
+  color: #0284C7;
 }
 
 /* Day pill: solid subject color is fine on dark too */
@@ -200,8 +199,8 @@ h1, h2, h3, h4, h5, h6,
   color: var(--ink);
 }
 .adj-card:hover {
-  background: rgba(56, 189, 248, 0.08);
-  border-color: #38BDF8;
+  background: rgba(2, 132, 199, 0.05);
+  border-color: #0284C7;
 }
 .adj-arrow {
   background: var(--bg-soft);
@@ -212,12 +211,12 @@ h1, h2, h3, h4, h5, h6,
 
 /* Back-to-today pill */
 .back-to-today {
-  background: rgba(56, 189, 248, 0.14);
-  color: #38BDF8;
+  background: rgba(2, 132, 199, 0.10);
+  color: #0284C7;
 }
 .back-to-today:hover {
-  background: #38BDF8;
-  color: #042331;
+  background: #0284C7;
+  color: #fff;
 }
 
 /* Notes body */
@@ -227,12 +226,12 @@ h1, h2, h3, h4, h5, h6,
 .notes-body code {
   background: var(--bg-soft);
   border-color: var(--border);
-  color: #38BDF8;
+  color: #0284C7;
 }
 
 /* ---- Outline card on today panel ----------------------------- */
 .outline-head h3, .outline-head .outline-title { color: var(--ink); }
-.outline-eyebrow { color: #38BDF8; }
+.outline-eyebrow { color: #0284C7; }
 .outline-intro { color: var(--ink-2); }
 .outline-foot small { color: var(--muted); }
 
@@ -245,11 +244,11 @@ h1, h2, h3, h4, h5, h6,
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-.filter-pill:hover { color: var(--ink); border-color: #38BDF8; }
+.filter-pill:hover { color: var(--ink); border-color: #0284C7; }
 .filter-pill.active {
-  background: rgba(56, 189, 248, 0.12);
-  border-color: #38BDF8;
-  color: #38BDF8;
+  background: rgba(2, 132, 199, 0.10);
+  border-color: #0284C7;
+  color: #0284C7;
 }
 
 /* ---- Schedule / calendar ------------------------------------- */
@@ -268,12 +267,12 @@ h1, h2, h3, h4, h5, h6,
   color: var(--ink);
 }
 .res-card:hover {
-  background: rgba(56, 189, 248, 0.06);
-  border-color: #38BDF8;
+  background: rgba(2, 132, 199, 0.04);
+  border-color: #0284C7;
 }
 .res-card h4 { color: var(--ink); }
 .res-card p { color: var(--ink-2); }
-.res-icon { color: #38BDF8; }
+.res-icon { color: #0284C7; }
 
 /* ---- Office hours panel -------------------------------------- */
 .office-info h3 { color: var(--ink); }
@@ -283,7 +282,7 @@ h1, h2, h3, h4, h5, h6,
 .office-embed iframe { background: #fff; }   /* Calendly needs white */
 
 /* ---- Side rail progress pies --------------------------------- */
-.rail-card h4 { color: var(--muted); }
+.rail-card h4 { color: var(--ink-2); }
 .allan-presence .info strong { color: var(--ink); }
 .allan-presence .info small { color: var(--ink-2); }
 .mini-cal { color: var(--ink); }
@@ -291,14 +290,14 @@ h1, h2, h3, h4, h5, h6,
 .progress-pie .lab { color: var(--ink); }
 .progress-pie .lab small { color: var(--muted); }
 
-/* ---- News panel: the big Rosemary card is heavily inlined
-       in dashboard.html with literal hex/var colors. The black
-       footer strip stays black-on-gold which works fine on the
-       darker page. The cream backgrounds we need to override
-       so they read on the monitor surface. */
+/* ---- News panel: the big Rosemary card is heavily inlined in
+       dashboard.html with literal hex/var colors. On the cream
+       theme we restyle the outer card to paper with a warm gold
+       hairline, the inner figures to cream-2, and keep the black
+       footer strip (it pops as the final visual anchor on cream). */
 [data-panel="news"] > article {
-  background: linear-gradient(180deg, rgba(229, 168, 35, 0.06) 0%, var(--bg-cream) 60%) !important;
-  border-color: rgba(229, 168, 35, 0.35) !important;
+  background: linear-gradient(180deg, rgba(184, 133, 28, 0.05) 0%, var(--bg-cream) 60%) !important;
+  border-color: rgba(184, 133, 28, 0.35) !important;
 }
 [data-panel="news"] figure {
   background: var(--bg-soft) !important;
@@ -311,29 +310,29 @@ h1, h2, h3, h4, h5, h6,
 [data-panel="news"] [style*="border: 1px dashed"] {
   background: var(--bg-soft) !important;
   border-color: var(--border) !important;
-  color: var(--muted) !important;
+  color: var(--ink-2) !important;
 }
 
 /* ---- Buttons in dashboard reuse .btn from design-tokens.
-       Keep .btn-primary / .btn-ghost legible on dark. */
+       Keep .btn-primary / .btn-ghost legible on cream. */
 .btn-ghost {
-  background: rgba(56, 189, 248, 0.04);
+  background: var(--bg-cream);
   color: var(--ink);
   border-color: var(--border);
 }
 .btn-ghost:hover {
-  background: rgba(56, 189, 248, 0.12);
-  border-color: #38BDF8;
-  color: #38BDF8;
+  background: rgba(2, 132, 199, 0.06);
+  border-color: #0284C7;
+  color: #0284C7;
 }
 
 /* ---- Sign-in / auth links --------------------------------- */
-a:not([class]) { color: #38BDF8; }
+a:not([class]) { color: #0284C7; }
 a:not([class]):hover { text-decoration: underline; }
 
 /* ---- Cyan focus ring on every interactive element ------------ */
 :focus-visible {
-  outline: 2px solid #38BDF8;
+  outline: 2px solid #0284C7;
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -350,16 +349,18 @@ a:not([class]):hover { text-decoration: underline; }
   height: 1px;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(56, 189, 248, 0.0) 5%,
-    rgba(56, 189, 248, 0.45) 30%,
-    rgba(56, 189, 248, 0.6) 50%,
-    rgba(56, 189, 248, 0.45) 70%,
-    rgba(56, 189, 248, 0.0) 95%,
+    rgba(2, 132, 199, 0.0) 5%,
+    rgba(2, 132, 199, 0.40) 30%,
+    rgba(2, 132, 199, 0.55) 50%,
+    rgba(2, 132, 199, 0.40) 70%,
+    rgba(2, 132, 199, 0.0) 95%,
     transparent 100%);
 }
 
 /* ---- Sign-in page meets the theme too ----------------------- */
 body[data-screen-label*="Sign"] { background: var(--bg); color: var(--ink); }
+body[data-screen-label*="Sign"] .brand { color: var(--ink); }
+body[data-screen-label*="Sign"] .brand small { color: var(--ink-2); }
 
 /* ---- Mobile polish ------------------------------------------ */
 @media (max-width: 700px) {
