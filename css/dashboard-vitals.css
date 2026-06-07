@@ -1,0 +1,377 @@
+/* ============================================================
+   dashboard-vitals.css
+   Thin override layer that re-skins the existing dashboard.css
+   with the "Vitals" dark, clinical-telemetry palette.
+
+   Strategy: keep every existing dashboard component / class
+   working exactly as before. Re-map the shared tokens
+   (--bg, --ink, --muted, --border, fonts) and override a small
+   set of selectors that needed direct color tweaks.
+
+   Load order in dashboard.html:
+     1. design-tokens.css   (subject hues + base scale)
+     2. site.css            (marketing primitives shared with index)
+     3. theme-vitals.css    (Vitals tokens + components)
+     4. dashboard.css       (dashboard-specific components)
+     5. dashboard-vitals.css (THIS FILE, last, wins the cascade)
+   ============================================================ */
+
+/* ---- Re-map base tokens to Vitals palette -------------------- */
+:root,
+[data-theme="light"],
+[data-theme="dark"] {
+  --bg:        #06141D;   /* monitor background */
+  --bg-soft:   #0A2230;   /* raised dark */
+  --bg-cream:  #0C2A3D;   /* panel / card */
+  --ink:       #E8F4FB;   /* primary text */
+  --ink-2:     #A9C8DA;   /* secondary text */
+  --muted:     #6E93A8;   /* caption text */
+  --border:    rgba(56, 189, 248, 0.13);
+  --border-2:  rgba(56, 189, 248, 0.08);
+
+  /* Soft tints for status-pill backgrounds need to stay readable
+     on the dark monitor surface. */
+  --cvs-soft:  rgba(2, 132, 199, 0.22);
+  --cvs-tint:  rgba(2, 132, 199, 0.12);
+  --resp-soft: rgba(5, 150, 105, 0.22);
+  --resp-tint: rgba(5, 150, 105, 0.12);
+  --path-soft: rgba(124, 58, 237, 0.22);
+  --path-tint: rgba(124, 58, 237, 0.12);
+  --amber-soft:rgba(217, 119, 6, 0.22);
+  --amber-tint:rgba(217, 119, 6, 0.12);
+
+  /* Vitals fonts override design-tokens.css fonts */
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-body:    "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Deeper shadows on dark */
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.45);
+  --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.35), 0 6px 16px rgba(0, 0, 0, 0.45);
+  --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.40), 0 12px 32px rgba(0, 0, 0, 0.50);
+}
+
+/* ---- Body type defaults -------------------------------------- */
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+/* Headings: serif, weight 400, lighter letter-spacing.
+   Bold and weight inheritance still works because dashboard.css
+   sets weight per element where needed. */
+h1, h2, h3, h4, h5, h6,
+.today-title, .notes-head h3, .rail-card h4,
+.dash-tab, .day-pill, .live-pill, .price, .price-card h3 {
+  font-family: var(--font-display);
+}
+.today-title, .notes-head h3, .rail-card h4 { letter-spacing: -0.01em; }
+
+/* Mono everywhere a label / data / eyebrow appears */
+.dash-tab, .live-pill .lab, .day-pill,
+.notes-head .meta, .rail-card h4,
+.cal-header span, .filter-pill,
+.adj-card-info small {
+  font-family: var(--font-mono);
+}
+
+/* ---- Top bar ------------------------------------------------- */
+.dash-nav {
+  background: rgba(6, 20, 29, 0.78);
+  border-bottom-color: var(--border);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px) saturate(140%);
+}
+.brand { color: var(--ink); font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.04em; }
+.brand-mark {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  color: #38BDF8;
+}
+
+/* Chip pills */
+.chip {
+  background: var(--bg-soft);
+  border-color: var(--border);
+  color: var(--ink);
+}
+.chip:hover {
+  border-color: #38BDF8;
+  background: rgba(56, 189, 248, 0.08);
+  color: #38BDF8;
+}
+.chip-zoom.live {
+  background: rgba(5, 150, 105, 0.18);
+  border-color: var(--resp);
+  color: #6EE7B7;
+}
+
+/* User chip */
+.user-chip {
+  background: var(--bg-soft);
+  border-color: var(--border);
+  color: var(--ink);
+}
+.user-chip:hover { background: rgba(56, 189, 248, 0.08); }
+.user-menu {
+  background: var(--bg-soft);
+  border-color: var(--border);
+}
+.user-menu button, .user-menu a { color: var(--ink); }
+.user-menu button:hover, .user-menu a:hover { background: rgba(56, 189, 248, 0.10); }
+
+/* ---- Tabs ---------------------------------------------------- */
+.dash-tabs { border-bottom-color: var(--border); }
+.dash-tab {
+  color: var(--ink-2);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.dash-tab:hover { color: var(--ink); }
+.dash-tab.active {
+  color: #38BDF8;
+  border-bottom-color: #38BDF8;
+  font-weight: 600;
+}
+
+/* ---- Cards (today + panel) ----------------------------------- */
+.today-card,
+.notes-card,
+.outline-card,
+.rail-card,
+.office-card,
+.cal-wrap,
+.res-card,
+.sessions-table {
+  background: var(--bg-cream);    /* --v-panel */
+  border-color: var(--border);
+  box-shadow: var(--shadow-2);
+}
+
+/* Today head gradient: subtle subject tint over panel */
+.today-head {
+  background: linear-gradient(180deg, var(--c-tint, rgba(56,189,248,0.08)) 0%, var(--bg-cream) 100%);
+}
+.today-title { color: var(--ink); }
+.today-sub { color: var(--ink-2); }
+.today-countdown {
+  background: var(--bg-soft);
+  border-color: var(--border);
+  color: var(--ink);
+}
+.today-countdown .lab { color: var(--muted); }
+
+/* Action tiles */
+.action-tile {
+  background: var(--bg-soft);
+  border-color: var(--border);
+  color: var(--ink);
+}
+.action-tile:hover {
+  background: rgba(56, 189, 248, 0.10);
+  border-color: rgba(56, 189, 248, 0.45);
+}
+.action-tile:not(.primary) .action-icon {
+  background: var(--bg);
+  border-color: var(--border);
+  color: #38BDF8;
+}
+
+/* Day pill: solid subject color is fine on dark too */
+.day-pill {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+/* Live pill */
+.live-pill {
+  background: var(--bg-soft);
+  border-color: var(--border);
+  color: var(--ink-2);
+}
+
+/* Adjacent (prev / next) cards */
+.adj-card {
+  background: var(--bg-cream);
+  border-color: var(--border);
+  color: var(--ink);
+}
+.adj-card:hover {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: #38BDF8;
+}
+.adj-arrow {
+  background: var(--bg-soft);
+  color: var(--ink-2);
+}
+.adj-card-info small { color: var(--muted); }
+.adj-card-info strong { color: var(--ink); }
+
+/* Back-to-today pill */
+.back-to-today {
+  background: rgba(56, 189, 248, 0.14);
+  color: #38BDF8;
+}
+.back-to-today:hover {
+  background: #38BDF8;
+  color: #042331;
+}
+
+/* Notes body */
+.notes-head h3 { color: var(--ink); }
+.notes-body { color: var(--ink-2); }
+.notes-body h4 { color: var(--ink); }
+.notes-body code {
+  background: var(--bg-soft);
+  border-color: var(--border);
+  color: #38BDF8;
+}
+
+/* ---- Outline card on today panel ----------------------------- */
+.outline-head h3, .outline-head .outline-title { color: var(--ink); }
+.outline-eyebrow { color: #38BDF8; }
+.outline-intro { color: var(--ink-2); }
+.outline-foot small { color: var(--muted); }
+
+/* ---- Sessions / filter pills --------------------------------- */
+.filter-pill {
+  background: var(--bg-soft);
+  border-color: var(--border);
+  color: var(--ink-2);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.filter-pill:hover { color: var(--ink); border-color: #38BDF8; }
+.filter-pill.active {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: #38BDF8;
+  color: #38BDF8;
+}
+
+/* ---- Schedule / calendar ------------------------------------- */
+.cal-header h3 { color: var(--ink); }
+.cal-grid > * {
+  background: var(--bg-soft);
+  border-color: var(--border);
+  color: var(--ink);
+}
+.cal-legend { color: var(--ink-2); }
+
+/* ---- Block summaries grid cards (reuses .res-grid) ----------- */
+.res-card {
+  background: var(--bg-cream);
+  border-color: var(--border);
+  color: var(--ink);
+}
+.res-card:hover {
+  background: rgba(56, 189, 248, 0.06);
+  border-color: #38BDF8;
+}
+.res-card h4 { color: var(--ink); }
+.res-card p { color: var(--ink-2); }
+.res-icon { color: #38BDF8; }
+
+/* ---- Office hours panel -------------------------------------- */
+.office-info h3 { color: var(--ink); }
+.office-info p { color: var(--ink-2); }
+.office-times { color: var(--ink-2); }
+.office-times strong { color: var(--ink); }
+.office-embed iframe { background: #fff; }   /* Calendly needs white */
+
+/* ---- Side rail progress pies --------------------------------- */
+.rail-card h4 { color: var(--muted); }
+.allan-presence .info strong { color: var(--ink); }
+.allan-presence .info small { color: var(--ink-2); }
+.mini-cal { color: var(--ink); }
+.pie-val { color: var(--ink); }
+.progress-pie .lab { color: var(--ink); }
+.progress-pie .lab small { color: var(--muted); }
+
+/* ---- News panel: the big Rosemary card is heavily inlined
+       in dashboard.html with literal hex/var colors. The black
+       footer strip stays black-on-gold which works fine on the
+       darker page. The cream backgrounds we need to override
+       so they read on the monitor surface. */
+[data-panel="news"] > article {
+  background: linear-gradient(180deg, rgba(229, 168, 35, 0.06) 0%, var(--bg-cream) 60%) !important;
+  border-color: rgba(229, 168, 35, 0.35) !important;
+}
+[data-panel="news"] figure {
+  background: var(--bg-soft) !important;
+  border-color: var(--border) !important;
+}
+[data-panel="news"] figure img[src*="score-report"] { background: #fff; }
+[data-panel="news"] blockquote { color: var(--ink) !important; }
+[data-panel="news"] blockquote footer { color: var(--ink-2) !important; }
+[data-panel="news"] h2 { color: var(--ink) !important; }
+[data-panel="news"] [style*="border: 1px dashed"] {
+  background: var(--bg-soft) !important;
+  border-color: var(--border) !important;
+  color: var(--muted) !important;
+}
+
+/* ---- Buttons in dashboard reuse .btn from design-tokens.
+       Keep .btn-primary / .btn-ghost legible on dark. */
+.btn-ghost {
+  background: rgba(56, 189, 248, 0.04);
+  color: var(--ink);
+  border-color: var(--border);
+}
+.btn-ghost:hover {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: #38BDF8;
+  color: #38BDF8;
+}
+
+/* ---- Sign-in / auth links --------------------------------- */
+a:not([class]) { color: #38BDF8; }
+a:not([class]):hover { text-decoration: underline; }
+
+/* ---- Cyan focus ring on every interactive element ------------ */
+:focus-visible {
+  outline: 2px solid #38BDF8;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---- ECG hairline above the tabs -- subtle telemetry detail -- */
+.dash-tabs {
+  position: relative;
+  padding-top: var(--s-20);
+}
+.dash-tabs::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(56, 189, 248, 0.0) 5%,
+    rgba(56, 189, 248, 0.45) 30%,
+    rgba(56, 189, 248, 0.6) 50%,
+    rgba(56, 189, 248, 0.45) 70%,
+    rgba(56, 189, 248, 0.0) 95%,
+    transparent 100%);
+}
+
+/* ---- Sign-in page meets the theme too ----------------------- */
+body[data-screen-label*="Sign"] { background: var(--bg); color: var(--ink); }
+
+/* ---- Mobile polish ------------------------------------------ */
+@media (max-width: 700px) {
+  .dash-tab { font-size: 11px; padding: 10px 10px; }
+  .today-head { padding: var(--s-20); }
+  .today-actions { padding: var(--s-16) var(--s-20) var(--s-20); }
+}
+
+/* ---- Tweaks panel (window.SIM_NOW) override -------------- */
+.tweaks-panel,
+[data-tweaks-panel] {
+  background: var(--bg-soft) !important;
+  border-color: var(--border) !important;
+  color: var(--ink) !important;
+}

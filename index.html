@@ -1,261 +1,289 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>USMLE Classes · Step 1 prep with Allan Bakesiga</title>
-  <meta name="description" content="A mentor-led USMLE Step 1 cohort starting June 1, 2026. Daily live Zoom classes Monday to Sunday with Allan Bakesiga, MD (Makerere), MScGH (Duke)." />
-  <meta name="theme-color" content="#0C2A3D" />
+  <meta name="description" content="A mentor-led USMLE Step 1 cohort, daily live Zoom classes Monday to Sunday with Allan Bakesiga, MD. Currently running the June 2026 cohort, enrolment open for the next intake." />
+  <meta name="theme-color" content="#06141D" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
 
   <link rel="stylesheet" href="css/design-tokens.css" />
-  <link rel="stylesheet" href="css/site.css" />
+  <link rel="stylesheet" href="css/theme-vitals.css" />
 </head>
-<body data-screen-label="01 Marketing Home">
+<body class="vitals" data-screen-label="01 Marketing Home, Vitals theme">
   <a href="#main" class="skip-link">Skip to main content</a>
 
   <!-- ============================ NAV ============================ -->
-  <header class="nav" role="banner">
-    <div class="container">
-      <a class="brand" href="/" aria-label="USMLE Classes home">
-        <span class="brand-mark" aria-hidden="true">U</span>
-        <span>USMLE Classes <small>· with Allan</small></span>
+  <header class="v-nav">
+    <div class="v-container">
+      <a class="v-brand" href="#main" aria-label="USMLE Classes home">
+        <span class="v-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 20" fill="none" stroke="#38BDF8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 10h7l2-5 3 11 3-13 3 16 2-9 2 4h12"/></svg>
+        </span>
+        <span>usmle.class <small>/ allan</small></span>
       </a>
-      <nav class="nav-links" aria-label="Main">
+      <nav class="v-nav-links" aria-label="Main">
         <a href="#outline">Curriculum</a>
-        <a href="#included">What's included</a>
-        <a href="#passes">Recent passes</a>
+        <a href="#included">Included</a>
+        <a href="#passes">Passes</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <div class="nav-cta">
-        <a class="btn btn-ghost btn-sm" href="signin.html">Student login</a>
-        <a class="btn btn-primary btn-sm" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign up</a>
-        <button class="nav-hamburger" aria-label="Open menu" type="button">
+      <div class="v-nav-cta">
+        <a class="v-btn v-btn-primary v-btn-sm" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Join next cohort</a>
+        <button class="v-ham" aria-label="Open menu" type="button">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
         </button>
       </div>
     </div>
   </header>
 
-  <aside class="nav-drawer" aria-label="Mobile menu">
-    <button class="nav-drawer-close" aria-label="Close menu" type="button">×</button>
+  <aside class="v-drawer" aria-label="Mobile menu">
+    <button class="v-drawer-x" aria-label="Close menu" type="button">×</button>
     <a href="#outline">Curriculum</a>
-    <a href="#included">What's included</a>
-    <a href="#passes">Recent passes</a>
+    <a href="#included">Included</a>
+    <a href="#passes">Passes</a>
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
-    <a href="signin.html">Student login</a>
-    <a class="btn btn-gold" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign up for Step 1</a>
+    <a class="v-btn v-btn-primary" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Join the next cohort</a>
   </aside>
-  <div class="scrim" aria-hidden="true"></div>
+  <div class="v-scrim" aria-hidden="true"></div>
 
   <main id="main">
 
     <!-- ============================ HERO ============================ -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-copy">
-          <p class="eyebrow" data-anim="fade-up">Enrolling now · Step 1 · June cohort</p>
-          <h1 data-anim="fade-up" data-delay="80">
-            USMLE prep that<br/>
-            <span class="accent">keeps you on it daily.</span>
-          </h1>
-          <p class="hero-lede" data-anim="fade-up" data-delay="160">
-            A mentor-led USMLE Step 1 cohort starting <strong>June 1, 2026</strong>. Daily live Zoom classes Monday to Sunday, a full First Aid walkthrough paired with UWorld vignettes, and end-to-end mentorship through ECFMG and the residency match.
-          </p>
-          <div class="hero-ctas" data-anim="fade-up" data-delay="240">
-            <a class="btn btn-primary" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">
-              Sign up for Step 1
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-            <a class="btn btn-ghost" href="#included">What's included</a>
-          </div>
-          <div class="hero-stats" data-stagger="80">
-            <div class="hero-stat"><div class="num">Mon – Sun</div><div class="label">DAILY CLASSES, 2.5 HRS</div></div>
-            <div class="hero-stat"><div class="num">30 days</div><div class="label">FULL FIRST AID WALKTHROUGH</div></div>
-            <div class="hero-stat"><div class="num">1 : 12</div><div class="label">MENTOR : COHORT RATIO</div></div>
-          </div>
-        </div>
+    <section class="vh">
+      <div class="vh-grid" aria-hidden="true"></div>
+      <div class="vh-ekg" aria-hidden="true">
+        <svg class="ekg" data-vw="1440" data-vh="230" data-cw="300" data-dash="22 978" data-dur="4s">
+          <path class="ekg-base"></path>
+          <path class="ekg-blip"></path>
+        </svg>
+      </div>
+      <div class="vh-reticle" aria-hidden="true"><b>x000 y000</b></div>
 
-        <aside class="allan-block" data-anim="fade-up" data-delay="100" aria-label="About the instructor">
-          <div class="allan-portrait" aria-hidden="false">
-            <img src="images/allan-headshot.jpg" alt="Allan Bakesiga, MD, headshot." loading="eager" decoding="async" />
-          </div>
-          <div>
-            <div class="allan-name">Allan Bakesiga</div>
-            <p class="allan-creds">
-              <strong>MD (Makerere)</strong> · MScGH (Duke)<br/>
-              PGY-1 Neurology, Creighton<br/>
-              Past TA, Epi &amp; Biostats, Duke GHI
+      <div class="v-container">
+        <div class="vh-inner">
+          <div class="vh-copy">
+            <span class="v-tag beat">Cohort live · Day 7 of 30 · join for next cohort</span>
+            <h1 class="vh-h1">USMLE prep that keeps you <span class="em">on it daily.</span></h1>
+            <p class="vh-lede">
+              A mentor-led USMLE Step 1 cohort that started <strong>June 1, 2026</strong>, currently in week 2. Daily live Zoom classes Monday to Sunday, a full First Aid walkthrough paired with UWorld vignettes, and mentorship through ECFMG and the match.
             </p>
+            <div class="vh-ctas">
+              <a class="v-btn v-btn-primary v-btn-lg" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">
+                Join the next cohort
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+              <a class="v-btn v-btn-ghost v-btn-lg" href="#included">What's included</a>
+            </div>
+
+            <div class="vh-stats" aria-label="Program at a glance">
+              <div class="vh-stat">
+                <div class="n" data-telemetry-text="MON–SUN" data-tdelay="0">MON–SUN</div>
+                <div class="l">Daily live classes</div>
+              </div>
+              <div class="vh-stat">
+                <div class="n" data-telemetry="30 days" data-tdelay="120">30 days</div>
+                <div class="l">First Aid walkthrough</div>
+              </div>
+              <div class="vh-stat">
+                <div class="n" data-telemetry-text="1:12" data-tdelay="240">1:12</div>
+                <div class="l">Mentor : cohort</div>
+              </div>
+            </div>
           </div>
-          <div class="inst-logos" aria-label="Affiliations">
-            <span>Makerere</span><span>Duke</span><span>Creighton</span>
-          </div>
-        </aside>
+
+          <aside class="vh-badge" aria-label="Instructor">
+            <div class="vh-badge-head">
+              <span>Attending · Instructor</span>
+              <span class="live"><i aria-hidden="true"></i> Live</span>
+            </div>
+            <div class="vh-badge-photo">
+              <img src="images/allan-headshot.jpg" alt="Allan Bakesiga, MD, headshot." loading="eager" decoding="async" />
+              <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+            </div>
+            <div class="vh-badge-body">
+              <div class="nm">Allan Bakesiga</div>
+              <div class="rows">
+                <div><span>Degree</span><span>MD · Makerere</span></div>
+                <div><span>MScGH</span><span>Duke</span></div>
+                <div><span>Role</span><span>PGY-1 Neuro · Creighton</span></div>
+                <div><span>Past</span><span>TA · Epi &amp; Biostats, Duke</span></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="vh-readout" aria-hidden="true">
+        <div class="v-container">
+          <span><b>● LIVE</b> COHORT 2026</span>
+          <span class="sep">│</span>
+          <span>05:00 AM EAT</span>
+          <span class="sep">│</span>
+          <span class="grow">SIGNAL STEADY · DAILY RHYTHM · NO MISSED BEATS · NEXT COHORT ENROLLING</span>
+          <span class="sep">│</span>
+          <span><b>DAY 7</b> OF 30</span>
+        </div>
       </div>
     </section>
 
-    <!-- ============================ COUNTDOWN STRIP ============================ -->
-    <section class="countdown-strip" aria-label="Cohort countdown">
-      <div class="container">
-        <div class="countdown-label">
-          <em data-days-to-go>12</em> days to go · Cohort starts June 1, 2026 · 5 AM EAT
+    <!-- ============================ PROGRESS STRIP ============================ -->
+    <section class="v-prog" aria-label="Cohort progress">
+      <div class="v-container">
+        <div class="v-prog-head">
+          <div class="v-prog-label">Cohort live · <b>Day 7 of 30</b> · 23 days remaining</div>
+          <div class="v-prog-stat">Daily <b>5:00 AM EAT</b> · Mon to Sun</div>
         </div>
-        <div class="countdown" data-countdown role="timer" aria-live="off">
-          <span class="unit"><span class="val d-val tnum">12</span><span class="lab">days</span></span>
-          <span class="unit"><span class="val h-val tnum">08</span><span class="lab">hrs</span></span>
-          <span class="unit"><span class="val m-val tnum">42</span><span class="lab">min</span></span>
-          <span class="unit"><span class="val sec-val tnum" aria-hidden="true">00</span><span class="lab">sec</span></span>
+        <div class="v-prog-bar" role="progressbar" aria-valuenow="7" aria-valuemin="0" aria-valuemax="30" aria-label="Cohort day 7 of 30">
+          <i style="--pct: 23.3%;"></i>
+        </div>
+        <div class="v-prog-ticks">
+          <span>JUN 01 · START</span>
+          <span>JUN 15 · MID</span>
+          <span>JUN 30 · END</span>
         </div>
       </div>
     </section>
 
     <!-- ============================ JUNE OUTLINE ============================ -->
-    <section class="section" id="outline">
-      <div class="container">
-        <header class="section-head" data-anim="fade-up">
-          <p class="eyebrow">The June outline</p>
+    <section class="v-sec cream" id="outline">
+      <div class="v-container">
+        <header class="v-head" data-scan>
+          <span class="v-tag">The June outline</span>
           <h2>Thirty days. Four chapters. One thread per day.</h2>
-          <p>Every session ties First Aid to UWorld vignettes you'll do alongside class. Click a chapter to see the day-by-day breakdown.</p>
+          <p>Every session ties First Aid to the UWorld vignettes you'll do alongside class. Each chapter is a continuous trace, not a pile of slides.</p>
         </header>
 
-        <div class="outline-grid" data-stagger="80">
-
-          <article class="subject-card subject-cvs" tabindex="0" data-anim="fade-up">
-            <header class="subject-card-head">
-              <div class="subject-card-icon">
-                <!-- heart -->
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              </div>
+        <div class="v-outline" data-scan>
+          <article class="v-subj s-cvs">
+            <div class="v-subj-top">
+              <div class="v-subj-code"><span class="lead"><b></b> CVS</span><span>10d</span></div>
               <h3>Cardiovascular</h3>
-              <div class="subject-card-meta"><span>10 days</span><span class="dot"></span><span>Jun 1 – Jun 10</span></div>
-            </header>
-            <div class="subject-card-body">
-              <ol class="subject-card-list">
-                <li>Cardiac anatomy &amp; embryology</li>
-                <li>The cardiac cycle &amp; PV loops</li>
-                <li>Cardiac output &amp; Frank-Starling</li>
-                <li>Vascular biology &amp; hemodynamics</li>
-                <li>EKG fundamentals</li>
-                <li>Arrhythmias I &amp; II</li>
-                <li>Heart failure &amp; cardiomyopathies</li>
-                <li>Valvular heart disease</li>
-                <li>Hypertension &amp; vasculitis</li>
-                <li>Congenital heart disease</li>
-              </ol>
+              <div class="v-subj-meta">JUN 01 · JUN 10</div>
             </div>
+            <ol class="v-subj-list">
+              <li><i>01</i>Cardiac anatomy &amp; embryology</li>
+              <li><i>02</i>The cardiac cycle &amp; PV loops</li>
+              <li><i>03</i>Cardiac output &amp; Frank-Starling</li>
+              <li><i>04</i>Vascular biology &amp; hemodynamics</li>
+              <li><i>05</i>EKG fundamentals</li>
+              <li><i>06</i>Arrhythmias I &amp; II</li>
+              <li><i>07</i>Heart failure &amp; cardiomyopathies</li>
+              <li><i>08</i>Valvular heart disease</li>
+              <li><i>09</i>Hypertension &amp; vasculitis</li>
+              <li><i>10</i>Congenital heart disease</li>
+            </ol>
           </article>
 
-          <article class="subject-card subject-resp" tabindex="0" data-anim="fade-up">
-            <header class="subject-card-head">
-              <div class="subject-card-icon">
-                <!-- lungs -->
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v10"/><path d="M9 4h6"/><path d="M6.5 9C3 11 2 15 3 19c.5 2 3 2 4 1l2-3V9.5C9 7 8 6 6.5 9z"/><path d="M17.5 9C21 11 22 15 21 19c-.5 2-3 2-4 1l-2-3V9.5C15 7 16 6 17.5 9z"/></svg>
-              </div>
+          <article class="v-subj s-resp">
+            <div class="v-subj-top">
+              <div class="v-subj-code"><span class="lead"><b></b> RESP</span><span>8d</span></div>
               <h3>Respiratory</h3>
-              <div class="subject-card-meta"><span>8 days</span><span class="dot"></span><span>Jun 11 – Jun 18</span></div>
-            </header>
-            <div class="subject-card-body">
-              <ol class="subject-card-list">
-                <li>Lung anatomy &amp; development</li>
-                <li>Ventilation &amp; perfusion</li>
-                <li>Gas exchange &amp; transport</li>
-                <li>Pulmonary function tests</li>
-                <li>Obstructive lung disease</li>
-                <li>Restrictive lung disease</li>
-                <li>Pulmonary vascular disease</li>
-                <li>Pneumonia, TB, ARDS</li>
-              </ol>
+              <div class="v-subj-meta">JUN 11 · JUN 18</div>
             </div>
+            <ol class="v-subj-list">
+              <li><i>11</i>Lung anatomy &amp; development</li>
+              <li><i>12</i>Ventilation &amp; perfusion</li>
+              <li><i>13</i>Gas exchange &amp; transport</li>
+              <li><i>14</i>Pulmonary function tests</li>
+              <li><i>15</i>Obstructive lung disease</li>
+              <li><i>16</i>Restrictive lung disease</li>
+              <li><i>17</i>Pulmonary vascular disease</li>
+              <li><i>18</i>Pneumonia, TB, ARDS</li>
+            </ol>
           </article>
 
-          <article class="subject-card subject-epi" tabindex="0" data-anim="fade-up">
-            <header class="subject-card-head">
-              <div class="subject-card-icon">
-                <!-- chart -->
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="20" x2="21" y2="20"/><rect x="6" y="12" width="3" height="8" rx="1"/><rect x="11" y="8" width="3" height="12" rx="1"/><rect x="16" y="4" width="3" height="16" rx="1"/></svg>
-              </div>
+          <article class="v-subj s-epi">
+            <div class="v-subj-top">
+              <div class="v-subj-code"><span class="lead"><b></b> EPI</span><span>4d</span></div>
               <h3>Epi &amp; Biostats</h3>
-              <div class="subject-card-meta"><span>4 days</span><span class="dot"></span><span>Jun 19 – Jun 22</span></div>
-            </header>
-            <div class="subject-card-body">
-              <ol class="subject-card-list">
-                <li>Study design</li>
-                <li>Diagnostic tests</li>
-                <li>Bias, confounding &amp; error</li>
-                <li>Statistical tests</li>
-              </ol>
+              <div class="v-subj-meta">JUN 19 · JUN 22</div>
             </div>
+            <ol class="v-subj-list">
+              <li><i>19</i>Study design</li>
+              <li><i>20</i>Diagnostic tests</li>
+              <li><i>21</i>Bias, confounding &amp; error</li>
+              <li><i>22</i>Statistical tests</li>
+            </ol>
           </article>
 
-          <article class="subject-card subject-path" tabindex="0" data-anim="fade-up">
-            <header class="subject-card-head">
-              <div class="subject-card-icon">
-                <!-- microscope -->
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="3"/><line x1="9" y1="9" x2="9" y2="15"/><path d="M5 17h8"/><path d="M3 21h18"/><path d="M14 9l4-4 2 2-4 4z"/></svg>
-              </div>
+          <article class="v-subj s-path">
+            <div class="v-subj-top">
+              <div class="v-subj-code"><span class="lead"><b></b> PATH</span><span>8d</span></div>
               <h3>Pathology</h3>
-              <div class="subject-card-meta"><span>8 days</span><span class="dot"></span><span>Jun 23 – Jun 30</span></div>
-            </header>
-            <div class="subject-card-body">
-              <ol class="subject-card-list">
-                <li>Cell injury, death &amp; adaptation</li>
-                <li>Inflammation &amp; wound healing</li>
-                <li>Neoplasia</li>
-                <li>Genetic disease</li>
-                <li>Immunology essentials</li>
-                <li>Hematologic pathology</li>
-                <li>Endocrine pathology</li>
-                <li>Renal &amp; GU pathology</li>
-              </ol>
+              <div class="v-subj-meta">JUN 23 · JUN 30</div>
             </div>
+            <ol class="v-subj-list">
+              <li><i>23</i>Cell injury, death &amp; adaptation</li>
+              <li><i>24</i>Inflammation &amp; wound healing</li>
+              <li><i>25</i>Neoplasia</li>
+              <li><i>26</i>Genetic disease</li>
+              <li><i>27</i>Immunology essentials</li>
+              <li><i>28</i>Hematologic pathology</li>
+              <li><i>29</i>Endocrine pathology</li>
+              <li><i>30</i>Renal &amp; GU pathology</li>
+            </ol>
           </article>
-
         </div>
       </div>
     </section>
 
+    <!-- ECG divider -->
+    <div class="v-divider on-cream" aria-hidden="true">
+      <svg class="ekg" data-vw="1440" data-vh="60" data-cw="240" data-dash="14 986" data-dur="5s">
+        <path class="ekg-base"></path>
+        <path class="ekg-blip"></path>
+      </svg>
+    </div>
+
     <!-- ============================ INCLUDED ============================ -->
-    <section class="section" id="included" style="background: var(--bg-cream);">
-      <div class="container">
-        <header class="section-head" data-anim="fade-up">
-          <p class="eyebrow">What's included</p>
+    <section class="v-sec cream-2" id="included">
+      <div class="v-container">
+        <header class="v-head" data-scan>
+          <span class="v-tag">What's included</span>
           <h2>Daily class. Real mentorship. Quiet study tools.</h2>
         </header>
 
-        <div class="included-grid" data-stagger="60">
-          <article class="feature" data-anim="fade-up">
-            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><polygon points="22 8 16 12 22 16 22 8"/></svg></div>
+        <div class="v-feats" data-scan>
+          <article class="v-feat">
+            <div class="v-feat-n">01</div>
+            <div class="v-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><polygon points="22 8 16 12 22 16 22 8"/></svg></div>
             <h3>Daily live Zoom classes</h3>
             <p>2.5 hours, every day, Monday to Sunday. 5:00 to 7:30 AM EAT.</p>
           </article>
-          <article class="feature" data-anim="fade-up">
-            <div class="feature-icon" style="background: var(--resp-tint); color: var(--resp-deep);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2z"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="14" y2="12"/></svg></div>
-            <h3>Full First Aid 2025 walkthrough</h3>
+          <article class="v-feat">
+            <div class="v-feat-n">02</div>
+            <div class="v-feat-ic" style="background: var(--resp-soft); color: var(--resp-deep);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2z"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="14" y2="12"/></svg></div>
+            <h3>Full First Aid walkthrough</h3>
             <p>Every chapter, every annotation. We read it together, not at you.</p>
           </article>
-          <article class="feature" data-anim="fade-up">
-            <div class="feature-icon" style="background: var(--path-tint); color: var(--path-deep);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
-            <h3>UWorld vignettes, page-by-page</h3>
-            <p>Daily question sets tied to each class. Reviewed live the next morning.</p>
+          <article class="v-feat">
+            <div class="v-feat-n">03</div>
+            <div class="v-feat-ic" style="background: var(--path-soft); color: var(--path-deep);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+            <h3>UWorld vignettes, page by page</h3>
+            <p>Daily question sets tied to each class, reviewed live the next morning.</p>
           </article>
-          <article class="feature" data-anim="fade-up">
-            <div class="feature-icon" style="background: var(--amber-tint); color: var(--amber-deep);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <article class="v-feat">
+            <div class="v-feat-n">04</div>
+            <div class="v-feat-ic" style="background: var(--amber-soft); color: var(--amber-deep);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
             <h3>Class dashboard, slides &amp; notes</h3>
             <p>Your home base for the daily link, deck, notes, and recordings.</p>
           </article>
-          <article class="feature" data-anim="fade-up">
-            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <article class="v-feat">
+            <div class="v-feat-n">05</div>
+            <div class="v-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
             <h3>ECFMG &amp; match mentorship</h3>
             <p>Through registration, scheduling, and residency interview prep.</p>
           </article>
-          <article class="feature" data-anim="fade-up">
-            <div class="feature-icon" style="background: var(--resp-tint); color: var(--resp-deep);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-1 4 8.5 8.5 0 0 1-7.5 4.5 8.4 8.4 0 0 1-4-1L3 21l2-5.5a8.4 8.4 0 0 1-1-4 8.5 8.5 0 0 1 4.5-7.5 8.4 8.4 0 0 1 4-1h.5a8.5 8.5 0 0 1 8 8z"/></svg></div>
+          <article class="v-feat">
+            <div class="v-feat-n">06</div>
+            <div class="v-feat-ic" style="background: var(--resp-soft); color: var(--resp-deep);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-1 4 8.5 8.5 0 0 1-7.5 4.5 8.4 8.4 0 0 1-4-1L3 21l2-5.5a8.4 8.4 0 0 1-1-4 8.5 8.5 0 0 1 4.5-7.5 8.4 8.4 0 0 1 4-1h.5a8.5 8.5 0 0 1 8 8z"/></svg></div>
             <h3>WhatsApp cohort group</h3>
             <p>Daily Q&amp;A with Allan and the rest of the cohort.</p>
           </article>
@@ -263,239 +291,145 @@
       </div>
     </section>
 
-    <!-- ============================ SAMPLE WEEK ============================ -->
-    <section class="section" id="sample-week">
-      <div class="container">
-        <header class="section-head" data-anim="fade-up">
-          <p class="eyebrow">A sample week</p>
-          <h2>Week one of June. Cardio, every day.</h2>
-          <p>The first ten days walk through every cardiovascular topic in First Aid. Here's how week one looks on the calendar.</p>
+    <!-- ============================ PASSES ============================ -->
+    <section class="v-sec dark" id="passes">
+      <div class="v-container">
+        <header class="v-head" data-scan>
+          <span class="v-tag beat">Recent passes</span>
+          <h2>The first graduate.</h2>
+          <p>This is the test the program exists for. Rosemary sat Step 1 on May 5, 2026, and passed on her first attempt.</p>
         </header>
 
-        <div class="week-wrap" data-anim="fade-up">
-          <div class="week-grid">
-            <div class="week-cell subject-cvs today">
-              <div class="dow">Mon</div>
-              <div class="date">1</div>
-              <span class="subject-chip">CVS</span>
-              <div class="topic">Cardiac anatomy &amp; embryology</div>
+        <div class="v-pass" data-scan>
+          <article class="v-pass-hero">
+            <div class="bar">
+              <span>Outcome · Step 1</span>
+              <span class="ok">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                PASS · VERIFIED
+              </span>
             </div>
-            <div class="week-cell subject-cvs">
-              <div class="dow">Tue</div>
-              <div class="date">2</div>
-              <span class="subject-chip">CVS</span>
-              <div class="topic">The cardiac cycle &amp; PV loops</div>
+            <div class="v-pass-body">
+              <div class="v-pass-photo">
+                <img src="images/rosemary-portrait.jpg" alt="Dr. Rosemary Njambi Githinji on her Duke graduation day." loading="lazy" decoding="async" />
+              </div>
+              <div class="v-pass-quote">
+                <p class="q">Allan is the most patient teacher I have ever had. He breaks every concept down so clearly that even a non-medic could follow. I would not have passed Step 1 without him.</p>
+                <p class="a">DR. ROSEMARY NJAMBI GITHINJI · TESTED 05 MAY 2026</p>
+              </div>
             </div>
-            <div class="week-cell subject-cvs">
-              <div class="dow">Wed</div>
-              <div class="date">3</div>
-              <span class="subject-chip">CVS</span>
-              <div class="topic">Cardiac output &amp; Frank-Starling</div>
-            </div>
-            <div class="week-cell subject-cvs">
-              <div class="dow">Thu</div>
-              <div class="date">4</div>
-              <span class="subject-chip">CVS</span>
-              <div class="topic">Vascular biology &amp; hemodynamics</div>
-            </div>
-            <div class="week-cell subject-cvs">
-              <div class="dow">Fri</div>
-              <div class="date">5</div>
-              <span class="subject-chip">CVS</span>
-              <div class="topic">EKG fundamentals</div>
-            </div>
-            <div class="week-cell subject-cvs">
-              <div class="dow">Sat</div>
-              <div class="date">6</div>
-              <span class="subject-chip">CVS</span>
-              <div class="topic">Arrhythmias I &amp; II</div>
-            </div>
-            <div class="week-cell subject-cvs">
-              <div class="dow">Sun</div>
-              <div class="date">7</div>
-              <span class="subject-chip">CVS</span>
-              <div class="topic">Heart failure &amp; cardiomyopathies</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================ TESTIMONIALS ============================ -->
-    <section class="section" id="passes" style="background: var(--bg-cream);">
-      <div class="container">
-        <header class="section-head" data-anim="fade-up">
-          <p class="eyebrow">Recent passes</p>
-          <h2>Step 1, passed.</h2>
-          <p>This is the test the program exists for. Rosemary sat Step 1 on May 5, 2026 and passed on her first attempt. More graduates will land here as they cross the finish line.</p>
-        </header>
-
-        <div class="passes-wrap">
-          <article class="pass-hero" data-anim="fade-up">
-            <div class="pass-portrait">
-              <img src="images/rosemary-portrait.jpg" alt="Dr. Rosemary Njambi Githinji on her Duke graduation day." loading="lazy" decoding="async" />
-            </div>
-            <span class="pass-badge">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              Passed · Step 1
-            </span>
-            <p class="pass-quote">Allan is the most patient teacher I have ever had. He breaks every concept down so clearly that even a non-medic could follow. I would not have passed Step 1 without him.</p>
-            <p class="pass-attr">Dr. Rosemary Njambi Githinji · Tested 5 May 2026 · Coached Feb – May 2026</p>
           </article>
 
-          <article class="pass-placeholder" data-anim="fade-up">
-            <div class="ico">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
+          <article class="v-pass-ph">
+            <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
             <strong>More passes coming</strong>
-            <span>June cohort tests Oct &ndash; Nov 2026</span>
+            <span>JUNE COHORT TESTS OCT, NOV 2026</span>
           </article>
-
-          <article class="pass-placeholder" data-anim="fade-up">
-            <div class="ico">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
+          <article class="v-pass-ph">
+            <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             <strong>Your name here</strong>
-            <span>The next testimonial is the one you'll write.</span>
+            <span>THE NEXT ONE IS YOURS TO WRITE</span>
           </article>
         </div>
       </div>
     </section>
 
     <!-- ============================ PRICING ============================ -->
-    <section class="section" id="pricing">
-      <div class="container">
-        <header class="section-head" data-anim="fade-up">
-          <p class="eyebrow">Pricing</p>
+    <section class="v-sec cream" id="pricing">
+      <div class="v-container">
+        <header class="v-head" data-scan>
+          <span class="v-tag">Pricing</span>
           <h2>Honest pricing, paid the way you actually can.</h2>
-          <p>Tuition is the same program. Two payment regions because two payment rails are easy and a third would not be.</p>
+          <p>The same program. Two payment regions because two rails are easy and a third would not be.</p>
         </header>
 
-        <div class="pricing-grid">
-          <article class="price-card" data-anim="fade-up">
-            <div class="price-head">
-              <span class="flag flag-ug" aria-hidden="true"><span></span><span></span><span></span></span>
-              <h3>Uganda</h3>
-            </div>
-            <div class="price">
-              <span class="from">From</span>UGX 700,000<span class="per"> / month</span>
-            </div>
-            <ul class="price-list">
+        <div class="v-price" data-scan>
+          <article class="v-card feature">
+            <div class="ph"><span class="flag flag-ug" aria-hidden="true"><span></span><span></span><span></span></span><h3>Uganda</h3></div>
+            <div class="num"><small>FROM </small>UGX 350,000<small> / MO</small></div>
+            <ul>
               <li>30 days of live Zoom classes</li>
               <li>Class dashboard, slides, notes</li>
               <li>UWorld vignette walkthroughs</li>
               <li>WhatsApp cohort group</li>
               <li>ECFMG &amp; match mentorship</li>
             </ul>
-            <div class="price-pay">
-              <strong>Pay by Mobile Money</strong>
-              0705 571 443 · Bakesiga Allan
-            </div>
-            <a class="btn btn-primary" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign up &rarr;</a>
+            <div class="pay"><b>PAY BY MOBILE MONEY</b>0705 571 443 · Bakesiga Allan</div>
+            <a class="v-btn v-btn-primary" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign up →</a>
           </article>
 
-          <article class="price-card" data-anim="fade-up">
-            <div class="price-head">
-              <span class="flag flag-intl" aria-hidden="true"></span>
-              <h3>International</h3>
-            </div>
-            <div class="price">
-              <span class="from">From</span>USD 200<span class="per"> / month</span>
-            </div>
-            <ul class="price-list">
+          <article class="v-card">
+            <div class="ph"><span class="flag flag-intl" aria-hidden="true"></span><h3>International</h3></div>
+            <div class="num"><small>FROM </small>USD 200<small> / MO</small></div>
+            <ul>
               <li>30 days of live Zoom classes</li>
               <li>Class dashboard, slides, notes</li>
               <li>UWorld vignette walkthroughs</li>
               <li>WhatsApp cohort group</li>
               <li>ECFMG &amp; match mentorship</li>
             </ul>
-            <div class="price-pay">
-              <strong>Pay by Wise, PayPal, or M-Pesa</strong>
-              +256 705 571 443 · reply to confirm rail
-            </div>
-            <a class="btn btn-ghost" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign up &rarr;</a>
+            <div class="pay"><b>PAY BY WISE · PAYPAL · M-PESA</b>+256 705 571 443 · reply to confirm rail</div>
+            <a class="v-btn v-btn-ink" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign up →</a>
           </article>
         </div>
       </div>
     </section>
 
     <!-- ============================ FAQ ============================ -->
-    <section class="section" id="faq" style="background: var(--bg-cream);">
-      <div class="container">
-        <header class="section-head" style="text-align: center; margin-inline: auto;" data-anim="fade-up">
-          <p class="eyebrow">Common questions</p>
+    <section class="v-sec dark" id="faq">
+      <div class="v-container">
+        <header class="v-head" style="text-align:center; margin-inline:auto;" data-scan>
+          <span class="v-tag">Common questions</span>
           <h2>Honest answers.</h2>
         </header>
-        <div class="faq-list">
-          <div class="faq-item">
-            <button class="faq-q" type="button">
-              <span>I have not finished medical school. Can I still join?</span>
-              <span class="chev" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              </span>
-            </button>
-            <div class="faq-a">Yes. Several current students are still in their final year. The pace assumes basic clinical sciences are familiar, but the daily walkthrough re-grounds every concept.</div>
+        <div class="v-faq">
+          <div class="v-faq-item">
+            <button class="v-faq-q" type="button"><span class="qn">Q1</span><span style="flex:1;">The June cohort already started. Can I still join?</span><span class="x">+</span></button>
+            <div class="v-faq-a">The current cohort is in week 2, so it is past the comfortable join point. You can sign up now to lock a seat in the next cohort, and Allan will share the start date and a head-start reading plan as soon as the date is set. Reply on the signup form if you want a tentative date.</div>
           </div>
-          <div class="faq-item">
-            <button class="faq-q" type="button">
-              <span>Do I need my own copy of First Aid?</span>
-              <span class="chev" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              </span>
-            </button>
-            <div class="faq-a">A copy of First Aid 2025 is recommended but not strictly required. Class slides reproduce the structure of every chapter and link out to the relevant figures.</div>
+          <div class="v-faq-item">
+            <button class="v-faq-q" type="button"><span class="qn">Q2</span><span style="flex:1;">I have not finished medical school. Can I still join?</span><span class="x">+</span></button>
+            <div class="v-faq-a">Yes. Several current students are still in their final year. The pace assumes basic clinical sciences are familiar, but the daily walkthrough re-grounds every concept.</div>
           </div>
-          <div class="faq-item">
-            <button class="faq-q" type="button">
-              <span>What if I miss a class?</span>
-              <span class="chev" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              </span>
-            </button>
-            <div class="faq-a">Every class is recorded and posted to the dashboard within a few hours. The session card on the dashboard always shows the latest recording link.</div>
+          <div class="v-faq-item">
+            <button class="v-faq-q" type="button"><span class="qn">Q3</span><span style="flex:1;">Do I need my own copy of First Aid?</span><span class="x">+</span></button>
+            <div class="v-faq-a">A copy of First Aid 2025 is recommended but not strictly required. Class slides reproduce the structure of every chapter and link out to the relevant figures.</div>
           </div>
-          <div class="faq-item">
-            <button class="faq-q" type="button">
-              <span>Can I pay weekly?</span>
-              <span class="chev" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              </span>
-            </button>
-            <div class="faq-a">Yes. Weekly and bi-weekly plans are arranged case-by-case. Reply on the signup form with what works for you and Allan will respond personally.</div>
+          <div class="v-faq-item">
+            <button class="v-faq-q" type="button"><span class="qn">Q4</span><span style="flex:1;">What if I miss a class?</span><span class="x">+</span></button>
+            <div class="v-faq-a">Every class is recorded and posted to the dashboard within a few hours. The session card always shows the latest recording link.</div>
           </div>
-          <div class="faq-item">
-            <button class="faq-q" type="button">
-              <span>Is the class recorded?</span>
-              <span class="chev" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              </span>
-            </button>
-            <div class="faq-a">Yes. Each Zoom session is recorded; the link is added to that day's session card on the dashboard alongside the slides.</div>
+          <div class="v-faq-item">
+            <button class="v-faq-q" type="button"><span class="qn">Q5</span><span style="flex:1;">Can I pay weekly?</span><span class="x">+</span></button>
+            <div class="v-faq-a">Yes. Weekly and bi-weekly plans are arranged case by case. Reply on the signup form with what works for you and Allan will respond personally.</div>
           </div>
-          <div class="faq-item">
-            <button class="faq-q" type="button">
-              <span>How is this different from a large course like Kaplan or USMLE-Rx?</span>
-              <span class="chev" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              </span>
-            </button>
-            <div class="faq-a">It is small, daily, and led by one physician who knows you. The big courses are libraries of recorded content. This is a class. You show up every morning and so does Allan.</div>
+          <div class="v-faq-item">
+            <button class="v-faq-q" type="button"><span class="qn">Q6</span><span style="flex:1;">How is this different from a large course like Kaplan?</span><span class="x">+</span></button>
+            <div class="v-faq-a">It is small, daily, and led by one physician who knows you. The big courses are libraries of recorded content. This is a class. You show up every morning and so does Allan.</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============================ CTA banner ============================ -->
-    <section class="section" style="padding-block: var(--s-64);">
-      <div class="container">
-        <div class="cta-banner" data-anim="fade-up">
-          <div>
-            <h2>You don't have to <em>do this alone.</em></h2>
-            <p>The June 2026 cohort is enrolling now. Sign up takes two minutes; Allan replies within a day.</p>
+    <!-- ============================ CTA ============================ -->
+    <section class="v-sec dark" style="padding-block: 40px 90px;">
+      <div class="v-container">
+        <div class="v-cta" data-scan>
+          <div class="v-cta-ekg" aria-hidden="true">
+            <svg class="ekg" data-vw="1200" data-vh="120" data-cw="260" data-dash="18 982" data-dur="3.5s">
+              <path class="ekg-base"></path>
+              <path class="ekg-blip"></path>
+            </svg>
           </div>
-          <div class="cta-actions">
-            <a class="btn btn-gold btn-lg" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign up for Step 1 &rarr;</a>
-            <a class="link" href="mailto:allanbakesiga@gmail.com">or email Allan first</a>
+          <div class="v-cta-inner">
+            <div>
+              <h2>You don't have to <em>do this alone.</em></h2>
+              <p>The June 2026 cohort is in week 2. The next cohort is enrolling now. Sign up takes two minutes; Allan replies within a day.</p>
+            </div>
+            <div class="v-cta-actions">
+              <a class="v-btn v-btn-primary v-btn-lg" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Join the next cohort →</a>
+              <a class="link" href="mailto:allanbakesiga@gmail.com">or email Allan first</a>
+            </div>
           </div>
         </div>
       </div>
@@ -504,25 +438,27 @@
   </main>
 
   <!-- ============================ FOOTER ============================ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-cols">
-        <div class="footer-col footer-brand">
-          <a class="brand" href="/" aria-label="USMLE Classes home">
-            <span class="brand-mark" aria-hidden="true">U</span>
-            <span>USMLE Classes</span>
+  <footer class="v-foot">
+    <div class="v-container">
+      <div class="v-foot-cols">
+        <div class="v-foot-brand">
+          <a class="v-brand" href="#main" aria-label="USMLE Classes home">
+            <span class="v-mark" aria-hidden="true">
+              <svg viewBox="0 0 40 20" fill="none" stroke="#38BDF8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 10h7l2-5 3 11 3-13 3 16 2-9 2 4h12"/></svg>
+            </span>
+            <span>usmle.class</span>
           </a>
           <p>A mentor-led Step 1 cohort for East African IMGs and international students preparing through 2026.</p>
         </div>
-        <div class="footer-col">
+        <div class="v-foot-col">
           <h4>Class</h4>
           <ul>
             <li><a href="https://chat.whatsapp.com/JvaTpyDt9loGZjomAVwi42" target="_blank" rel="noopener">WhatsApp group</a></li>
-            <li><a href="https://calendly.com/allanbakesiga/30min" target="_blank" rel="noopener">Calendly office hours</a></li>
+            <li><a href="https://calendly.com/allanbakesiga/30min" target="_blank" rel="noopener">Office hours</a></li>
             <li><a href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign-up form</a></li>
           </ul>
         </div>
-        <div class="footer-col">
+        <div class="v-foot-col">
           <h4>Allan</h4>
           <ul>
             <li><a href="#passes">Recent passes</a></li>
@@ -530,26 +466,22 @@
             <li><a href="mailto:allanbakesiga@gmail.com">Email Allan</a></li>
           </ul>
         </div>
-        <div class="footer-col">
+        <div class="v-foot-col">
           <h4>Materials</h4>
           <ul>
             <li><a href="signin.html">Student sign-in</a></li>
-            <li><a href="dashboard.html">Dashboard preview</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
             <li><a href="data/schedule.ics">Calendar (.ics)</a></li>
           </ul>
         </div>
       </div>
-      <div class="footer-bottom">
-        <span>© 2026 Allan Bakesiga · Site by Claude Design</span>
-        <span>Made with quiet motion, no trackers.</span>
+      <div class="v-foot-bottom">
+        <span>© 2026 ALLAN BAKESIGA · SITE BY CLAUDE DESIGN</span>
+        <span>SIGNAL STEADY · NO TRACKERS</span>
       </div>
     </div>
   </footer>
 
-  <script src="js/data.js"></script>
-  <script src="js/motion.js"></script>
-
-  <!-- Tweaks panel mount point (loaded by tweaks.js) -->
-  <script src="js/tweaks.js"></script>
+  <script src="js/vitals.js"></script>
 </body>
 </html>

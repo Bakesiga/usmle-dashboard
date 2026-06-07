@@ -1,17 +1,28 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sign in · USMLE Classes</title>
-  <meta name="theme-color" content="#0C2A3D" />
+  <meta name="theme-color" content="#06141D" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
 
   <link rel="stylesheet" href="css/design-tokens.css" />
   <link rel="stylesheet" href="css/site.css" />
+  <link rel="stylesheet" href="css/theme-vitals.css" />
+  <link rel="stylesheet" href="css/dashboard-vitals.css" />
+  <style>
+    /* Sign-in card on the monitor surface */
+    body.signin-page { background: var(--bg); min-height: 100vh; display: grid; place-items: center; padding: 24px; font-family: var(--font-body); }
+    .signin-card { background: var(--bg-cream); border: 1px solid var(--border); border-radius: 18px; padding: 40px 32px; max-width: 460px; width: 100%; box-shadow: 0 30px 80px rgba(0,0,0,0.45); }
+    .signin-card h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.6rem, 3vw + 0.5rem, 2.2rem); line-height: 1.1; margin: 24px 0 12px; color: var(--ink); }
+    .signin-card p { color: var(--ink-2); font-size: 15px; line-height: 1.55; margin: 0 0 8px; }
+    .signin-help { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--muted); margin-top: 24px !important; }
+    .signin-help a { color: #38BDF8; }
+  </style>
 
   <!-- Google Identity Services -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
