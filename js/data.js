@@ -6,7 +6,7 @@
 
 window.SESSIONS = [
   // ---- Cardiovascular (10) — June 1-10 ----
-  { day: 1,  date: "2026-06-01", subject: "cvs",  title: "Cardiac anatomy & embryology",      sub: "Heart tubes, septation, fetal circulation",
+  { day: 1,  date: "2026-06-01", subject: "cvs",  phase: "anatomy", title: "Anatomy & Embryology pt 1 · heart tube & looping", sub: "Heart tubes, cardiac looping, primitive chambers, early embryologic origins",
     resources: [
       { kind: "highYield", label: "High-yield 1-pager",
         url: "outputs/study-notes/cvs-day-01-high-yield.html",
@@ -16,23 +16,21 @@ window.SESSIONS = [
         meta: "65 cards" }
     ],
     outline: {
-      intro: "Read ahead in First Aid 2025 (Cardiovascular chapter) so class lands faster. Cover the sections below; the Q-bank for Day 1 only asks about material in these areas.",
-      edition: "First Aid 2025 · Cardiovascular chapter",
+      intro: "Day 1 opens the cardiovascular block with the earliest embryology. Read ahead in First Aid 2025 (Cardiovascular · Embryology) so the lecture lands faster. The Q-bank for Day 1 only asks about material in the sections below.",
+      edition: "First Aid 2025 · Cardiovascular chapter (Embryology)",
       items: [
-        { topic: "Heart embryology — tube formation, looping, atrial & ventricular septation, aorticopulmonary septum (neural crest)", section: "CVS · Embryology", pages: "pp. 284–286" },
-        { topic: "Pharyngeal arch arteries + their cranial-nerve pairings (1st, 2nd, 3rd, 4th, 6th)", section: "CVS · Embryology (aortic arch derivatives)", pages: "p. 286" },
-        { topic: "Fetal circulation, three in-utero shunts, and the neonatal flip (↑ SVR / ↓ PVR; PGE1 vs indomethacin)", section: "CVS · Embryology (fetal–postnatal derivatives + fetal circulation)", pages: "p. 287" },
-        { topic: "Cardiac chambers, surface anatomy, X-ray borders, silhouette sign, LA appendage stasis", section: "CVS · Anatomy (Heart anatomy)", pages: "p. 288" },
-        { topic: "Coronary arteries, coronary dominance, AV-nodal artery rule, posteromedial papillary muscle, coronary sinus & biventricular pacing", section: "CVS · Anatomy (coronary blood supply)", pages: "p. 288" },
-        { topic: "Conduction system: SA node, AV node (triangle of Koch), His-Purkinje, conduction speed order", section: "CVS · Anatomy + Physiology (conduction pathway, action potentials)", pages: "p. 288, 297–298" },
-        { topic: "Pericardium, effusion, tamponade (water-bottle silhouette, electrical alternans, Beck's triad)", section: "CVS · Pathology (pericardial disease)", pages: "pp. 317, 319–320" },
-        { topic: "Aorta in the adult: arch branches, Stanford A vs B dissection, blunt aortic injury at the isthmus, ICA → ophthalmic → CRA atheroemboli, subclavian steal", section: "CVS · Pathology (aortic aneurysm, dissection) + Anatomy (great vessels)", pages: "pp. 306–307" },
-        { topic: "Abdominal & pelvic vascular anatomy: IVC formation at L4–L5, renal-vein asymmetry, gonadal drainage, nutcracker syndrome, femoral triangle access", section: "Renal · Anatomy + Reproductive · Anatomy (gonadal venous drainage) — cross-chapter reference", pages: "Renal ch. (verify)" },
-        { topic: "Upper-body venous anatomy: SVC formation, brachiocephalic vs SVC obstruction patterns; CABG conduit landmarks (LIMA, great saphenous vein)", section: "CVS · Anatomy (heart anatomy figure) + Respiratory · Anatomy (mediastinum cross-ref)", pages: "p. 288 + Resp ch. (verify)" }
+        { topic: "Cardiogenic field and primitive heart tube formation from splanchnic mesoderm; lateral folding brings paired endocardial tubes together by day 22", section: "CVS · Embryology (heart tube formation)", pages: "p. 284" },
+        { topic: "Five primitive dilations along the heart tube and their adult derivatives: truncus arteriosus (ascending aorta + pulmonary trunk), bulbus cordis (smooth RV + smooth LV outflow), primitive ventricle (trabeculated LV), primitive atrium (trabeculated atria), sinus venosus (smooth RA + coronary sinus + SVC)", section: "CVS · Embryology (primitive chambers)", pages: "p. 284" },
+        { topic: "Cardiac looping at weeks 4 (dextral D-loop); dextrocardia and situs inversus when looping reverses; Kartagener syndrome (ciliary dyskinesia) as a clinical association", section: "CVS · Embryology (cardiac looping)", pages: "p. 284" },
+        { topic: "Sinus venosus contributions to the right atrium (smooth posterior wall) and to the coronary sinus and SVC; left horn regression leaves the coronary sinus", section: "CVS · Embryology (sinus venosus derivatives)", pages: "p. 284" },
+        { topic: "Pulmonary venous incorporation into the left atrium (single common pulmonary vein splits into four); explains anomalous pulmonary venous return patterns", section: "CVS · Embryology (LA derivation)", pages: "p. 284" },
+        { topic: "Endocardial cushion role: contributes to atrial septation, ventricular septation membranous portion, and AV valve formation; cushion defects underlie AV canal defects (common in Down syndrome)", section: "CVS · Embryology (endocardial cushions)", pages: "pp. 284-285" },
+        { topic: "Neural crest cell migration into the outflow tract; sets up the aorticopulmonary septum that Day 2 will cover; DiGeorge (22q11.2) as the clinical link", section: "CVS · Embryology (neural crest preview for Day 2)", pages: "p. 285" },
+        { topic: "Timeline anchors: heart beats by day 22; four-chambered heart by week 8; teratogen-sensitive window for cardiac defects roughly weeks 3 to 8", section: "CVS · Embryology (timeline)", pages: "p. 284" }
       ]
     }
   },
-  { day: 2,  date: "2026-06-02", subject: "cvs",  title: "Pumping mechanics — CO, PV loops, sounds & valves", sub: "Cardiac output, Frank-Starling, PV loops, sounds, valvular disease, cardiomyopathy",
+  { day: 2,  date: "2026-06-02", subject: "cvs",  phase: "anatomy", title: "Anatomy & Embryology pt 2 · septation", sub: "Atrial septation, ventricular septation, conotruncal / aorticopulmonary septum",
     resources: [
       { kind: "highYield", label: "High-yield 1-pager",
         url: "outputs/study-notes/cvs-day-02-high-yield.html",
@@ -42,51 +40,50 @@ window.SESSIONS = [
         meta: "52 cards" }
     ],
     outline: {
-      intro: "Day 2 covers the mechanical half of CVS Physiology — how the heart pumps. Read ahead in First Aid 2025 (Cardiovascular · Physiology section). The Day 2 Q-bank only asks about material in the sections below.",
-      edition: "First Aid 2025 · Cardiovascular chapter (Physiology)",
+      intro: "Day 2 walks through every septum the embryonic heart forms. Read ahead in First Aid 2025 (CVS Embryology · septation pages). The Q-bank for Day 2 only asks about material in the sections below.",
+      edition: "First Aid 2025 · Cardiovascular chapter (Embryology, septation)",
       items: [
-        { topic: "Cardiac output equations: CO = SV × HR, SV = EDV − ESV, EF = SV / EDV, Fick principle, MAP ≈ DBP + 1/3 PP", section: "CVS · Physiology (cardiac output)", pages: "p. 289" },
-        { topic: "Resistance, pressure, flow: Ohm's law for circulation, Poiseuille (r⁴ dominates), pulse pressure determinants (↑ SV or ↓ aortic compliance)", section: "CVS · Physiology (resistance, pressure, flow)", pages: "p. 290" },
-        { topic: "Stroke volume drivers: preload, afterload, contractility, Frank-Starling law, eccentric vs concentric hypertrophy (sarcomeres in series vs parallel, β-MHC upregulation)", section: "CVS · Physiology (CO variables, Starling curves)", pages: "p. 291" },
-        { topic: "Pressure-volume loops: 4 landmark points, ESPVR / EDPVR; shifts with preload, afterload, contractility, nitroglycerin, nitroprusside, AV fistula; loops for AS, AR, MS, MR", section: "CVS · Physiology (PV loops, valve disease physiology)", pages: "pp. 292, 296" },
-        { topic: "Cardiac & vascular function curves: cardiac up with contractility, vascular right with volume; intersection shifts for hemorrhage, exercise, AV fistula, HFrEF", section: "CVS · Physiology (cardiac & vascular function curves)", pages: "p. 293" },
-        { topic: "Heart sounds: S1 / S2 mechanics, splitting patterns (physiologic, wide, fixed, paradoxical), S3 (early diastole, dilated/stiff LV) and S4 (atrial kick into stiff LV)", section: "CVS · Physiology (splitting of S2, S3 / S4, murmurs)", pages: "p. 294" },
-        { topic: "Wiggers diagram + JVP waveforms (a, c, x, v, y); cannon a waves in 3° heart block; giant v wave in TR; Doppler mitral E / A waves and how S3 maps onto E", section: "CVS · Physiology (jugular venous pulse, cardiac cycle)", pages: "p. 295" },
-        { topic: "Valvular disease anchored on PV loops + auscultation: AS (pulsus parvus et tardus, triad of angina / syncope / HF), AR (water-hammer, de Musset, Duroziez, Quincke), MS (opening snap + diastolic rumble, LA hypertension with normal LV), MR (holosystolic to axilla), MVP (click + maneuvers), TR (Carvallo positive), VSD", section: "CVS · Pathology (valvular disease) + cross-ref Physiology", pages: "pp. 316–318" },
-        { topic: "Cardiomyopathy echo profiles: dilated, hypertrophic (asymmetric septal, dynamic LVOT, S4, sudden cardiac death), restrictive, athlete's heart — distinguished by LV mass, cavity size, EF, and diastolic function", section: "CVS · Pathology (cardiomyopathies)", pages: "pp. 314–315" },
-        { topic: "Exercise + aging cardiovascular hemodynamics: aerobic exercise (↓ SVR, ↑ SBP, DBP unchanged, ↑ PP, eccentric LVH); aging aorta (ISH, wide PP); aging myocyte (hypertrophy without hyperplasia, lipofuscin)", section: "CVS · Physiology (normal pressures) + Pathology (aging changes)", pages: "p. 301 + pathology cross-ref" }
+        { topic: "Atrial septation: septum primum grows down toward endocardial cushions leaving ostium primum, then perforations form ostium secundum; septum secundum grows down to its right leaving foramen ovale; the two septa form a one-way valve held open by right-to-left fetal pressure gradient", section: "CVS · Embryology (atrial septation)", pages: "p. 285" },
+        { topic: "Atrial septal defects: ostium secundum (most common, septum secundum failure), ostium primum (endocardial cushion failure, often with AV valve defect), sinus venosus, patent foramen ovale; left-to-right shunt with fixed split S2", section: "CVS · Embryology + Pathology (ASD)", pages: "p. 285 + cross-ref" },
+        { topic: "Ventricular septation: muscular IVS grows up from the apex; membranous IVS forms from endocardial cushions and aorticopulmonary septum fusing with the muscular IVS", section: "CVS · Embryology (ventricular septation)", pages: "p. 285" },
+        { topic: "VSD: membranous most common type (failure of the membranous IVS to form); muscular VSD smaller and often closes spontaneously; left-to-right shunt with holosystolic murmur at left lower sternal border", section: "CVS · Embryology + Pathology (VSD)", pages: "p. 285 + cross-ref" },
+        { topic: "Conotruncal / aorticopulmonary septum: neural-crest-derived spiral septum divides the truncus arteriosus into the aorta and pulmonary trunk and also divides the bulbus cordis into the LV and RV outflow tracts", section: "CVS · Embryology (aorticopulmonary septum)", pages: "p. 285" },
+        { topic: "Conotruncal defects: persistent truncus arteriosus (failure to divide), transposition of the great arteries (failure to spiral), tetralogy of Fallot (anterosuperior displacement causing pulmonary stenosis + overriding aorta + VSD + RVH); all linked to neural crest failure and 22q11.2 deletion", section: "CVS · Embryology + Pathology (conotruncal defects)", pages: "p. 285 + cross-ref" },
+        { topic: "AV septal defect (AV canal defect): full endocardial cushion failure giving large common atrioventricular orifice with primum ASD + inlet VSD + common AV valve; strong Down syndrome association", section: "CVS · Embryology (AVSD)", pages: "p. 285" },
+        { topic: "Tricuspid atresia: failure of right AV cushion development; absent tricuspid valve, hypoplastic RV; requires ASD + VSD to survive; cyanotic with left axis deviation", section: "CVS · Embryology + Pathology (tricuspid atresia)", pages: "p. 285 + cross-ref" }
       ]
     }
   },
-  { day: 3,  date: "2026-06-03", subject: "cvs",  title: "Cardiac electrics — APs, ECG, arrhythmias & shock", sub: "Action potentials, conduction, ECG, arrhythmias, coronary autoregulation, baroreflex, shock, HF cascade",
+  { day: 3,  date: "2026-06-03", subject: "cvs",  phase: "anatomy", title: "Anatomy & Embryology pt 3 · fetal circulation & gross anatomy", sub: "Fetal shunts, postnatal flip, gross cardiac anatomy, coronary anatomy, great vessels",
     resources: [
       { kind: "highYield", label: "High-yield 1-pager",
         url: "outputs/study-notes/cvs-day-03-high-yield.html",
         meta: "Open in browser" },
       { kind: "flashcards", label: "Flashcards",
         url: "outputs/study-notes/cvs-day-03-flashcards.html",
-        meta: "53 cards" }
+        meta: "53 cards" },
+      { kind: "notes", label: "Anatomy & Embryology block summary",
+        url: "outputs/study-notes/block-summary-anatomy-embryology.html",
+        meta: "Days 1-3 wrap-up" }
     ],
     outline: {
-      intro: "Day 3 covers the electrical half of CVS Physiology plus the body's integrative responses. Read ahead in First Aid 2025 (Cardiovascular · Physiology and Pathology selections below). The Day 3 Q-bank only asks about material in the sections below.",
-      edition: "First Aid 2025 · Cardiovascular chapter (Physiology + selected Pathology)",
+      intro: "Day 3 closes anatomy with fetal circulation and adult gross cardiac anatomy. Read ahead in First Aid 2025 (CVS · fetal circulation and heart anatomy pages). The Q-bank for Day 3 only asks about material in the sections below.",
+      edition: "First Aid 2025 · Cardiovascular chapter (fetal circulation + gross anatomy)",
       items: [
-        { topic: "Ventricular action potential: phases 0 (Na⁺) → 1 → 2 (L-type Ca²⁺ plateau) → 3 → 4 (K⁺ leak); effective refractory period; class IB shortens AP, class III prolongs", section: "CVS · Physiology (cardiac action potentials — ventricular)", pages: "pp. 297–298" },
-        { topic: "Pacemaker (SA / AV) action potential: phase 4 spontaneous depolarization (HCN funny current → T-type Ca²⁺ → L-type Ca²⁺), phase 0 = L-type Ca²⁺ slow upstroke; drug targets: β-blocker, non-DHP CCB, adenosine, ivabradine", section: "CVS · Physiology (cardiac action potentials — pacemaker)", pages: "pp. 297–298" },
-        { topic: "Excitation-contraction coupling: L-type Ca²⁺ → CICR via ryanodine receptor → troponin C → contraction; SERCA + NCX in relaxation; digoxin mechanism via Na/K ATPase block", section: "CVS · Physiology (myocardial action potential, calcium handling) + Pharmacology (digoxin)", pages: "pp. 297, 326" },
-        { topic: "Conduction system & velocity hierarchy (Park-At-Ventura, AV: Purkinje > atrial > ventricular > AV node); pacemaker escape rate hierarchy (SA 60–100, junctional 40–60, ventricular 20–40)", section: "CVS · Physiology (conduction velocity, ECG)", pages: "p. 299" },
-        { topic: "ECG fundamentals: rate, rhythm, axis, intervals; chamber enlargement (p-mitrale, p-pulmonale, LVH/RVH criteria); heart blocks (1°, Mobitz I, Mobitz II, 3°)", section: "CVS · Physiology (ECG) + Pathology (heart blocks)", pages: "p. 299 + pathology cross-ref" },
-        { topic: "Arrhythmia recognition + ablation map: AFib (PV triggers, irregularly irregular), atrial flutter (cavotricuspid isthmus, sawtooth), AVNRT (slow pathway, vagal/adenosine), PVC + compensatory pause, VT, complete heart block escape patterns", section: "CVS · Pathology (arrhythmias)", pages: "pp. 311–313" },
-        { topic: "Antiarrhythmic Vaughan-Williams classes I–IV (Na, β, K, Ca channel block) + adenosine + digoxin; rate-control choices for AFib", section: "CVS · Pharmacology (antiarrhythmics)", pages: "pp. 324–326" },
-        { topic: "Coronary autoregulation: > 70% O₂ extraction at rest; autoregulation MAP 60–140 via adenosine + NO; LV perfused in diastole; subendocardium most vulnerable; coronary sinus lowest O₂ in body", section: "CVS · Physiology (autoregulation, coronary circulation)", pages: "p. 300" },
-        { topic: "Vascular nitric oxide biology: eNOS / L-arginine → NO → guanylate cyclase → cGMP → smooth muscle relaxation; basis for nitroglycerin, nitroprusside, sildenafil mechanisms", section: "CVS · Physiology (NO) + Pharmacology", pages: "p. 300" },
-        { topic: "Baroreceptors + chemoreceptors: carotid → CN IX, aortic → CN X (both baro and chemo); baroreflex in HTN, hypotension, carotid sinus hypersensitivity, vasovagal syncope", section: "CVS · Physiology (baroreceptors, chemoreceptors)", pages: "p. 301" },
-        { topic: "Shock physiology — 4 types with cath profile shorthand (CVP, PCWP, CO, SVR, SvO₂): hypovolemic, cardiogenic, obstructive (tamponade pulsus paradoxus, Beck's triad), distributive (septic warm shock)", section: "CVS · Pathology (shock) — Day 7 preview", pages: "pp. 320–321" },
-        { topic: "Heart failure neurohormonal cascade: sympathetic + RAAS + ADH (maladaptive) vs ANP/BNP (counter-regulatory); ARNi mechanism (neprilysin block + ARB); four-pillar HFrEF regimen (β-blocker, ACE-i/ARB/ARNi, MRA, SGLT2-i)", section: "CVS · Pathology (heart failure) + Pharmacology — Day 7 preview", pages: "pp. 318–319" }
+        { topic: "Fetal circulation overview: oxygenated blood enters via umbilical vein from placenta; deoxygenated returns via two umbilical arteries (branches of internal iliacs)", section: "CVS · Embryology (fetal circulation)", pages: "p. 286" },
+        { topic: "Three fetal shunts: (1) ductus venosus bypasses fetal liver (umbilical vein to IVC); (2) foramen ovale shunts oxygenated blood right atrium to left atrium; (3) ductus arteriosus shunts deoxygenated blood pulmonary artery to descending aorta, bypassing high-resistance fetal lungs", section: "CVS · Embryology (3 shunts)", pages: "p. 286" },
+        { topic: "Postnatal transition: first breath drops pulmonary vascular resistance; loss of placenta raises systemic vascular resistance; left atrial pressure exceeds right and seals the foramen ovale; oxygenation and falling prostaglandins close the ductus arteriosus", section: "CVS · Embryology (postnatal transition)", pages: "p. 286" },
+        { topic: "Pharmacologic management of patent ductus: indomethacin or ibuprofen to close (inhibits prostaglandin synthesis); PGE1 (alprostadil) to keep open in ductal-dependent lesions (e.g. transposition, critical coarctation, hypoplastic left heart) until surgery", section: "CVS · Embryology + Pharmacology (PDA)", pages: "p. 286" },
+        { topic: "Fetal-to-adult derivatives: umbilical vein to ligamentum teres hepatis; ductus venosus to ligamentum venosum; umbilical arteries to medial umbilical ligaments; foramen ovale to fossa ovalis; ductus arteriosus to ligamentum arteriosum; allantois/urachus to median umbilical ligament", section: "CVS · Embryology (postnatal derivatives)", pages: "p. 286" },
+        { topic: "Cardiac chambers and surface anatomy: right atrium forms right heart border, right ventricle forms most of anterior surface, left ventricle forms apex and left border, left atrium most posterior (esophagus compression with LA enlargement)", section: "CVS · Anatomy (chambers and silhouette)", pages: "p. 287" },
+        { topic: "Coronary artery anatomy: left main divides into LAD (anterior IV groove, anterior 2/3 of septum, anterior LV) and LCx (left AV groove, lateral LV); RCA in right AV groove gives off AV nodal artery and PDA in right-dominant circulation (~85% of people); PDA supplies inferior LV, posterior 1/3 of septum, posteromedial papillary muscle", section: "CVS · Anatomy (coronary blood supply)", pages: "p. 287" },
+        { topic: "Coronary perfusion timing: LV coronaries fill during diastole; tachycardia shortens diastole and worsens subendocardial ischemia; SA nodal artery from RCA in ~60% and from LCx in ~40%", section: "CVS · Anatomy + Physiology (coronary perfusion)", pages: "p. 287" },
+        { topic: "Great vessel anatomy: aortic arch branches (brachiocephalic → right subclavian + right common carotid, then left common carotid, then left subclavian); ligamentum arteriosum at the isthmus (site of blunt aortic injury and coarctation); pulmonary trunk bifurcation under arch", section: "CVS · Anatomy (great vessels)", pages: "p. 287" },
+        { topic: "Pericardial anatomy: visceral and parietal layers; pericardial cavity holds 15-50 mL fluid; rapid accumulation causes tamponade well below the chronic threshold; phrenic nerve runs over the fibrous pericardium (referred shoulder pain)", section: "CVS · Anatomy (pericardium)", pages: "p. 287" }
       ]
     }
   },
-  { day: 4,  date: "2026-06-04", subject: "cvs",  title: "HTN, vascular pathology & aortic disease", sub: "Essential & secondary HTN, atherosclerosis, dyslipidemia, vasculitis large/medium/small, AAA, dissection",
+  { day: 4,  date: "2026-06-04", subject: "cvs",  phase: "physiology", title: "Physiology pt 1 · pump mechanics", sub: "CO, SV, Frank-Starling, preload/afterload, PV loops, ejection fraction",
     resources: [
       { kind: "highYield", label: "High-yield 1-pager",
         url: "outputs/study-notes/cvs-day-04-high-yield.html",
@@ -96,23 +93,22 @@ window.SESSIONS = [
         meta: "60 cards" }
     ],
     outline: {
-      intro: "Day 4 covers HTN, vascular wall pathology, aortic disease, and vasculitis. Read ahead in First Aid 2025 (CVS Pathology pp. 302-309) so the lecture lands faster.",
-      edition: "First Aid 2025 · CVS Pathology (vascular section)",
+      intro: "Day 4 opens CVS physiology with how the heart pumps. Read First Aid 2025 (CVS Physiology · cardiac output, Starling, PV loops) before class.",
+      edition: "First Aid 2025 · CVS Physiology (pump mechanics)",
       items: [
-        { topic: "Vascular wall pathology — recognize the 5 patterns: hyaline arteriolosclerosis (chronic HTN/DM), hyperplastic arteriolosclerosis (malignant HTN, onion-skin), fibrinoid necrosis (malignant HTN, PAN), atherosclerosis (intimal lipid plaques), Monckeberg medial calcific sclerosis (aging, no lumen narrowing)", section: "CVS · Pathology (vascular wall patterns)", pages: "pp. 302-303" },
-        { topic: "Primary vs secondary HTN; renal artery stenosis (atherosclerotic in older patients, fibromuscular dysplasia in younger women); refractory HTN + abdominal bruit + AKI after ACE-i", section: "CVS · Pathology (hypertension + secondary causes)", pages: "p. 309" },
-        { topic: "Hypertensive emergency vs urgency; malignant nephrosclerosis (fibrinoid necrosis + onion-skin + MAHA with schistocytes); 20-25% rule for lowering BP; concentric LVH driven by local AngII trophic signal (β-MHC upregulation)", section: "CVS · Pathology (HTN emergency + end-organ damage)", pages: "p. 309 + 314-315" },
-        { topic: "Abdominal aortic aneurysm: chronic inflammation + MMP-driven medial degradation; risks (age > 60, male, smoking strongest, HTN, family history); DM mildly protective; USPSTF screening (one-time US in men 65-75 ever-smokers); repair > 5.5 cm; rupture triad (sudden pain + syncope + pulsatile mass); Grey-Turner / Cullen signs", section: "CVS · Pathology (aortic aneurysm)", pages: "p. 307" },
-        { topic: "Thoracic aortic aneurysm: cystic medial degeneration (elastic lamellae fragmentation + mucopolysaccharide pools); compression triad (cough, dysphagia, hoarseness via RLN); Marfan FBN1; Loeys-Dietz; EDS vascular COL3A1; lathyrism / lysyl oxidase inhibition; Menkes copper defect", section: "CVS · Pathology (TAA + connective tissue disorders)", pages: "pp. 307-308" },
-        { topic: "Aortic dissection: intimal tear → false lumen; HTN is strongest risk; Stanford A (surgical) vs B (medical); BP discrepancy > 20 mmHg between arms; widened mediastinum on CXR; complication cascade (tamponade, acute AR, MI, stroke, limb ischemia); β-blocker FIRST then vasodilator", section: "CVS · Pathology (aortic dissection)", pages: "p. 308" },
-        { topic: "Vasculitis by vessel size: large (giant cell arteritis, Takayasu — both granulomatous), medium (PAN ANCA-negative + HBV + spares lungs, Kawasaki CRASH + coronary aneurysm, Buerger young male smoker + vein/nerve involvement), small (GPA c-ANCA, MPA p-ANCA without granulomas, EGPA with asthma/eosinophilia, IgA vasculitis/HSP in kids)", section: "CVS · Pathology (vasculitis)", pages: "pp. 311-313" },
-        { topic: "Atherosclerosis + peripheral artery disease: Leriche syndrome (aortoiliac); acute limb ischemia 6 Ps; embolic sources (AFib LA appendage, LV thrombus post-MI, endocarditis vegetations, atrial myxoma); reperfusion injury mechanisms (ROS, mitochondrial permeability transition, neutrophils, complement)", section: "CVS · Pathology (atherosclerosis + PAD)", pages: "pp. 305-307" },
-        { topic: "Venous disease: varicose veins from valve incompetence; chronic venous insufficiency with stasis dermatitis + hemosiderin bronze pigmentation + lipodermatosclerosis + medial-malleolar ulcers; distinguish arterial (lateral) vs venous (medial) ulcer location", section: "CVS · Pathology (venous disease)", pages: "p. 308" },
-        { topic: "Coarctation cross-reference (Day 10 preview): narrowing near ligamentum arteriosum; upper-body HTN + brachial-femoral delay; rib notching on CXR; Turner syndrome + bicuspid AV + berry aneurysm associations; neonate critical coarctation managed with PGE1 until surgery", section: "CVS · Pathology (congenital heart disease — coarctation)", pages: "p. 322 (cross-reference)" }
+        { topic: "Core equations: CO = SV × HR; SV = EDV − ESV; EF = SV / EDV; MAP ≈ DBP + 1/3 PP; Fick principle (CO = VO2 / [CaO2 − CvO2])", section: "CVS · Physiology (cardiac output equations)", pages: "p. 288" },
+        { topic: "Preload: end-diastolic ventricular volume; increased by venous return, fluid loading, decreased venous compliance (sympathetic tone); decreased by venodilators (nitroglycerin), hemorrhage, increased intrathoracic pressure", section: "CVS · Physiology (preload)", pages: "pp. 288-289" },
+        { topic: "Afterload: ventricular wall stress during ejection; approximated by MAP for LV; increased by hypertension, aortic stenosis; decreased by ACE inhibitors, hydralazine, nitroprusside; Laplace: wall stress = (P × r) / (2 × wall thickness)", section: "CVS · Physiology (afterload + Laplace)", pages: "pp. 288-289" },
+        { topic: "Contractility (inotropy): intrinsic strength of myocyte contraction; raised by sympathetic stimulation, catecholamines, digoxin, hypercalcemia; lowered by beta-blockers, non-DHP CCBs, hypoxia, acidosis, heart failure", section: "CVS · Physiology (contractility)", pages: "pp. 288-289" },
+        { topic: "Frank-Starling law: greater EDV stretches sarcomeres toward optimal length-tension overlap, raising SV; shifts down and right in heart failure; shifts up and left with positive inotropes", section: "CVS · Physiology (Frank-Starling)", pages: "p. 289" },
+        { topic: "Pressure-volume loop landmarks: (1) mitral close → isovolumetric contraction; (2) aortic open → ejection; (3) aortic close → isovolumetric relaxation; (4) mitral open → filling; ESPVR slope reflects contractility; EDPVR reflects compliance", section: "CVS · Physiology (PV loops)", pages: "p. 290" },
+        { topic: "PV loop shifts: increased preload widens the loop to the right; increased afterload raises the top of the loop and reduces SV; increased contractility steepens ESPVR and raises SV; valvular lesions produce characteristic shape distortions (AS tall narrow, MR no isovolumetric contraction, AR wide loop with high SV)", section: "CVS · Physiology (PV loop shifts + valves)", pages: "p. 290" },
+        { topic: "Ejection fraction: SV / EDV; normal 55-70%; HFrEF defined ≤ 40%; HFpEF preserved EF ≥ 50% with diastolic dysfunction; mid-range 41-49%", section: "CVS · Physiology + Pathology cross-ref (EF)", pages: "p. 288 + HF cross-ref" },
+        { topic: "Cardiac and vascular function curves: cardiac curve rises with contractility; vascular curve shifts right with volume or constriction; intersection sets operating CO and venous pressure; useful for explaining hemorrhage, exercise, AV fistula, HFrEF shifts", section: "CVS · Physiology (cardiac and vascular function curves)", pages: "p. 289" }
       ]
     }
   },
-  { day: 5,  date: "2026-06-05", subject: "cvs",  title: "Ischemic heart disease — angina to MI", sub: "Stable angina, ACS spectrum, ECG localisation, post-MI complications timeline",
+  { day: 5,  date: "2026-06-05", subject: "cvs",  phase: "physiology", title: "Physiology pt 2 · heart sounds & murmurs", sub: "S1/S2/S3/S4, splitting, systolic and diastolic murmurs, maneuvers",
     resources: [
       { kind: "highYield", label: "High-yield 1-pager",
         url: "outputs/study-notes/cvs-day-05-high-yield.html",
@@ -122,52 +118,45 @@ window.SESSIONS = [
         meta: "60 cards" }
     ],
     outline: {
-      intro: "Day 5 is the most board-tested CVS topic. Read First Aid 2025 (CVS Pathology pp. 308-313) on ischemic heart disease before class — focus on the ACS spectrum, MI histology timeline, and post-MI complications.",
-      edition: "First Aid 2025 · CVS Pathology (ischemic heart disease)",
+      intro: "Day 5 covers the auscultation half of CVS physiology. Read First Aid 2025 (CVS Physiology · heart sounds, splitting, murmurs + Pathology · valvular disease) before class.",
+      edition: "First Aid 2025 · CVS Physiology + Pathology (auscultation)",
       items: [
-        { topic: "Atherogenesis cellular cast in order: endothelial injury (first step) → LDL into intima → oxidation → monocyte adhesion → foam cells (via SR-A/CD36) → T cell recruitment → platelets adhere and release PDGF → smooth muscle cells migrate from media to intima and lay down collagen → fibrous cap. Lipid core built by foam cells; fibrous cap built by SMCs", section: "CVS · Pathology (atherogenesis)", pages: "pp. 305-307" },
-        { topic: "Plaque stability vs vulnerability; fatty streaks (age 10-20, reversible); plaque rupture mechanism — macrophage MMPs degrade fibrous cap → thrombosis → ACS; collateral circulation develops in slow-growing stenosis (Q11 anchor)", section: "CVS · Pathology (plaque stability)", pages: "pp. 306-307" },
-        { topic: "Atherosclerosis distribution: abdominal aorta > coronaries > popliteal > carotid > circle of Willis. Internal mammary arteries protected → LIMA = CABG conduit of choice", section: "CVS · Pathology (atherosclerosis location)", pages: "p. 307" },
-        { topic: "Stable angina: fixed ≥ 70% stenosis with NO thrombus; reproducible exertional pain; ECG normal at rest; stress testing modalities (exercise vs dobutamine vs adenosine nuclear); coronary steal mechanism with adenosine; wall motion localization (apical = LAD, inferior = RCA, lateral = LCx)", section: "CVS · Pathology (stable angina + stress testing)", pages: "p. 309" },
-        { topic: "ACS spectrum: UA (plaque rupture + partial thrombus, troponin normal), NSTEMI (subendocardial infarct, ST depression, troponin elevated), STEMI (transmural infarct from occlusive thrombus, ST elevation → Q waves). STEMI = emergent PCI < 90 min door-to-balloon", section: "CVS · Pathology (ACS spectrum)", pages: "pp. 310-311" },
-        { topic: "Special angina syndromes: vasospastic (Prinzmetal) angina — young woman, rest pain, transient ST elevation, no fixed CAD, CCB first-line, AVOID β-blockers; cocaine-induced chest pain — benzodiazepines + NTG, AVOID pure β-blockers", section: "CVS · Pathology (vasospastic angina + cocaine)", pages: "p. 311" },
-        { topic: "Ischemic injury timeline: contraction stops < 60 s; reversible cell swelling 1-20 min (Na/Ca accumulation → osmotic water influx); irreversible threshold at 20-30 min (mitochondrial permeability transition); EM marker = mitochondrial vacuolization with flocculent densities", section: "CVS · Pathology (ischemic cell injury)", pages: "p. 308" },
-        { topic: "MI histology timeline: 0-4 h minimal change; 4-24 h coag necrosis + contraction band; 1-5 d neutrophilic infiltrate; 5-10 d macrophages (PEAK risk for rupture); 10-14 d granulation tissue; 2 wk - 2 mo collagen scar (TGF-β driven)", section: "CVS · Pathology (MI histology)", pages: "p. 312" },
-        { topic: "Right ventricular infarction: inferior STEMI + JVD + clear lungs + hypotension; cath profile ↑ CVP + ↓ PCWP (pathognomonic); RV resilience explained by perfusion both systole and diastole; TREATMENT IV FLUIDS — AVOID nitroglycerin, diuretics, morphine", section: "CVS · Pathology (RV infarction)", pages: "p. 311" },
-        { topic: "Mechanical complications post-MI by timing: papillary muscle rupture or dysfunction 3-5 d (RCA, posteromedial single PDA supply); IV septum rupture 3-5 d (O₂ step-up RA → RV on cath); free wall rupture 5-14 d (LAD, distant heart sounds + JVD + clear lungs + PEA); LV aneurysm weeks-months (persistent ST elevation)", section: "CVS · Pathology (mechanical complications of MI)", pages: "p. 312" },
-        { topic: "Stunned vs hibernating vs scarred myocardium: stunned (brief acute ischemia, spontaneously reversible), hibernating (chronic underperfusion, reversible with revascularization), scarred (TGF-β driven fibrosis, irreversible). Viability testing distinguishes hibernating from scarred to guide revascularization decision", section: "CVS · Pathology (myocardial viability)", pages: "p. 312" },
-        { topic: "Sudden cardiac death post-MI: ~50% of MI deaths from VF in first hour out-of-hospital; ICD indication EF < 35% post-MI; β-blockers reduce arrhythmic death; atheroembolism (needle-shaped cholesterol clefts + giant cells) post-procedure; watershed colonic ischemia at splenic flexure", section: "CVS · Pathology (post-MI SCD + atheroembolism + watershed)", pages: "p. 313" }
+        { topic: "S1 (mitral + tricuspid closure) marks beginning of systole; S2 (aortic + pulmonic closure) marks beginning of diastole; A2 normally precedes P2 because LV pressure falls first", section: "CVS · Physiology (heart sounds)", pages: "p. 291" },
+        { topic: "S2 splitting patterns: physiologic (P2 delayed with inspiration), wide (delayed RV emptying: pulmonary stenosis, RBBB), fixed (independent of respiration: ASD), paradoxical (A2 after P2: LBBB, aortic stenosis, HOCM)", section: "CVS · Physiology (S2 splitting)", pages: "p. 291" },
+        { topic: "S3 (early diastolic, low-pitched): rapid passive filling into a dilated or volume-overloaded LV; normal in children and young adults; pathologic with HFrEF, MR, AR, high-output states", section: "CVS · Physiology (S3)", pages: "p. 291" },
+        { topic: "S4 (late diastolic, atrial kick into stiff LV): pathologic in HFpEF, HTN, HCM, restrictive CMP, acute MI; can be normal in older adults", section: "CVS · Physiology (S4)", pages: "p. 291" },
+        { topic: "Systolic murmurs: aortic stenosis (crescendo-decrescendo at right upper sternal border radiating to carotids, pulsus parvus et tardus); mitral regurgitation (holosystolic at apex radiating to axilla); mitral valve prolapse (mid-systolic click + late systolic murmur); HCM (crescendo-decrescendo at LLSB louder with Valsalva and standing); VSD (holosystolic at LLSB)", section: "CVS · Pathology (systolic murmurs)", pages: "pp. 296-297" },
+        { topic: "Diastolic murmurs: aortic regurgitation (early decrescendo at LLSB, wide pulse pressure, water-hammer pulse, head bobbing); mitral stenosis (opening snap + low-pitched diastolic rumble at apex, often post-rheumatic)", section: "CVS · Pathology (diastolic murmurs)", pages: "pp. 296-297" },
+        { topic: "Maneuvers that change preload or afterload: inspiration raises right-sided sounds; Valsalva strain and standing drop preload (MVP click moves earlier, HCM murmur louder, most other murmurs softer); squatting and passive leg raise raise preload (opposite effect); hand-grip raises afterload (louder MR, AR, VSD; softer AS, HCM)", section: "CVS · Physiology (maneuvers)", pages: "p. 291" },
+        { topic: "Auscultation map: aortic (right 2nd ICS), pulmonic (left 2nd ICS), tricuspid (left lower sternal border 4th-5th ICS), mitral (apex 5th ICS midclavicular line); Erb point (left 3rd ICS) for AR", section: "CVS · Physiology (auscultation landmarks)", pages: "p. 291" }
       ]
     }
   },
-  { day: 6,  date: "2026-06-06", subject: "cvs",  title: "Heart failure & shock — clinical management", sub: "HFrEF vs HFpEF clinical mgmt, NYHA staging, shock types applied",
+  { day: 6,  date: "2026-06-06", subject: "cvs",  phase: "physiology", title: "Physiology pt 3 · conduction & regulation", sub: "Cardiac action potentials, ECG basics, baroreflex, chemoreceptors, autoregulation",
     resources: [
       { kind: "highYield", label: "High-yield 1-pager",
         url: "outputs/study-notes/cvs-day-06-high-yield.html",
         meta: "Open in browser" },
       { kind: "flashcards", label: "Flashcards",
         url: "outputs/study-notes/cvs-day-06-flashcards.html",
-        meta: "52 cards" }
+        meta: "52 cards" },
+      { kind: "notes", label: "Physiology block summary",
+        url: "outputs/study-notes/block-summary-physiology.html",
+        meta: "Days 4-6 wrap-up" }
     ],
     outline: {
-      intro: "Day 6 pivots from the physiology of HF + shock (Day 3) to clinical recognition + management. Read First Aid 2025 (CVS Pathology — heart failure, cardiomyopathy backdrop, shock) and Pharmacology (HF + antihypertensives + adrenergic agents) before class. The Q-bank for Day 6 only asks about material in the sections below.",
-      edition: "First Aid 2025 · CVS Pathology + Pharmacology",
+      intro: "Day 6 closes physiology with the electrical and regulatory systems. Read First Aid 2025 (CVS Physiology · action potentials, ECG, autoregulation, baroreceptors) before class.",
+      edition: "First Aid 2025 · CVS Physiology (conduction + regulation)",
       items: [
-        { topic: "Heart failure clinical recognition: HFrEF vs HFpEF; left-sided symptoms (dyspnea, orthopnea, PND, cough); right-sided symptoms (JVD, hepatomegaly, peripheral edema); biventricular failure as a continuum; displaced PMI inferolaterally in HFrEF", section: "CVS · Pathology (heart failure clinical features)", pages: "pp. 318-319" },
-        { topic: "Heart sound integration — S3 vs S4: S3 = volume overload / floppy LV (HFrEF, MR, AR, high-output states; normal under 40); S4 = pressure overload / stiff LV (HFpEF, HTN, HCM, restrictive CMP, acute MI; can be normal in elderly)", section: "CVS · Physiology (S3/S4) cross-ref + Pathology (HF)", pages: "p. 294 + pp. 318-319" },
-        { topic: "Pulmonary congestion histopathology: hemosiderin-laden alveolar macrophages (heart failure cells) from chronic LV failure; Prussian-blue positive ferric iron; pink acellular intraalveolar transudate in acute pulmonary edema", section: "CVS · Pathology (HF histology) + Respiratory cross-ref", pages: "pp. 318-319" },
-        { topic: "Decompensated HF chest X-ray: cephalization of pulmonary vasculature, Kerley B lines (interlobular septal edema), fissure sign, bat-wing perihilar opacification, bilateral pleural effusions (costophrenic angle blunting), cardiomegaly", section: "CVS · Pathology (HF imaging)", pages: "pp. 318-319" },
-        { topic: "BNP and ANP biomarkers: ventricular cardiomyocytes release BNP in response to wall stress (Laplace), atrial cardiomyocytes release ANP from atrial stretch; clinical use of BNP/NT-proBNP — normal value rules out HF (high NPV), elevated values are non-specific (AFib, CKD, PE, advanced age)", section: "CVS · Physiology (natriuretic peptides) + Pathology (HF biomarkers)", pages: "pp. 318-319" },
-        { topic: "HF staging and classification: ACC/AHA stages A (at-risk) → B (structural, asymptomatic) → C (symptomatic) → D (refractory); NYHA functional class I → IV; treat structural disease at stage B with ACE-i + β-blocker even before symptoms", section: "CVS · Pathology (HF classification)", pages: "pp. 318-319" },
-        { topic: "Vicious cycle of decompensated HF: ↓ CO → ↓ baroreceptor stretch + ↓ renal perfusion → SNS + RAAS + ADH activation → ↑ SVR + Na/H₂O retention → ↑ preload + ↑ afterload → worsens HF. ANP / BNP counter-regulatory but eventually overwhelmed; ACE concentrated in pulmonary endothelium (PA → PV AngII conversion)", section: "CVS · Pathology (HF neurohormonal cascade)", pages: "pp. 318-319" },
-        { topic: "HFrEF four-pillar regimen with mortality benefit: (1) β-blocker (carvedilol, metoprolol succinate, bisoprolol), (2) ACE-i / ARB / ARNi (sacubitril-valsartan superior in PARADIGM-HF), (3) MRA (spironolactone, eplerenone), (4) SGLT2-i (dapagliflozin, empagliflozin); plus loop diuretic for symptoms only; ICD if EF ≤ 35%; CRT if QRS ≥ 150 ms + LBBB", section: "CVS · Pharmacology (HF + antihypertensives)", pages: "pp. 324-326" },
-        { topic: "HFpEF management: diuretics for symptom control, SGLT2-i and MRA established mortality benefit, aggressive BP and comorbidity control (AF, OSA, obesity, CKD); no inotrope role; preserved EF reflects diastolic dysfunction from concentric LVH", section: "CVS · Pathology (HFpEF) + Pharmacology", pages: "pp. 318-319 + 324-326" },
-        { topic: "Right HF / cor pulmonale: COPD → chronic hypoxic pulmonary vasoconstriction → pulmonary HTN → RV pressure overload → RV dilation → RV failure. Cardiac ascites = portal capillary hydrostatic ↑ with normal oncotic and permeability (transudate, SAAG > 1.1); lymphatic compensation buffers edema (~10-20× reserve)", section: "CVS · Pathology (right HF / cor pulmonale)", pages: "p. 319 + Respiratory cross-ref" },
-        { topic: "High-output HF: thyrotoxicosis (Graves — ↓ SVR + ↑ CO + wide PP + edema; β-blocker first-line, propranolol blocks T4 → T3), arteriovenous fistula, severe anemia, beriberi, Paget disease", section: "CVS · Pathology (high-output HF) + Endocrine cross-ref", pages: "p. 319" },
-        { topic: "Shock recognition + cath profile (CVP, PCWP, CI, SVR, SvO₂) — 4 types: hypovolemic (↓↓↓↑↓), cardiogenic (↑↑↓↑↓), obstructive (↑ ↓ ↓ ↑ ↓; tamponade exception PCWP paradox-↑), distributive (↓ ↓ ↑ ↓ ↑ warm phase)", section: "CVS · Pathology (shock — clinical) — Day 3 cross-ref", pages: "pp. 320-321" },
-        { topic: "Shock management by type: hypovolemic → rapid crystalloid + source control; cardiogenic → revascularize (PCI) + dobutamine + mechanical support (IABP, Impella, ECMO); obstructive → remove obstruction (pericardiocentesis for tamponade, thrombolytic for massive PE); distributive: anaphylaxis → IM epinephrine, septic shock → early antibiotics + IV fluid + norepinephrine first-line", section: "CVS · Pathology + Pharmacology (shock management)", pages: "pp. 320-321 + 324-326" },
-        { topic: "Lymphatic compensation + edema thresholds: lymphatic system has ~10-20× capacity reserve; ↑ filling pressures do not produce edema until reserve exceeded; edema is a late sign in HF, lymphedema, or hypoalbuminemia — useful framework for explaining why some HF patients lack peripheral edema despite high CVP", section: "CVS · Physiology cross-ref (Starling forces, lymphatics)", pages: "p. 290 + Pathology cross-ref" },
-        { topic: "Specific cardiomyopathies relevant to HF presentation (full coverage Day 7): doxorubicin-induced DCM (dose-dependent, irreversible, presents years post-chemo; dexrazoxane preventive); alcoholic DCM (reversible with abstinence); ischemic CMP from prior MI — most common cause of HFrEF in older adults", section: "CVS · Pathology (cardiomyopathy — preview)", pages: "pp. 314-315 (preview)" }
+        { topic: "Ventricular action potential: phase 0 (rapid Na+ in), phase 1 (transient K+ out), phase 2 (Ca2+ in plateau balancing K+ out), phase 3 (K+ out repolarization), phase 4 (resting potential, K+ leak); effective refractory period covers phases 0-3", section: "CVS · Physiology (ventricular AP)", pages: "pp. 292-293" },
+        { topic: "Pacemaker (SA / AV) action potential: phase 4 spontaneous depolarization from funny current (HCN channel, Na+ in) plus T-type Ca2+; phase 0 is a slow L-type Ca2+ upstroke; phase 3 K+ out repolarization; no phase 1 or 2; targets for beta-blockers, non-DHP CCBs, adenosine, ivabradine", section: "CVS · Physiology (pacemaker AP)", pages: "pp. 292-293" },
+        { topic: "Conduction system: SA node → atrial myocardium → AV node (delay allows atrial kick) → bundle of His → right + left bundle branches → Purkinje fibers → ventricular myocardium; velocity order Purkinje > atrial > ventricular > AV node; escape rate hierarchy SA 60-100, junctional 40-60, ventricular 20-40", section: "CVS · Physiology (conduction system)", pages: "p. 293" },
+        { topic: "ECG basics: P wave (atrial depolarization), PR interval (AV nodal delay, normal 120-200 ms), QRS (ventricular depolarization, normal < 120 ms), ST segment (ventricular plateau), T wave (ventricular repolarization), QT interval (rate-corrected QTc)", section: "CVS · Physiology (ECG)", pages: "p. 294" },
+        { topic: "Baroreflex: stretch on carotid sinus (CN IX to NTS) and aortic arch (CN X to NTS) → medullary integration → adjusts sympathetic and parasympathetic outflow; raised BP triggers vagal slowing + reduced sympathetic tone; falling BP triggers sympathetic surge (orthostasis response)", section: "CVS · Physiology (baroreceptors)", pages: "p. 295" },
+        { topic: "Chemoreceptors: peripheral (carotid + aortic bodies) respond to ↓ PO2, ↑ PCO2, ↓ pH and drive ventilation + sympathetic outflow; central (ventral medulla) respond to ↑ CSF H+ (from CO2 crossing BBB) and drive ventilation only", section: "CVS · Physiology (chemoreceptors)", pages: "p. 295" },
+        { topic: "Coronary autoregulation: heart extracts > 70% of delivered O2 at rest so meeting increased demand requires increased flow; mediated by adenosine and NO; preserved across MAP 60-140; LV perfused mostly in diastole, subendocardium most vulnerable to ischemia", section: "CVS · Physiology (coronary autoregulation)", pages: "p. 295" },
+        { topic: "Organ-specific autoregulation drivers: brain (CO2, pH), heart (adenosine, NO), kidney (myogenic + tubuloglomerular feedback), skeletal muscle (adenosine, lactate, K+ during exercise), skin (sympathetic tone for thermoregulation)", section: "CVS · Physiology (regional autoregulation)", pages: "p. 295" },
+        { topic: "MAP / CO / SVR relationship: MAP = CO × SVR; explains why hypotension reflects either pump (CO) or vascular tone (SVR) failure; drives shock classification (cardiogenic = low CO, distributive = low SVR, hypovolemic = low preload → low CO)", section: "CVS · Physiology (MAP equation)", pages: "p. 295" }
       ]
     }
   },
@@ -217,6 +206,11 @@ window.LINKS = {
   signup:   "https://forms.gle/iHCdPVjvJeGeGTXy7",
   ics:      "data/schedule.ics"
 };
+
+window.BLOCK_SUMMARIES = [
+  { id: "cvs-anatomy",    subject: "cvs", phase: "anatomy",    label: "Anatomy & Embryology", sub: "Days 1-3 wrap-up", days: [1,2,3], url: "outputs/study-notes/block-summary-anatomy-embryology.html" },
+  { id: "cvs-physiology", subject: "cvs", phase: "physiology", label: "Physiology",           sub: "Days 4-6 wrap-up", days: [4,5,6], url: "outputs/study-notes/block-summary-physiology.html" }
+];
 
 /* The "today" the dashboard uses. Defaults to real now, but the Tweaks
    panel can override it for previewing different states. */
