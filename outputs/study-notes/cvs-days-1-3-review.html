@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="../../js/artifact-gate.js" defer></script>
+<style>body { visibility: hidden; }</style>
+
+<meta charset="utf-8" />
+<title>CVS Days 1-3 Review: Anatomy, Embryology, and Integrative Pathology</title>
+<style>
+  /* ---------- design tokens, mirrored from the flyer/dashboard palette ---------- */
+  :root {
+    --ink: #0C2A3D;
+    --ink-2: #345671;
+    --muted: #5B7A95;
+    --bg: #FFFFFF;
+    --bg-cream: #FFF8EC;
+    --border: #D6E8F5;
+
+    --gold: #E5A823;
+    --gold-deep: #B8851C;
+    --gold-soft: #FFF4D6;
+
+    --cvs: #0284C7; --cvs-soft: #E0F2FE; --cvs-deep: #075985;
+    --resp: #059669; --resp-soft: #D1FAE5; --resp-deep: #065F46;
+    --path: #7C3AED; --path-soft: #EDE9FE; --path-deep: #5B21B6;
+    --amber: #D97706; --amber-soft: #FEF3C7; --amber-deep: #B45309;
+  }
+
+  @page { size: A4; margin: 12mm 10mm; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 9.5pt;
+    line-height: 1.32;
+  }
+
+  .ribbon {
+    background: var(--ink);
+    color: #FFFFFF;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .ribbon h1 {
+    margin: 0;
+    font-size: 13pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .ribbon .meta {
+    font-size: 8.5pt;
+    color: #BFE3F7;
+    letter-spacing: 0.06em;
+  }
+
+  .cohort-line {
+    font-size: 8.5pt;
+    color: var(--ink-2);
+    margin: 0 0 10px;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .byline {
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-deep) 100%);
+    color: var(--ink);
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 8.5pt;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin: -4px 0 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .byline .author { font-weight: 800; }
+  .byline .home {
+    font-weight: 500;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .card {
+    border-radius: 6px;
+    padding: 7px 9px 8px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .card h2 {
+    margin: 0 0 4px;
+    font-size: 9.5pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 3px 7px;
+    margin: -7px -9px 6px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .card h2 .tag {
+    font-size: 7pt;
+    background: rgba(255,255,255,0.22);
+    padding: 1px 6px;
+    border-radius: 999px;
+    letter-spacing: 0.06em;
+  }
+  .card ul { margin: 0; padding-left: 14px; }
+  .card li { margin-bottom: 2px; }
+  .card li::marker { color: var(--ink-2); }
+  .card p { margin: 0 0 4px; }
+
+  .card.embryo { background: var(--cvs-soft); }
+  .card.embryo h2 { background: var(--cvs-deep); }
+  .card.arches { background: var(--gold-soft); }
+  .card.arches h2 { background: var(--gold-deep); }
+  .card.fetal { background: var(--resp-soft); }
+  .card.fetal h2 { background: var(--resp-deep); }
+  .card.chambers { background: var(--cvs-soft); }
+  .card.chambers h2 { background: var(--cvs); }
+  .card.coronary { background: var(--amber-soft); }
+  .card.coronary h2 { background: var(--amber-deep); }
+  .card.conduction { background: var(--path-soft); }
+  .card.conduction h2 { background: var(--path-deep); }
+  .card.pericardium { background: var(--gold-soft); }
+  .card.pericardium h2 { background: var(--gold-deep); }
+  .card.aorta { background: var(--cvs-soft); }
+  .card.aorta h2 { background: var(--cvs-deep); }
+  .card.veins { background: var(--resp-soft); }
+  .card.veins h2 { background: var(--resp-deep); }
+  .card.upper { background: var(--path-soft); }
+  .card.upper h2 { background: var(--path); }
+  .card.path-card { background: var(--path-soft); }
+  .card.path-card h2 { background: var(--path-deep); }
+  .card.ie-card { background: var(--amber-soft); }
+  .card.ie-card h2 { background: var(--amber-deep); }
+
+  .card.span { grid-column: span 2; }
+
+  table.arch-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 4px;
+    font-size: 8.5pt;
+  }
+  table.arch-table th, table.arch-table td {
+    border: 1px solid var(--gold-deep);
+    padding: 2px 5px;
+    text-align: left;
+  }
+  table.arch-table th {
+    background: var(--gold);
+    color: var(--ink);
+    font-weight: 700;
+  }
+  table.arch-table tr:nth-child(even) { background: rgba(255,255,255,0.55); }
+
+  table.derivative-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 4px;
+    font-size: 8.5pt;
+  }
+  table.derivative-table th, table.derivative-table td {
+    border: 1px solid var(--cvs-deep);
+    padding: 2px 5px;
+    text-align: left;
+  }
+  table.derivative-table th {
+    background: var(--cvs);
+    color: #FFFFFF;
+    font-weight: 700;
+  }
+  table.derivative-table tr:nth-child(even) { background: rgba(255,255,255,0.55); }
+
+  table.ie-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 4px;
+    font-size: 8.5pt;
+  }
+  table.ie-table th, table.ie-table td {
+    border: 1px solid var(--amber-deep);
+    padding: 2px 5px;
+    text-align: left;
+  }
+  table.ie-table th {
+    background: var(--amber);
+    color: #FFFFFF;
+    font-weight: 700;
+  }
+  table.ie-table tr:nth-child(even) { background: rgba(255,255,255,0.55); }
+
+  .trap {
+    background: #FFF1F1;
+    border-left: 3px solid #B91C1C;
+    padding: 4px 7px;
+    margin-top: 5px;
+    font-size: 8.5pt;
+    border-radius: 3px;
+  }
+  .trap b { color: #B91C1C; letter-spacing: 0.04em; text-transform: uppercase; font-size: 7.5pt; }
+
+  .mnemonic {
+    background: var(--gold-soft);
+    border-left: 3px solid var(--gold-deep);
+    padding: 4px 7px;
+    margin-top: 5px;
+    font-size: 8.5pt;
+    border-radius: 3px;
+  }
+  .mnemonic b { color: var(--gold-deep); letter-spacing: 0.04em; text-transform: uppercase; font-size: 7.5pt; }
+
+  .fa-ref {
+    font-size: 7.5pt;
+    color: var(--ink-2);
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  .page-break { page-break-after: always; break-after: page; }
+
+  .footer-stamp {
+    text-align: center;
+    font-size: 7.5pt;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  .signature {
+    margin-top: 14px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg-cream);
+    font-size: 9pt;
+  }
+  .signature h3 {
+    margin: 0 0 4px;
+    color: var(--gold-deep);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 9.5pt;
+  }
+
+  .preview-block {
+    background: var(--cvs-soft);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-top: 10px;
+    border-left: 4px solid var(--cvs-deep);
+  }
+  .preview-block h2 {
+    margin: 0 0 6px;
+    color: var(--cvs-deep);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 11pt;
+  }
+  .preview-block ul { margin: 0; padding-left: 16px; }
+  .preview-block li { margin-bottom: 3px; font-size: 9pt; }
+
+  strong { color: var(--ink); }
+  em { font-style: italic; }
+  .accent-gold { color: var(--gold-deep); font-weight: 700; }
+  .accent-cvs { color: var(--cvs-deep); font-weight: 700; }
+  .accent-resp { color: var(--resp-deep); font-weight: 700; }
+  .accent-path { color: var(--path-deep); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- =================== PAGE 1: TITLE + EMBRYOLOGY =================== -->
+
+<div class="ribbon">
+  <h1>CVS Days 1-3 Review · Anatomy, Embryology &amp; Pathology</h1>
+  <div class="meta">USMLE Step 1 · June Cohort</div>
+</div>
+<div class="byline">
+  <span class="author">Prepared by Allan Bakesiga · USMLE Step 1 Prep</span>
+  <span class="home">bakesiga.github.io/usmle-dashboard</span>
+</div>
+<p class="cohort-line">Student recap of the first three class sessions. All wording original. Print and review before each Q-bank block.</p>
+
+<div class="grid">
+
+  <div class="card embryo span">
+    <h2>Embryology · Heart tube, looping &amp; septation <span class="tag">FA 2025 pp. 284-286</span></h2>
+    <p>The primitive heart tube forms from lateral plate mesoderm and is the first organ to function (first beat at week 4). The tube has five cranial-to-caudal regions that loop rightward (D-loop) and remodel into the adult chambers. Septation proceeds in four ordered acts: atrial, AV cushion, ventricular, then outflow. Each failure produces a named congenital lesion.</p>
+    <table class="derivative-table">
+      <tr><th>Embryonic region</th><th>Adult derivative</th></tr>
+      <tr><td>Truncus arteriosus</td><td>Ascending aorta + pulmonary trunk (after AP septation)</td></tr>
+      <tr><td>Bulbus cordis</td><td>Smooth outflow tracts of LV + RV</td></tr>
+      <tr><td>Primitive ventricle</td><td>Trabeculated LV + RV</td></tr>
+      <tr><td>Primitive atrium</td><td>Trabeculated LA + RA</td></tr>
+      <tr><td>Sinus venosus (R horn)</td><td>Smooth RA (sinus venarum), SVC</td></tr>
+      <tr><td>Sinus venosus (L horn)</td><td>Coronary sinus</td></tr>
+    </table>
+    <p style="margin-top:6px;"><strong>Aorticopulmonary septum:</strong> formed by <strong>neural crest</strong> cells migrating into the truncus and bulbus, then <em>spiraling</em> as it descends to split the truncus into aorta and pulmonary trunk. Three failure modes: failed formation (persistent truncus), failed spiraling (TGA), failed alignment with anterosuperior infundibular shift (tetralogy of Fallot). 22q11.2 deletion (DiGeorge) disrupts neural crest, hence the conotruncal cluster plus thymic aplasia and hypocalcemia.</p>
+    <div class="mnemonic"><b>Anchor</b> Septation runs apex up, base down: muscular IVS grows up from apex, membranous IVS closes last (and is where most VSDs live). AP septum spirals: think of a barber pole twisting as it descends.</div>
+    <div class="trap"><b>Trap</b> Do not confuse the three outflow failures. <strong>Truncus</strong> = no septum at all (failed formation). <strong>TGA</strong> = septum present but straight, not spiraled (parallel circuits, ductal dependent). <strong>TOF</strong> = septum present but malaligned anterosuperiorly (VSD + overriding aorta + RVOT obstruction + RVH).</div>
+  </div>
+
+  <div class="card fetal span">
+    <h2>Embryology · Fetal circulation &amp; adult remnants <span class="tag">FA 2025 p. 287</span></h2>
+    <p>Three in-utero shunts let blood bypass the non-functional liver and lungs: the <strong>ductus venosus</strong> (skips the liver), the <strong>foramen ovale</strong> (RA to LA, sends oxygenated blood to the upper body and brain), and the <strong>ductus arteriosus</strong> (PA to aorta, distal to the L subclavian). Highest O<sub>2</sub> saturation is in the umbilical vein (~80%), highest large-vessel O<sub>2</sub> in the fetus is the IVC. Fetal arterial saturation is ~65 to 70%, compensated by fetal hemoglobin's higher O<sub>2</sub> affinity and higher [Hb].</p>
+    <p><strong>The neonatal flip:</strong> first breath drops PVR sharply (alveolar O<sub>2</sub> vasodilates pulmonary bed); cord clamp raises SVR sharply (placental low-resistance bed removed). LA pressure now exceeds RA pressure, pushing the foramen ovale flap shut. Rising PaO<sub>2</sub> and falling PGE<sub>2</sub> close the DA functionally over 24 to 48 hours.</p>
+    <table class="derivative-table">
+      <tr><th>Fetal structure</th><th>Adult remnant</th></tr>
+      <tr><td>Ductus venosus</td><td>Ligamentum venosum</td></tr>
+      <tr><td>Ductus arteriosus</td><td>Ligamentum arteriosum (tethers arch near L subclavian)</td></tr>
+      <tr><td>Foramen ovale</td><td>Fossa ovalis (transseptal puncture site)</td></tr>
+      <tr><td>Umbilical vein</td><td>Ligamentum teres hepatis (in falciform ligament)</td></tr>
+      <tr><td>Umbilical arteries</td><td>Medial umbilical ligaments + superior vesical arteries</td></tr>
+      <tr><td>Urachus (allantois)</td><td>Median umbilical ligament</td></tr>
+      <tr><td>Notochord (cardiac context)</td><td>Nucleus pulposus of intervertebral discs</td></tr>
+    </table>
+    <div class="mnemonic"><b>Mnemonic</b> <strong>PGE keeps PDA going</strong>, <strong>INDOmethacin shuts the DOor</strong>. PGE1 (alprostadil) maintains ductal patency in ductal-dependent cyanotic lesions (TGA, severe coarctation, HLHS, pulmonary atresia). Indomethacin (or ibuprofen, paracetamol) closes a symptomatic PDA in preterm infants.</div>
+    <div class="trap"><b>Trap</b> The umbilical vein carries <em>oxygenated</em> blood (placenta to fetus), and the umbilical arteries carry <em>deoxygenated</em> blood (fetus to placenta). Opposite of adult systemic logic.</div>
+  </div>
+
+</div>
+
+<p class="footer-stamp">Page 1 of 5 · CVS Days 1-3 Review · Allan Bakesiga · USMLE Step 1 Prep</p>
+
+<div class="page-break"></div>
+
+<!-- =================== PAGE 2: ANATOMY =================== -->
+
+<div class="ribbon">
+  <h1>CVS Days 1-3 Review · Anatomy</h1>
+  <div class="meta">Page 2 · Surface anatomy + coronaries</div>
+</div>
+
+<div class="grid">
+
+  <div class="card chambers span">
+    <h2>Surface anatomy · Chambers &amp; valves on the chest wall <span class="tag">FA 2025 p. 288</span></h2>
+    <p>From the front, the <strong>RV is most anterior</strong> (it sits directly behind the sternum and lower left parasternal chest). The <strong>LA is most posterior</strong> (it abuts the esophagus and L main bronchus). The <strong>apex</strong> is LV, palpable at the left 5th intercostal space midclavicular line. On a PA chest X-ray, the right cardiac border is RA; the left border, top to bottom, is aortic knob, then main PA, then LA appendage, then LV.</p>
+    <ul>
+      <li><strong>Stab wound, left lower parasternal chest</strong> → most often hits the RV first → hemopericardium → tamponade.</li>
+      <li><strong>LA enlargement</strong> (classic in mitral stenosis) compresses the <strong>esophagus</strong> (dysphagia), <strong>L main bronchus</strong> (cough), and <strong>L recurrent laryngeal nerve</strong> (Ortner syndrome, hoarseness). Widened carinal angle on CXR.</li>
+      <li><strong>Silhouette sign on CXR:</strong> RML opacity silhouettes the RA border; lingular opacity silhouettes the LV border; LLL opacity silhouettes the descending aorta.</li>
+      <li><strong>Auscultation sites:</strong> aortic (R 2nd ICS), pulmonic (L 2nd ICS), Erb point (L 3rd ICS, where AR is heard), tricuspid (L lower sternal border), mitral (apex, L 5th ICS MCL).</li>
+      <li><strong>LA appendage</strong> = the stasis pouch for atrial fibrillation clot. This is the embolic source in cardioembolic stroke and the reason TEE is done before cardioversion.</li>
+    </ul>
+    <p style="margin-top:5px;"><strong>On chest CT:</strong> trace the great vessels by axial level. At the aortic arch level, the order anterior to posterior is SVC, ascending aorta, then arch wrapping over the trachea, with the descending aorta on the left of the spine. At the carinal level, the main PA branches into right and left, with the right PA crossing posterior to the ascending aorta. On abdominal CT, the IVC sits to the right of the aorta, anterior to the lumbar vertebrae; the left renal vein crosses anterior to the aorta and posterior to the SMA (the nutcracker corridor).</p>
+    <div class="trap"><b>Trap</b> The apex beat is LV, not RV. Students confuse the most anterior chamber (RV) with the apex (LV). RV occupies the lower sternal area but does not form the apex.</div>
+  </div>
+
+  <div class="card coronary span">
+    <h2>Coronary blood flow · Dominance, nodes &amp; ECG territories <span class="tag">FA 2025 p. 288</span></h2>
+    <p>The <strong>RCA</strong> runs in the right AV groove and gives off the SA nodal artery (in ~60% of people), the AV nodal artery (in ~90% of right-dominant hearts), the acute marginal branch (RV free wall), and continues as the PDA when the heart is right-dominant. The <strong>LCA</strong> divides into the LAD (anterior interventricular groove, anterior LV + anterior 2/3 of IVS + apex) and the LCx (left AV groove, lateral LV). The PDA runs in the posterior interventricular groove and supplies the inferior LV, posterior 1/3 of IVS, the posteromedial papillary muscle, and the AV node in right-dominant hearts.</p>
+    <div class="mnemonic"><b>Dominance rule</b> Whoever feeds the PDA feeds the AV node. Right-dominant (~70 to 85%): RCA → PDA → AV node, so an RCA inferior MI often comes with AV nodal block. Left-dominant (~5 to 10%): LCx → PDA → AV node. Co-dominant (~10 to 20%): both contribute.</div>
+    <table class="derivative-table">
+      <tr><th>ST elevation in</th><th>Territory</th><th>Culprit vessel</th></tr>
+      <tr><td>II, III, aVF</td><td>Inferior</td><td>RCA (LCx if left-dominant)</td></tr>
+      <tr><td>V1 to V2</td><td>Septal</td><td>LAD (proximal septal perforators)</td></tr>
+      <tr><td>V3 to V4</td><td>Anterior</td><td>LAD</td></tr>
+      <tr><td>V5, V6, I, aVL</td><td>Lateral</td><td>LCx (or distal LAD)</td></tr>
+      <tr><td>V1 to V6 + I + aVL</td><td>Extensive anterior</td><td>Proximal LAD ("widow-maker")</td></tr>
+      <tr><td>ST depression V1 to V3 (reciprocal)</td><td>Posterior</td><td>RCA or LCx</td></tr>
+      <tr><td>ST elevation V4R</td><td>Right ventricle</td><td>Proximal RCA (must check right-sided lead)</td></tr>
+    </table>
+    <p style="margin-top:5px;"><strong>Papillary muscles:</strong> the <strong>posteromedial</strong> muscle has a single blood supply from the PDA, which is why it ruptures 3 to 5 days after an inferior MI (acute mitral regurgitation, flash pulmonary edema). The <strong>anterolateral</strong> muscle has dual supply (LAD + LCx) and is far more resistant to ischemic rupture. The LV is perfused mostly in diastole because systolic intramural pressure compresses subendocardial vessels; the RV is perfused throughout the cycle because its systolic pressure is low.</p>
+    <div class="trap"><b>Trap</b> Inferior MI plus new Mobitz I (Wenckebach) AV block in a right-dominant patient does not mean pacemaker. The ischemic AV nodal block usually resolves with reperfusion. Resist the urge to implant early.</div>
+  </div>
+
+</div>
+
+<p class="footer-stamp">Page 2 of 5 · CVS Days 1-3 Review · Allan Bakesiga · USMLE Step 1 Prep</p>
+
+<div class="page-break"></div>
+
+<!-- =================== PAGE 3: PATHOLOGY PART 1 =================== -->
+
+<div class="ribbon">
+  <h1>CVS Days 1-3 Review · Pathology I</h1>
+  <div class="meta">Page 3 · Congenital + aortic emergencies + pericarditis</div>
+</div>
+
+<div class="grid">
+
+  <div class="card path-card span">
+    <h2>Cyanotic &amp; acyanotic congenital heart disease <span class="tag">FA 2025 pp. 304-307</span></h2>
+    <p><strong>Acyanotic (left-to-right shunts)</strong> present later, with failure to thrive or murmurs; severe long-standing shunts reverse to right-to-left when pulmonary vascular resistance climbs (<strong>Eisenmenger syndrome</strong>). The three classic acyanotic lesions are <strong>VSD</strong> (most common congenital cardiac defect, usually membranous), <strong>ASD</strong> (secundum most common; primum in Down syndrome with AV canal), and <strong>PDA</strong> (continuous machinery murmur at the left infraclavicular area, bounding pulses, wide pulse pressure).</p>
+    <p><strong>Cyanotic (right-to-left shunts)</strong> present at birth or in early infancy. The five classics: <strong>Tetralogy of Fallot</strong>, <strong>Transposition of the great arteries</strong>, <strong>Truncus arteriosus</strong>, <strong>Tricuspid atresia</strong>, and <strong>Total anomalous pulmonary venous return</strong>.</p>
+    <div class="mnemonic"><b>Mnemonic · TOF = PROVe</b> <strong>P</strong>ulmonary stenosis (RVOT obstruction, the lesion that drives severity), <strong>R</strong>ight ventricular hypertrophy, <strong>O</strong>verriding aorta, <strong>V</strong>SD. Boot-shaped heart on CXR. Mechanism = anterosuperior displacement of the infundibular septum (failed AP septum alignment).</div>
+    <p><strong>Why squatting / knee-chest position helps a TOF "tet spell":</strong> squatting kinks the femoral arteries, which sharply raises systemic vascular resistance. Higher SVR makes it harder for blood to shunt right-to-left across the VSD into the aorta, so more blood is forced through the obstructed RVOT into the pulmonary artery, getting oxygenated. The same logic explains why infants with tet spells improve when brought to the knees-to-chest position by a parent: it is a self-rescue maneuver that increases afterload.</p>
+    <div class="trap"><b>Trap</b> In TOF the murmur intensity reflects pulmonary stenosis severity inversely. <em>Louder</em> PS murmur = <em>more</em> flow through the RVOT = <em>less</em> right-to-left shunt = less cyanosis. A sudden quieter murmur during a tet spell is a bad sign, not a good one.</div>
+  </div>
+
+  <div class="card aorta span">
+    <h2>Aortic emergencies + subclavian steal + pericarditis <span class="tag">FA 2025 pp. 308-311</span></h2>
+    <p><strong>Traumatic aortic rupture</strong> (blunt aortic injury) happens in deceleration trauma (high-speed MVA, fall from height). The tear is at the <strong>aortic isthmus</strong>, just distal to the L subclavian, where the ligamentum arteriosum tethers the mobile arch to the fixed descending aorta. CXR clues: widened mediastinum, indistinct aortic knob, deviated trachea, depressed L main bronchus, apical pleural cap. Confirm with CT angiography.</p>
+    <p><strong>Aortic dissection</strong>: tear in the intima lets blood enter the media and create a false lumen. Sudden tearing chest or back pain radiating between the scapulae; pulse and BP asymmetry between arms; widened mediastinum on CXR. Strongest risk factor is chronic hypertension; connective tissue disease (Marfan, Ehlers-Danlos, Loeys-Dietz), bicuspid aortic valve, cocaine, pregnancy, and iatrogenic injury also contribute. <strong>Stanford A</strong> involves the ascending aorta and is a surgical emergency. <strong>Stanford B</strong> begins distal to the L subclavian and is managed medically with aggressive BP control (IV beta-blocker first, then vasodilator).</p>
+    <p><strong>Subclavian steal syndrome</strong>: atherosclerotic stenosis of the proximal subclavian artery (usually left), <em>proximal</em> to the vertebral artery takeoff. With ipsilateral arm exertion, the arm pulls blood backward (retrograde) down the vertebral, "stealing" from the posterior circulation. Symptoms are vertebrobasilar (dizziness, dysarthria, diplopia, drop attacks, ataxia) plus arm claudication; the giveaway sign is a <strong>&gt;15 mmHg interarm SBP difference</strong>.</p>
+    <p><strong>Acute pericarditis</strong>: sharp pleuritic chest pain, worse supine and better leaning forward; pericardial friction rub. ECG shows <strong>diffuse ST elevation with PR depression</strong>. Most common cause is viral (Coxsackie B, echovirus, adenovirus); other causes include uremia, post-MI (early peri-infarction pericarditis and the late <strong>Dressler syndrome</strong> at 2 to 8 weeks, autoimmune), connective tissue disease, malignancy, and bacterial. Effusion may progress to <strong>tamponade</strong>: Beck triad (hypotension, JVD, muffled sounds), pulsus paradoxus &gt;10 mmHg, low-voltage QRS with electrical alternans, RA late-diastolic collapse on echo.</p>
+    <div class="mnemonic"><b>Mnemonic · Beck&apos;s 3 D&apos;s</b> <strong>D</strong>istant heart sounds, <strong>D</strong>istended neck veins, <strong>D</strong>ecreased blood pressure. With pulsus paradoxus and electrical alternans, that is tamponade.</div>
+    <div class="trap"><b>Trap</b> Pulsus paradoxus is not paradoxical, it is exaggerated. SBP normally drops ~5 mmHg on inspiration; in tamponade the drop is &gt;10 mmHg because the stiff pericardium forces the inspiratory increase in RV volume to bow the septum into the LV, cutting LV stroke volume.</div>
+  </div>
+
+</div>
+
+<p class="footer-stamp">Page 3 of 5 · CVS Days 1-3 Review · Allan Bakesiga · USMLE Step 1 Prep</p>
+
+<div class="page-break"></div>
+
+<!-- =================== PAGE 4: PATHOLOGY PART 2 =================== -->
+
+<div class="ribbon">
+  <h1>CVS Days 1-3 Review · Pathology II</h1>
+  <div class="meta">Page 4 · Endocarditis + rheumatic disease</div>
+</div>
+
+<div class="grid">
+
+  <div class="card ie-card span">
+    <h2>Infective endocarditis · Organism-by-situation <span class="tag">FA 2025 pp. 318-319</span></h2>
+    <p>Infective endocarditis is bacterial (or fungal) infection of the endocardium, usually on a valve leaflet. The organism that grows depends on the host situation: native valve vs prosthetic, IV drug use, recent procedure, underlying valve lesion, or colon cancer. Pair organism with situation and the question almost writes itself.</p>
+    <table class="ie-table">
+      <tr><th>Situation</th><th>Most likely organism</th><th>Anchor</th></tr>
+      <tr><td>Acute IE on native valve (any host)</td><td><em>Staphylococcus aureus</em></td><td>Aggressive, valve destruction in days</td></tr>
+      <tr><td>IV drug user + tricuspid + septic pulmonary emboli</td><td><em>S. aureus</em> (also <em>Pseudomonas</em>, <em>Candida</em>)</td><td>Right-sided IE; TR murmur at LLSB, louder with inspiration (Carvallo)</td></tr>
+      <tr><td>Subacute IE on a damaged or prosthetic valve, after dental work</td><td>Viridans streptococci (<em>S. sanguinis</em>, <em>S. mutans</em>)</td><td>Make dextran, stick to fibrin-platelet vegetations</td></tr>
+      <tr><td>Prosthetic valve, &lt;2 months postoperative</td><td><em>S. epidermidis</em> (coagulase-negative staph)</td><td>Biofilm on hardware</td></tr>
+      <tr><td>Colon cancer or inflammatory bowel disease</td><td><em>Streptococcus gallolyticus</em> (formerly <em>S. bovis</em>)</td><td>Bowel mucosal breach. Colonoscope every patient with <em>S. gallolyticus</em> bacteremia.</td></tr>
+      <tr><td>Genitourinary procedure</td><td><em>Enterococcus faecalis</em></td><td>Gut and GU flora, ampicillin + gentamicin classic</td></tr>
+      <tr><td>Culture-negative IE</td><td>HACEK group, <em>Coxiella burnetii</em>, <em>Bartonella</em></td><td>Slow growers, need extended cultures or serology</td></tr>
+      <tr><td>Malignancy / hypercoagulable / pancreatic CA (marantic)</td><td>Sterile (non-bacterial thrombotic endocarditis)</td><td>No fever, no organism; bland fibrin vegetations</td></tr>
+      <tr><td>SLE (Libman-Sacks)</td><td>Sterile, immune-complex mediated</td><td>Vegetations on <em>both</em> sides of the mitral valve</td></tr>
+    </table>
+    <div class="mnemonic"><b>Mnemonic · FROM JANE</b> Classic IE findings: <strong>F</strong>ever, <strong>R</strong>oth spots (retinal hemorrhages with pale center), <strong>O</strong>sler nodes (painful, on finger pads, immune complex), <strong>M</strong>urmur (new or changed), <strong>J</strong>aneway lesions (painless, on palms and soles, septic emboli), <strong>A</strong>nemia, <strong>N</strong>ail-bed splinter hemorrhages, <strong>E</strong>mboli (systemic if left-sided, pulmonary if right-sided). Diagnose with modified <strong>Duke criteria</strong>: 2 major, or 1 major + 3 minor, or 5 minor.</div>
+    <div class="trap"><b>Trap</b> The painful lesions are Osler (Ouch); the painless lesions are Janeway (Just on palms/soles). Reverse them on the exam and you lose the question.</div>
+  </div>
+
+  <div class="card path-card span">
+    <h2>Rheumatic fever vs rheumatic heart disease <span class="tag">FA 2025 p. 320</span></h2>
+    <p><strong>These are two different diseases on the same timeline.</strong> Acute rheumatic fever (ARF) is a post-streptococcal febrile illness in children 5 to 15, occurring 2 to 4 weeks after untreated <em>group A streptococcal</em> (<em>S. pyogenes</em>) pharyngitis. It is driven by molecular mimicry: antibodies against streptococcal M protein cross-react with cardiac myosin (and joint, brain, skin antigens). Rheumatic heart disease (RHD) is the chronic valvular scarring that follows, often years to decades later, classically affecting the <strong>mitral valve</strong> first (early MR from leaflet thickening, later MS from commissural fusion). The aortic valve is second most often involved; tricuspid and pulmonic are rarely affected.</p>
+    <div class="mnemonic"><b>Mnemonic · JONES criteria (acute RF, major)</b> <strong>J</strong>oints (migratory polyarthritis of large joints), <strong>O</strong> (the heart shape, pancarditis), <strong>N</strong>odules (subcutaneous, on extensor surfaces), <strong>E</strong>rythema marginatum (pink ring rash on trunk), <strong>S</strong>ydenham chorea. Need 2 major <em>or</em> 1 major + 2 minor (fever, arthralgia, elevated acute-phase reactants, prolonged PR), plus evidence of recent strep infection (positive throat culture, rising ASO or anti-DNase B titer).</div>
+    <p><strong>Pathology pearls:</strong> ARF histology shows <strong>Aschoff bodies</strong> (granulomas with central fibrinoid necrosis surrounded by macrophages and lymphocytes) and <strong>Anitschkow cells</strong> (enlarged macrophages with caterpillar-shaped chromatin). RHD shows leaflet fibrosis, commissural fusion, and chordae tendineae thickening and shortening (the "fish-mouth" or "buttonhole" mitral orifice).</p>
+    <p><strong>Treatment of ARF:</strong> penicillin (or amoxicillin) to eradicate residual strep; anti-inflammatory (NSAIDs, or corticosteroids if severe carditis). <strong>Prophylaxis after a first attack:</strong> long-acting penicillin (benzathine penicillin G IM monthly) for years to prevent recurrent strep infection and worsening valve damage. Duration depends on carditis and valve disease (5 years or until age 21 if no carditis; 10 years or until 21 if carditis without RHD; 10 years or until 40 if RHD; lifelong if prosthetic valve).</p>
+    <div class="trap"><b>Trap</b> Do not equate rheumatic fever with rheumatic heart disease. <strong>RF is the acute, febrile, multisystem syndrome</strong> (joints, heart, skin, brain) immediately after strep throat. <strong>RHD is the chronic valvular sequela</strong>, decades later, dominated by mitral disease. A patient can have one without (yet) the other.</div>
+  </div>
+
+</div>
+
+<p class="footer-stamp">Page 4 of 5 · CVS Days 1-3 Review · Allan Bakesiga · USMLE Step 1 Prep</p>
+
+<div class="page-break"></div>
+
+<!-- =================== PAGE 5: PHYSIOLOGY PREVIEW + SIGNATURE =================== -->
+
+<div class="ribbon">
+  <h1>CVS Days 1-3 Review · What comes next</h1>
+  <div class="meta">Page 5 · Bridge into Physiology</div>
+</div>
+
+<div class="preview-block">
+  <h2>From structure to function · The Physiology block ahead</h2>
+  <p style="margin:0 0 6px;">Now that the anatomy and embryology are locked in, every clinical syndrome we meet from here forward is a <em>functional</em> consequence of one of the structures we have already placed. The next sessions move from anatomy to physiology, and every diagram you will draw rests on what we built this week.</p>
+  <ul>
+    <li><strong>The pressure-volume loop.</strong> A single rectangle that captures one heartbeat. Each corner is a valve event we just placed: MV opens (start of filling), MV closes (start of isovolumetric contraction), AV opens (start of ejection), AV closes (start of isovolumetric relaxation). Area inside the loop = stroke work.</li>
+    <li><strong>The cardiac cycle &amp; Wiggers diagram.</strong> Aligning pressure, volume, ECG, and heart sounds in time. S1 = MV+TV closure (start of systole). S2 = AV+PV closure (start of diastole). S3 = rapid passive filling (volume overload, normal in kids). S4 = atrial kick into a stiff ventricle (LVH, HOCM).</li>
+    <li><strong>Frank-Starling mechanism.</strong> Higher LV end-diastolic volume (preload) stretches sarcomeres, increasing the next contraction's stroke volume. The shifted curves for heart failure (down and right) and inotropes (up and left) drive every congestive heart failure question.</li>
+    <li><strong>Cardiac &amp; nodal action potentials.</strong> Phase 0 of ventricular myocyte = fast Na<sup>+</sup> in. Phase 2 plateau = slow Ca<sup>2+</sup> in balanced by K<sup>+</sup> out (the calcium that drives excitation-contraction coupling). SA node has no true resting potential; phase 4 funny current (I<sub>f</sub>, Na<sup>+</sup>) is the pacemaker mechanism, and phase 0 of nodal cells is Ca<sup>2+</sup>-driven (which is why calcium channel blockers and adenosine slow the node).</li>
+    <li><strong>Baroreflex &amp; chemoreflex.</strong> The carotid sinus baroreceptor afferent travels via <strong>CN IX</strong>, the aortic arch baroreceptor afferent via <strong>CN X</strong>, because of the arch derivatives we mapped: the carotid sinus sits on the 3rd arch (CN IX), the aortic arch is the 4th L arch (CN X). The reflex is the body's beat-to-beat BP autocorrect.</li>
+    <li><strong>Cardiac output equations.</strong> CO = SV x HR. SV = EDV - ESV. MAP = CO x SVR. Ejection fraction = SV / EDV. The Fick principle for CO measurement: CO = (rate of O<sub>2</sub> consumption) / (arteriovenous O<sub>2</sub> difference).</li>
+  </ul>
+</div>
+
+<div class="signature">
+  <h3>From your instructor</h3>
+  <p>If anatomy is the map, physiology is the traffic on the roads, and pathology is the accident report. We have spent three sessions drawing the map carefully because every later question reduces to <em>which structure</em>, <em>which developmental origin</em>, and <em>which neighbor it impinges on</em>. Keep this handout next to your Q-bank for the next week. Review the FA pages cited on each card the night before our next class. Bring questions to the WhatsApp group; we will work them through live.</p>
+  <p style="margin-top:6px;"><strong>Reading for the next session:</strong> First Aid 2025, Cardiovascular Physiology, pp. 289 to 296. Focus on cardiac output equations, pressure-volume loops, the Wiggers diagram, heart sounds, and valvular auscultation. Every PV loop landmark corresponds to a valve event we placed this week.</p>
+  <p style="margin-top:8px; text-align:right;"><strong>Allan Bakesiga</strong><br/><span style="font-style:italic; color:var(--ink-2);">USMLE Step 1 Prep · June Cohort</span><br/><span style="font-size:8pt; color:var(--muted);">bakesiga.github.io/usmle-dashboard</span></p>
+</div>
+
+<p class="footer-stamp">Page 5 of 5 · CVS Days 1-3 Review · Allan Bakesiga · USMLE Step 1 Prep · Original wording, FA 2025 references for further reading.</p>
+
+</body>
+</html>

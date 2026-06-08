@@ -65,6 +65,26 @@
         statusEl.style.color = "#065F46";
       }
 
+      /* Honor ?return=<url> if the URL is same-origin. Used by the artifact
+       * gate so that a student bounced from outputs/study-notes/foo.html
+       * lands back on foo.html after they sign in. */
+      function safeReturnTarget() {
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var raw = params.get("return");
+          if (!raw) return null;
+          var target = new URL(raw, window.location.origin);
+          if (target.origin !== window.location.origin) return null;
+          return target.href;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function landingTarget() {
+        return safeReturnTarget() || "dashboard.html";
+      }
+
       function onCredential(response) {
         if (!response || !response.credential) {
           showError("Sign-in cancelled. Try again.");
@@ -78,7 +98,8 @@
             return;
           }
           showOK("Signed in. Loading your dashboard…");
-          setTimeout(function () { location.replace("dashboard.html"); }, 400);
+          var dest = landingTarget();
+          setTimeout(function () { location.replace(dest); }, 400);
         });
       }
 
@@ -104,10 +125,11 @@
         });
       }
 
-      // If already signed in, skip straight to the dashboard.
+      // If already signed in, skip straight to the dashboard (or the
+      // requested return target).
       var existing = USMLE_AUTH.getSession();
       if (existing) {
-        location.replace("dashboard.html");
+        location.replace(landingTarget());
       } else {
         init();
       }
