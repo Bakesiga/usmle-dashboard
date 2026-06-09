@@ -194,10 +194,10 @@ window.SESSIONS = [
 ];
 
 window.SUBJECT_META = {
-  cvs:  { name: "Cardiovascular",   short: "CVS",   dateRange: "Jun 1 – Jun 10", count: 10 },
-  resp: { name: "Respiratory",      short: "RESP",  dateRange: "Jun 11 – Jun 18", count: 8 },
-  epi:  { name: "Epi & Biostats",   short: "EPI",   dateRange: "Jun 19 – Jun 22", count: 4 },
-  path: { name: "Pathology",        short: "PATH",  dateRange: "Jun 23 – Jun 30", count: 8 }
+  cvs:  { name: "Cardiovascular",   short: "CVS",   dateRange: "Jun 1 to Jun 11", count: 11 },
+  resp: { name: "Respiratory",      short: "RESP",  dateRange: "Jun 12 to Jun 19", count: 8 },
+  epi:  { name: "Epi & Biostats",   short: "EPI",   dateRange: "Jun 20 to Jun 23", count: 4 },
+  path: { name: "Pathology",        short: "PATH",  dateRange: "Jun 24 to Jul 1", count: 8 }
 };
 
 window.LINKS = {
