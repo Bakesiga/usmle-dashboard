@@ -14,11 +14,12 @@
   <link rel="stylesheet" href="css/design-tokens.css" />
   <link rel="stylesheet" href="css/theme-vitals.css" />
 
-  <!-- Page-specific overrides: uniform white background, no grid, no reticle -->
+  <!-- Page-specific overrides: uniform white background, no grid, no reticle, no RECOMMENDED ribbon -->
   <style>
     html, body, .vh, .v-sec, .v-sec.cream, .v-sec.cream-2, .v-sec.dark { background: #FFFFFF !important; }
     .vh-grid, .vh-reticle { display: none !important; }
     .v-divider, .v-divider.on-cream { background: #FFFFFF !important; }
+    .v-card.feature::before { content: none !important; display: none !important; }
   </style>
 </head>
 <body class="vitals" data-screen-label="01 Marketing Home, Vitals theme">
