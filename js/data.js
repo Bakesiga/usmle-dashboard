@@ -160,10 +160,10 @@ window.SESSIONS = [
       ]
     }
   },
-  { day: 7,  date: "2026-06-07", subject: "cvs",  title: "Cardiomyopathies & myocarditis",     sub: "Dilated, hypertrophic, restrictive, ARVC, peripartum, takotsubo, infectious myocarditis" },
-  { day: 8,  date: "2026-06-08", subject: "cvs",  title: "Valvular & rheumatic heart disease + endocarditis", sub: "Rheumatic HD, IE Duke criteria, prosthetic valves, valvular intervention timing" },
-  { day: 9,  date: "2026-06-09", subject: "cvs",  title: "Pericardial disease, cardiac tumors & inherited arrhythmias", sub: "Effusion, tamponade, constrictive pericarditis, myxoma, WPW, long QT, Brugada, ARVC" },
-  { day: 10, date: "2026-06-10", subject: "cvs",  title: "Congenital heart disease",           sub: "Acyanotic, cyanotic, TOF, TGA, coarctation, Eisenmenger, pediatric presentations" },
+  { day: 7,  date: "2026-06-07", subject: "cvs", phase: "pathology",    title: "CVS Pathology pt 1 · congenital, CAD, IE, RHD",        sub: "Congenital heart defects, coronary artery disease, infective endocarditis, rheumatic heart disease" },
+  { day: 8,  date: "2026-06-08", subject: "cvs", phase: "pathology",    title: "CVS Pathology pt 2 · HF, shock, CMP, vascular disease", sub: "Heart failure, shock, cardiomyopathies, hypertension, atherosclerosis and arteriolosclerosis, aortic diseases" },
+  { day: 9,  date: "2026-06-09", subject: "cvs", phase: "pathology",    title: "CVS Pathology pt 3 · arrhythmias, pericardial, tumors", sub: "Arrhythmias, pericardial diseases, cardiac tumors" },
+  { day: 10, date: "2026-06-10", subject: "cvs", phase: "pharmacology", title: "CVS Pharmacology",                                       sub: "Antihypertensives, antianginals, antiarrhythmics, heart failure drugs, lipid-lowering agents" },
 
   // ---- Respiratory (8) — June 11-18 ----
   { day: 11, date: "2026-06-11", subject: "resp", title: "Lung anatomy & development",         sub: "Branching, surfactant, fetal lung" },
