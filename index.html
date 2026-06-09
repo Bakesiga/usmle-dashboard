@@ -29,6 +29,9 @@
     .v-bp-list li { font-family: var(--vf-sans); font-size: 16px; color: var(--v-ink); padding: 10px 0; border-bottom: 1px dashed var(--v-border); }
     .v-bp-list li:last-child { border-bottom: none; }
     .v-bp-list li::before { content: "·  "; color: var(--v-cyan-d); font-weight: bold; }
+    /* Single centered pricing card */
+    .v-price.single { display: flex; justify-content: center; }
+    .v-price.single .v-card { max-width: 520px; width: 100%; }
   </style>
 </head>
 <body class="vitals" data-screen-label="01 Marketing Home, Vitals theme">
@@ -316,14 +319,14 @@
       <div class="v-container">
         <header class="v-head" data-scan>
           <span class="v-tag">Pricing</span>
-          <h2>Honest pricing, paid the way you actually can.</h2>
-          <p>The same program. Two payment regions because two rails are easy and a third would not be.</p>
+          <h2>One price. Pay the way that works for you.</h2>
+          <p>The same program for everyone. Multiple payment rails so you use the one that is easiest.</p>
         </header>
 
-        <div class="v-price" data-scan>
+        <div class="v-price single" data-scan>
           <article class="v-card feature">
-            <div class="ph"><span class="flag flag-ug" aria-hidden="true"><span></span><span></span><span></span></span><h3>Uganda</h3></div>
-            <div class="num"><small>FROM </small>UGX 350,000<small> / MO</small></div>
+            <div class="ph"><h3>USMLE Step 1 Cohort</h3></div>
+            <div class="num">USD 200<small> / MO</small></div>
             <ul>
               <li>Daily live Zoom classes, 4-month cohort</li>
               <li>Class dashboard, slides, notes</li>
@@ -331,22 +334,8 @@
               <li>WhatsApp cohort group</li>
               <li>ECFMG &amp; match mentorship</li>
             </ul>
-            <div class="pay"><b>PAY BY MOBILE MONEY</b>0705 571 443 · Bakesiga Allan</div>
+            <div class="pay"><b>PAY BY MOBILE MONEY · WISE · PAYPAL · M-PESA</b>0705 571 443 (MoMo) · +256 705 571 443 (international) · Bakesiga Allan · reply to confirm rail</div>
             <a class="v-btn v-btn-primary" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign up →</a>
-          </article>
-
-          <article class="v-card">
-            <div class="ph"><span class="flag flag-intl" aria-hidden="true"></span><h3>International</h3></div>
-            <div class="num"><small>FROM </small>USD 200<small> / MO</small></div>
-            <ul>
-              <li>Daily live Zoom classes, 4-month cohort</li>
-              <li>Class dashboard, slides, notes</li>
-              <li>UWorld vignette walkthroughs</li>
-              <li>WhatsApp cohort group</li>
-              <li>ECFMG &amp; match mentorship</li>
-            </ul>
-            <div class="pay"><b>PAY BY WISE · PAYPAL · M-PESA</b>+256 705 571 443 · reply to confirm rail</div>
-            <a class="v-btn v-btn-ink" href="https://forms.gle/iHCdPVjvJeGeGTXy7" target="_blank" rel="noopener">Sign up →</a>
           </article>
         </div>
       </div>
