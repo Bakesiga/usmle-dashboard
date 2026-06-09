@@ -20,6 +20,15 @@
     .vh-grid, .vh-reticle { display: none !important; }
     .v-divider, .v-divider.on-cream { background: #FFFFFF !important; }
     .v-card.feature::before { content: none !important; display: none !important; }
+    /* Blueprint curriculum layout */
+    .v-bp { display: grid; grid-template-columns: 1fr; gap: 32px; margin-top: 32px; }
+    @media (min-width: 720px) { .v-bp { grid-template-columns: 1fr 1fr; gap: 48px; } }
+    .v-bp-group { background: #FFFFFF; border: 1px solid var(--v-border); border-radius: 14px; padding: 28px 32px; }
+    .v-bp-h { font-family: var(--vf-serif); font-size: 26px; color: var(--v-ink); margin: 0 0 18px; padding-bottom: 14px; border-bottom: 1px solid var(--v-border); }
+    .v-bp-list { list-style: none; padding: 0; margin: 0; }
+    .v-bp-list li { font-family: var(--vf-sans); font-size: 16px; color: var(--v-ink); padding: 10px 0; border-bottom: 1px dashed var(--v-border); }
+    .v-bp-list li:last-child { border-bottom: none; }
+    .v-bp-list li::before { content: "·  "; color: var(--v-cyan-d); font-weight: bold; }
   </style>
 </head>
 <body class="vitals" data-screen-label="01 Marketing Home, Vitals theme">
@@ -161,84 +170,42 @@
       </div>
     </section>
 
-    <!-- ============================ JUNE OUTLINE ============================ -->
+    <!-- ============================ CURRICULUM (FIRST AID BLUEPRINT) ============================ -->
     <section class="v-sec cream" id="outline">
       <div class="v-container">
         <header class="v-head" data-scan>
-          <span class="v-tag">The June outline</span>
-          <h2>Thirty days. Four chapters. One thread per day.</h2>
-          <p>Every session ties First Aid to the UWorld vignettes you'll do alongside class. Each chapter is a continuous trace, not a pile of slides.</p>
+          <span class="v-tag">The First Aid blueprint</span>
+          <h2>Sixteen chapters. Four months. Every topic on Step 1.</h2>
+          <p>The cohort walks through the entire First Aid 2025, chapter by chapter. General Principles first, then the Organ Systems.</p>
         </header>
 
-        <div class="v-outline" data-scan>
-          <article class="v-subj s-cvs">
-            <div class="v-subj-top">
-              <div class="v-subj-code"><span class="lead"><b></b> CVS</span><span>10d</span></div>
-              <h3>Cardiovascular</h3>
-              <div class="v-subj-meta">JUN 01 · JUN 10</div>
-            </div>
-            <ol class="v-subj-list">
-              <li><i>01</i>Cardiac anatomy &amp; embryology</li>
-              <li><i>02</i>The cardiac cycle &amp; PV loops</li>
-              <li><i>03</i>Cardiac output &amp; Frank-Starling</li>
-              <li><i>04</i>Vascular biology &amp; hemodynamics</li>
-              <li><i>05</i>EKG fundamentals</li>
-              <li><i>06</i>Arrhythmias I &amp; II</li>
-              <li><i>07</i>Heart failure &amp; cardiomyopathies</li>
-              <li><i>08</i>Valvular heart disease</li>
-              <li><i>09</i>Hypertension &amp; vasculitis</li>
-              <li><i>10</i>Congenital heart disease</li>
-            </ol>
+        <div class="v-bp" data-scan>
+          <article class="v-bp-group">
+            <h3 class="v-bp-h">General Principles</h3>
+            <ul class="v-bp-list">
+              <li>Biochemistry</li>
+              <li>Immunology</li>
+              <li>Microbiology</li>
+              <li>General Pathology</li>
+              <li>Pharmacology</li>
+              <li>Public Health Sciences (Epi, Biostats, Ethics)</li>
+            </ul>
           </article>
 
-          <article class="v-subj s-resp">
-            <div class="v-subj-top">
-              <div class="v-subj-code"><span class="lead"><b></b> RESP</span><span>8d</span></div>
-              <h3>Respiratory</h3>
-              <div class="v-subj-meta">JUN 11 · JUN 18</div>
-            </div>
-            <ol class="v-subj-list">
-              <li><i>11</i>Lung anatomy &amp; development</li>
-              <li><i>12</i>Ventilation &amp; perfusion</li>
-              <li><i>13</i>Gas exchange &amp; transport</li>
-              <li><i>14</i>Pulmonary function tests</li>
-              <li><i>15</i>Obstructive lung disease</li>
-              <li><i>16</i>Restrictive lung disease</li>
-              <li><i>17</i>Pulmonary vascular disease</li>
-              <li><i>18</i>Pneumonia, TB, ARDS</li>
-            </ol>
-          </article>
-
-          <article class="v-subj s-epi">
-            <div class="v-subj-top">
-              <div class="v-subj-code"><span class="lead"><b></b> EPI</span><span>4d</span></div>
-              <h3>Epi &amp; Biostats</h3>
-              <div class="v-subj-meta">JUN 19 · JUN 22</div>
-            </div>
-            <ol class="v-subj-list">
-              <li><i>19</i>Study design</li>
-              <li><i>20</i>Diagnostic tests</li>
-              <li><i>21</i>Bias, confounding &amp; error</li>
-              <li><i>22</i>Statistical tests</li>
-            </ol>
-          </article>
-
-          <article class="v-subj s-path">
-            <div class="v-subj-top">
-              <div class="v-subj-code"><span class="lead"><b></b> PATH</span><span>8d</span></div>
-              <h3>Pathology</h3>
-              <div class="v-subj-meta">JUN 23 · JUN 30</div>
-            </div>
-            <ol class="v-subj-list">
-              <li><i>23</i>Cell injury, death &amp; adaptation</li>
-              <li><i>24</i>Inflammation &amp; wound healing</li>
-              <li><i>25</i>Neoplasia</li>
-              <li><i>26</i>Genetic disease</li>
-              <li><i>27</i>Immunology essentials</li>
-              <li><i>28</i>Hematologic pathology</li>
-              <li><i>29</i>Endocrine pathology</li>
-              <li><i>30</i>Renal &amp; GU pathology</li>
-            </ol>
+          <article class="v-bp-group">
+            <h3 class="v-bp-h">Organ Systems</h3>
+            <ul class="v-bp-list">
+              <li>Cardiovascular</li>
+              <li>Respiratory</li>
+              <li>Renal</li>
+              <li>Gastrointestinal</li>
+              <li>Endocrine</li>
+              <li>Reproductive</li>
+              <li>Hematology and Oncology</li>
+              <li>Musculoskeletal, Skin, and Connective Tissue</li>
+              <li>Neurology and Special Senses</li>
+              <li>Psychiatry and Behavioral Sciences</li>
+            </ul>
           </article>
         </div>
       </div>
