@@ -142,13 +142,7 @@ window.SESSIONS = [
         meta: "52 cards" },
       { kind: "notes", label: "Physiology block summary",
         url: "outputs/study-notes/block-summary-physiology.html",
-        meta: "Days 4-6 wrap-up" },
-      { kind: "notes", label: "Physiology review questions (50)",
-        url: "outputs/study-notes/cvs-physiology-review-questions.html",
-        meta: "USMLE-style vignettes, Days 4-6 wrap-up" },
-      { kind: "notes", label: "Physiology review answer key",
-        url: "outputs/study-notes/cvs-physiology-review-answers.html",
-        meta: "Correct answers + explanations" }
+        meta: "Days 4-6 wrap-up" }
     ],
     outline: {
       intro: "Day 6 closes physiology with the electrical and regulatory systems. Read First Aid 2025 (CVS Physiology · action potentials, ECG, autoregulation, baroreceptors) before class.",
@@ -215,9 +209,7 @@ window.LINKS = {
 
 window.BLOCK_SUMMARIES = [
   { id: "cvs-anatomy",    subject: "cvs", phase: "anatomy",    label: "Anatomy & Embryology", sub: "Days 1-3 wrap-up", days: [1,2,3], url: "outputs/study-notes/block-summary-anatomy-embryology.html" },
-  { id: "cvs-physiology", subject: "cvs", phase: "physiology", label: "Physiology",           sub: "Days 4-6 wrap-up", days: [4,5,6], url: "outputs/study-notes/block-summary-physiology.html" },
-  { id: "cvs-physiology-review-questions", subject: "cvs", phase: "physiology", label: "Physiology review questions", sub: "50 USMLE-style vignettes", days: [4,5,6], url: "outputs/study-notes/cvs-physiology-review-questions.html" },
-  { id: "cvs-physiology-review-answers",   subject: "cvs", phase: "physiology", label: "Physiology review answer key", sub: "Correct answers + explanations", days: [4,5,6], url: "outputs/study-notes/cvs-physiology-review-answers.html" }
+  { id: "cvs-physiology", subject: "cvs", phase: "physiology", label: "Physiology",           sub: "Days 4-6 wrap-up", days: [4,5,6], url: "outputs/study-notes/block-summary-physiology.html" }
 ];
 
 /* The "today" the dashboard uses. Defaults to real now, but the Tweaks
