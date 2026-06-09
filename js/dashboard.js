@@ -555,28 +555,6 @@
     }
   }
 
-  // ---------------- BLOCK SUMMARIES ----------------
-  function renderBlockSummaries() {
-    const grid = document.querySelector('[data-summaries-grid]');
-    if (!grid) return;
-    const summaries = window.BLOCK_SUMMARIES || [];
-    grid.innerHTML = '';
-    summaries.forEach(item => {
-      const a = document.createElement('a');
-      a.className = 'res-card subject-' + item.subject;
-      a.href = item.url;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.innerHTML =
-        '<span class="res-icon">' + RESOURCE_ICONS.notes + '</span>' +
-        '<div>' +
-          '<h4>' + item.label + '</h4>' +
-          '<p>' + item.sub + ' · Days ' + item.days.join(', ') + '. Print-friendly single-page review.</p>' +
-        '</div>';
-      grid.appendChild(a);
-    });
-  }
-
   // ---------------- TABS ----------------
   function activateTab(key) {
     document.querySelectorAll('[data-tab]').forEach(t => t.classList.toggle('active', t.dataset.tab === key));
@@ -584,7 +562,6 @@
     if (key === 'today')      renderToday();
     if (key === 'sessions')   { currentBlockView = 'all'; renderSessions(); }
     if (key === 'schedule')   renderCalendar();
-    if (key === 'summaries')  renderBlockSummaries();
   }
   function bindTabs() {
     document.querySelectorAll('[data-tab]').forEach(tab => {
@@ -689,7 +666,6 @@
     renderToday();
     renderSessions();
     renderCalendar();
-    renderBlockSummaries();
     // tick once a minute so the countdown stays fresh
     setInterval(renderToday, 30000);
   });
