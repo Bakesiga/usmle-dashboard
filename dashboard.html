@@ -178,16 +178,12 @@
 
       <!-- ====================================================== -->
       <!-- SESSIONS PANEL                                         -->
+      <!-- Hierarchical drill-in: Block tiles (L1) -> sub-block   -->
+      <!-- tiles (L2) -> day cards (L3). Rendered by JS into the  -->
+      <!-- [data-blocks-root] container.                          -->
       <!-- ====================================================== -->
       <section class="panel" data-panel="sessions" role="tabpanel" aria-label="All sessions">
-        <div class="sessions-toolbar">
-          <button class="filter-pill active" data-filter="all" type="button">All 30 days</button>
-          <button class="filter-pill subject-cvs"  data-filter="cvs"  type="button"><span class="swatch"></span>Cardiovascular</button>
-          <button class="filter-pill subject-resp" data-filter="resp" type="button"><span class="swatch"></span>Respiratory</button>
-          <button class="filter-pill subject-epi"  data-filter="epi"  type="button"><span class="swatch"></span>Epi &amp; Biostats</button>
-          <button class="filter-pill subject-path" data-filter="path" type="button"><span class="swatch"></span>Pathology</button>
-        </div>
-        <div class="sessions-table" data-sessions-table></div>
+        <div class="blocks-root" data-blocks-root></div>
       </section>
 
       <!-- ====================================================== -->

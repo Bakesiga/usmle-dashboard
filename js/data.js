@@ -212,6 +212,74 @@ window.BLOCK_SUMMARIES = [
   { id: "cvs-physiology", subject: "cvs", phase: "physiology", label: "Physiology",           sub: "Days 4-6 wrap-up", days: [4,5,6], url: "outputs/study-notes/block-summary-physiology.html" }
 ];
 
+/* ============================================================
+   BLOCKS. Hierarchical Block / Sub-block / Day structure that
+   powers the Sessions panel drill-in. SESSIONS above stays the
+   flat per-day source of truth (Today panel, mini-cal, etc.).
+   ============================================================ */
+window.BLOCKS = [
+  {
+    id: "cvs",
+    short: "CVS",
+    label: "Cardiovascular",
+    subject: "cvs",
+    dateRange: "Jun 01 to Jun 10",
+    dayRange: [1, 10],
+    subBlocks: [
+      { id: "cvs-anat-embryo",  label: "Anatomy and Embryology", days: [1, 2, 3] },
+      { id: "cvs-physiology",   label: "Physiology",             days: [4, 5, 6] },
+      { id: "cvs-pathology",    label: "Pathology",              days: [7, 8, 9] },
+      { id: "cvs-pharmacology", label: "Pharmacology",           days: [10] }
+    ]
+  },
+  {
+    id: "resp",
+    short: "RS",
+    label: "Respiratory",
+    subject: "resp",
+    dateRange: "Jun 11 to Jun 18",
+    dayRange: [11, 18],
+    subBlocks: [
+      { id: "resp-anat-embryo",  label: "Anatomy and Embryology", days: [11] },
+      { id: "resp-physiology",   label: "Physiology",             days: [12, 13, 14] },
+      { id: "resp-pathology",    label: "Pathology",              days: [15, 16, 17, 18] },
+      { id: "resp-pharmacology", label: "Pharmacology",           days: [] }
+    ]
+  },
+  {
+    id: "epi",
+    short: "EPI",
+    label: "Epi and Biostats",
+    subject: "epi",
+    dateRange: "Jun 19 to Jun 22",
+    dayRange: [19, 22],
+    subBlocks: [
+      { id: "epi-study-design",     label: "Study design",             days: [19] },
+      { id: "epi-diagnostic-tests", label: "Diagnostic tests",         days: [20] },
+      { id: "epi-bias-error",       label: "Bias, confounding, error", days: [21] },
+      { id: "epi-stat-tests",       label: "Statistical tests",        days: [22] }
+    ]
+  },
+  {
+    id: "path",
+    short: "PATH",
+    label: "Pathology (General)",
+    subject: "path",
+    dateRange: "Jun 23 to Jun 30",
+    dayRange: [23, 30],
+    subBlocks: [
+      { id: "path-cell-injury",  label: "Cell injury, death, adaptation", days: [23] },
+      { id: "path-inflammation", label: "Inflammation and wound healing", days: [24] },
+      { id: "path-neoplasia",    label: "Neoplasia",                      days: [25] },
+      { id: "path-genetic",      label: "Genetic disease",                days: [26] },
+      { id: "path-immunology",   label: "Immunology essentials",          days: [27] },
+      { id: "path-heme-onc",     label: "Hematologic pathology",          days: [28] },
+      { id: "path-endocrine",    label: "Endocrine pathology",            days: [29] },
+      { id: "path-renal-gu",     label: "Renal and GU pathology",         days: [30] }
+    ]
+  }
+];
+
 /* The "today" the dashboard uses. Defaults to real now, but the Tweaks
    panel can override it for previewing different states. */
 window.SIM_NOW = null;

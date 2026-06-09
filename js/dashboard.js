@@ -304,48 +304,213 @@
     }
   }
 
-  // ---------------- SESSIONS list ----------------
-  let activeFilter = 'all';
-  function renderSessions() {
-    const root = document.querySelector('[data-sessions-table]');
-    if (!root) return;
-    const now = window.getNow();
-    const todayStr = ymd(now);
-    root.innerHTML = '';
-    window.SESSIONS
-      .filter(s => activeFilter === 'all' || s.subject === activeFilter)
-      .forEach(s => {
-        const d = parseYMD(s.date);
-        const idx = window.SESSIONS.indexOf(s);
-        let status = 'upcoming';
-        if (s.date === todayStr) status = 'today';
-        else if (s.date < todayStr) status = 'done';
-        const row = document.createElement('div');
-        row.className = 'sess-row subject-' + s.subject + (status === 'today' ? ' today-row' : '');
-        row.dataset.sessionIdx = idx;
-        row.setAttribute('role', 'link');
-        row.setAttribute('tabindex', '0');
-        row.title = 'Open Day ' + s.day + ' in Today panel';
-        row.innerHTML = `
-          <div class="sess-day"><span class="num">Day ${s.day}</span></div>
-          <div class="sess-date">${fmtDateShort(d)}</div>
-          <div class="sess-topic">
-            <small>${window.SUBJECT_META[s.subject].name}</small>
-            <strong>${s.title}</strong>
-          </div>
-          <div class="sess-status ${status}">${status}</div>
-        `;
-        root.appendChild(row);
-      });
+  // ---------------- SESSIONS hierarchy (Block / Sub-block / Day) ----------------
+  // currentBlockView: 'all' (Level 1), '<blockId>' (Level 2),
+  // '<blockId>/<subBlockId>' (Level 3).
+  let currentBlockView = 'all';
+
+  function findBlock(blockId) {
+    return (window.BLOCKS || []).find(b => b.id === blockId) || null;
+  }
+  function findSubBlock(block, subBlockId) {
+    if (!block) return null;
+    return (block.subBlocks || []).find(sb => sb.id === subBlockId) || null;
+  }
+  function dayRangeLabel(days) {
+    if (!days || !days.length) return '';
+    if (days.length === 1) return 'Day ' + days[0];
+    return 'Days ' + days[0] + ' to ' + days[days.length - 1];
   }
 
-  function bindFilters() {
-    document.querySelectorAll('[data-filter]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        activeFilter = btn.dataset.filter;
-        document.querySelectorAll('[data-filter]').forEach(b => b.classList.toggle('active', b === btn));
-        renderSessions();
-      });
+  // Level 1: root grid of 4 Block tiles
+  function renderBlocksRoot() {
+    const root = document.querySelector('[data-blocks-root]');
+    if (!root) return;
+    const blocks = window.BLOCKS || [];
+    const wrap = document.createElement('div');
+    wrap.className = 'blocks-grid';
+    blocks.forEach(b => {
+      const dayCount = (b.dayRange ? (b.dayRange[1] - b.dayRange[0] + 1) : 0);
+      const subCount = (b.subBlocks || []).length;
+      const tile = document.createElement('button');
+      tile.type = 'button';
+      tile.className = 'block-tile subject-' + b.subject;
+      tile.dataset.blockId = b.id;
+      tile.innerHTML =
+        '<span class="block-tile-badge">' + b.short + '</span>' +
+        '<span class="block-tile-body">' +
+          '<span class="block-tile-eyebrow">' + b.dateRange + '</span>' +
+          '<span class="block-tile-title">' + b.label + '</span>' +
+          '<span class="block-tile-meta">' + dayCount + ' days · ' + subCount + ' sub-blocks</span>' +
+        '</span>' +
+        '<span class="block-tile-chevron" aria-hidden="true">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>' +
+        '</span>';
+      wrap.appendChild(tile);
+    });
+    root.innerHTML = '';
+    root.appendChild(wrap);
+  }
+
+  // Level 2: sub-block tiles for one Block
+  function renderBlocksOfBlock(blockId) {
+    const root = document.querySelector('[data-blocks-root]');
+    if (!root) return;
+    const block = findBlock(blockId);
+    if (!block) { renderBlocksRoot(); return; }
+
+    const header = document.createElement('div');
+    header.className = 'block-detail-head subject-' + block.subject;
+    header.innerHTML =
+      '<button type="button" class="block-back" data-back-target="all">' +
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>' +
+        'Back to all blocks' +
+      '</button>' +
+      '<div class="block-detail-titlerow">' +
+        '<span class="block-detail-badge">' + block.short + '</span>' +
+        '<h2 class="block-detail-title">' + block.label + '</h2>' +
+        '<span class="block-detail-range">' + block.dateRange + '</span>' +
+      '</div>';
+
+    const grid = document.createElement('div');
+    grid.className = 'subblocks-grid';
+    (block.subBlocks || []).forEach(sb => {
+      const empty = !sb.days || sb.days.length === 0;
+      const el = document.createElement(empty ? 'div' : 'button');
+      if (!empty) el.type = 'button';
+      el.className = 'subblock-tile subject-' + block.subject + (empty ? ' is-empty' : '');
+      if (!empty) {
+        el.dataset.blockId = block.id;
+        el.dataset.subBlockId = sb.id;
+      }
+      const metaText = empty ? 'Coming soon' : (dayRangeLabel(sb.days) + ' · ' + sb.days.length + ' day' + (sb.days.length === 1 ? '' : 's'));
+      el.innerHTML =
+        '<span class="subblock-title">' + sb.label + '</span>' +
+        '<span class="subblock-meta">' + metaText + '</span>' +
+        (empty ? '' :
+          '<span class="subblock-chevron" aria-hidden="true">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>' +
+          '</span>');
+      grid.appendChild(el);
+    });
+
+    root.innerHTML = '';
+    root.appendChild(header);
+    root.appendChild(grid);
+  }
+
+  // Level 3: day list for one sub-block
+  function renderSubBlock(blockId, subBlockId) {
+    const root = document.querySelector('[data-blocks-root]');
+    if (!root) return;
+    const block = findBlock(blockId);
+    const sub = findSubBlock(block, subBlockId);
+    if (!block || !sub) { renderBlocksRoot(); return; }
+
+    const now = window.getNow();
+    const todayStr = ymd(now);
+
+    const header = document.createElement('div');
+    header.className = 'block-detail-head subject-' + block.subject;
+    header.innerHTML =
+      '<button type="button" class="block-back" data-back-target="' + block.id + '">' +
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>' +
+        'Back to ' + block.label +
+      '</button>' +
+      '<div class="block-detail-titlerow">' +
+        '<span class="block-detail-badge">' + block.short + '</span>' +
+        '<h2 class="block-detail-title">' + block.label + ' · ' + sub.label + '</h2>' +
+        '<span class="block-detail-range">' + dayRangeLabel(sub.days) + '</span>' +
+      '</div>';
+
+    const list = document.createElement('div');
+    list.className = 'subblock-days';
+
+    (sub.days || []).forEach(dayNum => {
+      const session = window.SESSIONS.find(s => s.day === dayNum);
+      if (!session) return;
+      const idx = window.SESSIONS.indexOf(session);
+      let status = 'upcoming';
+      if (session.date === todayStr) status = 'today';
+      else if (session.date < todayStr) status = 'done';
+      const d = parseYMD(session.date);
+      const row = document.createElement('div');
+      row.className = 'sess-row subject-' + session.subject + (status === 'today' ? ' today-row' : '');
+      row.dataset.sessionIdx = idx;
+      row.setAttribute('role', 'link');
+      row.setAttribute('tabindex', '0');
+      row.title = 'Open Day ' + session.day + ' in Today panel';
+      row.innerHTML =
+        '<div class="sess-day"><span class="num">Day ' + session.day + '</span></div>' +
+        '<div class="sess-date">' + fmtDateShort(d) + '</div>' +
+        '<div class="sess-topic">' +
+          '<small>' + window.SUBJECT_META[session.subject].name + '</small>' +
+          '<strong>' + session.title + '</strong>' +
+        '</div>' +
+        '<div class="sess-status ' + status + '">' + status + '</div>';
+      list.appendChild(row);
+    });
+
+    root.innerHTML = '';
+    root.appendChild(header);
+    root.appendChild(list);
+  }
+
+  function renderSessions() {
+    // Dispatch based on currentBlockView state
+    if (currentBlockView === 'all') return renderBlocksRoot();
+    const parts = currentBlockView.split('/');
+    if (parts.length === 1) return renderBlocksOfBlock(parts[0]);
+    return renderSubBlock(parts[0], parts[1]);
+  }
+
+  function setBlockView(view) {
+    currentBlockView = view || 'all';
+    renderSessions();
+  }
+
+  // Event delegation on the blocks-root container.
+  function bindBlocksRoot() {
+    const root = document.querySelector('[data-blocks-root]');
+    if (!root) return;
+    root.addEventListener('click', e => {
+      // Back link
+      const back = e.target.closest('[data-back-target]');
+      if (back) {
+        e.preventDefault();
+        setBlockView(back.dataset.backTarget);
+        return;
+      }
+      // Sub-block tile drill-in (Level 2 -> Level 3)
+      const subTile = e.target.closest('.subblock-tile:not(.is-empty)');
+      if (subTile && subTile.dataset.subBlockId) {
+        e.preventDefault();
+        setBlockView(subTile.dataset.blockId + '/' + subTile.dataset.subBlockId);
+        return;
+      }
+      // Block tile drill-in (Level 1 -> Level 2)
+      const blockTile = e.target.closest('.block-tile');
+      if (blockTile && blockTile.dataset.blockId) {
+        e.preventDefault();
+        setBlockView(blockTile.dataset.blockId);
+        return;
+      }
+      // Day row -> Today panel (handled here too so day clicks always work)
+      const dayRow = e.target.closest('[data-session-idx]');
+      if (dayRow) {
+        e.preventDefault();
+        const idx = parseInt(dayRow.dataset.sessionIdx, 10);
+        if (Number.isInteger(idx)) jumpToSession(idx);
+      }
+    });
+    root.addEventListener('keydown', e => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const dayRow = e.target.closest('[data-session-idx]');
+      if (dayRow) {
+        e.preventDefault();
+        const idx = parseInt(dayRow.dataset.sessionIdx, 10);
+        if (Number.isInteger(idx)) jumpToSession(idx);
+      }
     });
   }
 
@@ -417,7 +582,7 @@
     document.querySelectorAll('[data-tab]').forEach(t => t.classList.toggle('active', t.dataset.tab === key));
     document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.dataset.panel === key));
     if (key === 'today')      renderToday();
-    if (key === 'sessions')   renderSessions();
+    if (key === 'sessions')   { currentBlockView = 'all'; renderSessions(); }
     if (key === 'schedule')   renderCalendar();
     if (key === 'summaries')  renderBlockSummaries();
   }
@@ -436,7 +601,8 @@
     if (todayPanel) todayPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   function bindDayJumps() {
-    [['sessions', '[data-session-idx]'], ['schedule', '[data-session-idx]']].forEach(([panelKey, selector]) => {
+    // Sessions panel is handled in bindBlocksRoot (delegated on the new container).
+    [['schedule', '[data-session-idx]']].forEach(([panelKey, selector]) => {
       const panel = document.querySelector(`[data-panel="${panelKey}"]`);
       if (!panel) return;
       panel.addEventListener('click', e => {
@@ -516,7 +682,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     wireLinks();
     bindTabs();
-    bindFilters();
+    bindBlocksRoot();
     bindUserMenu();
     bindAdjacentNav();
     bindDayJumps();
