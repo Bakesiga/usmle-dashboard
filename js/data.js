@@ -163,33 +163,34 @@ window.SESSIONS = [
   { day: 7,  date: "2026-06-07", subject: "cvs", phase: "pathology",    title: "CVS Pathology pt 1 · congenital, CAD, IE, RHD",        sub: "Congenital heart defects, coronary artery disease, infective endocarditis, rheumatic heart disease" },
   { day: 8,  date: "2026-06-08", subject: "cvs", phase: "pathology",    title: "CVS Pathology pt 2 · HF, shock, CMP, vascular disease", sub: "Heart failure, shock, cardiomyopathies, hypertension, atherosclerosis and arteriolosclerosis, aortic diseases" },
   { day: 9,  date: "2026-06-09", subject: "cvs", phase: "pathology",    title: "CVS Pathology pt 3 · arrhythmias, pericardial, tumors", sub: "Arrhythmias, pericardial diseases, cardiac tumors" },
-  { day: 10, date: "2026-06-10", subject: "cvs", phase: "pharmacology", title: "CVS Pharmacology",                                       sub: "Antihypertensives, antianginals, antiarrhythmics, heart failure drugs, lipid-lowering agents" },
+  { day: 10, date: "2026-06-10", subject: "cvs", phase: "pharmacology", title: "CVS Pharmacology pt 1",                                  sub: "First half of CVS pharm; Allan to populate the specific drug classes" },
+  { day: 11, date: "2026-06-11", subject: "cvs", phase: "pharmacology", title: "CVS Pharmacology pt 2",                                  sub: "Second half of CVS pharm; Allan to populate the specific drug classes" },
 
   // ---- Respiratory (8) — June 11-18 ----
-  { day: 11, date: "2026-06-11", subject: "resp", title: "Lung anatomy & development",         sub: "Branching, surfactant, fetal lung" },
-  { day: 12, date: "2026-06-12", subject: "resp", title: "Ventilation & perfusion",            sub: "V/Q matching, dead space, shunt" },
-  { day: 13, date: "2026-06-13", subject: "resp", title: "Gas exchange & transport",           sub: "O2-Hb curve, CO2 carriage, A-a gradient" },
-  { day: 14, date: "2026-06-14", subject: "resp", title: "Pulmonary function tests",           sub: "Spirometry, flow-volume loops, lung volumes" },
-  { day: 15, date: "2026-06-15", subject: "resp", title: "Obstructive lung disease",           sub: "Asthma, COPD, bronchiectasis, CF" },
-  { day: 16, date: "2026-06-16", subject: "resp", title: "Restrictive lung disease",           sub: "IPF, sarcoid, pneumoconioses, NMD" },
-  { day: 17, date: "2026-06-17", subject: "resp", title: "Pulmonary vascular disease",         sub: "PE, pulmonary hypertension, edema" },
-  { day: 18, date: "2026-06-18", subject: "resp", title: "Pneumonia, TB, ARDS",                sub: "Community, hospital, atypical, ARDS criteria" },
+  { day: 12, date: "2026-06-12", subject: "resp", title: "Lung anatomy & development",         sub: "Branching, surfactant, fetal lung" },
+  { day: 13, date: "2026-06-13", subject: "resp", title: "Ventilation & perfusion",            sub: "V/Q matching, dead space, shunt" },
+  { day: 14, date: "2026-06-14", subject: "resp", title: "Gas exchange & transport",           sub: "O2-Hb curve, CO2 carriage, A-a gradient" },
+  { day: 15, date: "2026-06-15", subject: "resp", title: "Pulmonary function tests",           sub: "Spirometry, flow-volume loops, lung volumes" },
+  { day: 16, date: "2026-06-16", subject: "resp", title: "Obstructive lung disease",           sub: "Asthma, COPD, bronchiectasis, CF" },
+  { day: 17, date: "2026-06-17", subject: "resp", title: "Restrictive lung disease",           sub: "IPF, sarcoid, pneumoconioses, NMD" },
+  { day: 18, date: "2026-06-18", subject: "resp", title: "Pulmonary vascular disease",         sub: "PE, pulmonary hypertension, edema" },
+  { day: 19, date: "2026-06-19", subject: "resp", title: "Pneumonia, TB, ARDS",                sub: "Community, hospital, atypical, ARDS criteria" },
 
   // ---- Epi & Biostats (4) — June 19-22 ----
-  { day: 19, date: "2026-06-19", subject: "epi",  title: "Study design",                       sub: "RCT, cohort, case-control, cross-sectional" },
-  { day: 20, date: "2026-06-20", subject: "epi",  title: "Diagnostic tests",                   sub: "Sensitivity, specificity, PPV, NPV, LR" },
-  { day: 21, date: "2026-06-21", subject: "epi",  title: "Bias, confounding & error",          sub: "Selection, recall, lead-time, type I/II" },
-  { day: 22, date: "2026-06-22", subject: "epi",  title: "Statistical tests",                  sub: "T-test, ANOVA, chi-square, regression" },
+  { day: 20, date: "2026-06-20", subject: "epi",  title: "Study design",                       sub: "RCT, cohort, case-control, cross-sectional" },
+  { day: 21, date: "2026-06-21", subject: "epi",  title: "Diagnostic tests",                   sub: "Sensitivity, specificity, PPV, NPV, LR" },
+  { day: 22, date: "2026-06-22", subject: "epi",  title: "Bias, confounding & error",          sub: "Selection, recall, lead-time, type I/II" },
+  { day: 23, date: "2026-06-23", subject: "epi",  title: "Statistical tests",                  sub: "T-test, ANOVA, chi-square, regression" },
 
   // ---- Pathology (8) — June 23-30 ----
-  { day: 23, date: "2026-06-23", subject: "path", title: "Cell injury, death & adaptation",    sub: "Necrosis, apoptosis, accumulations" },
-  { day: 24, date: "2026-06-24", subject: "path", title: "Inflammation & wound healing",       sub: "Acute, chronic, granulomatous, repair" },
-  { day: 25, date: "2026-06-25", subject: "path", title: "Neoplasia",                          sub: "Hallmarks, grading, staging, markers" },
-  { day: 26, date: "2026-06-26", subject: "path", title: "Genetic disease",                    sub: "AD, AR, X-linked, mitochondrial, trinucleotide" },
-  { day: 27, date: "2026-06-27", subject: "path", title: "Immunology essentials",              sub: "Hypersensitivity, immunodeficiency, transplant" },
-  { day: 28, date: "2026-06-28", subject: "path", title: "Hematologic pathology",              sub: "Anemias, leukemias, lymphomas, clotting" },
-  { day: 29, date: "2026-06-29", subject: "path", title: "Endocrine pathology",                sub: "Thyroid, adrenal, pituitary, pancreas" },
-  { day: 30, date: "2026-06-30", subject: "path", title: "Renal & GU pathology",               sub: "GN, tubular, neoplastic, stones" }
+  { day: 24, date: "2026-06-24", subject: "path", title: "Cell injury, death & adaptation",    sub: "Necrosis, apoptosis, accumulations" },
+  { day: 25, date: "2026-06-25", subject: "path", title: "Inflammation & wound healing",       sub: "Acute, chronic, granulomatous, repair" },
+  { day: 26, date: "2026-06-26", subject: "path", title: "Neoplasia",                          sub: "Hallmarks, grading, staging, markers" },
+  { day: 27, date: "2026-06-27", subject: "path", title: "Genetic disease",                    sub: "AD, AR, X-linked, mitochondrial, trinucleotide" },
+  { day: 28, date: "2026-06-28", subject: "path", title: "Immunology essentials",              sub: "Hypersensitivity, immunodeficiency, transplant" },
+  { day: 29, date: "2026-06-29", subject: "path", title: "Hematologic pathology",              sub: "Anemias, leukemias, lymphomas, clotting" },
+  { day: 30, date: "2026-06-30", subject: "path", title: "Endocrine pathology",                sub: "Thyroid, adrenal, pituitary, pancreas" },
+  { day: 31, date: "2026-07-01", subject: "path", title: "Renal & GU pathology",               sub: "GN, tubular, neoplastic, stones" }
 ];
 
 window.SUBJECT_META = {
@@ -229,7 +230,7 @@ window.BLOCKS = [
       { id: "cvs-anat-embryo",  label: "Anatomy and Embryology", days: [1, 2, 3] },
       { id: "cvs-physiology",   label: "Physiology",             days: [4, 5, 6] },
       { id: "cvs-pathology",    label: "Pathology",              days: [7, 8, 9] },
-      { id: "cvs-pharmacology", label: "Pharmacology",           days: [10] }
+      { id: "cvs-pharmacology", label: "Pharmacology",           days: [10, 11] }
     ]
   },
   {
@@ -237,12 +238,12 @@ window.BLOCKS = [
     short: "RS",
     label: "Respiratory",
     subject: "resp",
-    dateRange: "Jun 11 to Jun 18",
-    dayRange: [11, 18],
+    dateRange: "Jun 12 to Jun 19",
+    dayRange: [12, 19],
     subBlocks: [
-      { id: "resp-anat-embryo",  label: "Anatomy and Embryology", days: [11] },
-      { id: "resp-physiology",   label: "Physiology",             days: [12, 13, 14] },
-      { id: "resp-pathology",    label: "Pathology",              days: [15, 16, 17, 18] },
+      { id: "resp-anat-embryo",  label: "Anatomy and Embryology", days: [12] },
+      { id: "resp-physiology",   label: "Physiology",             days: [13, 14, 15] },
+      { id: "resp-pathology",    label: "Pathology",              days: [16, 17, 18, 19] },
       { id: "resp-pharmacology", label: "Pharmacology",           days: [] }
     ]
   },
@@ -251,13 +252,13 @@ window.BLOCKS = [
     short: "EPI",
     label: "Epi and Biostats",
     subject: "epi",
-    dateRange: "Jun 19 to Jun 22",
-    dayRange: [19, 22],
+    dateRange: "Jun 20 to Jun 23",
+    dayRange: [20, 23],
     subBlocks: [
-      { id: "epi-study-design",     label: "Study design",             days: [19] },
-      { id: "epi-diagnostic-tests", label: "Diagnostic tests",         days: [20] },
-      { id: "epi-bias-error",       label: "Bias, confounding, error", days: [21] },
-      { id: "epi-stat-tests",       label: "Statistical tests",        days: [22] }
+      { id: "epi-study-design",     label: "Study design",             days: [20] },
+      { id: "epi-diagnostic-tests", label: "Diagnostic tests",         days: [21] },
+      { id: "epi-bias-error",       label: "Bias, confounding, error", days: [22] },
+      { id: "epi-stat-tests",       label: "Statistical tests",        days: [23] }
     ]
   },
   {
@@ -265,17 +266,17 @@ window.BLOCKS = [
     short: "PATH",
     label: "Pathology (General)",
     subject: "path",
-    dateRange: "Jun 23 to Jun 30",
-    dayRange: [23, 30],
+    dateRange: "Jun 24 to Jul 01",
+    dayRange: [24, 31],
     subBlocks: [
-      { id: "path-cell-injury",  label: "Cell injury, death, adaptation", days: [23] },
-      { id: "path-inflammation", label: "Inflammation and wound healing", days: [24] },
-      { id: "path-neoplasia",    label: "Neoplasia",                      days: [25] },
-      { id: "path-genetic",      label: "Genetic disease",                days: [26] },
-      { id: "path-immunology",   label: "Immunology essentials",          days: [27] },
-      { id: "path-heme-onc",     label: "Hematologic pathology",          days: [28] },
-      { id: "path-endocrine",    label: "Endocrine pathology",            days: [29] },
-      { id: "path-renal-gu",     label: "Renal and GU pathology",         days: [30] }
+      { id: "path-cell-injury",  label: "Cell injury, death, adaptation", days: [24] },
+      { id: "path-inflammation", label: "Inflammation and wound healing", days: [25] },
+      { id: "path-neoplasia",    label: "Neoplasia",                      days: [26] },
+      { id: "path-genetic",      label: "Genetic disease",                days: [27] },
+      { id: "path-immunology",   label: "Immunology essentials",          days: [28] },
+      { id: "path-heme-onc",     label: "Hematologic pathology",          days: [29] },
+      { id: "path-endocrine",    label: "Endocrine pathology",            days: [30] },
+      { id: "path-renal-gu",     label: "Renal and GU pathology",         days: [31] }
     ]
   }
 ];
