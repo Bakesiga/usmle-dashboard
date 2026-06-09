@@ -14,3 +14,10 @@ outputs/flyers/node_modules
 # Allan-only teaching-prep + teaching-flow notes (NEVER deploy these to students)
 outputs/study-notes/*-teaching-prep.md
 outputs/study-notes/*-teaching-flow.md
+
+# Sensitive: never commit payment CSVs (contain student PII)
+outputs/payments/
+outputs/cowork-export/payments_tracker.csv
+
+# Office lock files
+~$*
