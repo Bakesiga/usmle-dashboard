@@ -231,6 +231,9 @@ window.BLOCKS = [
       { id: "cvs-physiology",   label: "Physiology",             days: [4, 5, 6] },
       { id: "cvs-pathology",    label: "Pathology (incl. review)", days: [7, 8, 9, 11] },
       { id: "cvs-pharmacology", label: "Pharmacology",             days: [10] }
+    ],
+    recordings: [
+      { title: "Myopericardial pathology part 1", url: "https://us06web.zoom.us/rec/share/hKEhi6frtIXdISm9SABDzyhq_6nz0KUN4a1_wM94F6cRogIdEs8ffn4HHx_AJ9GN.wtCb5-MhDQBilM8i" }
     ]
   },
   {

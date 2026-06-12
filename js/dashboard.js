@@ -397,6 +397,34 @@
     root.innerHTML = '';
     root.appendChild(header);
     root.appendChild(grid);
+
+    // Class recordings section (if present)
+    if (block.recordings && block.recordings.length > 0) {
+      const recHeader = document.createElement('h3');
+      recHeader.className = 'block-recordings-h';
+      recHeader.textContent = 'Class recordings';
+      root.appendChild(recHeader);
+
+      const recList = document.createElement('div');
+      recList.className = 'block-recordings-list subject-' + block.subject;
+      block.recordings.forEach(rec => {
+        const link = document.createElement('a');
+        link.className = 'block-recording-card';
+        link.href = rec.url;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.innerHTML =
+          '<span class="block-recording-icon">' +
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>' +
+          '</span>' +
+          '<div class="block-recording-body">' +
+            '<span class="block-recording-title">' + rec.title + '</span>' +
+            '<span class="block-recording-meta">Open recording on Zoom</span>' +
+          '</div>';
+        recList.appendChild(link);
+      });
+      root.appendChild(recList);
+    }
   }
 
   // Level 3: day list for one sub-block
