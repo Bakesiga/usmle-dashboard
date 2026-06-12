@@ -15,6 +15,31 @@
   <link rel="stylesheet" href="css/theme-vitals.css" />
   <link rel="stylesheet" href="css/dashboard.css" />
   <link rel="stylesheet" href="css/dashboard-vitals.css" />
+  <style>
+    /* Tubelight indicator under the active dashboard tab (ported from tubelight-navbar) */
+    .dash-tab { position: relative; }
+    .dash-tab::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      transform-origin: center;
+      width: 42px;
+      height: 2px;
+      background: #0284C7;
+      border-radius: 2px;
+      box-shadow: 0 0 6px #0284C7, 0 0 14px rgba(2, 132, 199, 0.55), 0 0 22px rgba(2, 132, 199, 0.3);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease;
+      opacity: 0;
+    }
+    .dash-tab:hover::after,
+    .dash-tab:focus-visible::after,
+    .dash-tab.active::after { transform: translateX(-50%) scaleX(1); opacity: 1; }
+    @media (prefers-reduced-motion: reduce) {
+      .dash-tab::after { transition: none; }
+    }
+  </style>
 </head>
 <body data-screen-label="03 Dashboard">
 
