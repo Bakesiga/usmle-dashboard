@@ -14,12 +14,40 @@
   <link rel="stylesheet" href="css/design-tokens.css" />
   <link rel="stylesheet" href="css/theme-vitals.css" />
 
-  <!-- Page-specific overrides: uniform white background, no grid, no reticle, no RECOMMENDED ribbon -->
+  <!-- Page-specific overrides + ported visual effects -->
   <style>
-    html, body, .vh, .v-sec, .v-sec.cream, .v-sec.cream-2, .v-sec.dark { background: #FFFFFF !important; }
-    .vh-grid, .vh-reticle { display: none !important; }
-    .v-divider, .v-divider.on-cream { background: #FFFFFF !important; }
+    /* Keep the cursor reticle off (annoying), hide the RECOMMENDED ribbon, but
+       restore section color alternation (cream / cream-2) and add aurora behind hero */
+    .vh-reticle { display: none !important; }
     .v-card.feature::before { content: none !important; display: none !important; }
+    /* Aurora background behind the hero (vanilla port of the aurora-background component) */
+    .vh { position: relative; overflow: hidden; }
+    .vh::after {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      background-image:
+        repeating-linear-gradient(100deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.92) 7%, transparent 10%, transparent 12%, rgba(255,255,255,0.92) 16%),
+        repeating-linear-gradient(100deg, rgba(2,132,199,0.45) 10%, rgba(99,102,241,0.35) 15%, rgba(56,189,248,0.45) 20%, rgba(167,139,250,0.35) 25%, rgba(2,132,199,0.45) 30%);
+      background-size: 300% 200%, 200% 100%;
+      background-position: 50% 50%, 50% 50%;
+      filter: blur(12px);
+      mix-blend-mode: multiply;
+      animation: aurora-drift 60s linear infinite;
+      pointer-events: none;
+      opacity: 0.55;
+      mask-image: radial-gradient(ellipse at 75% 25%, black 0%, black 40%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at 75% 25%, black 0%, black 40%, transparent 75%);
+      z-index: 0;
+    }
+    .vh > * { position: relative; z-index: 1; }
+    @keyframes aurora-drift {
+      from { background-position: 50% 50%, 50% 50%; }
+      to { background-position: 350% 50%, 350% 50%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .vh::after { animation: none; }
+    }
     /* Blueprint curriculum layout */
     .v-bp { display: grid; grid-template-columns: 1fr; gap: 32px; margin-top: 32px; }
     @media (min-width: 720px) { .v-bp { grid-template-columns: 1fr 1fr; gap: 48px; } }
