@@ -32,7 +32,65 @@
     /* Single centered pricing card */
     .v-price.single { display: flex; justify-content: center; }
     .v-price.single .v-card { max-width: 520px; width: 100%; }
+    /* Rotating-word effect in hero (vanilla port of the animated-hero component) */
+    .rotating-word {
+      display: inline-block;
+      transition: opacity 0.32s cubic-bezier(0.4, 0, 0.2, 1), transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: opacity, transform;
+    }
+    .rotating-word.swap-out { opacity: 0; transform: translateY(-12px); }
+    .rotating-word.swap-in  { opacity: 0; transform: translateY(12px); }
+    /* Tubelight nav indicator (vanilla port of the tubelight-navbar component) */
+    .v-nav-links a {
+      position: relative;
+      padding-bottom: 6px;
+    }
+    .v-nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      transform-origin: center;
+      width: 36px;
+      height: 2px;
+      background: var(--v-cyan-d);
+      border-radius: 2px;
+      box-shadow: 0 0 6px var(--v-cyan-d), 0 0 14px rgba(2, 132, 199, 0.55), 0 0 22px rgba(2, 132, 199, 0.3);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease;
+      opacity: 0;
+    }
+    .v-nav-links a:hover::after,
+    .v-nav-links a:focus-visible::after { transform: translateX(-50%) scaleX(1); opacity: 1; }
   </style>
+  <script defer>
+    // Rotating word in the hero
+    (function () {
+      var phrases = ["on it daily.", "ready early.", "scoring high.", "calm on test day.", "moving forward."];
+      function init() {
+        var el = document.getElementById("rotating-word");
+        if (!el) return;
+        var i = 0;
+        setInterval(function () {
+          el.classList.add("swap-out");
+          setTimeout(function () {
+            i = (i + 1) % phrases.length;
+            el.textContent = phrases[i];
+            el.classList.remove("swap-out");
+            el.classList.add("swap-in");
+            // force reflow so the "in" animation runs
+            void el.offsetWidth;
+            el.classList.remove("swap-in");
+          }, 320);
+        }, 2600);
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+      } else {
+        init();
+      }
+    })();
+  </script>
 </head>
 <body class="vitals" data-screen-label="01 Marketing Home, Vitals theme">
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -92,7 +150,7 @@
         <div class="vh-inner">
           <div class="vh-copy">
             <span class="v-tag beat">Cohort live · Day 9 of the 4-month cohort · join next cohort</span>
-            <h1 class="vh-h1">USMLE prep that keeps you <span class="em">on it daily.</span></h1>
+            <h1 class="vh-h1">USMLE prep that keeps you <span class="em rotating-word" id="rotating-word" aria-live="polite">on it daily.</span></h1>
             <p class="vh-lede">
               A mentor-led USMLE Step 1 cohort that started <strong>June 1, 2026</strong>, currently in week 2 of the 4-month program. Daily live Zoom classes Monday to Sunday, a full First Aid walkthrough paired with UWorld vignettes, and mentorship through ECFMG and the match.
             </p>
