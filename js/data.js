@@ -233,7 +233,8 @@ window.BLOCKS = [
       { id: "cvs-pharmacology", label: "Pharmacology",             days: [10] }
     ],
     recordings: [
-      { title: "Myopericardial pathology part 1", url: "https://us06web.zoom.us/rec/share/hKEhi6frtIXdISm9SABDzyhq_6nz0KUN4a1_wM94F6cRogIdEs8ffn4HHx_AJ9GN.wtCb5-MhDQBilM8i" }
+      { title: "Myopericardial pathology part 1", url: "https://us06web.zoom.us/rec/share/hKEhi6frtIXdISm9SABDzyhq_6nz0KUN4a1_wM94F6cRogIdEs8ffn4HHx_AJ9GN.wtCb5-MhDQBilM8i" },
+      { title: "Myopericardial pathology part 2", url: "https://us06web.zoom.us/rec/share/igoCAN24nmCgr0EKcVZ_Yo8pt26ihRHTri4LQ2O0cfg_UlkqkV5CcTuOnjD1Abik.lq57yEEv5ilJV9zR" }
     ]
   },
   {
