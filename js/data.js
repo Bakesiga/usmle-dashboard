@@ -164,7 +164,7 @@ window.SESSIONS = [
   { day: 8,  date: "2026-06-08", subject: "cvs", phase: "pathology",    title: "CVS Pathology pt 2 · HF, shock, CMP, vascular disease", sub: "Heart failure, shock, cardiomyopathies, hypertension, atherosclerosis and arteriolosclerosis, aortic diseases" },
   { day: 9,  date: "2026-06-09", subject: "cvs", phase: "pathology",    title: "CVS Pathology pt 3 · arrhythmias, pericardial, tumors", sub: "Arrhythmias, pericardial diseases, cardiac tumors" },
   { day: 10, date: "2026-06-10", subject: "cvs", phase: "pharmacology", title: "CVS Pharmacology pt 1",                                  sub: "First half of CVS pharm; Allan to populate the specific drug classes" },
-  { day: 11, date: "2026-06-11", subject: "cvs", phase: "pharmacology", title: "CVS Pharmacology pt 2",                                  sub: "Second half of CVS pharm; Allan to populate the specific drug classes" },
+  { day: 11, date: "2026-06-11", subject: "cvs", phase: "pathology",    title: "CVS Pathology review · final review day",              sub: "Last review pass over CVS pathology: congenital, CAD, IE, RHD, HF, shock, CMP, HTN, atherosclerosis, aortic, arrhythmias, pericardial, tumors" },
 
   // ---- Respiratory (8) — June 11-18 ----
   { day: 12, date: "2026-06-12", subject: "resp", title: "Lung anatomy & development",         sub: "Branching, surfactant, fetal lung" },
@@ -229,8 +229,8 @@ window.BLOCKS = [
     subBlocks: [
       { id: "cvs-anat-embryo",  label: "Anatomy and Embryology", days: [1, 2, 3] },
       { id: "cvs-physiology",   label: "Physiology",             days: [4, 5, 6] },
-      { id: "cvs-pathology",    label: "Pathology",              days: [7, 8, 9] },
-      { id: "cvs-pharmacology", label: "Pharmacology",           days: [10, 11] }
+      { id: "cvs-pathology",    label: "Pathology (incl. review)", days: [7, 8, 9, 11] },
+      { id: "cvs-pharmacology", label: "Pharmacology",             days: [10] }
     ]
   },
   {
