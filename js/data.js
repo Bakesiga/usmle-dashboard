@@ -235,7 +235,8 @@ window.BLOCKS = [
     recordings: [
       { title: "Myopericardial pathology part 1", url: "https://us06web.zoom.us/rec/share/hKEhi6frtIXdISm9SABDzyhq_6nz0KUN4a1_wM94F6cRogIdEs8ffn4HHx_AJ9GN.wtCb5-MhDQBilM8i" },
       { title: "Myopericardial pathology part 2", url: "https://us06web.zoom.us/rec/share/igoCAN24nmCgr0EKcVZ_Yo8pt26ihRHTri4LQ2O0cfg_UlkqkV5CcTuOnjD1Abik.lq57yEEv5ilJV9zR" },
-      { title: "CVS Pharmacology Day 1 (antihypertensives and heart failure medications) part 1", url: "https://us06web.zoom.us/rec/share/bi8XXkQi0YlE94xbDy928Mqphi8OqDHYBEZedjUueTEA0u2ENFyIDs98DVdbNIWW.DVroufTF-ooT_9Cc" }
+      { title: "CVS Pharmacology Day 1 (antihypertensives and heart failure medications) part 1", url: "https://us06web.zoom.us/rec/share/bi8XXkQi0YlE94xbDy928Mqphi8OqDHYBEZedjUueTEA0u2ENFyIDs98DVdbNIWW.DVroufTF-ooT_9Cc" },
+      { title: "CVS Pharmacology · antiarrhythmic medications", url: "https://us06web.zoom.us/rec/share/P9HPLYaN9BFB2E2v6JC0uB1umQ-Q-a5p5RLmUdvzNjeUBJVZ0iEbViNx_ucZQReC.gnRnmEGPs1KfzM3d" }
     ]
   },
   {
