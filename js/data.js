@@ -167,38 +167,37 @@ window.SESSIONS = [
   { day: 11, date: "2026-06-11", subject: "cvs", phase: "pharmacology", title: "CVS Pharmacology Day 1 · antihypertensives & HF meds", sub: "Antihypertensive drug classes and heart failure medications" },
   { day: 12, date: "2026-06-12", subject: "cvs", phase: "pharmacology", title: "CVS Pharmacology Day 2 · antiarrhythmic medications",  sub: "Class I to IV antiarrhythmics, adenosine, digoxin, magnesium" },
 
-  // ---- Respiratory (9) — June 14 to June 22 ----
+  // ---- Respiratory (8) — June 14 to June 21 ----
   { day: 13, date: "2026-06-14", subject: "resp", phase: "anatomy",     title: "Respiratory Anatomy & Embryology", sub: "Lung development, branching morphogenesis, surfactant, fetal lung, gross airway and lung anatomy" },
-  { day: 14, date: "2026-06-15", subject: "resp", phase: "anatomy",     title: "Respiratory Anatomy & Embryology", sub: "" },
+  { day: 14, date: "2026-06-15", subject: "resp", phase: "physiology",  title: "Respiratory Physiology",           sub: "" },
   { day: 15, date: "2026-06-16", subject: "resp", phase: "physiology",  title: "Respiratory Physiology",           sub: "" },
-  { day: 16, date: "2026-06-17", subject: "resp", phase: "physiology",  title: "Respiratory Physiology",           sub: "" },
+  { day: 16, date: "2026-06-17", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "" },
   { day: 17, date: "2026-06-18", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "" },
   { day: 18, date: "2026-06-19", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "" },
   { day: 19, date: "2026-06-20", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "" },
-  { day: 20, date: "2026-06-21", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "" },
-  { day: 21, date: "2026-06-22", subject: "resp", phase: "pharmacology", title: "Respiratory Pharmacology",        sub: "" },
+  { day: 20, date: "2026-06-21", subject: "resp", phase: "pharmacology", title: "Respiratory Pharmacology",        sub: "" },
 
-  // ---- Epi & Biostats (4) — June 23 to June 26 ----
-  { day: 22, date: "2026-06-23", subject: "epi",  title: "Study design",                       sub: "RCT, cohort, case-control, cross-sectional" },
-  { day: 23, date: "2026-06-24", subject: "epi",  title: "Diagnostic tests",                   sub: "Sensitivity, specificity, PPV, NPV, LR" },
-  { day: 24, date: "2026-06-25", subject: "epi",  title: "Bias, confounding & error",          sub: "Selection, recall, lead-time, type I/II" },
-  { day: 25, date: "2026-06-26", subject: "epi",  title: "Statistical tests",                  sub: "T-test, ANOVA, chi-square, regression" },
+  // ---- Epi & Biostats (4) — June 22 to June 25 ----
+  { day: 21, date: "2026-06-22", subject: "epi",  title: "Study design",                       sub: "RCT, cohort, case-control, cross-sectional" },
+  { day: 22, date: "2026-06-23", subject: "epi",  title: "Diagnostic tests",                   sub: "Sensitivity, specificity, PPV, NPV, LR" },
+  { day: 23, date: "2026-06-24", subject: "epi",  title: "Bias, confounding & error",          sub: "Selection, recall, lead-time, type I/II" },
+  { day: 24, date: "2026-06-25", subject: "epi",  title: "Statistical tests",                  sub: "T-test, ANOVA, chi-square, regression" },
 
-  // ---- General Pathology (7) — June 27 to July 3 ----
+  // ---- General Pathology (7) — June 26 to July 2 ----
+  { day: 25, date: "2026-06-26", subject: "path", title: "General Pathology", sub: "" },
   { day: 26, date: "2026-06-27", subject: "path", title: "General Pathology", sub: "" },
   { day: 27, date: "2026-06-28", subject: "path", title: "General Pathology", sub: "" },
   { day: 28, date: "2026-06-29", subject: "path", title: "General Pathology", sub: "" },
   { day: 29, date: "2026-06-30", subject: "path", title: "General Pathology", sub: "" },
   { day: 30, date: "2026-07-01", subject: "path", title: "General Pathology", sub: "" },
-  { day: 31, date: "2026-07-02", subject: "path", title: "General Pathology", sub: "" },
-  { day: 32, date: "2026-07-03", subject: "path", title: "General Pathology", sub: "" }
+  { day: 31, date: "2026-07-02", subject: "path", title: "General Pathology", sub: "" }
 ];
 
 window.SUBJECT_META = {
   cvs:  { name: "Cardiovascular",   short: "CVS",   dateRange: "Jun 1 to Jun 12", count: 12 },
-  resp: { name: "Respiratory",      short: "RESP",  dateRange: "Jun 14 to Jun 22", count: 9 },
-  epi:  { name: "Epi & Biostats",   short: "EPI",   dateRange: "Jun 23 to Jun 26", count: 4 },
-  path: { name: "General Pathology", short: "PATH", dateRange: "Jun 27 to Jul 3", count: 7 }
+  resp: { name: "Respiratory",      short: "RESP",  dateRange: "Jun 14 to Jun 21", count: 8 },
+  epi:  { name: "Epi & Biostats",   short: "EPI",   dateRange: "Jun 22 to Jun 25", count: 4 },
+  path: { name: "General Pathology", short: "PATH", dateRange: "Jun 26 to Jul 2", count: 7 }
 };
 
 window.LINKS = {
@@ -245,13 +244,13 @@ window.BLOCKS = [
     short: "RS",
     label: "Respiratory",
     subject: "resp",
-    dateRange: "Jun 14 to Jun 22",
-    dayRange: [13, 21],
+    dateRange: "Jun 14 to Jun 21",
+    dayRange: [13, 20],
     subBlocks: [
-      { id: "resp-anat-embryo",  label: "Anatomy and Embryology", days: [13, 14] },
-      { id: "resp-physiology",   label: "Physiology",             days: [15, 16] },
-      { id: "resp-pathology",    label: "Pathology",              days: [17, 18, 19, 20] },
-      { id: "resp-pharmacology", label: "Pharmacology",           days: [21] }
+      { id: "resp-anat-embryo",  label: "Anatomy and Embryology", days: [13] },
+      { id: "resp-physiology",   label: "Physiology",             days: [14, 15] },
+      { id: "resp-pathology",    label: "Pathology",              days: [16, 17, 18, 19] },
+      { id: "resp-pharmacology", label: "Pharmacology",           days: [20] }
     ]
   },
   {
@@ -259,13 +258,13 @@ window.BLOCKS = [
     short: "EPI",
     label: "Epi and Biostats",
     subject: "epi",
-    dateRange: "Jun 23 to Jun 26",
-    dayRange: [22, 25],
+    dateRange: "Jun 22 to Jun 25",
+    dayRange: [21, 24],
     subBlocks: [
-      { id: "epi-study-design",     label: "Study design",             days: [22] },
-      { id: "epi-diagnostic-tests", label: "Diagnostic tests",         days: [23] },
-      { id: "epi-bias-error",       label: "Bias, confounding, error", days: [24] },
-      { id: "epi-stat-tests",       label: "Statistical tests",        days: [25] }
+      { id: "epi-study-design",     label: "Study design",             days: [21] },
+      { id: "epi-diagnostic-tests", label: "Diagnostic tests",         days: [22] },
+      { id: "epi-bias-error",       label: "Bias, confounding, error", days: [23] },
+      { id: "epi-stat-tests",       label: "Statistical tests",        days: [24] }
     ]
   },
   {
@@ -273,10 +272,10 @@ window.BLOCKS = [
     short: "PATH",
     label: "General Pathology",
     subject: "path",
-    dateRange: "Jun 27 to Jul 03",
-    dayRange: [26, 32],
+    dateRange: "Jun 26 to Jul 02",
+    dayRange: [25, 31],
     subBlocks: [
-      { id: "path-general", label: "General Pathology", days: [26, 27, 28, 29, 30, 31, 32] }
+      { id: "path-general", label: "General Pathology", days: [25, 26, 27, 28, 29, 30, 31] }
     ]
   }
 ];
