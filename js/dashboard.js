@@ -180,9 +180,10 @@
       backLink.hidden = true;
     }
 
-    // Top bar chip — turn green when soon/live
+    // Top bar Zoom chip removed (students use their own personal links).
+    // Guard kept in case a future shared chip is reintroduced.
     const chip = document.querySelector('.chip-zoom');
-    chip.classList.toggle('live', status.state === 'live' || status.state === 'soon');
+    if (chip) chip.classList.toggle('live', status.state === 'live' || status.state === 'soon');
 
     // Side rail presence
     renderSideRail(now, pick);
