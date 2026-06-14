@@ -119,6 +119,41 @@
         init();
       }
     })();
+
+    // Live cohort-day counter: computes "Day N of 120" from the June 1, 2026
+    // start so the homepage progress advances on its own instead of staying
+    // frozen at a hardcoded number.
+    (function () {
+      var COHORT_LENGTH = 120;
+      var START = new Date(2026, 5, 1); // June 1, 2026 (month is 0-indexed)
+      function init() {
+        var now = new Date();
+        var msPerDay = 86400000;
+        var day = Math.floor((now - START) / msPerDay) + 1;
+        if (day < 1) day = 1;
+        if (day > COHORT_LENGTH) day = COHORT_LENGTH;
+        var pct = Math.round((day / COHORT_LENGTH) * 1000) / 10; // one decimal
+
+        var eyebrow = document.querySelector("[data-cohort-eyebrow]");
+        if (eyebrow) eyebrow.textContent = "Cohort live · Day " + day + " of the 4-month cohort · join next cohort";
+
+        var label = document.querySelector("[data-cohort-day]");
+        if (label) label.textContent = "Day " + day + " of " + COHORT_LENGTH;
+
+        var bar = document.querySelector("[data-cohort-bar]");
+        if (bar) {
+          bar.setAttribute("aria-valuenow", String(day));
+          bar.setAttribute("aria-label", "Cohort day " + day + " of " + COHORT_LENGTH);
+          var fill = bar.querySelector("i");
+          if (fill) fill.style.setProperty("--pct", pct + "%");
+        }
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+      } else {
+        init();
+      }
+    })();
   </script>
 </head>
 <body class="vitals" data-screen-label="01 Marketing Home, Vitals theme">
@@ -178,7 +213,7 @@
       <div class="v-container">
         <div class="vh-inner">
           <div class="vh-copy">
-            <span class="v-tag beat">Cohort live · Day 9 of the 4-month cohort · join next cohort</span>
+            <span class="v-tag beat" data-cohort-eyebrow>Cohort live · Day 9 of the 4-month cohort · join next cohort</span>
             <h1 class="vh-h1">USMLE prep that keeps you <span class="em rotating-word" id="rotating-word" aria-live="polite">on it daily.</span></h1>
             <p class="vh-lede">
               A mentor-led USMLE Step 1 cohort that started <strong>June 1, 2026</strong>, currently in week 2 of the 4-month program. Daily live Zoom classes Monday to Sunday, a full First Aid walkthrough paired with UWorld vignettes, and mentorship through ECFMG and the match.
@@ -246,10 +281,10 @@
     <section class="v-prog" aria-label="Cohort progress">
       <div class="v-container">
         <div class="v-prog-head">
-          <div class="v-prog-label">Cohort live · <b>Day 9 of 120</b> · 4-month program in progress</div>
+          <div class="v-prog-label">Cohort live · <b data-cohort-day>Day 9 of 120</b> · 4-month program in progress</div>
           <div class="v-prog-stat">Daily <b>5:00 AM EAT</b> · Mon to Sun</div>
         </div>
-        <div class="v-prog-bar" role="progressbar" aria-valuenow="9" aria-valuemin="0" aria-valuemax="120" aria-label="Cohort day 9 of 120">
+        <div class="v-prog-bar" role="progressbar" data-cohort-bar aria-valuenow="9" aria-valuemin="0" aria-valuemax="120" aria-label="Cohort day 9 of 120">
           <i style="--pct: 7.5%;"></i>
         </div>
         <div class="v-prog-ticks">
