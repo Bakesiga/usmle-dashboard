@@ -120,9 +120,10 @@
     pill.querySelector('.lab').textContent = pillText;
     root.querySelector('[data-countdown-line]').textContent = countdownLine;
 
-    // Live-pulse on primary join tile
+    // Live-pulse on primary join tile (the shared Zoom tile was removed, so
+    // guard against it being absent).
     const joinTile = root.querySelector('.action-tile.primary');
-    joinTile.classList.toggle('live', status.state === 'live');
+    if (joinTile) joinTile.classList.toggle('live', status.state === 'live');
 
     // Dynamic resource tiles (one per item in session.resources)
     renderResourceTiles(root, s);
