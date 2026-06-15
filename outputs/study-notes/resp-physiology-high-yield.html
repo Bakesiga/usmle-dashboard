@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="../../js/artifact-gate.js" defer></script>
+<style>body { visibility: hidden; }</style>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Respiratory Physiology · High-Yield Summary</title>
+<style>
+  /* ---------- design tokens, mirrored from the flyer/dashboard palette ---------- */
+  :root {
+    --ink: #0C2A3D;
+    --ink-2: #345671;
+    --muted: #5B7A95;
+    --bg: #FFFFFF;
+    --bg-cream: #FFF8EC;
+    --border: #D6E8F5;
+
+    --gold: #E5A823;
+    --gold-deep: #B8851C;
+    --gold-soft: #FFF4D6;
+
+    --cvs: #0284C7; --cvs-soft: #E0F2FE; --cvs-deep: #075985;
+    --resp: #059669; --resp-soft: #D1FAE5; --resp-deep: #065F46;
+    --path: #7C3AED; --path-soft: #EDE9FE; --path-deep: #5B21B6;
+    --amber: #D97706; --amber-soft: #FEF3C7; --amber-deep: #B45309;
+  }
+
+  @page { size: A4; margin: 12mm 10mm; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 9.5pt;
+    line-height: 1.32;
+  }
+
+  .ribbon {
+    background: var(--ink);
+    color: #FFFFFF;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .ribbon h1 {
+    margin: 0;
+    font-size: 14pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .ribbon .meta {
+    font-size: 8.5pt;
+    color: #BFE3F7;
+    letter-spacing: 0.06em;
+  }
+
+  .cohort-line {
+    font-size: 8.5pt;
+    color: var(--ink-2);
+    margin: 0 0 10px;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .byline {
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-deep) 100%);
+    color: var(--ink);
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 8.5pt;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin: -4px 0 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .byline .author { font-weight: 800; }
+  .byline .home {
+    font-weight: 500;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .card {
+    border-radius: 6px;
+    padding: 7px 9px 8px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .card h2 {
+    margin: 0 0 4px;
+    font-size: 9.5pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 3px 7px;
+    margin: -7px -9px 6px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .card h2 .tag {
+    font-size: 7pt;
+    background: rgba(255,255,255,0.22);
+    padding: 1px 6px;
+    border-radius: 999px;
+    letter-spacing: 0.06em;
+    text-transform: none;
+    font-weight: 600;
+  }
+  .card ul { margin: 0; padding-left: 14px; }
+  .card li { margin-bottom: 2px; }
+  .card li::marker { color: var(--ink-2); }
+
+  .card.gross { background: var(--resp-soft); }
+  .card.gross h2 { background: var(--resp-deep); }
+  .card.tree { background: var(--cvs-soft); }
+  .card.tree h2 { background: var(--cvs-deep); }
+  .card.embryo { background: var(--gold-soft); }
+  .card.embryo h2 { background: var(--gold-deep); }
+  .card.cells { background: var(--path-soft); }
+  .card.cells h2 { background: var(--path-deep); }
+  .card.congenital { background: var(--amber-soft); }
+  .card.congenital h2 { background: var(--amber-deep); }
+  .card.diaphragm { background: var(--cvs-soft); }
+  .card.diaphragm h2 { background: var(--cvs); }
+
+  .card.span { grid-column: span 2; }
+
+  table.resp-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 4px;
+    font-size: 8.5pt;
+  }
+  table.resp-table th, table.resp-table td {
+    border: 1px solid var(--ink-2);
+    padding: 2px 5px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.resp-table th {
+    background: var(--gold);
+    color: var(--ink);
+    font-weight: 700;
+  }
+  table.resp-table tr:nth-child(even) { background: rgba(255,255,255,0.55); }
+
+  .keynums {
+    background: var(--ink);
+    color: #FFFFFF;
+    border-radius: 6px;
+    padding: 7px 10px;
+    grid-column: span 2;
+    page-break-inside: avoid;
+  }
+  .keynums h2 {
+    margin: 0 0 4px;
+    font-size: 10pt;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .keynums ol {
+    margin: 0;
+    padding-left: 18px;
+    columns: 2;
+    column-gap: 14px;
+  }
+  .keynums li { margin-bottom: 2px; }
+  .keynums li::marker { color: var(--gold); font-weight: 700; }
+
+  .footer-stamp {
+    text-align: center;
+    font-size: 7.5pt;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  strong { color: var(--ink); }
+  em { font-style: italic; }
+  .accent-gold { color: var(--gold-deep); font-weight: 700; }
+  .accent-cvs { color: var(--cvs-deep); font-weight: 700; }
+  .accent-resp { color: var(--resp-deep); font-weight: 700; }
+  .accent-path { color: var(--path-deep); font-weight: 700; }
+  .accent-amber { color: var(--amber-deep); font-weight: 700; }
+
+  /* ---------- mobile ---------- */
+  @media (max-width: 640px) {
+    body { font-size: 11pt; }
+    .grid { grid-template-columns: 1fr; }
+    .card.span { grid-column: span 1; }
+    .keynums { grid-column: span 1; }
+    .keynums ol { columns: 1; }
+    .ribbon { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .ribbon h1 { font-size: 12pt; }
+    .byline { flex-direction: column; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <h1>Respiratory · Days 14 and 15 · Physiology</h1>
+  <div class="meta">USMLE Step 1 · June Cohort</div>
+</div>
+<div class="byline">
+  <span class="author">Prepared by Allan Bakesiga · USMLE Step 1 Prep</span>
+  <span class="home">bakesiga.github.io/usmle-dashboard</span>
+</div>
+<p class="cohort-line">Days 14 and 15 lecture summary · First Aid 2025 pp. 682 to 689 · All wording original</p>
+
+<div class="grid">
+
+  <div class="card gross span">
+    <h2>1 · Lung Volumes and Capacities <span class="tag">FA pp. 682 to 683</span></h2>
+    <ul>
+      <li><strong>Four volumes:</strong> <strong>tidal volume</strong> (about 500 mL, one normal breath), <strong>inspiratory reserve volume</strong> (extra air you can pull in beyond a normal breath), <strong>expiratory reserve volume</strong> (extra air you can push out beyond a normal breath), and <strong>residual volume</strong> (what remains after a maximal exhale, which spirometry cannot measure).</li>
+      <li><strong>Four capacities</strong> (a capacity is two or more volumes added together): <strong>inspiratory capacity</strong> (tidal plus inspiratory reserve), <strong>functional residual capacity</strong> (expiratory reserve plus residual, the resting volume after a normal exhale), <strong>vital capacity</strong> (tidal plus both reserves, the most air you can move), and <strong>total lung capacity</strong> (all four volumes summed).</li>
+      <li>Anything that contains <strong>residual volume</strong> (so RV, FRC, and TLC) <span class="accent-resp">cannot be measured by simple spirometry</span>. You need helium dilution or body plethysmography.</li>
+      <li><strong>Functional residual capacity</strong> is the equilibrium point where the inward elastic recoil of the lung exactly balances the outward recoil of the chest wall. Pulmonary vascular resistance is also at its lowest at FRC.</li>
+    </ul>
+  </div>
+
+  <div class="card tree span">
+    <h2>2 · Dead Space and Ventilation <span class="tag">FA p. 683</span></h2>
+    <ul>
+      <li><strong>Minute ventilation</strong> equals tidal volume times respiratory rate. <strong>Alveolar ventilation</strong> equals (tidal volume minus dead space) times respiratory rate.</li>
+      <li><strong>Anatomic dead space</strong> is the conducting airways (about 150 mL): they move air but do no gas exchange. <strong>Physiologic dead space</strong> adds <em>alveolar dead space</em>, meaning alveoli that are ventilated but not perfused. In healthy lungs physiologic dead space is about equal to anatomic dead space.</li>
+    </ul>
+  </div>
+
+  <div class="card embryo span">
+    <h2>3 · Oxygen-Hemoglobin Dissociation Curve <span class="tag">FA pp. 686 to 687</span></h2>
+    <ul>
+      <li>The curve is <strong>sigmoidal</strong> (S-shaped) because of <strong>positive cooperativity</strong>: hemoglobin has four subunits, and binding one oxygen molecule raises the affinity for the next. Myoglobin, with a single subunit, has a hyperbolic curve instead.</li>
+      <li>A <span class="accent-amber"><strong>right shift</strong></span> means decreased affinity, so hemoglobin <em>releases more oxygen to the tissues</em>. Causes (the Bohr effect): increased CO2, increased acidity (lower pH), increased temperature, increased 2,3-BPG, and exercise. Mnemonic <strong>CADET, "CADET face right"</strong>: CO2, Acid, 2,3-DPG, Exercise, Temperature.</li>
+      <li>A <span class="accent-cvs"><strong>left shift</strong></span> means increased affinity, so hemoglobin <em>holds onto oxygen</em>. Causes: fetal hemoglobin (binds 2,3-BPG poorly), carbon monoxide, methemoglobin, and decreased CO2, acid, temperature, or 2,3-BPG.</li>
+    </ul>
+  </div>
+
+  <div class="card cells span">
+    <h2>4 · Hemoglobin Modifications <span class="tag">FA pp. 686 to 687</span></h2>
+    <ul>
+      <li><strong>Methemoglobin:</strong> the iron is oxidized to the ferric (Fe3+) state and cannot bind oxygen, which produces a functional anemia and a left shift of the remaining sites. Causes include nitrites, dapsone, and local anesthetics. Blood looks chocolate-colored and the cyanosis does not improve with oxygen. Treat with <span class="accent-path">methylene blue</span>. Note that ferric iron also binds cyanide, which is why nitrites are deliberately used in cyanide poisoning to pull cyanide off the mitochondria.</li>
+      <li><strong>Carboxyhemoglobin:</strong> carbon monoxide binds hemoglobin roughly 200 times more avidly than oxygen, lowering oxygen-carrying capacity and shifting the curve left. Classic findings: cherry-red skin, a normal arterial oxygen partial pressure, but a low measured saturation. Treat with 100% oxygen, or hyperbaric oxygen in severe cases.</li>
+    </ul>
+  </div>
+
+  <div class="card congenital span">
+    <h2>5 · Oxygen Content and Delivery <span class="tag">FA p. 687</span></h2>
+    <ul>
+      <li><strong>Oxygen content</strong> equals (1.34 times hemoglobin times saturation) plus (0.003 times the arterial oxygen partial pressure). Almost all oxygen is bound to hemoglobin, and the dissolved portion is tiny.</li>
+      <li><strong>Oxygen delivery</strong> equals cardiac output times oxygen content.</li>
+      <li><span class="accent-amber"><strong>Key teaching point:</strong></span> anemia lowers oxygen content because hemoglobin is low, but the arterial oxygen partial pressure and the saturation percentage stay normal. Carbon monoxide poisoning lowers both saturation and content while the partial pressure stays normal.</li>
+    </ul>
+  </div>
+
+  <div class="card diaphragm span">
+    <h2>6 · Alveolar Gas Equation and A-a Gradient <span class="tag">FA p. 685</span></h2>
+    <ul>
+      <li>The <strong>alveolar oxygen partial pressure</strong> can be estimated as 150 minus (arterial CO2 divided by 0.8) on room air at sea level.</li>
+      <li>The <strong>A-a gradient</strong> is the alveolar minus the arterial oxygen partial pressure. Normal is about 5 to 15 mm Hg, and it rises with age.</li>
+      <li>A <strong>normal A-a gradient</strong> with hypoxemia points to high altitude or hypoventilation (for example opioid overdose or obesity hypoventilation). An <strong>increased A-a gradient</strong> points to V/Q mismatch, a diffusion problem (such as fibrosis), or a right-to-left shunt.</li>
+    </ul>
+  </div>
+
+  <div class="card gross span">
+    <h2>7 · Hypoxemia, Hypoxia, and Ischemia <span class="tag">FA p. 686</span></h2>
+    <ul>
+      <li><strong>Hypoxemia</strong> is a low arterial oxygen partial pressure. <strong>Hypoxia</strong> is inadequate oxygen delivery to tissue. <strong>Ischemia</strong> is inadequate blood flow.</li>
+      <li>A <strong>shunt does not correct</strong> with 100% oxygen because blood bypasses ventilated alveoli entirely. A <strong>V/Q mismatch does improve</strong> with 100% oxygen. That single distinction is heavily tested.</li>
+    </ul>
+  </div>
+
+  <div class="card tree span">
+    <h2>8 · Ventilation-Perfusion (V/Q) Matching <span class="tag">FA p. 685</span></h2>
+    <ul>
+      <li>The ideal <strong>V/Q is 1</strong>. At the <strong>apex</strong> the V/Q is high (around 3): both ventilation and perfusion are lower there, but perfusion falls more, so it behaves a little like wasted ventilation (dead space). At the <strong>base</strong> the V/Q is low (around 0.6): both are higher, but perfusion is higher still, so it behaves a little like wasted perfusion (shunt).</li>
+      <li>A V/Q approaching <strong>zero</strong> is airway obstruction (a shunt, where 100% oxygen does not help). A V/Q approaching <strong>infinity</strong> is blood-flow obstruction such as a pulmonary embolism (dead space).</li>
+      <li>The high-oxygen apex is why reactivated tuberculosis and centrilobular emphysema favor the upper lobes.</li>
+    </ul>
+  </div>
+
+  <div class="card embryo span">
+    <h2>9 · CO2 Transport <span class="tag">FA p. 687</span></h2>
+    <ul>
+      <li>Carbon dioxide travels three ways: as <strong>bicarbonate</strong> (about 90%, generated by carbonic anhydrase in red cells with the chloride shift), bound to hemoglobin as <strong>carbaminohemoglobin</strong> (about 5%), and <strong>dissolved</strong> (about 5%).</li>
+      <li>The <strong>Haldane effect:</strong> in the lungs, oxygenating hemoglobin promotes the release of CO2. The <strong>Bohr effect:</strong> in the tissues, CO2 and acid promote the release of oxygen.</li>
+    </ul>
+  </div>
+
+  <div class="card cells span">
+    <h2>10 · Pulmonary Circulation <span class="tag">FA p. 684</span></h2>
+    <ul>
+      <li>The pulmonary circulation is normally <strong>low-resistance and high-compliance</strong>.</li>
+      <li><strong>Hypoxic vasoconstriction</strong> is the key reflex: alveolar hypoxia constricts local pulmonary vessels to shunt blood toward better-ventilated lung. This is the <em>opposite</em> of the systemic circulation, where hypoxia dilates. Chronic hypoxic vasoconstriction drives pulmonary hypertension and cor pulmonale.</li>
+      <li><strong>Perfusion-limited gases</strong> (oxygen normally, CO2, nitrous oxide) equilibrate fully along the capillary. <strong>Diffusion-limited gases</strong> (carbon monoxide, and oxygen in fibrosis, emphysema, or strenuous exercise) do not.</li>
+    </ul>
+  </div>
+
+  <div class="card congenital span">
+    <h2>11 · Response to High Altitude <span class="tag">FA p. 688</span></h2>
+    <ul>
+      <li>Low atmospheric pressure lowers inspired oxygen, which lowers arterial oxygen, which triggers <strong>hyperventilation and a respiratory alkalosis</strong>.</li>
+      <li>Compensations: more erythropoietin and a higher hematocrit, more 2,3-BPG (a right shift to unload oxygen), and renal excretion of bicarbonate to offset the alkalosis (<span class="accent-amber">acetazolamide</span> accelerates this and treats altitude sickness). Chronic hypoxic pulmonary vasoconstriction causes pulmonary hypertension and right ventricular hypertrophy.</li>
+    </ul>
+  </div>
+
+  <div class="card diaphragm span">
+    <h2>12 · Response to Exercise <span class="tag">FA p. 688</span></h2>
+    <ul>
+      <li>Oxygen consumption and CO2 production rise, and ventilation rises to match, so the arterial oxygen and CO2 partial pressures stay essentially normal.</li>
+      <li>Pulmonary blood flow increases and the V/Q ratio becomes more uniform from apex to base. Venous oxygen content falls and venous CO2 content rises. At extreme exertion the pH can drop from lactic acidosis.</li>
+    </ul>
+  </div>
+
+  <div class="card gross span">
+    <h2>13 · Cyanide versus Carbon Monoxide <span class="tag">FA p. 689</span></h2>
+    <ul>
+      <li>Both poison aerobic metabolism by inhibiting <strong>complex IV (cytochrome c oxidase)</strong> of the electron transport chain, forcing anaerobic metabolism and a lactic acidosis.</li>
+    </ul>
+    <table class="resp-table">
+      <tr><th>Poison</th><th>Sources and clues</th><th>Treatment</th></tr>
+      <tr><td><strong>Cyanide</strong></td><td>House fires, nitroprusside, apricot seeds; classically an almond odor.</td><td>Hydroxocobalamin (binds cyanide), nitrites (make methemoglobin that binds cyanide), and sodium thiosulfate (converts cyanide to thiocyanate for renal excretion).</td></tr>
+      <tr><td><strong>Carbon monoxide</strong></td><td>Fires, car exhaust, faulty heaters. Headache, cherry-red appearance, a normal oxygen partial pressure with a low saturation, and a left-shifted curve.</td><td>100% oxygen, or hyperbaric oxygen.</td></tr>
+    </table>
+  </div>
+
+  <div class="keynums">
+    <h2>Key numbers and rules</h2>
+    <ol>
+      <li>Alveolar gas equation: 150 minus (CO2 / 0.8).</li>
+      <li>Normal A-a gradient: 5 to 15.</li>
+      <li>Shunt does not correct with 100% oxygen; V/Q mismatch does.</li>
+      <li>Oxygen content = 1.34 times Hb times saturation plus 0.003 times partial pressure.</li>
+      <li>Right shift unloads oxygen (CADET).</li>
+      <li>Altitude causes respiratory alkalosis.</li>
+    </ol>
+  </div>
+
+</div>
+
+<p class="footer-stamp">© Allan Bakesiga · USMLE Step 1 Prep · Original wording. Days 14 and 15 lecture summary. Carry it and review before every Q-bank block.</p>
+
+</body>
+</html>

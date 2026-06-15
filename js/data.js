@@ -173,8 +173,16 @@ window.SESSIONS = [
       { kind: "highYield", label: "Anatomy & Embryology high-yield summary", url: "outputs/study-notes/resp-anatomy-embryology-high-yield.html", meta: "Full lecture summary · FA 2025 pp. 678 to 681" }
     ]
   },
-  { day: 14, date: "2026-06-15", subject: "resp", phase: "physiology",  title: "Respiratory Physiology",           sub: "" },
-  { day: 15, date: "2026-06-16", subject: "resp", phase: "physiology",  title: "Respiratory Physiology",           sub: "" },
+  { day: 14, date: "2026-06-15", subject: "resp", phase: "physiology",  title: "Respiratory Physiology",           sub: "",
+    resources: [
+      { kind: "highYield", label: "Respiratory Physiology high-yield summary", url: "outputs/study-notes/resp-physiology-high-yield.html", meta: "Full lecture summary · FA 2025 pp. 682 to 689" }
+    ]
+  },
+  { day: 15, date: "2026-06-16", subject: "resp", phase: "physiology",  title: "Respiratory Physiology",           sub: "",
+    resources: [
+      { kind: "highYield", label: "Respiratory Physiology high-yield summary", url: "outputs/study-notes/resp-physiology-high-yield.html", meta: "Full lecture summary · FA 2025 pp. 682 to 689" }
+    ]
+  },
   { day: 16, date: "2026-06-17", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "" },
   { day: 17, date: "2026-06-18", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "" },
   { day: 18, date: "2026-06-19", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "" },
