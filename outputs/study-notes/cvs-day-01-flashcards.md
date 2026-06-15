@@ -1,7 +1,7 @@
 # Day 1 · CVS Anatomy & Embryology — Flashcards
 
 **USMLE Step 1 · June Cohort** · 60 cards · Active recall for the cohort
-*All wording original; cover the answer, attempt, then check.*
+*cover the answer, attempt, then check.*
 
 ---
 
