@@ -251,6 +251,9 @@ window.BLOCKS = [
       { id: "resp-physiology",   label: "Physiology",             days: [14, 15] },
       { id: "resp-pathology",    label: "Pathology",              days: [16, 17, 18, 19] },
       { id: "resp-pharmacology", label: "Pharmacology",           days: [20] }
+    ],
+    recordings: [
+      { title: "Respiratory Anatomy & Embryology", url: "https://us06web.zoom.us/rec/share/vSdGuRQ9lF5ZCrvXsl_L1M3begPlIxXm2cVH3MT9cjGA8OdNyHh0_NWZdD2rQm-3.c7Bo7MsUz1m2WLpS" }
     ]
   },
   {
