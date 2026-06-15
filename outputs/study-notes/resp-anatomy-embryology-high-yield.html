@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="../../js/artifact-gate.js" defer></script>
+<style>body { visibility: hidden; }</style>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Respiratory Anatomy &amp; Embryology · High-Yield Summary</title>
+<style>
+  /* ---------- design tokens, mirrored from the flyer/dashboard palette ---------- */
+  :root {
+    --ink: #0C2A3D;
+    --ink-2: #345671;
+    --muted: #5B7A95;
+    --bg: #FFFFFF;
+    --bg-cream: #FFF8EC;
+    --border: #D6E8F5;
+
+    --gold: #E5A823;
+    --gold-deep: #B8851C;
+    --gold-soft: #FFF4D6;
+
+    --cvs: #0284C7; --cvs-soft: #E0F2FE; --cvs-deep: #075985;
+    --resp: #059669; --resp-soft: #D1FAE5; --resp-deep: #065F46;
+    --path: #7C3AED; --path-soft: #EDE9FE; --path-deep: #5B21B6;
+    --amber: #D97706; --amber-soft: #FEF3C7; --amber-deep: #B45309;
+  }
+
+  @page { size: A4; margin: 12mm 10mm; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 9.5pt;
+    line-height: 1.32;
+  }
+
+  .ribbon {
+    background: var(--ink);
+    color: #FFFFFF;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .ribbon h1 {
+    margin: 0;
+    font-size: 14pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .ribbon .meta {
+    font-size: 8.5pt;
+    color: #BFE3F7;
+    letter-spacing: 0.06em;
+  }
+
+  .cohort-line {
+    font-size: 8.5pt;
+    color: var(--ink-2);
+    margin: 0 0 10px;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .byline {
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-deep) 100%);
+    color: var(--ink);
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 8.5pt;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin: -4px 0 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .byline .author { font-weight: 800; }
+  .byline .home {
+    font-weight: 500;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .card {
+    border-radius: 6px;
+    padding: 7px 9px 8px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .card h2 {
+    margin: 0 0 4px;
+    font-size: 9.5pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 3px 7px;
+    margin: -7px -9px 6px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .card h2 .tag {
+    font-size: 7pt;
+    background: rgba(255,255,255,0.22);
+    padding: 1px 6px;
+    border-radius: 999px;
+    letter-spacing: 0.06em;
+    text-transform: none;
+    font-weight: 600;
+  }
+  .card ul { margin: 0; padding-left: 14px; }
+  .card li { margin-bottom: 2px; }
+  .card li::marker { color: var(--ink-2); }
+
+  .card.gross { background: var(--resp-soft); }
+  .card.gross h2 { background: var(--resp-deep); }
+  .card.tree { background: var(--cvs-soft); }
+  .card.tree h2 { background: var(--cvs-deep); }
+  .card.embryo { background: var(--gold-soft); }
+  .card.embryo h2 { background: var(--gold-deep); }
+  .card.cells { background: var(--path-soft); }
+  .card.cells h2 { background: var(--path-deep); }
+  .card.congenital { background: var(--amber-soft); }
+  .card.congenital h2 { background: var(--amber-deep); }
+  .card.diaphragm { background: var(--cvs-soft); }
+  .card.diaphragm h2 { background: var(--cvs); }
+
+  .card.span { grid-column: span 2; }
+
+  table.resp-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 4px;
+    font-size: 8.5pt;
+  }
+  table.resp-table th, table.resp-table td {
+    border: 1px solid var(--ink-2);
+    padding: 2px 5px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.resp-table th {
+    background: var(--gold);
+    color: var(--ink);
+    font-weight: 700;
+  }
+  table.resp-table tr:nth-child(even) { background: rgba(255,255,255,0.55); }
+
+  .keynums {
+    background: var(--ink);
+    color: #FFFFFF;
+    border-radius: 6px;
+    padding: 7px 10px;
+    grid-column: span 2;
+    page-break-inside: avoid;
+  }
+  .keynums h2 {
+    margin: 0 0 4px;
+    font-size: 10pt;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .keynums ol {
+    margin: 0;
+    padding-left: 18px;
+    columns: 2;
+    column-gap: 14px;
+  }
+  .keynums li { margin-bottom: 2px; }
+  .keynums li::marker { color: var(--gold); font-weight: 700; }
+
+  .footer-stamp {
+    text-align: center;
+    font-size: 7.5pt;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  strong { color: var(--ink); }
+  em { font-style: italic; }
+  .accent-gold { color: var(--gold-deep); font-weight: 700; }
+  .accent-cvs { color: var(--cvs-deep); font-weight: 700; }
+  .accent-resp { color: var(--resp-deep); font-weight: 700; }
+  .accent-path { color: var(--path-deep); font-weight: 700; }
+  .accent-amber { color: var(--amber-deep); font-weight: 700; }
+
+  /* ---------- mobile ---------- */
+  @media (max-width: 640px) {
+    body { font-size: 11pt; }
+    .grid { grid-template-columns: 1fr; }
+    .card.span { grid-column: span 1; }
+    .keynums { grid-column: span 1; }
+    .keynums ol { columns: 1; }
+    .ribbon { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .ribbon h1 { font-size: 12pt; }
+    .byline { flex-direction: column; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <h1>Respiratory · Day 13 · Anatomy &amp; Embryology</h1>
+  <div class="meta">USMLE Step 1 · June Cohort</div>
+</div>
+<div class="byline">
+  <span class="author">Prepared by Allan Bakesiga · USMLE Step 1 Prep</span>
+  <span class="home">bakesiga.github.io/usmle-dashboard</span>
+</div>
+<p class="cohort-line">Day 13 lecture summary · First Aid 2025 pp. 678 to 681 · All wording original</p>
+
+<div class="grid">
+
+  <div class="card gross span">
+    <h2>1 · Lung Anatomy (gross) <span class="tag">FA p. 681</span></h2>
+    <ul>
+      <li><strong>Lobes:</strong> Right has 3 (upper, middle, lower) with a horizontal and an oblique fissure. Left has 2 (upper, lower) plus the <strong>lingula</strong> (homolog of the right middle lobe) with only an oblique fissure. The heart occupies the space where a left middle lobe would be. Mnemonic: <em>"Left has Less Lobes and Lingula."</em></li>
+      <li><strong>Hilum, RALS:</strong> on the <strong>R</strong>ight the pulmonary artery is <strong>A</strong>nterior to the bronchus; on the <strong>L</strong>eft it is <strong>S</strong>uperior. The carina sits posterior to the ascending aorta and anteromedial to the descending aorta.</li>
+      <li><strong>Foreign body aspiration</strong> favors the right lung because the right main bronchus is wider, more vertical, and shorter. The object lands in whatever segment is most gravity-dependent: <em>supine</em> goes to the superior segment of the right lower lobe (or posterior segment of the right upper lobe); <em>lying on the right side or prone</em> goes to the right upper lobe; <em>upright</em> goes to the right lower lobe.</li>
+      <li><strong>Thoracentesis:</strong> the pleural space lies between the visceral and parietal pleura. Pass the needle <span class="accent-resp">ABOVE a rib</span>, because the neurovascular bundle (Vein, Artery, Nerve, top to bottom) runs in the groove on the underside of each rib. Stay above the 9th rib to avoid the liver on the right and the spleen on the left.</li>
+    </ul>
+  </div>
+
+  <div class="card tree span">
+    <h2>2 · Tracheobronchial Tree &amp; Histology <span class="tag">FA p. 680</span></h2>
+    <ul>
+      <li><strong>Two zones:</strong> the <strong>conducting zone</strong> (nose, pharynx, larynx, trachea, bronchi, bronchioles, terminal bronchioles) warms, humidifies, and filters air but does no gas exchange (anatomic dead space). The <strong>respiratory zone</strong> (respiratory bronchioles, alveolar ducts, alveoli) is where gas exchange happens.</li>
+      <li><strong>Epithelium thins going down:</strong> pseudostratified ciliated columnar, then simple columnar, then simple cuboidal, then simple squamous (type I pneumocytes at the alveolus). Rule: tall and thick up top for defense, flat and thin at the bottom for gas exchange.</li>
+      <li><strong>Where each feature ends</strong> (going down, the airway progressively loses features): <strong>Cartilage</strong> ends at the end of the bronchi (bronchioles have none, so they can collapse). <strong>Goblet cells</strong> end at the end of the bronchi. <strong>Cilia</strong> extend to the respiratory bronchioles, slightly further than goblet cells, so mucus is always swept back up toward cilia. <strong>Smooth muscle</strong> extends to the terminal bronchioles (sparse beyond), and is the muscle that constricts in asthma.</li>
+      <li><strong>Airway resistance</strong> is highest in the <strong>medium-sized bronchi</strong>, not the smallest airways. The terminal bronchioles are so numerous and arranged in parallel that their combined cross-sectional area is huge, giving the lowest resistance.</li>
+      <li><strong>Mucociliary escalator:</strong> ciliated cells plus goblet-cell mucus trap and sweep debris upward; smoking paralyzes the cilia.</li>
+    </ul>
+  </div>
+
+  <div class="card embryo span">
+    <h2>3 · Embryology · Five Stages of Lung Development <span class="tag">FA p. 678</span></h2>
+    <ul>
+      <li>The lung buds off the foregut as the <strong>respiratory diverticulum</strong> during week 4, then develops in five stages. Mnemonic: <em>"Every Pulmonologist Can See Alveoli."</em></li>
+    </ul>
+    <table class="resp-table">
+      <tr><th>Stage</th><th>Weeks</th><th>What is built</th><th>Can it breathe?</th></tr>
+      <tr><td><strong>Embryonic</strong></td><td>4 to 7</td><td>Big pipes: lung bud &rarr; trachea &rarr; mainstem &rarr; lobar &rarr; segmental bronchi. Errors here cause tracheoesophageal fistula, tracheal atresia or stenosis, pulmonary agenesis.</td><td>No</td></tr>
+      <tr><td><strong>Pseudoglandular</strong></td><td>5 to 17</td><td>Branching down to terminal bronchioles (all conducting airways, no gas-exchange surface).</td><td>No</td></tr>
+      <tr><td><strong>Canalicular</strong></td><td>16 to 25</td><td>Terminal bronchioles &rarr; respiratory bronchioles &rarr; alveolar ducts with capillaries crowding in. Pneumocytes appear ~week 20 and begin surfactant.</td><td>Possible ~week 25 (edge of viability)</td></tr>
+      <tr><td><strong>Saccular</strong></td><td>24 to birth</td><td>Alveolar ducts &rarr; terminal sacs separated by primary septae.</td><td>Increasingly yes</td></tr>
+      <tr><td><strong>Alveolar</strong></td><td>36 to ~8 yr</td><td>Terminal sacs &rarr; mature alveoli by secondary septation; alveoli keep multiplying for years after birth.</td><td>Yes</td></tr>
+    </table>
+    <ul>
+      <li><strong>Two numbers that matter most:</strong> surfactant synthesis starts ~week 20 and matures ~week 35; respiration becomes possible ~week 25.</li>
+      <li>In utero, fetal "breathing" (aspirating and expelling amniotic fluid) drives lung growth. Pulmonary vascular resistance is high in utero (fluid-filled lungs) and drops sharply at birth when air replaces fluid.</li>
+    </ul>
+  </div>
+
+  <div class="card cells span">
+    <h2>4 · Alveolar Cells, Surfactant &amp; Law of Laplace <span class="tag">FA p. 679</span></h2>
+    <ul>
+      <li><strong>Type I pneumocyte:</strong> squamous, covers ~97% of the alveolar surface, does gas exchange, cannot divide. <strong>Pores of Kohn</strong> are holes connecting adjacent alveoli (collateral airflow, but also how pneumonia and fluid spread between alveoli).</li>
+      <li><strong>Type II pneumocyte:</strong> cuboidal, clustered, two jobs: it makes surfactant from <em>lamellar bodies</em>, and it is the stem cell that regenerates both type I and type II after injury.</li>
+      <li><strong>Club cells:</strong> nonciliated cells in the bronchioles that detoxify inhaled chemicals (cytochrome P-450), secrete a surfactant component, and act as stem cells for club and ciliated cells.</li>
+      <li><strong>Alveolar macrophages (dust cells):</strong> phagocytose debris and run immune defense; they become hemosiderin-laden <em>"heart failure cells"</em> in pulmonary edema.</li>
+      <li><strong>Surfactant</strong> lowers alveolar surface tension, which reduces the tendency to collapse, reduces lung recoil, and increases compliance. It is mostly dipalmitoylphosphatidylcholine (DPPC), and glucocorticoids accelerate its synthesis.</li>
+      <li><strong>Law of Laplace:</strong> collapsing pressure = 2 &times; surface tension &divide; radius (2T/r). As an alveolus gets smaller on expiration, its collapsing pressure rises, so small alveoli tend to collapse into larger ones. Surfactant rescues this by lowering surface tension more in the smaller alveoli, keeping them open.</li>
+    </ul>
+  </div>
+
+  <div class="card congenital span">
+    <h2>5 · Congenital Anomalies &amp; Neonatal RDS <span class="tag">FA p. 679</span></h2>
+    <ul>
+      <li><strong>Pulmonary hypoplasia</strong> comes from the lung having no room or no practice: a <strong>congenital diaphragmatic hernia</strong> (usually left-sided) lets abdominal organs compress the developing lung, and <strong>bilateral renal agenesis</strong> causes the Potter sequence (no fetal urine, so oligohydramnios, so no fluid practice plus compression). <span class="accent-amber"><strong>POTTER:</strong></span> Pulmonary hypoplasia, Oligohydramnios, Twisted face, Twisted skin, Extremity deformities, Renal agenesis. These babies die from the lungs, not the kidneys.</li>
+      <li><strong>Bronchogenic cysts</strong> arise from abnormal foregut budding. They appear as discrete, round, fluid-filled densities on chest x-ray (air-filled if infected), are usually asymptomatic, but can compress an airway or cause recurrent infections.</li>
+      <li><strong>Neonatal respiratory distress syndrome:</strong> surfactant deficiency raises surface tension, alveoli collapse, and the chest x-ray shows a <em>ground-glass</em> appearance. Risk factors: prematurity (born before the week-35 surfactant ramp), maternal diabetes (high fetal insulin suppresses surfactant), and elective C-section (skips the labor stress that releases fetal cortisol, which boosts surfactant). Treatment: maternal glucocorticoids before birth and exogenous surfactant after.</li>
+      <li><strong>Oxygen-toxicity complications are RIB:</strong> Retinopathy of prematurity, Intraventricular hemorrhage, Bronchopulmonary dysplasia. Persistently low oxygen keeps the ductus arteriosus open (a patent ductus risk).</li>
+      <li><strong>Fetal lung maturity tests:</strong> a lecithin-to-sphingomyelin (L/S) ratio of 2 or more is mature and under 1.5 predicts NRDS; also lamellar body count.</li>
+    </ul>
+  </div>
+
+  <div class="card diaphragm span">
+    <h2>6 · Diaphragm <span class="tag">FA p. 681</span></h2>
+    <ul>
+      <li><strong>Structures passing through</strong>, with the letter-count mnemonic <em>"I ate ten eggs at twelve"</em>: <strong>T8</strong> the IVC (with the right phrenic nerve); <strong>T10</strong> the esophagus (with the vagus, CN 10, two trunks); <strong>T12</strong> the aorta (with the thoracic duct and azygos vein, remembered as red, white, and blue).</li>
+      <li><strong>Innervation:</strong> the phrenic nerve, roots C3, C4, C5 (<em>"C3, 4, 5 keeps the diaphragm alive"</em>).</li>
+      <li><strong>Referred pain:</strong> diaphragm irritation refers to the shoulder (C5) and the trapezius ridge (C3, 4); splenic rupture causing left shoulder pain is <strong>Kehr sign</strong>.</li>
+      <li><strong>Phrenic nerve injury</strong> paralyzes that hemidiaphragm, which rides up high on the chest x-ray.</li>
+      <li><strong>Everything bifurcates at 4:</strong> the common carotid at C4, the trachea at T4 (the carina), and the abdominal aorta at L4.</li>
+    </ul>
+  </div>
+
+  <div class="keynums">
+    <h2>Key numbers</h2>
+    <ol>
+      <li>Surfactant starts ~week 20 / matures ~week 35.</li>
+      <li>Respiration possible ~week 25.</li>
+      <li>L/S ratio 2 or more = mature.</li>
+      <li>Phrenic nerve = C3, 4, 5.</li>
+      <li>Diaphragm hiatuses: T8 / T10 / T12.</li>
+    </ol>
+  </div>
+
+</div>
+
+<p class="footer-stamp">© Allan Bakesiga · USMLE Step 1 Prep · Original wording. Day 13 lecture summary. Carry it and review before every Q-bank block.</p>
+
+</body>
+</html>

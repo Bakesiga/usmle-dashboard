@@ -168,7 +168,11 @@ window.SESSIONS = [
   { day: 12, date: "2026-06-12", subject: "cvs", phase: "pharmacology", title: "CVS Pharmacology Day 2 · antiarrhythmic medications",  sub: "Class I to IV antiarrhythmics, adenosine, digoxin, magnesium" },
 
   // ---- Respiratory (8) — June 14 to June 21 ----
-  { day: 13, date: "2026-06-14", subject: "resp", phase: "anatomy",     title: "Respiratory Anatomy & Embryology", sub: "Lung development, branching morphogenesis, surfactant, fetal lung, gross airway and lung anatomy" },
+  { day: 13, date: "2026-06-14", subject: "resp", phase: "anatomy",     title: "Respiratory Anatomy & Embryology", sub: "Lung development, branching morphogenesis, surfactant, fetal lung, gross airway and lung anatomy",
+    resources: [
+      { kind: "highYield", label: "Anatomy & Embryology high-yield summary", url: "outputs/study-notes/resp-anatomy-embryology-high-yield.html", meta: "Full lecture summary · FA 2025 pp. 678 to 681" }
+    ]
+  },
   { day: 14, date: "2026-06-15", subject: "resp", phase: "physiology",  title: "Respiratory Physiology",           sub: "" },
   { day: 15, date: "2026-06-16", subject: "resp", phase: "physiology",  title: "Respiratory Physiology",           sub: "" },
   { day: 16, date: "2026-06-17", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "" },
