@@ -183,11 +183,31 @@ window.SESSIONS = [
       { kind: "highYield", label: "Respiratory Physiology high-yield summary", url: "outputs/study-notes/resp-physiology-high-yield.html", meta: "Full lecture summary · FA 2025 pp. 682 to 689" }
     ]
   },
-  { day: 16, date: "2026-06-17", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "" },
-  { day: 17, date: "2026-06-18", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "" },
-  { day: 18, date: "2026-06-19", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "" },
-  { day: 19, date: "2026-06-20", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "" },
-  { day: 20, date: "2026-06-21", subject: "resp", phase: "pharmacology", title: "Respiratory Pharmacology",        sub: "" },
+  { day: 16, date: "2026-06-17", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "",
+    resources: [
+      { kind: "highYield", label: "Respiratory Pathology high-yield summary", url: "outputs/study-notes/resp-pathology-high-yield.html", meta: "Full lecture summary · FA 2025 pp. 690 to 703" }
+    ]
+  },
+  { day: 17, date: "2026-06-18", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "",
+    resources: [
+      { kind: "highYield", label: "Respiratory Pathology high-yield summary", url: "outputs/study-notes/resp-pathology-high-yield.html", meta: "Full lecture summary · FA 2025 pp. 690 to 703" }
+    ]
+  },
+  { day: 18, date: "2026-06-19", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "",
+    resources: [
+      { kind: "highYield", label: "Respiratory Pathology high-yield summary", url: "outputs/study-notes/resp-pathology-high-yield.html", meta: "Full lecture summary · FA 2025 pp. 690 to 703" }
+    ]
+  },
+  { day: 19, date: "2026-06-20", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "",
+    resources: [
+      { kind: "highYield", label: "Respiratory Pathology high-yield summary", url: "outputs/study-notes/resp-pathology-high-yield.html", meta: "Full lecture summary · FA 2025 pp. 690 to 703" }
+    ]
+  },
+  { day: 20, date: "2026-06-21", subject: "resp", phase: "pharmacology", title: "Respiratory Pharmacology",        sub: "",
+    resources: [
+      { kind: "highYield", label: "Respiratory Pharmacology high-yield summary", url: "outputs/study-notes/resp-pharmacology-high-yield.html", meta: "Full lecture summary · FA 2025 pp. 704 to 707" }
+    ]
+  },
 
   // ---- Epi & Biostats (4) — June 22 to June 25 ----
   { day: 21, date: "2026-06-22", subject: "epi",  title: "Study design",                       sub: "RCT, cohort, case-control, cross-sectional" },

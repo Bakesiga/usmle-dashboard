@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="../../js/artifact-gate.js" defer></script>
+<style>body { visibility: hidden; }</style>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Respiratory Pathology · High-Yield Summary</title>
+<style>
+  /* ---------- design tokens, mirrored from the flyer/dashboard palette ---------- */
+  :root {
+    --ink: #0C2A3D;
+    --ink-2: #345671;
+    --muted: #5B7A95;
+    --bg: #FFFFFF;
+    --bg-cream: #FFF8EC;
+    --border: #D6E8F5;
+
+    --gold: #E5A823;
+    --gold-deep: #B8851C;
+    --gold-soft: #FFF4D6;
+
+    --cvs: #0284C7; --cvs-soft: #E0F2FE; --cvs-deep: #075985;
+    --resp: #059669; --resp-soft: #D1FAE5; --resp-deep: #065F46;
+    --path: #7C3AED; --path-soft: #EDE9FE; --path-deep: #5B21B6;
+    --amber: #D97706; --amber-soft: #FEF3C7; --amber-deep: #B45309;
+  }
+
+  @page { size: A4; margin: 12mm 10mm; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 9.5pt;
+    line-height: 1.32;
+  }
+
+  .ribbon {
+    background: var(--ink);
+    color: #FFFFFF;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .ribbon h1 {
+    margin: 0;
+    font-size: 14pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .ribbon .meta {
+    font-size: 8.5pt;
+    color: #BFE3F7;
+    letter-spacing: 0.06em;
+  }
+
+  .cohort-line {
+    font-size: 8.5pt;
+    color: var(--ink-2);
+    margin: 0 0 10px;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .byline {
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-deep) 100%);
+    color: var(--ink);
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 8.5pt;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin: -4px 0 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .byline .author { font-weight: 800; }
+  .byline .home {
+    font-weight: 500;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .card {
+    border-radius: 6px;
+    padding: 7px 9px 8px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .card h2 {
+    margin: 0 0 4px;
+    font-size: 9.5pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 3px 7px;
+    margin: -7px -9px 6px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .card h2 .tag {
+    font-size: 7pt;
+    background: rgba(255,255,255,0.22);
+    padding: 1px 6px;
+    border-radius: 999px;
+    letter-spacing: 0.06em;
+    text-transform: none;
+    font-weight: 600;
+  }
+  .card ul { margin: 0; padding-left: 14px; }
+  .card li { margin-bottom: 2px; }
+  .card li::marker { color: var(--ink-2); }
+
+  .card.gross { background: var(--resp-soft); }
+  .card.gross h2 { background: var(--resp-deep); }
+  .card.tree { background: var(--cvs-soft); }
+  .card.tree h2 { background: var(--cvs-deep); }
+  .card.embryo { background: var(--gold-soft); }
+  .card.embryo h2 { background: var(--gold-deep); }
+  .card.cells { background: var(--path-soft); }
+  .card.cells h2 { background: var(--path-deep); }
+  .card.congenital { background: var(--amber-soft); }
+  .card.congenital h2 { background: var(--amber-deep); }
+  .card.diaphragm { background: var(--cvs-soft); }
+  .card.diaphragm h2 { background: var(--cvs); }
+
+  .card.span { grid-column: span 2; }
+
+  table.resp-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 4px;
+    font-size: 8.5pt;
+  }
+  table.resp-table th, table.resp-table td {
+    border: 1px solid var(--ink-2);
+    padding: 2px 5px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.resp-table th {
+    background: var(--gold);
+    color: var(--ink);
+    font-weight: 700;
+  }
+  table.resp-table tr:nth-child(even) { background: rgba(255,255,255,0.55); }
+
+  .keynums {
+    background: var(--ink);
+    color: #FFFFFF;
+    border-radius: 6px;
+    padding: 7px 10px;
+    grid-column: span 2;
+    page-break-inside: avoid;
+  }
+  .keynums h2 {
+    margin: 0 0 4px;
+    font-size: 10pt;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .keynums ol {
+    margin: 0;
+    padding-left: 18px;
+    columns: 2;
+    column-gap: 14px;
+  }
+  .keynums li { margin-bottom: 2px; }
+  .keynums li::marker { color: var(--gold); font-weight: 700; }
+
+  .footer-stamp {
+    text-align: center;
+    font-size: 7.5pt;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  strong { color: var(--ink); }
+  em { font-style: italic; }
+  .accent-gold { color: var(--gold-deep); font-weight: 700; }
+  .accent-cvs { color: var(--cvs-deep); font-weight: 700; }
+  .accent-resp { color: var(--resp-deep); font-weight: 700; }
+  .accent-path { color: var(--path-deep); font-weight: 700; }
+  .accent-amber { color: var(--amber-deep); font-weight: 700; }
+
+  /* ---------- mobile ---------- */
+  @media (max-width: 640px) {
+    body { font-size: 11pt; }
+    .grid { grid-template-columns: 1fr; }
+    .card.span { grid-column: span 1; }
+    .keynums { grid-column: span 1; }
+    .keynums ol { columns: 1; }
+    .ribbon { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .ribbon h1 { font-size: 12pt; }
+    .byline { flex-direction: column; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <h1>Respiratory · Days 16 to 19 · Pathology</h1>
+  <div class="meta">USMLE Step 1 · June Cohort</div>
+</div>
+<div class="byline">
+  <span class="author">Prepared by Allan Bakesiga · USMLE Step 1 Prep</span>
+  <span class="home">bakesiga.github.io/usmle-dashboard</span>
+</div>
+<p class="cohort-line">Days 16 to 19 lecture summary · First Aid 2025 pp. 690 to 703 · All wording original</p>
+
+<div class="grid">
+
+  <div class="card tree span">
+    <h2>1 · Upper Airway <span class="tag">FA p. 690</span></h2>
+    <ul>
+      <li><strong>Rhinosinusitis:</strong> the <strong>maxillary sinus</strong> is involved most often. Usual organisms are <em>nontypeable Haemophilus influenzae</em>, <em>Streptococcus pneumoniae</em>, and <em>Moraxella catarrhalis</em>.</li>
+      <li><strong>Epistaxis:</strong> <span class="accent-cvs">anterior bleeds</span> from the Kiesselbach plexus are the most common. <span class="accent-amber">Posterior bleeds</span> from the sphenopalatine artery are less common but more dangerous.</li>
+    </ul>
+  </div>
+
+  <div class="card gross span">
+    <h2>2 · Obstructive Lung Disease <span class="tag">FA pp. 692 to 693</span></h2>
+    <ul>
+      <li><strong>Hallmark:</strong> airflow obstruction. The FEV1 falls more than the FVC, so the <span class="accent-resp">FEV1/FVC ratio drops below 70%</span>. Air trapping raises RV, FRC, and TLC.</li>
+      <li><strong>COPD has two faces.</strong> <em>Chronic bronchitis</em> (the "blue bloater"): a productive cough for at least 3 months a year over 2 years, an increased Reid index, with hypoxia and hypercapnia. <em>Emphysema</em> (the "pink puffer"): alveolar wall destruction, loss of elastic recoil, and a barrel chest. <strong>Centriacinar</strong> emphysema comes from smoking; <strong>panacinar</strong> comes from alpha-1 antitrypsin deficiency.</li>
+      <li><strong>Asthma:</strong> reversible bronchoconstriction triggered by allergens, viral infections, or stress. Sputum shows <em>Curschmann spirals</em> and <em>Charcot-Leyden crystals</em>. <span class="accent-amber">Aspirin-exacerbated respiratory disease</span> is the triad of asthma, nasal polyps, and aspirin or NSAID sensitivity.</li>
+      <li><strong>Bronchiectasis:</strong> permanently dilated bronchi from chronic infection or impaired clearance. Associated with cystic fibrosis, Kartagener syndrome, and allergic bronchopulmonary aspergillosis.</li>
+    </ul>
+  </div>
+
+  <div class="card embryo span">
+    <h2>3 · Restrictive Lung Disease <span class="tag">FA pp. 694 to 695</span></h2>
+    <ul>
+      <li><strong>Hallmark:</strong> reduced FVC and TLC with a <span class="accent-gold">normal or increased FEV1/FVC ratio</span>.</li>
+      <li><strong>Extrapulmonary causes</strong> (poor mechanics): neuromuscular weakness (myasthenia gravis, ALS, Guillain-Barre) and structural problems (scoliosis, severe obesity).</li>
+      <li><strong>Interstitial (pulmonary) causes:</strong> idiopathic pulmonary fibrosis (a usual interstitial pneumonia pattern with honeycomb lung), pneumoconioses, sarcoidosis, hypersensitivity pneumonitis, and drug toxicity (bleomycin, amiodarone, methotrexate).</li>
+    </ul>
+    <table class="resp-table">
+      <tr><th>Pneumoconiosis</th><th>Lobes</th><th>Key clues</th></tr>
+      <tr><td><strong>Asbestosis</strong></td><td>Lower</td><td>Ferruginous bodies, pleural plaques; raises risk of both mesothelioma and bronchogenic carcinoma.</td></tr>
+      <tr><td><strong>Coal workers</strong></td><td>Upper</td><td>Coal dust exposure in miners.</td></tr>
+      <tr><td><strong>Silicosis</strong></td><td>Upper</td><td>Eggshell calcification of hilar nodes; raises TB risk.</td></tr>
+      <tr><td><strong>Berylliosis</strong></td><td>Upper</td><td>Noncaseating granulomas, resembling sarcoidosis.</td></tr>
+    </table>
+  </div>
+
+  <div class="card cells span">
+    <h2>4 · Sarcoidosis <span class="tag">FA p. 695</span></h2>
+    <ul>
+      <li><strong>Noncaseating granulomas</strong>, bilateral hilar lymphadenopathy, an elevated ACE level, and <span class="accent-path">hypercalcemia</span> (activated macrophages make 1-alpha-hydroxylase, which raises vitamin D). More common in Black women.</li>
+      <li>Other findings: uveitis, erythema nodosum, lupus pernio, and Bell palsy. Often restrictive on pulmonary function testing.</li>
+    </ul>
+  </div>
+
+  <div class="card congenital span">
+    <h2>5 · Mesothelioma <span class="tag">FA p. 695</span></h2>
+    <ul>
+      <li>A malignancy of the <strong>pleura</strong> strongly tied to <span class="accent-amber">asbestos exposure</span>. <em>Psammoma bodies</em> appear on histology. It is <strong>not</strong> caused by smoking.</li>
+    </ul>
+  </div>
+
+  <div class="card gross span">
+    <h2>6 · Acute Respiratory Distress Syndrome <span class="tag">FA p. 697</span></h2>
+    <ul>
+      <li><strong>Causes:</strong> sepsis (most common), aspiration, trauma, pancreatitis, burns, and near-drowning.</li>
+      <li><strong>Diffuse alveolar damage</strong> raises capillary permeability, producing protein-rich edema and hyaline membranes. The result is stiff lungs (low compliance), V/Q mismatch, diffuse bilateral infiltrates, and a <span class="accent-resp">low PaO2 to FiO2 ratio</span>.</li>
+      <li><strong>Management:</strong> low tidal volume ventilation and PEEP.</li>
+    </ul>
+  </div>
+
+  <div class="card tree span">
+    <h2>7 · Sleep Apnea <span class="tag">FA p. 697</span></h2>
+    <ul>
+      <li><strong>Obstructive:</strong> the airway collapses despite effort (obesity, large tonsils). Features include daytime sleepiness, hypertension, and atrial fibrillation.</li>
+      <li><strong>Central:</strong> no respiratory effort (CNS injury, heart failure, opioids).</li>
+      <li>Both cause nocturnal hypoxia, leading to <span class="accent-cvs">pulmonary hypertension and polycythemia</span>.</li>
+    </ul>
+  </div>
+
+  <div class="card embryo span">
+    <h2>8 · Pulmonary Hypertension <span class="tag">FA p. 698</span></h2>
+    <ul>
+      <li>Defined by a <strong>mean pulmonary artery pressure of 20 mm Hg or more</strong>.</li>
+      <li><strong>Five groups:</strong> arterial or idiopathic (BMPR2 mutation), left heart disease, chronic lung disease or hypoxia, chronic thromboembolic, and multifactorial.</li>
+      <li>Vessels develop <em>medial hypertrophy</em> and <em>plexiform lesions</em>, ending in <span class="accent-amber">right ventricular failure (cor pulmonale)</span>.</li>
+    </ul>
+  </div>
+
+  <div class="card cells span">
+    <h2>9 · Exam Findings and Pleura <span class="tag">FA pp. 698 to 699</span></h2>
+    <ul>
+      <li><strong>Pleural effusion:</strong> dull to percussion, with decreased breath sounds and fremitus. <em>Transudate</em> (heart failure, cirrhosis, nephrotic syndrome) versus <em>exudate</em> (infection, malignancy, inflammation), separated by the <span class="accent-path">Light criteria</span>. <em>(Callback: this is the heart-failure effusion case from the CVS block.)</em></li>
+      <li><strong>Pneumothorax:</strong> hyperresonant, with decreased breath sounds and fremitus. The spontaneous type hits tall thin young men (a ruptured bleb). <span class="accent-amber">Tension pneumothorax</span> (trauma or mechanical ventilation) pushes the mediastinum <strong>away</strong> from the affected side and is an emergency needle decompression.</li>
+      <li><strong>Consolidation or lobar pneumonia:</strong> dull percussion, increased fremitus, bronchophony, egophony, and late inspiratory crackles.</li>
+    </ul>
+  </div>
+
+  <div class="card congenital span">
+    <h2>10 · Lung Cancer <span class="tag">FA pp. 702 to 703</span></h2>
+    <ul>
+      <li>The leading cause of cancer death. Complications mnemonic <strong>SPHERE</strong>: <strong>S</strong>VC syndrome, <strong>P</strong>ancoast tumor, <strong>H</strong>orner syndrome, <strong>E</strong>ndocrine paraneoplastic, <strong>R</strong>ecurrent laryngeal (and phrenic) nerve involvement, and <strong>E</strong>ffusions.</li>
+    </ul>
+    <table class="resp-table">
+      <tr><th>Type</th><th>Location and clues</th><th>Key associations</th></tr>
+      <tr><td><strong>Small cell</strong></td><td>Central, neuroendocrine, smoking. Aggressive; treated with chemo, not surgery.</td><td>Paraneoplastic SIADH, ACTH (Cushing), and Lambert-Eaton syndrome.</td></tr>
+      <tr><td><strong>Adenocarcinoma</strong></td><td>Peripheral. The most common primary lung cancer, and the most common in nonsmokers and women.</td><td>Glandular histology; driver mutations EGFR, ALK, KRAS.</td></tr>
+      <tr><td><strong>Squamous cell</strong></td><td>Central, smoking. Can cavitate.</td><td>Keratin pearls, intercellular bridges; paraneoplastic PTHrP causing hypercalcemia.</td></tr>
+      <tr><td><strong>Large cell</strong></td><td>Peripheral. Undifferentiated, poor prognosis.</td><td>Anaplastic histology.</td></tr>
+      <tr><td><strong>Carcinoid</strong></td><td>Neuroendocrine.</td><td>Can cause carcinoid syndrome.</td></tr>
+    </table>
+    <ul>
+      <li><strong>Pancoast tumor</strong> (lung apex, usually non-small cell) compresses local structures, causing <span class="accent-amber">Horner syndrome</span> (ptosis, miosis, anhidrosis) and <span class="accent-cvs">SVC syndrome</span> (facial plethora, jugular distension).</li>
+    </ul>
+  </div>
+
+  <div class="keynums">
+    <h2>Key rules</h2>
+    <ol>
+      <li>Obstructive = low FEV1/FVC.</li>
+      <li>Restrictive = low volumes, normal or high FEV1/FVC.</li>
+      <li>Asbestos = lower lobes plus mesothelioma.</li>
+      <li>Silica and coal = upper lobes.</li>
+      <li>Small cell and squamous = central and smoking.</li>
+      <li>Adeno and large = peripheral.</li>
+      <li>Tension pneumothorax pushes the trachea away.</li>
+    </ol>
+  </div>
+
+</div>
+
+<p class="footer-stamp">© Allan Bakesiga · USMLE Step 1 Prep · Original wording. Days 16 to 19 lecture summary. Carry it and review before every Q-bank block.</p>
+
+</body>
+</html>

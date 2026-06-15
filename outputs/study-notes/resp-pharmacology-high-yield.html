@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="../../js/artifact-gate.js" defer></script>
+<style>body { visibility: hidden; }</style>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Respiratory Pharmacology · High-Yield Summary</title>
+<style>
+  /* ---------- design tokens, mirrored from the flyer/dashboard palette ---------- */
+  :root {
+    --ink: #0C2A3D;
+    --ink-2: #345671;
+    --muted: #5B7A95;
+    --bg: #FFFFFF;
+    --bg-cream: #FFF8EC;
+    --border: #D6E8F5;
+
+    --gold: #E5A823;
+    --gold-deep: #B8851C;
+    --gold-soft: #FFF4D6;
+
+    --cvs: #0284C7; --cvs-soft: #E0F2FE; --cvs-deep: #075985;
+    --resp: #059669; --resp-soft: #D1FAE5; --resp-deep: #065F46;
+    --path: #7C3AED; --path-soft: #EDE9FE; --path-deep: #5B21B6;
+    --amber: #D97706; --amber-soft: #FEF3C7; --amber-deep: #B45309;
+  }
+
+  @page { size: A4; margin: 12mm 10mm; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 9.5pt;
+    line-height: 1.32;
+  }
+
+  .ribbon {
+    background: var(--ink);
+    color: #FFFFFF;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .ribbon h1 {
+    margin: 0;
+    font-size: 14pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .ribbon .meta {
+    font-size: 8.5pt;
+    color: #BFE3F7;
+    letter-spacing: 0.06em;
+  }
+
+  .cohort-line {
+    font-size: 8.5pt;
+    color: var(--ink-2);
+    margin: 0 0 10px;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .byline {
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-deep) 100%);
+    color: var(--ink);
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 8.5pt;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin: -4px 0 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .byline .author { font-weight: 800; }
+  .byline .home {
+    font-weight: 500;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .card {
+    border-radius: 6px;
+    padding: 7px 9px 8px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .card h2 {
+    margin: 0 0 4px;
+    font-size: 9.5pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 3px 7px;
+    margin: -7px -9px 6px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .card h2 .tag {
+    font-size: 7pt;
+    background: rgba(255,255,255,0.22);
+    padding: 1px 6px;
+    border-radius: 999px;
+    letter-spacing: 0.06em;
+    text-transform: none;
+    font-weight: 600;
+  }
+  .card ul { margin: 0; padding-left: 14px; }
+  .card li { margin-bottom: 2px; }
+  .card li::marker { color: var(--ink-2); }
+
+  .card.gross { background: var(--resp-soft); }
+  .card.gross h2 { background: var(--resp-deep); }
+  .card.tree { background: var(--cvs-soft); }
+  .card.tree h2 { background: var(--cvs-deep); }
+  .card.embryo { background: var(--gold-soft); }
+  .card.embryo h2 { background: var(--gold-deep); }
+  .card.cells { background: var(--path-soft); }
+  .card.cells h2 { background: var(--path-deep); }
+  .card.congenital { background: var(--amber-soft); }
+  .card.congenital h2 { background: var(--amber-deep); }
+  .card.diaphragm { background: var(--cvs-soft); }
+  .card.diaphragm h2 { background: var(--cvs); }
+
+  .card.span { grid-column: span 2; }
+
+  table.resp-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 4px;
+    font-size: 8.5pt;
+  }
+  table.resp-table th, table.resp-table td {
+    border: 1px solid var(--ink-2);
+    padding: 2px 5px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.resp-table th {
+    background: var(--gold);
+    color: var(--ink);
+    font-weight: 700;
+  }
+  table.resp-table tr:nth-child(even) { background: rgba(255,255,255,0.55); }
+
+  .keynums {
+    background: var(--ink);
+    color: #FFFFFF;
+    border-radius: 6px;
+    padding: 7px 10px;
+    grid-column: span 2;
+    page-break-inside: avoid;
+  }
+  .keynums h2 {
+    margin: 0 0 4px;
+    font-size: 10pt;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .keynums ol {
+    margin: 0;
+    padding-left: 18px;
+    columns: 2;
+    column-gap: 14px;
+  }
+  .keynums li { margin-bottom: 2px; }
+  .keynums li::marker { color: var(--gold); font-weight: 700; }
+
+  .footer-stamp {
+    text-align: center;
+    font-size: 7.5pt;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  strong { color: var(--ink); }
+  em { font-style: italic; }
+  .accent-gold { color: var(--gold-deep); font-weight: 700; }
+  .accent-cvs { color: var(--cvs-deep); font-weight: 700; }
+  .accent-resp { color: var(--resp-deep); font-weight: 700; }
+  .accent-path { color: var(--path-deep); font-weight: 700; }
+  .accent-amber { color: var(--amber-deep); font-weight: 700; }
+
+  /* ---------- mobile ---------- */
+  @media (max-width: 640px) {
+    body { font-size: 11pt; }
+    .grid { grid-template-columns: 1fr; }
+    .card.span { grid-column: span 1; }
+    .keynums { grid-column: span 1; }
+    .keynums ol { columns: 1; }
+    .ribbon { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .ribbon h1 { font-size: 12pt; }
+    .byline { flex-direction: column; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <h1>Respiratory · Day 20 · Pharmacology</h1>
+  <div class="meta">USMLE Step 1 · June Cohort</div>
+</div>
+<div class="byline">
+  <span class="author">Prepared by Allan Bakesiga · USMLE Step 1 Prep</span>
+  <span class="home">bakesiga.github.io/usmle-dashboard</span>
+</div>
+<p class="cohort-line">Day 20 lecture summary · First Aid 2025 pp. 704 to 707 · All wording original</p>
+
+<div class="grid">
+
+  <div class="card gross span">
+    <h2>1 · Asthma and COPD Drugs <span class="tag">FA pp. 704 to 705</span></h2>
+    <ul>
+      <li>Bronchoconstriction is driven by <strong>inflammation</strong> and <strong>parasympathetic (vagal) tone</strong>, so therapy targets both.</li>
+      <li><strong>Beta-2 agonists:</strong> short-acting <em>albuterol</em> relaxes airway smooth muscle for acute attacks. Long-acting <em>salmeterol</em> and <em>formoterol</em> are for maintenance and <span class="accent-amber">should not be used as monotherapy in asthma</span>.</li>
+      <li><strong>Muscarinic antagonists:</strong> <em>ipratropium</em> (short) and <em>tiotropium</em> (long) block M3 receptors to bronchodilate. Especially useful in COPD.</li>
+      <li><strong>Inhaled corticosteroids:</strong> <em>fluticasone</em> and <em>budesonide</em> are the <span class="accent-resp">first-line controllers</span> for persistent asthma (anti-inflammatory).</li>
+      <li><strong>Antileukotrienes:</strong> <em>montelukast</em> and <em>zafirlukast</em> block the CysLT1 receptor and are especially good for aspirin-exacerbated and exercise-induced asthma. <em>Zileuton</em> inhibits 5-lipoxygenase and can be hepatotoxic.</li>
+      <li><strong>Anti-IgE:</strong> <em>omalizumab</em>, a monoclonal antibody against IgE, for severe allergic asthma. <strong>Anti-IL-5</strong> agents (<em>mepolizumab</em>) target eosinophilic asthma.</li>
+      <li><strong>Methylxanthines:</strong> <em>theophylline</em> inhibits phosphodiesterase to raise cAMP, but has a <span class="accent-amber">narrow therapeutic window</span> with cardiac and neurotoxicity, and is metabolized by cytochrome P-450.</li>
+    </ul>
+  </div>
+
+  <div class="card embryo span">
+    <h2>2 · Pulmonary Hypertension Drugs <span class="tag">FA p. 706</span></h2>
+    <ul>
+      <li><strong>Endothelin receptor antagonists:</strong> <em>bosentan</em> blocks endothelin-1 (a vasoconstrictor); hepatotoxic.</li>
+      <li><strong>PDE-5 inhibitors:</strong> <em>sildenafil</em> raises cGMP to dilate pulmonary vessels.</li>
+      <li><strong>Prostacyclin analogs:</strong> <em>epoprostenol</em> and <em>iloprost</em> mimic PGI2 for vasodilation.</li>
+      <li><strong>Guanylate cyclase stimulator:</strong> <em>riociguat</em>.</li>
+    </ul>
+  </div>
+
+  <div class="card cells span">
+    <h2>3 · Cough, Congestion, Secretions <span class="tag">FA p. 707</span></h2>
+    <ul>
+      <li><strong>Dextromethorphan:</strong> a cough suppressant and mild NMDA antagonist.</li>
+      <li><strong>Decongestants:</strong> <em>pseudoephedrine</em> and <em>phenylephrine</em> are alpha agonists that reduce nasal swelling.</li>
+      <li><strong>Guaifenesin:</strong> an expectorant that thins secretions.</li>
+      <li><strong>N-acetylcysteine:</strong> a mucolytic that loosens mucus, and the <span class="accent-path">antidote for acetaminophen overdose</span>.</li>
+    </ul>
+  </div>
+
+  <div class="keynums">
+    <h2>Key rules</h2>
+    <ol>
+      <li>Albuterol for acute, inhaled steroids for control.</li>
+      <li>Never a long-acting beta-agonist alone in asthma.</li>
+      <li>Montelukast for aspirin and exercise asthma.</li>
+      <li>Bosentan blocks endothelin.</li>
+      <li>Sildenafil raises cGMP.</li>
+    </ol>
+  </div>
+
+</div>
+
+<p class="footer-stamp">© Allan Bakesiga · USMLE Step 1 Prep · Original wording. Day 20 lecture summary. Carry it and review before every Q-bank block.</p>
+
+</body>
+</html>
