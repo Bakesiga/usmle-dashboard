@@ -285,7 +285,8 @@ window.BLOCKS = [
       { id: "resp-pharmacology", label: "Pharmacology",           days: [20] }
     ],
     recordings: [
-      { title: "Respiratory Anatomy & Embryology", url: "https://us06web.zoom.us/rec/share/vSdGuRQ9lF5ZCrvXsl_L1M3begPlIxXm2cVH3MT9cjGA8OdNyHh0_NWZdD2rQm-3.c7Bo7MsUz1m2WLpS" }
+      { title: "Respiratory Anatomy & Embryology", url: "https://us06web.zoom.us/rec/share/vSdGuRQ9lF5ZCrvXsl_L1M3begPlIxXm2cVH3MT9cjGA8OdNyHh0_NWZdD2rQm-3.c7Bo7MsUz1m2WLpS" },
+      { title: "Respiratory Physiology part 1 (lung volumes, mechanics, pulmonary circulation, V/Q, A-a gradient)", url: "https://us06web.zoom.us/rec/share/K0PekmDVVmEJoK-tcoU8HUi661XpWmWZgRBkBUheeRkRr4cxEStpKZGBLv0EHxV0.6nUn_r87C_B2ZbYE" }
     ]
   },
   {
