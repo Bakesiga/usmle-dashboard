@@ -377,56 +377,33 @@
     const grid = document.createElement('div');
     grid.className = 'subblocks-grid';
     (block.subBlocks || []).forEach(sb => {
-      const empty = !sb.days || sb.days.length === 0;
-      const el = document.createElement(empty ? 'div' : 'button');
-      if (!empty) el.type = 'button';
-      el.className = 'subblock-tile subject-' + block.subject + (empty ? ' is-empty' : '');
-      if (!empty) {
+      const hasDays = sb.days && sb.days.length > 0;
+      const recN = (sb.recordings || []).length;
+      const resN = (sb.resources || []).length;
+      const clickable = hasDays || recN > 0 || resN > 0;
+      const el = document.createElement(clickable ? 'button' : 'div');
+      if (clickable) el.type = 'button';
+      el.className = 'subblock-tile subject-' + block.subject + (clickable ? '' : ' is-empty');
+      if (clickable) {
         el.dataset.blockId = block.id;
         el.dataset.subBlockId = sb.id;
       }
-      const metaText = empty ? 'Coming soon' : (dayRangeLabel(sb.days) + ' · ' + sb.days.length + ' day' + (sb.days.length === 1 ? '' : 's'));
+      const bits = [];
+      bits.push(hasDays ? (dayRangeLabel(sb.days) + ' · ' + sb.days.length + ' day' + (sb.days.length === 1 ? '' : 's')) : 'Coming soon');
+      if (recN) bits.push(recN + ' recording' + (recN === 1 ? '' : 's'));
       el.innerHTML =
         '<span class="subblock-title">' + sb.label + '</span>' +
-        '<span class="subblock-meta">' + metaText + '</span>' +
-        (empty ? '' :
+        '<span class="subblock-meta">' + bits.join(' · ') + '</span>' +
+        (clickable ?
           '<span class="subblock-chevron" aria-hidden="true">' +
             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>' +
-          '</span>');
+          '</span>' : '');
       grid.appendChild(el);
     });
 
     root.innerHTML = '';
     root.appendChild(header);
     root.appendChild(grid);
-
-    // Class recordings section (if present)
-    if (block.recordings && block.recordings.length > 0) {
-      const recHeader = document.createElement('h3');
-      recHeader.className = 'block-recordings-h';
-      recHeader.textContent = 'Class recordings';
-      root.appendChild(recHeader);
-
-      const recList = document.createElement('div');
-      recList.className = 'block-recordings-list subject-' + block.subject;
-      block.recordings.forEach(rec => {
-        const link = document.createElement('a');
-        link.className = 'block-recording-card';
-        link.href = rec.url;
-        link.target = '_blank';
-        link.rel = 'noopener';
-        link.innerHTML =
-          '<span class="block-recording-icon">' +
-            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>' +
-          '</span>' +
-          '<div class="block-recording-body">' +
-            '<span class="block-recording-title">' + rec.title + '</span>' +
-            '<span class="block-recording-meta">Open recording on Zoom</span>' +
-          '</div>';
-        recList.appendChild(link);
-      });
-      root.appendChild(recList);
-    }
   }
 
   // Level 3: day list for one sub-block
@@ -484,6 +461,62 @@
     root.innerHTML = '';
     root.appendChild(header);
     root.appendChild(list);
+
+    // Class recordings for this sub-block
+    if (sub.recordings && sub.recordings.length > 0) {
+      const recHeader = document.createElement('h3');
+      recHeader.className = 'block-recordings-h';
+      recHeader.textContent = 'Class recordings';
+      root.appendChild(recHeader);
+
+      const recList = document.createElement('div');
+      recList.className = 'block-recordings-list subject-' + block.subject;
+      sub.recordings.forEach(rec => {
+        const link = document.createElement('a');
+        link.className = 'block-recording-card';
+        link.href = rec.url;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.innerHTML =
+          '<span class="block-recording-icon">' +
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>' +
+          '</span>' +
+          '<div class="block-recording-body">' +
+            '<span class="block-recording-title">' + rec.title + '</span>' +
+            '<span class="block-recording-meta">Open recording on Zoom</span>' +
+          '</div>';
+        recList.appendChild(link);
+      });
+      root.appendChild(recList);
+    }
+
+    // Resources for this sub-block (Drive folders, question banks, etc.)
+    if (sub.resources && sub.resources.length > 0) {
+      const resHeader = document.createElement('h3');
+      resHeader.className = 'block-recordings-h';
+      resHeader.textContent = 'Resources';
+      root.appendChild(resHeader);
+
+      const resListEl = document.createElement('div');
+      resListEl.className = 'block-recordings-list subject-' + block.subject;
+      sub.resources.forEach(r => {
+        const link = document.createElement('a');
+        link.className = 'block-recording-card';
+        link.href = r.url;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.innerHTML =
+          '<span class="block-recording-icon">' +
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>' +
+          '</span>' +
+          '<div class="block-recording-body">' +
+            '<span class="block-recording-title">' + r.label + '</span>' +
+            '<span class="block-recording-meta">' + (r.meta || 'Open resource') + '</span>' +
+          '</div>';
+        resListEl.appendChild(link);
+      });
+      root.appendChild(resListEl);
+    }
   }
 
   function renderSessions() {

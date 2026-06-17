@@ -261,14 +261,18 @@ window.BLOCKS = [
     subBlocks: [
       { id: "cvs-anat-embryo",  label: "Anatomy and Embryology", days: [1, 2, 3] },
       { id: "cvs-physiology",   label: "Physiology",             days: [4, 5, 6] },
-      { id: "cvs-pathology",    label: "Pathology (incl. review)", days: [7, 8, 9, 10] },
-      { id: "cvs-pharmacology", label: "Pharmacology",             days: [11, 12] }
-    ],
-    recordings: [
-      { title: "Myopericardial pathology part 1", url: "https://us06web.zoom.us/rec/share/hKEhi6frtIXdISm9SABDzyhq_6nz0KUN4a1_wM94F6cRogIdEs8ffn4HHx_AJ9GN.wtCb5-MhDQBilM8i" },
-      { title: "Myopericardial pathology part 2", url: "https://us06web.zoom.us/rec/share/igoCAN24nmCgr0EKcVZ_Yo8pt26ihRHTri4LQ2O0cfg_UlkqkV5CcTuOnjD1Abik.lq57yEEv5ilJV9zR" },
-      { title: "CVS Pharmacology Day 1 (antihypertensives and heart failure medications) part 1", url: "https://us06web.zoom.us/rec/share/bi8XXkQi0YlE94xbDy928Mqphi8OqDHYBEZedjUueTEA0u2ENFyIDs98DVdbNIWW.DVroufTF-ooT_9Cc" },
-      { title: "CVS Pharmacology Day 2 (antiarrhythmic medications)", url: "https://us06web.zoom.us/rec/share/P9HPLYaN9BFB2E2v6JC0uB1umQ-Q-a5p5RLmUdvzNjeUBJVZ0iEbViNx_ucZQReC.gnRnmEGPs1KfzM3d" }
+      { id: "cvs-pathology",    label: "Pathology (incl. review)", days: [7, 8, 9, 10],
+        recordings: [
+          { title: "Myopericardial pathology part 1", url: "https://us06web.zoom.us/rec/share/hKEhi6frtIXdISm9SABDzyhq_6nz0KUN4a1_wM94F6cRogIdEs8ffn4HHx_AJ9GN.wtCb5-MhDQBilM8i" },
+          { title: "Myopericardial pathology part 2", url: "https://us06web.zoom.us/rec/share/igoCAN24nmCgr0EKcVZ_Yo8pt26ihRHTri4LQ2O0cfg_UlkqkV5CcTuOnjD1Abik.lq57yEEv5ilJV9zR" }
+        ]
+      },
+      { id: "cvs-pharmacology", label: "Pharmacology",             days: [11, 12],
+        recordings: [
+          { title: "CVS Pharmacology Day 1 (antihypertensives and heart failure medications) part 1", url: "https://us06web.zoom.us/rec/share/bi8XXkQi0YlE94xbDy928Mqphi8OqDHYBEZedjUueTEA0u2ENFyIDs98DVdbNIWW.DVroufTF-ooT_9Cc" },
+          { title: "CVS Pharmacology Day 2 (antiarrhythmic medications)", url: "https://us06web.zoom.us/rec/share/P9HPLYaN9BFB2E2v6JC0uB1umQ-Q-a5p5RLmUdvzNjeUBJVZ0iEbViNx_ucZQReC.gnRnmEGPs1KfzM3d" }
+        ]
+      }
     ]
   },
   {
@@ -279,14 +283,22 @@ window.BLOCKS = [
     dateRange: "Jun 14 to Jun 21",
     dayRange: [13, 20],
     subBlocks: [
-      { id: "resp-anat-embryo",  label: "Anatomy and Embryology", days: [13] },
-      { id: "resp-physiology",   label: "Physiology",             days: [14, 15] },
+      { id: "resp-anat-embryo",  label: "Anatomy and Embryology", days: [13],
+        recordings: [
+          { title: "Respiratory Anatomy & Embryology", url: "https://us06web.zoom.us/rec/share/vSdGuRQ9lF5ZCrvXsl_L1M3begPlIxXm2cVH3MT9cjGA8OdNyHh0_NWZdD2rQm-3.c7Bo7MsUz1m2WLpS" }
+        ]
+      },
+      { id: "resp-physiology",   label: "Physiology",             days: [14, 15],
+        recordings: [
+          { title: "Respiratory Physiology part 1 (lung volumes, mechanics, pulmonary circulation, V/Q, A-a gradient)", url: "https://us06web.zoom.us/rec/share/K0PekmDVVmEJoK-tcoU8HUi661XpWmWZgRBkBUheeRkRr4cxEStpKZGBLv0EHxV0.6nUn_r87C_B2ZbYE" },
+          { title: "Respiratory Physiology part 2 (gas transport, oxygen content, CO2 transport, hemoglobin)", url: "https://us06web.zoom.us/rec/share/KbNDxgnHWvyq0jCu9NdzadZXdXGo8i7iwD_yvTS8s7sVpn1S4RtKOQJBwFpWHT6u.zfaKWTyQSkv_QzfX" }
+        ],
+        resources: [
+          { kind: "drive", label: "Respiratory Physiology extra questions", url: "https://drive.google.com/drive/folders/1x6-b98OhD8SHt9DQjVfZn0_6zw6p46aK?usp=drive_link", meta: "Practice questions and answers on Google Drive" }
+        ]
+      },
       { id: "resp-pathology",    label: "Pathology",              days: [16, 17, 18, 19] },
       { id: "resp-pharmacology", label: "Pharmacology",           days: [20] }
-    ],
-    recordings: [
-      { title: "Respiratory Anatomy & Embryology", url: "https://us06web.zoom.us/rec/share/vSdGuRQ9lF5ZCrvXsl_L1M3begPlIxXm2cVH3MT9cjGA8OdNyHh0_NWZdD2rQm-3.c7Bo7MsUz1m2WLpS" },
-      { title: "Respiratory Physiology part 1 (lung volumes, mechanics, pulmonary circulation, V/Q, A-a gradient)", url: "https://us06web.zoom.us/rec/share/K0PekmDVVmEJoK-tcoU8HUi661XpWmWZgRBkBUheeRkRr4cxEStpKZGBLv0EHxV0.6nUn_r87C_B2ZbYE" }
     ]
   },
   {
