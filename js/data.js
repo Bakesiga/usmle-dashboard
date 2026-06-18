@@ -297,7 +297,11 @@ window.BLOCKS = [
           { kind: "drive", label: "Respiratory Physiology extra questions", url: "https://drive.google.com/drive/folders/1x6-b98OhD8SHt9DQjVfZn0_6zw6p46aK?usp=drive_link", meta: "Practice questions and answers on Google Drive" }
         ]
       },
-      { id: "resp-pathology",    label: "Pathology",              days: [16, 17, 18, 19] },
+      { id: "resp-pathology",    label: "Pathology",              days: [16, 17, 18, 19],
+        recordings: [
+          { title: "Respiratory Pathology part 1 (obstructive and restrictive airway diseases)", url: "https://us06web.zoom.us/rec/share/Sfa1D3zx7ex6JzcEA8sXPz9uY27z3GlhYRNOGdaqRNR9uaErnYO_Q-zN2pV7e5qY.z32jsExqt9YdsEx4" }
+        ]
+      },
       { id: "resp-pharmacology", label: "Pharmacology",           days: [20] }
     ]
   },
