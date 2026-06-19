@@ -160,7 +160,7 @@ body.vitals {
   min-height: 100svh;
   padding-top: 64px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   background:
     radial-gradient(120% 90% at 78% -10%, rgba(2,132,199,0.10), transparent 55%),
     radial-gradient(80% 80% at 0% 110%, rgba(184,133,28,0.08), transparent 60%),
