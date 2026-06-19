@@ -157,7 +157,7 @@ body.vitals {
    ============================================================ */
 .vh {
   position: relative;
-  min-height: 100svh;
+  min-height: auto;
   padding-top: 64px;
   display: flex;
   align-items: flex-start;
