@@ -236,7 +236,7 @@ window.LINKS = {
   zoom:     "https://duke.zoom.us/j/96991939005",
   whatsapp: "https://chat.whatsapp.com/JvaTpyDt9loGZjomAVwi42",
   calendly: "https://calendly.com/allanbakesiga/30min",
-  signup:   "https://forms.gle/iHCdPVjvJeGeGTXy7",
+  signup:   "https://docs.google.com/forms/d/e/1FAIpQLScJwdFDTwH6qtQio-0MmDo5e6rQtKA8BZstoa6RQbo7oPYsXw/viewform",
   ics:      "data/schedule.ics"
 };
 
