@@ -328,6 +328,10 @@ body.vitals {
 .vh-badge-body .rows div { display: flex; flex-direction: column; gap: 3px; font-family: var(--vf-mono); letter-spacing: 0.02em; min-width: 0; }
 .vh-badge-body .rows div span:first-child { color: var(--v-ink-2); text-transform: uppercase; letter-spacing: 0.12em; font-size: 9px; }
 .vh-badge-body .rows div span:last-child { color: var(--v-ink); font-size: 12px; line-height: 1.25; }
+/* fuller, larger instructor credentials (single column) */
+.vh-badge-body .rows.creds { grid-template-columns: 1fr; gap: 12px; margin-top: 14px; }
+.vh-badge-body .rows.creds div span:first-child { color: var(--v-ink); text-transform: none; letter-spacing: 0.01em; font-size: 15px; font-weight: 700; line-height: 1.2; }
+.vh-badge-body .rows.creds div span:last-child { color: var(--v-ink-2); font-size: 12.5px; line-height: 1.3; }
 
 /* bottom status readout bar */
 .vh-readout {
