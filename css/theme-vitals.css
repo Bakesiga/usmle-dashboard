@@ -238,7 +238,7 @@ body.vitals {
   width: 100%;
 }
 @media (min-width: 940px) {
-  .vh-inner { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 64px; padding-block: 90px; }
+  .vh-inner { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 64px; padding-block: 90px; align-items: start; }
 }
 
 .vh-h1 {
