@@ -19,6 +19,19 @@
         -webkit-font-smoothing:antialiased; padding:46px 22px 80px; }
   .wrap{ max-width:920px; margin:0 auto; }
 
+  /* passcode gate */
+  .gate{ position:fixed; inset:0; background:var(--paper); z-index:100; display:flex; align-items:center; justify-content:center; padding:24px; }
+  .gatebox{ max-width:380px; width:100%; text-align:center; }
+  .gatebox .gk{ font-family:var(--mono); font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--wine); }
+  .gatebox h2{ font-family:var(--serif); font-size:36px; font-weight:700; margin-top:10px; }
+  .gatebox h2 em{ font-style:italic; color:var(--wine); }
+  .gatebox p{ color:var(--ink2); font-size:14px; margin-top:12px; }
+  .gatebox form{ margin-top:24px; display:flex; gap:10px; }
+  .gatebox input{ flex:1; font-family:var(--mono); font-size:22px; letter-spacing:8px; text-align:center; padding:15px; border:2px solid var(--line2); background:#fff; color:var(--ink); }
+  .gatebox input:focus{ outline:none; border-color:var(--wine); }
+  .gatebox button{ font-family:var(--mono); font-size:13px; letter-spacing:1px; text-transform:uppercase; background:var(--wine); color:#fff; border:none; padding:0 22px; cursor:pointer; }
+  .gatebox .err{ color:#b1283b; font-size:13px; margin-top:14px; min-height:18px; font-family:var(--mono); letter-spacing:.5px; }
+
   .kick{ font-family:var(--mono); font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--wine); }
   h1{ font-family:var(--serif); font-weight:700; font-size:52px; line-height:1.02; margin-top:8px; letter-spacing:-.5px; }
   h1 em{ font-style:italic; color:var(--wine); }
@@ -79,12 +92,25 @@
   .reset:hover{ color:var(--wine); border-color:var(--wine); }
 </style></head>
 <body>
-<div class="wrap">
 
+<div class="gate" id="gate">
+  <div class="gatebox">
+    <div class="gk">Private</div>
+    <h2>For my love, <em>Julian.</em></h2>
+    <p>Enter your passcode to open the tracker.</p>
+    <form id="gateForm" autocomplete="off">
+      <input id="gateInput" type="password" inputmode="numeric" placeholder="••••" aria-label="Passcode">
+      <button type="submit">Open</button>
+    </form>
+    <div class="err" id="gateErr"></div>
+  </div>
+</div>
+
+<div class="wrap">
   <div class="kick">A study tracker, made with love</div>
   <h1>For my love, <em>Julian.</em></h1>
   <div class="sub">USMLE Step 1 · UWorld question bank · one block = 40 questions</div>
-  <div class="sync" id="sync"><span class="dot"></span><span id="syncTxt">Connecting…</span></div>
+  <div class="sync" id="sync"><span class="dot"></span><span id="syncTxt">Locked</span></div>
   <div class="thick"></div>
 
   <div class="hero">
@@ -118,6 +144,11 @@
 <script>
 const BANK = 3657, PERBLOCK = 40;
 const STORE = "https://kvdb.io/XyGmS5TpUtBkSTFdfHDhQL/state";
+const VERIFIER = "9500af54c5087afc9d20a9457f0cc3b4d4a770b8a06cb6131b76ad67565cf3bc";
+const SALT = "julian-step1-v1-salt";
+const td = new TextDecoder(), te = new TextEncoder();
+let CRYPTOKEY = null;
+
 const phases = [
   { title:"Phase 1", span:"Jun 21 – 28", per:5, dates:["Jun 21","Jun 22","Jun 23","Jun 24","Jun 25","Jun 26","Jun 27","Jun 28"] },
   { title:"Phase 2", span:"Jun 29 – Jul 3", per:2, dates:["Jun 29","Jun 30","Jul 1","Jul 2","Jul 3"] },
@@ -133,27 +164,42 @@ let state = {}, lastUpdated = 0;
 try { const c = JSON.parse(localStorage.getItem(LKEY)); if(c){ state = c.checks||{}; lastUpdated = c.updated||0; } } catch(e){}
 const saveLocal = () => { try { localStorage.setItem(LKEY, JSON.stringify({checks:state, updated:lastUpdated})); } catch(e){} };
 
+/* ---- crypto ---- */
+async function sha256hex(s){ const h=await crypto.subtle.digest("SHA-256", te.encode(s)); return [...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,"0")).join(""); }
+async function checkPass(p){ try { return (await sha256hex("julian-verify::"+p)) === VERIFIER; } catch(e){ return false; } }
+async function deriveKey(p){
+  const km = await crypto.subtle.importKey("raw", te.encode(p), "PBKDF2", false, ["deriveKey"]);
+  return crypto.subtle.deriveKey({name:"PBKDF2", salt:te.encode(SALT), iterations:150000, hash:"SHA-256"}, km, {name:"AES-GCM", length:256}, false, ["encrypt","decrypt"]);
+}
+function b64(buf){ let s=""; const u=new Uint8Array(buf); for(let i=0;i<u.length;i++) s+=String.fromCharCode(u[i]); return btoa(s); }
+function unb64(s){ return Uint8Array.from(atob(s), c=>c.charCodeAt(0)); }
+async function encState(obj){ const iv=crypto.getRandomValues(new Uint8Array(12)); const ct=await crypto.subtle.encrypt({name:"AES-GCM", iv}, CRYPTOKEY, te.encode(JSON.stringify(obj))); return JSON.stringify({v:1, iv:b64(iv), ct:b64(ct)}); }
+async function decState(txt){ const d=JSON.parse(txt); const pt=await crypto.subtle.decrypt({name:"AES-GCM", iv:unb64(d.iv)}, CRYPTOKEY, unb64(d.ct)); return JSON.parse(td.decode(pt)); }
+
+/* ---- sync ---- */
 function setSync(cls, txt){ const el=document.getElementById("sync"); el.className="sync "+cls; document.getElementById("syncTxt").textContent=txt; }
 function ago(ts){ if(!ts) return ""; const s=Math.round((Date.now()-ts)/1000); if(s<60) return "just now"; const m=Math.round(s/60); if(m<60) return m+" min ago"; const h=Math.round(m/60); if(h<24) return h+" hr ago"; return Math.round(h/24)+" d ago"; }
-
 let pushT=null;
 function schedulePush(){ setSync("saving","Saving…"); clearTimeout(pushT); pushT=setTimeout(pushRemote, 500); }
 async function pushRemote(){
+  if(!CRYPTOKEY) return;
   try{
-    const r = await fetch(STORE, {method:"PUT", headers:{"Content-Type":"application/json"}, body:JSON.stringify({checks:state, updated:lastUpdated})});
+    const body = await encState({checks:state, updated:lastUpdated});
+    const r = await fetch(STORE, {method:"PUT", headers:{"Content-Type":"application/json"}, body});
     const t = await r.text();
     if(/not verified|activate/i.test(t)){ setSync("off","Sync pending activation"); return; }
     if(!r.ok) throw 0; setSync("ok","Synced · "+ago(lastUpdated));
   }catch(e){ setSync("off","Offline · saved on this device"); }
 }
 async function pullRemote(){
+  if(!CRYPTOKEY) return;
   try{
     const r = await fetch(STORE, {cache:"no-store"});
     if(r.status===404){ if(lastUpdated>0) await pushRemote(); else setSync("ok","Synced"); return; }
     if(!r.ok) throw 0;
     const t = await r.text();
     if(/not verified|activate/i.test(t)){ setSync("off","Sync pending activation"); return; }
-    const d = JSON.parse(t);
+    let d; try{ d = await decState(t); }catch(e){ setSync("off","Sync error"); return; }
     const ru = d.updated||0;
     if(ru > lastUpdated){ state = d.checks||{}; lastUpdated = ru; saveLocal(); refreshChecks(); recompute(); setSync("ok","Synced · "+ago(lastUpdated)); }
     else if(lastUpdated > ru){ await pushRemote(); }
@@ -161,6 +207,7 @@ async function pullRemote(){
   }catch(e){ setSync("off","Offline · saved on this device"); }
 }
 
+/* ---- ui build ---- */
 function blockQ(ph, di, b){ if(ph.partialLast && di===ph.dates.length-1 && b===ph.per-1) return ph.partialLast; return PERBLOCK; }
 const checkSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
 function makeChk(id){
@@ -241,8 +288,27 @@ document.getElementById("reset").addEventListener("click", () => {
   }
 });
 
+/* ---- gate ---- */
+function startSync(){ setSync("saving","Connecting…"); pullRemote(); setInterval(pullRemote, 20000); }
+async function doUnlock(pass){
+  CRYPTOKEY = await deriveKey(pass);
+  try{ localStorage.setItem("julian_pc", pass); }catch(e){}
+  document.getElementById("gate").style.display = "none";
+  startSync();
+}
+document.getElementById("gateForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const inp = document.getElementById("gateInput"); const err = document.getElementById("gateErr");
+  const v = inp.value.trim();
+  if(await checkPass(v)){ err.textContent=""; await doUnlock(v); }
+  else { err.textContent = "Incorrect passcode."; inp.value=""; inp.focus(); }
+});
+
 recompute();
-pullRemote();
-setInterval(pullRemote, 20000);
+(async () => {
+  let saved=null; try{ saved = localStorage.getItem("julian_pc"); }catch(e){}
+  if(saved && await checkPass(saved)){ await doUnlock(saved); }
+  else { document.getElementById("gateInput").focus(); }
+})();
 </script>
 </body></html>
