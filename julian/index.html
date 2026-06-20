@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#8d2740">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Julian · Step 1">
+<title>Julian · USMLE Step 1 Tracker</title>
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  :root{
+    --paper:#fbf9f6; --ink:#1a1714; --ink2:#6b6258; --wine:#8d2740; --wine2:#a8324f;
+    --green:#2c7a46; --amber:#b5851f; --line:#e7e0d6; --line2:#cdc3b6;
+    --serif:"Didot","Hoefler Text",Georgia,serif; --sans:"Helvetica Neue",Arial,sans-serif;
+    --mono:"Menlo","Courier New",monospace;
+  }
+  body{ background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.5;
+        -webkit-font-smoothing:antialiased; padding:46px 22px 80px; }
+  .wrap{ max-width:920px; margin:0 auto; }
+
+  .kick{ font-family:var(--mono); font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--wine); }
+  h1{ font-family:var(--serif); font-weight:700; font-size:52px; line-height:1.02; margin-top:8px; letter-spacing:-.5px; }
+  h1 em{ font-style:italic; color:var(--wine); }
+  .sub{ font-family:var(--mono); font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink2); margin-top:12px; }
+  .sync{ font-family:var(--mono); font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--ink2); margin-top:10px; display:flex; align-items:center; gap:8px; }
+  .sync .dot{ width:9px; height:9px; border-radius:50%; background:var(--ink2); }
+  .sync.ok .dot{ background:var(--green); } .sync.saving .dot{ background:var(--amber); } .sync.off .dot{ background:#b23; }
+  .thick{ height:3px; background:var(--ink); margin:20px 0 30px; }
+
+  .hero{ display:flex; gap:34px; align-items:center; flex-wrap:wrap; margin-bottom:14px; }
+  .hstats{ flex:1; min-width:260px; }
+  .big{ font-family:var(--serif); font-size:60px; font-weight:700; line-height:1; }
+  .big span{ font-size:26px; color:var(--ink2); font-style:italic; }
+  .bar{ height:12px; background:#efe9e0; border:1px solid var(--line2); margin:16px 0 10px; overflow:hidden; }
+  .bar > i{ display:block; height:100%; width:0; background:linear-gradient(90deg,var(--wine),var(--wine2)); transition:width .25s; }
+  .mini{ display:flex; gap:30px; flex-wrap:wrap; font-family:var(--mono); font-size:13px; letter-spacing:1px; text-transform:uppercase; color:var(--ink2); }
+  .mini b{ color:var(--ink); font-family:var(--sans); font-weight:700; font-size:16px; }
+
+  .sec{ margin-top:46px; }
+  .sec-h{ display:flex; align-items:baseline; gap:16px; }
+  .sec-h .no{ font-family:var(--serif); font-style:italic; font-size:26px; color:var(--wine); }
+  .sec-h .ti{ font-family:var(--mono); font-size:16px; letter-spacing:4px; text-transform:uppercase; font-weight:700; }
+  .sec-h .ct{ font-family:var(--mono); font-size:13px; letter-spacing:1px; color:var(--ink2); margin-left:auto; }
+  .sec-h .fill{ flex:1; height:2px; background:var(--ink); align-self:center; }
+
+  .phase{ margin-top:24px; }
+  .phase-h{ display:flex; align-items:baseline; gap:14px; border-bottom:1px solid var(--line2); padding-bottom:6px; flex-wrap:wrap; }
+  .phase-h b{ font-family:var(--serif); font-size:22px; }
+  .phase-h .span{ color:var(--ink2); }
+  .phase-h .per{ margin-left:auto; font-family:var(--mono); font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--wine); }
+  .day{ display:flex; align-items:center; gap:16px; padding:11px 0; border-bottom:1px solid var(--line); }
+  .day .dt{ width:88px; flex:none; font-family:var(--mono); font-size:14px; letter-spacing:.5px; color:var(--ink); }
+  .day .boxes{ display:flex; gap:12px; flex-wrap:wrap; flex:1; }
+  .day .q{ width:120px; flex:none; text-align:right; font-family:var(--mono); font-size:13px; color:var(--ink2); }
+  .day.done .dt{ color:var(--green); font-weight:700; }
+
+  .chk{ position:relative; display:inline-flex; align-items:center; cursor:pointer; user-select:none; }
+  .chk input{ position:absolute; opacity:0; width:0; height:0; }
+  .chk .bx{ width:24px; height:24px; border:2px solid var(--line2); background:#fff; display:inline-flex;
+            align-items:center; justify-content:center; transition:.12s; }
+  .chk .bx svg{ width:15px; height:15px; opacity:0; transform:scale(.5); transition:.12s; }
+  .chk input:checked + .bx{ background:var(--wine); border-color:var(--wine); }
+  .chk input:checked + .bx svg{ opacity:1; transform:scale(1); }
+  .chk:hover .bx{ border-color:var(--wine); }
+
+  .sys{ display:grid; grid-template-columns:1fr 1fr; gap:30px 44px; margin-top:24px; }
+  .sysgrp h4{ font-family:var(--mono); font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--ink2);
+              border-bottom:2px solid var(--ink); padding-bottom:7px; margin-bottom:6px; }
+  .srow{ display:flex; align-items:center; gap:13px; padding:9px 0; border-bottom:1px solid var(--line); }
+  .srow .nm{ font-size:16.5px; }
+  .srow.done .nm{ color:var(--green); text-decoration:line-through; text-decoration-color:var(--line2); }
+  @media (max-width:620px){ .sys{ grid-template-columns:1fr; } h1{ font-size:40px; } .day .q{ display:none; } }
+
+  .foot{ margin-top:48px; border-top:3px solid var(--ink); padding-top:18px; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
+  .foot .love{ font-family:var(--serif); font-style:italic; font-size:20px; }
+  .reset{ font-family:var(--mono); font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--ink2);
+          background:none; border:1px solid var(--line2); padding:8px 14px; cursor:pointer; }
+  .reset:hover{ color:var(--wine); border-color:var(--wine); }
+</style></head>
+<body>
+<div class="wrap">
+
+  <div class="kick">A study tracker, made with love</div>
+  <h1>For my love, <em>Julian.</em></h1>
+  <div class="sub">USMLE Step 1 · UWorld question bank · one block = 40 questions</div>
+  <div class="sync" id="sync"><span class="dot"></span><span id="syncTxt">Connecting…</span></div>
+  <div class="thick"></div>
+
+  <div class="hero">
+    <div class="hstats">
+      <div class="big"><span id="qDone">0</span> <span>of 3,657 questions</span></div>
+      <div class="bar"><i id="barFill"></i></div>
+      <div class="mini">
+        <div><b id="pctBank">0%</b> of the bank</div>
+        <div><b id="blkDone">0</b> / <span id="blkTotal">92</span> blocks</div>
+        <div><b id="sysDone">0</b> / 26 systems</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="no">01</span><span class="ti">The reading plan</span><span class="fill"></span><span class="ct" id="planCt"></span></div>
+    <div id="plan"></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h"><span class="no">02</span><span class="ti">Systems completed</span><span class="fill"></span><span class="ct" id="sysCt">0 / 26</span></div>
+    <div class="sys" id="systems"></div>
+  </div>
+
+  <div class="foot">
+    <div class="love">Every block is one step closer. I'm proud of you.</div>
+    <button class="reset" id="reset">Reset all</button>
+  </div>
+</div>
+
+<script>
+const BANK = 3657, PERBLOCK = 40;
+const STORE = "https://kvdb.io/XyGmS5TpUtBkSTFdfHDhQL/state";
+const phases = [
+  { title:"Phase 1", span:"Jun 21 – 28", per:5, dates:["Jun 21","Jun 22","Jun 23","Jun 24","Jun 25","Jun 26","Jun 27","Jun 28"] },
+  { title:"Phase 2", span:"Jun 29 – Jul 3", per:2, dates:["Jun 29","Jun 30","Jul 1","Jul 2","Jul 3"] },
+  { title:"Phase 3", span:"Jul 6 – 25", per:1, dates:["Jul 6","Jul 7","Jul 8","Jul 9","Jul 10","Jul 11","Jul 12","Jul 13","Jul 14","Jul 15","Jul 16","Jul 17","Jul 18","Jul 19","Jul 20","Jul 21","Jul 22","Jul 23","Jul 24","Jul 25"] },
+  { title:"Phase 4", span:"Jul 26 – Aug 16", per:1, partialLast:17,
+    dates:["Jul 26","Jul 27","Jul 28","Jul 29","Jul 30","Jul 31","Aug 1","Aug 2","Aug 3","Aug 4","Aug 5","Aug 6","Aug 7","Aug 8","Aug 9","Aug 10","Aug 11","Aug 12","Aug 13","Aug 14","Aug 15","Aug 16"] },
+];
+const genPrinciples = ["Biochemistry (General Principles)","Genetics (General Principles)","Microbiology (General Principles)","Pathology (General Principles)","Pharmacology (General Principles)","Biostatistics & Epidemiology","Poisoning & Environmental Exposure","Psychiatric/Behavioral & Substance Use Disorder","Social Sciences (Ethics/Legal/Professional)","Miscellaneous (Multisystem)"];
+const organSystems = ["Allergy & Immunology","Cardiovascular System","Dermatology","Ear, Nose & Throat (ENT)","Endocrine, Diabetes & Metabolism","Female Reproductive System & Breast","Gastrointestinal & Nutrition","Hematology & Oncology","Infectious Diseases","Male Reproductive System","Nervous System","Ophthalmology","Pregnancy, Childbirth & Puerperium","Pulmonary & Critical Care","Renal, Urinary Systems & Electrolytes","Rheumatology/Orthopedics & Sports"];
+
+const LKEY = "julian_usmle_tracker_v2";
+let state = {}, lastUpdated = 0;
+try { const c = JSON.parse(localStorage.getItem(LKEY)); if(c){ state = c.checks||{}; lastUpdated = c.updated||0; } } catch(e){}
+const saveLocal = () => { try { localStorage.setItem(LKEY, JSON.stringify({checks:state, updated:lastUpdated})); } catch(e){} };
+
+function setSync(cls, txt){ const el=document.getElementById("sync"); el.className="sync "+cls; document.getElementById("syncTxt").textContent=txt; }
+function ago(ts){ if(!ts) return ""; const s=Math.round((Date.now()-ts)/1000); if(s<60) return "just now"; const m=Math.round(s/60); if(m<60) return m+" min ago"; const h=Math.round(m/60); if(h<24) return h+" hr ago"; return Math.round(h/24)+" d ago"; }
+
+let pushT=null;
+function schedulePush(){ setSync("saving","Saving…"); clearTimeout(pushT); pushT=setTimeout(pushRemote, 500); }
+async function pushRemote(){
+  try{
+    const r = await fetch(STORE, {method:"PUT", headers:{"Content-Type":"application/json"}, body:JSON.stringify({checks:state, updated:lastUpdated})});
+    const t = await r.text();
+    if(/not verified|activate/i.test(t)){ setSync("off","Sync pending activation"); return; }
+    if(!r.ok) throw 0; setSync("ok","Synced · "+ago(lastUpdated));
+  }catch(e){ setSync("off","Offline · saved on this device"); }
+}
+async function pullRemote(){
+  try{
+    const r = await fetch(STORE, {cache:"no-store"});
+    if(r.status===404){ if(lastUpdated>0) await pushRemote(); else setSync("ok","Synced"); return; }
+    if(!r.ok) throw 0;
+    const t = await r.text();
+    if(/not verified|activate/i.test(t)){ setSync("off","Sync pending activation"); return; }
+    const d = JSON.parse(t);
+    const ru = d.updated||0;
+    if(ru > lastUpdated){ state = d.checks||{}; lastUpdated = ru; saveLocal(); refreshChecks(); recompute(); setSync("ok","Synced · "+ago(lastUpdated)); }
+    else if(lastUpdated > ru){ await pushRemote(); }
+    else { setSync("ok", lastUpdated ? ("Synced · "+ago(lastUpdated)) : "Synced"); }
+  }catch(e){ setSync("off","Offline · saved on this device"); }
+}
+
+function blockQ(ph, di, b){ if(ph.partialLast && di===ph.dates.length-1 && b===ph.per-1) return ph.partialLast; return PERBLOCK; }
+const checkSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+function makeChk(id){
+  const l=document.createElement("label"); l.className="chk";
+  const inp=document.createElement("input"); inp.type="checkbox"; inp.dataset.id=id; inp.checked=!!state[id];
+  const bx=document.createElement("span"); bx.className="bx"; bx.innerHTML=checkSVG;
+  l.appendChild(inp); l.appendChild(bx);
+  inp.addEventListener("change", () => {
+    if(inp.checked) state[id]=true; else delete state[id];
+    lastUpdated = Date.now(); saveLocal(); recompute(); schedulePush();
+  });
+  return l;
+}
+function refreshChecks(){ document.querySelectorAll(".chk input").forEach(i => i.checked = !!state[i.dataset.id]); }
+
+const planEl=document.getElementById("plan");
+phases.forEach((ph, pi) => {
+  const wrap=document.createElement("div"); wrap.className="phase";
+  const h=document.createElement("div"); h.className="phase-h";
+  h.innerHTML=`<b>${ph.title}</b><span class="span">${ph.span}</span><span class="per">${ph.per} block${ph.per>1?"s":""} / day</span>`;
+  wrap.appendChild(h);
+  ph.dates.forEach((dt, di) => {
+    const row=document.createElement("div"); row.className="day"; row.dataset.p=pi; row.dataset.d=di;
+    const dtl=document.createElement("div"); dtl.className="dt"; dtl.textContent=dt;
+    const boxes=document.createElement("div"); boxes.className="boxes";
+    for(let b=0;b<ph.per;b++){ boxes.appendChild(makeChk(`p${pi}d${di}b${b}`)); }
+    const q=document.createElement("div"); q.className="q";
+    row.appendChild(dtl); row.appendChild(boxes); row.appendChild(q);
+    wrap.appendChild(row);
+  });
+  planEl.appendChild(wrap);
+});
+
+const sysEl=document.getElementById("systems");
+function sysGroup(title, arr, prefix){
+  const g=document.createElement("div"); g.className="sysgrp";
+  const hh=document.createElement("h4"); hh.textContent=title; g.appendChild(hh);
+  arr.forEach((name, i) => {
+    const r=document.createElement("div"); r.className="srow"; r.dataset.sys=prefix+i;
+    const nm=document.createElement("div"); nm.className="nm"; nm.textContent=name;
+    r.appendChild(makeChk("sys-"+prefix+i)); r.appendChild(nm);
+    g.appendChild(r);
+  });
+  return g;
+}
+sysEl.appendChild(sysGroup("General Principles & Foundations", genPrinciples, "g"));
+sysEl.appendChild(sysGroup("Organ Systems", organSystems, "o"));
+
+function recompute(){
+  let totalBlocks=0, doneBlocks=0, qDone=0;
+  phases.forEach((ph, pi) => {
+    ph.dates.forEach((_, di) => {
+      let dayDone=0, dayQ=0, dayDoneQ=0;
+      for(let b=0;b<ph.per;b++){
+        const q=blockQ(ph,di,b); totalBlocks++; dayQ+=q;
+        if(state[`p${pi}d${di}b${b}`]){ doneBlocks++; dayDone++; qDone+=q; dayDoneQ+=q; }
+      }
+      const row=planEl.querySelector(`.day[data-p="${pi}"][data-d="${di}"]`);
+      if(row){ row.classList.toggle("done", dayDone===ph.per); row.querySelector(".q").textContent=dayDoneQ+" / "+dayQ+" q"; }
+    });
+  });
+  const pct=Math.min(100, qDone/BANK*100);
+  document.getElementById("qDone").textContent=qDone.toLocaleString();
+  document.getElementById("pctBank").textContent=pct.toFixed(1).replace(/\.0$/,"")+"%";
+  document.getElementById("blkDone").textContent=doneBlocks;
+  document.getElementById("blkTotal").textContent=totalBlocks;
+  document.getElementById("barFill").style.width=pct+"%";
+  document.getElementById("planCt").textContent=doneBlocks+" / "+totalBlocks+" blocks done";
+  let sysDone=0, sysTotal=genPrinciples.length+organSystems.length;
+  document.querySelectorAll(".srow").forEach(r => { const on=!!state["sys-"+r.dataset.sys]; r.classList.toggle("done", on); if(on) sysDone++; });
+  document.getElementById("sysDone").textContent=sysDone;
+  document.getElementById("sysCt").textContent=sysDone+" / "+sysTotal;
+}
+
+document.getElementById("reset").addEventListener("click", () => {
+  if(confirm("Clear all checkmarks and start fresh?")){
+    state={}; lastUpdated=Date.now(); saveLocal(); refreshChecks(); recompute(); schedulePush();
+  }
+});
+
+recompute();
+pullRemote();
+setInterval(pullRemote, 20000);
+</script>
+</body></html>
