@@ -300,7 +300,11 @@ window.BLOCKS = [
       { id: "resp-pathology",    label: "Pathology",              days: [16, 17, 18, 19],
         recordings: [
           { title: "Respiratory Pathology part 1 (obstructive and restrictive airway diseases)", url: "https://us06web.zoom.us/rec/share/Sfa1D3zx7ex6JzcEA8sXPz9uY27z3GlhYRNOGdaqRNR9uaErnYO_Q-zN2pV7e5qY.z32jsExqt9YdsEx4" },
-          { title: "Respiratory Pathology part 2 (lung cancers, pulmonary hypertension, atelectasis, effusion, pneumothorax)", url: "https://us06web.zoom.us/rec/share/yzHz0g6G2P8WO3c5z8tIgZLO0_zVX1Hb4gYnf0dTYyKV09uFJPXxapYP9MdeBJ9C.SL3w5IOrYfa5MWcw" }
+          { title: "Respiratory Pathology part 2 (lung cancers, pulmonary hypertension, atelectasis, effusion, pneumothorax)", url: "https://us06web.zoom.us/rec/share/yzHz0g6G2P8WO3c5z8tIgZLO0_zVX1Hb4gYnf0dTYyKV09uFJPXxapYP9MdeBJ9C.SL3w5IOrYfa5MWcw" },
+          { title: "Respiratory Pathology part 3 (pulmonary vascular diseases and interstitial lung disease)", url: "https://us06web.zoom.us/rec/share/vkw0okrEn8Em5Y-9sqHYulyIizAy4D-AlEBaL6L1TmqFXm_GM3ksLs6JkGtaxAg-.B_Sc0IkSZewfZB4k" }
+        ],
+        resources: [
+          { kind: "drive", label: "Respiratory Pathology extra questions", url: "https://drive.google.com/drive/folders/1ghH7sDj1oUs428Jk95Ap6ufvXJ6kC9ZY?usp=sharing", meta: "Pulmonary vascular and interstitial lung disease practice questions on Google Drive" }
         ]
       },
       { id: "resp-pharmacology", label: "Pharmacology",           days: [20] }
