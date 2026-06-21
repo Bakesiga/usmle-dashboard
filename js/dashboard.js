@@ -389,7 +389,8 @@
         el.dataset.subBlockId = sb.id;
       }
       const bits = [];
-      bits.push(hasDays ? (dayRangeLabel(sb.days) + ' · ' + sb.days.length + ' day' + (sb.days.length === 1 ? '' : 's')) : 'Coming soon');
+      if (hasDays) bits.push(dayRangeLabel(sb.days) + ' · ' + sb.days.length + ' day' + (sb.days.length === 1 ? '' : 's'));
+      else if (!recN && !resN) bits.push('Coming soon');
       if (recN) bits.push(recN + ' recording' + (recN === 1 ? '' : 's'));
       el.innerHTML =
         '<span class="subblock-title">' + sb.label + '</span>' +

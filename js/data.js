@@ -297,6 +297,11 @@ window.BLOCKS = [
         resources: [
           { kind: "drive", label: "Respiratory Pathology extra questions", url: "https://drive.google.com/drive/folders/1ghH7sDj1oUs428Jk95Ap6ufvXJ6kC9ZY?usp=sharing", meta: "Pulmonary vascular and interstitial lung disease practice questions on Google Drive" }
         ]
+      },
+      { id: "resp-pharmacology", label: "Pharmacology", days: [],
+        recordings: [
+          { title: "Respiratory Pharmacology (H1 blockers, antitussives, decongestants)", url: "https://us06web.zoom.us/rec/share/TyUTwaa8QGjgX1l5Zv_WUB_EOOaLBd7sHGq0hQ0OdQqLg9C-nKyUcp5-rZQrb1Od.5r9ghjHSk-T02t60" }
+        ]
       }
     ]
   },
