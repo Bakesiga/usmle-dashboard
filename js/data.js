@@ -198,24 +198,15 @@ window.SESSIONS = [
       { kind: "highYield", label: "Respiratory Pathology high-yield summary", url: "outputs/study-notes/resp-pathology-high-yield.html", meta: "Full lecture summary · FA 2025 pp. 690 to 703" }
     ]
   },
-  { day: 19, date: "2026-06-20", subject: "resp", phase: "pathology",   title: "Respiratory Pathology",            sub: "",
-    resources: [
-      { kind: "highYield", label: "Respiratory Pathology high-yield summary", url: "outputs/study-notes/resp-pathology-high-yield.html", meta: "Full lecture summary · FA 2025 pp. 690 to 703" }
-    ]
-  },
-  { day: 20, date: "2026-06-21", subject: "resp", phase: "pharmacology", title: "Respiratory Pharmacology",        sub: "",
-    resources: [
-      { kind: "highYield", label: "Respiratory Pharmacology high-yield summary", url: "outputs/study-notes/resp-pharmacology-high-yield.html", meta: "Full lecture summary · FA 2025 pp. 704 to 707" }
-    ]
-  },
+  // ---- Epi & Biostats (5) — June 20 to June 24 ----
+  { day: 19, date: "2026-06-20", subject: "epi",  title: "Study design",                       sub: "RCT, cohort, case-control, cross-sectional" },
+  { day: 20, date: "2026-06-21", subject: "epi",  title: "Diagnostic tests",                   sub: "Sensitivity, specificity, PPV, NPV, LR" },
+  { day: 21, date: "2026-06-22", subject: "epi",  title: "Bias, confounding & error",          sub: "Selection, recall, lead-time, type I/II" },
+  { day: 22, date: "2026-06-23", subject: "epi",  title: "Statistical tests",                  sub: "T-test, ANOVA, chi-square, regression" },
+  { day: 23, date: "2026-06-24", subject: "epi",  title: "Review & practice",                  sub: "Epi & Biostats review and practice questions" },
 
-  // ---- Epi & Biostats (4) — June 22 to June 25 ----
-  { day: 21, date: "2026-06-22", subject: "epi",  title: "Study design",                       sub: "RCT, cohort, case-control, cross-sectional" },
-  { day: 22, date: "2026-06-23", subject: "epi",  title: "Diagnostic tests",                   sub: "Sensitivity, specificity, PPV, NPV, LR" },
-  { day: 23, date: "2026-06-24", subject: "epi",  title: "Bias, confounding & error",          sub: "Selection, recall, lead-time, type I/II" },
-  { day: 24, date: "2026-06-25", subject: "epi",  title: "Statistical tests",                  sub: "T-test, ANOVA, chi-square, regression" },
-
-  // ---- General Pathology (7) — June 26 to July 2 ----
+  // ---- General Pathology (8) — June 25 to July 2 ----
+  { day: 24, date: "2026-06-25", subject: "path", title: "General Pathology", sub: "" },
   { day: 25, date: "2026-06-26", subject: "path", title: "General Pathology", sub: "" },
   { day: 26, date: "2026-06-27", subject: "path", title: "General Pathology", sub: "" },
   { day: 27, date: "2026-06-28", subject: "path", title: "General Pathology", sub: "" },
@@ -227,9 +218,9 @@ window.SESSIONS = [
 
 window.SUBJECT_META = {
   cvs:  { name: "Cardiovascular",   short: "CVS",   dateRange: "Jun 1 to Jun 12", count: 12 },
-  resp: { name: "Respiratory",      short: "RESP",  dateRange: "Jun 14 to Jun 21", count: 8 },
-  epi:  { name: "Epi & Biostats",   short: "EPI",   dateRange: "Jun 22 to Jun 25", count: 4 },
-  path: { name: "General Pathology", short: "PATH", dateRange: "Jun 26 to Jul 2", count: 7 }
+  resp: { name: "Respiratory",      short: "RESP",  dateRange: "Jun 14 to Jun 19", count: 6 },
+  epi:  { name: "Epi & Biostats",   short: "EPI",   dateRange: "Jun 20 to Jun 24", count: 5 },
+  path: { name: "General Pathology", short: "PATH", dateRange: "Jun 25 to Jul 2", count: 8 }
 };
 
 window.LINKS = {
@@ -280,8 +271,8 @@ window.BLOCKS = [
     short: "RS",
     label: "Respiratory",
     subject: "resp",
-    dateRange: "Jun 14 to Jun 21",
-    dayRange: [13, 20],
+    dateRange: "Jun 14 to Jun 19",
+    dayRange: [13, 18],
     subBlocks: [
       { id: "resp-anat-embryo",  label: "Anatomy and Embryology", days: [13],
         recordings: [
@@ -297,7 +288,7 @@ window.BLOCKS = [
           { kind: "drive", label: "Respiratory Physiology extra questions", url: "https://drive.google.com/drive/folders/1x6-b98OhD8SHt9DQjVfZn0_6zw6p46aK?usp=drive_link", meta: "Practice questions and answers on Google Drive" }
         ]
       },
-      { id: "resp-pathology",    label: "Pathology",              days: [16, 17, 18, 19],
+      { id: "resp-pathology",    label: "Pathology",              days: [16, 17, 18],
         recordings: [
           { title: "Respiratory Pathology part 1 (obstructive and restrictive airway diseases)", url: "https://us06web.zoom.us/rec/share/Sfa1D3zx7ex6JzcEA8sXPz9uY27z3GlhYRNOGdaqRNR9uaErnYO_Q-zN2pV7e5qY.z32jsExqt9YdsEx4" },
           { title: "Respiratory Pathology part 2 (lung cancers, pulmonary hypertension, atelectasis, effusion, pneumothorax)", url: "https://us06web.zoom.us/rec/share/yzHz0g6G2P8WO3c5z8tIgZLO0_zVX1Hb4gYnf0dTYyKV09uFJPXxapYP9MdeBJ9C.SL3w5IOrYfa5MWcw" },
@@ -306,8 +297,7 @@ window.BLOCKS = [
         resources: [
           { kind: "drive", label: "Respiratory Pathology extra questions", url: "https://drive.google.com/drive/folders/1ghH7sDj1oUs428Jk95Ap6ufvXJ6kC9ZY?usp=sharing", meta: "Pulmonary vascular and interstitial lung disease practice questions on Google Drive" }
         ]
-      },
-      { id: "resp-pharmacology", label: "Pharmacology",           days: [20] }
+      }
     ]
   },
   {
@@ -315,13 +305,14 @@ window.BLOCKS = [
     short: "EPI",
     label: "Epi and Biostats",
     subject: "epi",
-    dateRange: "Jun 22 to Jun 25",
-    dayRange: [21, 24],
+    dateRange: "Jun 20 to Jun 24",
+    dayRange: [19, 23],
     subBlocks: [
-      { id: "epi-study-design",     label: "Study design",             days: [21] },
-      { id: "epi-diagnostic-tests", label: "Diagnostic tests",         days: [22] },
-      { id: "epi-bias-error",       label: "Bias, confounding, error", days: [23] },
-      { id: "epi-stat-tests",       label: "Statistical tests",        days: [24] }
+      { id: "epi-study-design",     label: "Study design",             days: [19] },
+      { id: "epi-diagnostic-tests", label: "Diagnostic tests",         days: [20] },
+      { id: "epi-bias-error",       label: "Bias, confounding, error", days: [21] },
+      { id: "epi-stat-tests",       label: "Statistical tests",        days: [22] },
+      { id: "epi-review",           label: "Review and practice",      days: [23] }
     ]
   },
   {
@@ -329,10 +320,10 @@ window.BLOCKS = [
     short: "PATH",
     label: "General Pathology",
     subject: "path",
-    dateRange: "Jun 26 to Jul 02",
-    dayRange: [25, 31],
+    dateRange: "Jun 25 to Jul 02",
+    dayRange: [24, 31],
     subBlocks: [
-      { id: "path-general", label: "General Pathology", days: [25, 26, 27, 28, 29, 30, 31] }
+      { id: "path-general", label: "General Pathology", days: [24, 25, 26, 27, 28, 29, 30, 31] }
     ]
   }
 ];
