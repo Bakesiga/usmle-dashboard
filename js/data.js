@@ -313,7 +313,11 @@ window.BLOCKS = [
     dateRange: "Jun 20 to Jun 24",
     dayRange: [19, 23],
     subBlocks: [
-      { id: "epi-study-design",     label: "Study design",             days: [19] },
+      { id: "epi-study-design",     label: "Study design",             days: [19],
+        recordings: [
+          { title: "Study designs: observational vs experimental (with practice questions)", url: "https://us06web.zoom.us/rec/share/LI1tH4KHa9e4CPT7NOeCcOYcwJH6T8B0moToT9O409PfpmGWvaunAGSbXpF4P6dJ.nu1k_Bs_BXhCG8Kg" }
+        ]
+      },
       { id: "epi-diagnostic-tests", label: "Diagnostic tests",         days: [20] },
       { id: "epi-bias-error",       label: "Bias, confounding, error", days: [21] },
       { id: "epi-stat-tests",       label: "Statistical tests",        days: [22] },
