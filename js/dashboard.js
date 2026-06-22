@@ -306,6 +306,13 @@
     }
   }
 
+  // Repaint the side rail on its own clock (the Today panel that used to drive
+  // it was retired). Safe to call any time; all targets live in the side rail.
+  function paintSideRail() {
+    const now = window.getNow();
+    renderSideRail(now, pickToday(now));
+  }
+
   // ---------------- SESSIONS hierarchy (Block / Sub-block / Day) ----------------
   // currentBlockView: 'all' (Level 1), '<blockId>' (Level 2),
   // '<blockId>/<subBlockId>' (Level 3).
@@ -727,6 +734,7 @@
   window.__dashRerender = function () {
     renderSessions();
     renderCalendar();
+    paintSideRail();
   };
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -737,5 +745,9 @@
     bindDayJumps();
     renderSessions();
     renderCalendar();
+    // Side rail: cohort progress, Allan presence, mini-calendar. Repaint every
+    // 30s so the presence state flips live as class start/end times pass.
+    paintSideRail();
+    setInterval(paintSideRail, 30000);
   });
 })();
