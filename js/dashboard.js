@@ -447,7 +447,7 @@
       row.dataset.sessionIdx = idx;
       row.setAttribute('role', 'link');
       row.setAttribute('tabindex', '0');
-      row.title = 'Open Day ' + session.day + ' in Today panel';
+      row.title = 'Day ' + session.day + ': ' + session.title;
       row.innerHTML =
         '<div class="sess-day"><span class="num">Day ' + session.day + '</span></div>' +
         '<div class="sess-date">' + fmtDateShort(d) + '</div>' +
@@ -611,7 +611,7 @@
         cell.dataset.sessionIdx = window.SESSIONS.indexOf(session);
         cell.setAttribute('role', 'link');
         cell.setAttribute('tabindex', '0');
-        cell.title = 'Open Day ' + session.day + ' (' + session.title + ') in Today panel';
+        cell.title = 'Day ' + session.day + ': ' + session.title;
       }
       if (ymdStr === todayStr) cell.classList.add('today');
       cell.innerHTML = `<span class="d">${day}</span>` + (session ? `<span class="t">${session.title}</span>` : '');
@@ -623,7 +623,6 @@
   function activateTab(key) {
     document.querySelectorAll('[data-tab]').forEach(t => t.classList.toggle('active', t.dataset.tab === key));
     document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.dataset.panel === key));
-    if (key === 'today')      renderToday();
     if (key === 'sessions')   { currentBlockView = 'all'; renderSessions(); }
     if (key === 'schedule')   renderCalendar();
   }
@@ -636,10 +635,21 @@
   // ---------------- Jump to a day from Sessions or Schedule ----------------
   function jumpToSession(idx) {
     if (!Number.isInteger(idx) || idx < 0 || idx >= window.SESSIONS.length) return;
-    window.DASH_SELECTED_IDX = idx;
-    activateTab('today');
-    const todayPanel = document.querySelector('[data-panel="today"]');
-    if (todayPanel) todayPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const session = window.SESSIONS[idx];
+    // The Today panel was retired. Day clicks now deep-link into the Sessions
+    // hierarchy: find the block + sub-block whose days[] holds this day and open it.
+    let view = 'all';
+    (window.BLOCKS || []).some(b =>
+      (b.subBlocks || []).some(sb => {
+        if ((sb.days || []).includes(session.day)) { view = b.id + '/' + sb.id; return true; }
+        return false;
+      })
+    );
+    document.querySelectorAll('[data-tab]').forEach(t => t.classList.toggle('active', t.dataset.tab === 'sessions'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.dataset.panel === 'sessions'));
+    setBlockView(view);
+    const panel = document.querySelector('[data-panel="sessions"]');
+    if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   function bindDayJumps() {
     // Sessions panel is handled in bindBlocksRoot (delegated on the new container).
@@ -715,7 +725,6 @@
 
   // Expose for tweaks panel re-rendering
   window.__dashRerender = function () {
-    renderToday();
     renderSessions();
     renderCalendar();
   };
@@ -725,12 +734,8 @@
     bindTabs();
     bindBlocksRoot();
     bindUserMenu();
-    bindAdjacentNav();
     bindDayJumps();
-    renderToday();
     renderSessions();
     renderCalendar();
-    // tick once a minute so the countdown stays fresh
-    setInterval(renderToday, 30000);
   });
 })();

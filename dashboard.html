@@ -138,11 +138,7 @@
 
     <!-- ============================ TABS ============================ -->
     <nav class="dash-tabs" role="tablist" aria-label="Dashboard sections">
-      <button class="dash-tab active" data-tab="today" role="tab" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
-        Today
-      </button>
-      <button class="dash-tab" data-tab="sessions" role="tab" type="button">
+      <button class="dash-tab active" data-tab="sessions" role="tab" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
         Sessions
       </button>
@@ -168,69 +164,11 @@
     <div class="dash-grid">
 
       <!-- ====================================================== -->
-      <!-- TODAY PANEL                                            -->
+      <!-- PANELS COLUMN                                          -->
+      <!-- (Today panel retired; Sessions is the default landing  -->
+      <!--  view. Day detail lives in Sessions and Schedule.)     -->
       <!-- ====================================================== -->
       <div>
-      <section class="panel active" data-panel="today" role="tabpanel" aria-label="Today's session">
-        <article class="today-card subject-cvs">
-          <div class="today-head">
-            <div class="today-meta">
-              <span class="day-pill" data-today-day>Day 3</span>
-              <span class="day-date" data-today-date>Wednesday, June 3, 2026</span>
-              <span class="live-pill" data-live-pill>
-                <span class="dot" aria-hidden="true"></span>
-                <span class="lab">Not yet live</span>
-              </span>
-            </div>
-            <h1 class="today-title" data-today-title>Cardiac output &amp; Frank-Starling</h1>
-            <p class="today-sub" data-today-sub>Preload, afterload, contractility, SV</p>
-            <div class="today-countdown">
-              <span class="lab">Countdown</span>
-              <span data-countdown-line>Class starts in 47 min</span>
-            </div>
-          </div>
-
-          <div class="today-actions" data-today-actions>
-            <!-- Shared Zoom join tile removed: each student now joins via
-                 their own personal Zoom registration link. -->
-            <!-- Dynamic resource tiles get appended here by js/dashboard.js -->
-          </div>
-        </article>
-
-        <!-- ====================================================== -->
-        <!-- COURSE OUTLINE / READ-AHEAD                            -->
-        <!-- Hidden by default; js/dashboard.js shows it when the   -->
-        <!-- selected session has an `outline` block in data.js.    -->
-        <!-- ====================================================== -->
-        <article class="outline-card" data-outline-card hidden>
-          <header class="outline-head">
-            <div class="outline-eyebrow" data-outline-eyebrow>Read ahead · First Aid</div>
-            <h3 class="outline-title">Course outline for today</h3>
-            <p class="outline-intro" data-outline-intro></p>
-          </header>
-          <ol class="outline-list" data-outline-list></ol>
-          <footer class="outline-foot">
-            <small>Page numbers will be filled in from the First Aid 2025 copy. Skim each section the evening before class; the question block tomorrow only tests what is covered here.</small>
-          </footer>
-        </article>
-
-        <div class="adj-cards">
-          <a class="adj-card subject-cvs" data-prev-card href="#">
-            <span class="adj-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></span>
-            <span class="adj-card-info">
-              <small data-prev-label>Yesterday · Day 2</small>
-              <strong data-prev-title>The cardiac cycle &amp; PV loops</strong>
-            </span>
-          </a>
-          <a class="adj-card subject-cvs" data-next-card href="#" data-dir="next">
-            <span class="adj-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
-            <span class="adj-card-info">
-              <small data-next-label>Tomorrow · Day 4</small>
-              <strong data-next-title>Vascular biology &amp; hemodynamics</strong>
-            </span>
-          </a>
-        </div>
-      </section>
 
       <!-- ====================================================== -->
       <!-- ====================================================== -->
@@ -239,7 +177,7 @@
       <!-- tiles (L2) -> day cards (L3). Rendered by JS into the  -->
       <!-- [data-blocks-root] container.                          -->
       <!-- ====================================================== -->
-      <section class="panel" data-panel="sessions" role="tabpanel" aria-label="All sessions">
+      <section class="panel active" data-panel="sessions" role="tabpanel" aria-label="All sessions">
         <div class="blocks-root" data-blocks-root></div>
       </section>
 
