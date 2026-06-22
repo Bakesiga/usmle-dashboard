@@ -200,9 +200,9 @@ window.SESSIONS = [
   },
   // ---- Epi & Biostats (5) — June 20 to June 24 ----
   { day: 19, date: "2026-06-20", subject: "epi",  title: "Study design",                       sub: "RCT, cohort, case-control, cross-sectional" },
-  { day: 20, date: "2026-06-21", subject: "epi",  title: "Diagnostic tests",                   sub: "Sensitivity, specificity, PPV, NPV, LR" },
-  { day: 21, date: "2026-06-22", subject: "epi",  title: "Bias, confounding & error",          sub: "Selection, recall, lead-time, type I/II" },
-  { day: 22, date: "2026-06-23", subject: "epi",  title: "Statistical tests",                  sub: "T-test, ANOVA, chi-square, regression" },
+  { day: 20, date: "2026-06-21", subject: "epi",  title: "Biases and Quantifying risk",        sub: "Selection, recall, confounding; RR, OR, AR, NNT" },
+  { day: 21, date: "2026-06-22", subject: "epi",  title: "Diagnostic tests",                   sub: "Sensitivity, specificity, PPV, NPV, LR" },
+  { day: 22, date: "2026-06-23", subject: "epi",  title: "Statistical tests",                  sub: "Type I/II error, t-test, ANOVA, chi-square" },
   { day: 23, date: "2026-06-24", subject: "epi",  title: "Review & practice",                  sub: "Epi & Biostats review and practice questions" },
 
   // ---- General Pathology (8) — June 25 to July 2 ----
@@ -318,10 +318,10 @@ window.BLOCKS = [
           { title: "Study designs: observational vs experimental (with practice questions)", url: "https://us06web.zoom.us/rec/share/LI1tH4KHa9e4CPT7NOeCcOYcwJH6T8B0moToT9O409PfpmGWvaunAGSbXpF4P6dJ.nu1k_Bs_BXhCG8Kg" }
         ]
       },
-      { id: "epi-diagnostic-tests", label: "Diagnostic tests",         days: [20] },
-      { id: "epi-bias-error",       label: "Bias, confounding, error", days: [21] },
-      { id: "epi-stat-tests",       label: "Statistical tests",        days: [22] },
-      { id: "epi-review",           label: "Review and practice",      days: [23] }
+      { id: "epi-bias-risk",        label: "Biases and Quantifying risk", days: [20] },
+      { id: "epi-diagnostic-tests", label: "Diagnostic tests",            days: [21] },
+      { id: "epi-stat-tests",       label: "Statistical tests",           days: [22] },
+      { id: "epi-review",           label: "Review and practice",         days: [23] }
     ]
   },
   {
