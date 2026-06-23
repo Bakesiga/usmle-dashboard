@@ -321,7 +321,11 @@ window.BLOCKS = [
           { title: "Study designs: observational vs experimental (with practice questions)", url: "https://us06web.zoom.us/rec/share/LI1tH4KHa9e4CPT7NOeCcOYcwJH6T8B0moToT9O409PfpmGWvaunAGSbXpF4P6dJ.nu1k_Bs_BXhCG8Kg" }
         ]
       },
-      { id: "epi-bias-risk",        label: "Biases and Quantifying risk", days: [21] },
+      { id: "epi-bias-risk",        label: "Biases and Quantifying risk", days: [21],
+        recordings: [
+          { title: "Biases and Quantifying risk (selection and recall bias, with practice questions; introduction to relative risk, odds ratio, attributable risk, and NNT)", url: "https://us06web.zoom.us/rec/share/5poUujCxFlhkwp93x70qMviwUHOd-yj9pROrTChdYtgJ6eh1FSjQ0lpcwZF02ctY.7u6W9bhUzp7f-e34" }
+        ]
+      },
       { id: "epi-diagnostic-tests", label: "Diagnostic tests and demographic transitions", days: [22] },
       { id: "epi-stat-tests",       label: "Statistical tests",           days: [23] },
       { id: "epi-review",           label: "Review and practice",         days: [24] }
