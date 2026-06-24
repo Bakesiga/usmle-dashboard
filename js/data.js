@@ -204,8 +204,8 @@ window.SESSIONS = [
   // ---- Epi & Biostats (5) · June 21 to June 25 ----
   { day: 20, date: "2026-06-21", subject: "epi",  title: "Study design",                       sub: "RCT, cohort, case-control, cross-sectional" },
   { day: 21, date: "2026-06-22", subject: "epi",  title: "Biases and Quantifying risk",        sub: "Selection, recall, confounding; RR, OR, AR, NNT" },
-  { day: 22, date: "2026-06-23", subject: "epi",  title: "Diagnostic tests and demographic transitions", sub: "Sensitivity, specificity, PPV, NPV; demographic transition" },
-  { day: 23, date: "2026-06-24", subject: "epi",  title: "Statistical tests",                  sub: "Type I/II error, t-test, ANOVA, chi-square" },
+  { day: 22, date: "2026-06-23", subject: "epi",  title: "Quantifying risk (Part 2) and Demographic transitions", sub: "Practice questions on risk measures; demographic transition" },
+  { day: 23, date: "2026-06-24", subject: "epi",  title: "Diagnostic studies and Statistical tests", sub: "Sensitivity, specificity, PPV, NPV; type I/II error, t-test, ANOVA" },
   { day: 24, date: "2026-06-25", subject: "epi",  title: "Review & practice",                  sub: "Epi & Biostats review and practice questions" },
 
   // ---- General Pathology (8) · June 26 to July 3 ----
@@ -326,8 +326,12 @@ window.BLOCKS = [
           { title: "Biases and Quantifying risk (selection and recall bias, with practice questions; introduction to relative risk, odds ratio, attributable risk, and NNT)", url: "https://us06web.zoom.us/rec/share/5poUujCxFlhkwp93x70qMviwUHOd-yj9pROrTChdYtgJ6eh1FSjQ0lpcwZF02ctY.7u6W9bhUzp7f-e34" }
         ]
       },
-      { id: "epi-diagnostic-tests", label: "Diagnostic tests and demographic transitions", days: [22] },
-      { id: "epi-stat-tests",       label: "Statistical tests",           days: [23] },
+      { id: "epi-quant-risk-2",     label: "Quantifying risk (Part 2) and Demographic transitions", days: [22],
+        recordings: [
+          { title: "Quantifying risk Part 2 (practice questions) and Demographic transitions", url: "https://us06web.zoom.us/rec/share/2oHbnbD-PUiGzTuWQCEosgNiKDGQ9t7kTDU_QcaMNHfObyJ3mrYXrfAAQedfLUtp.rhGdwN5oEICQXusP" }
+        ]
+      },
+      { id: "epi-diagnostic-stats", label: "Diagnostic studies and Statistical tests", days: [23] },
       { id: "epi-review",           label: "Review and practice",         days: [24] }
     ]
   },
