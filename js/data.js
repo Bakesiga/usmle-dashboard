@@ -205,8 +205,8 @@ window.SESSIONS = [
   { day: 20, date: "2026-06-21", subject: "epi",  title: "Study design",                       sub: "RCT, cohort, case-control, cross-sectional" },
   { day: 21, date: "2026-06-22", subject: "epi",  title: "Biases and Quantifying risk",        sub: "Selection, recall, confounding; RR, OR, AR, NNT" },
   { day: 22, date: "2026-06-23", subject: "epi",  title: "Quantifying risk (Part 2) and Demographic transitions", sub: "Practice questions on risk measures; demographic transition" },
-  { day: 23, date: "2026-06-24", subject: "epi",  title: "Diagnostic studies and Statistical tests", sub: "Sensitivity, specificity, PPV, NPV; type I/II error, t-test, ANOVA" },
-  { day: 24, date: "2026-06-25", subject: "epi",  title: "Review & practice",                  sub: "Epi & Biostats review and practice questions" },
+  { day: 23, date: "2026-06-24", subject: "epi",  title: "Diagnostic tests, Validity and Reliability, Incidence and Prevalence", sub: "Sensitivity, specificity, PPV, NPV; validity and reliability; incidence and prevalence" },
+  { day: 24, date: "2026-06-25", subject: "epi",  title: "Statistical tests",                  sub: "Type I/II error, t-test, ANOVA, chi-square" },
 
   // ---- General Pathology (8) · June 26 to July 3 ----
   { day: 25, date: "2026-06-26", subject: "path", title: "General Pathology", sub: "" },
@@ -331,8 +331,12 @@ window.BLOCKS = [
           { title: "Quantifying risk Part 2 (practice questions) and Demographic transitions", url: "https://us06web.zoom.us/rec/share/2oHbnbD-PUiGzTuWQCEosgNiKDGQ9t7kTDU_QcaMNHfObyJ3mrYXrfAAQedfLUtp.rhGdwN5oEICQXusP" }
         ]
       },
-      { id: "epi-diagnostic-stats", label: "Diagnostic studies and Statistical tests", days: [23] },
-      { id: "epi-review",           label: "Review and practice",         days: [24] }
+      { id: "epi-diagnostic-validity", label: "Diagnostic tests, Validity and Reliability, Incidence and Prevalence", days: [23],
+        recordings: [
+          { title: "Diagnostic tests, Validity and Reliability, and Incidence and Prevalence", url: "https://us06web.zoom.us/rec/share/1x_Jt3t9I7f6uYYBiAVY9SArs4iPtrZA_hDIgpl8B7IYmFtFr7qiq1T2yjuWqw-5.O7QDSEIUYLeXaNYN" }
+        ]
+      },
+      { id: "epi-stat-tests",       label: "Statistical tests",           days: [24] }
     ]
   },
   {
