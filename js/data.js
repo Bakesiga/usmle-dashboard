@@ -336,7 +336,11 @@ window.BLOCKS = [
           { title: "Diagnostic tests, Validity and Reliability, and Incidence and Prevalence", url: "https://us06web.zoom.us/rec/share/1x_Jt3t9I7f6uYYBiAVY9SArs4iPtrZA_hDIgpl8B7IYmFtFr7qiq1T2yjuWqw-5.O7QDSEIUYLeXaNYN" }
         ]
       },
-      { id: "epi-stat-tests",       label: "Statistical tests",           days: [24] }
+      { id: "epi-stat-tests",       label: "Statistical tests",           days: [24],
+        recordings: [
+          { title: "Statistical tests (distributions and central tendency, hypothesis testing, type I and II errors and power, confidence intervals, t-test, ANOVA, chi-square, and correlation)", url: "https://us06web.zoom.us/rec/share/888PhsnUEIlpZxPqZOmm5w8DRXiZicivcXAHoNiuIzQyHsAModxaeUEG9I5W1RVF.8xsZk16QgzqcygC3" }
+        ]
+      }
     ]
   },
   {
