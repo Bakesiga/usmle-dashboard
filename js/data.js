@@ -209,14 +209,14 @@ window.SESSIONS = [
   { day: 24, date: "2026-06-25", subject: "epi",  title: "Statistical tests",                  sub: "Type I/II error, t-test, ANOVA, chi-square" },
 
   // ---- General Pathology (8) · June 26 to July 3 ----
-  { day: 25, date: "2026-06-26", subject: "path", title: "General Pathology", sub: "" },
-  { day: 26, date: "2026-06-27", subject: "path", title: "General Pathology", sub: "" },
-  { day: 27, date: "2026-06-28", subject: "path", title: "General Pathology", sub: "" },
-  { day: 28, date: "2026-06-29", subject: "path", title: "General Pathology", sub: "" },
-  { day: 29, date: "2026-06-30", subject: "path", title: "General Pathology", sub: "" },
-  { day: 30, date: "2026-07-01", subject: "path", title: "General Pathology", sub: "" },
-  { day: 31, date: "2026-07-02", subject: "path", title: "General Pathology", sub: "" },
-  { day: 32, date: "2026-07-03", subject: "path", title: "General Pathology", sub: "" }
+  { day: 25, date: "2026-06-26", subject: "path", title: "Cellular injury, adaptation, and death", sub: "Cellular adaptations, reversible and irreversible injury, necrosis and apoptosis" },
+  { day: 26, date: "2026-06-27", subject: "path", title: "Inflammation: acute and chronic", sub: "Acute and chronic inflammation" },
+  { day: 27, date: "2026-06-28", subject: "path", title: "Inflammation and tissue repair", sub: "Chronic inflammation, granulomas, and wound healing" },
+  { day: 28, date: "2026-06-29", subject: "path", title: "Neoplasia", sub: "Tumor nomenclature, grading, and staging" },
+  { day: 29, date: "2026-06-30", subject: "path", title: "Neoplasia", sub: "Carcinogenesis, oncogenes, and tumor suppressors" },
+  { day: 30, date: "2026-07-01", subject: "path", title: "Neoplasia", sub: "Tumor markers and paraneoplastic syndromes" },
+  { day: 31, date: "2026-07-02", subject: "path", title: "Neoplasia", sub: "Metastasis and cancer epidemiology" },
+  { day: 32, date: "2026-07-03", subject: "path", title: "Neoplasia", sub: "Review and practice questions" }
 ];
 
 window.SUBJECT_META = {
@@ -351,7 +351,13 @@ window.BLOCKS = [
     dateRange: "Jun 26 to Jul 03",
     dayRange: [25, 32],
     subBlocks: [
-      { id: "path-general", label: "General Pathology", days: [25, 26, 27, 28, 29, 30, 31, 32] }
+      { id: "path-cellular", label: "Cellular injury, adaptation and death", days: [25],
+        recordings: [
+          { title: "Cellular adaptations, injury, and death", url: "https://us06web.zoom.us/rec/share/Ot-lp93Gj1UNTV8-264fCh8GvZBOJW1skXDwQ0wI8azSZAatlsAqH62pry0PyQNN.SbRTOzivB8Xkyld2" }
+        ]
+      },
+      { id: "path-inflammation", label: "Inflammation",                    days: [26, 27] },
+      { id: "path-neoplasia",    label: "Neoplasia",                       days: [28, 29, 30, 31, 32] }
     ]
   }
 ];
