@@ -276,6 +276,9 @@
       if (!el) return;
       el.style.setProperty('--pct', pct);
       el.querySelector('.pie-val').textContent = done + '/' + total;
+      // keep the "X days" label in sync with the live total so it can't go stale
+      const small = el.parentElement && el.parentElement.querySelector('.lab small');
+      if (small) small.textContent = total + ' day' + (total === 1 ? '' : 's');
     });
 
     // Allan presence
