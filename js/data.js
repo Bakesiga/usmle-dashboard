@@ -210,13 +210,13 @@ window.SESSIONS = [
 
   // ---- General Pathology (8) · June 26 to July 3 ----
   { day: 25, date: "2026-06-26", subject: "path", title: "Cellular injury, adaptation, and death", sub: "Cellular adaptations, reversible and irreversible injury, necrosis and apoptosis" },
-  { day: 26, date: "2026-06-27", subject: "path", title: "Inflammation: acute and chronic", sub: "Acute and chronic inflammation" },
-  { day: 27, date: "2026-06-28", subject: "path", title: "Inflammation and tissue repair", sub: "Chronic inflammation, granulomas, and wound healing" },
-  { day: 28, date: "2026-06-29", subject: "path", title: "Neoplasia", sub: "Tumor nomenclature, grading, and staging" },
-  { day: 29, date: "2026-06-30", subject: "path", title: "Neoplasia", sub: "Carcinogenesis, oncogenes, and tumor suppressors" },
-  { day: 30, date: "2026-07-01", subject: "path", title: "Neoplasia", sub: "Tumor markers and paraneoplastic syndromes" },
-  { day: 31, date: "2026-07-02", subject: "path", title: "Neoplasia", sub: "Metastasis and cancer epidemiology" },
-  { day: 32, date: "2026-07-03", subject: "path", title: "Neoplasia", sub: "Review and practice questions" }
+  { day: 26, date: "2026-06-27", subject: "path", title: "Inflammation and introduction to Neoplasia", sub: "Completing acute and chronic inflammation and tissue repair; introduction to neoplasia" },
+  { day: 27, date: "2026-06-28", subject: "path", title: "Neoplasia", sub: "Completing neoplasia: nomenclature, grading and staging, carcinogenesis, tumor markers, metastasis" },
+  { day: 28, date: "2026-06-29", subject: "path", title: "Neoplasia: practice questions", sub: "Question practice on neoplasia" },
+  { day: 29, date: "2026-06-30", subject: "path", title: "Neoplasia: practice questions", sub: "Question practice on neoplasia" },
+  { day: 30, date: "2026-07-01", subject: "path", title: "Neoplasia: practice questions", sub: "Question practice on neoplasia" },
+  { day: 31, date: "2026-07-02", subject: "path", title: "Neoplasia: practice questions", sub: "Question practice on neoplasia" },
+  { day: 32, date: "2026-07-03", subject: "path", title: "Neoplasia: practice questions", sub: "Question practice on neoplasia" }
 ];
 
 window.SUBJECT_META = {
@@ -356,8 +356,12 @@ window.BLOCKS = [
           { title: "Cellular adaptations, injury, and death", url: "https://us06web.zoom.us/rec/share/Ot-lp93Gj1UNTV8-264fCh8GvZBOJW1skXDwQ0wI8azSZAatlsAqH62pry0PyQNN.SbRTOzivB8Xkyld2" }
         ]
       },
-      { id: "path-inflammation", label: "Inflammation",                    days: [26, 27] },
-      { id: "path-neoplasia",    label: "Neoplasia",                       days: [28, 29, 30, 31, 32] }
+      { id: "path-inflammation", label: "Inflammation",                    days: [26],
+        recordings: [
+          { title: "Inflammation (completed) and introduction to Neoplasia", url: "https://us06web.zoom.us/rec/share/pw4xyysf3a1JuOgS03108Lbop5QCJabq2dcGNo1OS2jK5G0sZvUptPIcIv8ZCpZr.NRWbMWyKaCdRlLJI" }
+        ]
+      },
+      { id: "path-neoplasia",    label: "Neoplasia",                       days: [27, 28, 29, 30, 31, 32] }
     ]
   }
 ];
