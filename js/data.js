@@ -208,22 +208,19 @@ window.SESSIONS = [
   { day: 23, date: "2026-06-24", subject: "epi",  title: "Diagnostic tests, Validity and Reliability, Incidence and Prevalence", sub: "Sensitivity, specificity, PPV, NPV; validity and reliability; incidence and prevalence" },
   { day: 24, date: "2026-06-25", subject: "epi",  title: "Statistical tests",                  sub: "Type I/II error, t-test, ANOVA, chi-square" },
 
-  // ---- General Pathology (8) · June 26 to July 3 ----
+  // ---- General Pathology (5) · June 26 to June 30 ----
   { day: 25, date: "2026-06-26", subject: "path", title: "Cellular injury, adaptation, and death", sub: "Cellular adaptations, reversible and irreversible injury, necrosis and apoptosis" },
   { day: 26, date: "2026-06-27", subject: "path", title: "Inflammation and introduction to Neoplasia", sub: "Completing acute and chronic inflammation and tissue repair; introduction to neoplasia" },
   { day: 27, date: "2026-06-28", subject: "path", title: "Neoplasia", sub: "Completing neoplasia: nomenclature, grading and staging, carcinogenesis, tumor markers, metastasis" },
   { day: 28, date: "2026-06-29", subject: "path", title: "Neoplasia: practice questions", sub: "Question practice on neoplasia" },
-  { day: 29, date: "2026-06-30", subject: "path", title: "Neoplasia: practice questions", sub: "Question practice on neoplasia" },
-  { day: 30, date: "2026-07-01", subject: "path", title: "Neoplasia: practice questions", sub: "Question practice on neoplasia" },
-  { day: 31, date: "2026-07-02", subject: "path", title: "Neoplasia: practice questions", sub: "Question practice on neoplasia" },
-  { day: 32, date: "2026-07-03", subject: "path", title: "Neoplasia: practice questions", sub: "Question practice on neoplasia" }
+  { day: 29, date: "2026-06-30", subject: "path", title: "Neoplasia: practice questions", sub: "Question practice on neoplasia" }
 ];
 
 window.SUBJECT_META = {
   cvs:  { name: "Cardiovascular",   short: "CVS",   dateRange: "Jun 1 to Jun 12", count: 12 },
   resp: { name: "Respiratory",      short: "RESP",  dateRange: "Jun 14 to Jun 20", count: 7 },
   epi:  { name: "Epi & Biostats",   short: "EPI",   dateRange: "Jun 21 to Jun 25", count: 5 },
-  path: { name: "General Pathology", short: "PATH", dateRange: "Jun 26 to Jul 3", count: 8 }
+  path: { name: "General Pathology", short: "PATH", dateRange: "Jun 26 to Jun 30", count: 5 }
 };
 
 window.LINKS = {
@@ -348,8 +345,8 @@ window.BLOCKS = [
     short: "PATH",
     label: "General Pathology",
     subject: "path",
-    dateRange: "Jun 26 to Jul 03",
-    dayRange: [25, 32],
+    dateRange: "Jun 26 to Jun 30",
+    dayRange: [25, 29],
     subBlocks: [
       { id: "path-cellular", label: "Cellular injury, adaptation and death", days: [25],
         recordings: [
@@ -361,7 +358,7 @@ window.BLOCKS = [
           { title: "Inflammation (completed) and introduction to Neoplasia", url: "https://us06web.zoom.us/rec/share/pw4xyysf3a1JuOgS03108Lbop5QCJabq2dcGNo1OS2jK5G0sZvUptPIcIv8ZCpZr.NRWbMWyKaCdRlLJI" }
         ]
       },
-      { id: "path-neoplasia",    label: "Neoplasia",                       days: [27, 28, 29, 30, 31, 32] }
+      { id: "path-neoplasia",    label: "Neoplasia",                       days: [27, 28, 29] }
     ]
   }
 ];
