@@ -358,7 +358,11 @@ window.BLOCKS = [
           { title: "Inflammation (completed) and introduction to Neoplasia", url: "https://us06web.zoom.us/rec/share/pw4xyysf3a1JuOgS03108Lbop5QCJabq2dcGNo1OS2jK5G0sZvUptPIcIv8ZCpZr.NRWbMWyKaCdRlLJI" }
         ]
       },
-      { id: "path-neoplasia",    label: "Neoplasia",                       days: [27, 28, 29] }
+      { id: "path-neoplasia",    label: "Neoplasia",                       days: [27, 28, 29],
+        recordings: [
+          { title: "Neoplasia (oncogenes and tumor suppressors, cell cycle, hereditary cancer syndromes, hallmarks, invasion and metastasis)", url: "https://us06web.zoom.us/rec/share/Y0DpMCL-5exn1OTqm0e7v5BbDAklUUdmp6TwMoJsPFilAUChT_LMiL7dNVCpcYcI.eN7Usjy6rpaVJGdU" }
+        ]
+      }
     ]
   }
 ];
