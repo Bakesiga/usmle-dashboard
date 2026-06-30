@@ -249,6 +249,7 @@ window.BLOCKS = [
     subject: "cvs",
     dateRange: "Jun 01 to Jun 12",
     dayRange: [1, 12],
+    start: "2026-06-01",
     subBlocks: [
       { id: "cvs-anat-embryo",  label: "Anatomy and Embryology", days: [1, 2, 3] },
       { id: "cvs-physiology",   label: "Physiology",             days: [4, 5, 6] },
@@ -273,6 +274,7 @@ window.BLOCKS = [
     subject: "resp",
     dateRange: "Jun 14 to Jun 20",
     dayRange: [13, 19],
+    start: "2026-06-14",
     subBlocks: [
       { id: "resp-anat-embryo",  label: "Anatomy and Embryology", days: [13],
         recordings: [
@@ -312,6 +314,7 @@ window.BLOCKS = [
     subject: "epi",
     dateRange: "Jun 21 to Jun 25",
     dayRange: [20, 24],
+    start: "2026-06-21",
     subBlocks: [
       { id: "epi-study-design",     label: "Study design",             days: [20],
         recordings: [
@@ -347,6 +350,7 @@ window.BLOCKS = [
     subject: "path",
     dateRange: "Jun 26 to Jun 30",
     dayRange: [25, 29],
+    start: "2026-06-26",
     subBlocks: [
       { id: "path-cellular", label: "Cellular injury, adaptation and death", days: [25],
         recordings: [

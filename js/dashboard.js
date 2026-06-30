@@ -334,6 +334,31 @@
     return 'Days ' + days[0] + ' to ' + days[days.length - 1];
   }
 
+  // ---- Per-student recording access gate ----
+  // A student with an accessFrom date sees class recordings only from blocks
+  // that start on/after that date (blocks before they joined are locked).
+  // No accessFrom => full back-access (existing/founding students). Reads the
+  // live allowlist cache first so an accessFrom edit applies on next load
+  // without forcing a re-login; falls back to the stored session.
+  function studentAccessFrom() {
+    let email = null, fromSession = null;
+    try {
+      const sess = JSON.parse(localStorage.getItem('usmle.session.v2') || 'null');
+      if (sess) { email = sess.email; fromSession = sess.accessFrom || null; }
+    } catch (e) {}
+    if (!email) return null;
+    try {
+      const cache = JSON.parse(sessionStorage.getItem('usmle.allowlist.v2') || '[]');
+      const live = cache.find(s => s.email === email);
+      if (live) return live.accessFrom || null;
+    } catch (e) {}
+    return fromSession;
+  }
+  function blockRecordingsLocked(block) {
+    const from = studentAccessFrom();
+    return !!(from && block && block.start && block.start < from);
+  }
+
   // Level 1: root grid of 4 Block tiles
   function renderBlocksRoot() {
     const root = document.querySelector('[data-blocks-root]');
@@ -344,14 +369,15 @@
     blocks.forEach(b => {
       const dayCount = (b.dayRange ? (b.dayRange[1] - b.dayRange[0] + 1) : 0);
       const subCount = (b.subBlocks || []).length;
+      const locked = blockRecordingsLocked(b);
       const tile = document.createElement('button');
       tile.type = 'button';
-      tile.className = 'block-tile subject-' + b.subject;
+      tile.className = 'block-tile subject-' + b.subject + (locked ? ' is-locked' : '');
       tile.dataset.blockId = b.id;
       tile.innerHTML =
         '<span class="block-tile-badge">' + b.short + '</span>' +
         '<span class="block-tile-body">' +
-          '<span class="block-tile-eyebrow">' + b.dateRange + '</span>' +
+          '<span class="block-tile-eyebrow">' + b.dateRange + (locked ? ' <span class="lock-pill">recordings locked</span>' : '') + '</span>' +
           '<span class="block-tile-title">' + b.label + '</span>' +
           '<span class="block-tile-meta">' + dayCount + ' days · ' + subCount + ' sub-blocks</span>' +
         '</span>' +
@@ -370,6 +396,7 @@
     if (!root) return;
     const block = findBlock(blockId);
     if (!block) { renderBlocksRoot(); return; }
+    const locked = blockRecordingsLocked(block);
 
     const header = document.createElement('div');
     header.className = 'block-detail-head subject-' + block.subject;
@@ -401,7 +428,7 @@
       const bits = [];
       if (hasDays) bits.push(dayRangeLabel(sb.days) + ' · ' + sb.days.length + ' day' + (sb.days.length === 1 ? '' : 's'));
       else if (!recN && !resN) bits.push('Coming soon');
-      if (recN) bits.push(recN + ' recording' + (recN === 1 ? '' : 's'));
+      if (recN) bits.push(recN + ' recording' + (recN === 1 ? '' : 's') + (locked ? ' (locked)' : ''));
       el.innerHTML =
         '<span class="subblock-title">' + sb.label + '</span>' +
         '<span class="subblock-meta">' + bits.join(' · ') + '</span>' +
@@ -475,6 +502,7 @@
 
     // Class recordings for this sub-block
     if (sub.recordings && sub.recordings.length > 0) {
+      const recLocked = blockRecordingsLocked(block);
       const recHeader = document.createElement('h3');
       recHeader.className = 'block-recordings-h';
       recHeader.textContent = 'Class recordings';
@@ -483,20 +511,36 @@
       const recList = document.createElement('div');
       recList.className = 'block-recordings-list subject-' + block.subject;
       sub.recordings.forEach(rec => {
-        const link = document.createElement('a');
-        link.className = 'block-recording-card';
-        link.href = rec.url;
-        link.target = '_blank';
-        link.rel = 'noopener';
-        link.innerHTML =
-          '<span class="block-recording-icon">' +
-            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>' +
-          '</span>' +
-          '<div class="block-recording-body">' +
-            '<span class="block-recording-title">' + rec.title + '</span>' +
-            '<span class="block-recording-meta">Open recording on Zoom</span>' +
-          '</div>';
-        recList.appendChild(link);
+        if (recLocked) {
+          // Pre-join block: show the recording exists but lock it (no link).
+          const card = document.createElement('div');
+          card.className = 'block-recording-card is-locked';
+          card.setAttribute('aria-disabled', 'true');
+          card.innerHTML =
+            '<span class="block-recording-icon">' +
+              '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>' +
+            '</span>' +
+            '<div class="block-recording-body">' +
+              '<span class="block-recording-title">' + rec.title + '</span>' +
+              '<span class="block-recording-meta">Not included in your plan</span>' +
+            '</div>';
+          recList.appendChild(card);
+        } else {
+          const link = document.createElement('a');
+          link.className = 'block-recording-card';
+          link.href = rec.url;
+          link.target = '_blank';
+          link.rel = 'noopener';
+          link.innerHTML =
+            '<span class="block-recording-icon">' +
+              '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>' +
+            '</span>' +
+            '<div class="block-recording-body">' +
+              '<span class="block-recording-title">' + rec.title + '</span>' +
+              '<span class="block-recording-meta">Open recording on Zoom</span>' +
+            '</div>';
+          recList.appendChild(link);
+        }
       });
       root.appendChild(recList);
     }

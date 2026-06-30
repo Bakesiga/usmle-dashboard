@@ -17,10 +17,12 @@ const USMLE_AUTH = (() => {
       return json.students.map((s) => ({
         email: String(s.email || "").toLowerCase().trim(),
         tracks: Array.isArray(s.tracks) && s.tracks.length ? s.tracks : ["step1", "step2"],
+        // Optional join-date gate. null => full back-access.
+        accessFrom: s.accessFrom ? String(s.accessFrom).trim() : null,
       }));
     }
     if (Array.isArray(json.emails)) {
-      return json.emails.map((e) => ({ email: String(e).toLowerCase().trim(), tracks: ["step1", "step2"] }));
+      return json.emails.map((e) => ({ email: String(e).toLowerCase().trim(), tracks: ["step1", "step2"], accessFrom: null }));
     }
     return [];
   }
@@ -63,6 +65,7 @@ const USMLE_AUTH = (() => {
     const session = {
       email: entry.email,
       tracks: entry.tracks,
+      accessFrom: entry.accessFrom || null,
       name: claims.name || entry.email,
       picture: claims.picture || "",
       signedInAt: Date.now(),

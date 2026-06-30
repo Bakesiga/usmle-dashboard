@@ -1,5 +1,5 @@
 {
-  "_comment": "Per-student access. tracks = subset of ['step1','step2']. Allan has both. Edit via ./admin.py student add --track step1 foo@gmail.com",
+  "_comment": "Per-student access. tracks = subset of ['step1','step2']. Allan has both. Optional accessFrom (YYYY-MM-DD) gates the dashboard: a student sees class recordings only from blocks that start on/after this date. Omit accessFrom for full back-access (existing/founding students). Edit via ./admin.py student add --track step1 foo@gmail.com",
   "students": [
     {
       "email": "alikalthun@gmail.com",
@@ -18,7 +18,8 @@
       "email": "araba.oduro@gmail.com",
       "tracks": [
         "step1"
-      ]
+      ],
+      "accessFrom": "2026-07-01"
     },
     {
       "email": "barbaramwebaza@gmail.com",
