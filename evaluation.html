@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Monthly evaluation · USMLE Classes</title>
+  <meta name="theme-color" content="#F6F1E7" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
+
+  <style>
+    :root {
+      --ink: #0C2A3D; --ink-2: #345671; --muted: #5B7A95;
+      --bg: #FFFFFF; --bg-soft: #FFF8EC; --bg-cream: #FFFCF4;
+      --border: #D6E8F5; --border-2: #EAF2F9;
+      --cvs: #0284C7; --cvs-soft: #E0F2FE; --cvs-deep: #075985;
+      --resp: #059669; --resp-soft: #D1FAE5; --resp-deep: #065F46;
+      --path: #7C3AED; --path-soft: #EDE9FE; --path-deep: #5B21B6;
+      --amber: #D97706; --amber-soft: #FEF3C7; --amber-deep: #B45309;
+      --gold: #E5A823;
+      --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+      --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      --r-card: 16px; --r-soft: 12px; --r-btn: 9px; --r-pill: 999px;
+      --shadow-1: 0 1px 2px rgba(12,42,61,.04), 0 1px 3px rgba(12,42,61,.06);
+      --shadow-2: 0 2px 4px rgba(12,42,61,.04), 0 6px 16px rgba(12,42,61,.06);
+      --shadow-3: 0 4px 8px rgba(12,42,61,.05), 0 18px 40px rgba(12,42,61,.10);
+    }
+    * , *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; font-family: var(--sans); color: var(--ink);
+      background:
+        radial-gradient(60rem 30rem at 12% -8%, var(--cvs-soft) 0%, transparent 55%),
+        radial-gradient(50rem 26rem at 108% 4%, var(--amber-soft) 0%, transparent 50%),
+        var(--bg-cream);
+      line-height: 1.55; -webkit-font-smoothing: antialiased; visibility: hidden;
+    }
+    .wrap { max-width: 760px; margin-inline: auto; padding: clamp(20px, 4vw, 44px) clamp(16px, 4vw, 28px) 160px; }
+
+    /* ---- Masthead ---- */
+    .mast { border-bottom: 2px solid var(--ink); padding-bottom: 22px; margin-bottom: 8px; }
+    .kicker {
+      font-family: var(--mono); font-size: .72rem; font-weight: 600; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--amber-deep); display: flex; gap: 10px; align-items: center;
+    }
+    .kicker .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    h1 {
+      font-family: var(--serif); font-weight: 400; letter-spacing: -.01em; line-height: 1.02;
+      font-size: clamp(2.6rem, 7vw, 4.1rem); margin: 12px 0 6px; color: var(--ink);
+    }
+    h1 em { font-style: italic; color: var(--cvs-deep); }
+    .standfirst { font-size: clamp(1rem, 1.4vw, 1.12rem); color: var(--ink-2); max-width: 56ch; }
+    .meta-line {
+      display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 18px;
+      font-family: var(--mono); font-size: .72rem; letter-spacing: .04em; color: var(--muted);
+      text-transform: uppercase;
+    }
+    .meta-line b { color: var(--ink); font-weight: 600; }
+
+    .note {
+      margin-top: 22px; padding: 16px 18px; background: var(--bg); border: 1px solid var(--border);
+      border-left: 3px solid var(--cvs); border-radius: var(--r-soft); font-size: .92rem; color: var(--ink-2);
+    }
+    .note b { color: var(--ink); }
+
+    /* ---- Progress ---- */
+    .progress-bar {
+      position: sticky; top: 0; z-index: 30; margin: 0 calc(-1 * clamp(16px,4vw,28px));
+      padding: 10px clamp(16px,4vw,28px); background: rgba(255,252,244,.86);
+      backdrop-filter: saturate(150%) blur(8px); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .progress-track { flex: 1; height: 6px; border-radius: 999px; background: var(--border-2); overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--cvs), var(--amber)); transition: width .35s ease; }
+    .progress-label { font-family: var(--mono); font-size: .72rem; color: var(--muted); white-space: nowrap; }
+    .progress-label b { color: var(--ink); }
+
+    /* ---- Sections ---- */
+    section.block { margin-top: 46px; }
+    .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; }
+    .sec-num { font-family: var(--mono); font-size: .8rem; color: var(--muted); font-weight: 600; }
+    .sec-head h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.7rem, 3.4vw, 2.3rem); letter-spacing: -.01em; }
+    .sec-sub { color: var(--muted); font-size: .92rem; margin: 2px 0 20px; }
+    .rule { height: 1px; background: linear-gradient(90deg, var(--ink) 0%, var(--border) 40%, transparent 100%); margin-top: 4px; }
+
+    /* subject tinting */
+    .subj-cvs  { --c: var(--cvs);  --c-soft: var(--cvs-soft);  --c-deep: var(--cvs-deep); }
+    .subj-resp { --c: var(--resp); --c-soft: var(--resp-soft); --c-deep: var(--resp-deep); }
+    .subj-epi  { --c: var(--amber);--c-soft: var(--amber-soft);--c-deep: var(--amber-deep); }
+    .subj-path { --c: var(--path); --c-soft: var(--path-soft); --c-deep: var(--path-deep); }
+    .subj-tag {
+      display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono);
+      font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--c-deep); background: var(--c-soft); padding: 5px 11px; border-radius: var(--r-pill); margin-bottom: 14px;
+    }
+
+    /* legend */
+    .legend {
+      position: sticky; top: 44px; z-index: 20; display: flex; flex-wrap: wrap; gap: 6px 12px;
+      padding: 10px 12px; margin-bottom: 14px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--r-soft); font-size: .76rem; color: var(--ink-2); box-shadow: var(--shadow-1);
+    }
+    .legend span { white-space: nowrap; }
+    .legend b { font-family: var(--mono); color: var(--ink); }
+    .legend .skip { color: var(--muted); }
+
+    /* question row */
+    .q { padding: 14px 0; border-bottom: 1px dashed var(--border); }
+    .q:last-child { border-bottom: none; }
+    .q-group { font-family: var(--mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 18px 0 2px; }
+    .q-label { font-size: .98rem; color: var(--ink); margin-bottom: 10px; font-weight: 500; }
+    .q-label .req { color: var(--amber-deep); }
+    .scale { display: flex; flex-wrap: wrap; gap: 7px; }
+    .scale.wide .opt { min-width: 0; }
+    .opt {
+      position: relative; flex: 1 1 auto; min-width: 44px;
+    }
+    .opt input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+    .opt label {
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+      padding: 9px 6px; min-height: 44px; border: 1.5px solid var(--border); border-radius: 10px;
+      background: var(--bg); color: var(--ink-2); cursor: pointer; transition: all .14s ease; text-align: center;
+    }
+    .opt .n { font-family: var(--mono); font-weight: 600; font-size: .92rem; line-height: 1; }
+    .opt .t { font-size: .64rem; line-height: 1.1; color: var(--muted); }
+    .opt input:hover + label { border-color: var(--c, var(--cvs)); }
+    .opt input:checked + label {
+      background: var(--c, var(--cvs)); border-color: var(--c, var(--cvs)); color: #fff; box-shadow: var(--shadow-1);
+    }
+    .opt input:checked + label .t { color: rgba(255,255,255,.85); }
+    .opt.skip label { border-style: dashed; }
+    .opt input:focus-visible + label { outline: 2px solid var(--c, var(--cvs)); outline-offset: 2px; }
+
+    /* text inputs */
+    .field { margin-top: 16px; }
+    .field label.flab { display: block; font-size: .92rem; font-weight: 500; margin-bottom: 7px; }
+    .field input[type=text], .field input[type=email], .field textarea, .field select {
+      width: 100%; font: inherit; font-size: .95rem; color: var(--ink); background: var(--bg);
+      border: 1.5px solid var(--border); border-radius: var(--r-soft); padding: 12px 14px;
+    }
+    .field textarea { min-height: 92px; resize: vertical; }
+    .field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--cvs); box-shadow: 0 0 0 3px var(--cvs-soft); }
+    .field input[readonly] { background: var(--bg-soft); color: var(--ink-2); }
+    .hint { font-size: .78rem; color: var(--muted); margin-top: 6px; }
+
+    /* chip choices (single-select pills, e.g. hours, pace) */
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill { position: relative; }
+    .pill input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+    .pill label {
+      display: inline-flex; padding: 9px 15px; border: 1.5px solid var(--border); border-radius: var(--r-pill);
+      background: var(--bg); color: var(--ink-2); font-size: .88rem; cursor: pointer; transition: all .14s ease;
+    }
+    .pill input:checked + label { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .pill input:focus-visible + label { outline: 2px solid var(--cvs); outline-offset: 2px; }
+
+    /* revisit checklist */
+    .checks { display: grid; grid-template-columns: 1fr; gap: 7px; }
+    @media (min-width: 560px) { .checks { grid-template-columns: 1fr 1fr; } }
+    .chk { position: relative; }
+    .chk input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+    .chk label {
+      display: flex; gap: 9px; align-items: flex-start; padding: 10px 12px; border: 1.5px solid var(--border);
+      border-radius: 10px; background: var(--bg); font-size: .86rem; color: var(--ink-2); cursor: pointer; transition: all .12s ease;
+    }
+    .chk label::before { content: ""; flex-shrink: 0; width: 17px; height: 17px; border: 1.5px solid var(--muted); border-radius: 5px; margin-top: 1px; }
+    .chk input:checked + label { border-color: var(--cvs); background: var(--cvs-soft); color: var(--cvs-deep); }
+    .chk input:checked + label::before { background: var(--cvs); border-color: var(--cvs); }
+    .chk input:disabled + label { opacity: .42; cursor: not-allowed; }
+    .chk .ctag { font-family: var(--mono); font-size: .6rem; color: var(--muted); margin-left: auto; padding-left: 6px; }
+
+    /* submit bar */
+    .submitbar {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+      background: rgba(255,252,244,.92); backdrop-filter: saturate(150%) blur(10px);
+      border-top: 1px solid var(--border); padding: 12px clamp(16px,4vw,28px);
+    }
+    .submitbar .inner { max-width: 760px; margin-inline: auto; display: flex; align-items: center; gap: 14px; }
+    .submitbar .small { font-family: var(--mono); font-size: .72rem; color: var(--muted); flex: 1; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 26px;
+      border: none; border-radius: var(--r-btn); font-family: var(--sans); font-weight: 600; font-size: .95rem;
+      background: var(--ink); color: #fff; cursor: pointer; transition: transform .08s ease, background .15s ease;
+    }
+    .btn:hover { background: #061a27; } .btn:active { transform: scale(.98); }
+    .btn[disabled] { opacity: .5; cursor: not-allowed; }
+    .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
+    .btn-ghost:hover { background: var(--cvs-soft); border-color: var(--cvs); }
+
+    .err { color: #B42318; font-size: .82rem; margin-top: 8px; display: none; }
+    .err.show { display: block; }
+    .q.invalid .q-label { color: #B42318; }
+
+    /* success overlay */
+    .done {
+      position: fixed; inset: 0; z-index: 60; display: none; align-items: center; justify-content: center;
+      background: rgba(12,42,61,.55); backdrop-filter: blur(4px); padding: 22px;
+    }
+    .done.show { display: flex; }
+    .done .card {
+      max-width: 480px; width: 100%; background: var(--bg-cream); border-radius: var(--r-card);
+      padding: 34px 30px; box-shadow: var(--shadow-3); text-align: center; border: 1px solid var(--border);
+    }
+    .done .tick { width: 64px; height: 64px; margin: 0 auto 16px; border-radius: 50%; background: var(--resp-soft); display: flex; align-items: center; justify-content: center; }
+    .done h3 { font-family: var(--serif); font-weight: 400; font-size: 2rem; margin-bottom: 8px; }
+    .done p { color: var(--ink-2); font-size: .95rem; margin-bottom: 8px; }
+    .done .actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+
+    .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: .8rem; color: var(--muted); }
+    .footer a { color: var(--cvs-deep); text-decoration: underline; text-underline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="mast">
+      <div class="kicker"><span class="dot"></span> Monthly check-in · Step 1 cohort</div>
+      <h1><em>June</em> evaluation</h1>
+      <p class="standfirst">A few honest minutes from you tells me exactly where to slow down, what to revisit, and how to make next month sharper. Your answers shape the teaching.</p>
+      <div class="meta-line">
+        <span>Covers <b>Cardiovascular · Respiratory · Epi and Biostats · General Pathology</b></span>
+        <span>Takes <b>about 25 minutes</b></span>
+      </div>
+    </header>
+
+    <div class="note">
+      <b>How to answer the understanding questions.</b> This is not a test, and you are not expected to have mastered everything. Rate how well you can make sense of each topic and recognise it when it shows up in a question. Be honest, especially about the weak spots. That is the whole point.
+    </div>
+
+    <div class="progress-bar" aria-hidden="true">
+      <div class="progress-track"><div class="progress-fill" id="progFill"></div></div>
+      <div class="progress-label"><b id="progPct">0%</b> done</div>
+    </div>
+
+    <form id="evalForm" novalidate>
+
+      <!-- 1. About you -->
+      <section class="block">
+        <div class="sec-head"><span class="sec-num">01</span><h2>About you</h2></div>
+        <div class="rule"></div>
+        <div class="field">
+          <label class="flab" for="email">Your email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="you@gmail.com" />
+          <div class="hint">Used only so I can follow up with you personally. Filled in for you when you are signed in.</div>
+        </div>
+        <div class="field">
+          <label class="flab" for="name">Your name <span class="req">*</span></label>
+          <input type="text" id="name" name="name" autocomplete="name" placeholder="First and last name" />
+        </div>
+        <div class="field" data-q data-required>
+          <label class="flab">Roughly how many hours per week did you study this month? <span class="req">*</span></label>
+          <div class="pills" data-name="hours" data-single>
+            <span class="pill"><input type="radio" name="hours" id="h1" value="Under 5"><label for="h1">Under 5</label></span>
+            <span class="pill"><input type="radio" name="hours" id="h2" value="5 to 10"><label for="h2">5 to 10</label></span>
+            <span class="pill"><input type="radio" name="hours" id="h3" value="10 to 15"><label for="h3">10 to 15</label></span>
+            <span class="pill"><input type="radio" name="hours" id="h4" value="15 to 20"><label for="h4">15 to 20</label></span>
+            <span class="pill"><input type="radio" name="hours" id="h5" value="20 plus"><label for="h5">20+</label></span>
+          </div>
+          <div class="err">Please choose one.</div>
+        </div>
+        <div class="field" data-q data-required>
+          <label class="flab">How much of the live classes did you attend? <span class="req">*</span></label>
+          <div class="pills" data-name="attendance" data-single>
+            <span class="pill"><input type="radio" name="attendance" id="a1" value="All or almost all"><label for="a1">All or almost all</label></span>
+            <span class="pill"><input type="radio" name="attendance" id="a2" value="Most"><label for="a2">Most</label></span>
+            <span class="pill"><input type="radio" name="attendance" id="a3" value="About half"><label for="a3">About half</label></span>
+            <span class="pill"><input type="radio" name="attendance" id="a4" value="Less than half"><label for="a4">Less than half</label></span>
+          </div>
+          <div class="err">Please choose one.</div>
+        </div>
+      </section>
+
+      <!-- 2. Your month overall -->
+      <section class="block subj-cvs">
+        <div class="sec-head"><span class="sec-num">02</span><h2>Your month overall</h2></div>
+        <div class="rule"></div>
+        <div id="overallMount"></div>
+      </section>
+
+      <!-- 3. Teaching and support -->
+      <section class="block subj-cvs">
+        <div class="sec-head"><span class="sec-num">03</span><h2>Teaching and support</h2></div>
+        <p class="sec-sub">How much do you agree with each statement?</p>
+        <div class="legend" id="agreeLegend"></div>
+        <div id="satMount"></div>
+        <div class="field" data-q data-required>
+          <label class="flab">Overall, how was the pace of the classes? <span class="req">*</span></label>
+          <div class="pills" data-name="pace" data-single>
+            <span class="pill"><input type="radio" name="pace" id="p1" value="Too slow"><label for="p1">Too slow</label></span>
+            <span class="pill"><input type="radio" name="pace" id="p2" value="A bit slow"><label for="p2">A bit slow</label></span>
+            <span class="pill"><input type="radio" name="pace" id="p3" value="Just right"><label for="p3">Just right</label></span>
+            <span class="pill"><input type="radio" name="pace" id="p4" value="A bit fast"><label for="p4">A bit fast</label></span>
+            <span class="pill"><input type="radio" name="pace" id="p5" value="Too fast"><label for="p5">Too fast</label></span>
+          </div>
+          <div class="err">Please choose one.</div>
+        </div>
+      </section>
+
+      <!-- 4. Confidence by subject -->
+      <section class="block">
+        <div class="sec-head"><span class="sec-num">04</span><h2>Confidence, then and now</h2></div>
+        <p class="sec-sub">Compared with the start of June, how is your confidence in each subject now?</p>
+        <div class="legend" id="confLegend"></div>
+        <div id="confMount"></div>
+      </section>
+
+      <!-- 5. Understanding by topic -->
+      <section class="block">
+        <div class="sec-head"><span class="sec-num">05</span><h2>Topic by topic</h2></div>
+        <p class="sec-sub">For each topic, how well can you make sense of it and recognise it in a question? If you missed that class, mark Skipped.</p>
+        <div id="topicMount"></div>
+      </section>
+
+      <!-- 6. Where to focus -->
+      <section class="block">
+        <div class="sec-head"><span class="sec-num">06</span><h2>Where should we focus?</h2></div>
+        <div class="rule"></div>
+        <div class="field" data-q data-required>
+          <label class="flab">Pick up to five topics you most want us to revisit or slow down on next time. <span class="req">*</span></label>
+          <div class="hint" style="margin-top:0;margin-bottom:10px;">Choose the ones that would help you most. <b id="revisitCount">0</b> of 5 selected.</div>
+          <div class="checks" id="revisitMount"></div>
+          <div class="err">Please pick at least one topic.</div>
+        </div>
+        <div class="field">
+          <label class="flab" for="blocker">What is the single biggest thing getting in the way of your progress right now?</label>
+          <textarea id="blocker" name="blocker" placeholder="Time, internet, a hard subject, motivation, anything."></textarea>
+        </div>
+        <div class="field">
+          <label class="flab" for="worked">What worked best for you this month?</label>
+          <textarea id="worked" name="worked" placeholder="The thing you would not want me to change."></textarea>
+        </div>
+        <div class="field">
+          <label class="flab" for="change">What should we change or add next month?</label>
+          <textarea id="change" name="change" placeholder="Be as direct as you like."></textarea>
+        </div>
+        <div class="field">
+          <label class="flab" for="other">Anything else you want me to know? (optional)</label>
+          <textarea id="other" name="other" placeholder=""></textarea>
+        </div>
+      </section>
+
+      <div class="err" id="topErr" style="margin-top:24px;">Some required questions above still need an answer. They are marked in red.</div>
+    </form>
+
+    <div class="footer">
+      Your responses go straight to Allan and are used to plan teaching, not to grade you. Questions? Reach out on
+      <a href="https://wa.me/256705571443" target="_blank" rel="noopener">WhatsApp</a>.
+    </div>
+  </div>
+
+  <div class="submitbar">
+    <div class="inner">
+      <div class="small"><b id="progPct2">0%</b> complete · about <span id="timeLeft">25</span> min</div>
+      <button type="button" class="btn" id="submitBtn" form="evalForm">Submit my evaluation</button>
+    </div>
+  </div>
+
+  <div class="done" id="doneOverlay" role="dialog" aria-modal="true" aria-labelledby="doneTitle">
+    <div class="card">
+      <div class="tick">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#065F46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3 id="doneTitle">Thank you</h3>
+      <p id="doneMsg">Your evaluation has been recorded. This genuinely helps me plan next month around where you need it most.</p>
+      <div class="actions" id="doneActions"></div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+  /* =========================================================================
+     CONFIG: paste your deployed Apps Script collector URL between the quotes
+     to have responses flow automatically into a Google Sheet. Leave it empty
+     and the form will fall back to a downloadable copy the student sends you.
+     See outputs/evaluation/README.md for the 2 minute setup.
+     ========================================================================= */
+  const SHEETS_ENDPOINT = "";
+  const MONTH_LABEL = "June 2026";
+  const MONTH_KEY = "2026-06";
+  </script>
+  <script>
+  (function () {
+    "use strict";
+
+    /* ---- gate: must be a signed-in student ---- */
+    var session = null;
+    try { if (typeof USMLE_AUTH !== "undefined" && USMLE_AUTH.getSession) session = USMLE_AUTH.getSession(); } catch (e) {}
+    if (!session) { try { session = JSON.parse(localStorage.getItem("usmle.session.v2") || "null"); } catch (e2) {} }
+    if (!session || !session.email) {
+      location.replace("signin.html?return=" + encodeURIComponent(location.href));
+      return;
+    }
+    document.body.style.visibility = "visible";
+
+    /* ---- scales ---- */
+    var UNDERSTAND = [
+      { v: 1, n: "1", t: "Lost",         aria: "Lost, I cannot make sense of this yet" },
+      { v: 2, n: "2", t: "Shaky",        aria: "Shaky, I recognise it but cannot follow the reasoning alone" },
+      { v: 3, n: "3", t: "Sense",        aria: "Making sense, I can follow it with my notes" },
+      { v: 4, n: "4", t: "Solid",        aria: "Solid, I understand it and can usually spot it in a question" },
+      { v: 5, n: "5", t: "Confident",    aria: "Confident, I can reason through questions on it" },
+      { v: 0, n: "–", t: "Skipped",      aria: "Skipped, I did not attend or have not covered this", skip: true }
+    ];
+    var AGREE = [
+      { v: 1, n: "1", t: "No" },
+      { v: 2, n: "2", t: "" },
+      { v: 3, n: "3", t: "Mixed" },
+      { v: 4, n: "4", t: "" },
+      { v: 5, n: "5", t: "Yes" }
+    ];
+    var QUALITY = [
+      { v: 1, n: "1", t: "Poor" },
+      { v: 2, n: "2", t: "Fair" },
+      { v: 3, n: "3", t: "Good" },
+      { v: 4, n: "4", t: "Great" },
+      { v: 5, n: "5", t: "Best" }
+    ];
+    var CONFCHG = [
+      { v: 1, n: "1", t: "Much lower" },
+      { v: 2, n: "2", t: "Lower" },
+      { v: 3, n: "3", t: "Same" },
+      { v: 4, n: "4", t: "Higher" },
+      { v: 5, n: "5", t: "Much higher", },
+      { v: 0, n: "–", t: "Skipped", skip: true }
+    ];
+    var WELL = [
+      { v: 1, n: "1", t: "Not at all" },
+      { v: 2, n: "2", t: "" },
+      { v: 3, n: "3", t: "Some" },
+      { v: 4, n: "4", t: "" },
+      { v: 5, n: "5", t: "Very well" }
+    ];
+
+    /* ---- content ---- */
+    var OVERALL = [
+      { id: "ov_rating",        scale: QUALITY, label: "Overall, how would you rate this month of the programme?" },
+      { id: "ov_understanding", scale: WELL,    label: "How well do you feel you understood this month's material overall?" },
+      { id: "ov_confidence",    scale: CONFCHG, label: "Compared with the start of June, my overall confidence with this material is now..." }
+    ];
+    var SAT = [
+      { id: "sat_clarity",   label: "The teaching was clear and easy to follow." },
+      { id: "sat_pace",      label: "The classes moved at a pace I could keep up with." },
+      { id: "sat_record",    label: "The class recordings were useful for review." },
+      { id: "sat_dash",      label: "The dashboard and study materials supported my learning." },
+      { id: "sat_practice",  label: "The practice questions helped me apply the concepts." },
+      { id: "sat_support",   label: "I felt supported when I had questions or struggled." },
+      { id: "sat_load",      label: "The amount of material this month felt manageable." }
+    ];
+    var SUBJECTS = [
+      { key: "cvs",  cls: "subj-cvs",  name: "Cardiovascular" },
+      { key: "resp", cls: "subj-resp", name: "Respiratory" },
+      { key: "epi",  cls: "subj-epi",  name: "Epidemiology and Biostatistics" },
+      { key: "path", cls: "subj-path", name: "General Pathology" }
+    ];
+    var TOPICS = {
+      cvs: [
+        { g: "Foundations", items: [
+          ["cvs_embryo", "Embryology and fetal circulation"] ] },
+        { g: "Physiology", items: [
+          ["cvs_cycle", "Cardiac cycle and pressure volume loops"],
+          ["cvs_output", "Preload, afterload, contractility and cardiac output"],
+          ["cvs_bp", "Blood pressure regulation (baroreceptors, RAAS)"],
+          ["cvs_curves", "Cardiac and vascular function curves"],
+          ["cvs_ecg", "Cardiac electrophysiology and the ECG"] ] },
+        { g: "Pathology", items: [
+          ["cvs_htn", "Hypertension and vascular disease"],
+          ["cvs_athero", "Atherosclerosis and aneurysms"],
+          ["cvs_ihd", "Ischaemic heart disease and myocardial infarction"],
+          ["cvs_hf", "Heart failure"],
+          ["cvs_cm", "Cardiomyopathies and pericardial disease"],
+          ["cvs_valve", "Valvular disease and murmurs"],
+          ["cvs_arr", "Arrhythmias"] ] },
+        { g: "Pharmacology", items: [
+          ["cvs_rx1", "Antihypertensive and heart failure drugs"],
+          ["cvs_rx2", "Antiarrhythmic and lipid lowering drugs"] ] }
+      ],
+      resp: [
+        { g: "Foundations", items: [
+          ["resp_anat", "Embryology and anatomy"] ] },
+        { g: "Physiology", items: [
+          ["resp_vol", "Lung volumes and capacities"],
+          ["resp_mech", "Mechanics of breathing and compliance"],
+          ["resp_circ", "Pulmonary circulation and the A-a gradient"],
+          ["resp_vq", "V/Q mismatch and dead space"],
+          ["resp_o2", "Oxygen transport and the oxygen-haemoglobin curve"],
+          ["resp_co2", "Carbon dioxide transport and acid-base"] ] },
+        { g: "Pathology", items: [
+          ["resp_obs", "Obstructive lung disease (asthma, COPD)"],
+          ["resp_res", "Restrictive and interstitial lung disease"],
+          ["resp_ca", "Lung cancers"],
+          ["resp_vasc", "Pulmonary embolism, pulmonary hypertension and pleural disease"] ] },
+        { g: "Pharmacology", items: [
+          ["resp_rx", "Respiratory drugs (antihistamines, antitussives, decongestants)"] ] }
+      ],
+      epi: [
+        { g: "Study design", items: [
+          ["epi_obs", "Observational designs (cohort, case control, cross sectional)"],
+          ["epi_exp", "Experimental designs and clinical trials"],
+          ["epi_bias", "Bias and confounding"] ] },
+        { g: "Risk", items: [
+          ["epi_risk", "Quantifying risk (relative risk, odds ratio, attributable risk)"],
+          ["epi_nnt", "Number needed to treat and number needed to harm"] ] },
+        { g: "Testing", items: [
+          ["epi_sesp", "Sensitivity and specificity"],
+          ["epi_pv", "Predictive values and likelihood ratios"],
+          ["epi_inc", "Incidence versus prevalence"],
+          ["epi_valid", "Validity, reliability, precision and accuracy"] ] },
+        { g: "Statistics", items: [
+          ["epi_hyp", "Hypothesis testing, type I and II error and power"],
+          ["epi_tests", "Confidence intervals and statistical tests (t-test, ANOVA, chi-square, correlation)"] ] }
+      ],
+      path: [
+        { g: "Cell injury", items: [
+          ["path_adapt", "Cellular adaptations (hyperplasia, hypertrophy, atrophy, metaplasia)"],
+          ["path_inj", "Reversible versus irreversible cell injury"],
+          ["path_death", "Cell death: necrosis types and apoptosis"],
+          ["path_free", "Free radical injury"] ] },
+        { g: "Inflammation", items: [
+          ["path_acute", "Acute inflammation and chemical mediators"],
+          ["path_chronic", "Chronic and granulomatous inflammation"] ] },
+        { g: "Neoplasia", items: [
+          ["path_nomen", "Tumour nomenclature, grading and staging"],
+          ["path_hall", "Hallmarks of cancer"],
+          ["path_onco", "Oncogenes and tumour suppressor genes"],
+          ["path_carc", "Carcinogens and tumour markers"],
+          ["path_meta", "Invasion, metastasis and paraneoplastic syndromes"],
+          ["path_epi", "Cancer epidemiology and prevention"] ] }
+      ]
+    };
+
+    /* ---- builders ---- */
+    var el = function (tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+    var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); };
+
+    function scaleRow(name, scale, required) {
+      var q = el("div", "q" + (required ? "" : ""));
+      q.setAttribute("data-q", "");
+      if (required) q.setAttribute("data-required", "");
+      q.setAttribute("data-name", name);
+      var sc = el("div", "scale wide");
+      scale.forEach(function (o) {
+        var opt = el("div", "opt" + (o.skip ? " skip" : ""));
+        var rid = name + "_" + o.v;
+        var inp = el("input");
+        inp.type = "radio"; inp.name = name; inp.id = rid; inp.value = String(o.v);
+        inp.setAttribute("aria-label", o.aria || (o.n + " " + o.t));
+        var lab = el("label"); lab.setAttribute("for", rid);
+        lab.innerHTML = '<span class="n">' + o.n + '</span>' + (o.t ? '<span class="t">' + esc(o.t) + '</span>' : '<span class="t">&nbsp;</span>');
+        opt.appendChild(inp); opt.appendChild(lab); sc.appendChild(opt);
+      });
+      q.appendChild(sc);
+      return q;
+    }
+
+    function questionBlock(id, label, scale, required) {
+      var wrap = el("div", "q");
+      wrap.setAttribute("data-q", ""); if (required) wrap.setAttribute("data-required", "");
+      wrap.setAttribute("data-name", id);
+      wrap.appendChild(el("div", "q-label", esc(label) + (required ? ' <span class="req">*</span>' : "")));
+      var row = scaleRow(id, scale, false); // inner scale; required tracked on wrap
+      // move scale into wrap, keep name on inputs
+      wrap.appendChild(row.querySelector(".scale"));
+      wrap.appendChild(el("div", "err", "Please choose one."));
+      return wrap;
+    }
+
+    function legendInto(node, scale) {
+      scale.forEach(function (o) {
+        var s = el("span", o.skip ? "skip" : "", '<b>' + o.n + '</b> ' + esc(o.t || ""));
+        node.appendChild(s);
+      });
+    }
+
+    /* overall */
+    var ovMount = document.getElementById("overallMount");
+    OVERALL.forEach(function (q) { ovMount.appendChild(questionBlock(q.id, q.label, q.scale, true)); });
+    // NPS 0-10
+    (function () {
+      var wrap = el("div", "q"); wrap.setAttribute("data-q", ""); wrap.setAttribute("data-name", "ov_nps");
+      wrap.appendChild(el("div", "q-label", "How likely are you to recommend these classes to a friend preparing for Step 1?"));
+      var sc = el("div", "scale wide");
+      for (var i = 0; i <= 10; i++) {
+        var opt = el("div", "opt"); var rid = "nps_" + i;
+        var inp = el("input"); inp.type = "radio"; inp.name = "ov_nps"; inp.id = rid; inp.value = String(i);
+        var lab = el("label"); lab.setAttribute("for", rid);
+        lab.innerHTML = '<span class="n">' + i + '</span>';
+        opt.appendChild(inp); opt.appendChild(lab); sc.appendChild(opt);
+      }
+      wrap.appendChild(sc);
+      var hint = el("div", "hint", "0 means not at all, 10 means absolutely.");
+      wrap.appendChild(hint);
+      ovMount.appendChild(wrap);
+    })();
+
+    /* satisfaction */
+    legendInto(document.getElementById("agreeLegend"), AGREE);
+    var satMount = document.getElementById("satMount");
+    SAT.forEach(function (q) { satMount.appendChild(questionBlock(q.id, q.label, AGREE, true)); });
+
+    /* confidence by subject */
+    legendInto(document.getElementById("confLegend"), CONFCHG);
+    var confMount = document.getElementById("confMount");
+    SUBJECTS.forEach(function (s) {
+      confMount.appendChild(questionBlock("cc_" + s.key, "My confidence in " + s.name + " is now...", CONFCHG, true));
+    });
+
+    /* topic understanding */
+    var topicMount = document.getElementById("topicMount");
+    SUBJECTS.forEach(function (s) {
+      var sec = el("div", s.cls); sec.style.marginTop = "30px";
+      sec.appendChild(el("div", "subj-tag", esc(s.name)));
+      var leg = el("div", "legend"); legendInto(leg, UNDERSTAND); sec.appendChild(leg);
+      TOPICS[s.key].forEach(function (grp) {
+        sec.appendChild(el("div", "q-group", esc(grp.g)));
+        grp.items.forEach(function (it) {
+          sec.appendChild(questionBlock(it[0], it[1], UNDERSTAND, true));
+        });
+      });
+      topicMount.appendChild(sec);
+    });
+
+    /* revisit checklist (built from all topics) */
+    var revisitMount = document.getElementById("revisitMount");
+    var REVISIT_MAX = 5;
+    SUBJECTS.forEach(function (s) {
+      TOPICS[s.key].forEach(function (grp) {
+        grp.items.forEach(function (it) {
+          var c = el("div", "chk");
+          var rid = "rv_" + it[0];
+          var inp = el("input"); inp.type = "checkbox"; inp.name = "revisit"; inp.id = rid; inp.value = it[0];
+          var lab = el("label"); lab.setAttribute("for", rid);
+          lab.innerHTML = esc(it[1]) + '<span class="ctag">' + s.key.toUpperCase() + '</span>';
+          c.appendChild(inp); c.appendChild(lab); revisitMount.appendChild(c);
+        });
+      });
+    });
+    var revCount = document.getElementById("revisitCount");
+    revisitMount.addEventListener("change", function () {
+      var checked = revisitMount.querySelectorAll('input:checked');
+      revCount.textContent = checked.length;
+      var atMax = checked.length >= REVISIT_MAX;
+      revisitMount.querySelectorAll('input[type=checkbox]').forEach(function (i) {
+        if (!i.checked) i.disabled = atMax;
+      });
+    });
+
+    /* ---- prefill from session ---- */
+    var emailEl = document.getElementById("email");
+    var nameEl = document.getElementById("name");
+    if (session.email) { emailEl.value = session.email; emailEl.setAttribute("readonly", "readonly"); }
+    if (session.name && session.name !== session.email) nameEl.value = session.name;
+
+    /* ---- progress ---- */
+    var form = document.getElementById("evalForm");
+    function requiredGroups() {
+      // every [data-required] block (radio groups) + email + name
+      return Array.prototype.slice.call(form.querySelectorAll('[data-required]'));
+    }
+    function groupAnswered(g) {
+      if (g.querySelector('input[type=radio]')) return !!g.querySelector('input[type=radio]:checked');
+      if (g.querySelector('input[type=checkbox]')) return !!g.querySelector('input[type=checkbox]:checked');
+      return true;
+    }
+    function updateProgress() {
+      var groups = requiredGroups();
+      var total = groups.length + 2; // + email + name
+      var done = 0;
+      groups.forEach(function (g) { if (groupAnswered(g)) done++; });
+      if (emailEl.value.trim()) done++;
+      if (nameEl.value.trim()) done++;
+      var pct = Math.round(done / total * 100);
+      document.getElementById("progFill").style.width = pct + "%";
+      document.getElementById("progPct").textContent = pct + "%";
+      document.getElementById("progPct2").textContent = pct + "%";
+      var remain = Math.max(1, Math.round((total - done) * 0.32));
+      document.getElementById("timeLeft").textContent = done >= total ? "0" : remain;
+    }
+    form.addEventListener("change", updateProgress);
+    form.addEventListener("input", updateProgress);
+    updateProgress();
+
+    /* ---- collect ---- */
+    function collect() {
+      var data = {};
+      // radios
+      form.querySelectorAll('[data-q]').forEach(function (q) {
+        var name = q.getAttribute("data-name");
+        if (!name) {
+          var r = q.querySelector('input[type=radio]:checked');
+          if (r) data[r.name] = r.value;
+          return;
+        }
+        var sel = q.querySelector('input[type=radio]:checked');
+        data[name] = sel ? sel.value : "";
+      });
+      // single-pill groups already covered via data-name on their wrapper? ensure hours/attendance/pace
+      ["hours", "attendance", "pace"].forEach(function (n) {
+        var sel = form.querySelector('input[name="' + n + '"]:checked');
+        data[n] = sel ? sel.value : "";
+      });
+      // text
+      ["email", "name", "blocker", "worked", "change", "other"].forEach(function (n) {
+        var e = document.getElementById(n); data[n] = e ? e.value.trim() : "";
+      });
+      // revisit
+      var rv = [];
+      revisitMount.querySelectorAll('input:checked').forEach(function (i) { rv.push(i.value); });
+      data.revisit = rv.join("; ");
+      data.revisit_count = String(rv.length);
+      // meta
+      data.month = MONTH_LABEL; data.month_key = MONTH_KEY;
+      data.submitted_at = new Date().toISOString();
+      data.email_session = session.email;
+      return data;
+    }
+
+    /* ---- validate ---- */
+    function validate() {
+      var firstBad = null;
+      // clear
+      form.querySelectorAll('.q.invalid, [data-required].invalid').forEach(function (n) { n.classList.remove("invalid"); });
+      form.querySelectorAll('.err.show').forEach(function (n) { n.classList.remove("show"); });
+      // email + name
+      var ok = true;
+      if (!emailEl.value.trim()) { ok = false; markField(emailEl); firstBad = firstBad || emailEl; }
+      if (!nameEl.value.trim()) { ok = false; markField(nameEl); firstBad = firstBad || nameEl; }
+      requiredGroups().forEach(function (g) {
+        if (!groupAnswered(g)) {
+          ok = false; g.classList.add("invalid");
+          var e = g.querySelector('.err'); if (e) e.classList.add("show");
+          firstBad = firstBad || g;
+        }
+      });
+      document.getElementById("topErr").classList.toggle("show", !ok);
+      if (!ok && firstBad) firstBad.scrollIntoView({ behavior: "smooth", block: "center" });
+      return ok;
+    }
+    function markField(input) {
+      input.style.borderColor = "#B42318";
+      input.addEventListener("input", function once() { input.style.borderColor = ""; input.removeEventListener("input", once); });
+    }
+
+    /* ---- submit ---- */
+    function toText(data) {
+      var lines = ["USMLE monthly evaluation", data.month, "", "Name: " + data.name, "Email: " + data.email, "Submitted: " + data.submitted_at, ""];
+      Object.keys(data).forEach(function (k) {
+        if (["name", "email", "month", "submitted_at"].indexOf(k) !== -1) return;
+        lines.push(k + ": " + data[k]);
+      });
+      return lines.join("\n");
+    }
+    function download(data) {
+      var blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "USMLE-June-evaluation-" + (data.name || "student").replace(/\s+/g, "-") + ".json";
+      document.body.appendChild(a); a.click(); a.remove();
+    }
+    function whatsappText(data) {
+      var msg = "Hi Allan, here is my June evaluation summary:\n\n" + toText(data);
+      return "https://wa.me/256705571443?text=" + encodeURIComponent(msg);
+    }
+
+    var submitting = false;
+    document.getElementById("submitBtn").addEventListener("click", function () {
+      if (submitting) return;
+      if (!validate()) return;
+      submitting = true;
+      var btn = this; btn.disabled = true; btn.textContent = "Sending...";
+      var data = collect();
+      var finished = function (delivered) {
+        showDone(data, delivered);
+        submitting = false;
+      };
+      if (SHEETS_ENDPOINT) {
+        fetch(SHEETS_ENDPOINT, {
+          method: "POST", mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(data)
+        }).then(function () { finished(true); }).catch(function () { finished(false); });
+      } else {
+        finished(false);
+      }
+    });
+
+    function showDone(data, delivered) {
+      var overlay = document.getElementById("doneOverlay");
+      var msg = document.getElementById("doneMsg");
+      var actions = document.getElementById("doneActions");
+      actions.innerHTML = "";
+      if (delivered) {
+        msg.textContent = "Your evaluation has been recorded. This genuinely helps me plan next month around where you need it most.";
+        var b1 = el("button", "btn-ghost btn", "Download a copy for yourself");
+        b1.style.width = "100%";
+        b1.addEventListener("click", function () { download(data); });
+        actions.appendChild(b1);
+      } else {
+        msg.innerHTML = "Almost done. Tap below to send your answers to me, then you are all set. Thank you for taking the time.";
+        var wa = el("a", "btn", "Send my answers on WhatsApp");
+        wa.href = whatsappText(data); wa.target = "_blank"; wa.rel = "noopener"; wa.style.width = "100%";
+        var dl = el("button", "btn-ghost btn", "Or download my answers to send");
+        dl.style.width = "100%";
+        dl.addEventListener("click", function () { download(data); });
+        actions.appendChild(wa); actions.appendChild(dl);
+        try { sessionStorage.setItem("usmle.eval.june", JSON.stringify(data)); } catch (e) {}
+      }
+      overlay.classList.add("show");
+    }
+
+  })();
+  </script>
+</body>
+</html>
