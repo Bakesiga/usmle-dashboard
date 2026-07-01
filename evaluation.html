@@ -395,6 +395,27 @@
     }
     document.body.style.visibility = "visible";
 
+    // Record that this student completed this month's evaluation (this unlocks the dashboard).
+    function markEvalDone() {
+      try {
+        var o = JSON.parse(localStorage.getItem("usmle.eval.completed") || "{}");
+        (o[session.email] = o[session.email] || {})[MONTH_KEY] = new Date().toISOString();
+        localStorage.setItem("usmle.eval.completed", JSON.stringify(o));
+      } catch (e) {}
+    }
+
+    // If the student was sent here because the dashboard is locked, explain why.
+    if (/[?&]gate=1/.test(location.search)) {
+      var gb = document.createElement("div");
+      gb.className = "note";
+      gb.style.borderLeftColor = "var(--amber)";
+      gb.style.marginTop = "0";
+      gb.style.marginBottom = "18px";
+      gb.innerHTML = "<b>The dashboard is locked until you complete this evaluation.</b> It takes about 25 minutes, and as soon as you submit, the recordings and materials unlock again. Thank you for helping shape next month.";
+      var wrapEl = document.querySelector(".wrap");
+      if (wrapEl) wrapEl.insertBefore(gb, wrapEl.firstChild);
+    }
+
     /* ---- scales ---- */
     var UNDERSTAND = [
       { v: 1, n: "1", t: "Lost",         aria: "Lost, I cannot make sense of this yet" },
@@ -787,24 +808,28 @@
     });
 
     function showDone(data, delivered) {
+      markEvalDone();   // unlocks the dashboard for this student
       var overlay = document.getElementById("doneOverlay");
       var msg = document.getElementById("doneMsg");
       var actions = document.getElementById("doneActions");
       actions.innerHTML = "";
+      var goDash = el("a", "btn", "Go to the dashboard");
+      goDash.href = "dashboard.html"; goDash.style.width = "100%";
       if (delivered) {
-        msg.textContent = "Your evaluation has been recorded. This genuinely helps me plan next month around where you need it most.";
+        msg.textContent = "Your evaluation has been recorded, and the dashboard is now unlocked. This genuinely helps me plan next month around where you need it most.";
+        actions.appendChild(goDash);
         var b1 = el("button", "btn-ghost btn", "Download a copy for yourself");
         b1.style.width = "100%";
         b1.addEventListener("click", function () { download(data); });
         actions.appendChild(b1);
       } else {
-        msg.innerHTML = "Almost done. Tap below to send your answers to me, then you are all set. Thank you for taking the time.";
-        var wa = el("a", "btn", "Send my answers on WhatsApp");
+        msg.innerHTML = "You are all set, and the dashboard is now unlocked. Please also send me your answers so I can read them:";
+        var wa = el("a", "btn-ghost btn", "Send my answers on WhatsApp");
         wa.href = whatsappText(data); wa.target = "_blank"; wa.rel = "noopener"; wa.style.width = "100%";
         var dl = el("button", "btn-ghost btn", "Or download my answers to send");
         dl.style.width = "100%";
         dl.addEventListener("click", function () { download(data); });
-        actions.appendChild(wa); actions.appendChild(dl);
+        actions.appendChild(goDash); actions.appendChild(wa); actions.appendChild(dl);
         try { sessionStorage.setItem("usmle.eval.june", JSON.stringify(data)); } catch (e) {}
       }
       overlay.classList.add("show");

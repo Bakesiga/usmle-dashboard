@@ -447,6 +447,22 @@
     (function () {
       var session = USMLE_AUTH.requireSession();
       if (!session) return; // requireSession already redirected
+
+      // ---- Evaluation gate: the dashboard unlocks only after the student
+      // completes the month's survey. Set GATE_EVAL_MONTH to "" to turn off,
+      // or bump it to the new month key each cycle. The instructor and anyone
+      // who joined after the gate month (nothing to evaluate) are exempt.
+      var GATE_EVAL_MONTH = "2026-06";
+      if (GATE_EVAL_MONTH && session.email !== "allanbakesiga@gmail.com"
+          && !(session.accessFrom && session.accessFrom > GATE_EVAL_MONTH + "-30")) {
+        var evalDone = false;
+        try {
+          var _o = JSON.parse(localStorage.getItem("usmle.eval.completed") || "{}");
+          evalDone = !!(_o[session.email] && _o[session.email][GATE_EVAL_MONTH]);
+        } catch (e) {}
+        if (!evalDone) { location.replace("evaluation.html?gate=1"); return; }
+      }
+
       function initials(name) {
         if (!name) return "?";
         var parts = String(name).trim().split(/\s+/);
