@@ -365,7 +365,8 @@ window.BLOCKS = [
       { id: "path-neoplasia",    label: "Neoplasia",                       days: [27, 28, 29],
         recordings: [
           { title: "Neoplasia (oncogenes and tumor suppressors, cell cycle, hereditary cancer syndromes, hallmarks, invasion and metastasis)", url: "https://us06web.zoom.us/rec/share/Y0DpMCL-5exn1OTqm0e7v5BbDAklUUdmp6TwMoJsPFilAUChT_LMiL7dNVCpcYcI.eN7Usjy6rpaVJGdU" },
-          { title: "Neoplasia practice questions part 1", url: "https://us06web.zoom.us/rec/share/hO7Ay66kheku6C6wq-Jj8gZyHhCbV2ILPiCXpPI2wSNn_DnnjN2PttgLCcZnffah.58vWwbt3ZxQDmUQn" }
+          { title: "Neoplasia practice questions part 1", url: "https://us06web.zoom.us/rec/share/hO7Ay66kheku6C6wq-Jj8gZyHhCbV2ILPiCXpPI2wSNn_DnnjN2PttgLCcZnffah.58vWwbt3ZxQDmUQn" },
+          { title: "Neoplasia practice questions part 2", url: "https://us06web.zoom.us/rec/share/LnMvkptQWJdPeVKXvqyftQpfQ7cT5yUSaMZnv2nfM75zjnSRFFwT6a9MCoQ0bzhw.PE31mbt-F0wWRQtl" }
         ]
       }
     ]
