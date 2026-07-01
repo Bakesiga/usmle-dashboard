@@ -30,6 +30,9 @@
 const SHEET_ID = "PASTE_YOUR_SHEET_ID_HERE";
 const RESP_TAB = "Responses";
 const FOCUS_TAB = "Focus";
+const ROSTER_TAB = "Responders";
+// Public class roster (student emails), used to flag who has NOT responded yet.
+const ROSTER_URL = "https://bakesiga.github.io/usmle-dashboard/data/allowlist.json";
 
 /* Readable labels for the Focus tab. Keys must match evaluation.html. */
 const LABELS = {
@@ -120,6 +123,7 @@ function doPost(e) {
     sheet.appendRow(row);
 
     try { rebuildFocus(ss, sheet); } catch (err) { /* never block a save on summary errors */ }
+    try { rebuildRoster(ss, sheet); } catch (err) { /* never block a save on roster errors */ }
     return json({ ok: true });
   } catch (err) {
     return json({ ok: false, error: String(err) });
@@ -168,4 +172,51 @@ function rebuildFocus(ss, sheet) {
   f.getRange(1, 1, out.length, out[0].length).setValues(out);
   f.setFrozenRows(1);
   f.autoResizeColumn(1);
+}
+
+function rebuildRoster(ss, sheet) {
+  // Pull the class roster (student emails) from the public allowlist.
+  var roster = [];
+  try {
+    var res = UrlFetchApp.fetch(ROSTER_URL, { muteHttpExceptions: true });
+    var json = JSON.parse(res.getContentText());
+    (json.students || []).forEach(function (s) {
+      var e = String(s.email || "").toLowerCase().trim();
+      if (e && e !== "allanbakesiga@gmail.com") roster.push(e);
+    });
+  } catch (e) { return; }
+  if (!roster.length) return;
+
+  // Latest submission per email.
+  var values = sheet.getDataRange().getValues();
+  var header = values[0];
+  var emailCol = header.indexOf("email");
+  var nameCol = header.indexOf("name");
+  var subCol = header.indexOf("submitted_at");
+  var recCol = header.indexOf("received_at");
+  var responded = {};
+  values.slice(1).forEach(function (r) {
+    var e = emailCol > -1 ? String(r[emailCol] || "").toLowerCase().trim() : "";
+    if (!e) return;
+    responded[e] = {
+      at: (subCol > -1 ? r[subCol] : "") || (recCol > -1 ? r[recCol] : ""),
+      name: nameCol > -1 ? r[nameCol] : ""
+    };
+  });
+
+  var pending = [], done = [];
+  roster.forEach(function (e) {
+    if (responded[e]) done.push([e, "Yes", responded[e].at, responded[e].name]);
+    else pending.push([e, "No", "", ""]);
+  });
+
+  var out = [["Class roster: " + done.length + " of " + roster.length + " responded", "", "", ""]];
+  out.push(["Student email", "Responded?", "When", "Name"]);
+  pending.concat(done).forEach(function (row) { out.push(row); });   // not-yet-responded first
+
+  var t = ss.getSheetByName(ROSTER_TAB) || ss.insertSheet(ROSTER_TAB);
+  t.clear();
+  t.getRange(1, 1, out.length, out[0].length).setValues(out);
+  t.setFrozenRows(2);
+  t.autoResizeColumn(1);
 }

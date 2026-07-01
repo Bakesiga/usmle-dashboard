@@ -38,10 +38,16 @@ handful of replies, but to get clean, aggregated data, connect the collector.
 
 1. Open **collector.gs** in this folder and follow the 5 steps in its header
    comment. It takes about 5 minutes, once.
-2. It creates two tabs in a Google Sheet:
-   - **Responses** — one row per student, every answer in its own column.
+2. It creates three tabs in a Google Sheet:
+   - **Responses** — one row per student, every answer in its own column. The
+     student's email is captured automatically from their dashboard sign-in.
    - **Focus** — rebuilt on every submission, all 50 topics **sorted weakest
      first**.
+   - **Responders** — the full class roster with a Responded? Yes/No flag, so
+     you can see at a glance **who has and has not responded** (by email).
+     Not-yet-responded students are listed first, and the top row shows the
+     count (e.g. "12 of 40 responded"). The roster is read live from the class
+     allowlist, so new students appear automatically.
 
 ### Reading the Focus tab
 
