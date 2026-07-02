@@ -452,6 +452,21 @@
       var session = USMLE_AUTH.requireSession();
       if (!session) return; // requireSession already redirected
 
+      // Live allowlist re-check: a student removed from the allowlist is signed
+      // out even if they still hold a cached session on this device. Fails open
+      // on network error so a transient hiccup never locks everyone out.
+      fetch("data/allowlist.json", { cache: "no-store" })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) {
+          if (!j || !Array.isArray(j.students)) return;
+          var me = String(session.email).toLowerCase().trim();
+          var ok = j.students.some(function (s) {
+            return String(s.email || "").toLowerCase().trim() === me;
+          });
+          if (!ok && USMLE_AUTH.signOut) USMLE_AUTH.signOut();
+        })
+        .catch(function () {});
+
       // ---- Evaluation gate: the dashboard unlocks only after the student
       // completes the month's survey. Set GATE_EVAL_MONTH to "" to turn off,
       // or bump it to the new month key each cycle. The instructor and anyone
