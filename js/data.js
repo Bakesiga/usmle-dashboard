@@ -396,7 +396,11 @@ window.BLOCKS = [
     dayRange: [30, 44],
     start: "2026-07-01",
     subBlocks: [
-      { id: "cns-embryology",    label: "Embryology",             days: [30], recordings: [] },
+      { id: "cns-embryology",    label: "Embryology",             days: [30],
+        recordings: [
+          { title: "Neurology: Embryology (neural tube and crest, regionalization, germ-layer derivatives, teratogens)", url: "https://us06web.zoom.us/rec/share/H1pCHGBxtdRAEwzzses0OtdQc7cuUqytJWgo7zu7699gdZXxbMS-_skZkbqjW3jY.RY-0mUaaNgrzNlw5" }
+        ]
+      },
       { id: "cns-anat-phys",     label: "Anatomy and physiology", days: [31, 32, 33, 34], recordings: [] },
       { id: "cns-pathology",     label: "Pathology",              days: [35, 36, 37, 38], recordings: [] },
       { id: "cns-pharmacology",  label: "Pharmacology",           days: [39, 40], recordings: [] },
