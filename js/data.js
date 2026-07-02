@@ -213,14 +213,30 @@ window.SESSIONS = [
   { day: 26, date: "2026-06-27", subject: "path", title: "Inflammation and introduction to Neoplasia", sub: "Completing acute and chronic inflammation and tissue repair; introduction to neoplasia" },
   { day: 27, date: "2026-06-28", subject: "path", title: "Neoplasia", sub: "Completing neoplasia: nomenclature, grading and staging, carcinogenesis, tumor markers, metastasis" },
   { day: 28, date: "2026-06-29", subject: "path", title: "Neoplasia: practice questions", sub: "Question practice on neoplasia" },
-  { day: 29, date: "2026-06-30", subject: "path", title: "Neoplasia: practice questions", sub: "Question practice on neoplasia" }
+  { day: 29, date: "2026-06-30", subject: "path", title: "Neoplasia: practice questions", sub: "Question practice on neoplasia" },
+  { day: 30, date: "2026-07-01", subject: "cns", title: "Neurology: Embryology", sub: "Neural tube and neural crest, regionalization, germ-layer derivatives, teratogens" },
+  { day: 31, date: "2026-07-02", subject: "cns", title: "Neurology: Anatomy and physiology (1 of 4)", sub: "" },
+  { day: 32, date: "2026-07-03", subject: "cns", title: "Neurology: Anatomy and physiology (2 of 4)", sub: "" },
+  { day: 33, date: "2026-07-04", subject: "cns", title: "Neurology: Anatomy and physiology (3 of 4)", sub: "" },
+  { day: 34, date: "2026-07-05", subject: "cns", title: "Neurology: Anatomy and physiology (4 of 4)", sub: "" },
+  { day: 35, date: "2026-07-06", subject: "cns", title: "Neurology: Pathology (1 of 4)", sub: "" },
+  { day: 36, date: "2026-07-07", subject: "cns", title: "Neurology: Pathology (2 of 4)", sub: "" },
+  { day: 37, date: "2026-07-08", subject: "cns", title: "Neurology: Pathology (3 of 4)", sub: "" },
+  { day: 38, date: "2026-07-09", subject: "cns", title: "Neurology: Pathology (4 of 4)", sub: "" },
+  { day: 39, date: "2026-07-10", subject: "cns", title: "Neurology: Pharmacology (1 of 2)", sub: "" },
+  { day: 40, date: "2026-07-11", subject: "cns", title: "Neurology: Pharmacology (2 of 2)", sub: "" },
+  { day: 41, date: "2026-07-12", subject: "cns", title: "Ophthalmology (1 of 2)", sub: "" },
+  { day: 42, date: "2026-07-13", subject: "cns", title: "Ophthalmology (2 of 2)", sub: "" },
+  { day: 43, date: "2026-07-14", subject: "cns", title: "ENT (1 of 2)", sub: "" },
+  { day: 44, date: "2026-07-15", subject: "cns", title: "ENT (2 of 2)", sub: "" }
 ];
 
 window.SUBJECT_META = {
   cvs:  { name: "Cardiovascular",   short: "CVS",   dateRange: "Jun 1 to Jun 12", count: 12 },
   resp: { name: "Respiratory",      short: "RESP",  dateRange: "Jun 14 to Jun 20", count: 7 },
   epi:  { name: "Epi & Biostats",   short: "EPI",   dateRange: "Jun 21 to Jun 25", count: 5 },
-  path: { name: "General Pathology", short: "PATH", dateRange: "Jun 26 to Jun 30", count: 5 }
+  path: { name: "General Pathology", short: "PATH", dateRange: "Jun 26 to Jun 30", count: 5 },
+  cns:  { name: "Neurology (CNS)",  short: "CNS",  dateRange: "Jul 1 to Jul 15", count: 15 }
 };
 
 window.LINKS = {
@@ -369,6 +385,23 @@ window.BLOCKS = [
           { title: "Neoplasia practice questions part 2", url: "https://us06web.zoom.us/rec/share/LnMvkptQWJdPeVKXvqyftQpfQ7cT5yUSaMZnv2nfM75zjnSRFFwT6a9MCoQ0bzhw.PE31mbt-F0wWRQtl" }
         ]
       }
+    ]
+  },
+  {
+    id: "cns",
+    short: "CNS",
+    label: "Neurology (CNS)",
+    subject: "cns",
+    dateRange: "Jul 01 to Jul 15",
+    dayRange: [30, 44],
+    start: "2026-07-01",
+    subBlocks: [
+      { id: "cns-embryology",    label: "Embryology",             days: [30], recordings: [] },
+      { id: "cns-anat-phys",     label: "Anatomy and physiology", days: [31, 32, 33, 34], recordings: [] },
+      { id: "cns-pathology",     label: "Pathology",              days: [35, 36, 37, 38], recordings: [] },
+      { id: "cns-pharmacology",  label: "Pharmacology",           days: [39, 40], recordings: [] },
+      { id: "cns-ophthalmology", label: "Ophthalmology",          days: [41, 42], recordings: [] },
+      { id: "cns-ent",           label: "ENT",                    days: [43, 44], recordings: [] }
     ]
   }
 ];

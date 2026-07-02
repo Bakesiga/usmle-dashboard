@@ -262,7 +262,7 @@
   // ---------------- Side rail ----------------
   function renderSideRail(now, pick) {
     // progress
-    const counts = { cvs: 0, resp: 0, epi: 0, path: 0 };
+    const counts = { cvs: 0, resp: 0, epi: 0, path: 0, cns: 0 };
     window.SESSIONS.forEach(s => {
       const d = parseYMD(s.date);
       d.setHours(7, 30, 0, 0);

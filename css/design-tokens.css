@@ -39,6 +39,12 @@
   --amber-tint: #FFFBEB;
   --amber-deep: #B45309;
 
+  /* ---- Subject — Neurology (CNS) ---- */
+  --cns:        #E11D48;
+  --cns-soft:   #FFE4E6;
+  --cns-tint:   #FFF1F2;
+  --cns-deep:   #9F1239;
+
   /* ---- Success / passed ---- */
   --gold:       #E5A823;
   --gold-deep:  #B8851C;
@@ -177,6 +183,7 @@ button { font: inherit; cursor: pointer; }
 .subject-resp { --c: var(--resp);  --c-soft: var(--resp-soft);  --c-tint: var(--resp-tint);  --c-deep: var(--resp-deep); }
 .subject-path { --c: var(--path);  --c-soft: var(--path-soft);  --c-tint: var(--path-tint);  --c-deep: var(--path-deep); }
 .subject-epi  { --c: var(--amber); --c-soft: var(--amber-soft); --c-tint: var(--amber-tint); --c-deep: var(--amber-deep); }
+.subject-cns  { --c: var(--cns);   --c-soft: var(--cns-soft);   --c-tint: var(--cns-tint);   --c-deep: var(--cns-deep); }
 
 /* ---- Buttons ---- */
 .btn {
