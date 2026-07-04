@@ -401,7 +401,12 @@ window.BLOCKS = [
           { title: "Neurology: Embryology (neural tube and crest, regionalization, germ-layer derivatives, teratogens)", url: "https://us06web.zoom.us/rec/share/H1pCHGBxtdRAEwzzses0OtdQc7cuUqytJWgo7zu7699gdZXxbMS-_skZkbqjW3jY.RY-0mUaaNgrzNlw5" }
         ]
       },
-      { id: "cns-anat-phys",     label: "Anatomy and physiology", days: [31, 32, 33, 34], recordings: [] },
+      { id: "cns-anat-phys",     label: "Anatomy and physiology", days: [31, 32, 33, 34],
+        recordings: [
+          { title: "Neurology: Anatomy and Physiology, Part 1", url: "https://us06web.zoom.us/rec/share/dJ6xHU-uLEBpjRn-NIGah9yefkmwoYWgnjqGxVXLhFxn6jDIPxZEwM5gJwfNC-r0.4Zvxwh8su0zkq7gi" },
+          { title: "Neurology: Anatomy and Physiology, Part 2", url: "https://us06web.zoom.us/rec/share/9jD-yxIbBNNKFFuD4WVBFdVFtU8rYdECnL8oiXjCIueRr1nA4GoOq8TO0s8CsyjA.FbBqDaACiiMvKakv" }
+        ]
+      },
       { id: "cns-pathology",     label: "Pathology",              days: [35, 36, 37, 38], recordings: [] },
       { id: "cns-pharmacology",  label: "Pharmacology",           days: [39, 40], recordings: [] },
       { id: "cns-ophthalmology", label: "Ophthalmology",          days: [41, 42], recordings: [] },
