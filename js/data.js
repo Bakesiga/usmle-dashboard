@@ -405,7 +405,8 @@ window.BLOCKS = [
         recordings: [
           { title: "Neurology: Anatomy and Physiology, Part 1 (cerebral hemispheres)", url: "https://us06web.zoom.us/rec/share/dJ6xHU-uLEBpjRn-NIGah9yefkmwoYWgnjqGxVXLhFxn6jDIPxZEwM5gJwfNC-r0.4Zvxwh8su0zkq7gi" },
           { title: "Neurology: Anatomy and Physiology, Part 2 (diencephalon and basal ganglia)", url: "https://us06web.zoom.us/rec/share/9jD-yxIbBNNKFFuD4WVBFdVFtU8rYdECnL8oiXjCIueRr1nA4GoOq8TO0s8CsyjA.FbBqDaACiiMvKakv" },
-          { title: "Neurology: Anatomy and Physiology, Part 3 (blood supply to the brain)", url: "https://us06web.zoom.us/rec/share/cNXKYFnuAYuUHp3vkQhujX7QAILJ5mZpk1asEQ9C5sWk9Xr3Lrvjsk7LBuUZqAiV.Tr4PFKSSiZRstJjO" }
+          { title: "Neurology: Anatomy and Physiology, Part 3 (blood supply to the brain)", url: "https://us06web.zoom.us/rec/share/cNXKYFnuAYuUHp3vkQhujX7QAILJ5mZpk1asEQ9C5sWk9Xr3Lrvjsk7LBuUZqAiV.Tr4PFKSSiZRstJjO" },
+          { title: "Neurology: Anatomy and Physiology, Part 4", url: "https://us06web.zoom.us/rec/share/7p9byIgIgGfh8XYboT3zbUlLmch9LHqTVtaZPcIdkjUd2nEvfECL8gBaoHMivpjY.-fY7PgqpC9Zr3TmG" }
         ]
       },
       { id: "cns-pathology",     label: "Pathology",              days: [35, 36, 37, 38], recordings: [] },
