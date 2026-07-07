@@ -408,7 +408,8 @@ window.BLOCKS = [
           { title: "Neurology: Anatomy and Physiology, Part 3 (blood supply to the brain)", url: "https://us06web.zoom.us/rec/share/cNXKYFnuAYuUHp3vkQhujX7QAILJ5mZpk1asEQ9C5sWk9Xr3Lrvjsk7LBuUZqAiV.Tr4PFKSSiZRstJjO" },
           { title: "Neurology: Anatomy and Physiology, Part 4", url: "https://us06web.zoom.us/rec/share/7p9byIgIgGfh8XYboT3zbUlLmch9LHqTVtaZPcIdkjUd2nEvfECL8gBaoHMivpjY.-fY7PgqpC9Zr3TmG" },
           { title: "Neurology: Anatomy and Physiology, Part 5 (spinal cord and medulla)", url: "https://us06web.zoom.us/rec/share/4uNUDxY7fgoUNsMKlsoK14CvknqPewTKHqnJdYXz1jTEn4gtV7DvMg7So0w7YFnv.NSkdIbOI5l49fBq8" },
-          { title: "Neurology: Anatomy and Physiology, Part 6 (medulla and pons; medial and lateral medullary and lateral pontine syndromes)", url: "https://us06web.zoom.us/rec/share/yXvkvOjpfRxztLcDkwh9KACDPQIXIsxMFksWmrhl_iFbUPACGUmgG5lDH4fQO9iG.GW3_E4u45gFhwd83" }
+          { title: "Neurology: Anatomy and Physiology, Part 6 (medulla and pons; medial and lateral medullary and lateral pontine syndromes)", url: "https://us06web.zoom.us/rec/share/yXvkvOjpfRxztLcDkwh9KACDPQIXIsxMFksWmrhl_iFbUPACGUmgG5lDH4fQO9iG.GW3_E4u45gFhwd83" },
+          { title: "Neurology: Anatomy and Physiology, Part 7 (midbrain and pons conclusion; introduction to headaches)", url: "https://us06web.zoom.us/rec/share/fXDYQD3Ql95L6BwC9enuq6uusFTxXNgl2DztQ_57WQJ8REQM7Qyd-myp6DEc0-cz.4WDE8hyC36gHf4tQ" }
         ]
       },
       { id: "cns-pathology",     label: "Pathology",              days: [35, 36, 37, 38], recordings: [] },
