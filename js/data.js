@@ -412,7 +412,11 @@ window.BLOCKS = [
           { title: "Neurology: Anatomy and Physiology, Part 7 (midbrain and pons conclusion; introduction to headaches)", url: "https://us06web.zoom.us/rec/share/fXDYQD3Ql95L6BwC9enuq6uusFTxXNgl2DztQ_57WQJ8REQM7Qyd-myp6DEc0-cz.4WDE8hyC36gHf4tQ" }
         ]
       },
-      { id: "cns-pathology",     label: "Pathology",              days: [35, 36, 37, 38], recordings: [] },
+      { id: "cns-pathology",     label: "Pathology",              days: [35, 36, 37, 38],
+        recordings: [
+          { title: "Neurology: Pathology, Part 1 (extracranial and intracranial hemorrhages; introduction to seizures and epilepsy)", url: "https://us06web.zoom.us/rec/share/nipcx-hDqKt5ePnI21iIfvSF8sZOCyBKL8W79OJZCjodELVURPd0imRALamUFKcb.1UOEAu3m-wNdxFWC" }
+        ]
+      },
       { id: "cns-pharmacology",  label: "Pharmacology",           days: [39, 40], recordings: [] },
       { id: "cns-ophthalmology", label: "Ophthalmology",          days: [41, 42], recordings: [] },
       { id: "cns-ent",           label: "ENT",                    days: [43, 44], recordings: [] }
