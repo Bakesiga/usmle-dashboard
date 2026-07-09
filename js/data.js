@@ -414,7 +414,8 @@ window.BLOCKS = [
       },
       { id: "cns-pathology",     label: "Pathology",              days: [35, 36, 37, 38],
         recordings: [
-          { title: "Neurology: Pathology, Part 1 (extracranial and intracranial hemorrhages; introduction to seizures and epilepsy)", url: "https://us06web.zoom.us/rec/share/nipcx-hDqKt5ePnI21iIfvSF8sZOCyBKL8W79OJZCjodELVURPd0imRALamUFKcb.1UOEAu3m-wNdxFWC" }
+          { title: "Neurology: Pathology, Part 1 (extracranial and intracranial hemorrhages; introduction to seizures and epilepsy)", url: "https://us06web.zoom.us/rec/share/nipcx-hDqKt5ePnI21iIfvSF8sZOCyBKL8W79OJZCjodELVURPd0imRALamUFKcb.1UOEAu3m-wNdxFWC" },
+          { title: "Neurology: Pathology, Part 2 (seizures practice questions; neurodegenerative disorders and dementia)", url: "https://us06web.zoom.us/rec/share/38OA6Uhii6BjZ0pooccUd28NWGgFWdxiMVN7HEjOA44X-wh7voCmUi-5e99A4waJ.FLbEmIcoqStCaDm-" }
         ]
       },
       { id: "cns-pharmacology",  label: "Pharmacology",           days: [39, 40], recordings: [] },
