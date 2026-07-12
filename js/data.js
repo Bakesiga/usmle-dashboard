@@ -420,9 +420,9 @@ window.BLOCKS = [
           { title: "Neurology: Pathology, Part 4 (completing CNS pathology)", url: "https://us06web.zoom.us/rec/share/VEaXEj-Zxk5aKBg1LuLehT6yqaUNu5AJ6gu1m-_mM-J41QJkKeFn77HW3z7TeW6u.G5uJITDISfMTTLXY" }
         ]
       },
-      { id: "cns-pharmacology",  label: "Pharmacology",           days: [39, 40], recordings: [] },
+      { id: "cns-ent",           label: "ENT",                    days: [39, 40], recordings: [] },
       { id: "cns-ophthalmology", label: "Ophthalmology",          days: [41, 42], recordings: [] },
-      { id: "cns-ent",           label: "ENT",                    days: [43, 44], recordings: [] }
+      { id: "cns-pharmacology",  label: "Pharmacology",           days: [43, 44], recordings: [] }
     ]
   }
 ];
