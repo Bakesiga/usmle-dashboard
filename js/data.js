@@ -425,7 +425,12 @@ window.BLOCKS = [
           { title: "Neurology: ENT, Part 1 (Otology: the ear)", url: "https://us06web.zoom.us/rec/share/2YZwhyDSAE4w1I3bFfEW79RT_vN-1qd0ZTZbhcB-0JgsdDyGwmsi6uyBNduqFHDM.ERk7S_yCNHQqWllD" }
         ]
       },
-      { id: "cns-ophthalmology", label: "Ophthalmology",          days: [41, 42], recordings: [] },
+      { id: "cns-ophthalmology", label: "Ophthalmology",          days: [41, 42],
+        recordings: [
+          { title: "Neurology: Ophthalmology, Part 1", url: "https://us06web.zoom.us/rec/share/slfEimWySLwSDiAc_y79qbbAMBfXOi5wrgAFTaSl8WitF55fhMC2jbhRYhHgZLWv.1Aex_v0qcXRmOG9S" },
+          { title: "Neurology: Ophthalmology, Part 2", url: "https://us06web.zoom.us/rec/share/t6E0LurGIOBv6FXCseiC8wWzicDgqRrOdqVwy_5mL1l5EZYkMH62hpF06idm0vE5.g_texJmt36wBdrpl" }
+        ]
+      },
       { id: "cns-pharmacology",  label: "Pharmacology",           days: [43, 44], recordings: [] }
     ]
   }
