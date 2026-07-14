@@ -428,7 +428,8 @@ window.BLOCKS = [
       { id: "cns-ophthalmology", label: "Ophthalmology",          days: [41, 42],
         recordings: [
           { title: "Neurology: Ophthalmology, Part 1", url: "https://us06web.zoom.us/rec/share/slfEimWySLwSDiAc_y79qbbAMBfXOi5wrgAFTaSl8WitF55fhMC2jbhRYhHgZLWv.1Aex_v0qcXRmOG9S" },
-          { title: "Neurology: Ophthalmology, Part 2", url: "https://us06web.zoom.us/rec/share/t6E0LurGIOBv6FXCseiC8wWzicDgqRrOdqVwy_5mL1l5EZYkMH62hpF06idm0vE5.g_texJmt36wBdrpl" }
+          { title: "Neurology: Ophthalmology, Part 2", url: "https://us06web.zoom.us/rec/share/t6E0LurGIOBv6FXCseiC8wWzicDgqRrOdqVwy_5mL1l5EZYkMH62hpF06idm0vE5.g_texJmt36wBdrpl" },
+          { title: "Neurology: Ophthalmology, Part 3 (neuro-ophthalmology)", url: "https://us06web.zoom.us/rec/share/iedSMLNrOYxEy3mqvZl_5Ah4oIZ5UEMImQZFBqlcnb1QWsSpemLCOJ-CqYS19RJZ.SjDJGgFdQOvMPwIW" }
         ]
       },
       { id: "cns-pharmacology",  label: "Pharmacology",           days: [43, 44], recordings: [] }
