@@ -429,7 +429,8 @@ window.BLOCKS = [
         recordings: [
           { title: "Neurology: Ophthalmology, Part 1", url: "https://us06web.zoom.us/rec/share/slfEimWySLwSDiAc_y79qbbAMBfXOi5wrgAFTaSl8WitF55fhMC2jbhRYhHgZLWv.1Aex_v0qcXRmOG9S" },
           { title: "Neurology: Ophthalmology, Part 2", url: "https://us06web.zoom.us/rec/share/t6E0LurGIOBv6FXCseiC8wWzicDgqRrOdqVwy_5mL1l5EZYkMH62hpF06idm0vE5.g_texJmt36wBdrpl" },
-          { title: "Neurology: Ophthalmology, Part 3 (neuro-ophthalmology)", url: "https://us06web.zoom.us/rec/share/iedSMLNrOYxEy3mqvZl_5Ah4oIZ5UEMImQZFBqlcnb1QWsSpemLCOJ-CqYS19RJZ.SjDJGgFdQOvMPwIW" }
+          { title: "Neurology: Ophthalmology, Part 3 (neuro-ophthalmology)", url: "https://us06web.zoom.us/rec/share/iedSMLNrOYxEy3mqvZl_5Ah4oIZ5UEMImQZFBqlcnb1QWsSpemLCOJ-CqYS19RJZ.SjDJGgFdQOvMPwIW" },
+          { title: "Neurology: Ophthalmology, Part 4 (retinal diseases)", url: "https://us06web.zoom.us/rec/share/4J7pGIDkim-HjCYAn_el7qaZArTBUGqpmJQOS-lINhlsl8PL2f3LRIq6CxDlIPd9.V1ySjalr4ZI22yh7" }
         ]
       },
       { id: "cns-pharmacology",  label: "Pharmacology",           days: [43, 44], recordings: [] }
