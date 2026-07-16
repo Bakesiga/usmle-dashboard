@@ -433,7 +433,11 @@ window.BLOCKS = [
           { title: "Neurology: Ophthalmology, Part 4 (retinal diseases)", url: "https://us06web.zoom.us/rec/share/4J7pGIDkim-HjCYAn_el7qaZArTBUGqpmJQOS-lINhlsl8PL2f3LRIq6CxDlIPd9.V1ySjalr4ZI22yh7" }
         ]
       },
-      { id: "cns-pharmacology",  label: "Pharmacology",           days: [43, 44], recordings: [] }
+      { id: "cns-pharmacology",  label: "Pharmacology",           days: [43, 44],
+        recordings: [
+          { title: "Neurology: Pharmacology, Part 1 (seizure medications)", url: "https://us06web.zoom.us/rec/share/3uCCsb4fp_AcvcsxBpF1dU7EhJIKSCdojWQREP7sI9lfs-PT6o1MHQVipQmXVP95.IivRxmTWSBCfy6_r" }
+        ]
+      }
     ]
   }
 ];
