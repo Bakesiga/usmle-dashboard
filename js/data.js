@@ -444,6 +444,22 @@ window.BLOCKS = [
         ]
       }
     ]
+  },
+  {
+    id: "imm",
+    short: "IMM",
+    label: "Immunology",
+    subject: "imm",
+    dateRange: "From Jul 17",
+    dayRange: [45, 45],
+    start: "2026-07-17",
+    subBlocks: [
+      { id: "imm-lectures", label: "Lectures", days: [],
+        recordings: [
+          { title: "Immunology, Part 1", url: "https://us06web.zoom.us/rec/share/lDLU_NZxURAzdbiwnZXXJii8oE3iO_kqNNUxVdOu_7BacNaz9mW5smtCdujU5q0V.yE9io1mYofAHmShT" }
+        ]
+      }
+    ]
   }
 ];
 

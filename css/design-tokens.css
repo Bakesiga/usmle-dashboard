@@ -45,6 +45,12 @@
   --cns-tint:   #FFF1F2;
   --cns-deep:   #9F1239;
 
+  /* ---- Subject — Immunology ---- */
+  --imm:        #4F46E5;
+  --imm-soft:   #E0E7FF;
+  --imm-tint:   #EEF2FF;
+  --imm-deep:   #3730A3;
+
   /* ---- Success / passed ---- */
   --gold:       #E5A823;
   --gold-deep:  #B8851C;
@@ -136,6 +142,8 @@
   --path-tint: rgba(124, 58, 237, 0.10);
   --amber-soft:rgba(217, 119, 6, 0.18);
   --amber-tint:rgba(217, 119, 6, 0.10);
+  --imm-soft:  rgba(79, 70, 229, 0.18);
+  --imm-tint:  rgba(79, 70, 229, 0.10);
 
   --shadow-1:  0 1px 2px rgba(0, 0, 0, 0.30), 0 1px 3px rgba(0, 0, 0, 0.40);
   --shadow-2:  0 2px 4px rgba(0, 0, 0, 0.30), 0 6px 16px rgba(0, 0, 0, 0.40);
@@ -184,6 +192,7 @@ button { font: inherit; cursor: pointer; }
 .subject-path { --c: var(--path);  --c-soft: var(--path-soft);  --c-tint: var(--path-tint);  --c-deep: var(--path-deep); }
 .subject-epi  { --c: var(--amber); --c-soft: var(--amber-soft); --c-tint: var(--amber-tint); --c-deep: var(--amber-deep); }
 .subject-cns  { --c: var(--cns);   --c-soft: var(--cns-soft);   --c-tint: var(--cns-tint);   --c-deep: var(--cns-deep); }
+.subject-imm  { --c: var(--imm);   --c-soft: var(--imm-soft);   --c-tint: var(--imm-tint);   --c-deep: var(--imm-deep); }
 
 /* ---- Buttons ---- */
 .btn {
