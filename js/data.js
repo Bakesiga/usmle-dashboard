@@ -435,7 +435,12 @@ window.BLOCKS = [
       },
       { id: "cns-pharmacology",  label: "Pharmacology",           days: [43, 44],
         recordings: [
-          { title: "Neurology: Pharmacology, Part 1 (seizure medications)", url: "https://us06web.zoom.us/rec/share/3uCCsb4fp_AcvcsxBpF1dU7EhJIKSCdojWQREP7sI9lfs-PT6o1MHQVipQmXVP95.IivRxmTWSBCfy6_r" }
+          { title: "Neurology: Pharmacology, Part 1 (seizure medications)", url: "https://us06web.zoom.us/rec/share/0DEabbiwKQFjrfJq5hLosabSJxAznQA039Yr40_qsV6qWX_HfN2MQFgaqS2sRQdr.iG3geGGyADQ54hZG" }
+        ],
+        resources: [
+          { kind: "qbank", label: "Practice questions with explanations",
+            url: "outputs/study-notes/cns-pharmacology-practice-5q.pdf",
+            meta: "5 MCQs · PDF" }
         ]
       }
     ]
