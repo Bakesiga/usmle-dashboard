@@ -451,13 +451,14 @@ window.BLOCKS = [
     label: "Immunology",
     subject: "imm",
     dateRange: "From Jul 17",
-    dayRange: [45, 46],
+    dayRange: [45, 47],
     start: "2026-07-17",
     subBlocks: [
       { id: "imm-lectures", label: "Lectures", days: [],
         recordings: [
           { title: "Immunology, Part 1", url: "https://us06web.zoom.us/rec/share/lDLU_NZxURAzdbiwnZXXJii8oE3iO_kqNNUxVdOu_7BacNaz9mW5smtCdujU5q0V.yE9io1mYofAHmShT" },
-          { title: "Immunology, Part 2", url: "https://us06web.zoom.us/rec/share/CUV6hMMiITTLfXSZIWKEzV0jzhUOlMfzfFN-KBVsYKy9jgXP8L_D3upypUgxPv9j.XvZB_f8mgx9mx7nw" }
+          { title: "Immunology, Part 2", url: "https://us06web.zoom.us/rec/share/CUV6hMMiITTLfXSZIWKEzV0jzhUOlMfzfFN-KBVsYKy9jgXP8L_D3upypUgxPv9j.XvZB_f8mgx9mx7nw" },
+          { title: "Immunology, Part 3", url: "https://us06web.zoom.us/rec/share/ug5tdkrNwNT1IbL-S477TIMIyy4oe8RvCsjUlDItDQGxTVEkJ7IpwI67LL-9f4tX.osVQk1QKs-qbbTOS" }
         ]
       }
     ]
