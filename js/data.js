@@ -450,8 +450,8 @@ window.BLOCKS = [
     short: "IMM",
     label: "Immunology",
     subject: "imm",
-    dateRange: "From Jul 17",
-    dayRange: [45, 49],
+    dateRange: "Jul 17 to Jul 21",
+    dayRange: [45, 50],
     start: "2026-07-17",
     subBlocks: [
       { id: "imm-lectures", label: "Lectures", days: [],
@@ -460,7 +460,8 @@ window.BLOCKS = [
           { title: "Immunology, Part 2", url: "https://us06web.zoom.us/rec/share/CUV6hMMiITTLfXSZIWKEzV0jzhUOlMfzfFN-KBVsYKy9jgXP8L_D3upypUgxPv9j.XvZB_f8mgx9mx7nw" },
           { title: "Immunology, Part 3", url: "https://us06web.zoom.us/rec/share/ug5tdkrNwNT1IbL-S477TIMIyy4oe8RvCsjUlDItDQGxTVEkJ7IpwI67LL-9f4tX.osVQk1QKs-qbbTOS" },
           { title: "Immunology, Part 4", url: "https://us06web.zoom.us/rec/share/d5mfK-0a-WU1pxgKnlNulbf6Jc9mzGuqKbQpTbj3hlOWbDhYmHZMN1RgAMb7t4ST.valOyUeBtnj9_09t" },
-          { title: "Immunology, Part 5", url: "https://us06web.zoom.us/rec/share/wVOKneRi6i-cwj24OdEoblMz9zEiK6mtAv2x6MRqPjVrvtEkGSdk7PwAye4v1JHd.adFESwEd6Z5zIQ8p" }
+          { title: "Immunology, Part 5", url: "https://us06web.zoom.us/rec/share/wVOKneRi6i-cwj24OdEoblMz9zEiK6mtAv2x6MRqPjVrvtEkGSdk7PwAye4v1JHd.adFESwEd6Z5zIQ8p" },
+          { title: "Immunology, Part 6 (final)", url: "https://us06web.zoom.us/rec/share/hXSr9VPnwV42oyHvY3vcd954jJAbK2hUkqYTWkulvisWDpC2DglNq2gkwtTYeXt7.FSLuBz7ddNdAfgBS" }
         ]
       }
     ]
