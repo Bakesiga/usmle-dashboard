@@ -51,6 +51,12 @@
   --imm-tint:   #EEF2FF;
   --imm-deep:   #3730A3;
 
+  /* ---- Subject — Hematology & Oncology ---- */
+  --heme:       #0D9488;
+  --heme-soft:  #CCFBF1;
+  --heme-tint:  #F0FDFA;
+  --heme-deep:  #0F766E;
+
   /* ---- Success / passed ---- */
   --gold:       #E5A823;
   --gold-deep:  #B8851C;
@@ -144,6 +150,8 @@
   --amber-tint:rgba(217, 119, 6, 0.10);
   --imm-soft:  rgba(79, 70, 229, 0.18);
   --imm-tint:  rgba(79, 70, 229, 0.10);
+  --heme-soft: rgba(13, 148, 136, 0.18);
+  --heme-tint: rgba(13, 148, 136, 0.10);
 
   --shadow-1:  0 1px 2px rgba(0, 0, 0, 0.30), 0 1px 3px rgba(0, 0, 0, 0.40);
   --shadow-2:  0 2px 4px rgba(0, 0, 0, 0.30), 0 6px 16px rgba(0, 0, 0, 0.40);
@@ -193,6 +201,7 @@ button { font: inherit; cursor: pointer; }
 .subject-epi  { --c: var(--amber); --c-soft: var(--amber-soft); --c-tint: var(--amber-tint); --c-deep: var(--amber-deep); }
 .subject-cns  { --c: var(--cns);   --c-soft: var(--cns-soft);   --c-tint: var(--cns-tint);   --c-deep: var(--cns-deep); }
 .subject-imm  { --c: var(--imm);   --c-soft: var(--imm-soft);   --c-tint: var(--imm-tint);   --c-deep: var(--imm-deep); }
+.subject-heme { --c: var(--heme);  --c-soft: var(--heme-soft);  --c-tint: var(--heme-tint);  --c-deep: var(--heme-deep); }
 
 /* ---- Buttons ---- */
 .btn {

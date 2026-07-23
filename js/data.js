@@ -465,6 +465,22 @@ window.BLOCKS = [
         ]
       }
     ]
+  },
+  {
+    id: "heme",
+    short: "HEME",
+    label: "Hematology & Oncology",
+    subject: "heme",
+    dateRange: "From Jul 22",
+    dayRange: [51, 51],
+    start: "2026-07-22",
+    subBlocks: [
+      { id: "heme-lectures", label: "Lectures", days: [],
+        recordings: [
+          { title: "Hematology & Oncology: Introduction", url: "https://us06web.zoom.us/rec/share/YbVv496RV2onktwC0UzXdey6LJF3d5tu0t3aW2zb7NlQpslKjugIeFxFscx5DOWT.Pmlw1mc8UAC8N91P" }
+        ]
+      }
+    ]
   }
 ];
 
