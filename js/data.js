@@ -472,13 +472,14 @@ window.BLOCKS = [
     label: "Hematology & Oncology",
     subject: "heme",
     dateRange: "From Jul 22",
-    dayRange: [51, 52],
+    dayRange: [51, 53],
     start: "2026-07-22",
     subBlocks: [
       { id: "heme-lectures", label: "Lectures", days: [],
         recordings: [
           { title: "Hematology & Oncology: Introduction", url: "https://us06web.zoom.us/rec/share/YbVv496RV2onktwC0UzXdey6LJF3d5tu0t3aW2zb7NlQpslKjugIeFxFscx5DOWT.Pmlw1mc8UAC8N91P" },
-          { title: "Hematology & Oncology: Microcytic anaemia (iron deficiency, chronic disease, thalassemias)", url: "https://us06web.zoom.us/rec/share/g2fLrX7bNFYLj8DFwgwodtTZaEJUROFuLqcU1IOffLZk0eKJL8D1qtswa6ndUmMq.rC2sYH7xGyWFQaef" }
+          { title: "Hematology & Oncology: Microcytic anaemia (iron deficiency, chronic disease, thalassemias)", url: "https://us06web.zoom.us/rec/share/g2fLrX7bNFYLj8DFwgwodtTZaEJUROFuLqcU1IOffLZk0eKJL8D1qtswa6ndUmMq.rC2sYH7xGyWFQaef" },
+          { title: "Hematology & Oncology: Microcytic anaemia, Part 2", url: "https://us06web.zoom.us/rec/share/lopyO_A_t1MbiuAPiPs8nvHuLp2V1tJIjrfDkMgpwX_skGxsn4je6nX5Ve2iQNJc.RrxmK-4GY-3LwzUN" }
         ]
       }
     ]
