@@ -472,7 +472,7 @@ window.BLOCKS = [
     label: "Hematology & Oncology",
     subject: "heme",
     dateRange: "From Jul 22",
-    dayRange: [51, 56],
+    dayRange: [51, 57],
     start: "2026-07-22",
     subBlocks: [
       { id: "heme-lectures", label: "Lectures", days: [],
@@ -482,7 +482,8 @@ window.BLOCKS = [
           { title: "Hematology & Oncology: Microcytic anaemia, Part 2", url: "https://us06web.zoom.us/rec/share/lopyO_A_t1MbiuAPiPs8nvHuLp2V1tJIjrfDkMgpwX_skGxsn4je6nX5Ve2iQNJc.RrxmK-4GY-3LwzUN" },
           { title: "Hematology & Oncology: Macrocytic anaemias", url: "https://us06web.zoom.us/rec/share/5ljxQB2Oklja2cC_m5ZRTNcEsTItIfXoFx06ykxkAHaosA3dn90Qi2lB3-7h8nWK.pKUameMVgAdA4z3-" },
           { title: "Hematology & Oncology: Normocytic anaemia", url: "https://us06web.zoom.us/rec/share/sOR_GH1EIKe4TJU2AHTWfEQSNLSavTCBHrnM3zvuHjb7PWwTcQKuqx8kHx5IFhHL.KKaj0mkYuMIT8Rhy" },
-          { title: "Hematology & Oncology: Review of RBCs", url: "https://us06web.zoom.us/rec/share/jwnN2OnXI-o0kcpWDuXdmg8jcj84bIVbLCcJlry8AtBslB4YBYDPbaoHYgRVvhcr.RGL2iwQt9z1-J6f_" }
+          { title: "Hematology & Oncology: Review of RBCs", url: "https://us06web.zoom.us/rec/share/jwnN2OnXI-o0kcpWDuXdmg8jcj84bIVbLCcJlry8AtBslB4YBYDPbaoHYgRVvhcr.RGL2iwQt9z1-J6f_" },
+          { title: "Hematology & Oncology: Platelet disorders", url: "https://us06web.zoom.us/rec/share/WpWEQkuD0UZwtI90rY4BTuCPaS5qb1GVXXpK_fuzLo-KU184qy96jZ8Y8XtcAdK_.EtLUMNIwbHOPERg_" }
         ]
       }
     ]
