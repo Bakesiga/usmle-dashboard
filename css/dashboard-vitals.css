@@ -290,23 +290,10 @@ h1, h2, h3, h4, h5, h6,
 .progress-pie .lab { color: var(--ink); }
 .progress-pie .lab small { color: var(--muted); }
 
-/* ---- News panel: the big Rosemary card is heavily inlined in
-       dashboard.html with literal hex/var colors. On the cream
-       theme we restyle the outer card to paper with a warm gold
-       hairline, the inner figures to cream-2, and keep the black
-       footer strip (it pops as the final visual anchor on cream). */
-[data-panel="news"] > article {
-  background: linear-gradient(180deg, rgba(184, 133, 28, 0.05) 0%, var(--bg-cream) 60%) !important;
-  border-color: rgba(184, 133, 28, 0.35) !important;
-}
-[data-panel="news"] figure {
-  background: var(--bg-soft) !important;
-  border-color: var(--border) !important;
-}
-[data-panel="news"] figure img[src*="score-report"] { background: #fff; }
-[data-panel="news"] blockquote { color: var(--ink) !important; }
-[data-panel="news"] blockquote footer { color: var(--ink-2) !important; }
-[data-panel="news"] h2 { color: var(--ink) !important; }
+/* ---- News panel: cards here are heavily inlined in dashboard.html
+       with literal hex/var colors. Cards that set their own light
+       text on a coloured ground keep it; only the dashed "no more
+       news" placeholder needs restating for the cream theme. */
 [data-panel="news"] [style*="border: 1px dashed"] {
   background: var(--bg-soft) !important;
   border-color: var(--border) !important;
