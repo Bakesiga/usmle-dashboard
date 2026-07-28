@@ -19,10 +19,16 @@ const USMLE_AUTH = (() => {
         tracks: Array.isArray(s.tracks) && s.tracks.length ? s.tracks : ["step1", "step2"],
         // Optional join-date gate. null => full back-access.
         accessFrom: s.accessFrom ? String(s.accessFrom).trim() : null,
+        // Optional per-recording gate: list of title substrings. When present,
+        // only recordings whose title matches one of these unlock, even inside
+        // a block the accessFrom gate would otherwise open. null => no filter.
+        onlyRecordings: Array.isArray(s.onlyRecordings) && s.onlyRecordings.length
+          ? s.onlyRecordings.map((t) => String(t).trim()).filter(Boolean)
+          : null,
       }));
     }
     if (Array.isArray(json.emails)) {
-      return json.emails.map((e) => ({ email: String(e).toLowerCase().trim(), tracks: ["step1", "step2"], accessFrom: null }));
+      return json.emails.map((e) => ({ email: String(e).toLowerCase().trim(), tracks: ["step1", "step2"], accessFrom: null, onlyRecordings: null }));
     }
     return [];
   }
@@ -66,6 +72,7 @@ const USMLE_AUTH = (() => {
       email: entry.email,
       tracks: entry.tracks,
       accessFrom: entry.accessFrom || null,
+      onlyRecordings: entry.onlyRecordings || null,
       name: claims.name || entry.email,
       picture: claims.picture || "",
       signedInAt: Date.now(),

@@ -99,7 +99,10 @@
       "tracks": [
         "step1"
       ],
-      "accessFrom": "2026-07-22"
+      "accessFrom": "2026-07-22",
+      "onlyRecordings": [
+        "Platelet disorders"
+      ]
     },
     {
       "email": "juliannajjuma@gmail.com",

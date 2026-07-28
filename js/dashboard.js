@@ -359,6 +359,31 @@
     return !!(from && block && block.start && block.start < from);
   }
 
+  // Optional per-recording gate. A student may be entitled to only some
+  // recordings inside a block they can otherwise see (e.g. paid mid-block).
+  // Returns an array of title substrings, or null when there is no filter.
+  function studentOnlyRecordings() {
+    let email = null, fromSession = null;
+    try {
+      const sess = JSON.parse(localStorage.getItem('usmle.session.v2') || 'null');
+      if (sess) { email = sess.email; fromSession = sess.onlyRecordings || null; }
+    } catch (e) {}
+    if (!email) return null;
+    try {
+      const cache = JSON.parse(sessionStorage.getItem('usmle.allowlist.v2') || '[]');
+      const live = cache.find(s => s.email === email);
+      if (live) return live.onlyRecordings || null;
+    } catch (e) {}
+    return fromSession;
+  }
+  function recordingLocked(block, rec) {
+    if (blockRecordingsLocked(block)) return true;
+    const only = studentOnlyRecordings();
+    if (!only || !only.length) return false;
+    const title = (rec && rec.title) ? rec.title : '';
+    return !only.some(t => title.indexOf(t) !== -1);
+  }
+
   // Level 1: root grid of 4 Block tiles
   function renderBlocksRoot() {
     const root = document.querySelector('[data-blocks-root]');
@@ -502,7 +527,6 @@
 
     // Class recordings for this sub-block
     if (sub.recordings && sub.recordings.length > 0) {
-      const recLocked = blockRecordingsLocked(block);
       const recHeader = document.createElement('h3');
       recHeader.className = 'block-recordings-h';
       recHeader.textContent = 'Class recordings';
@@ -511,7 +535,7 @@
       const recList = document.createElement('div');
       recList.className = 'block-recordings-list subject-' + block.subject;
       sub.recordings.forEach(rec => {
-        if (recLocked) {
+        if (recordingLocked(block, rec)) {
           // Pre-join block: show the recording exists but lock it (no link).
           const card = document.createElement('div');
           card.className = 'block-recording-card is-locked';
