@@ -101,10 +101,9 @@
       ],
       "accessFrom": "2026-07-22",
       "onlyRecordings": {
-        "heme": [
-          "Platelet disorders",
-          "Leukemias"
-        ]
+        "heme": {
+          "from": "Platelet disorders"
+        }
       }
     },
     {

@@ -377,14 +377,33 @@
     } catch (e) {}
     return fromSession;
   }
+  function blockRecordingList(block) {
+    const out = [];
+    ((block && block.subBlocks) || []).forEach(sb => {
+      (sb.recordings || []).forEach(r => out.push(r));
+    });
+    return out;
+  }
   function recordingLocked(block, rec) {
     if (blockRecordingsLocked(block)) return true;
     const map = studentOnlyRecordings();
     if (!map || !block) return false;
-    const only = map[block.id];
-    if (!only || !only.length) return false;
-    const title = (rec && rec.title) ? rec.title : '';
-    return !only.some(t => title.indexOf(t) !== -1);
+    const rule = map[block.id];
+    if (!rule) return false;
+    // { from: "..." } => that recording and everything after it in the block,
+    // so classes added later are picked up automatically.
+    if (rule.from) {
+      const list = blockRecordingList(block);
+      const cut = list.findIndex(r => ((r && r.title) || '').indexOf(rule.from) !== -1);
+      if (cut < 0) return false;
+      const idx = list.indexOf(rec);
+      return idx > -1 && idx < cut;
+    }
+    if (Array.isArray(rule) && rule.length) {
+      const title = (rec && rec.title) ? rec.title : '';
+      return !rule.some(t => title.indexOf(t) !== -1);
+    }
+    return false;
   }
 
   // Level 1: root grid of 4 Block tiles

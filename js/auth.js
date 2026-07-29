@@ -11,14 +11,24 @@ const USMLE_AUTH = (() => {
     return JSON.parse(decodeURIComponent(escape(atob(padded))));
   }
 
+  // Per-block recording rules. Two forms are accepted:
+  //   { heme: { from: "Platelet disorders" } }  everything from that recording
+  //                                             onward, including ones added later
+  //   { heme: ["Platelet disorders"] }          only titles matching the list
+  // Prefer the "from" form for a student who joined mid-block and stays on:
+  // it needs no upkeep as new classes are appended.
   function normalizeOnlyRecordings(raw) {
     if (!raw || typeof raw !== "object" || Array.isArray(raw)) return null;
     const out = {};
     Object.keys(raw).forEach((blockId) => {
-      const list = Array.isArray(raw[blockId])
-        ? raw[blockId].map((t) => String(t).trim()).filter(Boolean)
-        : [];
-      if (list.length) out[blockId] = list;
+      const rule = raw[blockId];
+      if (Array.isArray(rule)) {
+        const list = rule.map((t) => String(t).trim()).filter(Boolean);
+        if (list.length) out[blockId] = list;
+      } else if (rule && typeof rule === "object" && rule.from) {
+        const from = String(rule.from).trim();
+        if (from) out[blockId] = { from: from };
+      }
     });
     return Object.keys(out).length ? out : null;
   }
