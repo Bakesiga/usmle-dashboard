@@ -267,10 +267,26 @@ window.BLOCKS = [
     dayRange: [1, 12],
     start: "2026-06-01",
     subBlocks: [
-      { id: "cvs-anat-embryo",  label: "Anatomy and Embryology", days: [1, 2, 3] },
-      { id: "cvs-physiology",   label: "Physiology",             days: [4, 5, 6] },
+      { id: "cvs-anat-embryo",  label: "Anatomy and Embryology", days: [1, 2, 3],
+        recordings: [
+          { title: "Anatomy & Embryology pt 1: heart tube and looping", date: "2026-06-01", url: "https://duke.zoom.us/rec/share/DhUMjps15chJ4Y4I0qSTG1I7OmVOOmRWKC_0Uy-vPms1vyEkpZVRrjOB7sSqnhSI.4Ztvh1pQK2NpkvTC" },
+          { title: "Anatomy & Embryology pt 2: septation", date: "2026-06-02", url: "https://duke.zoom.us/rec/share/15YHfKk73pAv0VaTDnQ5oS12pWgFplnvfLwKm0ME7V8yEcfMp09EHyzaeL2skurn.U9NXhljcwdEp0cVf" },
+          { title: "Anatomy & Embryology pt 3: fetal circulation and gross anatomy", date: "2026-06-03", url: "https://duke.zoom.us/rec/share/qEz4mHhm0m9ChA3WlgkMt8UBW0IzRqXqQJb7XcG5gUKquzW5nX_UV1gWFHI3EhYm.1WpIYWxYCl81qY99" }
+        ]
+      },
+      { id: "cvs-physiology",   label: "Physiology",             days: [4, 5, 6],
+        recordings: [
+          { title: "Physiology pt 1: pump mechanics", date: "2026-06-04", url: "https://duke.zoom.us/rec/share/sVbtSIljR9f7XrIhC0P3nnFq1lpIH3Rieit7PHhZ5oY2a7FA4VqSthUqjqHSm6kg.TvNYdqc-R9mF1mjp" },
+          { title: "Physiology pt 2: heart sounds and murmurs", date: "2026-06-05", url: "https://duke.zoom.us/rec/share/6Rf0Hz5QjPHimU9SZhcMIqGAexFVLH8hDQOJnjsMCMoauG-d83PgnJnKM-wY0cU.HSBdlNQLFtCCHnqi" },
+          { title: "Physiology pt 3: conduction and regulation", date: "2026-06-06", url: "https://duke.zoom.us/rec/share/Qe8DbkNNQ6Dh9H2au_4FA7ElGwT6tbx9Ca84n4KXH7aY_zdkyG4ldDYyfQq4O7U1.-e6bS2Xf3IhgVO-7" }
+        ]
+      },
       { id: "cvs-pathology",    label: "Pathology (incl. review)", days: [7, 8, 9, 10],
         recordings: [
+          { title: "CVS Pathology pt 1: congenital, CAD, IE, RHD", date: "2026-06-07", url: "https://duke.zoom.us/rec/share/1dbku0QBVfKrybnCt_kRj3ctIrUeG0OPsIwPWduIhC8yR0XAmFIVXRV1fU0nQtnb.Fw4Lf3aI_Hc_AiE-" },
+          { title: "CVS Pathology pt 2: HF, shock, CMP, vascular disease", date: "2026-06-08", url: "https://duke.zoom.us/rec/share/xjVrZa1jysfc8AP4xFmiLc_1YweA6Xg2it_3GP7yynjKmaS5fyTLq8rgIdnZBfPI.7SNPkXvYE--DTFFk" },
+          { title: "CVS Pathology pt 3: arrhythmias, pericardial, tumors", date: "2026-06-09", url: "https://duke.zoom.us/rec/share/uMPc5NbTA20LCjTy7rf_D7nuKyKYiamlmOVql2VEhQwr-oGFCDP14efNn9iHequK.WkF55l11J3N4nefq" },
+          { title: "CVS Pathology review", date: "2026-06-10", url: "https://duke.zoom.us/rec/share/8snx69ysyGpxiisLlUVk48FPjDn1aIgJQFhUsomDs9pfbsSoAbNd4zit5M3q1O8A.YNwKi4lsyRgDYMaX" },
           { title: "Myopericardial pathology part 1", url: "https://us06web.zoom.us/rec/share/hKEhi6frtIXdISm9SABDzyhq_6nz0KUN4a1_wM94F6cRogIdEs8ffn4HHx_AJ9GN.wtCb5-MhDQBilM8i" },
           { title: "Myopericardial pathology part 2", url: "https://us06web.zoom.us/rec/share/igoCAN24nmCgr0EKcVZ_Yo8pt26ihRHTri4LQ2O0cfg_UlkqkV5CcTuOnjD1Abik.lq57yEEv5ilJV9zR" }
         ]
