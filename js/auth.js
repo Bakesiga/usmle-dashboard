@@ -11,6 +11,18 @@ const USMLE_AUTH = (() => {
     return JSON.parse(decodeURIComponent(escape(atob(padded))));
   }
 
+  function normalizeOnlyRecordings(raw) {
+    if (!raw || typeof raw !== "object" || Array.isArray(raw)) return null;
+    const out = {};
+    Object.keys(raw).forEach((blockId) => {
+      const list = Array.isArray(raw[blockId])
+        ? raw[blockId].map((t) => String(t).trim()).filter(Boolean)
+        : [];
+      if (list.length) out[blockId] = list;
+    });
+    return Object.keys(out).length ? out : null;
+  }
+
   function normalizeAllowlist(json) {
     // Accept v2 ({students:[{email,tracks}]}) or legacy v1 ({emails:[]}, gives all tracks)
     if (Array.isArray(json.students)) {
@@ -19,12 +31,13 @@ const USMLE_AUTH = (() => {
         tracks: Array.isArray(s.tracks) && s.tracks.length ? s.tracks : ["step1", "step2"],
         // Optional join-date gate. null => full back-access.
         accessFrom: s.accessFrom ? String(s.accessFrom).trim() : null,
-        // Optional per-recording gate: list of title substrings. When present,
-        // only recordings whose title matches one of these unlock, even inside
-        // a block the accessFrom gate would otherwise open. null => no filter.
-        onlyRecordings: Array.isArray(s.onlyRecordings) && s.onlyRecordings.length
-          ? s.onlyRecordings.map((t) => String(t).trim()).filter(Boolean)
-          : null,
+        // Optional per-recording gate, keyed by block id:
+        //   { heme: ["Platelet disorders"] }
+        // Inside a listed block, only recordings whose title contains one of
+        // the substrings unlock. Blocks absent from the map are governed by
+        // accessFrom alone, so a partial entitlement in one block never leaks
+        // out and locks the student out of later blocks. null => no filter.
+        onlyRecordings: normalizeOnlyRecordings(s.onlyRecordings),
       }));
     }
     if (Array.isArray(json.emails)) {

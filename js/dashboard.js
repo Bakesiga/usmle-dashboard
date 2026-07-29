@@ -361,7 +361,8 @@
 
   // Optional per-recording gate. A student may be entitled to only some
   // recordings inside a block they can otherwise see (e.g. paid mid-block).
-  // Returns an array of title substrings, or null when there is no filter.
+  // Returns a { blockId: [titleSubstring] } map, or null when there is no
+  // filter. Blocks missing from the map are unrestricted.
   function studentOnlyRecordings() {
     let email = null, fromSession = null;
     try {
@@ -378,7 +379,9 @@
   }
   function recordingLocked(block, rec) {
     if (blockRecordingsLocked(block)) return true;
-    const only = studentOnlyRecordings();
+    const map = studentOnlyRecordings();
+    if (!map || !block) return false;
+    const only = map[block.id];
     if (!only || !only.length) return false;
     const title = (rec && rec.title) ? rec.title : '';
     return !only.some(t => title.indexOf(t) !== -1);

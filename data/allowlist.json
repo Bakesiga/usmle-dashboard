@@ -100,9 +100,12 @@
         "step1"
       ],
       "accessFrom": "2026-07-22",
-      "onlyRecordings": [
-        "Platelet disorders"
-      ]
+      "onlyRecordings": {
+        "heme": [
+          "Platelet disorders",
+          "Leukemias"
+        ]
+      }
     },
     {
       "email": "juliannajjuma@gmail.com",

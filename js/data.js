@@ -472,7 +472,7 @@ window.BLOCKS = [
     label: "Hematology & Oncology",
     subject: "heme",
     dateRange: "From Jul 22",
-    dayRange: [51, 59],
+    dayRange: [51, 60],
     start: "2026-07-22",
     subBlocks: [
       { id: "heme-lectures", label: "Lectures", days: [],
@@ -485,7 +485,8 @@ window.BLOCKS = [
           { title: "Hematology & Oncology: Review of RBCs", url: "https://us06web.zoom.us/rec/share/jwnN2OnXI-o0kcpWDuXdmg8jcj84bIVbLCcJlry8AtBslB4YBYDPbaoHYgRVvhcr.RGL2iwQt9z1-J6f_" },
           { title: "Hematology & Oncology: Platelet disorders", url: "https://us06web.zoom.us/rec/share/WpWEQkuD0UZwtI90rY4BTuCPaS5qb1GVXXpK_fuzLo-KU184qy96jZ8Y8XtcAdK_.EtLUMNIwbHOPERg_" },
           { title: "Hematology & Oncology: Platelet disorders, questions", url: "https://us06web.zoom.us/rec/share/pBBSYO7nasoPqNx_KbeoA1VTSp89DQ6fqJ2yXx5ABfn5qT2wSfeLcYD7O5wcntpA.F95AnVrrI1eHxY3T" },
-          { title: "Hematology & Oncology: Platelet disorders, questions, Part 2", url: "https://us06web.zoom.us/rec/share/f_fsrKOCQC_hc4n8aQg5gInvFboT7Krbtf6d7ndWy3iJHBEvxsYxlVlQQmwSBruY.3X3Nl1sFfgKtN2MJ" }
+          { title: "Hematology & Oncology: Platelet disorders, questions, Part 2", url: "https://us06web.zoom.us/rec/share/f_fsrKOCQC_hc4n8aQg5gInvFboT7Krbtf6d7ndWy3iJHBEvxsYxlVlQQmwSBruY.3X3Nl1sFfgKtN2MJ" },
+          { title: "Hematology & Oncology: Leukemias", url: "https://us06web.zoom.us/rec/share/LvyeXQlC7W-4IGQQTVC6qpTZMmyECQ5VDqWvVy1SlHoCiTF0qSeYY7ez-S2qIEvr.srzFMKNyUtp9YjM9" }
         ]
       }
     ]
