@@ -41,6 +41,12 @@ const USMLE_AUTH = (() => {
         tracks: Array.isArray(s.tracks) && s.tracks.length ? s.tracks : ["step1", "step2"],
         // Optional join-date gate. null => full back-access.
         accessFrom: s.accessFrom ? String(s.accessFrom).trim() : null,
+        // Optional end-date gate (YYYY-MM-DD, inclusive). A recording with a
+        // "date" past this is locked, regardless of block. Recordings without
+        // a "date" field fall back to their block's start date, which is safe
+        // for any block that closed out well before the cutoff. null => no
+        // upper bound.
+        accessUntil: s.accessUntil ? String(s.accessUntil).trim() : null,
         // Optional per-recording gate, keyed by block id:
         //   { heme: ["Platelet disorders"] }
         // Inside a listed block, only recordings whose title contains one of
@@ -51,7 +57,7 @@ const USMLE_AUTH = (() => {
       }));
     }
     if (Array.isArray(json.emails)) {
-      return json.emails.map((e) => ({ email: String(e).toLowerCase().trim(), tracks: ["step1", "step2"], accessFrom: null, onlyRecordings: null }));
+      return json.emails.map((e) => ({ email: String(e).toLowerCase().trim(), tracks: ["step1", "step2"], accessFrom: null, accessUntil: null, onlyRecordings: null }));
     }
     return [];
   }
@@ -95,6 +101,7 @@ const USMLE_AUTH = (() => {
       email: entry.email,
       tracks: entry.tracks,
       accessFrom: entry.accessFrom || null,
+      accessUntil: entry.accessUntil || null,
       onlyRecordings: entry.onlyRecordings || null,
       name: claims.name || entry.email,
       picture: claims.picture || "",

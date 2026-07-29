@@ -359,6 +359,31 @@
     return !!(from && block && block.start && block.start < from);
   }
 
+  // Mirror of studentAccessFrom for the optional upper-bound date gate.
+  function studentAccessUntil() {
+    let email = null, fromSession = null;
+    try {
+      const sess = JSON.parse(localStorage.getItem('usmle.session.v2') || 'null');
+      if (sess) { email = sess.email; fromSession = sess.accessUntil || null; }
+    } catch (e) {}
+    if (!email) return null;
+    try {
+      const cache = JSON.parse(sessionStorage.getItem('usmle.allowlist.v2') || '[]');
+      const live = cache.find(s => s.email === email);
+      if (live) return live.accessUntil || null;
+    } catch (e) {}
+    return fromSession;
+  }
+  // A recording dated after the cutoff is locked. Recordings without their
+  // own "date" fall back to the block's start date, which only matters for
+  // blocks whose entire run is unambiguously on one side of the cutoff.
+  function recordingPastAccessUntil(block, rec) {
+    const until = studentAccessUntil();
+    if (!until) return false;
+    const date = (rec && rec.date) ? rec.date : (block && block.start) || null;
+    return !!(date && date > until);
+  }
+
   // Optional per-recording gate. A student may be entitled to only some
   // recordings inside a block they can otherwise see (e.g. paid mid-block).
   // Returns a { blockId: [titleSubstring] } map, or null when there is no
@@ -386,6 +411,7 @@
   }
   function recordingLocked(block, rec) {
     if (blockRecordingsLocked(block)) return true;
+    if (recordingPastAccessUntil(block, rec)) return true;
     const map = studentOnlyRecordings();
     if (!map || !block) return false;
     const rule = map[block.id];

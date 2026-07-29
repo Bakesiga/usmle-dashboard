@@ -477,16 +477,16 @@ window.BLOCKS = [
     subBlocks: [
       { id: "heme-lectures", label: "Lectures", days: [],
         recordings: [
-          { title: "Hematology & Oncology: Introduction", url: "https://us06web.zoom.us/rec/share/YbVv496RV2onktwC0UzXdey6LJF3d5tu0t3aW2zb7NlQpslKjugIeFxFscx5DOWT.Pmlw1mc8UAC8N91P" },
-          { title: "Hematology & Oncology: Microcytic anaemia (iron deficiency, chronic disease, thalassemias)", url: "https://us06web.zoom.us/rec/share/g2fLrX7bNFYLj8DFwgwodtTZaEJUROFuLqcU1IOffLZk0eKJL8D1qtswa6ndUmMq.rC2sYH7xGyWFQaef" },
-          { title: "Hematology & Oncology: Microcytic anaemia, Part 2", url: "https://us06web.zoom.us/rec/share/lopyO_A_t1MbiuAPiPs8nvHuLp2V1tJIjrfDkMgpwX_skGxsn4je6nX5Ve2iQNJc.RrxmK-4GY-3LwzUN" },
-          { title: "Hematology & Oncology: Macrocytic anaemias", url: "https://us06web.zoom.us/rec/share/5ljxQB2Oklja2cC_m5ZRTNcEsTItIfXoFx06ykxkAHaosA3dn90Qi2lB3-7h8nWK.pKUameMVgAdA4z3-" },
-          { title: "Hematology & Oncology: Normocytic anaemia", url: "https://us06web.zoom.us/rec/share/sOR_GH1EIKe4TJU2AHTWfEQSNLSavTCBHrnM3zvuHjb7PWwTcQKuqx8kHx5IFhHL.KKaj0mkYuMIT8Rhy" },
-          { title: "Hematology & Oncology: Review of RBCs", url: "https://us06web.zoom.us/rec/share/jwnN2OnXI-o0kcpWDuXdmg8jcj84bIVbLCcJlry8AtBslB4YBYDPbaoHYgRVvhcr.RGL2iwQt9z1-J6f_" },
-          { title: "Hematology & Oncology: Platelet disorders", url: "https://us06web.zoom.us/rec/share/WpWEQkuD0UZwtI90rY4BTuCPaS5qb1GVXXpK_fuzLo-KU184qy96jZ8Y8XtcAdK_.EtLUMNIwbHOPERg_" },
-          { title: "Hematology & Oncology: Platelet disorders, questions", url: "https://us06web.zoom.us/rec/share/pBBSYO7nasoPqNx_KbeoA1VTSp89DQ6fqJ2yXx5ABfn5qT2wSfeLcYD7O5wcntpA.F95AnVrrI1eHxY3T" },
-          { title: "Hematology & Oncology: Platelet disorders, questions, Part 2", url: "https://us06web.zoom.us/rec/share/f_fsrKOCQC_hc4n8aQg5gInvFboT7Krbtf6d7ndWy3iJHBEvxsYxlVlQQmwSBruY.3X3Nl1sFfgKtN2MJ" },
-          { title: "Hematology & Oncology: Leukemias", url: "https://us06web.zoom.us/rec/share/LvyeXQlC7W-4IGQQTVC6qpTZMmyECQ5VDqWvVy1SlHoCiTF0qSeYY7ez-S2qIEvr.srzFMKNyUtp9YjM9" }
+          { title: "Hematology & Oncology: Introduction", date: "2026-07-22", url: "https://us06web.zoom.us/rec/share/YbVv496RV2onktwC0UzXdey6LJF3d5tu0t3aW2zb7NlQpslKjugIeFxFscx5DOWT.Pmlw1mc8UAC8N91P" },
+          { title: "Hematology & Oncology: Microcytic anaemia (iron deficiency, chronic disease, thalassemias)", date: "2026-07-23", url: "https://us06web.zoom.us/rec/share/g2fLrX7bNFYLj8DFwgwodtTZaEJUROFuLqcU1IOffLZk0eKJL8D1qtswa6ndUmMq.rC2sYH7xGyWFQaef" },
+          { title: "Hematology & Oncology: Microcytic anaemia, Part 2", date: "2026-07-24", url: "https://us06web.zoom.us/rec/share/lopyO_A_t1MbiuAPiPs8nvHuLp2V1tJIjrfDkMgpwX_skGxsn4je6nX5Ve2iQNJc.RrxmK-4GY-3LwzUN" },
+          { title: "Hematology & Oncology: Macrocytic anaemias", date: "2026-07-25", url: "https://us06web.zoom.us/rec/share/5ljxQB2Oklja2cC_m5ZRTNcEsTItIfXoFx06ykxkAHaosA3dn90Qi2lB3-7h8nWK.pKUameMVgAdA4z3-" },
+          { title: "Hematology & Oncology: Normocytic anaemia", date: "2026-07-25", url: "https://us06web.zoom.us/rec/share/sOR_GH1EIKe4TJU2AHTWfEQSNLSavTCBHrnM3zvuHjb7PWwTcQKuqx8kHx5IFhHL.KKaj0mkYuMIT8Rhy" },
+          { title: "Hematology & Oncology: Review of RBCs", date: "2026-07-25", url: "https://us06web.zoom.us/rec/share/jwnN2OnXI-o0kcpWDuXdmg8jcj84bIVbLCcJlry8AtBslB4YBYDPbaoHYgRVvhcr.RGL2iwQt9z1-J6f_" },
+          { title: "Hematology & Oncology: Platelet disorders", date: "2026-07-26", url: "https://us06web.zoom.us/rec/share/WpWEQkuD0UZwtI90rY4BTuCPaS5qb1GVXXpK_fuzLo-KU184qy96jZ8Y8XtcAdK_.EtLUMNIwbHOPERg_" },
+          { title: "Hematology & Oncology: Platelet disorders, questions", date: "2026-07-26", url: "https://us06web.zoom.us/rec/share/pBBSYO7nasoPqNx_KbeoA1VTSp89DQ6fqJ2yXx5ABfn5qT2wSfeLcYD7O5wcntpA.F95AnVrrI1eHxY3T" },
+          { title: "Hematology & Oncology: Platelet disorders, questions, Part 2", date: "2026-07-27", url: "https://us06web.zoom.us/rec/share/f_fsrKOCQC_hc4n8aQg5gInvFboT7Krbtf6d7ndWy3iJHBEvxsYxlVlQQmwSBruY.3X3Nl1sFfgKtN2MJ" },
+          { title: "Hematology & Oncology: Leukemias", date: "2026-07-28", url: "https://us06web.zoom.us/rec/share/LvyeXQlC7W-4IGQQTVC6qpTZMmyECQ5VDqWvVy1SlHoCiTF0qSeYY7ez-S2qIEvr.srzFMKNyUtp9YjM9" }
         ]
       }
     ]
