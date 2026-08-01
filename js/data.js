@@ -508,6 +508,29 @@ window.BLOCKS = [
         ]
       }
     ]
+  },
+  {
+    id: "renal",
+    short: "RENAL",
+    label: "Renal",
+    subject: "renal",
+    dateRange: "From Aug 1",
+    dayRange: [62, 70],
+    start: "2026-08-01",
+    subBlocks: [
+      { id: "renal-anat-embryo",  label: "Anatomy and Embryology", days: [],
+        recordings: []
+      },
+      { id: "renal-physiology",   label: "Physiology",             days: [],
+        recordings: []
+      },
+      { id: "renal-pathology",    label: "Pathology",              days: [],
+        recordings: []
+      },
+      { id: "renal-pharmacology", label: "Pharmacology",           days: [],
+        recordings: []
+      }
+    ]
   }
 ];
 
