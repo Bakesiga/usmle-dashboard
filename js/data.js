@@ -240,7 +240,7 @@ window.SUBJECT_META = {
 };
 
 window.LINKS = {
-  zoom:     "https://duke.zoom.us/j/96991939005",
+  zoom:     "https://us06web.zoom.us/meeting/register/WEC2xaIsTLa47j4jrPL47w",
   whatsapp: "https://chat.whatsapp.com/JvaTpyDt9loGZjomAVwi42",
   calendly: "https://calendly.com/allanbakesiga/30min",
   signup:   "https://docs.google.com/forms/d/e/1FAIpQLScJwdFDTwH6qtQio-0MmDo5e6rQtKA8BZstoa6RQbo7oPYsXw/viewform",
