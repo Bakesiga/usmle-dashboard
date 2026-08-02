@@ -519,7 +519,9 @@ window.BLOCKS = [
     start: "2026-08-01",
     subBlocks: [
       { id: "renal-anat-embryo",  label: "Anatomy and Embryology", days: [],
-        recordings: []
+        recordings: [
+          { title: "Renal: Anatomy and embryology of the kidney", date: "2026-08-01", url: "https://us06web.zoom.us/rec/share/kfYYyqCQyRbYwvX8lPvnqaw6v3bb7egpFB8hyT3KDGY7rGOBzGMluBIp4Ngprzm1.nsSdOQA9REyvrm1N" }
+        ]
       },
       { id: "renal-physiology",   label: "Physiology",             days: [],
         recordings: []
