@@ -525,7 +525,8 @@ window.BLOCKS = [
       },
       { id: "renal-physiology",   label: "Physiology",             days: [],
         recordings: [
-          { title: "Renal: Physiology, part 1", date: "2026-08-02", url: "https://us06web.zoom.us/rec/share/JN-NzsJyBciNlGQiuq9I0bwWsMCm9RnubJG9rXvlwsHe6mHXKi7CkNacSrTB9QAt.5SI2iErU4hzjIFvW" }
+          { title: "Renal: Physiology, part 1", date: "2026-08-02", url: "https://us06web.zoom.us/rec/share/JN-NzsJyBciNlGQiuq9I0bwWsMCm9RnubJG9rXvlwsHe6mHXKi7CkNacSrTB9QAt.5SI2iErU4hzjIFvW" },
+          { title: "Renal: Physiology, part 2", date: "2026-08-02", url: "https://us06web.zoom.us/rec/share/d9rRl38LAeooLqjY_26Dsn86B89v-Bq2k15kxkQPzhCl1lRXX3sk7IfqGRJPax_I.OAqusrc-NbiMfKMP" }
         ]
       },
       { id: "renal-pathology",    label: "Pathology",              days: [],
