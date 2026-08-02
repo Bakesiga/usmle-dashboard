@@ -524,7 +524,9 @@ window.BLOCKS = [
         ]
       },
       { id: "renal-physiology",   label: "Physiology",             days: [],
-        recordings: []
+        recordings: [
+          { title: "Renal: Physiology, part 1", date: "2026-08-02", url: "https://us06web.zoom.us/rec/share/JN-NzsJyBciNlGQiuq9I0bwWsMCm9RnubJG9rXvlwsHe6mHXKi7CkNacSrTB9QAt.5SI2iErU4hzjIFvW" }
+        ]
       },
       { id: "renal-pathology",    label: "Pathology",              days: [],
         recordings: []
