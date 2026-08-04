@@ -527,7 +527,8 @@ window.BLOCKS = [
         recordings: [
           { title: "Renal: Physiology, part 1", date: "2026-08-02", url: "https://us06web.zoom.us/rec/share/JN-NzsJyBciNlGQiuq9I0bwWsMCm9RnubJG9rXvlwsHe6mHXKi7CkNacSrTB9QAt.5SI2iErU4hzjIFvW" },
           { title: "Renal: Physiology, part 2", date: "2026-08-02", url: "https://us06web.zoom.us/rec/share/d9rRl38LAeooLqjY_26Dsn86B89v-Bq2k15kxkQPzhCl1lRXX3sk7IfqGRJPax_I.OAqusrc-NbiMfKMP" },
-          { title: "Renal: Physiology, part 3 (nephron transport and acid base)", date: "2026-08-02", url: "https://us06web.zoom.us/rec/share/OBJ62XWpWG_5p7Iyt3oWa4cvJe7EBZaq3G9DJE5DY_EFpubc3juy8l6od_C2jwFA.vva8HPrOdfPL5XJT" }
+          { title: "Renal: Physiology, part 3 (nephron transport and acid base)", date: "2026-08-02", url: "https://us06web.zoom.us/rec/share/OBJ62XWpWG_5p7Iyt3oWa4cvJe7EBZaq3G9DJE5DY_EFpubc3juy8l6od_C2jwFA.vva8HPrOdfPL5XJT" },
+          { title: "Renal: Acid base balance and renal tubular acidosis", date: "2026-08-03", url: "https://us06web.zoom.us/rec/share/3W8mpGa6COuA66IFFfn-FJy5-MUG8A_WxsQL8BirWRfjmg9IvOgI0tncMPc9JiGB.8nhAoGLz1H_pb2Zm" }
         ]
       },
       { id: "renal-pathology",    label: "Pathology",              days: [],
