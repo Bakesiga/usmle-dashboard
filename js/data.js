@@ -533,7 +533,8 @@ window.BLOCKS = [
       },
       { id: "renal-pathology",    label: "Pathology",              days: [],
         recordings: [
-          { title: "Renal: Nephritic syndrome", date: "2026-08-04", url: "https://us06web.zoom.us/rec/share/Hk7-I4t2QegHHHuEeCbr0llpSkgCYiX0Ca0I2v0P9pseUl58S7EUGV1BGSjB77ey.kCo2EXDbUUDrkapY" }
+          { title: "Renal: Nephritic syndrome", date: "2026-08-04", url: "https://us06web.zoom.us/rec/share/Hk7-I4t2QegHHHuEeCbr0llpSkgCYiX0Ca0I2v0P9pseUl58S7EUGV1BGSjB77ey.kCo2EXDbUUDrkapY" },
+          { title: "Renal: Nephrotic syndrome", date: "2026-08-05", url: "https://us06web.zoom.us/rec/share/QunyOyVht6_rtkKAu2Vh_vrbkPCRo8r3lZXLwydCG5dvHi3fl-X6fGJIuCQPGXoi.EmCV92lMVuFvh-jk" }
         ]
       },
       { id: "renal-pharmacology", label: "Pharmacology",           days: [],
