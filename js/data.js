@@ -535,7 +535,8 @@ window.BLOCKS = [
         recordings: [
           { title: "Renal: Nephritic syndrome", date: "2026-08-04", url: "https://us06web.zoom.us/rec/share/Hk7-I4t2QegHHHuEeCbr0llpSkgCYiX0Ca0I2v0P9pseUl58S7EUGV1BGSjB77ey.kCo2EXDbUUDrkapY" },
           { title: "Renal: Nephrotic syndrome", date: "2026-08-05", url: "https://us06web.zoom.us/rec/share/QunyOyVht6_rtkKAu2Vh_vrbkPCRo8r3lZXLwydCG5dvHi3fl-X6fGJIuCQPGXoi.EmCV92lMVuFvh-jk" },
-          { title: "Renal: Stones, incontinence, cystitis and pyelonephritis", date: "2026-08-06", url: "https://us06web.zoom.us/rec/share/Nnfj7jGJ5QRRMNW1MaghJkn034MyrgIuiYmK5toflWdUHm61i-IMhAeMaeFIO4KZ.o04ljq0V2BLQVlF6" }
+          { title: "Renal: Stones, incontinence, cystitis and pyelonephritis", date: "2026-08-06", url: "https://us06web.zoom.us/rec/share/Nnfj7jGJ5QRRMNW1MaghJkn034MyrgIuiYmK5toflWdUHm61i-IMhAeMaeFIO4KZ.o04ljq0V2BLQVlF6" },
+          { title: "Renal: Acute kidney injury and renal cysts", date: "2026-08-07", url: "https://us06web.zoom.us/rec/share/3_c1o0ylFqA-lhaRTuLg8uXsNCEDENuHJU9k4xV2qghYSWuRUY78PvkPPAREnb9j.ppvNMPVnSg9ydKzp" }
         ]
       },
       { id: "renal-pharmacology", label: "Pharmacology",           days: [],
