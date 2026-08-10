@@ -63,6 +63,12 @@
   --renal-tint: #F7FEE7;
   --renal-deep: #3F6212;
 
+  /* ---- Subject — Endocrine ---- */
+  --endo:       #C026D3;
+  --endo-soft:  #FAE8FF;
+  --endo-tint:  #FDF4FF;
+  --endo-deep:  #86198F;
+
   /* ---- Success / passed ---- */
   --gold:       #E5A823;
   --gold-deep:  #B8851C;
@@ -160,6 +166,8 @@
   --heme-tint: rgba(13, 148, 136, 0.10);
   --renal-soft:rgba(101, 163, 13, 0.18);
   --renal-tint:rgba(101, 163, 13, 0.10);
+  --endo-soft: rgba(192, 38, 211, 0.18);
+  --endo-tint: rgba(192, 38, 211, 0.10);
 
   --shadow-1:  0 1px 2px rgba(0, 0, 0, 0.30), 0 1px 3px rgba(0, 0, 0, 0.40);
   --shadow-2:  0 2px 4px rgba(0, 0, 0, 0.30), 0 6px 16px rgba(0, 0, 0, 0.40);
@@ -211,6 +219,7 @@ button { font: inherit; cursor: pointer; }
 .subject-imm  { --c: var(--imm);   --c-soft: var(--imm-soft);   --c-tint: var(--imm-tint);   --c-deep: var(--imm-deep); }
 .subject-heme { --c: var(--heme);  --c-soft: var(--heme-soft);  --c-tint: var(--heme-tint);  --c-deep: var(--heme-deep); }
 .subject-renal{ --c: var(--renal); --c-soft: var(--renal-soft); --c-tint: var(--renal-tint); --c-deep: var(--renal-deep); }
+.subject-endo { --c: var(--endo);  --c-soft: var(--endo-soft);  --c-tint: var(--endo-tint);  --c-deep: var(--endo-deep); }
 
 /* ---- Buttons ---- */
 .btn {

@@ -545,6 +545,28 @@ window.BLOCKS = [
         recordings: []
       }
     ]
+  },
+  {
+    id: "endo",
+    short: "ENDO",
+    label: "Endocrine",
+    subject: "endo",
+    dateRange: "From Aug 9",
+    dayRange: [71, 76],
+    start: "2026-08-09",
+    subBlocks: [
+      { id: "endo-anat-phys",     label: "Anatomy, embryology and physiology", days: [],
+        recordings: [
+          { title: "Endocrine: Hypothalamus and pituitary gland", date: "2026-08-09", url: "https://us06web.zoom.us/rec/share/_HCaXrXraOId-bKN09OJQz1dmHfqzh7tuUDWmaw1MsePquGo7uDqQtZvxM7H6yYO.BKsYq6N_fOTdh8uJ" }
+        ]
+      },
+      { id: "endo-pathology",     label: "Pathology",                          days: [],
+        recordings: []
+      },
+      { id: "endo-pharmacology",  label: "Pharmacology",                       days: [],
+        recordings: []
+      }
+    ]
   }
 ];
 
