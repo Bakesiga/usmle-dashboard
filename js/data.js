@@ -555,16 +555,15 @@ window.BLOCKS = [
     dayRange: [71, 76],
     start: "2026-08-09",
     subBlocks: [
-      { id: "endo-anat-phys",     label: "Anatomy, embryology and physiology", days: [],
+      { id: "endo-hypothal-pituitary", label: "Hypothalamus and pituitary", days: [],
         recordings: [
           { title: "Endocrine: Hypothalamus and pituitary gland", date: "2026-08-09", url: "https://us06web.zoom.us/rec/share/_HCaXrXraOId-bKN09OJQz1dmHfqzh7tuUDWmaw1MsePquGo7uDqQtZvxM7H6yYO.BKsYq6N_fOTdh8uJ" }
         ]
       },
-      { id: "endo-pathology",     label: "Pathology",                          days: [],
-        recordings: []
-      },
-      { id: "endo-pharmacology",  label: "Pharmacology",                       days: [],
-        recordings: []
+      { id: "endo-thyroid",            label: "Thyroid",                    days: [],
+        recordings: [
+          { title: "Endocrine: Thyroid gland (embryology, anatomy, physiology, pathology and pharmacology)", date: "2026-08-10", url: "https://us06web.zoom.us/rec/share/_NpAf7Q7mYVV7of-Y7D-rCxO5c_IsVAeJqnHVFZZOoFs2WmaIUn3AxB98fP32FxX.1QQxxknoVsNVS0aF" }
+        ]
       }
     ]
   }
