@@ -565,6 +565,11 @@ window.BLOCKS = [
           { title: "Endocrine: Thyroid gland (embryology, anatomy, physiology, pathology and pharmacology)", date: "2026-08-10", url: "https://us06web.zoom.us/rec/share/_NpAf7Q7mYVV7of-Y7D-rCxO5c_IsVAeJqnHVFZZOoFs2WmaIUn3AxB98fP32FxX.1QQxxknoVsNVS0aF" },
           { title: "Endocrine: Thyroid gland, question session", date: "2026-08-11", url: "https://us06web.zoom.us/rec/share/lSLtP-pAomnraeb1cACCYn1MRVVriKvEkm2Kx7uSNS-nVAkws-kimRF8pgLtFHi4.DhOoFe_Zs0f6LLu4" }
         ]
+      },
+      { id: "endo-adrenal",            label: "Adrenal gland",              days: [],
+        recordings: [
+          { title: "Endocrine: Adrenal gland (anatomy, physiology, pathology and pharmacology)", date: "2026-08-12", url: "https://us06web.zoom.us/rec/share/saR10XDN72jeLEsIsw20tISql-OKUrgG0VxiHUdj5yHcCw1LuOll0_QLIsh22q3S.__6dGnIZ85GHzhVY" }
+        ]
       }
     ]
   }
