@@ -568,7 +568,8 @@ window.BLOCKS = [
       },
       { id: "endo-adrenal",            label: "Adrenal gland",              days: [],
         recordings: [
-          { title: "Endocrine: Adrenal gland (anatomy, physiology, pathology and pharmacology)", date: "2026-08-12", url: "https://us06web.zoom.us/rec/share/saR10XDN72jeLEsIsw20tISql-OKUrgG0VxiHUdj5yHcCw1LuOll0_QLIsh22q3S.__6dGnIZ85GHzhVY" }
+          { title: "Endocrine: Adrenal gland (anatomy, physiology, pathology and pharmacology)", date: "2026-08-12", url: "https://us06web.zoom.us/rec/share/saR10XDN72jeLEsIsw20tISql-OKUrgG0VxiHUdj5yHcCw1LuOll0_QLIsh22q3S.__6dGnIZ85GHzhVY" },
+          { title: "Endocrine: Adrenal gland, question session", date: "2026-08-13", url: "https://us06web.zoom.us/rec/share/jXPMF1UsTN6C5TdHzEfNStwrwN31T7os-Pj6x0OAjIEOmABAUkZt4bedOjonlEvL.oN-EafSAq7qner7Q" }
         ]
       }
     ]
