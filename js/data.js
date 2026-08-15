@@ -575,7 +575,8 @@ window.BLOCKS = [
       { id: "endo-pancreas",           label: "Pancreas and diabetes",      days: [],
         recordings: [
           { title: "Endocrine: Pancreas, diabetes mellitus (anatomy, physiology and pathology)", date: "2026-08-14", url: "https://us06web.zoom.us/rec/share/7Ypw84WHqOjXPK-mztmJPBErkXdVnGr5GXUvHxsFA7Llo4MFiepGKvlMJBhh78e5.hV7wasUi0pjUDhIc" },
-          { title: "Endocrine: Diabetes mellitus, question session", date: "2026-08-15", url: "https://us06web.zoom.us/rec/share/ErC8u0iDHYNdbk-E8CK-PL46tMjQoNArEoD6xvIknaqx7YRkO3PwvR-lm3cJ2SR9.5Kp66b35Ka5klzTv" }
+          { title: "Endocrine: Diabetes mellitus, question session", date: "2026-08-15", url: "https://us06web.zoom.us/rec/share/ErC8u0iDHYNdbk-E8CK-PL46tMjQoNArEoD6xvIknaqx7YRkO3PwvR-lm3cJ2SR9.5Kp66b35Ka5klzTv" },
+          { title: "Endocrine: Diabetes pharmacology", date: "2026-08-15", url: "https://us06web.zoom.us/rec/share/JeAsIElWwY3PUf9G0oYgo5RErMg82hUAgOae_ZaDBI4piYBH45kD0IhBaRSA-P_p.0i2_1FVQqJHJRpqS" }
         ]
       }
     ]
