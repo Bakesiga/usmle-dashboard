@@ -590,6 +590,22 @@ window.BLOCKS = [
         ]
       }
     ]
+  },
+  {
+    id: "repro",
+    short: "REPRO",
+    label: "Reproductive",
+    subject: "repro",
+    dateRange: "From Aug 16",
+    dayRange: [77, 84],
+    start: "2026-08-16",
+    subBlocks: [
+      { id: "repro-embryology",  label: "Embryology",   days: [],
+        recordings: [
+          { title: "Reproductive: Embryology", date: "2026-08-16", url: "https://us06web.zoom.us/rec/share/g50eM0a-dNOdtWUfkw3HOlx2bD-tPnOqX60tcyfyrQBMgDyz9fr1UXY9WZ8thFh4.gVBUknsKveGbMBM4" }
+        ]
+      }
+    ]
   }
 ];
 
