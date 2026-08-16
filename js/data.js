@@ -583,6 +583,11 @@ window.BLOCKS = [
         recordings: [
           { title: "Endocrine: Growth hormone and calcium metabolism", date: "2026-08-15", url: "https://us06web.zoom.us/rec/share/MY8zr4sNg4TFbjaojuF0HQJ2exUif5kCe2nhR1uzd7joEVBGMHEL9HJMvm2s-nzl.JpQIr-UZi9s_Y5in" }
         ]
+      },
+      { id: "endo-tumours",            label: "Endocrine tumours",          days: [],
+        recordings: [
+          { title: "Endocrine: Endocrine gland tumours", date: "2026-08-16", url: "https://us06web.zoom.us/rec/share/X_rWGBa9qKbNarQ4_wSqIW_hUOJ7tzKCgrKQvw4-YfrYrx4mRhviEpNtbHFa7bBm.zpqxPpcX4OGHMTqN" }
+        ]
       }
     ]
   }
