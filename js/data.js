@@ -578,6 +578,11 @@ window.BLOCKS = [
           { title: "Endocrine: Diabetes mellitus, question session", date: "2026-08-15", url: "https://us06web.zoom.us/rec/share/ErC8u0iDHYNdbk-E8CK-PL46tMjQoNArEoD6xvIknaqx7YRkO3PwvR-lm3cJ2SR9.5Kp66b35Ka5klzTv" },
           { title: "Endocrine: Diabetes pharmacology", date: "2026-08-15", url: "https://us06web.zoom.us/rec/share/JeAsIElWwY3PUf9G0oYgo5RErMg82hUAgOae_ZaDBI4piYBH45kD0IhBaRSA-P_p.0i2_1FVQqJHJRpqS" }
         ]
+      },
+      { id: "endo-gh-calcium",         label: "Growth hormone and calcium metabolism", days: [],
+        recordings: [
+          { title: "Endocrine: Growth hormone and calcium metabolism", date: "2026-08-15", url: "https://us06web.zoom.us/rec/share/MY8zr4sNg4TFbjaojuF0HQJ2exUif5kCe2nhR1uzd7joEVBGMHEL9HJMvm2s-nzl.JpQIr-UZi9s_Y5in" }
+        ]
       }
     ]
   }
