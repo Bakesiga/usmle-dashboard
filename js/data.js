@@ -603,7 +603,7 @@ window.BLOCKS = [
       { id: "repro-embryology",  label: "Embryology",   days: [],
         recordings: [
           { title: "Reproductive: Embryology", date: "2026-08-16", url: "https://us06web.zoom.us/rec/share/g50eM0a-dNOdtWUfkw3HOlx2bD-tPnOqX60tcyfyrQBMgDyz9fr1UXY9WZ8thFh4.gVBUknsKveGbMBM4" },
-          { title: "Reproductive: Anomalies of sex differentiation, and anatomy of the reproductive tract", date: "2026-08-16", url: "https://us06web.zoom.us/rec/share/doUqHf3VxpIX-I0PaiIs9tP2dX9U0nrjYL1dwx_Pl8V3fSL4uPcvIKsQIUivFFXh.NQriqrmgGmd9r_6C" }
+          { title: "Reproductive: Sex differentiation and ambiguous genitalia, question session", date: "2026-08-16", url: "https://us06web.zoom.us/rec/share/doUqHf3VxpIX-I0PaiIs9tP2dX9U0nrjYL1dwx_Pl8V3fSL4uPcvIKsQIUivFFXh.NQriqrmgGmd9r_6C" }
         ]
       }
     ]
