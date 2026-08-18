@@ -605,6 +605,11 @@ window.BLOCKS = [
           { title: "Reproductive: Embryology", date: "2026-08-16", url: "https://us06web.zoom.us/rec/share/g50eM0a-dNOdtWUfkw3HOlx2bD-tPnOqX60tcyfyrQBMgDyz9fr1UXY9WZ8thFh4.gVBUknsKveGbMBM4" },
           { title: "Reproductive: Sex differentiation and ambiguous genitalia, question session", date: "2026-08-16", url: "https://us06web.zoom.us/rec/share/doUqHf3VxpIX-I0PaiIs9tP2dX9U0nrjYL1dwx_Pl8V3fSL4uPcvIKsQIUivFFXh.NQriqrmgGmd9r_6C" }
         ]
+      },
+      { id: "repro-anatomy",     label: "Anatomy",      days: [],
+        recordings: [
+          { title: "Reproductive: Female reproductive system anatomy", date: "2026-08-17", url: "https://us06web.zoom.us/rec/share/xFp-oLZEh4biRx3knTbDKH0PBU8gseTe_J09ZpuVHZvaRodBVXxNgBl4XMBz9Sg4.vmc2Lig4h1WpiUPj" }
+        ]
       }
     ]
   }
