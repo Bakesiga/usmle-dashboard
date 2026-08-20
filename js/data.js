@@ -611,6 +611,11 @@ window.BLOCKS = [
           { title: "Reproductive: Female reproductive system anatomy", date: "2026-08-17", url: "https://us06web.zoom.us/rec/share/xFp-oLZEh4biRx3knTbDKH0PBU8gseTe_J09ZpuVHZvaRodBVXxNgBl4XMBz9Sg4.vmc2Lig4h1WpiUPj" },
           { title: "Reproductive: Male reproductive system anatomy", date: "2026-08-18", url: "https://us06web.zoom.us/rec/share/xZ1r2l7wjB6lgXrzAbZpZ-AK-YI7SJsRHe2ixMWPUOd6BjilUi2yLrBmmtdwI2ab.Ktevek2ElCyq_ZcX" }
         ]
+      },
+      { id: "repro-physiology",  label: "Physiology",   days: [],
+        recordings: [
+          { title: "Reproductive: Female reproductive physiology", date: "2026-08-19", url: "https://us06web.zoom.us/rec/share/ctwcOn_xJtXBG7uv7wAFPjz6Qar0nhK7R5Ux9rBA_5ddH1s-fspH4AVuReSYPrnP.MU-k9VpVrypdw5F4" }
+        ]
       }
     ]
   }
