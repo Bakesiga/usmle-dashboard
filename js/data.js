@@ -616,6 +616,11 @@ window.BLOCKS = [
         recordings: [
           { title: "Reproductive: Female reproductive physiology", date: "2026-08-19", url: "https://us06web.zoom.us/rec/share/ctwcOn_xJtXBG7uv7wAFPjz6Qar0nhK7R5Ux9rBA_5ddH1s-fspH4AVuReSYPrnP.MU-k9VpVrypdw5F4" }
         ]
+      },
+      { id: "repro-pathology",   label: "Pathology",    days: [],
+        recordings: [
+          { title: "Obstetric pathology: early and late pregnancy hemorrhage, preeclampsia", date: "2026-08-20", url: "https://us06web.zoom.us/rec/share/Quf37kgOpJbpDKhSeAyXoveC93FDxJf3GjJ-fpNECpl-og6nHpL8GIiqutM0c11I.c8t-qlezvV_PybKv" }
+        ]
       }
     ]
   }
