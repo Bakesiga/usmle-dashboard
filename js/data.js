@@ -620,7 +620,8 @@ window.BLOCKS = [
       { id: "repro-pathology",   label: "Pathology",    days: [],
         recordings: [
           { title: "Obstetric pathology: early and late pregnancy hemorrhage, preeclampsia", date: "2026-08-20", url: "https://us06web.zoom.us/rec/share/Quf37kgOpJbpDKhSeAyXoveC93FDxJf3GjJ-fpNECpl-og6nHpL8GIiqutM0c11I.c8t-qlezvV_PybKv" },
-          { title: "Gynecologic tumors part 1: vulva, vagina, cervix, uterus", date: "2026-08-21", url: "https://us06web.zoom.us/rec/share/NPphq2PnHW2Q6qppimXxr2FCFXOEh8s_dop7sARa81Zc6kHX65cERVKWvJ3-AWQY._IODd-bOQjBe-X3d" }
+          { title: "Gynecologic tumors part 1: vulva, vagina, cervix, uterus", date: "2026-08-21", url: "https://us06web.zoom.us/rec/share/NPphq2PnHW2Q6qppimXxr2FCFXOEh8s_dop7sARa81Zc6kHX65cERVKWvJ3-AWQY._IODd-bOQjBe-X3d" },
+          { title: "Gynecologic tumors part 2: ovarian tumors", date: "2026-08-22", url: "https://us06web.zoom.us/rec/share/QxkUez0z8BfCJfBdESftStoGzLy3o1ogTdGcpd6k1fVGRxMi9bamNe7bd9lw7fYR.rlx3cVlHH7qwjnhM" }
         ]
       }
     ]
