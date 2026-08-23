@@ -354,7 +354,24 @@
     } catch (e) {}
     return fromSession;
   }
+  // Mirror of studentAccessFrom for the optional whole-block lock.
+  function studentLockedBlocks() {
+    let email = null, fromSession = null;
+    try {
+      const sess = JSON.parse(localStorage.getItem('usmle.session.v2') || 'null');
+      if (sess) { email = sess.email; fromSession = sess.lockedBlocks || null; }
+    } catch (e) {}
+    if (!email) return null;
+    try {
+      const cache = JSON.parse(sessionStorage.getItem('usmle.allowlist.v2') || '[]');
+      const live = cache.find(s => s.email === email);
+      if (live) return live.lockedBlocks || null;
+    } catch (e) {}
+    return fromSession;
+  }
   function blockRecordingsLocked(block) {
+    const locked = studentLockedBlocks();
+    if (locked && block && locked.indexOf(block.id) !== -1) return true;
     const from = studentAccessFrom();
     return !!(from && block && block.start && block.start < from);
   }

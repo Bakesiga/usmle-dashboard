@@ -33,6 +33,16 @@ const USMLE_AUTH = (() => {
     return Object.keys(out).length ? out : null;
   }
 
+  // Optional whole-block lock, by block id: ["cvs"]. Every recording in a
+  // listed block is locked regardless of accessFrom, and the block tile shows
+  // as locked. Used when a student is entitled to the cohort but not to one
+  // particular block.
+  function normalizeLockedBlocks(raw) {
+    if (!Array.isArray(raw)) return null;
+    const list = raw.map((b) => String(b).trim()).filter(Boolean);
+    return list.length ? list : null;
+  }
+
   function normalizeAllowlist(json) {
     // Accept v2 ({students:[{email,tracks}]}) or legacy v1 ({emails:[]}, gives all tracks)
     if (Array.isArray(json.students)) {
@@ -54,10 +64,12 @@ const USMLE_AUTH = (() => {
         // accessFrom alone, so a partial entitlement in one block never leaks
         // out and locks the student out of later blocks. null => no filter.
         onlyRecordings: normalizeOnlyRecordings(s.onlyRecordings),
+        // Optional whole-block lock. null => nothing locked.
+        lockedBlocks: normalizeLockedBlocks(s.lockedBlocks),
       }));
     }
     if (Array.isArray(json.emails)) {
-      return json.emails.map((e) => ({ email: String(e).toLowerCase().trim(), tracks: ["step1", "step2"], accessFrom: null, accessUntil: null, onlyRecordings: null }));
+      return json.emails.map((e) => ({ email: String(e).toLowerCase().trim(), tracks: ["step1", "step2"], accessFrom: null, accessUntil: null, onlyRecordings: null, lockedBlocks: null }));
     }
     return [];
   }
@@ -103,6 +115,7 @@ const USMLE_AUTH = (() => {
       accessFrom: entry.accessFrom || null,
       accessUntil: entry.accessUntil || null,
       onlyRecordings: entry.onlyRecordings || null,
+      lockedBlocks: entry.lockedBlocks || null,
       name: claims.name || entry.email,
       picture: claims.picture || "",
       signedInAt: Date.now(),
