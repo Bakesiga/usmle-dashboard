@@ -625,6 +625,11 @@ window.BLOCKS = [
           { title: "Breast pathology", date: "2026-08-22", url: "https://us06web.zoom.us/rec/share/ZtgXNm9hhPDlIofmDS3Q7kd4DU98W7PjQeAdmLTM58JRouNOjGLdRi3nwi_TfRlb.-P4l_cVyByy5XGIs" },
           { title: "Male reproductive system pathology", date: "2026-08-23", url: "https://us06web.zoom.us/rec/share/S1R_eqTlw0zHgr9c8YzxlNYP3O2qrpAgE9KWul7XpaEOEq5fg3EaKVT5nBfkU4_w.8y7CFITVMKNt0VeM" }
         ]
+      },
+      { id: "repro-pharmacology", label: "Pharmacology", days: [],
+        recordings: [
+          { title: "Reproductive system pharmacology", date: "2026-08-23", url: "https://us06web.zoom.us/rec/share/WsnPNUwJI0iCmpV-XRw8KjWXn6Unp_ZwFyo2Fj2IShFEnd1e7a6ww-WBeIqmJSM3.7eR-qvmOtVKARN2L" }
+        ]
       }
     ]
   }
