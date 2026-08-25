@@ -75,6 +75,14 @@
   --repro-tint: #FFF7ED;
   --repro-deep: #9A3412;
 
+  /* ---- Subject — General Pharmacology ---- */
+  /* Slate rather than another saturated hue: this block is general
+     principles, not an organ system, and the ten organ colours are used. */
+  --pharm:      #475569;
+  --pharm-soft: #E2E8F0;
+  --pharm-tint: #F1F5F9;
+  --pharm-deep: #1E293B;
+
   /* ---- Success / passed ---- */
   --gold:       #E5A823;
   --gold-deep:  #B8851C;
@@ -176,6 +184,10 @@
   --endo-tint: rgba(192, 38, 211, 0.10);
   --repro-soft:rgba(234, 88, 12, 0.18);
   --repro-tint:rgba(234, 88, 12, 0.10);
+  --pharm:     #94A3B8;
+  --pharm-soft:rgba(148, 163, 184, 0.20);
+  --pharm-tint:rgba(148, 163, 184, 0.11);
+  --pharm-deep:#CBD5E1;
 
   --shadow-1:  0 1px 2px rgba(0, 0, 0, 0.30), 0 1px 3px rgba(0, 0, 0, 0.40);
   --shadow-2:  0 2px 4px rgba(0, 0, 0, 0.30), 0 6px 16px rgba(0, 0, 0, 0.40);
@@ -229,6 +241,7 @@ button { font: inherit; cursor: pointer; }
 .subject-renal{ --c: var(--renal); --c-soft: var(--renal-soft); --c-tint: var(--renal-tint); --c-deep: var(--renal-deep); }
 .subject-endo { --c: var(--endo);  --c-soft: var(--endo-soft);  --c-tint: var(--endo-tint);  --c-deep: var(--endo-deep); }
 .subject-repro{ --c: var(--repro); --c-soft: var(--repro-soft); --c-tint: var(--repro-tint); --c-deep: var(--repro-deep); }
+.subject-pharm{ --c: var(--pharm); --c-soft: var(--pharm-soft); --c-tint: var(--pharm-tint); --c-deep: var(--pharm-deep); }
 
 /* ---- Buttons ---- */
 .btn {
