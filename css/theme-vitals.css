@@ -647,3 +647,62 @@ body.vitals {
   .ekg-blip { display: none; }
   [data-scan].in > * { animation: none !important; }
 }
+
+/* ============================================================
+   ABOUT THE CLASS (landing page)
+   ============================================================ */
+.v-about {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-32);
+  margin-top: var(--s-32);
+}
+@media (min-width: 900px) {
+  .v-about { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: var(--s-48); }
+}
+
+.v-about-copy p {
+  font-size: var(--fs-16);
+  line-height: 1.62;
+  color: var(--ink-2);
+  margin-bottom: var(--s-16);
+  max-width: 62ch;
+}
+.v-about-lede {
+  font-size: var(--fs-18) !important;
+  line-height: 1.55 !important;
+  color: var(--ink) !important;
+}
+.v-about-who {
+  border-top: 1px solid var(--border);
+  padding-top: var(--s-16);
+  margin-top: var(--s-24);
+  font-size: var(--fs-15) !important;
+}
+.v-about-who b { color: var(--ink); }
+
+/* Facts column: instrument styling, hairlines and mono numerals. */
+.v-about-facts {
+  align-self: start;
+  border-top: 2px solid var(--ink);
+}
+.v-fact {
+  padding: var(--s-16) 0;
+  border-bottom: 1px solid var(--border);
+}
+.v-fact-n {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-24);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.v-fact-l {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
