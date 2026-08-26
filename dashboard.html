@@ -155,7 +155,11 @@
     <!-- ============================ TABS ============================ -->
     <nav class="dash-tabs" role="tablist" aria-label="Dashboard sections">
       <span class="dash-nav-label">Dashboard</span>
-      <button class="dash-tab active" data-tab="sessions" role="tab" type="button">
+      <button class="dash-tab active" data-tab="about" role="tab" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12" y2="8.01"/></svg>
+        About
+      </button>
+      <button class="dash-tab" data-tab="sessions" role="tab" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
         Sessions
       </button>
@@ -194,7 +198,74 @@
       <!-- tiles (L2) -> day cards (L3). Rendered by JS into the  -->
       <!-- [data-blocks-root] container.                          -->
       <!-- ====================================================== -->
-      <section class="panel active" data-panel="sessions" role="tabpanel" aria-label="All sessions">
+      <!-- ====================================================== -->
+      <!-- ABOUT PANEL (landing tab after sign-in)                 -->
+      <!-- ====================================================== -->
+      <section class="panel active" data-panel="about" role="tabpanel" aria-label="About the class">
+        <header class="v-head" style="margin-bottom: var(--s-24);">
+          <span class="v-tag">About the class</span>
+          <h2 style="font-family:var(--font-display);font-size:var(--fs-28);font-weight:700;letter-spacing:-0.02em;line-height:1.15;margin-top:var(--s-8);">
+            One class, every day, until the exam is not frightening any more.
+          </h2>
+        </header>
+
+        <div class="v-about">
+          <div class="v-about-copy">
+            <p class="v-about-lede">
+              We meet live every day and work through the whole of First Aid in order, system by
+              system, then answer exam style questions on the same topic while it is still fresh.
+            </p>
+            <p>
+              The class is live so you can interrupt, and questions are worked out loud so you hear
+              the reasoning rather than just the answer. Most of what goes wrong on Step 1 is not
+              knowledge, it is how a stem gets read, and that only improves out loud. Use the Raise
+              Hand button. The class is better when you interrupt.
+            </p>
+
+            <h3 class="about-h">Finding your way around</h3>
+            <ul class="about-list">
+              <li><b>Sessions</b> holds every recording, grouped by system and sub-topic. Tick one off once you have watched it.</li>
+              <li><b>Progress</b> shows how much of each system you have covered and which block we are in now.</li>
+              <li><b>Extra resources</b> has the material that goes alongside the classes.</li>
+              <li><b>Office hours</b> is where you book one to one time with me.</li>
+            </ul>
+
+            <h3 class="about-h">The things worth knowing</h3>
+            <ul class="about-list">
+              <li>Every class is recorded and goes up here the same night, so missing one costs you nothing.</li>
+              <li>Registration is per month. Your Zoom link works for every session in that month.</li>
+              <li>Recordings are shared to the email you enrolled with. If one will not open, that is usually the reason.</li>
+              <li>Your subscription runs month to month and is due at the start of each month.</li>
+            </ul>
+
+            <p class="v-about-who">
+              Taught by <b>Dr. Allan Bakesiga</b>, MBChB, MSc, a neurology resident who sat these
+              exams and now teaches them daily.
+            </p>
+          </div>
+
+          <aside class="v-about-facts" aria-label="Class at a glance">
+            <div class="v-fact">
+              <div class="v-fact-n">Daily</div>
+              <div class="v-fact-l">Live class, Monday to Sunday</div>
+            </div>
+            <div class="v-fact">
+              <div class="v-fact-n">2.5 hrs</div>
+              <div class="v-fact-l">Teaching, then questions</div>
+            </div>
+            <div class="v-fact">
+              <div class="v-fact-n">Recorded</div>
+              <div class="v-fact-l">Up the same night</div>
+            </div>
+            <div class="v-fact">
+              <div class="v-fact-n">1 : 1</div>
+              <div class="v-fact-l">Mentorship when you need it</div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="panel" data-panel="sessions" role="tabpanel" aria-label="All sessions">
         <div class="blocks-root" data-blocks-root></div>
       </section>
 
