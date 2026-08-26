@@ -120,19 +120,20 @@ h1, h2, h3, h4, h5, h6,
 .user-menu button, .user-menu a { color: var(--ink); }
 .user-menu button:hover, .user-menu a:hover { background: rgba(2, 132, 199, 0.08); }
 
-/* ---- Tabs ---------------------------------------------------- */
-.dash-tabs { border-bottom-color: var(--border); }
+/* ---- Side navigation ----------------------------------------- */
+/* Keeps the theme's instrument lettering, but on the navy rail the
+   active state is a gold left edge, not a blue underline. */
 .dash-tab {
-  color: var(--ink-2);
+  color: var(--sidenav-idle);
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 500;
 }
-.dash-tab:hover { color: var(--ink); }
+.dash-tab:hover { color: var(--sidenav-hot); }
 .dash-tab.active {
-  color: #0284C7;
-  border-bottom-color: #0284C7;
+  color: #fff;
+  border-bottom-color: transparent;
   font-weight: 600;
 }
 
@@ -324,25 +325,8 @@ a:not([class]):hover { text-decoration: underline; }
   border-radius: 4px;
 }
 
-/* ---- ECG hairline above the tabs -- subtle telemetry detail -- */
-.dash-tabs {
-  position: relative;
-  padding-top: var(--s-20);
-}
-.dash-tabs::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(2, 132, 199, 0.0) 5%,
-    rgba(2, 132, 199, 0.40) 30%,
-    rgba(2, 132, 199, 0.55) 50%,
-    rgba(2, 132, 199, 0.40) 70%,
-    rgba(2, 132, 199, 0.0) 95%,
-    transparent 100%);
-}
+/* The ECG hairline lived above the old horizontal tab bar. The navy rail
+   carries its own edge, so it is not needed here. */
 
 /* ---- Sign-in page meets the theme too ----------------------- */
 body[data-screen-label*="Sign"] { background: var(--bg); color: var(--ink); }
@@ -351,7 +335,7 @@ body[data-screen-label*="Sign"] .brand small { color: var(--ink-2); }
 
 /* ---- Mobile polish ------------------------------------------ */
 @media (max-width: 700px) {
-  .dash-tab { font-size: 11px; padding: 10px 10px; }
+  .dash-tab { font-size: 11px; padding: 10px 12px; }
   .today-head { padding: var(--s-20); }
   .today-actions { padding: var(--s-16) var(--s-20) var(--s-20); }
 }

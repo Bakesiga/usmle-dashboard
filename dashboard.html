@@ -27,29 +27,7 @@
   <link rel="stylesheet" href="css/dashboard.css" />
   <link rel="stylesheet" href="css/dashboard-vitals.css" />
   <style>
-    /* Tubelight indicator under the active dashboard tab (ported from tubelight-navbar) */
-    .dash-tab { position: relative; }
-    .dash-tab::after {
-      content: "";
-      position: absolute;
-      bottom: -2px;
-      left: 50%;
-      transform: translateX(-50%) scaleX(0);
-      transform-origin: center;
-      width: 42px;
-      height: 2px;
-      background: #0284C7;
-      border-radius: 2px;
-      box-shadow: 0 0 6px #0284C7, 0 0 14px rgba(2, 132, 199, 0.55), 0 0 22px rgba(2, 132, 199, 0.3);
-      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease;
-      opacity: 0;
-    }
-    .dash-tab:hover::after,
-    .dash-tab:focus-visible::after,
-    .dash-tab.active::after { transform: translateX(-50%) scaleX(1); opacity: 1; }
-    @media (prefers-reduced-motion: reduce) {
-      .dash-tab::after { transition: none; }
-    }
+    /* The active tab indicator now lives on the navy rail (gold left edge). */
     /* Class recordings section inside the CVS block view */
     .block-recordings-h {
       font-family: var(--font-display);
@@ -176,6 +154,7 @@
 
     <!-- ============================ TABS ============================ -->
     <nav class="dash-tabs" role="tablist" aria-label="Dashboard sections">
+      <span class="dash-nav-label">Dashboard</span>
       <button class="dash-tab active" data-tab="sessions" role="tab" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
         Sessions

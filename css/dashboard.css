@@ -131,39 +131,75 @@
 }
 .user-menu button:hover, .user-menu a:hover { background: var(--bg-cream); }
 
-/* ---- Tabs (under top bar) ---- */
+/* ---- Side navigation (navy rail) ---- */
+:root {
+  --sidenav:      #0C2A3D;
+  --sidenav-line: rgba(255,255,255,0.10);
+  --sidenav-idle: rgba(255,255,255,0.62);
+  --sidenav-hot:  rgba(255,255,255,0.94);
+}
+:root[data-theme="dark"], :root:not([data-theme="light"]) {
+  /* Lift it off the dark page background so the panel still reads as a panel. */
+  --sidenav:      #12334A;
+  --sidenav-line: rgba(255,255,255,0.12);
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) { --sidenav: #0C2A3D; }
+}
+
 .dash-tabs {
   display: flex;
-  align-items: center;
-  gap: var(--s-4);
-  padding: var(--s-12) 0 0;
-  border-bottom: 1px solid var(--border-2);
+  gap: 2px;
+  background: var(--sidenav);
+  border-radius: var(--r-card);
+  padding: var(--s-8);
   overflow-x: auto;
   scrollbar-width: none;
 }
 .dash-tabs::-webkit-scrollbar { display: none; }
+
+.dash-nav-label {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.42);
+  padding: 6px 12px 10px;
+}
+
 .dash-tab {
   padding: 10px 14px;
   background: transparent;
   border: 0;
-  border-bottom: 2px solid transparent;
+  border-left: 3px solid transparent;
   font-family: var(--font-display);
   font-size: var(--fs-14);
   font-weight: 500;
-  color: var(--ink-2);
+  color: var(--sidenav-idle);
   cursor: pointer;
   white-space: nowrap;
-  transition: color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+  text-align: left;
+  transition: color var(--t-fast) var(--ease),
+              background var(--t-fast) var(--ease);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
-.dash-tab svg { width: 16px; height: 16px; }
-.dash-tab:hover { color: var(--ink); }
+.dash-tab svg { width: 16px; height: 16px; flex: none; }
+.dash-tab:hover {
+  color: var(--sidenav-hot);
+  background: rgba(255,255,255,0.06);
+}
 .dash-tab.active {
-  color: var(--ink);
-  border-bottom-color: var(--cvs);
+  color: #fff;
+  background: rgba(255,255,255,0.10);
+  border-left-color: var(--gold);
   font-weight: 600;
+}
+.dash-tab:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
 }
 
 /* ---- Layout ---- */
@@ -171,16 +207,43 @@
   width: 100%;
   max-width: 1320px;
   margin-inline: auto;
-  padding: 0 var(--s-24) var(--s-64);
+  padding: var(--s-16) var(--s-24) var(--s-64);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-20);
 }
 .dash-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--s-32);
-  padding-top: var(--s-32);
+  min-width: 0;
 }
-@media (min-width: 1100px) {
-  .dash-grid { grid-template-columns: 1fr 320px; gap: var(--s-40); }
+
+/* Wide: navy rail becomes a true vertical sidebar beside the content. */
+@media (min-width: 1000px) {
+  .dash-shell {
+    grid-template-columns: 216px minmax(0, 1fr);
+    gap: var(--s-32);
+    align-items: start;
+    padding-top: var(--s-24);
+  }
+  .dash-tabs {
+    position: sticky;
+    top: calc(var(--nav-h, 64px) + var(--s-16));
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--s-12) var(--s-8) var(--s-16);
+    overflow: visible;
+  }
+  .dash-nav-label { display: block; }
+  .dash-tab { width: 100%; }
+  .dash-grid { padding-top: 0; }
+}
+
+/* The right rail only earns a column once the sidebar and main content
+   both have room. Below this it stacks under the content. */
+@media (min-width: 1280px) {
+  .dash-grid { grid-template-columns: minmax(0, 1fr) 300px; gap: var(--s-32); }
 }
 
 /* ---- Today panel ---- */
