@@ -615,8 +615,9 @@
             '</div>';
           recList.appendChild(card);
         } else {
+          const isDone = watchedSet().has(rec.url);
           const link = document.createElement('a');
-          link.className = 'block-recording-card';
+          link.className = 'block-recording-card' + (isDone ? ' is-watched' : '');
           link.href = rec.url;
           link.target = '_blank';
           link.rel = 'noopener';
@@ -627,7 +628,12 @@
             '<div class="block-recording-body">' +
               '<span class="block-recording-title">' + rec.title + '</span>' +
               '<span class="block-recording-meta">Open recording on Zoom</span>' +
-            '</div>';
+            '</div>' +
+            '<button type="button" class="rec-tick" data-watch-url="' + rec.url + '" ' +
+              'aria-pressed="' + (isDone ? 'true' : 'false') + '" ' +
+              'title="Mark as watched" aria-label="Mark as watched">' +
+              '<svg viewBox="0 0 14 14" aria-hidden="true"><polyline points="2.5,7.5 5.8,10.5 11.5,4"/></svg>' +
+            '</button>';
           recList.appendChild(link);
         }
       });
@@ -681,6 +687,18 @@
     const root = document.querySelector('[data-blocks-root]');
     if (!root) return;
     root.addEventListener('click', e => {
+      // Mark-watched tick. Must run before the card's own link navigation.
+      const tick = e.target.closest('[data-watch-url]');
+      if (tick) {
+        e.preventDefault();
+        e.stopPropagation();
+        const on = window.__usmleToggleWatched(tick.dataset.watchUrl);
+        tick.setAttribute('aria-pressed', on ? 'true' : 'false');
+        const card = tick.closest('.block-recording-card');
+        if (card) card.classList.toggle('is-watched', on);
+        renderProgress();
+        return;
+      }
       // Back link
       const back = e.target.closest('[data-back-target]');
       if (back) {
@@ -721,53 +739,133 @@
     });
   }
 
-  // ---------------- SCHEDULE (June grid) ----------------
-  function renderCalendar() {
-    const grid = document.querySelector('[data-cal-grid]');
-    if (!grid) return;
-    grid.innerHTML = '';
-    const now = window.getNow();
-    const todayStr = ymd(now);
-    const dows = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    dows.forEach(d => {
-      const cell = document.createElement('div');
-      cell.className = 'cal-dow';
-      cell.textContent = d;
-      grid.appendChild(cell);
-    });
-    // June 1 2026 = Monday (good!)
-    const first = new Date(2026, 5, 1);
-    let dow = (first.getDay() + 6) % 7; // 0 = Mon
-    for (let i = 0; i < dow; i++) {
-      const blank = document.createElement('div');
-      blank.className = 'cal-day empty';
-      grid.appendChild(blank);
-    }
-    for (let day = 1; day <= 30; day++) {
-      const dateObj = new Date(2026, 5, day);
-      const ymdStr = ymd(dateObj);
-      const session = window.SESSIONS.find(s => s.date === ymdStr);
-      const cell = document.createElement('div');
-      cell.className = 'cal-day';
-      if (session) {
-        cell.classList.add('has-class', 'subject-' + session.subject);
-        cell.dataset.sessionIdx = window.SESSIONS.indexOf(session);
-        cell.setAttribute('role', 'link');
-        cell.setAttribute('tabindex', '0');
-        cell.title = 'Day ' + session.day + ': ' + session.title;
-      }
-      if (ymdStr === todayStr) cell.classList.add('today');
-      cell.innerHTML = `<span class="d">${day}</span>` + (session ? `<span class="t">${session.title}</span>` : '');
-      grid.appendChild(cell);
-    }
+  // ---------------- PROGRESS ----------------
+  // Derived entirely from BLOCKS, so it can never go stale the way the old
+  // hardcoded June calendar did. Respects the same access gates as Sessions:
+  // a locked block contributes nothing to the student's totals.
+  var WATCH_KEY = 'usmle.watched.v1';
+
+  function watchedSet() {
+    try { return new Set(JSON.parse(localStorage.getItem(WATCH_KEY) || '[]')); }
+    catch (e) { return new Set(); }
   }
+  function saveWatched(set) {
+    try { localStorage.setItem(WATCH_KEY, JSON.stringify(Array.from(set))); }
+    catch (e) {}
+  }
+  window.__usmleWatched = watchedSet;
+  window.__usmleToggleWatched = function (url) {
+    var set = watchedSet();
+    if (set.has(url)) set.delete(url); else set.add(url);
+    saveWatched(set);
+    return set.has(url);
+  };
+
+  // Recordings in a block this student is actually entitled to see.
+  function visibleRecordings(block) {
+    if (blockRecordingsLocked(block)) return [];
+    var out = [];
+    (block.subBlocks || []).forEach(function (sb) {
+      (sb.recordings || []).forEach(function (r) {
+        if (!recordingLocked(block, r)) out.push(r);
+      });
+    });
+    return out;
+  }
+
+  // The block the cohort is currently in: latest block whose start has passed.
+  function currentBlockId() {
+    var today = ymd(window.getNow());
+    var id = null;
+    (window.BLOCKS || []).forEach(function (b) {
+      if (b.start && b.start <= today) id = b.id;
+    });
+    return id;
+  }
+
+  function renderProgress() {
+    var root = document.querySelector('[data-progress-root]');
+    if (!root) return;
+    var watched = watchedSet();
+    var curId = currentBlockId();
+    var blocks = window.BLOCKS || [];
+
+    var totalAvail = 0, totalDone = 0, openBlocks = 0;
+    var rows = blocks.map(function (b) {
+      var locked = blockRecordingsLocked(b);
+      var recs = visibleRecordings(b);
+      var done = recs.filter(function (r) { return watched.has(r.url); }).length;
+      if (!locked) { openBlocks++; totalAvail += recs.length; totalDone += done; }
+      return { b: b, locked: locked, total: recs.length, done: done };
+    });
+    var pct = totalAvail ? Math.round(totalDone / totalAvail * 100) : 0;
+
+    var html =
+      '<div class="prog-telemetry">' +
+        tele(openBlocks, 'Systems open to you') +
+        tele(totalAvail, 'Classes available') +
+        tele(totalDone, 'Watched') +
+        tele(pct + '%', 'Complete') +
+      '</div><div class="prog-list">';
+
+    rows.forEach(function (row) {
+      var b = row.b;
+      var isCur = b.id === curId;
+      var w = row.total ? Math.round(row.done / row.total * 100) : 0;
+      html +=
+        '<div class="prog-block subject-' + b.subject +
+          (row.locked ? ' is-locked' : '') + (isCur ? ' is-current' : '') + '"' +
+          (row.locked ? '' : ' data-goto-block="' + b.id + '" role="link" tabindex="0"') + '>' +
+          '<span class="prog-spine"></span>' +
+          '<div class="prog-body">' +
+            '<div class="prog-head">' +
+              '<span class="prog-name">' + esc(b.label) + '</span>' +
+              (isCur ? '<span class="prog-now">Current</span>' : '') +
+              '<span class="prog-count">' +
+                (row.locked ? 'Locked' : row.done + ' / ' + row.total) +
+              '</span>' +
+            '</div>' +
+            '<div class="prog-bar"><i style="width:' + (row.locked ? 0 : w) + '%"></i></div>' +
+            '<div class="prog-meta">' + esc(b.dateRange || '') +
+              (row.locked ? '' : ' &middot; ' + row.total + ' class' + (row.total === 1 ? '' : 'es')) +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    });
+
+    root.innerHTML = html + '</div>';
+  }
+
+  function tele(num, label) {
+    return '<div class="prog-tele"><div class="prog-num">' + num +
+           '</div><div class="prog-lab">' + label + '</div></div>';
+  }
+
+  function esc(str) {
+    return String(str == null ? '' : str)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function bindProgress() {
+    var root = document.querySelector('[data-progress-root]');
+    if (!root) return;
+    root.addEventListener('click', function (e) {
+      var t = e.target.closest('[data-goto-block]');
+      if (!t) return;
+      activateTab('sessions');
+      setBlockView(t.dataset.gotoBlock);
+    });
+  }
+
+  // Kept so older call sites and the tweaks panel keep working.
+  function renderCalendar() { renderProgress(); }
 
   // ---------------- TABS ----------------
   function activateTab(key) {
     document.querySelectorAll('[data-tab]').forEach(t => t.classList.toggle('active', t.dataset.tab === key));
     document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.dataset.panel === key));
     if (key === 'sessions')   { currentBlockView = 'all'; renderSessions(); }
-    if (key === 'schedule')   renderCalendar();
+    if (key === 'progress')   renderProgress();
   }
   function bindTabs() {
     document.querySelectorAll('[data-tab]').forEach(tab => {
@@ -877,6 +975,7 @@
     wireLinks();
     bindTabs();
     bindBlocksRoot();
+    bindProgress();
     bindUserMenu();
     bindDayJumps();
     renderSessions();
