@@ -644,7 +644,8 @@ window.BLOCKS = [
     subBlocks: [
       { id: "pharm-pkpd", label: "Pharmacokinetics and pharmacodynamics", days: [],
         recordings: [
-          { title: "General pharmacology: enzyme kinetics, bioavailability and volume of distribution", date: "2026-08-24", url: "https://us06web.zoom.us/rec/share/_khWzT-BBPY7mzR2z8iTFLElT4fisH5qkdQ0J0i8hSPFeboTSG6EBJK1pbeN4ZGc.E8_mAiWpnaOwGJNg" }
+          { title: "General pharmacology: enzyme kinetics, bioavailability and volume of distribution", date: "2026-08-24", url: "https://us06web.zoom.us/rec/share/_khWzT-BBPY7mzR2z8iTFLElT4fisH5qkdQ0J0i8hSPFeboTSG6EBJK1pbeN4ZGc.E8_mAiWpnaOwGJNg" },
+          { title: "Pharmacokinetics: clearance, half life, dosage calculations, metabolism and elimination", date: "2026-08-25", url: "https://us06web.zoom.us/rec/share/lOTr0_ipsKDPk6oXDBypa_Ng_nrYYrJgMwsSouhL8uVIB7e81ia4Tsb1L2XuHoKS.mqzWv_WBPO2hvYmE" }
         ]
       }
     ]
