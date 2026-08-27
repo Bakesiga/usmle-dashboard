@@ -133,18 +133,19 @@
 
 /* ---- Side navigation (navy rail) ---- */
 :root {
-  --sidenav:      #0C2A3D;
+  /* Same blue as the evaluation card (--cvs-deep). */
+  --sidenav:      #075985;
   --sidenav-line: rgba(255,255,255,0.10);
   --sidenav-idle: rgba(255,255,255,0.62);
   --sidenav-hot:  rgba(255,255,255,0.94);
 }
 :root[data-theme="dark"], :root:not([data-theme="light"]) {
   /* Lift it off the dark page background so the panel still reads as a panel. */
-  --sidenav:      #12334A;
+  --sidenav:      #0A6C9E;
   --sidenav-line: rgba(255,255,255,0.12);
 }
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) { --sidenav: #0C2A3D; }
+  :root:not([data-theme="dark"]) { --sidenav: #075985; }
 }
 
 .dash-tabs {
