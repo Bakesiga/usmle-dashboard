@@ -1,0 +1,244 @@
+/* ============================================================
+   USMLE Classes — design-tokens.css  (REDESIGN, drop-in)
+   Replaces css/design-tokens.css in bakesiga/usmle-dashboard.
+
+   Every variable name from the old file is kept, so existing
+   rules in site.css / dashboard.css keep resolving. What changed
+   is the VALUES. Deleting css/theme-vitals.css and
+   css/dashboard-vitals.css is part of this change: the old page
+   stacked two design languages and this is the single one.
+
+   Derived from the Organic design system (see tokens/organic-styles.css).
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600;700;800&display=swap");
+
+:root {
+  /* ---- Ink + surfaces ----
+     The ground is cream, not white. Cards are the LIGHTER neutral
+     sitting on it, which is the inverse of the old white-page model. */
+  --ink:        #201e1d;   /* was #0C2A3D */
+  --ink-2:      #474238;
+  --muted:      #645c50;
+  --bg:         #f5ead8;   /* page ground — was #FFFFFF */
+  --bg-soft:    #ebddc5;   /* sand: stat tiles, resource cards */
+  --bg-cream:   #f9f4ed;   /* card surface on the ground */
+  --border:     #dcd3c4;
+  --border-2:   #eee7db;
+
+  /* ---- Subject colors: DELIBERATELY COLLAPSED ----
+     The old file carried 11 organ-system hues x 4 tints = 44 colors.
+     All eleven now resolve to the single terracotta accent. The
+     .subject-* helper classes at the bottom of this file still work,
+     so no markup has to change — they simply stop producing 11 hues.
+
+     Subject identity now comes from TYPE AND POSITION, not color:
+     the system name in --font-display, the day count, the date range.
+     Do not reintroduce per-subject hues. */
+  --accent:      #c67139;
+  --accent-soft: #ffe1d0;
+  --accent-tint: #fff2eb;
+  --accent-deep: #8c491a;
+
+  --cvs: var(--accent);   --cvs-soft: var(--accent-soft);   --cvs-tint: var(--accent-tint);   --cvs-deep: var(--accent-deep);
+  --resp: var(--accent);  --resp-soft: var(--accent-soft);  --resp-tint: var(--accent-tint);  --resp-deep: var(--accent-deep);
+  --path: var(--accent);  --path-soft: var(--accent-soft);  --path-tint: var(--accent-tint);  --path-deep: var(--accent-deep);
+  --amber: var(--accent); --amber-soft: var(--accent-soft); --amber-tint: var(--accent-tint); --amber-deep: var(--accent-deep);
+  --cns: var(--accent);   --cns-soft: var(--accent-soft);   --cns-tint: var(--accent-tint);   --cns-deep: var(--accent-deep);
+  --imm: var(--accent);   --imm-soft: var(--accent-soft);   --imm-tint: var(--accent-tint);   --imm-deep: var(--accent-deep);
+  --heme: var(--accent);  --heme-soft: var(--accent-soft);  --heme-tint: var(--accent-tint);  --heme-deep: var(--accent-deep);
+  --renal: var(--accent); --renal-soft: var(--accent-soft); --renal-tint: var(--accent-tint); --renal-deep: var(--accent-deep);
+  --endo: var(--accent);  --endo-soft: var(--accent-soft);  --endo-tint: var(--accent-tint);  --endo-deep: var(--accent-deep);
+  --repro: var(--accent); --repro-soft: var(--accent-soft); --repro-tint: var(--accent-tint); --repro-deep: var(--accent-deep);
+  --pharm: var(--accent); --pharm-soft: var(--accent-soft); --pharm-tint: var(--accent-tint); --pharm-deep: var(--accent-deep);
+
+  /* ---- Second voice: sage ----
+     The old --gold marked success/passed. Sage takes that job — it is
+     the system's genuine second accent, not a highlight. Use it for
+     completion, progress fills and "finished" marks. Nothing else. */
+  --sage:       #7a8a5e;
+  --sage-soft:  #e1eecc;
+  --sage-tint:  #f0fae1;
+  --sage-deep:  #56633f;
+  --gold:       var(--sage);
+  --gold-deep:  var(--sage-deep);
+
+  /* ---- Full neutral ramp (new; use these for anything ad-hoc) ---- */
+  --n-100: #f9f4ed;
+  --n-200: #eee7db;
+  --n-300: #dcd3c4;
+  --n-400: #c0b6a5;
+  --n-500: #a19786;
+  --n-600: #82796a;
+  --n-700: #645c50;
+  --n-800: #474238;
+  --n-900: #2e2b25;
+
+  /* ---- Typography ----
+     Two faces. Caprasimo is a heavy display serif — it carries
+     headlines at 27px and up and must never be used below ~20px or
+     for body copy. Figtree does everything else.
+
+     --font-mono no longer maps to a mono face: the system has one
+     display and one body voice. The old mono micro-labels become
+     Figtree at 11.5px/700/0.11em uppercase. Search the CSS for
+     var(--font-mono) and convert those rules. */
+  --font-display: "Caprasimo", Georgia, serif;
+  --font-body:    "Figtree", system-ui, -apple-system, sans-serif;
+  --font-mono:    "Figtree", system-ui, -apple-system, sans-serif;
+
+  /* ---- Type scale (unchanged — existing rules depend on it) ---- */
+  --fs-12: 0.75rem;   --fs-13: 0.8125rem; --fs-14: 0.875rem;
+  --fs-15: 0.9375rem; --fs-16: 1rem;      --fs-17: 1.0625rem;
+  --fs-18: 1.125rem;  --fs-20: 1.25rem;   --fs-24: 1.5rem;
+  --fs-28: 1.75rem;   --fs-32: 2rem;      --fs-40: 2.5rem;
+  --fs-48: 3rem;      --fs-56: 3.5rem;    --fs-72: 4.5rem;
+
+  /* ---- Spacing (unchanged 8pt scale) ---- */
+  --s-4: 4px;   --s-8: 8px;   --s-12: 12px; --s-16: 16px;
+  --s-20: 20px; --s-24: 24px; --s-32: 32px; --s-40: 40px;
+  --s-48: 48px; --s-64: 64px; --s-80: 80px; --s-96: 96px;
+  --s-128: 128px;
+
+  /* ---- Radii: OVER-ROUNDED, and only three values ----
+     The old file had 8/12/16/24 plus a hardcoded 12px inline.
+     Everything interactive is a full pill. */
+  --r-soft: 16px;
+  --r-card: 28px;
+  --r-hero: 28px;
+  --r-btn:  999px;
+  --r-pill: 999px;
+
+  /* ---- Shadows ----
+     Ink-tinted and tuned to the cream ground. The old blue-tinted
+     --shadow-cvs is gone; it now aliases the neutral mid shadow.
+     Do not reintroduce colored glows. */
+  --shadow-1: 0 1px 2px color-mix(in srgb, #2e2b25 14%, transparent);
+  --shadow-2: 0 3px 10px color-mix(in srgb, #2e2b25 16%, transparent);
+  --shadow-3: 0 12px 32px color-mix(in srgb, #2e2b25 22%, transparent);
+  --shadow-cvs: var(--shadow-2);
+
+  /* ---- Motion (unchanged) ---- */
+  --ease:     cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in:  cubic-bezier(0.4, 0, 1, 1);
+  --t-fast: 150ms; --t-base: 250ms; --t-slow: 600ms;
+
+  /* ---- Layout (unchanged) ---- */
+  --container: 1180px;
+  --container-narrow: 880px;
+  --bp-sm: 480px; --bp-md: 768px; --bp-lg: 1024px; --bp-xl: 1280px;
+  --nav-h: 64px;
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-16);
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+@media (min-width: 768px) { body { font-size: var(--fs-17); } }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;          /* Caprasimo ships one weight */
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+p { margin: 0; }
+a { color: var(--accent-deep); text-decoration: none; }
+a:hover { color: #643312; }
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; }
+::selection { background: var(--accent-soft); }
+
+.tnum, time, .countdown, .price {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ---- Subject helpers: kept so markup does not change ---- */
+.subject-cvs, .subject-resp, .subject-path, .subject-epi, .subject-cns,
+.subject-imm, .subject-heme, .subject-renal, .subject-endo,
+.subject-repro, .subject-pharm {
+  --c: var(--accent);
+  --c-soft: var(--accent-soft);
+  --c-tint: var(--accent-tint);
+  --c-deep: var(--accent-deep);
+}
+
+/* ---- Buttons: pills ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-8);
+  padding: 14px 26px;
+  border-radius: var(--r-btn);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-15);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background var(--t-fast) var(--ease),
+              color var(--t-fast) var(--ease),
+              border-color var(--t-fast) var(--ease),
+              transform 80ms var(--ease);
+}
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--accent); color: var(--accent-tint); }
+.btn-primary:hover { background: #b2622d; }
+.btn-ghost { background: transparent; color: var(--ink-2); border: 1.5px solid var(--border); }
+.btn-ghost:hover { background: var(--accent-tint); border-color: #f6a06b; color: var(--accent-deep); }
+.btn-ink { background: var(--n-900); color: var(--n-100); }
+.btn-ink:hover { background: #000; }
+.btn-gold { background: var(--sage); color: var(--sage-tint); }
+.btn-gold:hover { background: var(--sage-deep); }
+.btn-sm { padding: 9px 18px; font-size: var(--fs-14); }
+.btn-lg { padding: 17px 32px; font-size: var(--fs-17); }
+
+/* ---- Micro-label: the replacement for the old mono eyebrow ---- */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---- Focus ---- */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  padding-left: var(--s-24);
+  padding-right: var(--s-24);
+  margin-inline: auto;
+}
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--n-900); color: var(--n-100);
+  padding: 8px 12px; border-radius: var(--r-pill); z-index: 100;
+}
+.skip-link:focus { left: 12px; top: 12px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

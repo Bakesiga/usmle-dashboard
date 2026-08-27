@@ -131,120 +131,72 @@
 }
 .user-menu button:hover, .user-menu a:hover { background: var(--bg-cream); }
 
-/* ---- Side navigation (navy rail) ---- */
-:root {
-  /* Same blue as the evaluation card (--cvs-deep). */
-  --sidenav:      #075985;
-  --sidenav-line: rgba(255,255,255,0.10);
-  --sidenav-idle: rgba(255,255,255,0.62);
-  --sidenav-hot:  rgba(255,255,255,0.94);
-}
-:root[data-theme="dark"], :root:not([data-theme="light"]) {
-  /* Lift it off the dark page background so the panel still reads as a panel. */
-  --sidenav:      #0A6C9E;
-  --sidenav-line: rgba(255,255,255,0.12);
-}
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) { --sidenav: #075985; }
-}
-
+/* ---- Tab rail: pills, wrapping, no icons ---- */
 .dash-tabs {
   display: flex;
-  gap: 2px;
-  background: var(--sidenav);
-  border-radius: var(--r-card);
-  padding: var(--s-8);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.dash-tabs::-webkit-scrollbar { display: none; }
-
-.dash-nav-label {
-  display: none;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.42);
-  padding: 6px 12px 10px;
-}
-
-.dash-tab {
-  padding: 10px 14px;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 18px 0 35px;
   background: transparent;
   border: 0;
-  border-left: 3px solid transparent;
-  font-family: var(--font-display);
-  font-size: var(--fs-14);
-  font-weight: 500;
-  color: var(--sidenav-idle);
+}
+.dash-nav-label { display: none; }
+
+.dash-tab {
+  padding: 11px 21px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 700;
+  background: transparent;
+  color: var(--n-700);
+  border: 1.5px solid var(--border);
   cursor: pointer;
   white-space: nowrap;
-  text-align: left;
-  transition: color var(--t-fast) var(--ease),
-              background var(--t-fast) var(--ease);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
 }
-.dash-tab svg { width: 16px; height: 16px; flex: none; }
+/* The rail carried six icons plus a NEW badge and read as noise. */
+.dash-tab svg { display: none; }
 .dash-tab:hover {
-  color: var(--sidenav-hot);
-  background: rgba(255,255,255,0.06);
+  background: var(--accent-tint);
+  border-color: #f6a06b;
+  color: var(--accent-deep);
 }
 .dash-tab.active {
-  color: #fff;
-  background: rgba(255,255,255,0.10);
-  border-left-color: var(--gold);
-  font-weight: 600;
+  background: var(--accent);
+  color: var(--accent-tint);
+  border-color: var(--accent);
 }
 .dash-tab:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: -2px;
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* ---- Layout ---- */
 .dash-shell {
   width: 100%;
-  max-width: 1320px;
+  max-width: var(--container);
   margin-inline: auto;
-  padding: var(--s-16) var(--s-24) var(--s-64);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--s-20);
+  padding: 0 26px var(--s-64);
+  display: block;
 }
 .dash-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--s-32);
-  min-width: 0;
+  /* minmax(0, 316px), never a bare 316px: a fixed track wins the row at
+     narrow widths and floors the main column at 0. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 316px);
+  gap: 44px;
+  align-items: start;
 }
+.side-rail { position: sticky; top: 96px; }
 
-/* Wide: navy rail becomes a true vertical sidebar beside the content. */
-@media (min-width: 1000px) {
-  .dash-shell {
-    grid-template-columns: 216px minmax(0, 1fr);
-    gap: var(--s-32);
-    align-items: start;
-    padding-top: var(--s-24);
-  }
-  .dash-tabs {
-    position: sticky;
-    top: calc(var(--nav-h, 64px) + var(--s-16));
-    flex-direction: column;
-    gap: 2px;
-    padding: var(--s-12) var(--s-8) var(--s-16);
-    overflow: visible;
-  }
-  .dash-nav-label { display: block; }
-  .dash-tab { width: 100%; }
-  .dash-grid { padding-top: 0; }
+@media (max-width: 900px) {
+  .dash-grid { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+  /* Countdown and cohort position land first on a phone. */
+  .side-rail { order: -1; position: static; }
 }
-
-/* The right rail only earns a column once the sidebar and main content
-   both have room. Below this it stacks under the content. */
-@media (min-width: 1280px) {
-  .dash-grid { grid-template-columns: minmax(0, 1fr) 300px; gap: var(--s-32); }
+@media (max-width: 720px) {
+  .panel h1 { font-size: 2.1rem; }
 }
 
 /* ---- Today panel ---- */
@@ -1177,14 +1129,14 @@
 .topic-mark svg { width: 23px; height: 23px; display: block; }
 
 /* Covered: solid green disc, white check. */
-.ic-done circle { fill: var(--resp); }
+.ic-done circle { fill: var(--sage); }
 .ic-done polyline {
   fill: none; stroke: #fff; stroke-width: 2.1;
   stroke-linecap: round; stroke-linejoin: round;
 }
 /* In progress: subject-coloured ring with a filled centre. */
-.ic-now circle { fill: none; stroke: var(--c); stroke-width: 2; }
-.ic-now .dot { fill: var(--c); stroke: none; }
+.ic-now circle { fill: none; stroke: var(--accent); stroke-width: 2; }
+.ic-now .dot { fill: var(--accent); stroke: none; }
 /* Still ahead / locked: muted outline. */
 .ic-wait {
   fill: none; stroke: var(--muted); stroke-width: 1.5;
@@ -1195,9 +1147,9 @@
   flex: 1;
   min-width: 0;
   font-family: var(--font-display);
-  font-size: var(--fs-17);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.015em;
   color: var(--ink);
 }
 .topic.is-ahead .topic-name,
@@ -1221,7 +1173,7 @@
   color: var(--muted);
   white-space: nowrap;
 }
-.topic.is-current .topic-name { color: var(--c-deep); }
+.topic.is-current .topic-name { color: var(--accent-deep); }
 
 @media (max-width: 560px) {
   .topic-when { display: none; }
@@ -1268,29 +1220,6 @@
 }
 .about-list li b { color: var(--ink); font-weight: 600; }
 
-/* ============================================================
-   DASHBOARD TYPE SCALE
-   The dashboard is read at a desk for long stretches, so it runs a
-   step larger than the marketing site. Scoped to this page only, by
-   overriding the tokens rather than patching individual rules, so
-   every panel picks it up including ones added later.
-   Body sizes scale ~1.10x; display sizes are already large and move
-   less, so headings do not overpower the content.
-   ============================================================ */
-body[data-screen-label="03 Dashboard"] {
-  --fs-12: 0.8125rem;   /* 13 */
-  --fs-13: 0.875rem;    /* 14 */
-  --fs-14: 0.9375rem;   /* 15 */
-  --fs-15: 1rem;        /* 16 */
-  --fs-16: 1.0625rem;   /* 17 */
-  --fs-17: 1.125rem;    /* 18 */
-  --fs-18: 1.1875rem;   /* 19 */
-  --fs-20: 1.375rem;    /* 22 */
-  --fs-24: 1.625rem;    /* 26 */
-  --fs-28: 1.875rem;    /* 30 */
-  --fs-32: 2.125rem;    /* 34 */
-}
-
 /* ---- Road ahead (Where we are) ---- */
 .prog-ahead { margin-top: var(--s-32); }
 .prog-ahead-h {
@@ -1328,3 +1257,488 @@ body[data-screen-label="03 Dashboard"] {
   letter-spacing: 0.13em;
   text-transform: uppercase;
 }
+
+/* ============================================================
+   ANNOUNCEMENTS
+   One ink hero, then dated list rows. Previously two competing
+   full-bleed coloured cards.
+   ============================================================ */
+.ann-hero {
+  background: var(--n-900);
+  border-radius: var(--r-card);
+  padding: 35px;
+  margin-bottom: var(--s-24);
+}
+.ann-tag {
+  display: inline-block;
+  background: #3d472b;
+  color: var(--sage-soft);
+  border-radius: var(--r-pill);
+  padding: 6px 15px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.ann-hero h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 2.2vw + 1rem, 2.6rem);
+  color: var(--n-100);
+  max-width: 22em;
+  margin-top: var(--s-16);
+  line-height: 1.1;
+}
+.ann-lede {
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--n-300);
+  max-width: 38em;
+  margin-top: var(--s-16) !important;
+}
+.ann-body {
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--n-400);
+  max-width: 38em;
+  margin-top: var(--s-12) !important;
+}
+.ann-hero .btn { margin-top: var(--s-24); }
+
+.ann-earlier-h {
+  font-family: var(--font-display);
+  font-size: 24px;
+  margin: var(--s-32) 0 var(--s-16);
+}
+.ann-list { display: flex; flex-direction: column; gap: 11px; }
+.ann-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  background: var(--n-100);
+  border: 1.5px solid var(--n-200);
+  border-radius: var(--r-card);
+  padding: 18px 26px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 180ms var(--ease), border-color 180ms var(--ease),
+              transform 180ms var(--ease);
+}
+.ann-row:hover {
+  background: var(--accent-tint);
+  border-color: #f6a06b;
+  transform: translateY(-2px);
+}
+.ann-ic {
+  flex: none;
+  width: 46px; height: 46px;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  color: var(--accent-deep);
+  display: grid; place-items: center;
+}
+.ann-ic svg { width: 21px; height: 21px; }
+.ann-row-body { flex: 1; min-width: 0; display: block; }
+.ann-row-eyebrow {
+  display: block;
+  font-size: 11.5px; font-weight: 700;
+  letter-spacing: 0.11em; text-transform: uppercase;
+  color: var(--muted);
+}
+.ann-row-title {
+  display: block;
+  font-size: 17px; font-weight: 700;
+  color: var(--ink);
+  margin-top: 3px;
+}
+.ann-row-desc {
+  display: block;
+  font-size: 14.5px; line-height: 1.5;
+  color: var(--n-700);
+  margin-top: 4px;
+}
+.ann-chev { flex: none; align-self: center; color: var(--n-400); }
+.ann-closing {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--n-600);
+  margin-top: var(--s-24) !important;
+}
+
+/* ============================================================
+   ABOUT PANEL
+   These lived in theme-vitals.css, which the dashboard no longer
+   loads. Restated here against the new tokens, per the handoff:
+   facts become a sand grid, figures in the display face.
+   ============================================================ */
+.v-about {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-32);
+  margin-top: var(--s-24);
+}
+.v-about-copy p {
+  font-size: 17px;
+  line-height: 1.62;
+  color: var(--n-700);
+  margin-bottom: var(--s-16);
+  max-width: 36em;
+}
+.v-about-lede {
+  font-size: 20.5px !important;
+  line-height: 1.5 !important;
+  color: var(--ink-2) !important;
+  max-width: 34em !important;
+}
+.v-about-who {
+  border-top: 1.5px solid var(--n-200);
+  padding-top: var(--s-16);
+  margin-top: var(--s-24);
+  font-size: 15.5px !important;
+}
+.v-about-who b { color: var(--ink); }
+
+/* Facts: a sand grid, not a bordered column */
+.v-about-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
+  gap: 13px;
+  border: 0;
+}
+.v-fact {
+  background: var(--bg-soft);
+  border-radius: var(--r-card);
+  padding: 26px 18px 18px;
+  border: 0;
+}
+.v-fact-n {
+  font-family: var(--font-display);
+  font-size: 27px;
+  color: var(--accent-deep);
+  line-height: 1.1;
+}
+.v-fact-l {
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--n-700);
+  margin-top: 6px;
+}
+
+.about-h {
+  font-family: var(--font-display);
+  font-size: 31px;
+  color: var(--ink);
+  margin: var(--s-32) 0 var(--s-16);
+}
+.about-list { display: flex; flex-direction: column; gap: 20px; }
+.about-list li {
+  position: relative;
+  padding: 0 0 0 26px;
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--n-700);
+  border: 0;
+}
+.about-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 11px; height: 11px;
+  border-radius: 999px;
+  background: var(--sage);
+}
+.about-list li b { color: var(--ink); font-weight: 700; }
+
+/* ============================================================
+   SESSIONS
+   Tile and card styling came from dashboard-vitals.css, which the
+   dashboard no longer loads. Restated against the new tokens.
+   ============================================================ */
+
+/* ---- Level 1: system tiles ---- */
+.blocks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
+  gap: 13px;
+}
+.block-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--n-100);
+  border: 1.5px solid var(--n-200);
+  border-radius: var(--r-card);
+  padding: 26px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 180ms var(--ease), border-color 180ms var(--ease),
+              transform 180ms var(--ease);
+}
+.block-tile:hover {
+  background: var(--accent-tint);
+  border-color: #f6a06b;
+  transform: translateY(-2px);
+}
+.block-tile:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.block-tile-badge {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.block-tile-body { display: flex; flex-direction: column; gap: 5px; }
+.block-tile-eyebrow {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--n-600);
+}
+.block-tile-title {
+  font-family: var(--font-display);
+  font-size: 21px;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.block-tile-meta {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--n-600);
+}
+.block-tile-chevron { color: var(--accent-deep); margin-top: 4px; }
+.block-tile-chevron svg { width: 18px; height: 18px; }
+.block-tile.is-locked { opacity: 1; }
+.lock-pill {
+  display: inline-block;
+  background: var(--n-200);
+  color: var(--n-700);
+  border-radius: var(--r-pill);
+  padding: 3px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+/* ---- Level 2/3: back pill, heading, sub-block tiles ---- */
+.block-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-pill);
+  padding: 9px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-2);
+  text-decoration: none;
+  margin-bottom: var(--s-20);
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+.block-back:hover {
+  background: var(--accent-tint);
+  border-color: #f6a06b;
+  color: var(--accent-deep);
+}
+.block-detail-head { margin-bottom: var(--s-24); }
+.block-detail-titlerow { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.block-detail-badge {
+  font-size: 11.5px; font-weight: 700;
+  letter-spacing: 0.11em; text-transform: uppercase;
+  color: var(--accent);
+}
+.block-detail-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 2.6vw + 1rem, 3.1rem);
+  line-height: 1.05;
+  color: var(--ink);
+}
+.block-detail-range {
+  font-size: 14.5px; font-weight: 600;
+  color: var(--n-600);
+  margin-top: 6px;
+}
+
+.subblocks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
+  gap: 13px;
+}
+.subblock-tile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--n-100);
+  border: 1.5px solid var(--n-200);
+  border-radius: var(--r-card);
+  padding: 18px 26px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 180ms var(--ease), border-color 180ms var(--ease),
+              transform 180ms var(--ease);
+}
+.subblock-tile:hover {
+  background: var(--accent-tint);
+  border-color: #f6a06b;
+  transform: translateY(-2px);
+}
+.subblock-tile.is-empty { opacity: 0.6; cursor: default; }
+.subblock-title {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.subblock-days, .subblock-meta {
+  font-size: 13.5px; font-weight: 600; color: var(--n-600);
+}
+.subblock-chevron { color: var(--n-400); }
+.subblock-chevron svg { width: 18px; height: 18px; }
+
+/* ---- Recording cards ---- */
+.block-recordings-h {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--ink);
+  margin: var(--s-32) 0 var(--s-16);
+}
+.block-recordings-list { display: flex; flex-direction: column; gap: 11px; }
+.block-recording-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  background: var(--n-100);
+  border: 1.5px solid var(--n-200);
+  border-radius: var(--r-card);
+  padding: 18px 26px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 180ms var(--ease), border-color 180ms var(--ease),
+              transform 180ms var(--ease);
+}
+.block-recording-card:hover {
+  background: var(--accent-tint);
+  border-color: #f6a06b;
+  transform: translateY(-2px);
+}
+.block-recording-icon {
+  flex: none;
+  width: 46px; height: 46px;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  color: var(--accent-deep);
+  display: grid; place-items: center;
+}
+.block-recording-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.block-recording-title {
+  font-size: 17px; font-weight: 700; line-height: 1.35;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.block-recording-meta { font-size: 13px; font-weight: 600; color: var(--n-600); }
+
+/* Locked recordings get a full-contrast label, never grayscale-and-fade. */
+.block-recording-card.is-locked {
+  filter: none;
+  opacity: 1;
+  cursor: default;
+  background: var(--bg-cream);
+}
+.block-recording-card.is-locked:hover {
+  background: var(--bg-cream);
+  border-color: var(--n-200);
+  transform: none;
+}
+.block-recording-card.is-locked .block-recording-icon { color: var(--n-600); }
+.block-recording-card.is-locked .block-recording-meta {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--n-200);
+  color: var(--n-700);
+  border-radius: var(--r-pill);
+  padding: 3px 11px;
+  font-size: 12.5px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* ============================================================
+   EXTRA RESOURCES + OFFICE HOURS
+   Also orphaned by the dashboard-vitals.css removal.
+   ============================================================ */
+.res-grid { display: flex; flex-direction: column; gap: 11px; }
+.res-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  background: var(--bg-soft);
+  border: 0;
+  border-radius: var(--r-card);
+  padding: 26px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 180ms var(--ease), transform 180ms var(--ease);
+}
+.res-card:hover { background: var(--accent-soft); transform: translateY(-2px); }
+.res-icon {
+  flex: none;
+  width: 52px; height: 52px;
+  border-radius: 999px;
+  background: var(--n-100);
+  color: var(--accent-deep);
+  display: grid; place-items: center;
+}
+.res-icon svg { width: 22px; height: 22px; }
+.res-card h3 {
+  font-family: var(--font-display);
+  font-size: 21px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.res-card p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--n-700);
+  max-width: 34em;
+  margin-top: 5px;
+}
+
+.office-times {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 11px;
+  margin: var(--s-24) 0;
+}
+.office-card {
+  background: var(--bg-soft);
+  border: 0;
+  border-radius: var(--r-card);
+  padding: 26px;
+}
+.office-card h3, .office-card strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--accent-deep);
+  line-height: 1.2;
+}
+.office-card p, .office-card span {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--n-700);
+  margin-top: 5px;
+}
+.office-info { max-width: 40em; }
+.office-embed {
+  border-radius: var(--r-card);
+  overflow: hidden;
+  border: 1.5px solid var(--n-200);
+  min-height: 660px;
+  margin-top: var(--s-24);
+}
+.office-embed iframe { display: block; width: 100%; min-height: 660px; border: 0; }

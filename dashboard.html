@@ -19,103 +19,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
+  <!-- Caprasimo + Figtree are @imported by css/redesign-tokens.css. -->
 
-  <link rel="stylesheet" href="css/design-tokens.css" />
+  <link rel="stylesheet" href="css/redesign-tokens.css" />
   <link rel="stylesheet" href="css/site.css" />
-  <link rel="stylesheet" href="css/theme-vitals.css" />
   <link rel="stylesheet" href="css/dashboard.css" />
-  <link rel="stylesheet" href="css/dashboard-vitals.css" />
-  <style>
-    /* The active tab indicator now lives on the navy rail (gold left edge). */
-    /* Class recordings section inside the CVS block view */
-    .block-recordings-h {
-      font-family: var(--font-display);
-      font-size: clamp(1.25rem, 1.5vw + 0.6rem, 1.5rem);
-      font-weight: 600;
-      color: var(--ink);
-      margin: 2.5rem 0 1rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-    }
-    .block-recordings-list {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
-    }
-    .block-recording-card {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 1.25rem;
-      background: var(--bg-cream);
-      border: 1px solid var(--border);
-      border-left: 3px solid #0284C7;
-      border-radius: 12px;
-      color: var(--ink);
-      text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-left-color 0.2s ease;
-    }
-    .block-recording-card:hover,
-    .block-recording-card:focus-visible {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.15);
-      outline: none;
-    }
-    .block-recording-icon {
-      flex-shrink: 0;
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
-      background: rgba(2, 132, 199, 0.12);
-      color: #0284C7;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .block-recording-body { display: flex; flex-direction: column; min-width: 0; }
-    .block-recording-title {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--ink);
-      margin-bottom: 0.2rem;
-    }
-    .block-recording-meta {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-    /* Locked (pre-join) recordings + blocks for date-gated students */
-    .block-recording-card.is-locked {
-      background: var(--bg-cream);
-      border-left-color: var(--border);
-      opacity: 0.55;
-      cursor: not-allowed;
-      filter: grayscale(1);
-    }
-    .block-recording-card.is-locked:hover { transform: none; box-shadow: none; }
-    .block-recording-card.is-locked .block-recording-icon {
-      background: rgba(0, 0, 0, 0.06);
-      color: var(--muted);
-    }
-    .block-tile.is-locked { opacity: 0.72; }
-    .lock-pill {
-      display: inline-block;
-      margin-left: 0.4rem;
-      padding: 0.05rem 0.45rem;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.07);
-      color: var(--muted);
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      vertical-align: middle;
-    }
-  </style>
+  <!-- Panel styles live in css/dashboard.css. The old inline block carried
+       hardcoded #0284C7, 8/12px radii and a grayscale(1) locked state; all
+       three are superseded by the redesign tokens. -->
 </head>
 <body data-screen-label="03 Dashboard">
 
@@ -287,43 +198,41 @@
       <!-- ====================================================== -->
       <section class="panel" data-panel="news" role="tabpanel" aria-label="Announcements">
 
-        <!-- September Zoom registration -->
-        <div style="margin-bottom: var(--s-24); background: #0C2A3D; color:#fff; border-radius: var(--r-card); padding: var(--s-32); box-shadow: var(--shadow-2);">
-          <span style="font-family: var(--font-mono); font-size: 11px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color: #A3E635;">Month 4 &middot; September &middot; Do this first</span>
-          <h2 style="font-family: var(--font-display); font-size: clamp(1.6rem, 2.5vw + 1rem, 2.25rem); font-weight:700; letter-spacing:-0.02em; line-height:1.12; margin-top: var(--s-12); color:#fff;">Register once for the September Zoom link</h2>
-          <p style="font-size: var(--fs-16); line-height:1.55; margin-top: var(--s-12); max-width: 620px; color: rgba(255,255,255,0.88);">
+        <!-- Primary: one ink panel, not a second competing hero -->
+        <div class="ann-hero">
+          <span class="ann-tag">Month 4 &middot; September &middot; Do this first</span>
+          <h2>Register once for the September Zoom link</h2>
+          <p class="ann-lede">
             This replaces the August link, so please register even if you have been with us since June. Use the same email address you subscribed with, because that is how I match you.
           </p>
-          <p style="font-size: var(--fs-15); line-height:1.55; margin-top: var(--s-12); max-width: 620px; color: rgba(255,255,255,0.72);">
+          <p class="ann-body">
             You will not get the join link straight away. Registrations come to me for approval, and I approve them once your September subscription is in. Zoom then emails you your own personal join link, so keep that email. Tap Add to Calendar in it and every session lands in your calendar with the join link inside the reminder.
           </p>
-          <p style="font-size: var(--fs-15); line-height:1.55; margin-top: var(--s-12); max-width: 620px; color: rgba(255,255,255,0.72);">
+          <p class="ann-body">
             September covers Musculoskeletal, skin and connective tissue, Gastroenterology, Microbiology and Psychiatry.
           </p>
-          <a href="https://us06web.zoom.us/meeting/register/RtyYXESfSiOm_f_blRG-xw" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; margin-top: var(--s-20); background:#fff; color: #0C2A3D; padding: 12px 22px; border-radius: var(--r-btn); font-family: var(--font-display); font-weight:600; font-size: var(--fs-15); text-decoration:none;">
+          <a class="btn btn-primary" href="https://us06web.zoom.us/meeting/register/RtyYXESfSiOm_f_blRG-xw" target="_blank" rel="noopener">
             Register for the September Zoom link
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
         </div>
 
-        <!-- Monthly evaluation call to action -->
-        <a href="evaluation.html" style="display:block; text-decoration:none; margin-bottom: var(--s-24); background: linear-gradient(135deg, var(--cvs-deep), var(--cvs)); color:#fff; border-radius: var(--r-card); padding: var(--s-32); box-shadow: var(--shadow-2);">
-          <span style="font-family: var(--font-mono); font-size: 11px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color: rgba(255,255,255,0.82);">Month 1 · June · Coming shortly</span>
-          <h2 style="font-family: var(--font-display); font-size: clamp(1.6rem, 2.5vw + 1rem, 2.25rem); font-weight:700; letter-spacing:-0.02em; line-height:1.12; margin-top: var(--s-12); color:#fff;">The evaluation is moving to a new platform</h2>
-          <p style="font-size: var(--fs-16); line-height:1.55; margin-top: var(--s-12); max-width: 560px; color: rgba(255,255,255,0.9);">
-            I am upgrading the survey to make it smoother for you and easier for me to read. The new link is coming shortly. Thank you for your patience.
-          </p>
-          <span style="display:inline-flex; align-items:center; gap:8px; margin-top: var(--s-20); background:#fff; color: var(--cvs-deep); padding: 12px 22px; border-radius: var(--r-btn); font-family: var(--font-display); font-weight:600; font-size: var(--fs-15);">
-            See details
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </span>
-        </a>
-
-
-        <!-- Older news placeholder -->
-        <div style="margin-top: var(--s-24); display: flex; align-items:center; justify-content: center; padding: var(--s-32); border: 1px dashed var(--border); border-radius: var(--r-card); background: var(--bg-cream); color: var(--muted); font-family: var(--font-display); font-size: var(--fs-13); letter-spacing: 0.04em; text-transform: uppercase;">
-          That's all the news for now. Class wins, schedule changes, and announcements will land here.
+        <h2 class="ann-earlier-h">Earlier</h2>
+        <div class="ann-list">
+          <a class="ann-row" href="evaluation.html">
+            <span class="ann-ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </span>
+            <span class="ann-row-body">
+              <span class="ann-row-eyebrow">June</span>
+              <span class="ann-row-title">The evaluation is moving to a new platform</span>
+              <span class="ann-row-desc">I am upgrading the survey to make it smoother for you and easier for me to read. The new link is coming shortly. Thank you for your patience.</span>
+            </span>
+            <svg class="ann-chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
         </div>
+
+        <p class="ann-closing">Class wins, schedule changes and announcements land here.</p>
       </section>
 
       <!-- ====================================================== -->
