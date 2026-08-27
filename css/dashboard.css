@@ -1157,118 +1157,73 @@
   margin-top: 3px;
 }
 
-/* ---- per-block rows ---- */
+/* ---- topic list: ticked = covered, hourglass = still ahead ---- */
 .prog-list { margin-top: var(--s-8); }
 
-.prog-block {
+.topic {
   display: flex;
-  gap: 14px;
-  padding: 14px 0 15px;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 8px 11px 2px;
   border-bottom: 1px solid var(--border);
   cursor: pointer;
   transition: background var(--t-fast) var(--ease);
 }
-.prog-block[data-goto-block]:hover { background: var(--c-tint); }
-.prog-block.is-locked { cursor: default; opacity: 0.55; }
+.topic[data-goto-block]:hover { background: var(--c-tint); }
+.topic.is-ahead, .topic.is-locked { cursor: default; }
 
-.prog-spine {
-  flex: none;
-  width: 3px;
-  border-radius: 0;
-  background: var(--c);
-  align-self: stretch;
+.topic-mark { flex: none; width: 20px; height: 20px; display: block; }
+.topic-mark svg { width: 20px; height: 20px; display: block; }
+
+/* Covered: solid green disc, white check. */
+.ic-done circle { fill: var(--resp); }
+.ic-done polyline {
+  fill: none; stroke: #fff; stroke-width: 2.1;
+  stroke-linecap: round; stroke-linejoin: round;
 }
-.prog-block.is-locked .prog-spine { background: var(--muted); }
-
-.prog-body { flex: 1; min-width: 0; }
-
-.prog-head {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
+/* In progress: subject-coloured ring with a filled centre. */
+.ic-now circle { fill: none; stroke: var(--c); stroke-width: 2; }
+.ic-now .dot { fill: var(--c); stroke: none; }
+/* Still ahead / locked: muted outline. */
+.ic-wait {
+  fill: none; stroke: var(--muted); stroke-width: 1.5;
+  stroke-linecap: round; stroke-linejoin: round;
 }
-.prog-name {
+
+.topic-name {
+  flex: 1;
+  min-width: 0;
   font-family: var(--font-display);
-  font-size: var(--fs-16);
+  font-size: var(--fs-15);
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--ink);
 }
-.prog-now {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--c-deep);
-  border: 1px solid var(--c-soft);
-  padding: 2px 5px;
-}
-.prog-count {
-  margin-left: auto;
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--fs-13);
-  color: var(--muted);
-  white-space: nowrap;
-}
+.topic.is-ahead .topic-name,
+.topic.is-locked .topic-name { color: var(--muted); font-weight: 500; }
 
-/* Cohort status: what the class has done with this system. */
-.prog-status {
-  margin-left: auto;
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
-}
-.prog-status.is-now {
-  color: var(--c-deep);
-  border: 1px solid var(--c-soft);
-  padding: 2px 6px;
-}
-
-/* Personal line: explicitly labelled so it is never read as class progress. */
-.prog-you {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-.prog-you-lab {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
-}
-.prog-you-bar {
-  flex: 1;
-  height: 3px;
-  background: var(--border);
-  overflow: hidden;
-}
-.prog-you-bar i {
-  display: block;
-  height: 100%;
-  background: var(--c);
-  transition: width var(--t-base) var(--ease);
-}
-.prog-you-n {
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--fs-13);
-  color: var(--muted);
-  white-space: nowrap;
-}
-
-.prog-meta {
+.topic-when {
+  flex: none;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.04em;
   color: var(--muted);
-  margin-top: 7px;
+  white-space: nowrap;
+}
+.topic-n {
+  flex: none;
+  width: 54px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 11.5px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.topic.is-current .topic-name { color: var(--c-deep); }
+
+@media (max-width: 560px) {
+  .topic-when { display: none; }
 }
 
 /* ---- mark-watched tick on recording cards ---- */

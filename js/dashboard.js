@@ -816,29 +816,20 @@
       var b = row.b;
       var isCur = b.id === curId;
       var w = row.total ? Math.round(row.done / row.total * 100) : 0;
-      // Cohort status is the headline. What the student has watched is a
-      // separate, clearly attributed line underneath.
-      var status = row.locked ? 'Locked' : (isCur ? 'In progress' : 'Covered');
+      var mark;
+      if (row.locked)      mark = ICON_LOCK;
+      else if (isCur)      mark = ICON_NOW;
+      else                 mark = ICON_DONE;
+
       html +=
-        '<div class="prog-block subject-' + b.subject +
+        '<div class="topic subject-' + b.subject +
           (row.locked ? ' is-locked' : '') + (isCur ? ' is-current' : '') + '"' +
           (row.locked ? '' : ' data-goto-block="' + b.id + '" role="link" tabindex="0"') + '>' +
-          '<span class="prog-spine"></span>' +
-          '<div class="prog-body">' +
-            '<div class="prog-head">' +
-              '<span class="prog-name">' + esc(b.label) + '</span>' +
-              '<span class="prog-status' + (isCur ? ' is-now' : '') + '">' + status + '</span>' +
-            '</div>' +
-            '<div class="prog-meta">' + esc(b.dateRange || '') +
-              (row.locked ? '' : ' &middot; ' + row.total + ' class' + (row.total === 1 ? '' : 'es') + ' taught') +
-            '</div>' +
-            (row.locked ? '' :
-              '<div class="prog-you">' +
-                '<span class="prog-you-lab">You have watched</span>' +
-                '<span class="prog-you-bar"><i style="width:' + w + '%"></i></span>' +
-                '<span class="prog-you-n">' + row.done + ' / ' + row.total + '</span>' +
-              '</div>') +
-          '</div>' +
+          '<span class="topic-mark">' + mark + '</span>' +
+          '<span class="topic-name">' + esc(b.label) + '</span>' +
+          '<span class="topic-when">' + esc(b.dateRange || '') + '</span>' +
+          (row.locked ? '<span class="topic-n">Locked</span>'
+                      : '<span class="topic-n">' + row.done + '/' + row.total + '</span>') +
         '</div>';
     });
 
@@ -853,15 +844,11 @@
           lastWhen = u.when;
         }
         html +=
-          '<div class="prog-block is-ahead">' +
-            '<span class="prog-spine"></span>' +
-            '<div class="prog-body">' +
-              '<div class="prog-head">' +
-                '<span class="prog-name">' + esc(u.label) + '</span>' +
-                '<span class="prog-count">Not started</span>' +
-              '</div>' +
-              (u.note ? '<div class="prog-meta">' + esc(u.note) + '</div>' : '') +
-            '</div>' +
+          '<div class="topic is-ahead">' +
+            '<span class="topic-mark">' + ICON_WAIT + '</span>' +
+            '<span class="topic-name">' + esc(u.label) + '</span>' +
+            '<span class="topic-when">' + esc(u.note || '') + '</span>' +
+            '<span class="topic-n">&mdash;</span>' +
           '</div>';
       });
       html += '</div></div>';
@@ -869,6 +856,25 @@
 
     root.innerHTML = html;
   }
+
+  var ICON_DONE =
+    '<svg viewBox="0 0 20 20" aria-hidden="true" class="ic-done">' +
+      '<circle cx="10" cy="10" r="9"/>' +
+      '<polyline points="5.9,10.4 8.7,13.2 14.1,7.5"/>' +
+    '</svg>';
+  var ICON_NOW =
+    '<svg viewBox="0 0 20 20" aria-hidden="true" class="ic-now">' +
+      '<circle cx="10" cy="10" r="9"/><circle cx="10" cy="10" r="3.6" class="dot"/>' +
+    '</svg>';
+  var ICON_WAIT =
+    '<svg viewBox="0 0 20 20" aria-hidden="true" class="ic-wait">' +
+      '<line x1="6" y1="3.2" x2="14" y2="3.2"/><line x1="6" y1="16.8" x2="14" y2="16.8"/>' +
+      '<path d="M7 3.2v3.1L10 10l3-3.7V3.2"/><path d="M7 16.8v-3.1L10 10l3 3.7v3.1"/>' +
+    '</svg>';
+  var ICON_LOCK =
+    '<svg viewBox="0 0 20 20" aria-hidden="true" class="ic-wait">' +
+      '<rect x="4.5" y="9" width="11" height="7.5" rx="1.4"/><path d="M7 9V6.6a3 3 0 0 1 6 0V9"/>' +
+    '</svg>';
 
   function tele(num, label) {
     return '<div class="prog-tele"><div class="prog-num">' + num +
