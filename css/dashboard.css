@@ -1212,19 +1212,56 @@
   white-space: nowrap;
 }
 
-.prog-bar {
-  height: 4px;
+/* Cohort status: what the class has done with this system. */
+.prog-status {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.prog-status.is-now {
+  color: var(--c-deep);
+  border: 1px solid var(--c-soft);
+  padding: 2px 6px;
+}
+
+/* Personal line: explicitly labelled so it is never read as class progress. */
+.prog-you {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.prog-you-lab {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.prog-you-bar {
+  flex: 1;
+  height: 3px;
   background: var(--border);
-  margin-top: 9px;
   overflow: hidden;
 }
-.prog-bar i {
+.prog-you-bar i {
   display: block;
   height: 100%;
   background: var(--c);
   transition: width var(--t-base) var(--ease);
 }
-.prog-block.is-locked .prog-bar i { background: var(--muted); }
+.prog-you-n {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-13);
+  color: var(--muted);
+  white-space: nowrap;
+}
 
 .prog-meta {
   font-family: var(--font-mono);

@@ -801,18 +801,24 @@
     var pct = totalAvail ? Math.round(totalDone / totalAvail * 100) : 0;
 
     var upcoming = window.UPCOMING || [];
+    var coveredCount = 0;
+    rows.forEach(function (r) { if (!r.locked && r.b.id !== curId) coveredCount++; });
+
     var html =
       '<div class="prog-telemetry">' +
-        tele(totalAvail, 'Classes released') +
-        tele(totalDone, 'Watched') +
-        tele(pct + '%', 'Caught up') +
+        tele(coveredCount, 'Systems covered') +
+        tele(totalAvail, 'Classes taught') +
         tele(upcoming.length, 'Systems still ahead') +
+        tele(pct + '%', 'You have watched') +
       '</div><div class="prog-list">';
 
     rows.forEach(function (row) {
       var b = row.b;
       var isCur = b.id === curId;
       var w = row.total ? Math.round(row.done / row.total * 100) : 0;
+      // Cohort status is the headline. What the student has watched is a
+      // separate, clearly attributed line underneath.
+      var status = row.locked ? 'Locked' : (isCur ? 'In progress' : 'Covered');
       html +=
         '<div class="prog-block subject-' + b.subject +
           (row.locked ? ' is-locked' : '') + (isCur ? ' is-current' : '') + '"' +
@@ -821,15 +827,17 @@
           '<div class="prog-body">' +
             '<div class="prog-head">' +
               '<span class="prog-name">' + esc(b.label) + '</span>' +
-              (isCur ? '<span class="prog-now">Current</span>' : '') +
-              '<span class="prog-count">' +
-                (row.locked ? 'Locked' : row.done + ' / ' + row.total) +
-              '</span>' +
+              '<span class="prog-status' + (isCur ? ' is-now' : '') + '">' + status + '</span>' +
             '</div>' +
-            '<div class="prog-bar"><i style="width:' + (row.locked ? 0 : w) + '%"></i></div>' +
             '<div class="prog-meta">' + esc(b.dateRange || '') +
-              (row.locked ? '' : ' &middot; ' + row.total + ' class' + (row.total === 1 ? '' : 'es')) +
+              (row.locked ? '' : ' &middot; ' + row.total + ' class' + (row.total === 1 ? '' : 'es') + ' taught') +
             '</div>' +
+            (row.locked ? '' :
+              '<div class="prog-you">' +
+                '<span class="prog-you-lab">You have watched</span>' +
+                '<span class="prog-you-bar"><i style="width:' + w + '%"></i></span>' +
+                '<span class="prog-you-n">' + row.done + ' / ' + row.total + '</span>' +
+              '</div>') +
           '</div>' +
         '</div>';
     });
