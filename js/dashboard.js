@@ -271,6 +271,20 @@
 
   }
 
+  // Greet the signed-in student by first name. Falls back gracefully so the
+  // heading never reads "Welcome back, undefined".
+  function paintWelcome() {
+    var el = document.querySelector('[data-welcome-name]');
+    if (!el) return;
+    var name = '';
+    try {
+      var sess = JSON.parse(localStorage.getItem('usmle.session.v2') || 'null');
+      if (sess) name = sess.name || '';
+    } catch (e) {}
+    if (!name || name.indexOf('@') > -1) { el.textContent = 'there'; return; }
+    el.textContent = name.trim().split(/\s+/)[0];
+  }
+
   // ---------------- SIDE RAIL: countdown + cohort position ----------------
   // Counts down to the next 05:00 East Africa Time (UTC+3 => 02:00 UTC).
   function nextClassUTC(now) {
@@ -1018,6 +1032,7 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     wireLinks();
+    paintWelcome();
     bindTabs();
     bindBlocksRoot();
     bindProgress();
