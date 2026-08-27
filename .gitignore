@@ -21,3 +21,15 @@ outputs/cowork-export/payments_tracker.csv
 
 # Office lock files
 ~$*
+
+# Generated working files. These are produced locally and several carry
+# student names, emails and payment figures, so they must never be
+# published. outputs/study-notes/ is deliberately NOT ignored: the
+# dashboard links to it.
+outputs/rosters/
+outputs/email-templates/
+outputs/prototypes/
+outputs/flyers/
+outputs/posters/
+outputs/schedules/
+outputs/forms/
