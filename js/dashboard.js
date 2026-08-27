@@ -411,7 +411,25 @@
     } catch (e) {}
     return fromSession;
   }
+  // Mirror of studentAccessFrom for the whole-account recording pause. Unlike
+  // lockedBlocks this needs no per-block list, so blocks added later are
+  // covered automatically and the student keeps seeing the rest of the site.
+  function studentRecordingsPaused() {
+    let email = null, fromSession = false;
+    try {
+      const sess = JSON.parse(localStorage.getItem('usmle.session.v2') || 'null');
+      if (sess) { email = sess.email; fromSession = !!sess.recordingsPaused; }
+    } catch (e) {}
+    if (!email) return false;
+    try {
+      const cache = JSON.parse(sessionStorage.getItem('usmle.allowlist.v2') || '[]');
+      const live = cache.find(s => s.email === email);
+      if (live) return !!live.recordingsPaused;
+    } catch (e) {}
+    return fromSession;
+  }
   function blockRecordingsLocked(block) {
+    if (studentRecordingsPaused()) return true;
     const locked = studentLockedBlocks();
     if (locked && block && locked.indexOf(block.id) !== -1) return true;
     const from = studentAccessFrom();

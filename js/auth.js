@@ -66,10 +66,14 @@ const USMLE_AUTH = (() => {
         onlyRecordings: normalizeOnlyRecordings(s.onlyRecordings),
         // Optional whole-block lock. null => nothing locked.
         lockedBlocks: normalizeLockedBlocks(s.lockedBlocks),
+        // Account-wide recording pause. true => every block's recordings are
+        // locked, including blocks added later, while the rest of the
+        // dashboard stays visible. Use for a lapsed subscription.
+        recordingsPaused: s.recordingsPaused === true,
       }));
     }
     if (Array.isArray(json.emails)) {
-      return json.emails.map((e) => ({ email: String(e).toLowerCase().trim(), tracks: ["step1", "step2"], accessFrom: null, accessUntil: null, onlyRecordings: null, lockedBlocks: null }));
+      return json.emails.map((e) => ({ email: String(e).toLowerCase().trim(), tracks: ["step1", "step2"], accessFrom: null, accessUntil: null, onlyRecordings: null, lockedBlocks: null, recordingsPaused: false }));
     }
     return [];
   }
@@ -116,6 +120,7 @@ const USMLE_AUTH = (() => {
       accessUntil: entry.accessUntil || null,
       onlyRecordings: entry.onlyRecordings || null,
       lockedBlocks: entry.lockedBlocks || null,
+      recordingsPaused: entry.recordingsPaused === true,
       name: claims.name || entry.email,
       picture: claims.picture || "",
       signedInAt: Date.now(),
