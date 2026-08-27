@@ -1742,3 +1742,285 @@
   margin-top: var(--s-24);
 }
 .office-embed iframe { display: block; width: 100%; min-height: 660px; border: 0; }
+
+/* ============================================================
+   TOP BAR — to the handoff spec
+   ============================================================ */
+.dash-nav {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: none;
+}
+.dash-nav .container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: 12px 26px;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+.brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: var(--ink); }
+.brand-mark {
+  width: 38px; height: 38px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-tint);
+  font-family: var(--font-display);
+  font-size: 19px;
+  display: grid; place-items: center;
+  padding-top: 2px;            /* Caprasimo sits high in its box */
+}
+.brand > span:last-child {
+  font-family: var(--font-body);
+  font-size: 16px; font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.dash-chips { display: flex; gap: 9px; margin-left: auto; }
+.chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 16px;
+  border-radius: var(--r-pill);
+  background: var(--n-100);
+  border: 1.5px solid var(--border);
+  color: var(--ink-2);
+  font-size: 13.5px; font-weight: 600;
+  text-decoration: none;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+.chip svg { width: 16px; height: 16px; stroke-width: 2.75; }
+.chip[data-link="whatsapp"]:hover {
+  background: var(--sage-tint); border-color: var(--sage); color: var(--sage-deep);
+}
+.chip[data-link="ics"]:hover {
+  background: var(--accent-tint); border-color: #f6a06b; color: var(--accent-deep);
+}
+.user-chip {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 6px 15px 6px 6px;
+  border-radius: var(--r-pill);
+  background: var(--bg-soft);
+  border: 1.5px solid var(--border);
+  font-size: 13.5px; font-weight: 600;
+  cursor: pointer;
+}
+.user-avatar {
+  width: 29px; height: 29px;
+  border-radius: 999px;
+  background: var(--sage);
+  color: var(--sage-tint);
+  font-size: 12px; font-weight: 700;
+  display: grid; place-items: center;
+}
+
+/* ============================================================
+   SIDE RAIL — three cards
+   ============================================================ */
+.side-rail { display: flex; flex-direction: column; gap: 13px; }
+
+/* 1. Next live class */
+.rail-live {
+  background: var(--accent);
+  border-radius: var(--r-card);
+  padding: 26px 26px 18px;
+}
+.rail-live-eyebrow {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 11.5px; font-weight: 700;
+  letter-spacing: 0.11em; text-transform: uppercase;
+  color: var(--accent-900);
+}
+.rail-live-eyebrow i {
+  width: 7px; height: 7px; border-radius: 999px;
+  background: var(--accent-900); display: block;
+}
+.rail-countdown {
+  font-family: var(--font-display);
+  font-size: 43px;
+  line-height: 1.05;
+  color: var(--accent-tint);
+  margin-top: 12px;
+}
+.rail-live-sub {
+  font-size: 14px; font-weight: 700;
+  color: var(--accent-900);
+  margin-top: 4px;
+}
+.rail-live-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px 22px;
+  border-radius: var(--r-pill);
+  background: var(--n-900);
+  color: var(--n-100);
+  font-size: 15px; font-weight: 700;
+  text-decoration: none;
+  transition: background 160ms ease, transform 80ms ease;
+}
+.rail-live-btn:hover { background: #000; color: var(--n-100); }
+.rail-live-btn:active { transform: scale(0.98); }
+
+/* 2 + 3. Cream cards */
+.rail-card {
+  background: var(--n-100);
+  border: 1.5px solid var(--n-200);
+  border-radius: var(--r-card);
+  padding: 26px;
+}
+.rail-presence { padding: 18px 26px; }
+.rail-eyebrow {
+  display: block;
+  font-size: 11.5px; font-weight: 700;
+  letter-spacing: 0.11em; text-transform: uppercase;
+  color: var(--muted);
+}
+.rail-month {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-top: 8px;
+}
+.rail-subjects {
+  font-size: 14px; font-weight: 500;
+  line-height: 1.45;
+  color: var(--n-700);
+  margin-top: 5px !important;
+}
+.rail-figs {
+  display: flex; gap: 26px;
+  border-top: 1.5px solid var(--n-200);
+  margin-top: 16px; padding-top: 14px;
+}
+.rail-fig {
+  font-family: var(--font-display);
+  font-size: 25px;
+  color: var(--sage-deep);
+  line-height: 1.1;
+}
+.rail-fig-l { font-size: 12.5px; font-weight: 500; color: var(--n-700); margin-top: 2px; }
+
+.allan-presence { display: flex; align-items: center; gap: 13px; }
+.allan-presence .avatar {
+  width: 46px; height: 46px; flex: none;
+  border-radius: 999px; overflow: hidden;
+}
+.allan-presence .avatar img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(0.72) contrast(0.94);   /* the system's washed imagery */
+}
+.allan-presence .info strong { display: block; font-size: 15px; font-weight: 700; }
+.allan-presence .info small {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12.5px; font-weight: 500; color: var(--n-700);
+}
+.allan-presence .status-dot {
+  width: 7px; height: 7px; border-radius: 999px;
+  background: var(--n-400); display: block;
+}
+.allan-presence.online .status-dot { background: var(--sage); }
+
+/* ============================================================
+   ABOUT — tag pill, display h1, launcher rows
+   ============================================================ */
+.tag-sage {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 15px 6px 12px;
+  border-radius: var(--r-pill);
+  background: var(--sage-soft);
+  color: var(--sage-deep);
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.tag-sage i { width: 7px; height: 7px; border-radius: 999px; background: var(--sage); display: block; }
+
+.panel[data-panel="about"] h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 3.6vw + 1rem, 4.15rem) !important;
+  line-height: 1.0;
+  letter-spacing: -0.018em;
+  max-width: 15.5em;
+  text-wrap: pretty;
+  margin-top: var(--s-16);
+}
+
+.about-sub { font-size: 15px; color: var(--n-700); margin-bottom: var(--s-16) !important; }
+.launcher { display: flex; flex-direction: column; gap: 11px; }
+.launch-row {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--n-100);
+  border: 1.5px solid var(--n-200);
+  border-radius: var(--r-card);
+  padding: 18px 26px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 180ms var(--ease), border-color 180ms var(--ease),
+              transform 180ms var(--ease);
+}
+.launch-row:hover {
+  background: var(--accent-tint);
+  border-color: #f6a06b;
+  transform: translateY(-2px);
+}
+.launch-row:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.launch-n {
+  flex: none;
+  width: 46px; height: 46px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  font-family: var(--font-display);
+  font-size: 19px;
+  display: grid; place-items: center;
+}
+.launch-body { flex: 1; min-width: 0; }
+.launch-t { display: block; font-size: 17px; font-weight: 700; color: var(--ink); }
+.launch-d { display: block; font-size: 14.5px; color: var(--n-700); margin-top: 2px; }
+.launch-chev { flex: none; width: 20px; height: 20px; color: var(--n-400); }
+
+/* Accent emphasis inside body copy */
+.em-accent { color: var(--accent-deep); font-weight: 700; }
+
+/* Instructor card at the foot of About */
+.tutor-card {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  background: var(--n-900);
+  border-radius: var(--r-card);
+  padding: 35px;
+  margin-top: var(--s-32);
+}
+.tutor-photo {
+  width: 104px; height: 104px; flex: none;
+  border-radius: 999px;
+  object-fit: cover;
+  filter: saturate(0.72) contrast(0.94);
+}
+.tutor-body { flex: 1; min-width: 220px; }
+.tutor-eyebrow {
+  display: block;
+  font-size: 11.5px; font-weight: 700;
+  letter-spacing: 0.11em; text-transform: uppercase;
+  color: var(--sage-soft);
+}
+.tutor-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1.15;
+  color: var(--n-100);
+  margin-top: 6px;
+}
+.tutor-cred {
+  display: block;
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: var(--n-400);
+  margin-top: 8px;
+  max-width: 40em;
+}

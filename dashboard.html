@@ -114,7 +114,7 @@
       <!-- ====================================================== -->
       <section class="panel active" data-panel="about" role="tabpanel" aria-label="About the class">
         <header class="v-head" style="margin-bottom: var(--s-24);">
-          <span class="v-tag">About the class</span>
+          <span class="tag-sage"><i></i>About the class</span>
           <h2 style="font-family:var(--font-display);font-size:var(--fs-28);font-weight:700;letter-spacing:-0.02em;line-height:1.15;margin-top:var(--s-8);">
             One class, every day, until the exam is not frightening any more.
           </h2>
@@ -130,32 +130,10 @@
               The class is live so you can interrupt, and questions are worked out loud so you hear
               the reasoning rather than just the answer. Most of what goes wrong on Step 1 is not
               knowledge, it is how a stem gets read, and that only improves out loud. Use the Raise
-              Hand button. The class is better when you interrupt.
+              Hand button &mdash; <b class="em-accent">the class is better when you interrupt.</b>
             </p>
 
-            <h3 class="about-h">Finding your way around</h3>
-            <ul class="about-list">
-              <li><b>Sessions</b> holds every recording, grouped by system and sub-topic.</li>
-              <li><b>Progress</b> shows how much of each system you have covered and which block we are in now.</li>
-              <li><b>Extra resources</b> has the material that goes alongside the classes.</li>
-              <li><b>Office hours</b> is where you book one to one time with me.</li>
-            </ul>
-
-            <h3 class="about-h">The things worth knowing</h3>
-            <ul class="about-list">
-              <li>Every class is recorded and goes up here the same night, so missing one costs you nothing.</li>
-              <li>Registration is per month. Your Zoom link works for every session in that month.</li>
-              <li>Recordings are shared to the email you enrolled with. If one will not open, that is usually the reason.</li>
-              <li>Your subscription runs month to month and is due at the start of each month.</li>
-            </ul>
-
-            <p class="v-about-who">
-              Taught by <b>Dr. Allan Bakesiga</b>, MBChB, MSc, a neurology resident who sat these
-              exams and now teaches them daily.
-            </p>
-          </div>
-
-          <aside class="v-about-facts" aria-label="Class at a glance">
+            <aside class="v-about-facts" aria-label="Class at a glance">
             <div class="v-fact">
               <div class="v-fact-n">Daily</div>
               <div class="v-fact-l">Live class, Monday to Sunday</div>
@@ -173,6 +151,63 @@
               <div class="v-fact-l">Mentorship when you need it</div>
             </div>
           </aside>
+
+            <h3 class="about-h">Finding your way around</h3>
+            <p class="about-sub">Tap any of these to go straight there.</p>
+            <div class="launcher">
+              <button type="button" class="launch-row" data-goto-tab="sessions">
+                <span class="launch-n">1</span>
+                <span class="launch-body">
+                  <span class="launch-t">Sessions</span>
+                  <span class="launch-d">Every recording, grouped by system and sub-topic.</span>
+                </span>
+                <svg class="launch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+              <button type="button" class="launch-row" data-goto-tab="progress">
+                <span class="launch-n">2</span>
+                <span class="launch-body">
+                  <span class="launch-t">Where we are</span>
+                  <span class="launch-d">What the cohort has covered and what is still ahead.</span>
+                </span>
+                <svg class="launch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+              <button type="button" class="launch-row" data-goto-tab="resources">
+                <span class="launch-n">3</span>
+                <span class="launch-body">
+                  <span class="launch-t">Extra resources</span>
+                  <span class="launch-d">First Aid 2025, slide decks, notes, mnemonics, NBMEs.</span>
+                </span>
+                <svg class="launch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+              <button type="button" class="launch-row" data-goto-tab="office">
+                <span class="launch-n">4</span>
+                <span class="launch-body">
+                  <span class="launch-t">Office hours</span>
+                  <span class="launch-d">Book one to one time with me.</span>
+                </span>
+                <svg class="launch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+
+            <h3 class="about-h">The things worth knowing</h3>
+            <ul class="about-list">
+              <li>Every class is recorded and goes up here the same night, so missing one costs you nothing.</li>
+              <li>Registration is per month. Your Zoom link works for every session in that month.</li>
+              <li>Recordings are shared to the email you enrolled with. If one will not open, that is usually the reason.</li>
+              <li>Your subscription runs month to month and is due at the start of each month.</li>
+            </ul>
+
+            <div class="tutor-card">
+              <img class="tutor-photo" src="images/allan-headshot.jpg" alt="" />
+              <div class="tutor-body">
+                <span class="tutor-eyebrow">Taught by</span>
+                <span class="tutor-name">Dr. Allan Bakesiga</span>
+                <span class="tutor-cred">MBChB, MSc &mdash; a neurology resident who sat these exams and now teaches them daily.</span>
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </section>
 
@@ -286,16 +321,46 @@
       <!-- SIDE RAIL                                              -->
       <!-- ====================================================== -->
       <aside class="side-rail" aria-label="Cohort sidebar">
+
+        <!-- 1. Next live class -->
+        <div class="rail-live">
+          <span class="rail-live-eyebrow"><i></i>Next live class</span>
+          <div class="rail-countdown tnum" data-countdown>--:--:--</div>
+          <div class="rail-live-sub" data-countdown-label>Today, 5:00 AM EAT</div>
+          <a class="rail-live-btn" data-link="zoom" target="_blank" rel="noopener">
+            Join on Zoom
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+
+        <!-- 2. Where we are -->
         <div class="rail-card">
-          <h4>Instructor</h4>
-          <div class="allan-presence" data-allan-presence>
-            <div class="avatar"><img src="images/allan-headshot.jpg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" /></div>
-            <div class="info">
-              <strong>Allan Bakesiga</strong>
-              <small><span class="status-dot"></span><span data-presence-text>Offline · next at 5:00 AM EAT</span></small>
+          <span class="rail-eyebrow">Where we are</span>
+          <div class="rail-month" data-rail-month>&mdash;</div>
+          <p class="rail-subjects" data-rail-subjects>&mdash;</p>
+          <div class="rail-figs">
+            <div>
+              <div class="rail-fig tnum" data-rail-sessions>0</div>
+              <div class="rail-fig-l">sessions up</div>
+            </div>
+            <div>
+              <div class="rail-fig tnum" data-rail-systems>0</div>
+              <div class="rail-fig-l">systems done</div>
             </div>
           </div>
         </div>
+
+        <!-- 3. Instructor presence -->
+        <div class="rail-card rail-presence">
+          <div class="allan-presence" data-allan-presence>
+            <div class="avatar"><img src="images/allan-headshot.jpg" alt="" /></div>
+            <div class="info">
+              <strong>Allan Bakesiga</strong>
+              <small><span class="status-dot"></span><span data-presence-text>Offline &middot; next at 5:00 AM EAT</span></small>
+            </div>
+          </div>
+        </div>
+
       </aside>
 
     </div>

@@ -39,6 +39,9 @@
   --accent-soft: #ffe1d0;
   --accent-tint: #fff2eb;
   --accent-deep: #8c491a;
+  /* Darkest terracotta step. The handoff references --accent-900 for text
+     sitting ON the accent (the countdown card); the token file omitted it. */
+  --accent-900:  #5e2f0f;
 
   --cvs: var(--accent);   --cvs-soft: var(--accent-soft);   --cvs-tint: var(--accent-tint);   --cvs-deep: var(--accent-deep);
   --resp: var(--accent);  --resp-soft: var(--accent-soft);  --resp-tint: var(--accent-tint);  --resp-deep: var(--accent-deep);

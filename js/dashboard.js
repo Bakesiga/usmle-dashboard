@@ -271,11 +271,77 @@
 
   }
 
+  // ---------------- SIDE RAIL: countdown + cohort position ----------------
+  // Counts down to the next 05:00 East Africa Time (UTC+3 => 02:00 UTC).
+  function nextClassUTC(now) {
+    var t = new Date(now.getTime());
+    // 02:00 UTC today
+    var target = Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate(), 2, 0, 0, 0);
+    if (target <= now.getTime()) target += 86400000;   // already passed, aim at tomorrow
+    return target;
+  }
+
+  function paintCountdown() {
+    var el = document.querySelector('[data-countdown]');
+    if (!el) return;
+    var now = new Date();
+    var ms = nextClassUTC(now) - now.getTime();
+    if (ms < 0) ms = 0;
+    var h = Math.floor(ms / 3600000);
+    var m = Math.floor((ms % 3600000) / 60000);
+    var sec = Math.floor((ms % 60000) / 1000);
+    var pad2 = function (n) { return String(n).padStart(2, '0'); };
+    el.textContent = pad2(h) + ':' + pad2(m) + ':' + pad2(sec);
+
+    var lab = document.querySelector('[data-countdown-label]');
+    if (lab) lab.textContent = (h < 12 ? 'Today' : 'Tomorrow') + ', 5:00 AM EAT';
+  }
+
+  function paintRailPosition() {
+    var blocks = window.BLOCKS || [];
+    var upcoming = window.UPCOMING || [];
+    var curId = currentBlockId();
+    var cur = blocks.filter(function (b) { return b.id === curId; })[0];
+
+    var sessions = 0, systemsDone = 0;
+    blocks.forEach(function (b) {
+      if (blockRecordingsLocked(b)) return;
+      sessions += visibleRecordings(b).length;
+      if (b.id !== curId) systemsDone++;
+    });
+
+    var monthEl = document.querySelector('[data-rail-month]');
+    var subsEl  = document.querySelector('[data-rail-subjects]');
+    var sEl     = document.querySelector('[data-rail-sessions]');
+    var yEl     = document.querySelector('[data-rail-systems]');
+
+    if (monthEl) {
+      var start = new Date(2026, 5, 1);                 // cohort began June 2026
+      var now = window.getNow();
+      var monthNo = (now.getFullYear() - start.getFullYear()) * 12
+                  + (now.getMonth() - start.getMonth()) + 1;
+      var names = ['January','February','March','April','May','June','July',
+                   'August','September','October','November','December'];
+      monthEl.innerHTML = 'Month ' + monthNo + ' &middot; ' + names[now.getMonth()];
+    }
+    if (subsEl) {
+      // What is running now, or what is next if the block has not opened.
+      var line = cur ? cur.label
+               : (upcoming.length ? upcoming[0].label : '');
+      var sameMonth = upcoming.filter(function (u, i) { return i < 4; })
+                              .map(function (u) { return u.label; });
+      subsEl.textContent = cur ? cur.label : sameMonth.join(', ');
+    }
+    if (sEl) sEl.textContent = sessions;
+    if (yEl) yEl.textContent = systemsDone;
+  }
+
   // Repaint the side rail on its own clock (the Today panel that used to drive
   // it was retired). Safe to call any time; all targets live in the side rail.
   function paintSideRail() {
     const now = window.getNow();
     renderSideRail(now, pickToday(now));
+    paintRailPosition();
   }
 
   // ---------------- SESSIONS hierarchy (Block / Sub-block / Day) ----------------
@@ -808,6 +874,12 @@
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
+  function bindLauncher() {
+    document.querySelectorAll('[data-goto-tab]').forEach(function (btn) {
+      btn.addEventListener('click', function () { activateTab(btn.dataset.gotoTab); });
+    });
+  }
+
   function bindProgress() {
     var root = document.querySelector('[data-progress-root]');
     if (!root) return;
@@ -938,6 +1010,7 @@
     bindTabs();
     bindBlocksRoot();
     bindProgress();
+    bindLauncher();
     bindUserMenu();
     bindDayJumps();
     renderSessions();
@@ -946,5 +1019,7 @@
     // 30s so the presence state flips live as class start/end times pass.
     paintSideRail();
     setInterval(paintSideRail, 30000);
+    paintCountdown();
+    setInterval(paintCountdown, 1000);
   });
 })();
