@@ -1115,12 +1115,12 @@
 
 .prog-intro h3 {
   font-family: var(--font-display);
-  font-size: var(--fs-20);
+  font-size: var(--fs-24);
   font-weight: 700;
   letter-spacing: -0.01em;
 }
 .prog-intro p {
-  font-size: var(--fs-14);
+  font-size: var(--fs-15);
   color: var(--muted);
   margin-top: var(--s-4);
   max-width: 52ch;
@@ -1143,14 +1143,14 @@
 .prog-num {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
-  font-size: var(--fs-24);
+  font-size: var(--fs-28);
   font-weight: 500;
   letter-spacing: -0.01em;
   color: var(--ink);
 }
 .prog-lab {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1164,7 +1164,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 11px 8px 11px 2px;
+  padding: 15px 8px 15px 2px;
   border-bottom: 1px solid var(--border);
   cursor: pointer;
   transition: background var(--t-fast) var(--ease);
@@ -1172,8 +1172,8 @@
 .topic[data-goto-block]:hover { background: var(--c-tint); }
 .topic.is-ahead, .topic.is-locked { cursor: default; }
 
-.topic-mark { flex: none; width: 20px; height: 20px; display: block; }
-.topic-mark svg { width: 20px; height: 20px; display: block; }
+.topic-mark { flex: none; width: 23px; height: 23px; display: block; }
+.topic-mark svg { width: 23px; height: 23px; display: block; }
 
 /* Covered: solid green disc, white check. */
 .ic-done circle { fill: var(--resp); }
@@ -1194,7 +1194,7 @@
   flex: 1;
   min-width: 0;
   font-family: var(--font-display);
-  font-size: var(--fs-15);
+  font-size: var(--fs-17);
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -1205,18 +1205,18 @@
 .topic-when {
   flex: none;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12.5px;
   letter-spacing: 0.04em;
   color: var(--muted);
   white-space: nowrap;
 }
 .topic-n {
   flex: none;
-  width: 66px;
+  width: 78px;
   text-align: right;
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
-  font-size: 11.5px;
+  font-size: 12.5px;
   color: var(--muted);
   white-space: nowrap;
 }
@@ -1301,7 +1301,7 @@
 .prog-ahead { margin-top: var(--s-32); }
 .prog-ahead-h {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11.5px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1310,7 +1310,7 @@
 }
 .prog-when {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11.5px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);

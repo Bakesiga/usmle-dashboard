@@ -261,26 +261,6 @@
 
   // ---------------- Side rail ----------------
   function renderSideRail(now, pick) {
-    // progress
-    const counts = { cvs: 0, resp: 0, epi: 0, path: 0, cns: 0 };
-    window.SESSIONS.forEach(s => {
-      const d = parseYMD(s.date);
-      d.setHours(7, 30, 0, 0);
-      if (d < now) counts[s.subject]++;
-    });
-    Object.keys(counts).forEach(key => {
-      const done = counts[key];
-      const total = window.SUBJECT_META[key].count;
-      const pct = Math.round((done / total) * 100);
-      const el = document.querySelector('[data-pie="' + key + '"]');
-      if (!el) return;
-      el.style.setProperty('--pct', pct);
-      el.querySelector('.pie-val').textContent = done + '/' + total;
-      // keep the "X days" label in sync with the live total so it can't go stale
-      const small = el.parentElement && el.parentElement.querySelector('.lab small');
-      if (small) small.textContent = total + ' day' + (total === 1 ? '' : 's');
-    });
-
     // Allan presence
     const status = classStatus(now, pick.session);
     const presence = document.querySelector('[data-allan-presence]');
