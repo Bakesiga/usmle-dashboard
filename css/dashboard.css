@@ -1304,3 +1304,41 @@
   background: var(--cvs);
 }
 .about-list li b { color: var(--ink); font-weight: 600; }
+
+/* ---- Road ahead (Where we are) ---- */
+.prog-ahead { margin-top: var(--s-32); }
+.prog-ahead-h {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--ink);
+}
+.prog-when {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: var(--s-16) 0 4px 17px;
+}
+.prog-block.is-ahead {
+  cursor: default;
+  padding: 11px 0 12px;
+}
+.prog-block.is-ahead .prog-spine {
+  background: transparent;
+  border-left: 3px dashed var(--border-2, var(--border));
+  width: 0;
+}
+.prog-block.is-ahead .prog-name {
+  color: var(--ink-2);
+  font-weight: 500;
+}
+.prog-block.is-ahead .prog-count {
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}

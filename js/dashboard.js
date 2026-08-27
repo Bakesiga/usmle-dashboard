@@ -800,12 +800,13 @@
     });
     var pct = totalAvail ? Math.round(totalDone / totalAvail * 100) : 0;
 
+    var upcoming = window.UPCOMING || [];
     var html =
       '<div class="prog-telemetry">' +
-        tele(openBlocks, 'Systems open to you') +
-        tele(totalAvail, 'Classes available') +
+        tele(totalAvail, 'Classes released') +
         tele(totalDone, 'Watched') +
-        tele(pct + '%', 'Complete') +
+        tele(pct + '%', 'Caught up') +
+        tele(upcoming.length, 'Systems still ahead') +
       '</div><div class="prog-list">';
 
     rows.forEach(function (row) {
@@ -833,7 +834,32 @@
         '</div>';
     });
 
-    root.innerHTML = html + '</div>';
+    html += '</div>';
+
+    if (upcoming.length) {
+      var lastWhen = null;
+      html += '<div class="prog-ahead"><div class="prog-ahead-h">Still ahead</div><div class="prog-list">';
+      upcoming.forEach(function (u) {
+        if (u.when !== lastWhen) {
+          html += '<div class="prog-when">' + esc(u.when) + '</div>';
+          lastWhen = u.when;
+        }
+        html +=
+          '<div class="prog-block is-ahead">' +
+            '<span class="prog-spine"></span>' +
+            '<div class="prog-body">' +
+              '<div class="prog-head">' +
+                '<span class="prog-name">' + esc(u.label) + '</span>' +
+                '<span class="prog-count">Not started</span>' +
+              '</div>' +
+              (u.note ? '<div class="prog-meta">' + esc(u.note) + '</div>' : '') +
+            '</div>' +
+          '</div>';
+      });
+      html += '</div></div>';
+    }
+
+    root.innerHTML = html;
   }
 
   function tele(num, label) {

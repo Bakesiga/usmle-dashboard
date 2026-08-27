@@ -654,6 +654,23 @@ window.BLOCKS = [
 
 /* The "today" the dashboard uses. Defaults to real now, but the Tweaks
    panel can override it for previewing different states. */
+/* ------------------------------------------------------------------
+   UPCOMING — curriculum still ahead of the cohort.
+   These have no recordings yet, so they cannot live in BLOCKS. The
+   "Where we are" tab renders them after the current block so students
+   can see the whole road, not just the part already travelled.
+   Move an entry into BLOCKS once its first class is recorded.
+   ------------------------------------------------------------------ */
+window.UPCOMING = [
+  { label: "Musculoskeletal, skin and connective tissue", when: "September" },
+  { label: "Gastroenterology",                            when: "September" },
+  { label: "Microbiology",                                when: "September" },
+  { label: "Psychiatry",                                  when: "September" },
+  { label: "Ethics",                                      when: "October"   },
+  { label: "Biochemistry",                                when: "October", note: "2 weeks" },
+  { label: "Putting it all together",                     when: "October", note: "2 weeks, full recap" }
+];
+
 window.SIM_NOW = null;
 window.getNow = function () {
   if (window.SIM_NOW) return new Date(window.SIM_NOW);
