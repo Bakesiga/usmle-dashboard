@@ -125,7 +125,7 @@ h1, h2, h3, h4, h5, h6,
    active state is a gold left edge, not a blue underline. */
 .dash-tab {
   color: var(--sidenav-idle);
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 500;
@@ -182,7 +182,7 @@ h1, h2, h3, h4, h5, h6,
 
 /* Day pill: solid subject color is fine on dark too */
 .day-pill {
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.12em;
 }
 
@@ -241,7 +241,7 @@ h1, h2, h3, h4, h5, h6,
   background: var(--bg-soft);
   border-color: var(--border);
   color: var(--ink-2);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -335,7 +335,7 @@ body[data-screen-label*="Sign"] .brand small { color: var(--ink-2); }
 
 /* ---- Mobile polish ------------------------------------------ */
 @media (max-width: 700px) {
-  .dash-tab { font-size: 11px; padding: 10px 12px; }
+  .dash-tab { font-size: 12px; padding: 10px 12px; }
   .today-head { padding: var(--s-20); }
   .today-actions { padding: var(--s-16) var(--s-20) var(--s-20); }
 }
@@ -404,7 +404,7 @@ body[data-screen-label*="Sign"] .brand small { color: var(--ink-2); }
   color: var(--c-deep, var(--cvs-deep));
   font-family: var(--font-mono);
   font-weight: 600;
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.12em;
   border-radius: var(--r-pill);
 }
@@ -417,7 +417,7 @@ body[data-screen-label*="Sign"] .brand small { color: var(--ink-2); }
 }
 .block-tile-eyebrow {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
@@ -432,7 +432,7 @@ body[data-screen-label*="Sign"] .brand small { color: var(--ink-2); }
 }
 .block-tile-meta {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   color: var(--ink-2);
   letter-spacing: 0.04em;
 }
@@ -469,7 +469,7 @@ body[data-screen-label*="Sign"] .brand small { color: var(--ink-2); }
   padding: 6px 12px;
   margin-bottom: var(--s-16);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -497,7 +497,7 @@ body[data-screen-label*="Sign"] .brand small { color: var(--ink-2); }
   color: var(--c-deep, var(--cvs-deep));
   font-family: var(--font-mono);
   font-weight: 600;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.12em;
   border-radius: var(--r-pill);
 }
@@ -511,7 +511,7 @@ body[data-screen-label*="Sign"] .brand small { color: var(--ink-2); }
 }
 .block-detail-range {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.06em;
   color: var(--muted);
   margin-left: auto;
@@ -579,7 +579,7 @@ body[data-screen-label*="Sign"] .brand small { color: var(--ink-2); }
 .subblock-meta {
   grid-column: 1;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   color: var(--ink-2);
   letter-spacing: 0.04em;
 }

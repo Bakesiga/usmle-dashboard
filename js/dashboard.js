@@ -269,24 +269,6 @@
     presence.querySelector('[data-presence-text]').textContent =
       online ? 'Allan is here · in class' : 'Offline · next at 5:00 AM EAT';
 
-    // mini-cal — 7 days starting today
-    const cal = document.querySelector('[data-mini-cal]');
-    cal.innerHTML = '';
-    for (let i = 0; i < 7; i++) {
-      const d = new Date(now);
-      d.setDate(d.getDate() + i);
-      const ymdStr = ymd(d);
-      const session = window.SESSIONS.find(s => s.date === ymdStr);
-      const cell = document.createElement('div');
-      cell.className = 'cell' + (i === 0 ? ' today' : '');
-      const dow = d.toLocaleDateString('en-US', { weekday: 'narrow' });
-      cell.innerHTML = '<span>' + dow.toUpperCase() + '</span><span class="d">' + d.getDate() + '</span>';
-      if (session) {
-        cell.classList.add('subject-' + session.subject);
-        const dot = document.createElement('span'); dot.className = 'sub-dot'; cell.appendChild(dot);
-      }
-      cal.appendChild(cell);
-    }
   }
 
   // Repaint the side rail on its own clock (the Today panel that used to drive
@@ -595,9 +577,8 @@
             '</div>';
           recList.appendChild(card);
         } else {
-          const isDone = watchedSet().has(rec.url);
           const link = document.createElement('a');
-          link.className = 'block-recording-card' + (isDone ? ' is-watched' : '');
+          link.className = 'block-recording-card';
           link.href = rec.url;
           link.target = '_blank';
           link.rel = 'noopener';
@@ -608,12 +589,7 @@
             '<div class="block-recording-body">' +
               '<span class="block-recording-title">' + rec.title + '</span>' +
               '<span class="block-recording-meta">Open recording on Zoom</span>' +
-            '</div>' +
-            '<button type="button" class="rec-tick" data-watch-url="' + rec.url + '" ' +
-              'aria-pressed="' + (isDone ? 'true' : 'false') + '" ' +
-              'title="Mark as watched" aria-label="Mark as watched">' +
-              '<svg viewBox="0 0 14 14" aria-hidden="true"><polyline points="2.5,7.5 5.8,10.5 11.5,4"/></svg>' +
-            '</button>';
+            '</div>';
           recList.appendChild(link);
         }
       });
@@ -667,18 +643,6 @@
     const root = document.querySelector('[data-blocks-root]');
     if (!root) return;
     root.addEventListener('click', e => {
-      // Mark-watched tick. Must run before the card's own link navigation.
-      const tick = e.target.closest('[data-watch-url]');
-      if (tick) {
-        e.preventDefault();
-        e.stopPropagation();
-        const on = window.__usmleToggleWatched(tick.dataset.watchUrl);
-        tick.setAttribute('aria-pressed', on ? 'true' : 'false');
-        const card = tick.closest('.block-recording-card');
-        if (card) card.classList.toggle('is-watched', on);
-        renderProgress();
-        return;
-      }
       // Back link
       const back = e.target.closest('[data-back-target]');
       if (back) {
@@ -723,24 +687,6 @@
   // Derived entirely from BLOCKS, so it can never go stale the way the old
   // hardcoded June calendar did. Respects the same access gates as Sessions:
   // a locked block contributes nothing to the student's totals.
-  var WATCH_KEY = 'usmle.watched.v1';
-
-  function watchedSet() {
-    try { return new Set(JSON.parse(localStorage.getItem(WATCH_KEY) || '[]')); }
-    catch (e) { return new Set(); }
-  }
-  function saveWatched(set) {
-    try { localStorage.setItem(WATCH_KEY, JSON.stringify(Array.from(set))); }
-    catch (e) {}
-  }
-  window.__usmleWatched = watchedSet;
-  window.__usmleToggleWatched = function (url) {
-    var set = watchedSet();
-    if (set.has(url)) set.delete(url); else set.add(url);
-    saveWatched(set);
-    return set.has(url);
-  };
-
   // Recordings in a block this student is actually entitled to see.
   function visibleRecordings(block) {
     if (blockRecordingsLocked(block)) return [];
@@ -766,19 +712,16 @@
   function renderProgress() {
     var root = document.querySelector('[data-progress-root]');
     if (!root) return;
-    var watched = watchedSet();
     var curId = currentBlockId();
     var blocks = window.BLOCKS || [];
 
-    var totalAvail = 0, totalDone = 0, openBlocks = 0;
+    var totalAvail = 0, openBlocks = 0;
     var rows = blocks.map(function (b) {
       var locked = blockRecordingsLocked(b);
       var recs = visibleRecordings(b);
-      var done = recs.filter(function (r) { return watched.has(r.url); }).length;
-      if (!locked) { openBlocks++; totalAvail += recs.length; totalDone += done; }
-      return { b: b, locked: locked, total: recs.length, done: done };
+      if (!locked) { openBlocks++; totalAvail += recs.length; }
+      return { b: b, locked: locked, total: recs.length };
     });
-    var pct = totalAvail ? Math.round(totalDone / totalAvail * 100) : 0;
 
     var upcoming = window.UPCOMING || [];
     var coveredCount = 0;
@@ -789,13 +732,11 @@
         tele(coveredCount, 'Systems covered') +
         tele(totalAvail, 'Classes taught') +
         tele(upcoming.length, 'Systems still ahead') +
-        tele(pct + '%', 'You have watched') +
       '</div><div class="prog-list">';
 
     rows.forEach(function (row) {
       var b = row.b;
       var isCur = b.id === curId;
-      var w = row.total ? Math.round(row.done / row.total * 100) : 0;
       var mark;
       if (row.locked)      mark = ICON_LOCK;
       else if (isCur)      mark = ICON_NOW;
@@ -1001,7 +942,7 @@
     bindDayJumps();
     renderSessions();
     renderCalendar();
-    // Side rail: cohort progress, Allan presence, mini-calendar. Repaint every
+    // Side rail: instructor presence. Repaint every
     // 30s so the presence state flips live as class start/end times pass.
     paintSideRail();
     setInterval(paintSideRail, 30000);

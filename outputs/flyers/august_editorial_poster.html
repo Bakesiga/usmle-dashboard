@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root{
+    --ink:#1a1a1a; --red:#9d1b1b; --green:#2c6e34; --muted:#6f6a62;
+    --paper:#fdfcf8; --rule:#1a1a1a; --hair:#d9d3c6;
+    --serif:"Didot","Bodoni 72","Playfair Display",Georgia,"Times New Roman",serif;
+    --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#cfcfcf}
+  .page{
+    position:relative;width:1150px;height:2000px;background:var(--paper);
+    color:var(--ink);font-family:var(--sans);
+    padding:96px 92px 70px;overflow:hidden;
+  }
+  /* crop marks */
+  .cm{position:absolute;width:26px;height:26px}
+  .cm::before,.cm::after{content:"";position:absolute;background:var(--ink)}
+  .cm::before{width:26px;height:1.5px}.cm::after{width:1.5px;height:26px}
+  .cm.tl{top:34px;left:34px}.cm.tr{top:34px;right:34px}
+  .cm.tr::before{right:0}.cm.tr::after{right:0}
+  .cm.bl{bottom:34px;left:34px}.cm.bl::before{bottom:0}.cm.bl::after{bottom:0}
+  .cm.br{bottom:34px;right:34px}.cm.br::before{right:0;bottom:0}.cm.br::after{right:0;bottom:0}
+
+  .caps{font-family:var(--sans);text-transform:uppercase;letter-spacing:.22em;font-weight:700}
+
+  /* masthead */
+  .mast{display:flex;justify-content:space-between;align-items:baseline;
+    font-size:14px;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+  .mast .l{color:var(--red)} .mast .r{color:var(--ink)}
+  .mast-rule{height:3px;background:var(--ink);margin:14px 0 0}
+
+  /* hero */
+  .hero{display:flex;gap:34px;margin-top:40px}
+  .hero-l{flex:1 1 auto;padding-top:6px}
+  .tag{display:inline-block;background:var(--red);color:#fff;
+    font-size:15px;letter-spacing:.18em;font-weight:700;text-transform:uppercase;
+    padding:8px 16px;margin-bottom:26px}
+  h1{font-family:var(--serif);font-weight:400;color:var(--ink);
+    font-size:78px;line-height:.98;letter-spacing:-.01em}
+  h1 em{display:block;color:var(--red);font-style:italic}
+  .lede{font-size:24px;line-height:1.45;color:#2b2b2b;margin-top:26px;max-width:600px}
+  .hero-r{flex:0 0 300px;text-align:center;padding-top:4px}
+  .hero-r img{width:210px;height:210px;border-radius:50%;object-fit:cover;
+    box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+  .who{font-family:var(--serif);font-size:26px;font-weight:700;margin-top:18px}
+  .cred{font-size:15px;line-height:1.62;color:#333;margin-top:6px}
+
+  /* section header */
+  .sec{display:flex;align-items:center;gap:16px;margin-top:46px}
+  .sec .num{font-family:var(--serif);font-style:italic;color:var(--red);
+    font-size:30px;line-height:1}
+  .sec .lbl{font-size:16px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+  .sec .line{flex:1 1 auto;height:2px;background:var(--ink)}
+
+  /* status rows */
+  .row{display:flex;align-items:center;justify-content:space-between;
+    padding:15px 2px;border-bottom:1px solid var(--hair)}
+  .row .name{display:flex;align-items:center;gap:14px;font-size:25px;font-weight:700;color:var(--ink)}
+  .row .name .tick{color:var(--green);font-size:22px;width:20px;display:inline-block}
+  .row .name .box{color:var(--muted);font-size:20px;width:20px;display:inline-block}
+  .row .sub{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:2px}
+  .stat{font-size:15px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+  .stat.done{color:var(--green)} .stat.now{color:var(--red)}
+
+  /* still ahead */
+  .ahead{font-size:24px;line-height:1.5;color:var(--ink);margin-top:22px;font-weight:400}
+  .ahead .sep{color:var(--red);padding:0 8px;font-weight:700}
+
+  /* details */
+  .details{display:flex;gap:56px;margin-top:24px}
+  .details .col{flex:1}
+  .colhead{font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:14px}
+  .tz{display:flex;justify-content:space-between;align-items:baseline;
+    padding:9px 0;border-bottom:1px solid var(--hair);font-size:19px}
+  .tz .zone{color:var(--ink)} .tz .time{font-family:var(--serif);font-size:22px}
+  .more{font-size:19px;line-height:1.5;color:#2b2b2b;margin-bottom:14px}
+  .more em{font-family:var(--serif);font-style:italic;color:var(--red);font-weight:400}
+  .more b{font-weight:700;color:var(--ink)}
+
+  /* footer / registration */
+  .foot-rule{height:3px;background:var(--ink);margin-top:44px}
+  .reg{display:flex;justify-content:space-between;align-items:flex-end;margin-top:24px}
+  .reg h2{font-family:var(--serif);font-weight:400;font-size:52px;line-height:1}
+  .reg h2 em{color:var(--red);font-style:italic}
+  .reg .sub{font-size:18px;line-height:1.5;color:#2b2b2b;margin-top:12px}
+  .reg .sub b{font-weight:700}
+  .reg .closes{text-align:right}
+  .reg .closes .k{font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .reg .closes .d{font-family:var(--serif);font-style:italic;color:var(--red);font-size:40px;line-height:1.1}
+  .contact{margin-top:26px;font-size:15px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink)}
+  .contact b{color:var(--ink)} .contact .dot{color:var(--red);padding:0 8px}
+</style>
+</head>
+<body>
+<div class="page">
+  <span class="cm tl"></span><span class="cm tr"></span><span class="cm bl"></span><span class="cm br"></span>
+
+  <div class="mast">
+    <span class="l">United States Medical Licensing Examination</span>
+    <span class="r">Step 1 &nbsp;·&nbsp; Cohort in session 2026</span>
+  </div>
+  <div class="mast-rule"></div>
+
+  <div class="hero">
+    <div class="hero-l">
+      <span class="tag">Limited slots · August</span>
+      <h1>Join the cohort<em>already in motion.</em></h1>
+      <p class="lede">Come in for August and pick up right alongside the current cohort. The whole First Aid blueprint runs on a repeating cycle, so every module comes back around, and every past class is recorded and waiting for you.</p>
+    </div>
+    <div class="hero-r">
+      <img src="allan_circle.png" alt="Allan Bakesiga">
+      <div class="who">Dr. Allan Bakesiga</div>
+      <div class="cred">MBChB (Makerere University)<br>MScGH (Duke University)<br>PGY-1 Neurology (Creighton University)<br>Past TA, Epi &amp; Biostats (Duke University)</div>
+    </div>
+  </div>
+
+  <div class="sec"><span class="num">01</span><span class="lbl">Already covered · June to July</span><span class="line"></span></div>
+  <div class="row"><span class="name"><span class="tick">&#10003;</span>Cardiovascular</span><span class="stat done">Complete</span></div>
+  <div class="row"><span class="name"><span class="tick">&#10003;</span>Respiratory</span><span class="stat done">Complete</span></div>
+  <div class="row"><span class="name"><span class="tick">&#10003;</span>Epidemiology &amp; Biostatistics</span><span class="stat done">Complete</span></div>
+  <div class="row"><span class="name"><span class="tick">&#10003;</span>General Pathology</span><span class="stat done">Complete</span></div>
+  <div class="row"><span class="name"><span class="tick">&#10003;</span>Neurology &amp; Special Senses</span><span class="stat done">Complete</span></div>
+  <div class="row"><span class="name"><span class="tick">&#10003;</span>Immunology</span><span class="stat done">Complete</span></div>
+
+  <div class="sec"><span class="num">02</span><span class="lbl">Running this month</span><span class="line"></span></div>
+  <div class="row"><span class="name">Hematology &amp; Oncology</span><span class="stat now">Live now</span></div>
+  <div class="row"><span class="name">General &amp; Autonomic Pharmacology</span><span class="stat now">Live now</span></div>
+
+  <div class="sec"><span class="num">03</span><span class="lbl">Still ahead</span><span class="line"></span></div>
+  <div class="ahead">Renal<span class="sep">/</span>Reproductive<span class="sep">/</span>Endocrine<span class="sep">/</span>Gastrointestinal<span class="sep">/</span>Musculoskeletal, Skin &amp; Connective Tissue<span class="sep">/</span>Behavioral Sciences<span class="sep">/</span>Biochemistry<span class="sep">/</span>Microbiology</div>
+
+  <div class="sec"><span class="num">04</span><span class="lbl">The details</span><span class="line"></span></div>
+  <div class="details">
+    <div class="col">
+      <div class="colhead">Daily live classes</div>
+      <div class="tz"><span class="zone">East Africa (EAT)</span><span class="time">5:00 – 7:30 AM</span></div>
+      <div class="tz"><span class="zone">US Eastern</span><span class="time">10:00 PM – 12:30 AM</span></div>
+      <div class="tz"><span class="zone">US Central</span><span class="time">9:00 – 11:30 PM</span></div>
+    </div>
+    <div class="col">
+      <div class="colhead">More than a class</div>
+      <p class="more"><em>Mentorship</em> the whole way through the cycle — <b>ECFMG, applications, the Match.</b></p>
+      <p class="more"><em>Community</em> — a <b>WhatsApp group</b> of fellow IMGs on the same path.</p>
+    </div>
+  </div>
+
+  <div class="foot-rule"></div>
+  <div class="reg">
+    <div>
+      <h2>Registration <em>is open.</em></h2>
+      <p class="sub">On the website — <b>bakesiga.github.io/usmle-dashboard</b> —<br>tap <b>Join next cohort.</b></p>
+    </div>
+    <div class="closes"><div class="k">Closes</div><div class="d">July 31</div></div>
+  </div>
+  <div class="contact">Whatsapp <b>+256 (0) 705 571 443</b><span class="dot">·</span>Text <b>+1 (984) 710 2902</b><span class="dot">·</span>allanbakesiga@gmail.com</div>
+</div>
+</body>
+</html>

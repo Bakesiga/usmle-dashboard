@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root{
+    --ink:#1a1a1a; --red:#9d1b1b; --green:#2c6e34; --muted:#6f6a62;
+    --paper:#fdfcf8; --hair:#d9d3c6;
+    --serif:"Didot","Bodoni 72","Playfair Display",Georgia,"Times New Roman",serif;
+    --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#cfcfcf}
+  .page{position:relative;width:1150px;background:var(--paper);color:var(--ink);
+    font-family:var(--sans);padding:80px 70px 62px}
+  .cm{position:absolute;width:26px;height:26px}
+  .cm::before,.cm::after{content:"";position:absolute;background:var(--ink)}
+  .cm::before{width:26px;height:1.5px}.cm::after{width:1.5px;height:26px}
+  .cm.tl{top:34px;left:34px}.cm.tr{top:34px;right:34px}
+  .cm.tr::before{right:0}.cm.tr::after{right:0}
+  .cm.bl{bottom:34px;left:34px}.cm.bl::before{bottom:0}.cm.bl::after{bottom:0}
+  .cm.br{bottom:34px;right:34px}.cm.br::before{right:0;bottom:0}.cm.br::after{right:0;bottom:0}
+  .mast{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+  .mast .l{color:var(--red)} .mast .r{color:var(--ink)}
+  .mast-rule{height:3px;background:var(--ink);margin:14px 0 0}
+  .tag{display:inline-block;background:var(--red);color:#fff;font-size:15px;letter-spacing:.18em;font-weight:700;text-transform:uppercase;padding:8px 16px;margin:44px 0 26px}
+  h1{font-family:var(--serif);font-weight:400;color:var(--ink);font-size:92px;line-height:.98;letter-spacing:-.01em}
+  h1 em{color:var(--red);font-style:italic}
+  .lede{font-size:26px;line-height:1.46;color:#2b2b2b;margin-top:30px}
+  .lede b{color:var(--ink);font-weight:700}
+  .sec{display:flex;align-items:center;gap:16px;margin-top:44px}
+  .sec .num{font-family:var(--serif);font-style:italic;color:var(--red);font-size:30px;line-height:1}
+  .sec .lbl{font-size:16px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+  .sec .line{flex:1 1 auto;height:2px;background:var(--ink)}
+  .para{font-size:22px;line-height:1.5;color:#2b2b2b;margin-top:18px}
+  .para b{color:var(--ink);font-weight:700}
+  .row{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;padding:18px 2px;border-bottom:1px solid var(--hair)}
+  .row .name{flex:1}
+  .row .name .t{font-size:26px;font-weight:700;color:var(--ink)}
+  .row .name .d{font-size:19px;line-height:1.4;color:#3a3a3a;margin-top:4px}
+  .row .stat{flex:0 0 auto;font-size:15px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding-top:6px;white-space:nowrap}
+  .row .stat.key{color:var(--red)} .row .stat.mut{color:var(--muted)}
+  .details{display:flex;gap:56px;margin-top:18px}
+  .details .col{flex:1}
+  .colhead{font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:12px}
+  .details p{font-size:20px;line-height:1.5;color:#2b2b2b}
+  .details p b{color:var(--ink);font-weight:700}
+  .details em{font-family:var(--serif);font-style:italic;color:var(--red)}
+  .foot-rule{height:3px;background:var(--ink);margin-top:44px}
+  .close{display:flex;justify-content:space-between;align-items:flex-end;margin-top:22px}
+  .close .l2{font-family:var(--serif);font-size:38px;line-height:1.05}
+  .close .l2 em{color:var(--red);font-style:italic}
+  .close .r2{font-size:18px;font-weight:700;text-align:right;line-height:1.6}
+  .close .r2 .k{font-size:13px;letter-spacing:.18em;color:var(--muted)}
+  .close .r2 b{color:var(--red)}
+</style>
+</head>
+<body>
+<div class="page">
+  <span class="cm tl"></span><span class="cm tr"></span><span class="cm bl"></span><span class="cm br"></span>
+  <div class="mast"><span class="l">United States Medical Licensing Examination</span><span class="r">Step 1 &nbsp;·&nbsp; Start here</span></div>
+  <div class="mast-rule"></div>
+
+  <span class="tag">USMLE Step 1 · New intake open</span>
+  <h1>Join USMLE classes<br>with <em>Allan.</em></h1>
+  <p class="lede">The United States Medical Licensing Examination is the exam every physician must pass to be licensed in the United States. For an <b>international medical graduate</b>, it is the single gateway to a US residency and a career practicing medicine in America.</p>
+
+  <div class="sec"><span class="num">01</span><span class="lbl">What it is</span><span class="line"></span></div>
+  <p class="para">A standardised, multi-part examination that tests whether a doctor can <b>apply</b> medical knowledge and clinical skills to safe, effective patient care, not just recall facts. Every physician who wants to practise in the US sits it, graduates of US and international medical schools alike.</p>
+
+  <div class="sec"><span class="num">02</span><span class="lbl">The three steps</span><span class="line"></span></div>
+  <div class="row"><div class="name"><div class="t">Step 1 &nbsp;&#183;&nbsp; Foundational sciences</div><div class="d">Anatomy, physiology, pathology, pharmacology and the rest, and how they explain disease.</div></div><div class="stat mut">Pass / Fail</div></div>
+  <div class="row"><div class="name"><div class="t">Step 2 CK &nbsp;&#183;&nbsp; Clinical knowledge</div><div class="d">Diagnosis and management across the major specialties. The score residencies weigh most heavily.</div></div><div class="stat key">Scored</div></div>
+  <div class="row"><div class="name"><div class="t">Step 3 &nbsp;&#183;&nbsp; Clinical practice</div><div class="d">Readiness to manage patients independently. Usually taken during residency.</div></div><div class="stat mut">In residency</div></div>
+
+  <div class="sec"><span class="num">03</span><span class="lbl">Why it matters</span><span class="line"></span></div>
+  <p class="para">For an international graduate, passing the USMLE is what earns <b>ECFMG certification</b> and makes you eligible for the Match, the system that places doctors into US residency programs. Put simply: no USMLE, no US residency.</p>
+
+  <div class="sec"><span class="num">04</span><span class="lbl">What is involved</span><span class="line"></span></div>
+  <div class="details">
+    <div class="col">
+      <div class="colhead">The study</div>
+      <p>Months of structured work: <b>First Aid</b> alongside a large <b>question bank</b>, reviewed daily, then a full-day exam at a test centre.</p>
+    </div>
+    <div class="col">
+      <div class="colhead">The wider path</div>
+      <p><em>ECFMG</em> certification, <b>ERAS</b> applications, interviews and finally <b>the Match</b> into residency.</p>
+    </div>
+  </div>
+
+  <div class="foot-rule"></div>
+  <div class="close">
+    <div class="l2">It is a long road.<br><em>You should not walk it alone.</em></div>
+    <div class="r2"><span class="k">NEXT</span><br>How the class works &#8594;<br><b>bakesiga.github.io/usmle-dashboard</b></div>
+  </div>
+</div>
+</body>
+</html>
