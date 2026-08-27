@@ -212,6 +212,10 @@
       </section>
 
       <section class="panel" data-panel="sessions" role="tabpanel" aria-label="All sessions">
+        <div class="panel-head">
+          <h1>Sessions</h1>
+          <p>Every recording, grouped by system. Pick a system to see its classes.</p>
+        </div>
         <div class="blocks-root" data-blocks-root></div>
       </section>
 
@@ -294,25 +298,37 @@
       <!-- OFFICE HOURS PANEL                                     -->
       <!-- ====================================================== -->
       <section class="panel" data-panel="office" role="tabpanel" aria-label="Office hours">
-        <div class="office-card">
-          <div class="office-info">
-            <h3>Office hours with Allan</h3>
-            <p>Book a 1:1 for anything not solved in WhatsApp. Pacing trouble, application questions, panic about a chapter. Show up with one specific thing.</p>
-            <a class="btn btn-primary" data-link="calendly" target="_blank" rel="noopener">Open Calendly</a>
-            <ul class="office-times">
-              <li><strong>Tue &amp; Thu</strong>9:00 – 10:00 PM EAT</li>
-              <li><strong>Sat</strong>2:00 – 4:00 PM EAT</li>
-              <li><strong>Match prep</strong>by appointment</li>
-            </ul>
+        <div class="panel-head">
+          <h1>Office hours with Allan</h1>
+          <p>Book a 1:1 for anything not solved in WhatsApp. Pacing trouble, application
+             questions, panic about a chapter. <b class="em-accent">Show up with one specific thing.</b></p>
+        </div>
+
+        <div class="office-times">
+          <div class="office-card">
+            <span class="office-when">Tue &amp; Thu</span>
+            <span class="office-time">9:00 &ndash; 10:00 PM EAT</span>
           </div>
-          <div class="office-embed">
-            <iframe
-              src="https://calendly.com/allanbakesiga/30min?embed_domain=bakesiga.github.io&embed_type=Inline&hide_landing_page_details=1&hide_gdpr_banner=1"
-              title="Allan's Calendly · USMLE Office Hours"
-              loading="lazy"
-              style="width:100%;min-height:680px;border:0;border-radius:var(--r-card);background:#fff;"
-            ></iframe>
+          <div class="office-card">
+            <span class="office-when">Saturday</span>
+            <span class="office-time">2:00 &ndash; 4:00 PM EAT</span>
           </div>
+          <div class="office-card">
+            <span class="office-when">Match prep</span>
+            <span class="office-time">By appointment</span>
+          </div>
+        </div>
+
+        <a class="btn btn-primary" data-link="calendly" target="_blank" rel="noopener">
+          Open Calendly
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+
+        <div class="office-embed">
+          <iframe
+            src="https://calendly.com/allanbakesiga/30min?embed_domain=bakesiga.github.io&embed_type=Inline&hide_landing_page_details=1&hide_gdpr_banner=1"
+            title="Allan's Calendly · USMLE Office Hours"
+            loading="lazy"></iframe>
         </div>
       </section>
       </div>

@@ -492,15 +492,14 @@
       tile.type = 'button';
       tile.className = 'block-tile subject-' + b.subject + (locked ? ' is-locked' : '');
       tile.dataset.blockId = b.id;
+      const recCount = visibleRecordings(b).length;
       tile.innerHTML =
-        '<span class="block-tile-badge">' + b.short + '</span>' +
-        '<span class="block-tile-body">' +
-          '<span class="block-tile-eyebrow">' + b.dateRange + (locked ? ' <span class="lock-pill">recordings locked</span>' : '') + '</span>' +
-          '<span class="block-tile-title">' + b.label + '</span>' +
-          '<span class="block-tile-meta">' + dayCount + ' days · ' + subCount + ' sub-blocks</span>' +
-        '</span>' +
-        '<span class="block-tile-chevron" aria-hidden="true">' +
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>' +
+        '<span class="tile-count"><b>' + recCount + '</b><span>classes</span></span>' +
+        '<span class="tile-name">' + esc(b.label) + '</span>' +
+        '<span class="tile-range">' + esc(b.dateRange || '') +
+          (locked ? ' <span class="lock-pill">locked</span>' : '') + '</span>' +
+        '<span class="tile-open">Open system' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>' +
         '</span>';
       wrap.appendChild(tile);
     });
@@ -793,53 +792,65 @@
     var coveredCount = 0;
     rows.forEach(function (r) { if (!r.locked && r.b.id !== curId) coveredCount++; });
 
-    var html =
-      '<div class="prog-telemetry">' +
-        tele(coveredCount, 'Systems covered') +
-        tele(totalAvail, 'Classes taught') +
-        tele(upcoming.length, 'Systems still ahead') +
-      '</div><div class="prog-list">';
+    var upcoming = window.UPCOMING || [];
+    var coveredCount = 0;
+    rows.forEach(function (r) { if (!r.locked && r.b.id !== curId) coveredCount++; });
 
+    var now = window.getNow();
+    var mAbbr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][now.getMonth()];
+    var cohortStart = new Date(2026, 5, 1);
+    var monthNo = (now.getFullYear() - cohortStart.getFullYear()) * 12
+                + (now.getMonth() - cohortStart.getMonth()) + 1;
+
+    var html =
+      '<div class="stat-row">' +
+        '<div class="stat"><div class="stat-n">' + totalAvail + '</div>' +
+          '<div class="stat-l">Sessions in the archive</div></div>' +
+        '<div class="stat"><div class="stat-n">' + coveredCount + '</div>' +
+          '<div class="stat-l">Systems finished</div></div>' +
+        '<div class="stat is-now"><div class="stat-n">' + mAbbr + '</div>' +
+          '<div class="stat-l">Month ' + monthNo + ', running now</div></div>' +
+      '</div>';
+
+    html += '<h2 class="sec-h">Finished</h2><div class="fin-list">';
     rows.forEach(function (row) {
       var b = row.b;
-      var isCur = b.id === curId;
-      var mark;
-      if (row.locked)      mark = ICON_LOCK;
-      else if (isCur)      mark = ICON_NOW;
-      else                 mark = ICON_DONE;
-
+      if (row.locked || b.id === curId) return;
+      var days = b.dayRange ? (b.dayRange[1] - b.dayRange[0] + 1) : row.total;
       html +=
-        '<div class="topic subject-' + b.subject +
-          (row.locked ? ' is-locked' : '') + (isCur ? ' is-current' : '') + '"' +
-          (row.locked ? '' : ' data-goto-block="' + b.id + '" role="link" tabindex="0"') + '>' +
-          '<span class="topic-mark">' + mark + '</span>' +
-          '<span class="topic-name">' + esc(b.label) + '</span>' +
-          '<span class="topic-when">' + esc(b.dateRange || '') + '</span>' +
-          (row.locked
-            ? '<span class="topic-n">Locked</span>'
-            : '<span class="topic-n">' + row.total + ' class' + (row.total === 1 ? '' : 'es') + '</span>') +
+        '<div class="fin-row" data-goto-block="' + b.id + '" role="link" tabindex="0">' +
+          '<span class="fin-check">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12.5 10 17.5 19 7"/></svg>' +
+          '</span>' +
+          '<span class="fin-body">' +
+            '<span class="fin-name">' + esc(b.label) + '</span>' +
+            '<span class="fin-meta">' + days + ' days &middot; ' + esc(b.dateRange || '') + '</span>' +
+          '</span>' +
+          '<svg class="fin-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>' +
         '</div>';
     });
-
     html += '</div>';
 
+    // The system running right now, if it has opened.
+    var cur = rows.filter(function (r) { return r.b.id === curId && !r.locked; })[0];
+    if (cur) {
+      html += '<h2 class="sec-h">Running now</h2><div class="fin-list">' +
+        '<div class="fin-row is-now" data-goto-block="' + cur.b.id + '" role="link" tabindex="0">' +
+          '<span class="fin-check is-now"><i></i></span>' +
+          '<span class="fin-body">' +
+            '<span class="fin-name">' + esc(cur.b.label) + '</span>' +
+            '<span class="fin-meta">' + cur.total + ' classes so far &middot; ' + esc(cur.b.dateRange || '') + '</span>' +
+          '</span>' +
+          '<svg class="fin-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>' +
+        '</div></div>';
+    }
+
     if (upcoming.length) {
-      var lastWhen = null;
-      html += '<div class="prog-ahead"><div class="prog-ahead-h">Still ahead</div><div class="prog-list">';
+      html += '<h2 class="sec-h">Ahead</h2><div class="ahead-pills">';
       upcoming.forEach(function (u) {
-        if (u.when !== lastWhen) {
-          html += '<div class="prog-when">' + esc(u.when) + '</div>';
-          lastWhen = u.when;
-        }
-        html +=
-          '<div class="topic is-ahead">' +
-            '<span class="topic-mark">' + ICON_WAIT + '</span>' +
-            '<span class="topic-name">' + esc(u.label) + '</span>' +
-            '<span class="topic-when">' + esc(u.note || '') + '</span>' +
-            '<span class="topic-n"></span>' +
-          '</div>';
+        html += '<span class="ahead-pill">' + esc(u.label) + '</span>';
       });
-      html += '</div></div>';
+      html += '</div>';
     }
 
     root.innerHTML = html;

@@ -893,855 +893,7 @@
 .office-info h3 { font-family: var(--font-display); font-size: var(--fs-24); font-weight: 700; }
 .office-info p { font-size: var(--fs-15); color: var(--ink-2); margin-top: var(--s-12); line-height: 1.55; }
 .office-info .btn { margin-top: var(--s-24); }
-.office-times {
-  list-style: none; padding: 0; margin: var(--s-20) 0 0;
-  display: flex; flex-direction: column; gap: 8px;
-  font-size: var(--fs-14); color: var(--ink-2);
-  font-variant-numeric: tabular-nums;
-}
-.office-times li { display: flex; gap: 12px; }
-.office-times strong { color: var(--ink); min-width: 90px; font-weight: 600; }
-.office-embed {
-  background: var(--bg-cream);
-  border: 1px dashed var(--border);
-  border-radius: var(--r-soft);
-  display: grid;
-  place-items: center;
-  text-align: center;
-  color: var(--muted);
-  padding: var(--s-32);
-  font-family: var(--font-mono);
-  font-size: var(--fs-12);
-  min-height: 280px;
-}
-
-/* ---- panels ---- */
-.panel { display: none; }
-.panel.active { display: block; animation: fade-in 250ms var(--ease-out); }
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: none; }
-}
-
-/* ============================================================
-   Course outline / FA read-ahead card
-   Rendered per-session, hidden when the session has no outline.
-   ============================================================ */
-.outline-card {
-  margin-top: var(--s-20);
-  padding: var(--s-20) var(--s-20) var(--s-16);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--r-card);
-  border-left: 4px solid var(--cvs);
-  box-shadow: 0 1px 0 rgba(12, 42, 61, 0.04),
-              0 8px 20px -12px rgba(12, 42, 61, 0.10);
-}
-.outline-card.subject-cvs  { border-left-color: var(--cvs); }
-.outline-card.subject-resp { border-left-color: var(--resp); }
-.outline-card.subject-path { border-left-color: var(--path); }
-.outline-card.subject-epi  { border-left-color: var(--amber); }
-
-.outline-head { margin-bottom: var(--s-16); }
-.outline-eyebrow {
-  display: inline-block;
-  font-family: var(--font-display);
-  font-size: var(--fs-12);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--gold-deep);
-  background: var(--gold-soft, #FFF4D6);
-  padding: 2px 10px;
-  border-radius: 999px;
-  font-weight: 700;
-  margin-bottom: var(--s-8);
-}
-.outline-title {
-  font-family: var(--font-display);
-  font-size: var(--fs-20);
-  font-weight: 700;
-  margin: 0 0 var(--s-6);
-  color: var(--ink);
-  letter-spacing: -0.01em;
-}
-.outline-intro {
-  margin: 0;
-  color: var(--ink-2);
-  font-size: var(--fs-14);
-  line-height: 1.5;
-}
-
-.outline-list {
-  list-style: none;
-  padding: 0;
-  margin: var(--s-12) 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-8);
-  counter-reset: outline;
-}
-.outline-item {
-  display: grid;
-  grid-template-columns: 28px 1fr auto;
-  align-items: start;
-  gap: var(--s-12);
-  padding: var(--s-10) var(--s-12);
-  background: var(--bg-cream, #FFF8EC);
-  border-radius: var(--r-soft);
-  border: 1px solid var(--border);
-  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
-}
-.outline-item:hover {
-  border-color: var(--cvs);
-  background: var(--cvs-soft);
-}
-.outline-num {
-  font-family: var(--font-mono);
-  font-size: var(--fs-13);
-  font-weight: 700;
-  color: var(--cvs-deep);
-  background: #ffffff;
-  width: 28px; height: 28px;
-  border-radius: 6px;
-  display: grid; place-items: center;
-  border: 1px solid var(--border);
-  letter-spacing: 0;
-}
-.outline-card.subject-resp .outline-num { color: var(--resp-deep); }
-.outline-card.subject-path .outline-num { color: var(--path-deep); }
-.outline-card.subject-epi  .outline-num { color: var(--amber-deep); }
-
-.outline-body {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-.outline-topic {
-  font-size: var(--fs-14);
-  color: var(--ink);
-  line-height: 1.42;
-  font-weight: 500;
-}
-.outline-section {
-  font-family: var(--font-display);
-  font-size: var(--fs-12);
-  color: var(--ink-2);
-  letter-spacing: 0.02em;
-  font-weight: 600;
-}
-.outline-pages {
-  font-family: var(--font-mono);
-  font-size: var(--fs-12);
-  color: var(--ink);
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 2px 10px;
-  white-space: nowrap;
-  align-self: center;
-}
-.outline-pages-blank {
-  color: var(--muted);
-  background: transparent;
-  border-style: dashed;
-}
-
-.outline-foot {
-  margin-top: var(--s-12);
-  padding-top: var(--s-12);
-  border-top: 1px dashed var(--border);
-}
-.outline-foot small {
-  font-size: var(--fs-12);
-  color: var(--muted);
-  font-style: italic;
-  line-height: 1.4;
-}
-
-/* ============================================================
-   PROGRESS PANEL
-   Replaces the old hardcoded June calendar. Instrument styling:
-   hairline rules, tabular numerals, subject colour as a spine.
-   ============================================================ */
-.prog-wrap { padding-top: var(--s-8); }
-
-.prog-intro h3 {
-  font-family: var(--font-display);
-  font-size: var(--fs-24);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-.prog-intro p {
-  font-size: var(--fs-15);
-  color: var(--muted);
-  margin-top: var(--s-4);
-  max-width: 52ch;
-  line-height: 1.5;
-}
-
-/* ---- telemetry strip ---- */
-.prog-telemetry {
-  display: flex;
-  margin-top: var(--s-24);
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--border);
-}
-.prog-tele {
-  flex: 1;
-  padding: var(--s-12) 0 14px;
-  border-right: 1px solid var(--border);
-}
-.prog-tele:last-child { border-right: 0; }
-.prog-num {
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--fs-28);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-}
-.prog-lab {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 3px;
-}
-
-/* ---- topic list: ticked = covered, hourglass = still ahead ---- */
-.prog-list { margin-top: var(--s-8); }
-
-.topic {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 15px 8px 15px 2px;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
-  transition: background var(--t-fast) var(--ease);
-}
-.topic[data-goto-block]:hover { background: var(--c-tint); }
-.topic.is-ahead, .topic.is-locked { cursor: default; }
-
-.topic-mark { flex: none; width: 23px; height: 23px; display: block; }
-.topic-mark svg { width: 23px; height: 23px; display: block; }
-
-/* Covered: solid green disc, white check. */
-.ic-done circle { fill: var(--sage); }
-.ic-done polyline {
-  fill: none; stroke: #fff; stroke-width: 2.1;
-  stroke-linecap: round; stroke-linejoin: round;
-}
-/* In progress: subject-coloured ring with a filled centre. */
-.ic-now circle { fill: none; stroke: var(--accent); stroke-width: 2; }
-.ic-now .dot { fill: var(--accent); stroke: none; }
-/* Still ahead / locked: muted outline. */
-.ic-wait {
-  fill: none; stroke: var(--muted); stroke-width: 1.5;
-  stroke-linecap: round; stroke-linejoin: round;
-}
-
-.topic-name {
-  flex: 1;
-  min-width: 0;
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: -0.015em;
-  color: var(--ink);
-}
-.topic.is-ahead .topic-name,
-.topic.is-locked .topic-name { color: var(--muted); font-weight: 500; }
-
-.topic-when {
-  flex: none;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-  white-space: nowrap;
-}
-.topic-n {
-  flex: none;
-  width: 78px;
-  text-align: right;
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
-  font-size: 12.5px;
-  color: var(--muted);
-  white-space: nowrap;
-}
-.topic.is-current .topic-name { color: var(--accent-deep); }
-
-@media (max-width: 560px) {
-  .topic-when { display: none; }
-}
-
-@media (max-width: 640px) {
-  .prog-telemetry { flex-wrap: wrap; }
-  .prog-tele { flex: 1 0 50%; border-bottom: 1px solid var(--border); }
-}
-
-/* ---- About panel (dashboard landing tab) ---- */
-.panel[data-panel="about"] .v-about { margin-top: 0; }
-.about-h {
-  font-family: var(--font-display);
-  font-size: var(--fs-16);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin: var(--s-24) 0 var(--s-8);
-}
-.about-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  max-width: 62ch;
-}
-.about-list li {
-  position: relative;
-  padding: 7px 0 7px 18px;
-  font-size: var(--fs-15);
-  line-height: 1.55;
-  color: var(--ink-2);
-  border-bottom: 1px solid var(--border);
-}
-.about-list li:last-child { border-bottom: 0; }
-.about-list li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 15px;
-  width: 7px;
-  height: 1.5px;
-  background: var(--cvs);
-}
-.about-list li b { color: var(--ink); font-weight: 600; }
-
-/* ---- Road ahead (Where we are) ---- */
-.prog-ahead { margin-top: var(--s-32); }
-.prog-ahead-h {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--ink);
-}
-.prog-when {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding: var(--s-16) 0 4px 17px;
-}
-.prog-block.is-ahead {
-  cursor: default;
-  padding: 11px 0 12px;
-}
-.prog-block.is-ahead .prog-spine {
-  background: transparent;
-  border-left: 3px dashed var(--border-2, var(--border));
-  width: 0;
-}
-.prog-block.is-ahead .prog-name {
-  color: var(--ink-2);
-  font-weight: 500;
-}
-.prog-block.is-ahead .prog-count {
-  font-size: 11px;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-}
-
-/* ============================================================
-   ANNOUNCEMENTS
-   One ink hero, then dated list rows. Previously two competing
-   full-bleed coloured cards.
-   ============================================================ */
-.ann-hero {
-  background: var(--n-900);
-  border-radius: var(--r-card);
-  padding: 35px;
-  margin-bottom: var(--s-24);
-}
-.ann-tag {
-  display: inline-block;
-  background: #3d472b;
-  color: var(--sage-soft);
-  border-radius: var(--r-pill);
-  padding: 6px 15px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.ann-hero h2 {
-  font-family: var(--font-display);
-  font-size: clamp(1.9rem, 2.2vw + 1rem, 2.6rem);
-  color: var(--n-100);
-  max-width: 22em;
-  margin-top: var(--s-16);
-  line-height: 1.1;
-}
-.ann-lede {
-  font-size: 17px;
-  line-height: 1.55;
-  color: var(--n-300);
-  max-width: 38em;
-  margin-top: var(--s-16) !important;
-}
-.ann-body {
-  font-size: 15.5px;
-  line-height: 1.55;
-  color: var(--n-400);
-  max-width: 38em;
-  margin-top: var(--s-12) !important;
-}
-.ann-hero .btn { margin-top: var(--s-24); }
-
-.ann-earlier-h {
-  font-family: var(--font-display);
-  font-size: 24px;
-  margin: var(--s-32) 0 var(--s-16);
-}
-.ann-list { display: flex; flex-direction: column; gap: 11px; }
-.ann-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  background: var(--n-100);
-  border: 1.5px solid var(--n-200);
-  border-radius: var(--r-card);
-  padding: 18px 26px;
-  text-decoration: none;
-  color: inherit;
-  transition: background 180ms var(--ease), border-color 180ms var(--ease),
-              transform 180ms var(--ease);
-}
-.ann-row:hover {
-  background: var(--accent-tint);
-  border-color: #f6a06b;
-  transform: translateY(-2px);
-}
-.ann-ic {
-  flex: none;
-  width: 46px; height: 46px;
-  border-radius: 999px;
-  background: var(--bg-soft);
-  color: var(--accent-deep);
-  display: grid; place-items: center;
-}
-.ann-ic svg { width: 21px; height: 21px; }
-.ann-row-body { flex: 1; min-width: 0; display: block; }
-.ann-row-eyebrow {
-  display: block;
-  font-size: 11.5px; font-weight: 700;
-  letter-spacing: 0.11em; text-transform: uppercase;
-  color: var(--muted);
-}
-.ann-row-title {
-  display: block;
-  font-size: 17px; font-weight: 700;
-  color: var(--ink);
-  margin-top: 3px;
-}
-.ann-row-desc {
-  display: block;
-  font-size: 14.5px; line-height: 1.5;
-  color: var(--n-700);
-  margin-top: 4px;
-}
-.ann-chev { flex: none; align-self: center; color: var(--n-400); }
-.ann-closing {
-  font-size: 14.5px;
-  font-weight: 500;
-  color: var(--n-600);
-  margin-top: var(--s-24) !important;
-}
-
-/* ============================================================
-   ABOUT PANEL
-   These lived in theme-vitals.css, which the dashboard no longer
-   loads. Restated here against the new tokens, per the handoff:
-   facts become a sand grid, figures in the display face.
-   ============================================================ */
-.v-about {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--s-32);
-  margin-top: var(--s-24);
-}
-.v-about-copy p {
-  font-size: 17px;
-  line-height: 1.62;
-  color: var(--n-700);
-  margin-bottom: var(--s-16);
-  max-width: 36em;
-}
-.v-about-lede {
-  font-size: 20.5px !important;
-  line-height: 1.5 !important;
-  color: var(--ink-2) !important;
-  max-width: 34em !important;
-}
-.v-about-who {
-  border-top: 1.5px solid var(--n-200);
-  padding-top: var(--s-16);
-  margin-top: var(--s-24);
-  font-size: 15.5px !important;
-}
-.v-about-who b { color: var(--ink); }
-
-/* Facts: a sand grid, not a bordered column */
-.v-about-facts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
-  gap: 13px;
-  border: 0;
-}
-.v-fact {
-  background: var(--bg-soft);
-  border-radius: var(--r-card);
-  padding: 26px 18px 18px;
-  border: 0;
-}
-.v-fact-n {
-  font-family: var(--font-display);
-  font-size: 27px;
-  color: var(--accent-deep);
-  line-height: 1.1;
-}
-.v-fact-l {
-  font-size: 13.5px;
-  font-weight: 500;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--n-700);
-  margin-top: 6px;
-}
-
-.about-h {
-  font-family: var(--font-display);
-  font-size: 31px;
-  color: var(--ink);
-  margin: var(--s-32) 0 var(--s-16);
-}
-.about-list { display: flex; flex-direction: column; gap: 20px; }
-.about-list li {
-  position: relative;
-  padding: 0 0 0 26px;
-  font-size: 16.5px;
-  line-height: 1.55;
-  color: var(--n-700);
-  border: 0;
-}
-.about-list li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 8px;
-  width: 11px; height: 11px;
-  border-radius: 999px;
-  background: var(--sage);
-}
-.about-list li b { color: var(--ink); font-weight: 700; }
-
-/* ============================================================
-   SESSIONS
-   Tile and card styling came from dashboard-vitals.css, which the
-   dashboard no longer loads. Restated against the new tokens.
-   ============================================================ */
-
-/* ---- Level 1: system tiles ---- */
-.blocks-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
-  gap: 13px;
-}
-.block-tile {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  background: var(--n-100);
-  border: 1.5px solid var(--n-200);
-  border-radius: var(--r-card);
-  padding: 26px;
-  text-align: left;
-  cursor: pointer;
-  transition: background 180ms var(--ease), border-color 180ms var(--ease),
-              transform 180ms var(--ease);
-}
-.block-tile:hover {
-  background: var(--accent-tint);
-  border-color: #f6a06b;
-  transform: translateY(-2px);
-}
-.block-tile:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.block-tile-badge {
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.block-tile-body { display: flex; flex-direction: column; gap: 5px; }
-.block-tile-eyebrow {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--n-600);
-}
-.block-tile-title {
-  font-family: var(--font-display);
-  font-size: 21px;
-  line-height: 1.15;
-  color: var(--ink);
-}
-.block-tile-meta {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--n-600);
-}
-.block-tile-chevron { color: var(--accent-deep); margin-top: 4px; }
-.block-tile-chevron svg { width: 18px; height: 18px; }
-.block-tile.is-locked { opacity: 1; }
-.lock-pill {
-  display: inline-block;
-  background: var(--n-200);
-  color: var(--n-700);
-  border-radius: var(--r-pill);
-  padding: 3px 10px;
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: none;
-}
-
-/* ---- Level 2/3: back pill, heading, sub-block tiles ---- */
-.block-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: transparent;
-  border: 1.5px solid var(--border);
-  border-radius: var(--r-pill);
-  padding: 9px 18px;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--ink-2);
-  text-decoration: none;
-  margin-bottom: var(--s-20);
-  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
-}
-.block-back:hover {
-  background: var(--accent-tint);
-  border-color: #f6a06b;
-  color: var(--accent-deep);
-}
-.block-detail-head { margin-bottom: var(--s-24); }
-.block-detail-titlerow { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-.block-detail-badge {
-  font-size: 11.5px; font-weight: 700;
-  letter-spacing: 0.11em; text-transform: uppercase;
-  color: var(--accent);
-}
-.block-detail-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 2.6vw + 1rem, 3.1rem);
-  line-height: 1.05;
-  color: var(--ink);
-}
-.block-detail-range {
-  font-size: 14.5px; font-weight: 600;
-  color: var(--n-600);
-  margin-top: 6px;
-}
-
-.subblocks-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
-  gap: 13px;
-}
-.subblock-tile {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: var(--n-100);
-  border: 1.5px solid var(--n-200);
-  border-radius: var(--r-card);
-  padding: 18px 26px;
-  cursor: pointer;
-  text-align: left;
-  transition: background 180ms var(--ease), border-color 180ms var(--ease),
-              transform 180ms var(--ease);
-}
-.subblock-tile:hover {
-  background: var(--accent-tint);
-  border-color: #f6a06b;
-  transform: translateY(-2px);
-}
-.subblock-tile.is-empty { opacity: 0.6; cursor: default; }
-.subblock-title {
-  flex: 1;
-  font-family: var(--font-display);
-  font-size: 20px;
-  line-height: 1.2;
-  color: var(--ink);
-}
-.subblock-days, .subblock-meta {
-  font-size: 13.5px; font-weight: 600; color: var(--n-600);
-}
-.subblock-chevron { color: var(--n-400); }
-.subblock-chevron svg { width: 18px; height: 18px; }
-
-/* ---- Recording cards ---- */
-.block-recordings-h {
-  font-family: var(--font-display);
-  font-size: 24px;
-  color: var(--ink);
-  margin: var(--s-32) 0 var(--s-16);
-}
-.block-recordings-list { display: flex; flex-direction: column; gap: 11px; }
-.block-recording-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  background: var(--n-100);
-  border: 1.5px solid var(--n-200);
-  border-radius: var(--r-card);
-  padding: 18px 26px;
-  text-decoration: none;
-  color: inherit;
-  transition: background 180ms var(--ease), border-color 180ms var(--ease),
-              transform 180ms var(--ease);
-}
-.block-recording-card:hover {
-  background: var(--accent-tint);
-  border-color: #f6a06b;
-  transform: translateY(-2px);
-}
-.block-recording-icon {
-  flex: none;
-  width: 46px; height: 46px;
-  border-radius: 999px;
-  background: var(--bg-soft);
-  color: var(--accent-deep);
-  display: grid; place-items: center;
-}
-.block-recording-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
-.block-recording-title {
-  font-size: 17px; font-weight: 700; line-height: 1.35;
-  color: var(--ink);
-  text-wrap: pretty;
-}
-.block-recording-meta { font-size: 13px; font-weight: 600; color: var(--n-600); }
-
-/* Locked recordings get a full-contrast label, never grayscale-and-fade. */
-.block-recording-card.is-locked {
-  filter: none;
-  opacity: 1;
-  cursor: default;
-  background: var(--bg-cream);
-}
-.block-recording-card.is-locked:hover {
-  background: var(--bg-cream);
-  border-color: var(--n-200);
-  transform: none;
-}
-.block-recording-card.is-locked .block-recording-icon { color: var(--n-600); }
-.block-recording-card.is-locked .block-recording-meta {
-  display: inline-block;
-  align-self: flex-start;
-  background: var(--n-200);
-  color: var(--n-700);
-  border-radius: var(--r-pill);
-  padding: 3px 11px;
-  font-size: 12.5px;
-  font-weight: 700;
-  margin-top: 4px;
-}
-
-/* ============================================================
-   EXTRA RESOURCES + OFFICE HOURS
-   Also orphaned by the dashboard-vitals.css removal.
-   ============================================================ */
-.res-grid { display: flex; flex-direction: column; gap: 11px; }
-.res-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  background: var(--bg-soft);
-  border: 0;
-  border-radius: var(--r-card);
-  padding: 26px;
-  text-decoration: none;
-  color: inherit;
-  transition: background 180ms var(--ease), transform 180ms var(--ease);
-}
-.res-card:hover { background: var(--accent-soft); transform: translateY(-2px); }
-.res-icon {
-  flex: none;
-  width: 52px; height: 52px;
-  border-radius: 999px;
-  background: var(--n-100);
-  color: var(--accent-deep);
-  display: grid; place-items: center;
-}
-.res-icon svg { width: 22px; height: 22px; }
-.res-card h3 {
-  font-family: var(--font-display);
-  font-size: 21px;
-  line-height: 1.2;
-  color: var(--ink);
-}
-.res-card p {
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--n-700);
-  max-width: 34em;
-  margin-top: 5px;
-}
-
-.office-times {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 11px;
-  margin: var(--s-24) 0;
-}
-.office-card {
-  background: var(--bg-soft);
-  border: 0;
-  border-radius: var(--r-card);
-  padding: 26px;
-}
-.office-card h3, .office-card strong {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 400;
-  color: var(--accent-deep);
-  line-height: 1.2;
-}
-.office-card p, .office-card span {
-  font-size: 14.5px;
-  font-weight: 600;
-  color: var(--n-700);
-  margin-top: 5px;
-}
-.office-info { max-width: 40em; }
-.office-embed {
-  border-radius: var(--r-card);
-  overflow: hidden;
-  border: 1.5px solid var(--n-200);
-  min-height: 660px;
-  margin-top: var(--s-24);
-}
-.office-embed iframe { display: block; width: 100%; min-height: 660px; border: 0; }
+/* office styles moved to the block below */
 
 /* ============================================================
    TOP BAR — to the handoff spec
@@ -2024,3 +1176,162 @@
   margin-top: 8px;
   max-width: 40em;
 }
+
+/* ---- Panel visibility. Handoff: plain state swap, no animation. ---- */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* ---- Shared panel heading (Sessions, Office hours, Where we are) ---- */
+.panel-head { margin-bottom: var(--s-32); }
+.panel-head h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 2.6vw + 1rem, 3.1rem);
+  line-height: 1.05;
+  color: var(--ink);
+}
+.panel-head p {
+  font-size: 18px; line-height: 1.5;
+  color: var(--n-700);
+  margin-top: var(--s-8) !important;
+  max-width: 40em;
+}
+
+/* ---- About: section heading + sage bullet list ---- */
+.about-h {
+  font-family: var(--font-display);
+  font-size: 31px; line-height: 1.1;
+  color: var(--ink);
+  margin: var(--s-32) 0 var(--s-8);
+}
+.about-list { display: flex; flex-direction: column; gap: 20px; margin: 0; padding: 0; list-style: none; }
+.about-list li {
+  position: relative;
+  padding: 0 0 0 26px;
+  font-size: 16.5px; line-height: 1.55;
+  color: var(--n-700);
+  border: 0;
+}
+.about-list li::before {
+  content: ""; position: absolute; left: 0; top: 8px;
+  width: 11px; height: 11px; border-radius: 999px; background: var(--sage);
+}
+.about-list li b { color: var(--ink); font-weight: 700; }
+
+/* ============================================================
+   WHERE WE ARE — stat cards, finished rows, ahead pills
+   ============================================================ */
+.prog-intro h3 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 2.6vw + 1rem, 3.1rem);
+  line-height: 1.05; color: var(--ink);
+}
+.prog-intro p {
+  font-size: 18px; line-height: 1.5; color: var(--n-700);
+  margin-top: var(--s-8) !important; max-width: 40em;
+}
+.stat-row { display: flex; flex-wrap: wrap; gap: 13px; margin: var(--s-32) 0; }
+.stat {
+  flex: 1 1 170px; min-width: 170px;
+  background: var(--bg-soft);
+  border-radius: var(--r-card);
+  padding: 26px;
+}
+.stat-n { font-family: var(--font-display); font-size: 40px; line-height: 1.05; color: var(--accent-deep); }
+.stat-l { font-size: 14px; font-weight: 500; color: var(--n-700); margin-top: 6px; }
+.stat.is-now { background: var(--sage); }
+.stat.is-now .stat-n { color: var(--sage-tint); }
+.stat.is-now .stat-l { color: var(--sage-tint); opacity: 0.92; }
+
+.sec-h {
+  font-family: var(--font-display);
+  font-size: 31px; line-height: 1.1;
+  color: var(--ink);
+  margin: var(--s-32) 0 var(--s-16);
+}
+.fin-list { display: flex; flex-direction: column; gap: 11px; }
+.fin-row {
+  display: flex; align-items: center; gap: 18px;
+  background: var(--n-100);
+  border-radius: var(--r-card);
+  padding: 18px 26px;
+  cursor: pointer;
+  transition: background 180ms var(--ease), transform 180ms var(--ease);
+}
+.fin-row:hover { background: var(--accent-tint); transform: translateY(-2px); }
+.fin-row:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.fin-check {
+  flex: none; width: 46px; height: 46px;
+  border-radius: 999px;
+  background: var(--sage-soft); color: var(--sage-deep);
+  display: grid; place-items: center;
+}
+.fin-check svg { width: 22px; height: 22px; }
+.fin-check.is-now { background: var(--accent-soft); }
+.fin-check.is-now i { width: 13px; height: 13px; border-radius: 999px; background: var(--accent); display: block; }
+.fin-body { flex: 1; min-width: 0; }
+.fin-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 20px; line-height: 1.2; color: var(--ink);
+}
+.fin-meta { display: block; font-size: 13.5px; font-weight: 600; color: var(--n-600); margin-top: 3px; }
+.fin-chev { flex: none; width: 20px; height: 20px; color: var(--n-400); }
+
+.ahead-pills { display: flex; flex-wrap: wrap; gap: 9px; }
+.ahead-pill {
+  background: var(--sage-tint);
+  border: 1.5px solid #ccdbb2;
+  color: var(--sage-deep);
+  border-radius: var(--r-pill);
+  padding: 11px 21px;
+  font-size: 14.5px; font-weight: 600;
+}
+
+/* ============================================================
+   SESSIONS TILES — count, name, range, open
+   ============================================================ */
+.tile-count { display: flex; align-items: baseline; gap: 9px; }
+.tile-count b {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 34px; line-height: 1; color: var(--accent);
+}
+.tile-count span {
+  font-size: 11.5px; font-weight: 700;
+  letter-spacing: 0.11em; text-transform: uppercase; color: var(--n-600);
+}
+.tile-name {
+  font-family: var(--font-display);
+  font-size: 21px; line-height: 1.2; color: var(--ink); margin-top: 12px;
+}
+.tile-range { font-size: 13.5px; font-weight: 600; color: var(--n-600); margin-top: 4px; }
+.tile-open {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 13px; font-weight: 700; color: var(--accent-deep); margin-top: 16px;
+}
+.tile-open svg { width: 15px; height: 15px; }
+
+/* ============================================================
+   OFFICE HOURS
+   ============================================================ */
+.office-times {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 11px;
+  margin: var(--s-24) 0;
+  list-style: none; padding: 0;
+}
+.office-card { background: var(--bg-soft); border: 0; border-radius: var(--r-card); padding: 26px; }
+.office-when {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 22px; line-height: 1.15; color: var(--accent-deep);
+}
+.office-time { display: block; font-size: 14.5px; font-weight: 600; color: var(--n-700); margin-top: 5px; }
+.office-embed {
+  border-radius: var(--r-card);
+  overflow: hidden;
+  border: 1.5px solid var(--n-200);
+  margin-top: var(--s-24);
+  background: #fff;
+}
+.office-embed iframe { display: block; width: 100%; min-height: 660px; border: 0; }
