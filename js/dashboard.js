@@ -828,8 +828,9 @@
           '<span class="topic-mark">' + mark + '</span>' +
           '<span class="topic-name">' + esc(b.label) + '</span>' +
           '<span class="topic-when">' + esc(b.dateRange || '') + '</span>' +
-          (row.locked ? '<span class="topic-n">Locked</span>'
-                      : '<span class="topic-n">' + row.done + '/' + row.total + '</span>') +
+          (row.locked
+            ? '<span class="topic-n">Locked</span>'
+            : '<span class="topic-n">' + row.total + ' class' + (row.total === 1 ? '' : 'es') + '</span>') +
         '</div>';
     });
 
@@ -848,7 +849,7 @@
             '<span class="topic-mark">' + ICON_WAIT + '</span>' +
             '<span class="topic-name">' + esc(u.label) + '</span>' +
             '<span class="topic-when">' + esc(u.note || '') + '</span>' +
-            '<span class="topic-n">&mdash;</span>' +
+            '<span class="topic-n"></span>' +
           '</div>';
       });
       html += '</div></div>';
