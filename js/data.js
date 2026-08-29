@@ -648,7 +648,8 @@ window.BLOCKS = [
           { title: "Pharmacokinetics: clearance, half life, dosage calculations, metabolism and elimination", date: "2026-08-25", url: "https://us06web.zoom.us/rec/share/lOTr0_ipsKDPk6oXDBypa_Ng_nrYYrJgMwsSouhL8uVIB7e81ia4Tsb1L2XuHoKS.mqzWv_WBPO2hvYmE" },
           { title: "Pharmacodynamics: potency and efficacy", date: "2026-08-26", url: "https://us06web.zoom.us/rec/share/clDyB36L8Hj8TWPby6jINs8Ilsg8ewlb0x8vwzChhUpVnUdnf7ZrY3vfAUmDP26K.vuLYnSVuZyWmVIQm" },
           { title: "Autonomic nervous system: anatomy, neurotransmitters, receptor types, distribution and effects", date: "2026-08-27", url: "https://us06web.zoom.us/rec/share/dbRwzF-PNmex1eyvOk3-z3XABhGU_jaeWZ70gJiwQBi3dfH2DfI5eZogYQ9P_UNE.VWtKDXcE52HlF8-n" },
-          { title: "Cholinergic system: cholinomimetic and anticholinergic drugs", date: "2026-08-28", url: "https://us06web.zoom.us/rec/share/recwnimDKYiDiSEj-lPlKP8Wy9XrUFOwjzSEiQjBvA4PJCNOUUrwTDz49wUoir3q.fnRm18-Zz3j69hUR" }
+          { title: "Cholinergic system: cholinomimetic and anticholinergic drugs", date: "2026-08-28", url: "https://us06web.zoom.us/rec/share/recwnimDKYiDiSEj-lPlKP8Wy9XrUFOwjzSEiQjBvA4PJCNOUUrwTDz49wUoir3q.fnRm18-Zz3j69hUR" },
+          { title: "Sympathetic system: direct and indirect sympathomimetics", date: "2026-08-29", url: "https://us06web.zoom.us/rec/share/fQ8opn6GfNsjF4E7rOCnumroWNlb10Zz0_hE71gh6kXs4MsM6yIc3rQVVsKvRU8a.N6B54tV8lm5ZNUC4" }
         ]
       }
     ]
