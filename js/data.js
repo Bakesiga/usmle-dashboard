@@ -682,3 +682,50 @@ window.getNow = function () {
   if (window.SIM_NOW) return new Date(window.SIM_NOW);
   return new Date();
 };
+
+// ---------------------------------------------------------------------------
+// The month plan. Drives the landing view on the About tab: one row per day,
+// grouped into blocks. Dates are the class date in the dashboard's own
+// timezone, so "today" lines up with what the student sees on the rail.
+// To roll the dashboard into a new month, replace this object wholesale.
+// ---------------------------------------------------------------------------
+window.PLAN = {
+  label: "September 2026",
+  blocks: [
+    { id: "msk",   label: "Musculoskeletal and skin", range: "1 to 13 September" },
+    { id: "gi",    label: "Gastrointestinal",         range: "14 to 22 September" },
+    { id: "micro", label: "Microbiology",             range: "23 to 30 September" }
+  ],
+  days: [
+    { date: "2026-09-01", block: "msk", title: "Upper limb: brachial plexus, terminal nerve distribution and palsies" },
+    { date: "2026-09-02", block: "msk", title: "Lower limb: lumbosacral plexus, terminal nerve distribution and palsies" },
+    { date: "2026-09-03", block: "msk", title: "Review of upper and lower limb anatomy" },
+    { date: "2026-09-04", block: "msk", title: "Physiology: muscle contraction, fibre types, muscle as a sensory organ, cell biology of bone" },
+    { date: "2026-09-05", block: "msk", title: "Arthritis and the spondyloarthropathies" },
+    { date: "2026-09-06", block: "msk", title: "Autoimmune connective tissue disease and the vasculitides" },
+    { date: "2026-09-07", block: "msk", title: "Bone tumours" },
+    { date: "2026-09-08", block: "msk", title: "Other benign conditions of the upper and lower limbs" },
+    { date: "2026-09-09", block: "msk", title: "Skin: anatomy, nomenclature, inflammatory and immunobullous disorders" },
+    { date: "2026-09-10", block: "msk", title: "Skin and soft tissue infections" },
+    { date: "2026-09-11", block: "msk", title: "Skin tumours and tumour-like lesions" },
+    { date: "2026-09-12", block: "msk", title: "Pharmacology of the musculoskeletal system, part 1" },
+    { date: "2026-09-13", block: "msk", title: "Pharmacology of the musculoskeletal system, part 2" },
+    { date: "2026-09-14", block: "gi",  title: "Embryology of the gastrointestinal tract" },
+    { date: "2026-09-15", block: "gi",  title: "Anatomy of the gastrointestinal tract" },
+    { date: "2026-09-16", block: "gi",  title: "Gastrointestinal physiology" },
+    { date: "2026-09-17", block: "gi",  title: "Pathology: oesophagus and stomach" },
+    { date: "2026-09-18", block: "gi",  title: "Pathology: intestine and colorectum" },
+    { date: "2026-09-19", block: "gi",  title: "Pathology: liver" },
+    { date: "2026-09-20", block: "gi",  title: "Pathology: biliary tree" },
+    { date: "2026-09-21", block: "gi",  title: "Pathology: pancreas" },
+    { date: "2026-09-22", block: "gi",  title: "Tumours of the gastrointestinal tract" },
+    { date: "2026-09-23", block: "micro", title: "Bacteriology, part 1" },
+    { date: "2026-09-24", block: "micro", title: "Bacteriology, part 2" },
+    { date: "2026-09-25", block: "micro", title: "Bacteriology, part 3" },
+    { date: "2026-09-26", block: "micro", title: "Virology, part 1" },
+    { date: "2026-09-27", block: "micro", title: "Virology, part 2" },
+    { date: "2026-09-28", block: "micro", title: "Parasitology" },
+    { date: "2026-09-29", block: "micro", title: "Fungi" },
+    { date: "2026-09-30", block: "micro", title: "Antimicrobial drugs" }
+  ]
+};

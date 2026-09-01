@@ -192,8 +192,13 @@
 
 @media (max-width: 900px) {
   .dash-grid { grid-template-columns: minmax(0, 1fr); gap: 26px; }
-  /* Countdown and cohort position land first on a phone. */
-  .side-rail { order: -1; position: static; }
+  /* On a phone the whole rail used to land first, which pushed the month plan
+     roughly 1400px down the page. Only the countdown earns that position,
+     because it carries the join button. display:contents lifts the rail's
+     children into the grid so the other two cards can sit after the panel. */
+  .side-rail { display: contents; }
+  .side-rail > .rail-live { order: -1; position: static; margin-bottom: 0; }
+  .side-rail > .rail-card { order: 2; position: static; }
 }
 @media (max-width: 720px) {
   .panel h1 { font-size: 2.1rem; }
@@ -502,10 +507,12 @@
 /* ============================================================
    SIDE RAIL  (right column, desktop only)
    ============================================================ */
-.side-rail {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-20);
+@media (min-width: 901px) {
+  .side-rail {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-20);
+  }
 }
 .rail-card {
   background: var(--bg);
@@ -1674,7 +1681,15 @@
 /* ============================================================
    SIDE RAIL — three cards
    ============================================================ */
-.side-rail { display: flex; flex-direction: column; gap: 13px; }
+/* Column layout on desktop only. Below 900px the rail becomes display:contents
+   (see the media query near the top) so the month plan can sit above the
+   where-we-are and presence cards, with only the countdown kept on top. */
+@media (min-width: 901px) {
+  .side-rail { display: flex; flex-direction: column; gap: 13px; }
+}
+@media (max-width: 900px) {
+  .side-rail > .rail-live, .side-rail > .rail-card { margin-bottom: 13px; }
+}
 
 /* 1. Next live class */
 .rail-live {
@@ -2041,3 +2056,109 @@
   border: 1.5px solid var(--n-200); margin-top: var(--s-24); background: #fff;
 }
 .office-embed iframe { display: block; width: 100%; min-height: 660px; border: 0; }
+
+/* ===========================================================================
+   MONTH PLAN
+   The landing block on About. Reads as an editorial contents page rather than
+   a calendar grid: a calendar wastes most of a phone screen on empty cells,
+   and the students only ever want the ordered list of what is coming.
+   =========================================================================== */
+.plan { margin: 0 0 30px; }
+
+.plan-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 20px; flex-wrap: wrap;
+  padding-bottom: 14px; border-bottom: 2px solid var(--ink);
+}
+.plan-eyebrow {
+  display: block;
+  font-size: .78rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--accent-deep); font-weight: 700; margin-bottom: 4px;
+}
+.plan-h {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 2.2vw + 1rem, 2.6rem);
+  line-height: 1; color: var(--ink); margin: 0;
+}
+.plan-meter { text-align: right; line-height: 1; }
+.plan-meter-n {
+  display: block; font-family: var(--font-display);
+  font-size: 2rem; color: var(--ink);
+}
+.plan-meter-n i { font-style: normal; color: var(--muted); font-size: 1.2rem; }
+.plan-meter-l {
+  display: block; margin-top: 4px;
+  font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+}
+
+/* The single most useful line on the page: what happens tonight. */
+.plan-now {
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  margin: 16px 0 26px; padding: 14px 18px;
+  background: var(--accent-tint, rgba(198,113,57,.1));
+  border-left: 4px solid var(--accent);
+  font-size: 1.06rem; color: var(--ink);
+}
+.plan-now-tag {
+  font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+  font-weight: 800; color: #fff; background: var(--accent);
+  padding: 4px 9px; border-radius: 999px; white-space: nowrap;
+}
+
+.plan-group { margin-top: 26px; }
+.plan-group-head {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.plan-rule { width: 26px; height: 4px; border-radius: 2px; background: var(--accent); flex: none; }
+.plan-group-h {
+  font-family: var(--font-display); font-size: 1.18rem; color: var(--ink); margin: 0;
+}
+.plan-group-range {
+  margin-left: auto; font-size: .84rem; color: var(--muted); white-space: nowrap;
+}
+/* The three blocks read as one family, separated by weight rather than by
+   three unrelated hues, which is what made the old subject palette noisy. */
+.plan-gi    .plan-rule { background: var(--sage, #7a8a5e); }
+.plan-micro .plan-rule { background: var(--ink-2); }
+
+.plan-list { list-style: none; margin: 0; padding: 0; }
+.plan-row {
+  display: flex; align-items: baseline; gap: 14px;
+  padding: 9px 4px 9px 0;
+  border-bottom: 1px solid var(--border);
+}
+.plan-date {
+  flex: none; width: 46px; display: flex; align-items: baseline; gap: 5px;
+}
+.plan-date b {
+  font-family: var(--font-display); font-size: 1.02rem; color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.plan-date i { font-style: normal; font-size: .74rem; color: var(--muted); }
+.plan-title { flex: 1; font-size: .98rem; line-height: 1.4; color: var(--ink); }
+.plan-state {
+  flex: none; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent-deep); font-weight: 700;
+}
+
+/* Days already taught recede but stay legible, so the month still reads as a
+   whole rather than as a shrinking to-do list. */
+.plan-row.is-done .plan-title,
+.plan-row.is-done .plan-date b { color: var(--muted); }
+.plan-row.is-done .plan-date b { text-decoration: line-through; text-decoration-thickness: 1px; }
+
+.plan-row.is-now {
+  background: var(--accent-tint, rgba(198,113,57,.1));
+  border-bottom-color: var(--accent);
+  margin: 0 -10px; padding-left: 10px; padding-right: 10px;
+}
+.plan-row.is-now .plan-title { font-weight: 700; }
+
+@media (max-width: 560px) {
+  .plan-group-range { margin-left: 0; width: 100%; }
+  .plan-state { display: none; }
+  .plan-row.is-now .plan-title::after {
+    content: ' · Today'; color: var(--accent-deep); font-weight: 800;
+  }
+}

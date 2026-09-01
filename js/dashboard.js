@@ -806,6 +806,91 @@
     return id;
   }
 
+  // ---------------- MONTH PLAN ----------------
+  // The landing view. One row per teaching day, grouped into blocks, with the
+  // day the cohort is actually on marked. Purely derived from window.PLAN, so
+  // rolling into October means replacing that object and nothing here.
+  var WDAY = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  var WDAY_LONG = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var MON_LONG = ['January','February','March','April','May','June','July',
+                  'August','September','October','November','December'];
+
+  function planDayParts(iso) {
+    var p = iso.split('-');
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    return {
+      num: +p[2],
+      wday: WDAY[d.getDay()],
+      wdayLong: WDAY_LONG[d.getDay()],
+      month: MON_LONG[+p[1] - 1]
+    };
+  }
+
+  function renderPlan() {
+    var root = document.querySelector('[data-plan-root]');
+    if (!root) return;
+    var plan = window.PLAN;
+    if (!plan || !plan.days || !plan.days.length) { root.innerHTML = ''; return; }
+
+    var today = ymd(window.getNow());
+    var days = plan.days;
+    var first = days[0].date, last = days[days.length - 1].date;
+    var done = 0;
+    days.forEach(function (d) { if (d.date < today) done++; });
+
+    var todayItem = null;
+    days.forEach(function (d) { if (d.date === today) todayItem = d; });
+
+    var html = '' +
+      '<div class="plan-head">' +
+        '<div class="plan-head-l">' +
+          '<span class="plan-eyebrow">The month ahead</span>' +
+          '<h2 class="plan-h">' + esc(plan.label) + '</h2>' +
+        '</div>' +
+        '<div class="plan-meter">' +
+          '<span class="plan-meter-n">' + done + '<i>/' + days.length + '</i></span>' +
+          '<span class="plan-meter-l">days behind us</span>' +
+        '</div>' +
+      '</div>';
+
+    if (todayItem) {
+      html += '<p class="plan-now"><span class="plan-now-tag">Today</span>' +
+              esc(todayItem.title) + '</p>';
+    } else if (today < first) {
+      var f = planDayParts(first);
+      html += '<p class="plan-now"><span class="plan-now-tag">Starts</span>' +
+              f.wdayLong + ' ' + f.num + ' ' + f.month + ', with ' +
+              esc(days[0].title) + '.</p>';
+    } else if (today > last) {
+      html += '<p class="plan-now"><span class="plan-now-tag">Done</span>' +
+              esc(plan.label) + ' is complete.</p>';
+    }
+
+    (plan.blocks || []).forEach(function (b) {
+      var items = days.filter(function (d) { return d.block === b.id; });
+      if (!items.length) return;
+      html += '<section class="plan-group plan-' + esc(b.id) + '">' +
+                '<div class="plan-group-head">' +
+                  '<span class="plan-rule"></span>' +
+                  '<h3 class="plan-group-h">' + esc(b.label) + '</h3>' +
+                  '<span class="plan-group-range">' + esc(b.range || '') + '</span>' +
+                '</div><ol class="plan-list">';
+      items.forEach(function (d) {
+        var state = d.date < today ? 'is-done' : (d.date === today ? 'is-now' : '');
+        var pt = planDayParts(d.date);
+        html += '<li class="plan-row ' + state + '">' +
+                  '<span class="plan-date"><b>' + pt.num + '</b><i>' + pt.wday + '</i></span>' +
+                  '<span class="plan-title">' + esc(d.title) + '</span>' +
+                  '<span class="plan-state">' + (d.date === today ? 'Today' : '') + '</span>' +
+                '</li>';
+      });
+      html += '</ol></section>';
+    });
+
+    root.innerHTML = html;
+  }
+
   function renderProgress() {
     var root = document.querySelector('[data-progress-root]');
     if (!root) return;
@@ -918,6 +1003,8 @@
     document.querySelectorAll('[data-tab]').forEach(t => t.classList.toggle('active', t.dataset.tab === key));
     document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.dataset.panel === key));
     if (key === 'sessions')   { currentBlockView = 'all'; renderSessions(); }
+    // Re-render on entry so a tab left open overnight rolls onto the new day.
+    if (key === 'about')      renderPlan();
     if (key === 'progress')   renderProgress();
   }
   function bindTabs() {
@@ -1027,6 +1114,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     wireLinks();
     paintWelcome();
+    renderPlan();
     bindTabs();
     bindBlocksRoot();
     bindProgress();
