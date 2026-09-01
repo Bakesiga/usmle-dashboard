@@ -651,7 +651,8 @@ window.BLOCKS = [
           { title: "Cholinergic system: cholinomimetic and anticholinergic drugs", date: "2026-08-28", url: "https://us06web.zoom.us/rec/share/recwnimDKYiDiSEj-lPlKP8Wy9XrUFOwjzSEiQjBvA4PJCNOUUrwTDz49wUoir3q.fnRm18-Zz3j69hUR" },
           { title: "Sympathetic system: direct and indirect sympathomimetics", date: "2026-08-29", url: "https://us06web.zoom.us/rec/share/fQ8opn6GfNsjF4E7rOCnumroWNlb10Zz0_hE71gh6kXs4MsM6yIc3rQVVsKvRU8a.N6B54tV8lm5ZNUC4" },
           { title: "Sympathetic system: sympatholytics, alpha and beta blockers", date: "2026-08-29", url: "https://us06web.zoom.us/rec/share/iedOTsYv5NyOLs8vtyvipsLsnBCaoWtXiT3iA1Bwe0bvAWYxpIQIdBBMB-_iVIQh.OaNpbC7z2mqCVfaQ" },
-          { title: "PDE inhibitors, drug toxicities, drug interactions, and autonomic review", date: "2026-08-30", url: "https://us06web.zoom.us/rec/share/Aiq5DBWTkwym4u-z-Vo1b0XIOtSh1unRwRT7DOR-f3aPlkuMyL5Lk5-FbAWWW5PN.NpINOlx7MM6zESG3" }
+          { title: "PDE inhibitors, drug toxicities, drug interactions, and autonomic review", date: "2026-08-30", url: "https://us06web.zoom.us/rec/share/Aiq5DBWTkwym4u-z-Vo1b0XIOtSh1unRwRT7DOR-f3aPlkuMyL5Lk5-FbAWWW5PN.NpINOlx7MM6zESG3" },
+          { title: "Autonomic pharmacology review", date: "2026-08-31", url: "https://us06web.zoom.us/rec/share/aQyz0d5FdmhRd4giDgT6NLpj0D2HryJAJTCesp26c6qZM7kJgCXUnsVWlHmCLCBI.rbCSQ-AqQUgqHAaE" }
         ]
       }
     ]
