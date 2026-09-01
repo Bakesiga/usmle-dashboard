@@ -428,6 +428,26 @@
     } catch (e) {}
     return fromSession;
   }
+  // The student's own Zoom join link, or null. Read live-first like the other
+  // per-student fields, so issuing a link does not require them to sign out.
+  function studentZoomLink() {
+    let email = null, fromSession = null;
+    try {
+      const sess = JSON.parse(localStorage.getItem('usmle.session.v2') || 'null');
+      if (sess) { email = sess.email; fromSession = sess.zoomLink || null; }
+    } catch (e) {}
+    if (!email) return null;
+    try {
+      const cache = JSON.parse(sessionStorage.getItem('usmle.allowlist.v2') || '[]');
+      const live = cache.find(s => s.email === email);
+      // Only let the live entry win when it actually carries a link. A cache
+      // written by an older auth.js has no zoomLink field at all, and treating
+      // that absence as "no link" would blank out a link we already hold.
+      if (live && live.zoomLink) return live.zoomLink;
+    } catch (e) {}
+    return fromSession;
+  }
+
   function blockRecordingsLocked(block) {
     if (studentRecordingsPaused()) return true;
     const locked = studentLockedBlocks();
@@ -922,7 +942,7 @@
     var html =
       '<div class="stat-row">' +
         '<div class="stat"><div class="stat-n">' + totalAvail + '</div>' +
-          '<div class="stat-l">Sessions in the archive</div></div>' +
+          '<div class="stat-l">Class recordings in the archive</div></div>' +
         '<div class="stat"><div class="stat-n">' + coveredCount + '</div>' +
           '<div class="stat-l">Systems finished</div></div>' +
         '<div class="stat is-now"><div class="stat-n">' + mAbbr + '</div>' +
@@ -1070,7 +1090,16 @@
   // ---------------- Wire chip + action links ----------------
   function wireLinks() {
     const L = window.LINKS;
-    document.querySelectorAll('[data-link="zoom"]').forEach(a => a.href = L.zoom);
+    // Each student gets their own Zoom join link when we have one, so the
+    // button drops them straight into the class instead of the registration
+    // form. Falls back to the shared registration URL for anyone not yet
+    // registered. Same live-allowlist-then-session lookup as the access gates,
+    // so a link added today works on their next load without a re-login.
+    const personalZoom = studentZoomLink();
+    document.querySelectorAll('[data-link="zoom"]').forEach(a => {
+      a.href = personalZoom || L.zoom;
+      if (personalZoom) a.setAttribute('data-personal', '');
+    });
     document.querySelectorAll('[data-link="whatsapp"]').forEach(a => a.href = L.whatsapp);
     document.querySelectorAll('[data-link="ics"]').forEach(a => a.href = L.ics);
     document.querySelectorAll('[data-link="calendly"]').forEach(a => a.href = L.calendly);

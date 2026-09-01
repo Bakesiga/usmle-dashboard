@@ -66,6 +66,10 @@ const USMLE_AUTH = (() => {
         onlyRecordings: normalizeOnlyRecordings(s.onlyRecordings),
         // Optional whole-block lock. null => nothing locked.
         lockedBlocks: normalizeLockedBlocks(s.lockedBlocks),
+        // Personal Zoom join link from that student's own registration. When
+        // present the dashboard's Join button uses it instead of the shared
+        // registration URL, so they go straight into the class.
+        zoomLink: typeof s.zoomLink === "string" && s.zoomLink ? s.zoomLink.trim() : null,
         // Account-wide recording pause. true => every block's recordings are
         // locked, including blocks added later, while the rest of the
         // dashboard stays visible. Use for a lapsed subscription.
@@ -73,7 +77,7 @@ const USMLE_AUTH = (() => {
       }));
     }
     if (Array.isArray(json.emails)) {
-      return json.emails.map((e) => ({ email: String(e).toLowerCase().trim(), tracks: ["step1", "step2"], accessFrom: null, accessUntil: null, onlyRecordings: null, lockedBlocks: null, recordingsPaused: false }));
+      return json.emails.map((e) => ({ email: String(e).toLowerCase().trim(), tracks: ["step1", "step2"], accessFrom: null, accessUntil: null, onlyRecordings: null, lockedBlocks: null, recordingsPaused: false, zoomLink: null }));
     }
     return [];
   }
@@ -121,6 +125,7 @@ const USMLE_AUTH = (() => {
       onlyRecordings: entry.onlyRecordings || null,
       lockedBlocks: entry.lockedBlocks || null,
       recordingsPaused: entry.recordingsPaused === true,
+      zoomLink: entry.zoomLink || null,
       name: claims.name || entry.email,
       picture: claims.picture || "",
       signedInAt: Date.now(),
