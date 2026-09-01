@@ -1,0 +1,256 @@
+/* ============================================================
+   landing.css — the public page at /index.html.
+
+   Runs on redesign-tokens.css, the same tokens as the dashboard,
+   so a visitor who signs in does not cross into a different
+   product. Replaces the old theme-vitals.css look: navy ground,
+   Instrument Serif, cyan accents, animated ECG traces.
+
+   Layout is editorial rather than card-grid: rules and type
+   hierarchy carry the structure, and colour is used sparingly
+   because the whole palette is one accent plus one second voice.
+   ============================================================ */
+
+/* ---------------------------------------------------------------- shell */
+body.landing {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+.l-wrap { max-width: 1120px; margin: 0 auto; padding: 0 26px; }
+
+.l-sec { padding: 78px 0; }
+.l-sec.tight { padding: 54px 0; }
+/* The one dark passage on the page. Used once, for the closing ask, so it
+   still reads as an event rather than as decoration. */
+.l-sec.ink { background: var(--ink); color: var(--bg-cream); }
+.l-sec.sand { background: var(--bg-soft); }
+
+.l-eyebrow {
+  display: inline-block;
+  font-size: .76rem; font-weight: 800;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--accent-deep);
+  margin-bottom: 12px;
+}
+.l-sec.ink .l-eyebrow { color: var(--accent-soft); }
+
+.l-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3vw + .6rem, 3rem);
+  line-height: 1.04;
+  margin: 0 0 14px;
+  color: inherit;
+}
+.l-sub { font-size: 1.06rem; line-height: 1.55; color: var(--muted); max-width: 62ch; margin: 0; }
+.l-sec.ink .l-sub { color: #cfc6b6; }
+
+/* ---------------------------------------------------------------- header */
+.l-head {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(245,234,216,.9);
+  backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.l-head-in { display: flex; align-items: center; gap: 22px; padding: 14px 0; }
+.l-brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: var(--ink); }
+.l-mark {
+  width: 38px; height: 38px; border-radius: 999px;
+  background: var(--accent); color: var(--accent-tint);
+  display: grid; place-items: center;
+  font-family: var(--font-display); font-size: 19px; padding-top: 2px;
+}
+.l-brand b { font-size: 16px; font-weight: 700; letter-spacing: -.01em; }
+.l-nav { display: none; gap: 22px; margin-left: 14px; }
+.l-nav a { color: var(--ink-2); text-decoration: none; font-weight: 600; font-size: .95rem; }
+.l-nav a:hover { color: var(--accent-deep); }
+.l-head-cta { margin-left: auto; display: flex; gap: 9px; align-items: center; }
+@media (min-width: 860px) { .l-nav { display: flex; } }
+
+.l-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  border-radius: 999px; padding: 11px 20px;
+  font-weight: 700; font-size: .95rem; text-decoration: none;
+  border: 1.5px solid transparent; cursor: pointer;
+  transition: background .14s ease, color .14s ease;
+}
+.l-btn-primary { background: var(--accent); color: #fff; }
+.l-btn-primary:hover { background: var(--accent-deep); }
+.l-btn-quiet { background: transparent; color: var(--ink); border-color: var(--border); }
+.l-btn-quiet:hover { border-color: var(--ink); }
+.l-btn-lg { padding: 15px 26px; font-size: 1.02rem; }
+.l-sec.ink .l-btn-quiet { color: var(--bg-cream); border-color: rgba(255,255,255,.34); }
+.l-sec.ink .l-btn-quiet:hover { border-color: var(--bg-cream); }
+
+/* ---------------------------------------------------------------- hero */
+.l-hero { padding: 62px 0 44px; }
+.l-hero-grid { display: grid; gap: 40px; align-items: start; }
+@media (min-width: 940px) { .l-hero-grid { grid-template-columns: 1.35fr .85fr; gap: 54px; } }
+
+.l-live {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent-deep);
+  background: var(--accent-tint);
+  border-radius: 999px; padding: 7px 14px;
+  margin-bottom: 18px;
+}
+.l-live i {
+  width: 8px; height: 8px; border-radius: 999px; background: var(--accent);
+  animation: l-pulse 2.4s ease-in-out infinite;
+}
+@keyframes l-pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .l-live i { animation: none; } }
+
+.l-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5.2vw + .6rem, 4.6rem);
+  line-height: .98;
+  letter-spacing: -.01em;
+  margin: 0 0 20px;
+}
+.l-h1 em { font-style: normal; color: var(--accent); }
+.l-lede { font-size: 1.16rem; line-height: 1.6; color: var(--ink-2); max-width: 56ch; margin: 0 0 26px; }
+.l-hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 34px; }
+
+.l-stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0; border-top: 2px solid var(--ink); }
+.l-stat { padding: 16px 16px 0 0; }
+.l-stat + .l-stat { padding-left: 18px; border-left: 1px solid var(--border); }
+.l-stat b { display: block; font-family: var(--font-display); font-size: 1.5rem; line-height: 1; }
+.l-stat span { display: block; margin-top: 6px; font-size: .86rem; color: var(--muted); line-height: 1.35; }
+
+/* Instructor card. Credentials as a definition list, not a bio paragraph:
+   they are the thing a prospective student actually scans for. */
+.l-tutor { background: var(--bg-cream); border: 1px solid var(--border); border-radius: 28px; overflow: hidden; }
+.l-tutor-top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 18px; border-bottom: 1px solid var(--border);
+  font-size: .74rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted);
+}
+.l-tutor-top .on { color: var(--sage-deep); display: inline-flex; align-items: center; gap: 6px; }
+.l-tutor-top .on i { width: 7px; height: 7px; border-radius: 999px; background: var(--sage); }
+.l-tutor img { display: block; width: 100%; height: auto; }
+.l-tutor-body { padding: 18px 20px 22px; }
+.l-tutor-name { font-family: var(--font-display); font-size: 1.45rem; margin: 0 0 12px; }
+.l-cred { display: grid; gap: 9px; margin: 0; }
+.l-cred div { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: baseline; }
+.l-cred dt { font-weight: 700; font-size: .9rem; white-space: nowrap; }
+.l-cred dd { margin: 0; font-size: .88rem; color: var(--muted); line-height: 1.35; }
+
+/* ---------------------------------------------------------------- month rhythm */
+.l-months { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 22px 0; }
+.l-months-head {
+  display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: baseline;
+  margin-bottom: 16px; font-size: .95rem; color: var(--muted);
+}
+.l-months-head b { color: var(--ink); }
+.l-month-row { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 10px; }
+.l-month { border-top: 4px solid var(--border); padding-top: 10px; }
+.l-month.is-done { border-top-color: var(--sage); }
+.l-month.is-now { border-top-color: var(--accent); }
+.l-month .m { display: block; font-family: var(--font-display); font-size: 1.02rem; }
+.l-month .t { display: block; margin-top: 3px; font-size: .8rem; color: var(--muted); line-height: 1.3; }
+.l-month.is-now .t { color: var(--accent-deep); font-weight: 700; }
+@media (max-width: 620px) {
+  .l-month-row { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+}
+
+/* ---------------------------------------------------------------- about */
+.l-about { display: grid; gap: 34px; }
+@media (min-width: 900px) { .l-about { grid-template-columns: 1.3fr .8fr; gap: 54px; } }
+.l-about p { font-size: 1.04rem; line-height: 1.65; color: var(--ink-2); }
+.l-about p:first-child { font-size: 1.16rem; color: var(--ink); }
+.l-facts { display: grid; gap: 0; align-self: start; border-top: 2px solid var(--ink); }
+.l-fact { padding: 14px 0; border-bottom: 1px solid var(--border); }
+.l-fact b { display: block; font-family: var(--font-display); font-size: 1.3rem; }
+.l-fact span { display: block; margin-top: 3px; font-size: .9rem; color: var(--muted); }
+
+/* ---------------------------------------------------------------- blueprint */
+.l-bp { display: grid; gap: 30px; margin-top: 32px; }
+@media (min-width: 760px) { .l-bp { grid-template-columns: 1fr 1fr; gap: 44px; } }
+.l-bp h3 {
+  font-family: var(--font-display); font-size: 1.2rem; margin: 0 0 12px;
+  padding-bottom: 9px; border-bottom: 2px solid var(--accent);
+}
+.l-bp ul { list-style: none; margin: 0; padding: 0; }
+.l-bp li { padding: 9px 0; border-bottom: 1px solid var(--border); font-size: .99rem; }
+
+/* ---------------------------------------------------------------- included */
+.l-feats { display: grid; gap: 2px; margin-top: 32px; background: var(--border); border: 1px solid var(--border); }
+@media (min-width: 700px) { .l-feats { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .l-feats { grid-template-columns: repeat(3, 1fr); } }
+.l-feat { background: var(--bg); padding: 26px 24px 28px; }
+.l-feat b.n {
+  display: block; font-family: var(--font-display); font-size: 1.02rem;
+  color: var(--accent); margin-bottom: 10px;
+}
+.l-feat h3 { font-size: 1.06rem; margin: 0 0 7px; font-weight: 800; }
+.l-feat p { margin: 0; font-size: .95rem; line-height: 1.5; color: var(--muted); }
+
+/* ---------------------------------------------------------------- faq */
+.l-faq { margin-top: 28px; border-top: 2px solid var(--ink); }
+.l-faq-item { border-bottom: 1px solid var(--border); }
+.l-faq-q {
+  width: 100%; display: flex; gap: 14px; align-items: baseline;
+  background: none; border: 0; cursor: pointer; text-align: left;
+  padding: 18px 0; font: inherit; font-weight: 700; font-size: 1.04rem; color: var(--ink);
+}
+.l-faq-q .x { margin-left: auto; color: var(--accent); font-size: 1.3rem; line-height: 1; flex: none; }
+.l-faq-a { display: none; padding: 0 0 20px; color: var(--ink-2); line-height: 1.6; max-width: 68ch; }
+.l-faq-item.open .l-faq-a { display: block; }
+.l-faq-item.open .l-faq-q .x { transform: rotate(45deg); }
+
+/* ---------------------------------------------------------------- closing */
+.l-cta { display: grid; gap: 26px; align-items: center; }
+@media (min-width: 820px) { .l-cta { grid-template-columns: 1.3fr auto; gap: 46px; } }
+.l-cta h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.4vw + .6rem, 3.1rem); line-height: 1.04; margin: 0 0 12px; }
+.l-cta h2 em { font-style: normal; color: var(--accent-soft); }
+.l-cta-actions { display: flex; flex-direction: column; gap: 12px; }
+.l-cta-actions a.quietlink { color: var(--accent-soft); font-size: .95rem; text-align: center; }
+
+/* ---------------------------------------------------------------- footer */
+.l-foot { background: var(--bg-soft); border-top: 1px solid var(--border); padding: 46px 0 26px; }
+.l-foot-cols { display: grid; gap: 30px; }
+@media (min-width: 760px) { .l-foot-cols { grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; } }
+.l-foot p { font-size: .92rem; color: var(--muted); line-height: 1.55; max-width: 40ch; margin: 12px 0 0; }
+.l-foot h4 { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+.l-foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+.l-foot a { color: var(--ink-2); text-decoration: none; font-size: .95rem; }
+.l-foot a:hover { color: var(--accent-deep); }
+.l-foot-bottom {
+  display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;
+  margin-top: 34px; padding-top: 18px; border-top: 1px solid var(--border);
+  font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+}
+
+/* ---------------------------------------------------------------- small screens
+   On a narrow phone the header had four things competing for one row, so the
+   brand wrapped to two lines and both buttons broke their labels, giving a
+   200px tall bar before any content. Keep the mark, drop the wordmark, and
+   stop the buttons wrapping. */
+.l-btn { white-space: nowrap; }
+@media (max-width: 560px) {
+  .l-brand b { display: none; }
+  .l-head-in { gap: 12px; padding: 11px 0; }
+  .l-head-cta { gap: 7px; }
+  .l-btn { padding: 9px 14px; font-size: .88rem; }
+  .l-hero { padding: 40px 0 34px; }
+  .l-stats { grid-template-columns: 1fr; border-top-width: 2px; }
+  .l-stat { padding: 13px 0; border-bottom: 1px solid var(--border); }
+  .l-stat + .l-stat { padding-left: 0; border-left: 0; }
+  .l-sec { padding: 54px 0; }
+  .l-wrap { padding: 0 20px; }
+}
+
+/* ---------------------------------------------------------------- ink section text
+   redesign-tokens.css sets a global `h1,h2,h3,h4 { color: var(--ink) }`, which
+   beats inheritance from `.l-sec.ink`. Without this the closing heading renders
+   ink on ink and is invisible. Restate every text colour inside the dark
+   passage rather than relying on inherit. */
+.l-sec.ink h2,
+.l-sec.ink h3,
+.l-sec.ink h4 { color: var(--bg-cream); }
+.l-sec.ink p { color: #cfc6b6; }
