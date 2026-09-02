@@ -656,6 +656,22 @@ window.BLOCKS = [
         ]
       }
     ]
+  },
+  {
+    id: "msk",
+    short: "MSK",
+    label: "Musculoskeletal and Skin",
+    subject: "msk",
+    dateRange: "From Sep 1",
+    dayRange: [93, 105],
+    start: "2026-09-01",
+    subBlocks: [
+      { id: "msk-anatomy", label: "Anatomy", days: [],
+        recordings: [
+          { title: "Upper limb: brachial plexus, axillary, musculocutaneous and radial nerves", date: "2026-09-01", url: "https://us06web.zoom.us/rec/share/wVE3L1ZpS9LWICEE9fkj3ip00KvuoTIpBq699S9itiJOU00yZ4jDmOJ2Cbqb1J8u.-Wy4NrqSCI-rH9Nv" }
+        ]
+      }
+    ]
   }
 ];
 
