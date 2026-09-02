@@ -29,7 +29,8 @@
         "step1"
       ],
       "accessFrom": "2026-08-01",
-      "zoomLink": "https://us06web.zoom.us/w/81397383545?tk=CF6qxCBBlSG_tMSXeUcEvUW_Y1DEXNRpXSrvRc1PbjQ"
+      "zoomLink": "https://us06web.zoom.us/w/81397383545?tk=CF6qxCBBlSG_tMSXeUcEvUW_Y1DEXNRpXSrvRc1PbjQ",
+      "shareRecordings": false
     },
     {
       "email": "barbaramwebaza@gmail.com",
@@ -107,7 +108,8 @@
       "email": "drnjambigithinji123@gmail.com",
       "tracks": [
         "step1"
-      ]
+      ],
+      "shareRecordings": false
     },
     {
       "email": "franciemarie2020@gmail.com",
@@ -197,7 +199,9 @@
       "tracks": [
         "step1"
       ],
-      "accessFrom": "2026-08-01"
+      "accessFrom": "2026-08-01",
+      "shareRecordings": false,
+      "accessUntil": "2026-08-31"
     },
     {
       "email": "kukundapavin850@gmail.com",
@@ -210,7 +214,8 @@
       "email": "leahnkamara@gmail.com",
       "tracks": [
         "step1"
-      ]
+      ],
+      "shareRecordings": false
     },
     {
       "email": "lklaurakim@gmail.com",
@@ -335,7 +340,8 @@
       "email": "shalomkdi@gmail.com",
       "tracks": [
         "step1"
-      ]
+      ],
+      "shareRecordings": false
     },
     {
       "email": "snansaamu@gmail.com",
@@ -349,7 +355,8 @@
       "email": "sorodavi19@gmail.com",
       "tracks": [
         "step1"
-      ]
+      ],
+      "shareRecordings": false
     },
     {
       "email": "susanchemutai@gmail.com",
@@ -362,7 +369,9 @@
       "email": "thatcherrhina@gmail.com",
       "tracks": [
         "step1"
-      ]
+      ],
+      "shareRecordings": false,
+      "accessUntil": "2026-08-31"
     },
     {
       "email": "trueddunguabrahammatovu@gmail.com",
