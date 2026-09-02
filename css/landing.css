@@ -254,3 +254,34 @@ body.landing {
 .l-sec.ink h3,
 .l-sec.ink h4 { color: var(--bg-cream); }
 .l-sec.ink p { color: #cfc6b6; }
+
+/* ---------------------------------------------------------------- wall of fame
+   Top of the page. The reports are white documents, so they sit on white
+   mounts against the lightest neutral rather than on the cream ground. */
+.l-wof { background: var(--bg-cream); border-bottom: 1px solid var(--border); padding: 54px 0 50px; }
+.l-wof-h {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(1.9rem, 3.2vw + .6rem, 2.9rem);
+  line-height: 1.05; letter-spacing: -.012em; margin: 0 0 14px; text-wrap: balance;
+}
+.l-wof-msg { font-size: 1.12rem; line-height: 1.6; color: var(--ink); max-width: 62ch; margin: 0 0 28px; }
+.l-wof-grid { display: grid; gap: 22px; }
+@media (min-width: 760px) { .l-wof-grid { grid-template-columns: 1fr 1fr; gap: 26px; } }
+.l-wof-card {
+  margin: 0; background: #fff; border: 1px solid var(--border); border-radius: 14px;
+  padding: 10px; box-shadow: 0 1px 2px rgba(32,30,29,.08), 0 12px 28px -14px rgba(32,30,29,.28);
+}
+.l-wof-card img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.l-wof-cap {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 6px 8px 12px;
+}
+.l-wof-cap b { font-family: var(--font-display); font-weight: 400; font-size: 1.28rem; line-height: 1.1; color: var(--ink); }
+.l-wof-date { font-size: .74rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); width: 100%; }
+.l-wof-pass {
+  display: inline-flex; align-items: center; gap: 7px; margin-left: auto;
+  font-size: .76rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--sage-deep); background: var(--sage-soft); border: 1px solid var(--sage);
+  border-radius: 999px; padding: 5px 13px 5px 10px;
+}
+.l-wof-pass i { width: 7px; height: 7px; border-radius: 999px; background: var(--sage); }

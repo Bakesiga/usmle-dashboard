@@ -2162,3 +2162,32 @@
     content: ' · Today'; color: var(--accent-deep); font-weight: 800;
   }
 }
+
+/* ---- Wall of Fame (About panel, above the month plan) ----
+   White mounts for the reports, which are white documents; the block
+   itself stays on the panel ground so it reads as content, not a card. */
+.wof { margin: 0 0 34px; padding: 0 0 30px; border-bottom: 2px solid var(--ink); }
+.wof-h {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 2.2vw + .8rem, 2.4rem);
+  line-height: 1.08; letter-spacing: -.014em; color: var(--ink);
+  margin: var(--s-16) 0 10px; text-wrap: balance;
+}
+.wof-msg { font-size: 16.5px; line-height: 1.58; color: var(--ink); max-width: 60ch; margin: 0 0 22px; }
+.wof-grid { display: grid; gap: 18px; }
+@media (min-width: 720px) { .wof-grid { grid-template-columns: 1fr 1fr; gap: 20px; } }
+.wof-card {
+  margin: 0; background: #fff; border: 1px solid var(--border); border-radius: 14px;
+  padding: 9px; box-shadow: 0 1px 2px rgba(32,30,29,.08), 0 12px 28px -14px rgba(32,30,29,.28);
+}
+.wof-card img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.wof-cap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 5px 7px 11px; }
+.wof-cap b { font-family: var(--font-display); font-weight: 400; font-size: 1.2rem; line-height: 1.1; color: var(--ink); }
+.wof-date { width: 100%; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.wof-pass {
+  display: inline-flex; align-items: center; gap: 7px; margin-left: auto;
+  font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--sage-deep); background: var(--sage-soft); border: 1px solid var(--sage);
+  border-radius: var(--r-pill); padding: 4px 12px 4px 9px;
+}
+.wof-pass i { width: 7px; height: 7px; border-radius: 999px; background: var(--sage); display: block; }

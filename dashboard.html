@@ -118,6 +118,39 @@
           <h1 class="welcome-h">Welcome back, <span data-welcome-name>there</span></h1>
         </header>
 
+        <!-- Class wins. The two most recent Step 1 passes, shown as the
+             students' own score reports with the USMLE ID removed. The
+             data-wof-key is the fireworks trigger: bump it when a new pass
+             is added and every student sees the celebration once more. -->
+        <section class="wof" data-wof-key="2026-08-kamara-najjuma" aria-label="Recent Step 1 results">
+          <span class="tag-sage"><i></i>Wall of Fame</span>
+          <h2 class="wof-h">Congratulations, Leah and Julian.</h2>
+          <p class="wof-msg">
+            I would like to congratulate our latest USMLE test takers, Leah Kamara and Julian Najjuma.
+            They now add to the list of wins we have from Austin Flint!
+          </p>
+          <div class="wof-grid">
+            <figure class="wof-card">
+              <div class="wof-cap">
+                <span class="wof-date">18 August 2026</span>
+                <b>Leah Njeri Kamara</b>
+                <span class="wof-pass"><i aria-hidden="true"></i>Pass</span>
+              </div>
+              <img src="images/wof-kamara.png" width="1200" height="485" loading="eager" decoding="async"
+                   alt="Step 1 score report for Leah Njeri Kamara, result PASS, test date 18 August 2026. The USMLE ID is blacked out." />
+            </figure>
+            <figure class="wof-card">
+              <div class="wof-cap">
+                <span class="wof-date">17 August 2026</span>
+                <b>Julian Najjuma</b>
+                <span class="wof-pass"><i aria-hidden="true"></i>Pass</span>
+              </div>
+              <img src="images/wof-najjuma.png" width="1200" height="485" loading="eager" decoding="async"
+                   alt="Step 1 score report for Julian Najjuma, result PASS, test date 17 August 2026. The USMLE ID is blacked out." />
+            </figure>
+          </div>
+        </section>
+
         <!-- The month plan. This is the face of the dashboard: what we are
              doing tonight, what has gone, what is still ahead. Rendered from
              window.PLAN by renderPlan(). -->
@@ -517,6 +550,7 @@
   </script>
   <script src="js/data.js"></script>
   <script src="js/dashboard.js"></script>
+  <script src="js/fireworks.js"></script>
   <script src="js/tweaks.js"></script>
 </body>
 </html>
