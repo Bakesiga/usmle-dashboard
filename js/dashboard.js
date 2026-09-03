@@ -1158,5 +1158,13 @@
     setInterval(paintSideRail, 30000);
     paintCountdown();
     setInterval(paintCountdown, 1000);
+
+    // The first pass above ran against whatever allowlist copy the device
+    // already held. Once the fresh copy lands, apply it: the Zoom button picks
+    // up a corrected personal link and the recording gates any changed access,
+    // without the student needing to sign out and in.
+    if (typeof USMLE_AUTH !== 'undefined' && USMLE_AUTH.ready && typeof USMLE_AUTH.ready.then === 'function') {
+      USMLE_AUTH.ready.then(() => { wireLinks(); renderSessions(); }).catch(() => {});
+    }
   });
 })();

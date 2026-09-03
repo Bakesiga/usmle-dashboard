@@ -155,7 +155,30 @@ const USMLE_AUTH = (() => {
     return s;
   }
 
-  loadAllowlist();
+  // After the fresh allowlist arrives, refresh the stored session from it so the
+  // session fallback never carries stale access fields or an old Zoom link. A
+  // device that signed in before a fix was pushed would otherwise keep the old
+  // values until the student signed out and back in.
+  function syncSessionFromAllowlist(students) {
+    try {
+      const s = getSession();
+      if (!s || !Array.isArray(students)) return;
+      const live = students.find((x) => x.email === s.email);
+      if (!live) return;
+      const next = Object.assign({}, s, {
+        tracks: live.tracks,
+        accessFrom: live.accessFrom || null,
+        accessUntil: live.accessUntil || null,
+        onlyRecordings: live.onlyRecordings || null,
+        lockedBlocks: live.lockedBlocks || null,
+        recordingsPaused: live.recordingsPaused === true,
+        zoomLink: live.zoomLink || null,
+      });
+      if (JSON.stringify(next) !== JSON.stringify(s)) localStorage.setItem(SESSION_KEY, JSON.stringify(next));
+    } catch (e) {}
+  }
 
-  return { handleCredential, getSession, signOut, requireSession, loadAllowlist };
+  const ready = loadAllowlist().then((students) => { syncSessionFromAllowlist(students); return students; });
+
+  return { handleCredential, getSession, signOut, requireSession, loadAllowlist, ready };
 })();
