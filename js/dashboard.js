@@ -856,11 +856,15 @@
     var today = ymd(window.getNow());
     var days = plan.days;
     var first = days[0].date, last = days[days.length - 1].date;
-    var done = 0;
-    days.forEach(function (d) { if (d.date < today) done++; });
+    var dates = [];
+    days.forEach(function (d) { if (dates.indexOf(d.date) === -1) dates.push(d.date); });
+    var done = dates.filter(function (dt) { return dt < today; }).length;
 
-    var todayItem = null;
-    days.forEach(function (d) { if (d.date === today) todayItem = d; });
+    // Several sessions can share a date (extra classes); the Today line names them all.
+    var todayItems = days.filter(function (d) { return d.date === today; });
+    var todayItem = todayItems.length ? {
+      title: todayItems.map(function (d) { return d.title; }).join('. Then: ')
+    } : null;
 
     var html = '' +
       '<div class="plan-head">' +
@@ -869,7 +873,7 @@
           '<h2 class="plan-h">' + esc(plan.label) + '</h2>' +
         '</div>' +
         '<div class="plan-meter">' +
-          '<span class="plan-meter-n">' + done + '<i>/' + days.length + '</i></span>' +
+          '<span class="plan-meter-n">' + done + '<i>/' + dates.length + '</i></span>' +
           '<span class="plan-meter-l">days behind us</span>' +
         '</div>' +
       '</div>';
@@ -899,10 +903,11 @@
       items.forEach(function (d) {
         var state = d.date < today ? 'is-done' : (d.date === today ? 'is-now' : '');
         var pt = planDayParts(d.date);
-        html += '<li class="plan-row ' + state + '">' +
+        var tag = d.date === today ? (d.extra ? 'Today, extra' : 'Today') : (d.extra ? 'Extra class' : '');
+        html += '<li class="plan-row ' + state + (d.extra ? ' is-extra' : '') + '">' +
                   '<span class="plan-date"><b>' + pt.num + '</b><i>' + pt.wday + '</i></span>' +
                   '<span class="plan-title">' + esc(d.title) + '</span>' +
-                  '<span class="plan-state">' + (d.date === today ? 'Today' : '') + '</span>' +
+                  '<span class="plan-state' + (d.extra && d.date !== today ? ' is-extra' : '') + '">' + tag + '</span>' +
                 '</li>';
       });
       html += '</ol></section>';

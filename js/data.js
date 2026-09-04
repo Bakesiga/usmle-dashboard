@@ -715,11 +715,13 @@ window.PLAN = {
     { id: "micro", label: "Microbiology",             range: "23 to 30 September" }
   ],
   days: [
-    { date: "2026-09-01", block: "msk", title: "Upper limb: brachial plexus, terminal nerve distribution and palsies" },
-    { date: "2026-09-02", block: "msk", title: "Lower limb: lumbosacral plexus, terminal nerve distribution and palsies" },
-    { date: "2026-09-03", block: "msk", title: "Review of upper and lower limb anatomy" },
-    { date: "2026-09-04", block: "msk", title: "Physiology: muscle contraction, fibre types, muscle as a sensory organ, cell biology of bone" },
-    { date: "2026-09-05", block: "msk", title: "Arthritis and the spondyloarthropathies" },
+    { date: "2026-09-01", block: "msk", title: "Upper limb: brachial plexus, axillary, musculocutaneous and radial nerves" },
+    { date: "2026-09-02", block: "msk", title: "Upper limb: median and ulnar nerves, the hand, and the nerve palsies" },
+    { date: "2026-09-03", block: "msk", title: "Upper limb: muscles of the shoulder, arm, forearm and hand, sensory innervation, and review" },
+    { date: "2026-09-04", block: "msk", title: "Lower limb: lumbosacral plexus, terminal nerve distribution and palsies" },
+    { date: "2026-09-05", block: "msk", title: "Review of upper and lower limb anatomy" },
+    { date: "2026-09-05", block: "msk", extra: true, title: "Physiology: muscle contraction, fibre types, muscle as a sensory organ, cell biology of bone" },
+    { date: "2026-09-05", block: "msk", extra: true, title: "Arthritis and the spondyloarthropathies" },
     { date: "2026-09-06", block: "msk", title: "Autoimmune connective tissue disease and the vasculitides" },
     { date: "2026-09-07", block: "msk", title: "Bone tumours" },
     { date: "2026-09-08", block: "msk", title: "Other benign conditions of the upper and lower limbs" },

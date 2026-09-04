@@ -2191,3 +2191,8 @@
   border-radius: var(--r-pill); padding: 4px 12px 4px 9px;
 }
 .wof-pass i { width: 7px; height: 7px; border-radius: 999px; background: var(--sage); display: block; }
+
+/* Extra classes in the month plan: same row, a quieter sage tag so they read
+   as additions to the day rather than a duplicate entry. */
+.plan-state.is-extra { color: var(--sage-deep); }
+.plan-row.is-extra .plan-date b { color: var(--sage-deep); }
