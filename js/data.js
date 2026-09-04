@@ -669,7 +669,8 @@ window.BLOCKS = [
       { id: "msk-anatomy", label: "Anatomy", days: [],
         recordings: [
           { title: "Upper limb: brachial plexus, axillary, musculocutaneous and radial nerves", date: "2026-09-01", url: "https://us06web.zoom.us/rec/share/wVE3L1ZpS9LWICEE9fkj3ip00KvuoTIpBq699S9itiJOU00yZ4jDmOJ2Cbqb1J8u.-Wy4NrqSCI-rH9Nv" },
-          { title: "Upper limb: median and ulnar nerves, the hand, and radial, ulnar and median nerve palsies", date: "2026-09-02", url: "https://us06web.zoom.us/rec/share/MhNHaeWLWaLIvuvstAKHiA1kLqAKqkE1o0LV3xTjTqCO2dg4Sq31GRHFwJZ0FJLI.fgNBYsvf6Gk00hfn" }
+          { title: "Upper limb: median and ulnar nerves, the hand, and radial, ulnar and median nerve palsies", date: "2026-09-02", url: "https://us06web.zoom.us/rec/share/MhNHaeWLWaLIvuvstAKHiA1kLqAKqkE1o0LV3xTjTqCO2dg4Sq31GRHFwJZ0FJLI.fgNBYsvf6Gk00hfn" },
+          { title: "Upper limb revision", date: "2026-09-03", url: "https://us06web.zoom.us/rec/share/Vp4aDgtTCW4rfQs-9bMtVo2Uohk5Mb09GNmj1-q-TfRoNYTlUgejqI2l7XH92T2T.5PDn4sSC--2Maqpm" }
         ]
       }
     ]
