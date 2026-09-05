@@ -671,7 +671,8 @@ window.BLOCKS = [
           { title: "Upper limb: brachial plexus, axillary, musculocutaneous and radial nerves", date: "2026-09-01", url: "https://us06web.zoom.us/rec/share/wVE3L1ZpS9LWICEE9fkj3ip00KvuoTIpBq699S9itiJOU00yZ4jDmOJ2Cbqb1J8u.-Wy4NrqSCI-rH9Nv" },
           { title: "Upper limb: median and ulnar nerves, the hand, and radial, ulnar and median nerve palsies", date: "2026-09-02", url: "https://us06web.zoom.us/rec/share/MhNHaeWLWaLIvuvstAKHiA1kLqAKqkE1o0LV3xTjTqCO2dg4Sq31GRHFwJZ0FJLI.fgNBYsvf6Gk00hfn" },
           { title: "Upper limb revision", date: "2026-09-03", url: "https://us06web.zoom.us/rec/share/Vp4aDgtTCW4rfQs-9bMtVo2Uohk5Mb09GNmj1-q-TfRoNYTlUgejqI2l7XH92T2T.5PDn4sSC--2Maqpm" },
-          { title: "Upper limb review, and the lumbar and sacral plexuses", date: "2026-09-04", url: "https://us06web.zoom.us/rec/share/Q4ks4GJRY5tq-2sgjYbpIJECsZvhW90IuDCX2iCfn4wDIC7r-yl1Y8DH0mWe-mXT.nO-Kp_SMqWM3f9Yb" }
+          { title: "Upper limb review, and the lumbar and sacral plexuses", date: "2026-09-04", url: "https://us06web.zoom.us/rec/share/Q4ks4GJRY5tq-2sgjYbpIJECsZvhW90IuDCX2iCfn4wDIC7r-yl1Y8DH0mWe-mXT.nO-Kp_SMqWM3f9Yb" },
+          { title: "Lower limb anatomy, continued (Saturday morning extra class)", date: "2026-09-05", url: "https://us06web.zoom.us/rec/share/TA0VrgnYNP_Y24w-oisUXLin3Gc2niTYZIwQ5jvyf8FN5-dwam9Cnh4712jOFlcJ.dFsfvQ50Z2LSOOt7" }
         ]
       }
     ]
