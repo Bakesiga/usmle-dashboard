@@ -675,6 +675,11 @@ window.BLOCKS = [
           { title: "Lower limb anatomy, continued (Saturday morning extra class)", date: "2026-09-05", url: "https://us06web.zoom.us/rec/share/TA0VrgnYNP_Y24w-oisUXLin3Gc2niTYZIwQ5jvyf8FN5-dwam9Cnh4712jOFlcJ.dFsfvQ50Z2LSOOt7" },
           { title: "Lower limb review, the knee and ankle joints, and Julian's Step 1 experience, part 1 (Saturday afternoon extra class)", date: "2026-09-05", url: "https://us06web.zoom.us/rec/share/DOW9ELA9WZoK-G2-SumdQ-iEywejokEhWcWIalFIk4jYHKHSuTSJnXQ51cN8RTkS.H3b7TXizyW-fBTWW" }
         ]
+      },
+      { id: "msk-physiology", label: "Physiology", days: [],
+        recordings: [
+          { title: "Physiology: skeletal muscle contraction, muscle fibre types, muscle proprioceptors, and bone cell biology (osteoblasts and osteoclasts)", date: "2026-09-05", url: "https://us06web.zoom.us/rec/share/Oxv5AaDd4ktPXzYi4cJ29NTD8RS7VE6EDsuPwr_XRAMk_rlxKyWNPr1LmLhGMFAs.YPYB05ON-lgGYGU0" }
+        ]
       }
     ]
   }
