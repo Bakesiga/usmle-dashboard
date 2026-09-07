@@ -680,6 +680,11 @@ window.BLOCKS = [
         recordings: [
           { title: "Physiology: skeletal muscle contraction, muscle fibre types, muscle proprioceptors, and bone cell biology (osteoblasts and osteoclasts)", date: "2026-09-05", url: "https://us06web.zoom.us/rec/share/Oxv5AaDd4ktPXzYi4cJ29NTD8RS7VE6EDsuPwr_XRAMk_rlxKyWNPr1LmLhGMFAs.YPYB05ON-lgGYGU0" }
         ]
+      },
+      { id: "msk-pathology", label: "Pathology", days: [],
+        recordings: [
+          { title: "Pathology: osteoarthritis, rheumatoid arthritis, crystal arthropathies, systemic JIA, Sjogren syndrome, septic arthritis, osteomyelitis, and the seronegative spondyloarthropathies", date: "2026-09-06", url: "https://us06web.zoom.us/rec/share/QsmI5_lY5dYH_koZzH073JhiFASp10LXacAUlII1HwIUuoDsKGy9zZptz_F0sgaO.x9mPUOwW3SA-Klq4" }
+        ]
       }
     ]
   }
