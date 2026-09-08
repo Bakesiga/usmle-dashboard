@@ -683,7 +683,8 @@ window.BLOCKS = [
       },
       { id: "msk-pathology", label: "Pathology", days: [],
         recordings: [
-          { title: "Pathology: osteoarthritis, rheumatoid arthritis, crystal arthropathies, systemic JIA, Sjogren syndrome, septic arthritis, osteomyelitis, and the seronegative spondyloarthropathies", date: "2026-09-06", url: "https://us06web.zoom.us/rec/share/QsmI5_lY5dYH_koZzH073JhiFASp10LXacAUlII1HwIUuoDsKGy9zZptz_F0sgaO.x9mPUOwW3SA-Klq4" }
+          { title: "Pathology: osteoarthritis, rheumatoid arthritis, crystal arthropathies, systemic JIA, Sjogren syndrome, septic arthritis, osteomyelitis, and the seronegative spondyloarthropathies", date: "2026-09-06", url: "https://us06web.zoom.us/rec/share/QsmI5_lY5dYH_koZzH073JhiFASp10LXacAUlII1HwIUuoDsKGy9zZptz_F0sgaO.x9mPUOwW3SA-Klq4" },
+          { title: "Pathology: lupus and the connective tissue diseases, the myositides, IgG4-related disease, the vasculitides, myasthenia gravis and Lambert-Eaton, and Raynaud phenomenon (scleroderma to follow)", date: "2026-09-07", url: "https://us06web.zoom.us/rec/share/7b96xO0vq7wc3CjvPfqnviZt-Q_xtvW0rnNm5LmxQxwUx_jGhNRsXRRaqXOHFBnu.1LOQebGndP5Ozuah" }
         ]
       }
     ]
