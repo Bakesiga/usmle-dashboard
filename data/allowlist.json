@@ -256,7 +256,12 @@
       "tracks": [
         "step1"
       ],
-      "recordingsPaused": true
+      "recordingsPaused": true,
+      "lockedBlocks": [
+        "msk",
+        "gi",
+        "micro"
+      ]
     },
     {
       "email": "mugisha114@gmail.com",
