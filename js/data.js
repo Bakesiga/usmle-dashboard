@@ -689,6 +689,11 @@ window.BLOCKS = [
           { title: "Bone tumours, and metabolic bone disease: osteoporosis, osteopetrosis, osteomalacia and rickets, Paget disease, and avascular necrosis", date: "2026-09-10", url: "https://us06web.zoom.us/rec/share/wzxq-2CF2LsyxVfQAEW4t7Pcv1GoLQIkRZYzNqb6lt_nDpLBvtC7kZcs7RSHIUl_.95Df9UsvP42xhwMA" },
           { title: "Achondroplasia, mosaicism and McCune-Albright syndrome, clavicle and hand fractures, carpal tunnel and Guyon canal, psoas abscess, common knee and overuse conditions, compartment syndrome, childhood hip and knee conditions, paediatric fractures, and the knee examination", date: "2026-09-11", url: "https://us06web.zoom.us/rec/share/odUoEiZg0lYTNBaqIu5J2kT0rCKTfvStKUMICAtM_wlz4TMhPUk_NSJyQzOpOlA.liYuQNbUxYM5T5sp" }
         ]
+      },
+      { id: "msk-skin", label: "Dermatology", days: [],
+        recordings: [
+          { title: "Skin layers and epithelial cell junctions, exocrine gland types, dermatologic nomenclature (macroscopic and microscopic terms), pemphigus vulgaris and bullous pemphigoid, and the other blistering disorders (Saturday morning extra class)", date: "2026-09-12", url: "https://us06web.zoom.us/rec/share/L1jJbpYRl2etTCxgLTmV_W_NSdzpmlZnt2S5Hv8Jg-cqKF1A8sd1zU6Euo-hnn_O.JGIVqzQz7InXFzTA" }
+        ]
       }
     ]
   }
