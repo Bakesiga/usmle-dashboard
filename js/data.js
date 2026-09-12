@@ -692,7 +692,8 @@ window.BLOCKS = [
       },
       { id: "msk-skin", label: "Dermatology", days: [],
         recordings: [
-          { title: "Skin layers and epithelial cell junctions, exocrine gland types, dermatologic nomenclature (macroscopic and microscopic terms), pemphigus vulgaris and bullous pemphigoid, and the other blistering disorders (Saturday morning extra class)", date: "2026-09-12", url: "https://us06web.zoom.us/rec/share/L1jJbpYRl2etTCxgLTmV_W_NSdzpmlZnt2S5Hv8Jg-cqKF1A8sd1zU6Euo-hnn_O.JGIVqzQz7InXFzTA" }
+          { title: "Skin layers and epithelial cell junctions, exocrine gland types, dermatologic nomenclature (macroscopic and microscopic terms), pemphigus vulgaris and bullous pemphigoid, and the other blistering disorders (Saturday morning extra class)", date: "2026-09-12", url: "https://us06web.zoom.us/rec/share/L1jJbpYRl2etTCxgLTmV_W_NSdzpmlZnt2S5Hv8Jg-cqKF1A8sd1zU6Euo-hnn_O.JGIVqzQz7InXFzTA" },
+          { title: "Skin infections: bacterial, viral and fungal (Saturday afternoon extra class)", date: "2026-09-12", url: "https://us06web.zoom.us/rec/share/36Y2IIxbHg3vFbcdTRslQZS00V4KepnLxPeyQyMUVn1UQWhDX06wXHQUuMdfZ_aw.1KmkQ25VGgYMpN2G" }
         ]
       }
     ]
