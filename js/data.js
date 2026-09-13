@@ -693,7 +693,8 @@ window.BLOCKS = [
       { id: "msk-skin", label: "Dermatology", days: [],
         recordings: [
           { title: "Skin layers and epithelial cell junctions, exocrine gland types, dermatologic nomenclature (macroscopic and microscopic terms), pemphigus vulgaris and bullous pemphigoid, and the other blistering disorders (Saturday morning extra class)", date: "2026-09-12", url: "https://us06web.zoom.us/rec/share/L1jJbpYRl2etTCxgLTmV_W_NSdzpmlZnt2S5Hv8Jg-cqKF1A8sd1zU6Euo-hnn_O.JGIVqzQz7InXFzTA" },
-          { title: "Skin infections: bacterial, viral and fungal (Saturday afternoon extra class)", date: "2026-09-12", url: "https://us06web.zoom.us/rec/share/36Y2IIxbHg3vFbcdTRslQZS00V4KepnLxPeyQyMUVn1UQWhDX06wXHQUuMdfZ_aw.1KmkQ25VGgYMpN2G" }
+          { title: "Skin infections: bacterial, viral and fungal (Saturday afternoon extra class)", date: "2026-09-12", url: "https://us06web.zoom.us/rec/share/36Y2IIxbHg3vFbcdTRslQZS00V4KepnLxPeyQyMUVn1UQWhDX06wXHQUuMdfZ_aw.1KmkQ25VGgYMpN2G" },
+          { title: "Vascular tumours of the skin, and skin cancers: basal cell carcinoma, squamous cell carcinoma and actinic keratosis, melanoma, and naevi", date: "2026-09-12", url: "https://us06web.zoom.us/rec/share/E04eBmN-bBF7Fdrs3kISQ-y-Nddhxf2mQfiKUViGL0bMnCkO7zcH5bDeAC4Y1lgH.xRVOnARdxxE2VPPR" }
         ]
       }
     ]
@@ -753,7 +754,7 @@ window.PLAN = {
     { date: "2026-09-11", block: "msk", title: "Achondroplasia and McCune-Albright syndrome, fractures and overuse injuries, compartment syndrome, childhood hip and knee conditions, and the knee examination" },
     { date: "2026-09-12", block: "msk", extra: true, title: "Skin: layers, cell junctions, exocrine glands, dermatologic nomenclature, and the blistering disorders" },
     { date: "2026-09-12", block: "msk", extra: true, title: "Skin infections, and tumours and tumour-like conditions of the skin" },
-    { date: "2026-09-12", block: "msk", title: "Dermatology, continued: the remaining skin conditions" },
+    { date: "2026-09-12", block: "msk", title: "Vascular tumours of the skin, skin cancers, and naevi" },
     { date: "2026-09-13", block: "msk", title: "Pharmacology of the musculoskeletal system" },
     { date: "2026-09-14", block: "gi",  title: "Embryology of the gastrointestinal tract" },
     { date: "2026-09-15", block: "gi",  title: "Anatomy of the gastrointestinal tract" },
