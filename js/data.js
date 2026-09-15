@@ -699,6 +699,22 @@ window.BLOCKS = [
         ]
       }
     ]
+  },
+  {
+    id: "gi",
+    short: "GI",
+    label: "Gastrointestinal",
+    subject: "gi",
+    dateRange: "From Sep 14",
+    dayRange: [106, 116],
+    start: "2026-09-14",
+    subBlocks: [
+      { id: "gi-embryology", label: "Embryology", days: [],
+        recordings: [
+          { title: "Embryology: development of the tongue, and the foregut including the oesophagus", date: "2026-09-14", url: "https://us06web.zoom.us/rec/share/l-6gA8dkHTKW6r7WdiaDIKwEO8Hs9yoahkPICSSxhCzWhvgBB0GH5jSL6Xs8kmfD.fdoe9nVjb2tcejCI" }
+        ]
+      }
+    ]
   }
 ];
 
@@ -713,7 +729,6 @@ window.BLOCKS = [
    ------------------------------------------------------------------ */
 window.UPCOMING = [
   { label: "Musculoskeletal, skin and connective tissue", when: "September" },
-  { label: "Gastroenterology",                            when: "September" },
   { label: "Microbiology",                                when: "September" },
   { label: "Psychiatry",                                  when: "September" },
   { label: "Ethics",                                      when: "October"   },
@@ -757,7 +772,7 @@ window.PLAN = {
     { date: "2026-09-12", block: "msk", extra: true, title: "Skin infections, and tumours and tumour-like conditions of the skin" },
     { date: "2026-09-12", block: "msk", title: "Vascular tumours of the skin, skin cancers, and naevi" },
     { date: "2026-09-13", block: "msk", title: "Acne, dermatitis (atopic, allergic contact and irritant contact), psoriasis, and lichen planus" },
-    { date: "2026-09-14", block: "gi",  title: "Embryology: tongue, the gut tube, pancreas, and congenital anomalies" },
+    { date: "2026-09-14", block: "gi",  title: "Embryology: development of the tongue, and the foregut including the oesophagus" },
     { date: "2026-09-15", block: "gi",  title: "Anatomy, part 1: peritoneal reflections, ligaments and their contents, the retroperitoneum, histology of the digestive tract, and blood supply of the gut" },
     { date: "2026-09-16", block: "gi",  title: "Anatomy, part 2: completing the anatomy, the abdominal wall and femoral region, and hernias" },
     { date: "2026-09-17", block: "gi",  title: "Physiology: secretions and their regulation, and absorption" },
