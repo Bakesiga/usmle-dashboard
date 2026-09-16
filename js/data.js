@@ -711,7 +711,8 @@ window.BLOCKS = [
     subBlocks: [
       { id: "gi-embryology", label: "Embryology", days: [],
         recordings: [
-          { title: "Embryology: development of the tongue, and the foregut including the oesophagus", date: "2026-09-14", url: "https://us06web.zoom.us/rec/share/l-6gA8dkHTKW6r7WdiaDIKwEO8Hs9yoahkPICSSxhCzWhvgBB0GH5jSL6Xs8kmfD.fdoe9nVjb2tcejCI" }
+          { title: "Embryology: development of the tongue, and the foregut including the oesophagus", date: "2026-09-14", url: "https://us06web.zoom.us/rec/share/l-6gA8dkHTKW6r7WdiaDIKwEO8Hs9yoahkPICSSxhCzWhvgBB0GH5jSL6Xs8kmfD.fdoe9nVjb2tcejCI" },
+          { title: "Embryology, part 2, opening with Leah Kamara's session on preparing for Step 1", date: "2026-09-15", url: "https://us06web.zoom.us/rec/share/4PT9jhnAUtSemZHP1pHxLC1toF4xuv1GWUFN-okCXSXTVvuqhplXa3aR8Hb-dXUq.o7WnaR5EvAoXpLxv" }
         ]
       }
     ]
@@ -773,7 +774,7 @@ window.PLAN = {
     { date: "2026-09-12", block: "msk", title: "Vascular tumours of the skin, skin cancers, and naevi" },
     { date: "2026-09-13", block: "msk", title: "Acne, dermatitis (atopic, allergic contact and irritant contact), psoriasis, and lichen planus" },
     { date: "2026-09-14", block: "gi",  title: "Embryology: development of the tongue, and the foregut including the oesophagus" },
-    { date: "2026-09-15", block: "gi",  title: "Anatomy, part 1: peritoneal reflections, ligaments and their contents, the retroperitoneum, histology of the digestive tract, and blood supply of the gut" },
+    { date: "2026-09-15", block: "gi",  title: "Embryology, part 2, opening with Leah Kamara's session on preparing for Step 1" },
     { date: "2026-09-16", block: "gi",  title: "Anatomy, part 2: completing the anatomy, the abdominal wall and femoral region, and hernias" },
     { date: "2026-09-17", block: "gi",  title: "Physiology: secretions and their regulation, and absorption" },
     { date: "2026-09-18", block: "gi",  title: "Pathology, part 1: oral cavity, oesophagus and stomach" },
