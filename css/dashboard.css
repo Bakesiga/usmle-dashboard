@@ -2192,6 +2192,22 @@
 }
 .wof-pass i { width: 7px; height: 7px; border-radius: 999px; background: var(--sage); display: block; }
 
+/* A graduate's own session, linked from their Wall of Fame card. */
+.wof-session {
+  display: flex; align-items: center; gap: 10px; text-decoration: none;
+  margin: 9px 1px 1px; padding: 10px 12px;
+  border: 1px solid var(--sage); border-radius: 10px; background: var(--sage-soft);
+  color: var(--ink); transition: background .15s ease;
+}
+.wof-session:hover { background: #fff; }
+.wof-session:focus-visible { outline: 2px solid var(--sage-deep); outline-offset: 2px; }
+.wof-session-tag {
+  font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--sage-deep); white-space: nowrap;
+}
+.wof-session b { font-family: var(--font-display); font-weight: 400; font-size: 1.02rem; line-height: 1.2; }
+.wof-session svg { margin-left: auto; flex: none; color: var(--sage-deep); }
+
 /* Extra classes in the month plan: same row, a quieter sage tag so they read
    as additions to the day rather than a duplicate entry. */
 .plan-state.is-extra { color: var(--sage-deep); }
