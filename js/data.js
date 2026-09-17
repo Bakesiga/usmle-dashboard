@@ -706,7 +706,7 @@ window.BLOCKS = [
     label: "Gastrointestinal",
     subject: "gi",
     dateRange: "From Sep 14",
-    dayRange: [106, 116],
+    dayRange: [106, 118],
     start: "2026-09-14",
     subBlocks: [
       { id: "gi-embryology", label: "Embryology", days: [],
@@ -754,8 +754,8 @@ window.PLAN = {
   label: "September 2026",
   blocks: [
     { id: "msk",   label: "Musculoskeletal and skin", range: "1 to 13 September" },
-    { id: "gi",    label: "Gastrointestinal",         range: "14 to 24 September" },
-    { id: "micro", label: "Microbiology",             range: "25 to 30 September" }
+    { id: "gi",    label: "Gastrointestinal",         range: "14 to 26 September" },
+    { id: "micro", label: "Microbiology",             range: "27 September to 2 October" }
   ],
   days: [
     { date: "2026-09-01", block: "msk", title: "Upper limb: brachial plexus, axillary, musculocutaneous and radial nerves" },
@@ -777,19 +777,21 @@ window.PLAN = {
     { date: "2026-09-14", block: "gi",  title: "Embryology: development of the tongue, and the foregut including the oesophagus" },
     { date: "2026-09-15", block: "gi",  title: "Embryology, part 2" },
     { date: "2026-09-16", block: "gi",  title: "Embryology: question practice" },
-    { date: "2026-09-17", block: "gi",  title: "Physiology: secretions and their regulation, and absorption" },
-    { date: "2026-09-18", block: "gi",  title: "Pathology, part 1: oral cavity, oesophagus and stomach" },
-    { date: "2026-09-19", block: "gi",  title: "Pathology, part 2: intestines, with malabsorption, inflammatory bowel disease, irritable bowel syndrome, and diverticular disease" },
-    { date: "2026-09-20", block: "gi",  title: "Pathology, part 3: neoplasms of the stomach and colorectum" },
-    { date: "2026-09-21", block: "gi",  title: "Hepatology: anatomy, histology, physiology and pathology of the liver" },
-    { date: "2026-09-22", block: "gi",  title: "Biliary tree: anatomy, histology, physiology and pathology" },
-    { date: "2026-09-23", block: "gi",  title: "Pancreas: anatomy, histology, physiology and pathology" },
-    { date: "2026-09-24", block: "gi",  title: "Gastrointestinal pharmacology" },
-    { date: "2026-09-25", block: "micro", title: "Bacteriology, part 1" },
-    { date: "2026-09-26", block: "micro", title: "Bacteriology, part 2" },
-    { date: "2026-09-27", block: "micro", title: "Virology" },
-    { date: "2026-09-28", block: "micro", title: "Parasitology and fungi" },
-    { date: "2026-09-29", block: "micro", title: "Antimicrobial drugs" },
-    { date: "2026-09-30", block: "micro", title: "Microbiology review" }
+    { date: "2026-09-17", block: "gi",  title: "Anatomy, part 1: peritoneal reflections, ligaments and their contents, the retroperitoneum, histology of the digestive tract, and blood supply of the gut" },
+    { date: "2026-09-18", block: "gi",  title: "Anatomy, part 2: completing the anatomy, the abdominal wall and femoral region, and hernias" },
+    { date: "2026-09-19", block: "gi",  title: "Physiology: secretions and their regulation, and absorption" },
+    { date: "2026-09-20", block: "gi",  title: "Pathology, part 1: oral cavity, oesophagus and stomach" },
+    { date: "2026-09-21", block: "gi",  title: "Pathology, part 2: intestines, with malabsorption, inflammatory bowel disease, irritable bowel syndrome, and diverticular disease" },
+    { date: "2026-09-22", block: "gi",  title: "Pathology, part 3: neoplasms of the stomach and colorectum" },
+    { date: "2026-09-23", block: "gi",  title: "Hepatology: anatomy, histology, physiology and pathology of the liver" },
+    { date: "2026-09-24", block: "gi",  title: "Biliary tree: anatomy, histology, physiology and pathology" },
+    { date: "2026-09-25", block: "gi",  title: "Pancreas: anatomy, histology, physiology and pathology" },
+    { date: "2026-09-26", block: "gi",  title: "Gastrointestinal pharmacology" },
+    { date: "2026-09-27", block: "micro", title: "Bacteriology, part 1" },
+    { date: "2026-09-28", block: "micro", title: "Bacteriology, part 2" },
+    { date: "2026-09-29", block: "micro", title: "Virology" },
+    { date: "2026-09-30", block: "micro", title: "Parasitology and fungi" },
+    { date: "2026-10-01", block: "micro", title: "Antimicrobial drugs" },
+    { date: "2026-10-02", block: "micro", title: "Microbiology review" }
   ]
 };
