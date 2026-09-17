@@ -712,7 +712,8 @@ window.BLOCKS = [
       { id: "gi-embryology", label: "Embryology", days: [],
         recordings: [
           { title: "Embryology: development of the tongue, and the foregut including the oesophagus", date: "2026-09-14", url: "https://us06web.zoom.us/rec/share/l-6gA8dkHTKW6r7WdiaDIKwEO8Hs9yoahkPICSSxhCzWhvgBB0GH5jSL6Xs8kmfD.fdoe9nVjb2tcejCI" },
-          { title: "Embryology, part 2", date: "2026-09-15", url: "https://us06web.zoom.us/rec/share/VgtMBlqALc-UHjGyMnps3T7ykt8R4wKGI5CkxYDYN_ts5X9vF9fVPFcTSyCxGYY2.fNi7YGDz6Hi8cf_R?startTime=1789527952000" }
+          { title: "Embryology, part 2", date: "2026-09-15", url: "https://us06web.zoom.us/rec/share/VgtMBlqALc-UHjGyMnps3T7ykt8R4wKGI5CkxYDYN_ts5X9vF9fVPFcTSyCxGYY2.fNi7YGDz6Hi8cf_R?startTime=1789527952000" },
+          { title: "Embryology: question practice", date: "2026-09-16", url: "https://us06web.zoom.us/rec/share/9gKx-DIRJfLeaAWE_jO1I2-fgj8a98OuEAvrrQdCzZfc4Zw-6Q6XH_IxY5Ok6EDD.0s0egFsOFH-Fs-hH" }
         ]
       }
     ]
@@ -775,7 +776,7 @@ window.PLAN = {
     { date: "2026-09-13", block: "msk", title: "Acne, dermatitis (atopic, allergic contact and irritant contact), psoriasis, and lichen planus" },
     { date: "2026-09-14", block: "gi",  title: "Embryology: development of the tongue, and the foregut including the oesophagus" },
     { date: "2026-09-15", block: "gi",  title: "Embryology, part 2" },
-    { date: "2026-09-16", block: "gi",  title: "Anatomy, part 2: completing the anatomy, the abdominal wall and femoral region, and hernias" },
+    { date: "2026-09-16", block: "gi",  title: "Embryology: question practice" },
     { date: "2026-09-17", block: "gi",  title: "Physiology: secretions and their regulation, and absorption" },
     { date: "2026-09-18", block: "gi",  title: "Pathology, part 1: oral cavity, oesophagus and stomach" },
     { date: "2026-09-19", block: "gi",  title: "Pathology, part 2: intestines, with malabsorption, inflammatory bowel disease, irritable bowel syndrome, and diverticular disease" },
