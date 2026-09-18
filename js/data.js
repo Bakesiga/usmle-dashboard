@@ -715,6 +715,11 @@ window.BLOCKS = [
           { title: "Embryology, part 2", date: "2026-09-15", url: "https://us06web.zoom.us/rec/share/VgtMBlqALc-UHjGyMnps3T7ykt8R4wKGI5CkxYDYN_ts5X9vF9fVPFcTSyCxGYY2.fNi7YGDz6Hi8cf_R?startTime=1789527952000" },
           { title: "Embryology: question practice", date: "2026-09-16", url: "https://us06web.zoom.us/rec/share/9gKx-DIRJfLeaAWE_jO1I2-fgj8a98OuEAvrrQdCzZfc4Zw-6Q6XH_IxY5Ok6EDD.0s0egFsOFH-Fs-hH" }
         ]
+      },
+      { id: "gi-anatomy", label: "Anatomy", days: [],
+        recordings: [
+          { title: "Anatomy: the coeliac, superior mesenteric and inferior mesenteric axes, venous drainage, portosystemic shunts, and the retroperitoneal organs", date: "2026-09-17", url: "https://us06web.zoom.us/rec/share/IUi7VYprMKHV7EJT-rAjVU-I7yW4YTP8EaHsSviJ5WEV0ORZPVlUE8S9D-xSdDNl.gRnWIYnhUlu8wfWM" }
+        ]
       }
     ]
   }
@@ -777,7 +782,7 @@ window.PLAN = {
     { date: "2026-09-14", block: "gi",  title: "Embryology: development of the tongue, and the foregut including the oesophagus" },
     { date: "2026-09-15", block: "gi",  title: "Embryology, part 2" },
     { date: "2026-09-16", block: "gi",  title: "Embryology: question practice" },
-    { date: "2026-09-17", block: "gi",  title: "Anatomy, part 1: peritoneal reflections, ligaments and their contents, the retroperitoneum, histology of the digestive tract, and blood supply of the gut" },
+    { date: "2026-09-17", block: "gi",  title: "Anatomy, part 1: the coeliac, superior mesenteric and inferior mesenteric axes, venous drainage, portosystemic shunts, and the retroperitoneal organs" },
     { date: "2026-09-18", block: "gi",  title: "Anatomy, part 2: completing the anatomy, the abdominal wall and femoral region, and hernias" },
     { date: "2026-09-19", block: "gi",  title: "Physiology: secretions and their regulation, and absorption" },
     { date: "2026-09-20", block: "gi",  title: "Pathology, part 1: oral cavity, oesophagus and stomach" },
