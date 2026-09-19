@@ -718,7 +718,8 @@ window.BLOCKS = [
       },
       { id: "gi-anatomy", label: "Anatomy", days: [],
         recordings: [
-          { title: "Anatomy: the coeliac, superior mesenteric and inferior mesenteric axes, venous drainage, portosystemic shunts, and the retroperitoneal organs", date: "2026-09-17", url: "https://us06web.zoom.us/rec/share/IUi7VYprMKHV7EJT-rAjVU-I7yW4YTP8EaHsSviJ5WEV0ORZPVlUE8S9D-xSdDNl.gRnWIYnhUlu8wfWM" }
+          { title: "Anatomy: the coeliac, superior mesenteric and inferior mesenteric axes, venous drainage, portosystemic shunts, and the retroperitoneal organs", date: "2026-09-17", url: "https://us06web.zoom.us/rec/share/IUi7VYprMKHV7EJT-rAjVU-I7yW4YTP8EaHsSviJ5WEV0ORZPVlUE8S9D-xSdDNl.gRnWIYnhUlu8wfWM" },
+          { title: "Anatomy: the gastrointestinal ligaments, and hernias (inguinal, femoral and diaphragmatic)", date: "2026-09-18", url: "https://us06web.zoom.us/rec/share/B-8u-HeCPRBacrPC-3ayHc58T_RL8121LGgCatnh0L_Rfiz3jtRbxOlp14bECd1M.fjVvJ0m0iIcbYcl2" }
         ]
       }
     ]
@@ -783,7 +784,7 @@ window.PLAN = {
     { date: "2026-09-15", block: "gi",  title: "Embryology, part 2" },
     { date: "2026-09-16", block: "gi",  title: "Embryology: question practice" },
     { date: "2026-09-17", block: "gi",  title: "Anatomy, part 1: the coeliac, superior mesenteric and inferior mesenteric axes, venous drainage, portosystemic shunts, and the retroperitoneal organs" },
-    { date: "2026-09-18", block: "gi",  title: "Anatomy, part 2: completing the anatomy, the abdominal wall and femoral region, and hernias" },
+    { date: "2026-09-18", block: "gi",  title: "Anatomy, part 2: the gastrointestinal ligaments, and hernias (inguinal, femoral and diaphragmatic)" },
     { date: "2026-09-19", block: "gi",  title: "Physiology: secretions and their regulation, and absorption" },
     { date: "2026-09-20", block: "gi",  title: "Pathology, part 1: oral cavity, oesophagus and stomach" },
     { date: "2026-09-21", block: "gi",  title: "Pathology, part 2: intestines, with malabsorption, inflammatory bowel disease, irritable bowel syndrome, and diverticular disease" },
