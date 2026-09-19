@@ -721,6 +721,11 @@ window.BLOCKS = [
           { title: "Anatomy: the coeliac, superior mesenteric and inferior mesenteric axes, venous drainage, portosystemic shunts, and the retroperitoneal organs", date: "2026-09-17", url: "https://us06web.zoom.us/rec/share/IUi7VYprMKHV7EJT-rAjVU-I7yW4YTP8EaHsSviJ5WEV0ORZPVlUE8S9D-xSdDNl.gRnWIYnhUlu8wfWM" },
           { title: "Anatomy: the gastrointestinal ligaments, and hernias (inguinal, femoral and diaphragmatic)", date: "2026-09-18", url: "https://us06web.zoom.us/rec/share/B-8u-HeCPRBacrPC-3ayHc58T_RL8121LGgCatnh0L_Rfiz3jtRbxOlp14bECd1M.fjVvJ0m0iIcbYcl2" }
         ]
+      },
+      { id: "gi-physiology", label: "Physiology", days: [],
+        recordings: [
+          { title: "Physiology, part 1: a First Aid run through of the gastrointestinal regulatory substances and secretory products", date: "2026-09-19", url: "https://us06web.zoom.us/rec/share/BibJp3vO60vtBkxBHf2GYTLnENbS5NXz0vzASHckU7aTr4KVi468BWNG7A2QPxCC.ebQgRYfzgXON6XJJ" }
+        ]
       }
     ]
   }
@@ -785,7 +790,7 @@ window.PLAN = {
     { date: "2026-09-16", block: "gi",  title: "Embryology: question practice" },
     { date: "2026-09-17", block: "gi",  title: "Anatomy, part 1: the coeliac, superior mesenteric and inferior mesenteric axes, venous drainage, portosystemic shunts, and the retroperitoneal organs" },
     { date: "2026-09-18", block: "gi",  title: "Anatomy, part 2: the gastrointestinal ligaments, and hernias (inguinal, femoral and diaphragmatic)" },
-    { date: "2026-09-19", block: "gi",  title: "Physiology: secretions and their regulation, and absorption" },
+    { date: "2026-09-19", block: "gi",  extra: true, title: "Physiology, part 1: a First Aid run through of the regulatory substances and secretory products" },
     { date: "2026-09-20", block: "gi",  title: "Pathology, part 1: oral cavity, oesophagus and stomach" },
     { date: "2026-09-21", block: "gi",  title: "Pathology, part 2: intestines, with malabsorption, inflammatory bowel disease, irritable bowel syndrome, and diverticular disease" },
     { date: "2026-09-22", block: "gi",  title: "Pathology, part 3: neoplasms of the stomach and colorectum" },
