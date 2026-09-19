@@ -724,8 +724,12 @@ window.BLOCKS = [
       },
       { id: "gi-physiology", label: "Physiology", days: [],
         recordings: [
-          { title: "Physiology, part 1: a First Aid run through of the gastrointestinal regulatory substances and secretory products", date: "2026-09-19", url: "https://us06web.zoom.us/rec/share/BibJp3vO60vtBkxBHf2GYTLnENbS5NXz0vzASHckU7aTr4KVi468BWNG7A2QPxCC.ebQgRYfzgXON6XJJ" },
-          { title: "Physiology, part 2: question practice, then the start of pathology (oral cavity and oesophagus)", date: "2026-09-19", url: "https://us06web.zoom.us/rec/share/ZSeYOTBCuTYqEeoU8uS0ZBo-6pdWYHUa-Hq03cY2_qhjETQVP0rsXyV-0xe8f69f.rQs8ts7cB7vjNCgM" }
+          { title: "Physiology, part 1: a First Aid run through of the gastrointestinal regulatory substances and secretory products", date: "2026-09-19", url: "https://us06web.zoom.us/rec/share/BibJp3vO60vtBkxBHf2GYTLnENbS5NXz0vzASHckU7aTr4KVi468BWNG7A2QPxCC.ebQgRYfzgXON6XJJ" }
+        ]
+      },
+      { id: "gi-pathology", label: "Pathology", days: [],
+        recordings: [
+          { title: "Pathology, part 1: the oral cavity and the oesophagus, preceded by physiology part 2 question practice", date: "2026-09-19", url: "https://us06web.zoom.us/rec/share/ZSeYOTBCuTYqEeoU8uS0ZBo-6pdWYHUa-Hq03cY2_qhjETQVP0rsXyV-0xe8f69f.rQs8ts7cB7vjNCgM" }
         ]
       }
     ]
