@@ -730,7 +730,8 @@ window.BLOCKS = [
       { id: "gi-pathology", label: "Pathology", days: [],
         recordings: [
           { title: "Pathology, part 1: the oral cavity and the oesophagus, preceded by physiology part 2 question practice", date: "2026-09-19", url: "https://us06web.zoom.us/rec/share/ZSeYOTBCuTYqEeoU8uS0ZBo-6pdWYHUa-Hq03cY2_qhjETQVP0rsXyV-0xe8f69f.rQs8ts7cB7vjNCgM" },
-          { title: "Pathology, part 2: oesophagitis, the oesophageal tumours, and gastritis", date: "2026-09-19", url: "https://us06web.zoom.us/rec/share/T-qToGAm5J73LzDdSohKlT-M3xETYGsJdwi_mZtW9eNZqPpqFaRzBUNGwg296E3L.r-OlWdI0VjKTwseB" }
+          { title: "Pathology, part 2: oesophagitis, the oesophageal tumours, and gastritis", date: "2026-09-19", url: "https://us06web.zoom.us/rec/share/T-qToGAm5J73LzDdSohKlT-M3xETYGsJdwi_mZtW9eNZqPpqFaRzBUNGwg296E3L.r-OlWdI0VjKTwseB" },
+          { title: "Pathology, part 3: stomach question practice, then the malabsorption syndromes", date: "2026-09-20", url: "https://us06web.zoom.us/rec/share/1gwRNAbqtFceiVHCmOauxbSMO2ecoEvbYihKiSsa8I1Gm6dqk0bzE6XSpxddSc3m.7AV9sTaWywbskPVL" }
         ]
       }
     ]
@@ -799,7 +800,7 @@ window.PLAN = {
     { date: "2026-09-19", block: "gi",  extra: true, title: "Physiology, part 1: a First Aid run through of the regulatory substances and secretory products" },
     { date: "2026-09-19", block: "gi",  extra: true, title: "Physiology, part 2: question practice, then pathology part 1: oral cavity and oesophagus" },
     { date: "2026-09-19", block: "gi",  title: "Pathology, part 2: oesophagitis, the oesophageal tumours, and gastritis" },
-    { date: "2026-09-20", block: "gi",  title: "Pathology, part 1: oral cavity, oesophagus and stomach" },
+    { date: "2026-09-20", block: "gi",  extra: true, title: "Pathology, part 3: stomach question practice, then the malabsorption syndromes" },
     { date: "2026-09-21", block: "gi",  title: "Pathology, part 2: intestines, with malabsorption, inflammatory bowel disease, irritable bowel syndrome, and diverticular disease" },
     { date: "2026-09-22", block: "gi",  title: "Pathology, part 3: neoplasms of the stomach and colorectum" },
     { date: "2026-09-23", block: "gi",  title: "Hepatology: anatomy, histology, physiology and pathology of the liver" },
