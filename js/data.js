@@ -735,6 +735,11 @@ window.BLOCKS = [
           { title: "Pathology, part 4: the intestinal disorders, part 2", date: "2026-09-20", url: "https://us06web.zoom.us/rec/share/RoXGHLqVh-pH_OSDYRDcimrRn5Y97V6kggt206zUcrmYRJmYFzbztcdLfBdAoYS0.gE6wLJykgYSr6FrB" },
           { title: "Pathology, part 5: the gastrointestinal cancers of the oesophagus, stomach and colorectum", date: "2026-09-21", url: "https://us06web.zoom.us/rec/share/YnxnAk_iTVSt-YeE5ELhNg8RB4_RP_-KCOomxWxGyEOfS1z8YwXMg25uF2dbTjvd.m4rWWQt2R1pk-Ya4" }
         ]
+      },
+      { id: "gi-hepatology", label: "Hepatology", days: [],
+        recordings: [
+          { title: "Completing colorectal cancer, then liver histology, cirrhosis and portal hypertension", date: "2026-09-22", url: "https://us06web.zoom.us/rec/share/KuqsjZBfM5wmGxDPTCH_Z53iHqw8e0A13QfDHAV5-q5RR-lFzGXaoJKAQsWkSxwE.BOPplsJIjqQFwnJH" }
+        ]
       }
     ]
   }
@@ -805,7 +810,7 @@ window.PLAN = {
     { date: "2026-09-20", block: "gi",  extra: true, title: "Pathology, part 3: stomach question practice, then the malabsorption syndromes" },
     { date: "2026-09-20", block: "gi",  title: "Pathology, part 4: the intestinal disorders, part 2" },
     { date: "2026-09-21", block: "gi",  title: "Pathology, part 5: the gastrointestinal cancers of the oesophagus, stomach and colorectum" },
-    { date: "2026-09-22", block: "gi",  title: "Pathology, part 3: neoplasms of the stomach and colorectum" },
+    { date: "2026-09-22", block: "gi",  title: "Completing colorectal cancer, then liver histology, cirrhosis and portal hypertension" },
     { date: "2026-09-23", block: "gi",  title: "Hepatology: anatomy, histology, physiology and pathology of the liver" },
     { date: "2026-09-24", block: "gi",  title: "Biliary tree: anatomy, histology, physiology and pathology" },
     { date: "2026-09-25", block: "gi",  title: "Pancreas: anatomy, histology, physiology and pathology" },
