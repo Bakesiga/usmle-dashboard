@@ -2119,8 +2119,9 @@
 }
 /* The three blocks read as one family, separated by weight rather than by
    three unrelated hues, which is what made the old subject palette noisy. */
-.plan-gi    .plan-rule { background: var(--sage, #7a8a5e); }
-.plan-micro .plan-rule { background: var(--ink-2); }
+.plan-gi     .plan-rule { background: var(--sage, #7a8a5e); }
+.plan-ethics .plan-rule { background: var(--ink-2); }
+.plan-micro  .plan-rule { background: var(--ink-2); }
 
 .plan-list { list-style: none; margin: 0; padding: 0; }
 .plan-row {
