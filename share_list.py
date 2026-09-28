@@ -7,6 +7,8 @@ in the allowlist itself rather than in someone's notes:
 
   shareRecordings: false   never share new recordings with this student
   recordingsPaused: true   recordings locked on the dashboard, so no sharing
+  accessFrom: "YYYY-MM-DD"  entitlement starts on that date; recordings from
+                           before it are not shared, matching the dashboard gate
   accessUntil: "YYYY-MM-DD" entitlement ends on that date, inclusive
 
 Usage:  python3 share_list.py [YYYY-MM-DD]     (defaults to today)
@@ -30,6 +32,8 @@ def build(date):
             skip.append((e, "shareRecordings: false"))
         elif r.get("recordingsPaused"):
             skip.append((e, "recordingsPaused: true"))
+        elif r.get("accessFrom") and r["accessFrom"] > date:
+            skip.append((e, "accessFrom %s, not yet entitled" % r["accessFrom"]))
         elif r.get("accessUntil") and r["accessUntil"] < date:
             skip.append((e, "accessUntil %s" % r["accessUntil"]))
         else:
