@@ -757,7 +757,8 @@ window.BLOCKS = [
         recordings: [
           { title: "Ethics, part 1: the ethical principles, informed consent, decision making capacity, advance directives and surrogate decision makers", date: "2026-09-25", url: "https://us06web.zoom.us/rec/share/LdI-wvR-BiSR7tiSYbU1yJaY2sSC6p2YPMy9QVmQFB48tTNReqxkEj4pd79PsVE.geIZbcEiQNtcrQQw" },
           { title: "Ethics, part 2: confidentiality and its exceptions, accepting gifts, and the core communication skills", date: "2026-09-26", url: "https://us06web.zoom.us/rec/share/9vnwOEMp_lEaXhm84R-_gWPI914mMo7UfIim385Q88jg2RlL_oYfVrIxB_1UyEUV.7CHCPo7V3jRotG8D" },
-          { title: "Ethics, part 3: healthcare delivery. Disease prevention, insurance plans, payment models, Medicare and Medicaid, palliative care, and medical error analysis", date: "2026-09-27", url: "https://us06web.zoom.us/rec/share/6gF5ySfw4OECN-m0n_kFb8dhvbv7Gu3HqcY8AQH1Hfwlnx5GQPlyog5tjYSKAcnH.1q6qhqQ6OrQ089Yn" }
+          { title: "Ethics, part 3: healthcare delivery. Disease prevention, insurance plans, payment models, Medicare and Medicaid, palliative care, and medical error analysis", date: "2026-09-27", url: "https://us06web.zoom.us/rec/share/6gF5ySfw4OECN-m0n_kFb8dhvbv7Gu3HqcY8AQH1Hfwlnx5GQPlyog5tjYSKAcnH.1q6qhqQ6OrQ089Yn" },
+          { title: "Ethics, part 4: the challenging patient and ethical scenarios, part 1", date: "2026-09-28", url: "https://us06web.zoom.us/rec/share/olGePac96hwW35p2PELxjyYUbxjr2_4fAAnLIuKG5bVKzLgkGkZ97qgxo49GKq-5.hBpNiphPJQy0yAp9" }
         ]
       }
     ]
@@ -833,7 +834,7 @@ window.PLAN = {
     { date: "2026-09-25", block: "ethics", title: "Ethics, part 1: the ethical principles, informed consent, decision making capacity, advance directives and surrogate decision makers" },
     { date: "2026-09-26", block: "ethics", title: "Ethics, part 2: confidentiality and its exceptions, accepting gifts, and the core communication skills" },
     { date: "2026-09-27", block: "ethics", title: "Ethics, part 3: healthcare delivery. Disease prevention, insurance plans, payment models, Medicare and Medicaid, palliative care, and medical error analysis" },
-    { date: "2026-09-28", block: "ethics", title: "Ethics, part 4: end of life care, palliative care, and death and dying" },
+    { date: "2026-09-28", block: "ethics", title: "Ethics, part 4: the challenging patient and ethical scenarios, part 1" },
     { date: "2026-09-29", block: "ethics", title: "Ethics, part 5: healthcare delivery, quality improvement and patient safety" },
     { date: "2026-09-30", block: "ethics", title: "Ethics, part 6: question practice and a full review of the block" }
   ]
