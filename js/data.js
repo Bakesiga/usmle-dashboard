@@ -759,6 +759,10 @@ window.BLOCKS = [
           { title: "Ethics, part 2: confidentiality and its exceptions, accepting gifts, and the core communication skills", date: "2026-09-26", url: "https://us06web.zoom.us/rec/share/9vnwOEMp_lEaXhm84R-_gWPI914mMo7UfIim385Q88jg2RlL_oYfVrIxB_1UyEUV.7CHCPo7V3jRotG8D" },
           { title: "Ethics, part 3: healthcare delivery. Disease prevention, insurance plans, payment models, Medicare and Medicaid, palliative care, and medical error analysis", date: "2026-09-27", url: "https://us06web.zoom.us/rec/share/6gF5ySfw4OECN-m0n_kFb8dhvbv7Gu3HqcY8AQH1Hfwlnx5GQPlyog5tjYSKAcnH.1q6qhqQ6OrQ089Yn" },
           { title: "Ethics, part 4: the challenging patient and ethical scenarios, part 1", date: "2026-09-28", url: "https://us06web.zoom.us/rec/share/olGePac96hwW35p2PELxjyYUbxjr2_4fAAnLIuKG5bVKzLgkGkZ97qgxo49GKq-5.hBpNiphPJQy0yAp9" }
+        ],
+        resources: [
+          { kind: "drive", label: "Ethics revision questions", url: "https://drive.google.com/file/d/1KZ56kymJkBhu_T-Ky1Oz0Dc56m_cEann/view?usp=drive_link", meta: "32 questions, one per page \u00b7 PDF on Google Drive" },
+          { kind: "drive", label: "Ethics revision answers and explanations", url: "https://drive.google.com/file/d/1A1Hjgoo3Rh1dLvaPl_WClPnCMNpeePbe/view?usp=drive_link", meta: "Answer key and full explanations \u00b7 PDF on Google Drive" }
         ]
       }
     ]
