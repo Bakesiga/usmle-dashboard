@@ -798,48 +798,20 @@ window.getNow = function () {
 // To roll the dashboard into a new month, replace this object wholesale.
 // ---------------------------------------------------------------------------
 window.PLAN = {
-  label: "September 2026",
+  label: "October 2026",
   blocks: [
-    { id: "msk",   label: "Musculoskeletal and skin", range: "1 to 13 September" },
-    { id: "gi",     label: "Gastrointestinal",        range: "14 to 24 September" },
-    { id: "ethics", label: "Ethics",                  range: "25 to 30 September" }
+    { id: "micro", label: "Microbiology", range: "1 to 10 October" }
   ],
   days: [
-    { date: "2026-09-01", block: "msk", title: "Upper limb: brachial plexus, axillary, musculocutaneous and radial nerves" },
-    { date: "2026-09-02", block: "msk", title: "Upper limb: median and ulnar nerves, the hand, and the nerve palsies" },
-    { date: "2026-09-03", block: "msk", title: "Upper limb: muscles of the shoulder, arm, forearm and hand, sensory innervation, and review" },
-    { date: "2026-09-04", block: "msk", title: "Upper limb review, and the lumbar and sacral plexuses" },
-    { date: "2026-09-05", block: "msk", extra: true, title: "Lower limb anatomy, continued" },
-    { date: "2026-09-05", block: "msk", extra: true, title: "Lower limb review, the knee and ankle joints, and Julian's Step 1 experience, part 1" },
-    { date: "2026-09-05", block: "msk", title: "Physiology: skeletal muscle contraction, muscle fibre types, proprioceptors, and bone cell biology" },
-    { date: "2026-09-06", block: "msk", title: "Pathology: osteoarthritis, rheumatoid arthritis, crystal arthropathies, Sjogren syndrome, septic arthritis, osteomyelitis, and the spondyloarthropathies" },
-    { date: "2026-09-07", block: "msk", title: "Lupus and the connective tissue diseases, the myositides, the vasculitides, myasthenia gravis and Lambert-Eaton, and Raynaud phenomenon" },
-    { date: "2026-09-08", block: "msk", title: "Systemic sclerosis, and a review of the rheumatological conditions" },
-    { date: "2026-09-10", block: "msk", title: "Bone tumours, and metabolic bone disease: osteoporosis, osteopetrosis, osteomalacia and rickets, Paget disease, and avascular necrosis" },
-    { date: "2026-09-11", block: "msk", title: "Achondroplasia and McCune-Albright syndrome, fractures and overuse injuries, compartment syndrome, childhood hip and knee conditions, and the knee examination" },
-    { date: "2026-09-12", block: "msk", extra: true, title: "Skin: layers, cell junctions, exocrine glands, dermatologic nomenclature, and the blistering disorders" },
-    { date: "2026-09-12", block: "msk", extra: true, title: "Skin infections, and tumours and tumour-like conditions of the skin" },
-    { date: "2026-09-12", block: "msk", title: "Vascular tumours of the skin, skin cancers, and naevi" },
-    { date: "2026-09-13", block: "msk", title: "Acne, dermatitis (atopic, allergic contact and irritant contact), psoriasis, and lichen planus" },
-    { date: "2026-09-14", block: "gi",  title: "Embryology: development of the tongue, and the foregut including the oesophagus" },
-    { date: "2026-09-15", block: "gi",  title: "Embryology, part 2" },
-    { date: "2026-09-16", block: "gi",  title: "Embryology: question practice" },
-    { date: "2026-09-17", block: "gi",  title: "Anatomy, part 1: the coeliac, superior mesenteric and inferior mesenteric axes, venous drainage, portosystemic shunts, and the retroperitoneal organs" },
-    { date: "2026-09-18", block: "gi",  title: "Anatomy, part 2: the gastrointestinal ligaments, and hernias (inguinal, femoral and diaphragmatic)" },
-    { date: "2026-09-19", block: "gi",  extra: true, title: "Physiology, part 1: a First Aid run through of the regulatory substances and secretory products" },
-    { date: "2026-09-19", block: "gi",  extra: true, title: "Physiology, part 2: question practice, then pathology part 1: oral cavity and oesophagus" },
-    { date: "2026-09-19", block: "gi",  title: "Pathology, part 2: oesophagitis, the oesophageal tumours, and gastritis" },
-    { date: "2026-09-20", block: "gi",  extra: true, title: "Pathology, part 3: stomach question practice, then the malabsorption syndromes" },
-    { date: "2026-09-20", block: "gi",  title: "Pathology, part 4: the intestinal disorders, part 2" },
-    { date: "2026-09-21", block: "gi",  title: "Pathology, part 5: the gastrointestinal cancers of the oesophagus, stomach and colorectum" },
-    { date: "2026-09-22", block: "gi",  title: "Completing colorectal cancer, then liver histology, cirrhosis and portal hypertension" },
-    { date: "2026-09-23", block: "gi",  title: "Hepatology: anatomy, histology, physiology and pathology of the liver" },
-    { date: "2026-09-24", block: "gi",  title: "Gastrointestinal pathology: everything remaining, then an overview of biliary disease" },
-    { date: "2026-09-25", block: "ethics", title: "Ethics, part 1: the ethical principles, informed consent, decision making capacity, advance directives and surrogate decision makers" },
-    { date: "2026-09-26", block: "ethics", title: "Ethics, part 2: confidentiality and its exceptions, accepting gifts, and the core communication skills" },
-    { date: "2026-09-27", block: "ethics", title: "Ethics, part 3: healthcare delivery. Disease prevention, insurance plans, payment models, Medicare and Medicaid, palliative care, and medical error analysis" },
-    { date: "2026-09-28", block: "ethics", title: "Ethics, part 4: the challenging patient and ethical scenarios, part 1" },
-    { date: "2026-09-29", block: "ethics", title: "Ethics, part 5: healthcare delivery, quality improvement and patient safety" },
-    { date: "2026-09-30", block: "ethics", title: "Ethics, part 6: question practice and a full review of the block" }
+    { date: "2026-10-01", block: "micro", title: "Bacteriology, general principles: structures, stains, culture media, classification, virulence factors, bacterial genetics, and exotoxins versus endotoxins" },
+    { date: "2026-10-02", block: "micro", title: "Gram-positive bacteria: the lab algorithm, staphylococci, streptococci, enterococci, Bacillus, the clostridia, Corynebacterium, Listeria, Nocardia, Actinomyces and the mycobacteria" },
+    { date: "2026-10-03", block: "micro", title: "Gram-negative bacteria and the atypicals: the lab algorithm, the enterics, the spirochetes, Chlamydiae, Rickettsiae and Mycoplasma" },
+    { date: "2026-10-04", block: "micro", title: "Antibacterials: cell wall, protein synthesis, nucleic acid and folate inhibitors, resistance, prophylaxis, and the antimycobacterial drugs" },
+    { date: "2026-10-05", block: "micro", title: "Mycology and antifungals: systemic, cutaneous and opportunistic mycoses, then amphotericin, the azoles, the echinocandins and the rest" },
+    { date: "2026-10-06", block: "micro", title: "Parasitology: protozoa, nematodes, cestodes, trematodes, ectoparasites and the antiparasitic drugs" },
+    { date: "2026-10-07", block: "micro", title: "Virology foundations and the DNA viruses: structure, genetics, replication, classification, and the herpesviruses" },
+    { date: "2026-10-08", block: "micro", title: "RNA viruses, part 1: picornaviruses, paramyxoviruses, orthomyxoviruses, rhabdovirus and the arboviruses" },
+    { date: "2026-10-09", block: "micro", title: "RNA viruses, part 2, and antivirals: hepatitis, HIV, prions, then the antiviral drugs" },
+    { date: "2026-10-10", block: "micro", title: "Systems-based infections and block review: the bugs causing tables, pneumonia, meningitis, osteomyelitis, urinary tract and sexually transmitted infections, and TORCH" }
   ]
 };
