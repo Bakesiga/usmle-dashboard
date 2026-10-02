@@ -766,6 +766,22 @@ window.BLOCKS = [
         ]
       }
     ]
+  },
+  {
+    id: "micro",
+    short: "MIC",
+    label: "Microbiology",
+    subject: "micro",
+    dateRange: "1 to 10 October",
+    dayRange: [123, 132],
+    start: "2026-10-01",
+    subBlocks: [
+      { id: "micro-bacteriology", label: "Bacteriology", days: [],
+        recordings: [
+          { title: "Bacteriology, general principles: structures, stains, culture media, classification, virulence factors and bacterial genetics", date: "2026-10-01", url: "https://us06web.zoom.us/rec/share/rmsQ3C_IxhDzPcO6hx5Frv9gcDfyzLsQ2bDfK5AgZDcjrbRiKbixOjjcPp0IxXk.vnGCvPURhnCOiGZp" }
+        ]
+      }
+    ]
   }
 ];
 
@@ -779,7 +795,6 @@ window.BLOCKS = [
    Move an entry into BLOCKS once its first class is recorded.
    ------------------------------------------------------------------ */
 window.UPCOMING = [
-  { label: "Microbiology",            when: "October" },
   { label: "Biochemistry",            when: "October", note: "2 weeks" },
   { label: "Psychiatry",              when: "October" },
   { label: "Putting it all together", when: "November", note: "2 weeks, full recap" }
