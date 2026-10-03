@@ -778,7 +778,8 @@ window.BLOCKS = [
     subBlocks: [
       { id: "micro-bacteriology", label: "Bacteriology", days: [],
         recordings: [
-          { title: "Bacteriology, general principles: structures, stains, culture media, classification, virulence factors and bacterial genetics", date: "2026-10-01", url: "https://us06web.zoom.us/rec/share/rmsQ3C_IxhDzPcO6hx5Frv9gcDfyzLsQ2bDfK5AgZDcjrbRiKbixOjjcPp0IxXk.vnGCvPURhnCOiGZp" }
+          { title: "Bacteriology, general principles: structures, stains, culture media, classification, virulence factors and bacterial genetics", date: "2026-10-01", url: "https://us06web.zoom.us/rec/share/rmsQ3C_IxhDzPcO6hx5Frv9gcDfyzLsQ2bDfK5AgZDcjrbRiKbixOjjcPp0IxXk.vnGCvPURhnCOiGZp" },
+          { title: "Gram-positive bacteria, part 1: the lab algorithm, the staphylococci, the streptococci, the enterococci, Bacillus and Listeria", date: "2026-10-02", url: "https://us06web.zoom.us/rec/share/z8JApGvRyyvynh4p3OPoQwkA81c0D71fXlb4d8VeB5GVK7IWyWuO_2dD4f_WtATa.1YK56N3I3IiJhQIK" }
         ]
       }
     ]
