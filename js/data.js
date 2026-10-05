@@ -780,7 +780,8 @@ window.BLOCKS = [
         recordings: [
           { title: "Bacteriology, general principles: structures, stains, culture media, classification, virulence factors and bacterial genetics", date: "2026-10-01", url: "https://us06web.zoom.us/rec/share/rmsQ3C_IxhDzPcO6hx5Frv9gcDfyzLsQ2bDfK5AgZDcjrbRiKbixOjjcPp0IxXk.vnGCvPURhnCOiGZp" },
           { title: "Gram-positive bacteria, part 1: the lab algorithm, the staphylococci, the streptococci, the enterococci, Bacillus and Listeria", date: "2026-10-02", url: "https://us06web.zoom.us/rec/share/z8JApGvRyyvynh4p3OPoQwkA81c0D71fXlb4d8VeB5GVK7IWyWuO_2dD4f_WtATa.1YK56N3I3IiJhQIK" },
-          { title: "Gram-positive bacteria, part 2: the clostridia, Corynebacterium, Nocardia and Actinomyces, and the mycobacteria", date: "2026-10-03", url: "https://us06web.zoom.us/rec/share/ueweAcCt-6prt9bqEU2y9nF6qnRGrcWMzNkL0XvvmVJQN3j7LIyk0WCbL7ITj3mr.Xv2dTJHhcPZVA-FI" }
+          { title: "Gram-positive bacteria, part 2: the clostridia, Corynebacterium, Nocardia and Actinomyces, and the mycobacteria", date: "2026-10-03", url: "https://us06web.zoom.us/rec/share/ueweAcCt-6prt9bqEU2y9nF6qnRGrcWMzNkL0XvvmVJQN3j7LIyk0WCbL7ITj3mr.Xv2dTJHhcPZVA-FI" },
+          { title: "Gram-negative bacteria, part 1: the lab algorithm, Neisseria, Haemophilus, Burkholderia and Bordetella", date: "2026-10-04", url: "https://us06web.zoom.us/rec/share/0-NK3wUghJcMx_mtv7w4JFY1KmEoWNxeK-2TdkK_1-WA0kRsOHbyFvEcKCLvukeC.7jAzknTKu6jm_wJJ" }
         ]
       }
     ]
