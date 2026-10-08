@@ -782,7 +782,8 @@ window.BLOCKS = [
           { title: "Gram-positive bacteria, part 1: the lab algorithm, the staphylococci, the streptococci, the enterococci, Bacillus and Listeria", date: "2026-10-02", url: "https://us06web.zoom.us/rec/share/z8JApGvRyyvynh4p3OPoQwkA81c0D71fXlb4d8VeB5GVK7IWyWuO_2dD4f_WtATa.1YK56N3I3IiJhQIK" },
           { title: "Gram-positive bacteria, part 2: the clostridia, Corynebacterium, Nocardia and Actinomyces, and the mycobacteria", date: "2026-10-03", url: "https://us06web.zoom.us/rec/share/ueweAcCt-6prt9bqEU2y9nF6qnRGrcWMzNkL0XvvmVJQN3j7LIyk0WCbL7ITj3mr.Xv2dTJHhcPZVA-FI" },
           { title: "Gram-negative bacteria, part 1: the lab algorithm, Neisseria, Haemophilus, Burkholderia and Bordetella", date: "2026-10-04", url: "https://us06web.zoom.us/rec/share/0-NK3wUghJcMx_mtv7w4JFY1KmEoWNxeK-2TdkK_1-WA0kRsOHbyFvEcKCLvukeC.7jAzknTKu6jm_wJJ" },
-          { title: "Gram-negative bacteria, part 2: Legionella, Pseudomonas, the enterics, Vibrio, Helicobacter, the spirochetes, Chlamydiae, Rickettsiae and Mycoplasma. Bacteriology complete", date: "2026-10-06", url: "https://us06web.zoom.us/rec/share/77vQp67uN0FWKe8CwxwfFioKqZhzOiu3NCLej4seDxeoqRBYytJOfH3hKvFBiLiw.6c5BPk7CecE6dNdD" }
+          { title: "Gram-negative bacteria, part 2: Legionella, Pseudomonas, the enterics, Vibrio, Helicobacter, the spirochetes, Chlamydiae, Rickettsiae and Mycoplasma. Bacteriology complete", date: "2026-10-06", url: "https://us06web.zoom.us/rec/share/77vQp67uN0FWKe8CwxwfFioKqZhzOiu3NCLej4seDxeoqRBYytJOfH3hKvFBiLiw.6c5BPk7CecE6dNdD" },
+          { title: "Mycology: the systemic dimorphic fungi, the opportunistic fungi, Pneumocystis and Sporothrix", date: "2026-10-07", url: "https://us06web.zoom.us/rec/share/wlyEbsGzEEG76maQfunZXrXjCNZ1qx7LzUMPll0Ap5iOM5GWF5VC9bj0ORvUzjQH.tYGgQHzJ1g9oDTdQ" }
         ]
       }
     ]
