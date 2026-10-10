@@ -784,7 +784,8 @@ window.BLOCKS = [
           { title: "Gram-negative bacteria, part 1: the lab algorithm, Neisseria, Haemophilus, Burkholderia and Bordetella", date: "2026-10-04", url: "https://us06web.zoom.us/rec/share/0-NK3wUghJcMx_mtv7w4JFY1KmEoWNxeK-2TdkK_1-WA0kRsOHbyFvEcKCLvukeC.7jAzknTKu6jm_wJJ" },
           { title: "Gram-negative bacteria, part 2: Legionella, Pseudomonas, the enterics, Vibrio, Helicobacter, the spirochetes, Chlamydiae, Rickettsiae and Mycoplasma. Bacteriology complete", date: "2026-10-06", url: "https://us06web.zoom.us/rec/share/77vQp67uN0FWKe8CwxwfFioKqZhzOiu3NCLej4seDxeoqRBYytJOfH3hKvFBiLiw.6c5BPk7CecE6dNdD" },
           { title: "Mycology: the systemic dimorphic fungi, the opportunistic fungi, Pneumocystis and Sporothrix", date: "2026-10-07", url: "https://us06web.zoom.us/rec/share/wlyEbsGzEEG76maQfunZXrXjCNZ1qx7LzUMPll0Ap5iOM5GWF5VC9bj0ORvUzjQH.tYGgQHzJ1g9oDTdQ" },
-          { title: "Parasitology: the protozoa, the helminths and the ectoparasites. Every parasite on the list", date: "2026-10-08", url: "https://us06web.zoom.us/rec/share/20-fu62sBjvkBQ8FLJ8Tz_vgWWWWmET6BRfJZpC0HS92Lavawfu_8ztuJ6_wgGXu.N04uduDy0mlIcZlr" }
+          { title: "Parasitology: the protozoa, the helminths and the ectoparasites. Every parasite on the list", date: "2026-10-08", url: "https://us06web.zoom.us/rec/share/20-fu62sBjvkBQ8FLJ8Tz_vgWWWWmET6BRfJZpC0HS92Lavawfu_8ztuJ6_wgGXu.N04uduDy0mlIcZlr" },
+          { title: "Parasitology, question session: the whole subject worked through in stems", date: "2026-10-09", url: "https://us06web.zoom.us/rec/share/qHZC0cB5rtOQzPhyu14JLk_Va7tcEXOVqW-t-uyELi-Kf2zndnXzyjmNMYxOKqqq.BkvevvC97AcLfle-" }
         ]
       }
     ]
