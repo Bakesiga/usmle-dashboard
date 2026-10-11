@@ -785,7 +785,8 @@ window.BLOCKS = [
           { title: "Gram-negative bacteria, part 2: Legionella, Pseudomonas, the enterics, Vibrio, Helicobacter, the spirochetes, Chlamydiae, Rickettsiae and Mycoplasma. Bacteriology complete", date: "2026-10-06", url: "https://us06web.zoom.us/rec/share/77vQp67uN0FWKe8CwxwfFioKqZhzOiu3NCLej4seDxeoqRBYytJOfH3hKvFBiLiw.6c5BPk7CecE6dNdD" },
           { title: "Mycology: the systemic dimorphic fungi, the opportunistic fungi, Pneumocystis and Sporothrix", date: "2026-10-07", url: "https://us06web.zoom.us/rec/share/wlyEbsGzEEG76maQfunZXrXjCNZ1qx7LzUMPll0Ap5iOM5GWF5VC9bj0ORvUzjQH.tYGgQHzJ1g9oDTdQ" },
           { title: "Parasitology: the protozoa, the helminths and the ectoparasites. Every parasite on the list", date: "2026-10-08", url: "https://us06web.zoom.us/rec/share/20-fu62sBjvkBQ8FLJ8Tz_vgWWWWmET6BRfJZpC0HS92Lavawfu_8ztuJ6_wgGXu.N04uduDy0mlIcZlr" },
-          { title: "Parasitology, question session: the whole subject worked through in stems", date: "2026-10-09", url: "https://us06web.zoom.us/rec/share/qHZC0cB5rtOQzPhyu14JLk_Va7tcEXOVqW-t-uyELi-Kf2zndnXzyjmNMYxOKqqq.BkvevvC97AcLfle-" }
+          { title: "Parasitology, question session: the whole subject worked through in stems", date: "2026-10-09", url: "https://us06web.zoom.us/rec/share/qHZC0cB5rtOQzPhyu14JLk_Va7tcEXOVqW-t-uyELi-Kf2zndnXzyjmNMYxOKqqq.BkvevvC97AcLfle-" },
+          { title: "Virology: introduction, viral genetics and the DNA viruses, part 1", date: "2026-10-10", url: "https://us06web.zoom.us/rec/share/DMF34OqPCvpi7tKFrbB9zTQputjS99roltHqRFCEObP3Nj1d-mA1dTpSwCcDvdG_.8ns6RguNE288T7sx" }
         ]
       }
     ]
