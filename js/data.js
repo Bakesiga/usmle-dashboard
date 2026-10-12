@@ -772,7 +772,7 @@ window.BLOCKS = [
     short: "MIC",
     label: "Microbiology",
     subject: "micro",
-    dateRange: "1 to 10 October",
+    dateRange: "1 to 11 October",
     dayRange: [123, 132],
     start: "2026-10-01",
     subBlocks: [
@@ -786,7 +786,8 @@ window.BLOCKS = [
           { title: "Mycology: the systemic dimorphic fungi, the opportunistic fungi, Pneumocystis and Sporothrix", date: "2026-10-07", url: "https://us06web.zoom.us/rec/share/wlyEbsGzEEG76maQfunZXrXjCNZ1qx7LzUMPll0Ap5iOM5GWF5VC9bj0ORvUzjQH.tYGgQHzJ1g9oDTdQ" },
           { title: "Parasitology: the protozoa, the helminths and the ectoparasites. Every parasite on the list", date: "2026-10-08", url: "https://us06web.zoom.us/rec/share/20-fu62sBjvkBQ8FLJ8Tz_vgWWWWmET6BRfJZpC0HS92Lavawfu_8ztuJ6_wgGXu.N04uduDy0mlIcZlr" },
           { title: "Parasitology, question session: the whole subject worked through in stems", date: "2026-10-09", url: "https://us06web.zoom.us/rec/share/qHZC0cB5rtOQzPhyu14JLk_Va7tcEXOVqW-t-uyELi-Kf2zndnXzyjmNMYxOKqqq.BkvevvC97AcLfle-" },
-          { title: "Virology: introduction, viral genetics and the DNA viruses, part 1", date: "2026-10-10", url: "https://us06web.zoom.us/rec/share/DMF34OqPCvpi7tKFrbB9zTQputjS99roltHqRFCEObP3Nj1d-mA1dTpSwCcDvdG_.8ns6RguNE288T7sx" }
+          { title: "Virology: introduction, viral genetics and the DNA viruses, part 1", date: "2026-10-10", url: "https://us06web.zoom.us/rec/share/DMF34OqPCvpi7tKFrbB9zTQputjS99roltHqRFCEObP3Nj1d-mA1dTpSwCcDvdG_.8ns6RguNE288T7sx" },
+          { title: "Virology, part 2: the introduction, viral genetics and the DNA viruses worked through in questions", date: "2026-10-11", url: "https://us06web.zoom.us/rec/share/tMUCJ5CNBhL7P4ps4VVzxIM4bM0T9DoMmCrJq9M6gSMINgvN8lbkLXzPPM_Fd6v6.Nl0ShGmgFlKiGlcD" }
         ]
       }
     ]
