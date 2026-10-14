@@ -772,7 +772,7 @@ window.BLOCKS = [
     short: "MIC",
     label: "Microbiology",
     subject: "micro",
-    dateRange: "1 to 11 October",
+    dateRange: "1 to 13 October",
     dayRange: [123, 132],
     start: "2026-10-01",
     subBlocks: [
@@ -787,7 +787,8 @@ window.BLOCKS = [
           { title: "Parasitology: the protozoa, the helminths and the ectoparasites. Every parasite on the list", date: "2026-10-08", url: "https://us06web.zoom.us/rec/share/20-fu62sBjvkBQ8FLJ8Tz_vgWWWWmET6BRfJZpC0HS92Lavawfu_8ztuJ6_wgGXu.N04uduDy0mlIcZlr" },
           { title: "Parasitology, question session: the whole subject worked through in stems", date: "2026-10-09", url: "https://us06web.zoom.us/rec/share/qHZC0cB5rtOQzPhyu14JLk_Va7tcEXOVqW-t-uyELi-Kf2zndnXzyjmNMYxOKqqq.BkvevvC97AcLfle-" },
           { title: "Virology: introduction, viral genetics and the DNA viruses, part 1", date: "2026-10-10", url: "https://us06web.zoom.us/rec/share/DMF34OqPCvpi7tKFrbB9zTQputjS99roltHqRFCEObP3Nj1d-mA1dTpSwCcDvdG_.8ns6RguNE288T7sx" },
-          { title: "Virology, part 2: the introduction, viral genetics and the DNA viruses worked through in questions", date: "2026-10-11", url: "https://us06web.zoom.us/rec/share/tMUCJ5CNBhL7P4ps4VVzxIM4bM0T9DoMmCrJq9M6gSMINgvN8lbkLXzPPM_Fd6v6.Nl0ShGmgFlKiGlcD" }
+          { title: "Virology, part 2: the introduction, viral genetics and the DNA viruses worked through in questions", date: "2026-10-11", url: "https://us06web.zoom.us/rec/share/tMUCJ5CNBhL7P4ps4VVzxIM4bM0T9DoMmCrJq9M6gSMINgvN8lbkLXzPPM_Fd6v6.Nl0ShGmgFlKiGlcD" },
+          { title: "Virology, part 3: the RNA viruses, from the picornaviruses through to the hepatitis viruses. HIV and the prions still to come", date: "2026-10-13", url: "https://us06web.zoom.us/rec/share/zO94D-1ZHVgV6SsKFuoGDcn1H0u2VpI1KGoQylNrUB9uPMinwLRYSqxo7vH7wSaw.PmgzPObjm2kAQk0n" }
         ]
       }
     ]
