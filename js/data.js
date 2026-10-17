@@ -772,7 +772,7 @@ window.BLOCKS = [
     short: "MIC",
     label: "Microbiology",
     subject: "micro",
-    dateRange: "1 to 15 October",
+    dateRange: "1 to 16 October",
     dayRange: [123, 132],
     start: "2026-10-01",
     subBlocks: [
@@ -790,7 +790,8 @@ window.BLOCKS = [
           { title: "Virology, part 2: the introduction, viral genetics and the DNA viruses worked through in questions", date: "2026-10-11", url: "https://us06web.zoom.us/rec/share/tMUCJ5CNBhL7P4ps4VVzxIM4bM0T9DoMmCrJq9M6gSMINgvN8lbkLXzPPM_Fd6v6.Nl0ShGmgFlKiGlcD" },
           { title: "Virology, part 3: the RNA viruses, from the picornaviruses through to the hepatitis viruses. HIV and the prions still to come", date: "2026-10-13", url: "https://us06web.zoom.us/rec/share/zO94D-1ZHVgV6SsKFuoGDcn1H0u2VpI1KGoQylNrUB9uPMinwLRYSqxo7vH7wSaw.PmgzPObjm2kAQk0n" },
           { title: "The hepatitis viruses worked through in questions, then Mohamed's first session: how he prepared, what worked, what did not, and his exam day", date: "2026-10-14", url: "https://us06web.zoom.us/rec/share/CaytFdxsZPrH_0iowFHYvyZi8pAhgp3UAtFC1H0VWCQx08_-Ia1P7BcEgsEBOn_n.V_kR0EW7zwkC6Nr9" },
-          { title: "Virology in questions, then Mohamed's second session: the questions he met in his own exam, topic by topic", date: "2026-10-15", url: "https://us06web.zoom.us/rec/share/Z819S8UHNfm-WFpQiXabUWKtkYGDlbtESmWXUhFcTHO0sObklRcnPxlz-Mt9W0ni.NZGHSKzonTHa9Pil" }
+          { title: "Virology in questions, then Mohamed's second session: the questions he met in his own exam, topic by topic", date: "2026-10-15", url: "https://us06web.zoom.us/rec/share/Z819S8UHNfm-WFpQiXabUWKtkYGDlbtESmWXUhFcTHO0sObklRcnPxlz-Mt9W0ni.NZGHSKzonTHa9Pil" },
+          { title: "Antimicrobials, part 1, then Mohamed's third session on the questions he met in his own exam", date: "2026-10-16", url: "https://us06web.zoom.us/rec/share/iN4kAwMJX99HoRIKbwd_Dh8JElZ0sG7eGFVuYGADm-8GdXW1OTWSTxvo4y3Q8JeS._LpseuISCYPA6kvP" }
         ]
       }
     ]
