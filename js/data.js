@@ -773,7 +773,7 @@ window.BLOCKS = [
     label: "Microbiology",
     subject: "micro",
     dateRange: "1 to 17 October",
-    dayRange: [123, 132],
+    dayRange: [123, 139],
     start: "2026-10-01",
     subBlocks: [
       { id: "micro-bacteriology", label: "Bacteriology", days: [],
@@ -796,6 +796,22 @@ window.BLOCKS = [
         ]
       }
     ]
+  },
+  {
+    id: "biochem",
+    short: "BIO",
+    label: "Biochemistry",
+    subject: "biochem",
+    dateRange: "From 18 October",
+    dayRange: [140, 140],
+    start: "2026-10-18",
+    subBlocks: [
+      { id: "biochem-molecular", label: "Molecular", days: [],
+        recordings: [
+          { title: "Molecular biochemistry, part 1: chromatin structure, the nucleotides, and de novo and salvage synthesis", date: "2026-10-18", url: "https://us06web.zoom.us/rec/share/NDsCMflISQQlgVPS4kJkbm0-5EyWBh-L5aTslKJOLK6KuBUhrjOU6AuK1MncR7ul.v1ulR-XUA2hXfRbM" }
+        ]
+      }
+    ]
   }
 ];
 
@@ -809,7 +825,6 @@ window.BLOCKS = [
    Move an entry into BLOCKS once its first class is recorded.
    ------------------------------------------------------------------ */
 window.UPCOMING = [
-  { label: "Biochemistry",            when: "October", note: "2 weeks" },
   { label: "Psychiatry",              when: "October" },
   { label: "Putting it all together", when: "November", note: "2 weeks, full recap" }
 ];
