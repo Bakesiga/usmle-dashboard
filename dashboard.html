@@ -74,6 +74,11 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="4" y2="12"/><line x1="10" y1="20" x2="10" y2="4"/><line x1="16" y1="20" x2="16" y2="9"/><line x1="22" y1="20" x2="22" y2="15"/></svg>
         Where we are
       </button>
+      <button class="dash-tab" data-tab="nbme" role="tab" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></svg>
+        NBMEs
+        <span style="display:inline-flex;align-items:center;justify-content:center;background:var(--gold);color:#fff;font-size:10px;font-family:var(--font-body);font-weight:800;padding:1px 6px;border-radius:999px;letter-spacing:0.04em;">NEW</span>
+      </button>
       <button class="dash-tab" data-tab="sessions" role="tab" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
         Class recordings
@@ -309,6 +314,22 @@
       <!-- ====================================================== -->
       <!-- SCHEDULE PANEL                                         -->
       <!-- ====================================================== -->
+      <!-- ====================================================== -->
+      <!-- NBME PANEL                                             -->
+      <!-- November/December phase. Schedule, the student's own    -->
+      <!-- score trend, and the per-system evaluation. Rendered    -->
+      <!-- by JS into [data-nbme-root] from window.NBME.           -->
+      <!-- ====================================================== -->
+      <section class="panel" data-panel="nbme" role="tabpanel" aria-label="NBME self-assessments">
+        <div class="nbme-wrap">
+          <div class="prog-intro">
+            <h3>The NBME phase</h3>
+            <p>Eight self-assessments across November and December. You sit each one on your own over the weekend, then we spend Monday to Friday on the questions most of the class got wrong.</p>
+          </div>
+          <div data-nbme-root></div>
+        </div>
+      </section>
+
       <section class="panel" data-panel="progress" role="tabpanel" aria-label="Your progress">
         <div class="prog-wrap">
           <div class="prog-intro">

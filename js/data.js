@@ -829,6 +829,42 @@ window.UPCOMING = [
   { label: "Putting it all together", when: "November", note: "2 weeks, full recap" }
 ];
 
+// -------------------------------------------------------------
+// NBME PHASE (November and December)
+// Eight self-assessments. The student sits a form over the
+// weekend on their own, then Monday to Friday we work through
+// the questions most of the class got wrong.
+//
+// results: keyed by lowercase email. Add a student's row as soon
+// as they send their report. A missing form simply has not been
+// sat yet, so the panel degrades to the schedule on its own.
+//   score   3-digit NBME equivalent
+//   systems blockId -> "strong" | "borderline" | "weak"
+// blockId matches window.BLOCKS[].id, so a weak system links
+// straight to the recordings that cover it.
+// -------------------------------------------------------------
+window.NBME = {
+  label: "NBME phase",
+  blurb: "Eight NBME self-assessments across November and December, each followed by a week of corrections.",
+  forms: [
+    { id: "nbme27", n: 27, sit: ["2026-10-31", "2026-11-01"], week: ["2026-11-02", "2026-11-06"] },
+    { id: "nbme28", n: 28, sit: ["2026-11-07", "2026-11-08"], week: ["2026-11-09", "2026-11-13"] },
+    { id: "nbme29", n: 29, sit: ["2026-11-14", "2026-11-15"], week: ["2026-11-16", "2026-11-20"] },
+    { id: "nbme30", n: 30, sit: ["2026-11-21", "2026-11-22"], week: ["2026-11-23", "2026-11-27"] },
+    { id: "nbme31", n: 31, sit: ["2026-11-28", "2026-11-29"], week: ["2026-11-30", "2026-12-04"] },
+    { id: "nbme32", n: 32, sit: ["2026-12-05", "2026-12-06"], week: ["2026-12-07", "2026-12-11"] },
+    { id: "nbme33", n: 33, sit: ["2026-12-12", "2026-12-13"], week: ["2026-12-14", "2026-12-18"] },
+    { id: "nbme34", n: 34, sit: ["2026-12-19", "2026-12-20"], week: ["2026-12-21", "2026-12-25"] }
+  ],
+  // The passing mark Allan holds the class to. Drawn on the trend.
+  target: 196,
+  results: {
+    // "student@example.com": {
+    //   nbme27: { score: 201, systems: { cvs: "strong", renal: "weak", micro: "borderline" } }
+    // }
+  }
+};
+
 window.SIM_NOW = null;
 window.getNow = function () {
   if (window.SIM_NOW) return new Date(window.SIM_NOW);

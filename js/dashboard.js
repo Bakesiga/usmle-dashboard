@@ -1003,6 +1003,263 @@
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
+  // ============================================================
+  // NBME PHASE
+  // Schedule for the eight forms, the student's own score trend,
+  // and the per-system evaluation. All driven by window.NBME.
+  // ============================================================
+
+  function nbmeEmail() {
+    try {
+      var sess = JSON.parse(localStorage.getItem('usmle.session.v2') || 'null');
+      return sess && sess.email ? String(sess.email).toLowerCase().trim() : null;
+    } catch (e) { return null; }
+  }
+
+  // This student's results, or an empty object before anything is entered.
+  function nbmeResults() {
+    var N = window.NBME || {};
+    var email = nbmeEmail();
+    if (!email || !N.results) return {};
+    return N.results[email] || {};
+  }
+
+  // Status of one form relative to today: done | sitting | correcting | ahead
+  function nbmeFormStatus(form, now, res) {
+    var sitEnd = parseYMD(form.sit[1]);
+    var wkStart = parseYMD(form.week[0]);
+    var wkEnd = parseYMD(form.week[1]);
+    var t = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    if (t < parseYMD(form.sit[0])) return 'ahead';
+    if (t <= sitEnd) return 'sitting';
+    if (t >= wkStart && t <= wkEnd) return 'correcting';
+    return 'done';
+  }
+
+  function nbmeDayLabel(ymdStr) {
+    var d = parseYMD(ymdStr);
+    var mon = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];
+    return d.getDate() + ' ' + mon;
+  }
+
+  // ---- Score trend ------------------------------------------------
+  // One series, so no legend: the heading names it. Target line is a
+  // recessive reference, not a second series.
+  function nbmeTrendSvg(forms, res, target) {
+    var pts = [];
+    forms.forEach(function (f, i) {
+      var r = res[f.id];
+      if (r && typeof r.score === 'number') pts.push({ i: i, n: f.n, score: r.score });
+    });
+    if (!pts.length) return '';
+
+    var W = 680, H = 210, padL = 44, padR = 18, padT = 18, padB = 34;
+    var scores = pts.map(function (p) { return p.score; }).concat([target]);
+    var lo = Math.min.apply(null, scores), hi = Math.max.apply(null, scores);
+    lo = Math.floor((lo - 8) / 10) * 10;
+    hi = Math.ceil((hi + 8) / 10) * 10;
+    if (hi - lo < 40) { hi = lo + 40; }
+
+    var x = function (i) { return padL + (forms.length === 1 ? 0 : i * (W - padL - padR) / (forms.length - 1)); };
+    var y = function (v) { return padT + (hi - v) * (H - padT - padB) / (hi - lo); };
+
+    var out = '<svg class="nbme-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" ' +
+      'aria-label="Your NBME score across the forms you have sat">';
+
+    // Recessive horizontal grid, labelled.
+    for (var g = lo; g <= hi; g += 20) {
+      out += '<line class="nb-grid" x1="' + padL + '" y1="' + y(g) + '" x2="' + (W - padR) + '" y2="' + y(g) + '"/>' +
+             '<text class="nb-ax" x="' + (padL - 9) + '" y="' + (y(g) + 4) + '" text-anchor="end">' + g + '</text>';
+    }
+
+    // Target reference.
+    out += '<line class="nb-target" x1="' + padL + '" y1="' + y(target) + '" x2="' + (W - padR) + '" y2="' + y(target) + '"/>' +
+           '<text class="nb-target-t" x="' + (W - padR) + '" y="' + (y(target) - 7) + '" text-anchor="end">Target ' + target + '</text>';
+
+    // Form numbers along the foot.
+    forms.forEach(function (f, i) {
+      out += '<text class="nb-ax" x="' + x(i) + '" y="' + (H - 11) + '" text-anchor="middle">' + f.n + '</text>';
+    });
+
+    // The line, 2px, only across forms actually sat.
+    if (pts.length > 1) {
+      var d = pts.map(function (p, k) { return (k ? 'L' : 'M') + x(p.i) + ' ' + y(p.score); }).join(' ');
+      out += '<path class="nb-line" d="' + d + '"/>';
+    }
+
+    // Markers with a 2px surface ring so overlaps stay readable.
+    pts.forEach(function (p, k) {
+      var last = (k === pts.length - 1);
+      out += '<circle class="nb-dot' + (last ? ' is-last' : '') + '" cx="' + x(p.i) + '" cy="' + y(p.score) + '" r="' + (last ? 7 : 5) + '">' +
+             '<title>NBME ' + p.n + ': ' + p.score + '</title></circle>';
+      // Direct-label the first and last only, never every point.
+      if (last || k === 0) {
+        var first = (k === 0 && !last);
+        out += '<text class="nb-val" x="' + (x(p.i) + (first ? 9 : 0)) + '" y="' + (y(p.score) - 14) +
+               '" text-anchor="' + (first ? 'start' : 'middle') + '">' + p.score + '</text>';
+      }
+    });
+
+    out += '</svg>';
+    return out;
+  }
+
+  // ---- Per-system evaluation --------------------------------------
+  // Encoded three ways over a single-hue ramp: bar length, depth of
+  // tint, and the word itself. Never hue alone, because the system's
+  // sage and terracotta are not separable under protanopia.
+  var NBME_BANDS = { strong: 1, borderline: 2, weak: 3 };
+
+  function nbmeSystemsBlock(res, forms) {
+    // Use the most recent form that carries a systems breakdown.
+    var latest = null;
+    for (var i = forms.length - 1; i >= 0; i--) {
+      var r = res[forms[i].id];
+      if (r && r.systems && Object.keys(r.systems).length) { latest = { form: forms[i], r: r }; break; }
+    }
+    if (!latest) return '';
+
+    var blocks = window.BLOCKS || [];
+    var byId = {};
+    blocks.forEach(function (b) { byId[b.id] = b; });
+
+    var rows = Object.keys(latest.r.systems).map(function (id) {
+      var band = String(latest.r.systems[id] || '').toLowerCase();
+      return { id: id, band: band, rank: NBME_BANDS[band] || 0, label: (byId[id] && byId[id].label) || id };
+    }).filter(function (r) { return r.rank; });
+    if (!rows.length) return '';
+
+    // Weakest first: this list is a to-do list, not an alphabet.
+    rows.sort(function (a, b) { return b.rank - a.rank || a.label.localeCompare(b.label); });
+
+    var html = '<h2 class="sec-h">Your systems after NBME ' + latest.form.n + '</h2>' +
+      '<p class="nbme-note">Weakest first. Anything marked weak links to the classes that cover it.</p>' +
+      '<div class="nbme-sys">';
+    rows.forEach(function (r) {
+      var known = !!byId[r.id];
+      var word = r.band.charAt(0).toUpperCase() + r.band.slice(1);
+      html += '<div class="nbme-sysrow band-' + r.band + '"' + (known ? ' data-goto-block="' + r.id + '" role="link" tabindex="0"' : '') + '>' +
+          '<span class="nbme-sysname">' + esc(r.label) + '</span>' +
+          '<span class="nbme-meter" aria-hidden="true"><i style="width:' + ({1:100,2:60,3:28}[r.rank]) + '%"></i></span>' +
+          '<span class="nbme-band">' + word + '</span>' +
+        '</div>';
+    });
+    html += '</div>';
+    return html;
+  }
+
+  function renderNBME() {
+    var root = document.querySelector('[data-nbme-root]');
+    if (!root) return;
+    var N = window.NBME;
+    if (!N || !N.forms) { root.innerHTML = ''; return; }
+
+    var now = window.getNow();
+    var res = nbmeResults();
+    var forms = N.forms;
+    var sat = forms.filter(function (f) { return res[f.id] && typeof res[f.id].score === 'number'; });
+    var scores = sat.map(function (f) { return res[f.id].score; });
+    var latest = scores.length ? scores[scores.length - 1] : null;
+    var prev = scores.length > 1 ? scores[scores.length - 2] : null;
+    var delta = (latest !== null && prev !== null) ? latest - prev : null;
+
+    // --- Headline -------------------------------------------------
+    var html = '<div class="stat-row">';
+    if (latest !== null) {
+      html += '<div class="stat is-now"><div class="stat-n">' + latest + '</div>' +
+              '<div class="stat-l">Your latest NBME</div></div>';
+      html += '<div class="stat"><div class="stat-n">' +
+              (delta === null ? '&mdash;' : (delta > 0 ? '+' + delta : String(delta))) + '</div>' +
+              '<div class="stat-l">' + (delta === null ? 'No earlier form yet' : 'Since the form before') + '</div></div>';
+    } else {
+      html += '<div class="stat is-now"><div class="stat-n">8</div>' +
+              '<div class="stat-l">Forms in this phase</div></div>';
+    }
+    html += '<div class="stat"><div class="stat-n">' + sat.length + '<span class="stat-of">/8</span></div>' +
+            '<div class="stat-l">Sat so far</div></div>' +
+          '</div>';
+
+    // --- Where we are this week ----------------------------------
+    var live = null;
+    forms.forEach(function (f) {
+      var st = nbmeFormStatus(f, now, res);
+      if (st === 'sitting' || st === 'correcting') live = { f: f, st: st };
+    });
+    var nextUp = null;
+    for (var i = 0; i < forms.length; i++) {
+      if (nbmeFormStatus(forms[i], now, res) === 'ahead') { nextUp = forms[i]; break; }
+    }
+    if (live) {
+      html += '<div class="nbme-now">' +
+        '<span class="nbme-now-k">This week</span>' +
+        '<span class="nbme-now-v">' +
+          (live.st === 'sitting'
+            ? 'Sit <b>NBME ' + live.f.n + '</b> on your own. 200 questions, 4 blocks of 50, timed. There is no class today.'
+            : 'Corrections for <b>NBME ' + live.f.n + '</b>, ' + nbmeDayLabel(live.f.week[0]) + ' to ' + nbmeDayLabel(live.f.week[1]) + '. Send me your report if you have not.') +
+        '</span></div>';
+    } else if (nextUp) {
+      html += '<div class="nbme-now">' +
+        '<span class="nbme-now-k">Next up</span>' +
+        '<span class="nbme-now-v"><b>NBME ' + nextUp.n + '</b>, sit it ' +
+          nbmeDayLabel(nextUp.sit[0]) + ' or ' + nbmeDayLabel(nextUp.sit[1]) + '.</span></div>';
+    }
+
+    // --- Trend ----------------------------------------------------
+    var chart = nbmeTrendSvg(forms, res, N.target || 196);
+    if (chart) {
+      html += '<h2 class="sec-h">Your scores</h2>' +
+              '<div class="nbme-chart-wrap">' + chart + '</div>';
+    }
+
+    // --- Systems --------------------------------------------------
+    html += nbmeSystemsBlock(res, forms);
+
+    // --- The eight forms ------------------------------------------
+    html += '<h2 class="sec-h">All eight forms</h2><div class="fin-list nbme-list">';
+    forms.forEach(function (f) {
+      var st = nbmeFormStatus(f, now, res);
+      var r = res[f.id];
+      var hasScore = r && typeof r.score === 'number';
+      var meta = 'Sit ' + nbmeDayLabel(f.sit[0]) + ' or ' + nbmeDayLabel(f.sit[1]) +
+                 ' &middot; corrections ' + nbmeDayLabel(f.week[0]) + ' to ' + nbmeDayLabel(f.week[1]);
+      var mark = hasScore
+        ? '<span class="nbme-score">' + r.score + '</span>'
+        : '<span class="nbme-state is-' + st + '">' +
+            (st === 'ahead' ? 'Ahead' : st === 'sitting' ? 'Sit it now' : st === 'correcting' ? 'In corrections' : 'Awaiting your report') +
+          '</span>';
+      html += '<div class="fin-row nbme-row' + (st === 'sitting' || st === 'correcting' ? ' is-now' : '') + '">' +
+          '<span class="nbme-num">' + f.n + '</span>' +
+          '<span class="fin-body">' +
+            '<span class="fin-name">NBME ' + f.n + '</span>' +
+            '<span class="fin-meta">' + meta + '</span>' +
+          '</span>' + mark +
+        '</div>';
+    });
+    html += '</div>';
+
+    if (!sat.length) {
+      html += '<p class="nbme-note nbme-foot">Your scores appear here once you send me each report. ' +
+              'I will add the per-system breakdown at the same time.</p>';
+    }
+
+    root.innerHTML = html;
+  }
+
+  function bindNbme() {
+    var root = document.querySelector('[data-nbme-root]');
+    if (!root) return;
+    function go(t) { activateTab('sessions'); setBlockView(t.dataset.gotoBlock); }
+    root.addEventListener('click', function (e) {
+      var t = e.target.closest('[data-goto-block]');
+      if (t) go(t);
+    });
+    root.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var t = e.target.closest('[data-goto-block]');
+      if (t) { e.preventDefault(); go(t); }
+    });
+  }
+
   function bindLauncher() {
     document.querySelectorAll('[data-goto-tab]').forEach(function (btn) {
       btn.addEventListener('click', function () { activateTab(btn.dataset.gotoTab); });
@@ -1031,6 +1288,7 @@
     // Re-render on entry so a tab left open overnight rolls onto the new day.
     if (key === 'about')      renderPlan();
     if (key === 'progress')   renderProgress();
+    if (key === 'nbme')       renderNBME();
   }
   function bindTabs() {
     document.querySelectorAll('[data-tab]').forEach(tab => {
@@ -1152,6 +1410,7 @@
     bindTabs();
     bindBlocksRoot();
     bindProgress();
+    bindNbme();
     bindLauncher();
     bindUserMenu();
     bindDayJumps();

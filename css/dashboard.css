@@ -2218,3 +2218,105 @@
    as additions to the day rather than a duplicate entry. */
 .plan-state.is-extra { color: var(--sage-deep); }
 .plan-row.is-extra .plan-date b { color: var(--sage-deep); }
+
+/* ============================================================
+   NBME PANEL  (November / December phase)
+
+   Colour note: results are NOT encoded by hue. The system's sage
+   and terracotta sit at deltaE 4.8 under protanopia, so they are not
+   separable. Band is carried three ways instead: bar length,
+   depth of a single-hue terracotta ramp, and the word itself.
+   ============================================================ */
+
+.nbme-wrap { padding: var(--s-4) 0 var(--s-32); }
+
+.stat-of { font-size: 0.5em; color: var(--muted); margin-left: 2px; }
+
+/* ---- This week ---- */
+.nbme-now {
+  display: flex; gap: var(--s-16); align-items: baseline; flex-wrap: wrap;
+  margin: var(--s-20) 0 var(--s-8);
+  padding: var(--s-16) var(--s-20);
+  background: var(--accent-tint);
+  border: 1px solid var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r-card);
+}
+.nbme-now-k {
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.11em;
+  text-transform: uppercase; color: var(--accent-deep); white-space: nowrap;
+}
+.nbme-now-v { font-size: var(--fs-15); color: var(--ink-2); line-height: 1.5; flex: 1 1 260px; }
+.nbme-now-v b { color: var(--ink); font-weight: 700; }
+
+/* ---- Trend ---- */
+.nbme-chart-wrap {
+  background: var(--bg-cream); border: 1px solid var(--border);
+  border-radius: var(--r-card); padding: var(--s-16) var(--s-12) var(--s-8);
+  overflow: hidden;
+}
+.nbme-chart { width: 100%; height: auto; display: block; }
+.nb-grid   { stroke: var(--border-2); stroke-width: 1; }
+.nb-ax     { fill: var(--muted); font-family: var(--font-body); font-size: 11px; font-weight: 600; }
+.nb-target { stroke: var(--n-400); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.nb-target-t { fill: var(--muted); font-family: var(--font-body); font-size: 10.5px;
+  font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.nb-line   { fill: none; stroke: var(--accent); stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round; }
+.nb-dot    { fill: var(--accent); stroke: var(--bg-cream); stroke-width: 2; }
+.nb-dot.is-last { fill: var(--accent-deep); }
+.nb-val    { fill: var(--ink); font-family: var(--font-display); font-size: 15px; }
+
+/* ---- Per-system evaluation ---- */
+.nbme-note { font-size: var(--fs-14); color: var(--muted); margin: 0 0 var(--s-12); line-height: 1.5; }
+.nbme-foot { margin-top: var(--s-16); }
+
+.nbme-sys { display: flex; flex-direction: column; gap: 2px; }
+.nbme-sysrow {
+  display: grid; grid-template-columns: minmax(104px, 1.1fr) minmax(70px, 1fr) auto;
+  gap: var(--s-12); align-items: center;
+  padding: var(--s-12) var(--s-16);
+  background: var(--bg-cream); border: 1px solid var(--border-2);
+  border-radius: var(--r-soft);
+}
+.nbme-sysrow[role="link"] { cursor: pointer; transition: background var(--t-fast), border-color var(--t-fast); }
+.nbme-sysrow[role="link"]:hover,
+.nbme-sysrow[role="link"]:focus-visible { background: var(--accent-tint); border-color: var(--accent-soft); outline: none; }
+.nbme-sysname { font-weight: 600; color: var(--ink); font-size: var(--fs-15); }
+
+.nbme-meter { display: block; height: 8px; background: var(--border-2); border-radius: 999px; overflow: hidden; }
+.nbme-meter i { display: block; height: 100%; border-radius: 999px; }
+/* One colour for every bar: LENGTH is the encoding, and it now runs the
+   intuitive way (longest = strongest). Attention is carried by the chip. */
+.nbme-meter i { background: var(--accent); }
+
+.nbme-band {
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 999px; white-space: nowrap;
+}
+.band-strong     .nbme-band { color: var(--accent-deep); background: var(--accent-tint); }
+.band-borderline .nbme-band { color: #fff;              background: var(--accent); }
+.band-weak       .nbme-band { color: #fff;              background: var(--accent-deep); }
+
+/* ---- The eight forms ---- */
+.nbme-list { margin-top: var(--s-8); }
+.nbme-row { align-items: center; }
+.nbme-num {
+  flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 15px;
+  background: var(--bg-soft); color: var(--ink-2); border: 1px solid var(--border);
+}
+.nbme-row.is-now .nbme-num { background: var(--accent); color: #fff; border-color: var(--accent-deep); }
+.nbme-score { font-family: var(--font-display); font-size: var(--fs-20); color: var(--ink); white-space: nowrap; }
+.nbme-state {
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); white-space: nowrap;
+}
+.nbme-state.is-sitting, .nbme-state.is-correcting { color: var(--accent-deep); }
+
+@media (max-width: 560px) {
+  .nbme-sysrow { grid-template-columns: 1fr auto; }
+  .nbme-sysrow .nbme-meter { grid-column: 1 / -1; order: 3; }
+  .nbme-now { flex-direction: column; gap: var(--s-8); }
+}
