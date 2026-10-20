@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Mark your NBME · USMLE Classes</title>
+<link rel="icon" href="favicon.ico" />
+<link rel="stylesheet" href="css/redesign-tokens.css" />
+<link rel="stylesheet" href="css/site.css" />
+<style>
+  body { background: var(--bg); color: var(--ink); font-family: var(--font-body); margin: 0; }
+  .nf-wrap { max-width: 720px; margin: 0 auto; padding: var(--s-24) var(--s-16) 140px; }
+  .nf-h { font-family: var(--font-display); font-size: var(--fs-32); margin: 0 0 var(--s-8); line-height: 1.1; }
+  .nf-sub { color: var(--muted); font-size: var(--fs-15); line-height: 1.55; margin: 0 0 var(--s-24); }
+  .nf-pick { display: flex; flex-wrap: wrap; gap: var(--s-8); margin-bottom: var(--s-24); }
+  .nf-pick button {
+    font: inherit; font-weight: 700; cursor: pointer; padding: 9px 14px; border-radius: 999px;
+    background: var(--bg-cream); color: var(--ink-2); border: 1px solid var(--border);
+  }
+  .nf-pick button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent-deep); }
+  .nf-blk { margin-bottom: var(--s-24); }
+  .nf-blk h2 {
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 var(--s-12);
+  }
+  .nf-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; }
+  .nf-q {
+    aspect-ratio: 1; min-height: 34px; border-radius: 9px; cursor: pointer;
+    font: inherit; font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums;
+    background: var(--bg-cream); color: var(--muted); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+  }
+  .nf-q[aria-pressed="true"] { background: var(--accent-deep); color: #fff; border-color: var(--accent-deep); }
+  .nf-q:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .nf-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    background: var(--bg-cream); border-top: 1px solid var(--border);
+    padding: var(--s-12) var(--s-16) calc(var(--s-12) + env(safe-area-inset-bottom));
+    display: flex; gap: var(--s-16); align-items: center; justify-content: space-between; flex-wrap: wrap;
+  }
+  .nf-tally { font-family: var(--font-display); font-size: var(--fs-20); }
+  .nf-tally small { font-family: var(--font-body); font-size: var(--fs-13); font-weight: 600; color: var(--muted); display: block; }
+  .nf-send {
+    font: inherit; font-weight: 800; cursor: pointer; padding: 12px 22px; border-radius: 999px;
+    background: var(--accent); color: #fff; border: none;
+  }
+  .nf-send[disabled] { opacity: .45; cursor: not-allowed; }
+  .nf-note { font-size: var(--fs-14); color: var(--muted); line-height: 1.55; margin: var(--s-16) 0 0; }
+  .nf-out {
+    margin-top: var(--s-16); padding: var(--s-16); border-radius: var(--r-card);
+    background: var(--accent-tint); border: 1px solid var(--accent-soft);
+  }
+  .nf-out textarea {
+    width: 100%; min-height: 88px; font-family: var(--font-body); font-size: var(--fs-13);
+    border: 1px solid var(--border); border-radius: var(--r-soft); padding: 10px; background: #fff; color: var(--ink);
+  }
+  @media (max-width: 520px) { .nf-grid { grid-template-columns: repeat(5, 1fr); } }
+</style>
+</head>
+<body>
+<div class="nf-wrap">
+  <h1 class="nf-h">Mark your NBME</h1>
+  <p class="nf-sub">Tap only the questions you got <b>wrong</b>. Everything you leave alone counts as correct, so most people tap 40 to 70 of the 200. Your topic report is worked out from this.</p>
+
+  <div class="nf-pick" id="pick" role="group" aria-label="Which form"></div>
+  <div id="blocks"></div>
+
+  <p class="nf-note" id="hint"></p>
+  <div class="nf-out" id="out" hidden>
+    <p class="nf-note" style="margin-top:0"><b>Send this line to Allan on WhatsApp.</b> Tap it to select, then copy.</p>
+    <textarea id="code" readonly rows="3"></textarea>
+  </div>
+</div>
+
+<div class="nf-bar">
+  <div class="nf-tally"><span id="tally">0</span><small id="pct">nothing marked wrong yet</small></div>
+  <button class="nf-send" id="send" disabled>Send my result</button>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script>
+(function () {
+  'use strict';
+  var N = window.NBME || { forms: [] };
+  var TOTAL = 200;
+  var wrong = new Set();
+  var formId = null;
+
+  var pick = document.getElementById('pick');
+  N.forms.forEach(function (f) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.textContent = 'NBME ' + f.n;
+    b.setAttribute('aria-pressed', 'false'); b.dataset.form = f.id;
+    b.addEventListener('click', function () {
+      formId = f.id;
+      [].forEach.call(pick.children, function (c) { c.setAttribute('aria-pressed', String(c === b)); });
+      update();
+    });
+    pick.appendChild(b);
+  });
+
+  var blocks = document.getElementById('blocks');
+  for (var k = 0; k < 4; k++) {
+    var sec = document.createElement('section');
+    sec.className = 'nf-blk';
+    var h = document.createElement('h2');
+    h.textContent = 'Block ' + (k + 1) + ' · questions ' + (k * 50 + 1) + ' to ' + (k * 50 + 50);
+    sec.appendChild(h);
+    var g = document.createElement('div'); g.className = 'nf-grid';
+    for (var i = 1; i <= 50; i++) {
+      (function (n) {
+        var q = document.createElement('button');
+        q.type = 'button'; q.className = 'nf-q'; q.textContent = n;
+        q.setAttribute('aria-pressed', 'false');
+        q.setAttribute('aria-label', 'Question ' + n + ', mark wrong');
+        q.addEventListener('click', function () {
+          if (wrong.has(n)) { wrong.delete(n); q.setAttribute('aria-pressed', 'false'); }
+          else { wrong.add(n); q.setAttribute('aria-pressed', 'true'); }
+          update();
+        });
+        g.appendChild(q);
+      })(k * 50 + i);
+    }
+    sec.appendChild(g); blocks.appendChild(sec);
+  }
+
+  var tally = document.getElementById('tally'), pctEl = document.getElementById('pct'),
+      send = document.getElementById('send'), hint = document.getElementById('hint');
+
+  function update() {
+    var w = wrong.size, right = TOTAL - w;
+    tally.textContent = w;
+    pctEl.textContent = w
+      ? right + ' of ' + TOTAL + ' correct · ' + Math.round(right * 100 / TOTAL) + '%'
+      : 'nothing marked wrong yet';
+    send.disabled = !formId;
+    hint.textContent = formId ? '' : 'Pick which form you sat before you send.';
+  }
+  update();
+
+  function session() {
+    try { return JSON.parse(localStorage.getItem('usmle.session.v2') || 'null'); } catch (e) { return null; }
+  }
+
+  send.addEventListener('click', function () {
+    var s = session();
+    var email = (s && s.email) || '';
+    var list = Array.from(wrong).sort(function (a, b) { return a - b; });
+    if (!wrong.size && !confirm('You have not marked anything wrong. Send a clean 200 out of 200?')) return;
+
+    var payload = { form: formId, email: email, wrong: list, total: TOTAL, at: new Date().toISOString() };
+    var url = (window.USMLE_CONFIG || {}).NBME_COLLECTOR_URL;
+
+    if (url) {
+      send.disabled = true; send.textContent = 'Sending…';
+      fetch(url, { method: 'POST', mode: 'no-cors',
+                   headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                   body: JSON.stringify(payload) })
+        .then(function () { send.textContent = 'Sent — thank you'; })
+        .catch(function () { send.disabled = false; send.textContent = 'Send my result'; showCode(payload); });
+    } else {
+      showCode(payload);
+    }
+  });
+
+  // No collector configured: hand the student one line to send on WhatsApp.
+  function showCode(p) {
+    var out = document.getElementById('out'), code = document.getElementById('code');
+    code.value = p.form.toUpperCase() + ' | ' + (p.email || 'your email') + ' | wrong: ' + p.wrong.join(',');
+    out.hidden = false;
+    code.focus(); code.select();
+    out.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+})();
+</script>
+</body>
+</html>

@@ -858,11 +858,34 @@ window.NBME = {
   ],
   // The passing mark Allan holds the class to. Drawn on the trend.
   target: 196,
+
+  // ---- Question -> topic map -------------------------------------
+  // One entry per question, in order, so map[formId][0] is question 1.
+  // Values are window.BLOCKS ids:
+  //   cvs resp epi path cns imm heme renal endo repro pharm msk gi
+  //   ethics micro biochem
+  // A form with no map here simply shows the raw score and no topic
+  // breakdown, so a form can go live before its map is typed up.
+  map: {
+    // nbme27: ["cvs", "biochem", "micro", ...200 entries...]
+  },
+
+  // ---- What each student submits ---------------------------------
+  // results[email][formId] = { wrong: [12, 45, 88], score: 205 }
+  //   wrong  the question numbers they got WRONG (1-based). Everything
+  //          not listed counts as correct, so a clean form is [].
+  //   score  the 3-digit equivalent, optional. Percent correct is
+  //          always derived from wrong.length.
   results: {
-    // "student@example.com": {
-    //   nbme27: { score: 201, systems: { cvs: "strong", renal: "weak", micro: "borderline" } }
-    // }
-  }
+    // "student@example.com": { nbme27: { wrong: [3, 17, 44], score: 201 } }
+  },
+
+  // Band thresholds on percent correct within a topic. Tune freely.
+  bands: { strong: 75, borderline: 60 },
+
+  // Topics with fewer than this many questions on a form are too thin
+  // to call, and are reported separately rather than banded.
+  minTopicN: 4
 };
 
 window.SIM_NOW = null;

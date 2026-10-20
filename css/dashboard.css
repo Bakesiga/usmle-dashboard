@@ -2320,3 +2320,24 @@
   .nbme-sysrow .nbme-meter { grid-column: 1 / -1; order: 3; }
   .nbme-now { flex-direction: column; gap: var(--s-8); }
 }
+
+/* Fraction beside the topic name: right / total on this form. */
+.nbme-frac {
+  display: inline-block; margin-left: 8px;
+  font-size: var(--fs-13); font-weight: 600; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+/* Topics with too few questions on a form to band honestly. */
+.nbme-thin { margin-top: var(--s-12); font-style: italic; }
+.nbme-band { font-variant-numeric: tabular-nums; }
+
+/* Link out to the 200-question marking form. */
+.nbme-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin: var(--s-20) 0 var(--s-4); padding: 11px 20px;
+  background: var(--accent); color: #fff; border-radius: 999px;
+  font-weight: 800; font-size: var(--fs-15); text-decoration: none;
+  transition: background var(--t-fast);
+}
+.nbme-cta:hover, .nbme-cta:focus-visible { background: var(--accent-deep); color: #fff; }
+.nbme-cta svg { width: 17px; height: 17px; }
