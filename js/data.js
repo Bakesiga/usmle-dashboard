@@ -803,12 +803,13 @@ window.BLOCKS = [
     label: "Biochemistry",
     subject: "biochem",
     dateRange: "From 18 October",
-    dayRange: [140, 140],
+    dayRange: [140, 142],
     start: "2026-10-18",
     subBlocks: [
       { id: "biochem-molecular", label: "Molecular", days: [],
         recordings: [
-          { title: "Molecular biochemistry, part 1: chromatin structure, the nucleotides, and de novo and salvage synthesis", date: "2026-10-18", url: "https://us06web.zoom.us/rec/share/NDsCMflISQQlgVPS4kJkbm0-5EyWBh-L5aTslKJOLK6KuBUhrjOU6AuK1MncR7ul.v1ulR-XUA2hXfRbM" }
+          { title: "Molecular biochemistry, part 1: chromatin structure, the nucleotides, and de novo and salvage synthesis", date: "2026-10-18", url: "https://us06web.zoom.us/rec/share/NDsCMflISQQlgVPS4kJkbm0-5EyWBh-L5aTslKJOLK6KuBUhrjOU6AuK1MncR7ul.v1ulR-XUA2hXfRbM" },
+          { title: "Molecular biochemistry, part 2: the genetic code, DNA replication and telomerase", date: "2026-10-20", url: "https://us06web.zoom.us/rec/share/18U9F3BbKd1w41E_ruKSYTGgQqkaxr78k1YDyV-biggCUpmMEOdREhzkpy_7sCNY.Q5Ns15rtw4jWU_zO" }
         ]
       }
     ]
