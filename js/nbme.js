@@ -116,9 +116,19 @@
   // Joins what the student got wrong against the question->topic map.
   // Everything the student does not list counts as correct, so their
   // form is just the misses.
-  function nbmeTopicReport(formId, rec) {
+  // axis is 'system' (the eight score-report systems) or 'discipline'
+  // (the ten disciplines). Both are read off the same wrong list.
+  function nbmeAxis(axis) {
     var N = window.NBME || {};
-    var map = (N.map || {})[formId];
+    return axis === 'discipline'
+      ? { maps: N.disc || {},  table: N.disciplines || {} }
+      : { maps: N.map  || {},  table: N.systems     || {} };
+  }
+
+  function nbmeTopicReport(formId, rec, axis) {
+    var N = window.NBME || {};
+    var ax = nbmeAxis(axis);
+    var map = ax.maps[formId];
     if (!map || !map.length) return null;
     if (!rec || !Array.isArray(rec.wrong)) return null;
 
@@ -135,16 +145,19 @@
 
     var bands = N.bands || { strong: 75, borderline: 60 };
     var minN = N.minTopicN || 4;
-    var blocks = window.BLOCKS || [];
-    var byId = {}; blocks.forEach(function (b) { byId[b.id] = b; });
+    var byId = {}; (window.BLOCKS || []).forEach(function (b) { byId[b.id] = b; });
 
     var rows = Object.keys(agg).map(function (id) {
       var a = agg[id];
+      var meta = ax.table[id] || {};
       a.pct = a.total ? Math.round(a.right * 100 / a.total) : 0;
       a.thin = a.total < minN;
       a.band = a.pct >= bands.strong ? 'strong' : (a.pct >= bands.borderline ? 'borderline' : 'weak');
-      a.label = (byId[id] && byId[id].label) || id;
-      a.known = !!byId[id];
+      a.label = meta.label || (byId[id] && byId[id].label) || id;
+      // Only blocks that actually exist, so a row never offers a dead link.
+      a.blocks = (meta.blocks || []).filter(function (b) { return byId[b]; })
+                                    .map(function (b) { return byId[b]; });
+      a.known = a.blocks.length > 0;
       return a;
     });
 
@@ -160,9 +173,9 @@
   }
 
   // The most recent form that has both a map and a submission.
-  function nbmeLatestReport(forms, res) {
+  function nbmeLatestReport(forms, res, axis) {
     for (var i = forms.length - 1; i >= 0; i--) {
-      var rep = nbmeTopicReport(forms[i].id, res[forms[i].id]);
+      var rep = nbmeTopicReport(forms[i].id, res[forms[i].id], axis);
       if (rep) return { form: forms[i], rep: rep };
     }
     return null;
@@ -174,12 +187,10 @@
   // sit at deltaE 4.8 under protanopia and are not separable.
   var NBME_RANK = { strong: 1, borderline: 2, weak: 3 };
 
-  function nbmeSystemsBlock(res, forms) {
-    var latest = nbmeLatestReport(forms, res);
-    if (!latest) return '';
-
-    var solid = latest.rep.rows.filter(function (r) { return !r.thin; });
-    var thin  = latest.rep.rows.filter(function (r) { return r.thin; });
+  // One axis rendered as a weakest-first list.
+  function nbmeAxisList(rep) {
+    var solid = rep.rows.filter(function (r) { return !r.thin; });
+    var thin  = rep.rows.filter(function (r) { return r.thin; });
     if (!solid.length && !thin.length) return '';
 
     // Weakest first: this is a to-do list, not an alphabet.
@@ -187,20 +198,25 @@
       return (NBME_RANK[b.band] - NBME_RANK[a.band]) || (a.pct - b.pct) || a.label.localeCompare(b.label);
     });
 
-    var html = '<h2 class="sec-h">Your topics after NBME ' + latest.form.n + '</h2>' +
-      '<p class="nbme-note">Weakest first, out of the questions on this form. ' +
-      'Anything you are losing marks on links to the classes that cover it.</p>' +
-      '<div class="nbme-sys">';
-
+    var html = '<div class="nbme-sys">';
     solid.forEach(function (r) {
       var word = r.band.charAt(0).toUpperCase() + r.band.slice(1);
-      html += '<div class="nbme-sysrow band-' + r.band + '"' +
-            (r.known ? ' data-goto-block="' + r.id + '" role="link" tabindex="0"' : '') + '>' +
-          '<span class="nbme-sysname">' + esc(r.label) +
-            '<span class="nbme-frac">' + r.right + '/' + r.total + '</span></span>' +
+      html += '<div class="nbme-sysrow band-' + r.band + '">' +
+          '<span class="nbme-sysname">' + esc(r.label) + '</span>' +
           '<span class="nbme-meter" aria-hidden="true"><i style="width:' + Math.max(r.pct, 3) + '%"></i></span>' +
           '<span class="nbme-band">' + r.pct + '% &middot; ' + word + '</span>' +
-        '</div>';
+          // Spelled out, because a bare fraction makes a student do the
+          // arithmetic before they know whether to worry.
+          '<span class="nbme-say">There were <b>' + r.total + '</b> questions from this section ' +
+            'and you passed <b>' + r.right + '</b>. That is <b>' + r.pct + '%</b>.</span>';
+      // Weak and borderline rows carry the way back to the lessons.
+      if (r.known && r.band !== 'strong') {
+        html += '<span class="nbme-goto">Review ' + r.blocks.map(function (b) {
+          return '<a class="nbme-gotolink" data-goto-block="' + b.id + '" role="link" tabindex="0">' +
+                 esc(b.label) + '</a>';
+        }).join(' &middot; ') + '</span>';
+      }
+      html += '</div>';
     });
     html += '</div>';
 
@@ -209,6 +225,27 @@
       html += '<p class="nbme-note nbme-thin">Too few questions on this form to call: ' +
         thin.map(function (r) { return esc(r.label) + ' (' + r.right + '/' + r.total + ')'; }).join(', ') +
         '.</p>';
+    }
+    return html;
+  }
+
+  function nbmeSystemsBlock(res, forms) {
+    var bySystem = nbmeLatestReport(forms, res, 'system');
+    if (!bySystem) return '';
+    var byDisc = nbmeTopicReport(bySystem.form.id, res[bySystem.form.id], 'discipline');
+
+    var sysList = nbmeAxisList(bySystem.rep);
+    if (!sysList) return '';
+
+    var html = '<h2 class="sec-h">Your systems after NBME ' + bySystem.form.n + '</h2>' +
+      '<p class="nbme-note">The same eight systems your Step 1 score report uses, weakest first, ' +
+      'out of the questions on this form.</p>' + sysList;
+
+    var discList = byDisc ? nbmeAxisList(byDisc) : '';
+    if (discList) {
+      html += '<h2 class="sec-h">And by discipline</h2>' +
+        '<p class="nbme-note">The same questions cut the other way. A system can look fine ' +
+        'while one discipline inside it is quietly costing you marks.</p>' + discList;
     }
     return html;
   }

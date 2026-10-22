@@ -861,15 +861,88 @@ window.NBME = {
   // The passing mark Allan holds the class to. Drawn on the trend.
   target: 196,
 
-  // ---- Question -> topic map -------------------------------------
-  // One entry per question, in order, so map[formId][0] is question 1.
-  // Values are window.BLOCKS ids:
-  //   cvs resp epi path cns imm heme renal endo repro pharm msk gi
-  //   ethics micro biochem
+  // ---- Question -> topic maps ------------------------------------
+  // Two axes, both taken from the real Step 1 score report: the eight
+  // systems and the ten disciplines. One entry per question, in order,
+  // so map[formId][0] is question 1 and disc[formId][0] is the same
+  // question's discipline.
   // A form with no map here simply shows the raw score and no topic
   // breakdown, so a form can go live before its map is typed up.
+
+  // The score report's wording for each code, and the class blocks that
+  // cover it, so a weak row can send a student straight to the lessons.
+  systems: {
+    "repro-endo":  { label: "Reproductive and Endocrine",            blocks: ["repro", "endo"] },
+    "resp-renal":  { label: "Respiratory and Renal/Urinary",         blocks: ["resp", "renal"] },
+    "neuro-behav": { label: "Behavioral Health and Nervous/Special Senses", blocks: ["cns"] },
+    "blood-imm":   { label: "Blood and Lymphoreticular/Immune",      blocks: ["heme", "imm"] },
+    "multi":       { label: "Multisystem Processes and Disorders",   blocks: ["path", "epi"] },
+    "msk-skin":    { label: "Musculoskeletal, Skin and Subcutaneous", blocks: ["msk"] },
+    "cvs":         { label: "Cardiovascular",                        blocks: ["cvs"] },
+    "gi":          { label: "Gastrointestinal",                      blocks: ["gi"] }
+  },
+  disciplines: {
+    path:     { label: "Pathology",                 blocks: ["path"] },
+    physio:   { label: "Physiology",                blocks: [] },
+    anat:     { label: "Anatomy and Embryology",    blocks: [] },
+    micro:    { label: "Microbiology",              blocks: ["micro"] },
+    pharm:    { label: "Pharmacology",              blocks: ["pharm"] },
+    behav:    { label: "Biostatistics and Behavioral science", blocks: ["epi", "ethics"] },
+    biochem:  { label: "Biochemistry and Nutrition", blocks: ["biochem"] },
+    histo:    { label: "Histology and Cell biology", blocks: [] },
+    imm:      { label: "Immunology",                blocks: ["imm"] },
+    genetics: { label: "Genetics",                  blocks: ["biochem"] }
+  },
+
   map: {
-    // nbme27: ["cvs", "biochem", "micro", ...200 entries...]
+    nbme27: [
+      "repro-endo","neuro-behav","cvs","msk-skin","neuro-behav","blood-imm","gi","repro-endo","multi","blood-imm"
+      ,"cvs","blood-imm","repro-endo","multi","msk-skin","resp-renal","msk-skin","resp-renal","multi","repro-endo"
+      ,"resp-renal","msk-skin","cvs","resp-renal","msk-skin","gi","repro-endo","repro-endo","msk-skin","multi"
+      ,"resp-renal","neuro-behav","msk-skin","neuro-behav","neuro-behav","neuro-behav","gi","neuro-behav","blood-imm","multi"
+      ,"blood-imm","multi","msk-skin","repro-endo","blood-imm","msk-skin","resp-renal","resp-renal","neuro-behav","blood-imm"
+      ,"repro-endo","neuro-behav","resp-renal","neuro-behav","resp-renal","resp-renal","blood-imm","neuro-behav","gi","resp-renal"
+      ,"blood-imm","neuro-behav","multi","repro-endo","blood-imm","neuro-behav","blood-imm","neuro-behav","neuro-behav","multi"
+      ,"msk-skin","msk-skin","msk-skin","neuro-behav","cvs","multi","multi","cvs","multi","msk-skin"
+      ,"repro-endo","blood-imm","repro-endo","msk-skin","blood-imm","gi","gi","msk-skin","multi","multi"
+      ,"resp-renal","gi","gi","neuro-behav","gi","blood-imm","repro-endo","cvs","gi","multi"
+      ,"blood-imm","multi","neuro-behav","blood-imm","repro-endo","msk-skin","msk-skin","cvs","resp-renal","repro-endo"
+      ,"resp-renal","gi","multi","msk-skin","resp-renal","resp-renal","msk-skin","neuro-behav","multi","gi"
+      ,"gi","resp-renal","neuro-behav","resp-renal","resp-renal","repro-endo","multi","blood-imm","neuro-behav","neuro-behav"
+      ,"msk-skin","multi","gi","msk-skin","gi","gi","neuro-behav","blood-imm","repro-endo","neuro-behav"
+      ,"cvs","neuro-behav","resp-renal","gi","resp-renal","cvs","resp-renal","neuro-behav","multi","blood-imm"
+      ,"msk-skin","multi","multi","blood-imm","gi","msk-skin","cvs","multi","resp-renal","resp-renal"
+      ,"blood-imm","gi","multi","cvs","repro-endo","neuro-behav","msk-skin","gi","msk-skin","repro-endo"
+      ,"resp-renal","cvs","multi","neuro-behav","resp-renal","multi","blood-imm","msk-skin","resp-renal","msk-skin"
+      ,"repro-endo","repro-endo","multi","gi","blood-imm","blood-imm","msk-skin","resp-renal","neuro-behav","cvs"
+      ,"repro-endo","neuro-behav","gi","resp-renal","blood-imm","blood-imm","neuro-behav","repro-endo","msk-skin","neuro-behav"
+      
+    ]
+  },
+  disc: {
+    nbme27: [
+      "physio","biochem","path","micro","physio","imm","micro","path","pharm","biochem"
+      ,"anat","path","physio","behav","path","physio","anat","micro","micro","path"
+      ,"anat","path","physio","path","physio","pharm","pharm","anat","imm","behav"
+      ,"path","path","physio","anat","behav","physio","histo","anat","path","behav"
+      ,"imm","biochem","anat","anat","biochem","path","physio","path","behav","imm"
+      ,"anat","path","pharm","behav","pharm","path","physio","pharm","path","micro"
+      ,"pharm","behav","behav","pharm","imm","behav","imm","physio","pharm","genetics"
+      ,"anat","micro","micro","anat","physio","biochem","path","physio","behav","pharm"
+      ,"path","genetics","pharm","physio","imm","micro","path","anat","biochem","behav"
+      ,"path","physio","physio","anat","anat","path","anat","physio","physio","biochem"
+      ,"path","behav","biochem","path","micro","biochem","path","path","pharm","physio"
+      ,"path","physio","biochem","pharm","physio","path","physio","behav","biochem","pharm"
+      ,"genetics","physio","behav","path","path","physio","pharm","imm","histo","pharm"
+      ,"pharm","behav","biochem","anat","genetics","physio","micro","imm","biochem","pharm"
+      ,"path","histo","physio","path","micro","pharm","physio","physio","behav","imm"
+      ,"biochem","behav","pharm","biochem","path","imm","pharm","behav","path","path"
+      ,"path","anat","genetics","pharm","path","genetics","anat","path","biochem","pharm"
+      ,"anat","pharm","genetics","genetics","path","behav","biochem","anat","anat","histo"
+      ,"pharm","path","behav","micro","micro","imm","anat","path","anat","pharm"
+      ,"physio","anat","physio","anat","imm","imm","genetics","histo","path","behav"
+      
+    ]
   },
 
   // ---- What each student submits ---------------------------------

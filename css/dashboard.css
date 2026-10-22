@@ -2279,10 +2279,30 @@
   background: var(--bg-cream); border: 1px solid var(--border-2);
   border-radius: var(--r-soft);
 }
-.nbme-sysrow[role="link"] { cursor: pointer; transition: background var(--t-fast), border-color var(--t-fast); }
-.nbme-sysrow[role="link"]:hover,
-.nbme-sysrow[role="link"]:focus-visible { background: var(--accent-tint); border-color: var(--accent-soft); outline: none; }
 .nbme-sysname { font-weight: 600; color: var(--ink); font-size: var(--fs-15); }
+
+/* The count and the score in words. It sits on its own line under the
+   name so the meter keeps its width. */
+.nbme-say {
+  grid-column: 1 / -1;
+  font-size: var(--fs-13); color: var(--muted); line-height: 1.5;
+}
+.nbme-say b { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* The way back to the lessons. Only weak and borderline rows carry it,
+   and it sits on its own line so the meter keeps its width. */
+.nbme-goto {
+  grid-column: 1 / -1;
+  font-size: var(--fs-13); color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: baseline;
+}
+.nbme-gotolink {
+  cursor: pointer; color: var(--accent-deep); font-weight: 600;
+  text-decoration: underline; text-underline-offset: 2px;
+  border-radius: 3px; transition: color var(--t-fast);
+}
+.nbme-gotolink:hover { color: var(--ink); }
+.nbme-gotolink:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 .nbme-meter { display: block; height: 8px; background: var(--border-2); border-radius: 999px; overflow: hidden; }
 .nbme-meter i { display: block; height: 100%; border-radius: 999px; }
@@ -2316,8 +2336,16 @@
 .nbme-state.is-sitting, .nbme-state.is-correcting { color: var(--accent-deep); }
 
 @media (max-width: 560px) {
-  .nbme-sysrow { grid-template-columns: 1fr auto; }
-  .nbme-sysrow .nbme-meter { grid-column: 1 / -1; order: 3; }
+  /* One column at phone width. Side by side, a long system name such as
+     "Blood and Lymphoreticular/Immune" either pushes the band chip off
+     the card or has to be broken mid-word; stacking avoids both and the
+     reading order stays name, verdict, where to review, bar. */
+  .nbme-sysrow { grid-template-columns: 1fr; gap: var(--s-8); }
+  .nbme-sysrow .nbme-sysname { order: 1; min-width: 0; }
+  .nbme-sysrow .nbme-band    { order: 2; justify-self: start; }
+  .nbme-sysrow .nbme-say     { order: 3; }
+  .nbme-sysrow .nbme-goto    { order: 4; }
+  .nbme-sysrow .nbme-meter   { order: 5; }
   .nbme-now { flex-direction: column; gap: var(--s-8); }
 }
 
