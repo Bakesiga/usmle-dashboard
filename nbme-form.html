@@ -68,7 +68,7 @@
 
   <p class="nf-note" id="hint"></p>
   <div class="nf-out" id="out" hidden>
-    <p class="nf-note" style="margin-top:0"><b>Send this line to Allan on WhatsApp.</b> Tap it to select, then copy.</p>
+    <p class="nf-note" style="margin-top:0" id="outlead"></p>
     <textarea id="code" readonly rows="3"></textarea>
   </div>
 </div>
@@ -144,31 +144,60 @@
     try { return JSON.parse(localStorage.getItem('usmle.session.v2') || 'null'); } catch (e) { return null; }
   }
 
+  var lastLine = '';
   send.addEventListener('click', function () {
     var s = session();
     var email = (s && s.email) || '';
     var list = Array.from(wrong).sort(function (a, b) { return a - b; });
     if (!wrong.size && !confirm('You have not marked anything wrong. Send a clean 200 out of 200?')) return;
 
-    var payload = { form: formId, email: email, wrong: list, total: TOTAL, at: new Date().toISOString() };
-    var url = (window.USMLE_CONFIG || {}).NBME_COLLECTOR_URL;
+    lastLine = formId.toUpperCase() + ' | ' + (email || 'your email') + ' | wrong: ' + list.join(',');
+    var payload = { form: formId, email: email, name: (s && s.name) || '',
+                    wrong: list, total: TOTAL, at: new Date().toISOString() };
+    var url = (typeof USMLE_CONFIG !== 'undefined' ? USMLE_CONFIG : {}).NBME_COLLECTOR_URL;
 
     if (url) {
-      send.disabled = true; send.textContent = 'Sending…';
+      send.disabled = true; send.textContent = 'Sending...';
       fetch(url, { method: 'POST', mode: 'no-cors',
                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                    body: JSON.stringify(payload) })
-        .then(function () { send.textContent = 'Sent — thank you'; })
-        .catch(function () { send.disabled = false; send.textContent = 'Send my result'; showCode(payload); });
+        .then(function () {
+          send.textContent = 'Sent, thank you';
+          done(p2(payload));
+        })
+        .catch(function () {
+          send.disabled = false; send.textContent = 'Send my result';
+          showCode(payload, true);
+        });
     } else {
-      showCode(payload);
+      showCode(payload, false);
     }
   });
 
-  // No collector configured: hand the student one line to send on WhatsApp.
-  function showCode(p) {
+  function p2(p) {
+    var right = p.total - p.wrong.length;
+    return right + ' of ' + p.total + ' correct, ' + Math.round(right * 100 / p.total) + '%';
+  }
+
+  // Shown after a successful send: a receipt, plus the backup line in case the
+  // submission did not land (a no-cors POST cannot be read back).
+  function done(summary) {
+    var out = document.getElementById('out'), code = document.getElementById('code');
+    code.value = lastLine;
+    document.getElementById('outlead').innerHTML =
+      '<b>Received: ' + summary + '.</b> Your report by system will follow. ' +
+      'If you do not hear back, send the line below to Allan on WhatsApp.';
+    out.hidden = false;
+    out.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // No collector configured, or the send failed: one line to send on WhatsApp.
+  function showCode(p, failed) {
     var out = document.getElementById('out'), code = document.getElementById('code');
     code.value = p.form.toUpperCase() + ' | ' + (p.email || 'your email') + ' | wrong: ' + p.wrong.join(',');
+    document.getElementById('outlead').innerHTML = failed
+      ? '<b>That did not send.</b> Copy the line below and send it to Allan on WhatsApp.'
+      : '<b>Send this line to Allan on WhatsApp.</b> Tap it to select, then copy.';
     out.hidden = false;
     code.focus(); code.select();
     out.scrollIntoView({ behavior: 'smooth', block: 'center' });
