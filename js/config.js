@@ -2,7 +2,7 @@
 const USMLE_CONFIG = {
   // Carey Coombs NBME submissions collector (Apps Script web app /exec URL).
   // Paste the deployed URL here; the marking form posts submissions to it.
-  NBME_COLLECTOR_URL: "",
+  NBME_COLLECTOR_URL: "https://script.google.com/macros/s/AKfycbyuqcwawDcrB9lnKjBpB_HTb88zophFO42NPLMXFMxYVPkTrDUaHpF1AhikW5BbBVOp/exec",
 
   // Get this from Google Cloud Console → APIs & Services → Credentials → Create OAuth client (Web)
   // Authorized JS origins must include your hosted URL (e.g. https://bakesiga.github.io) and http://localhost:5151 for local preview.
