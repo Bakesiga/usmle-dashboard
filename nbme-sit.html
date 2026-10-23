@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Sit an NBME · USMLE Classes</title>
+<link rel="icon" href="favicon.ico" />
+<link rel="stylesheet" href="css/redesign-tokens.css" />
+<link rel="stylesheet" href="css/site.css" />
+<style>
+  body { background: var(--bg); color: var(--ink); font-family: var(--font-body); margin: 0; }
+  .st-wrap { max-width: 720px; margin: 0 auto; padding: var(--s-24) var(--s-16) 150px; }
+  .st-h { font-family: var(--font-display); font-size: var(--fs-32); margin: 0 0 var(--s-8); line-height: 1.1; }
+  .st-sub { color: var(--muted); font-size: var(--fs-15); line-height: 1.55; margin: 0 0 var(--s-24); }
+  .st-lab {
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--muted); margin: var(--s-24) 0 var(--s-12);
+  }
+  .st-pick { display: flex; flex-wrap: wrap; gap: var(--s-8); }
+  .st-pick button {
+    font: inherit; font-weight: 700; cursor: pointer; padding: 9px 14px; border-radius: 999px;
+    background: var(--bg-cream); color: var(--ink-2); border: 1px solid var(--border);
+  }
+  .st-pick button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent-deep); }
+
+  .st-btn {
+    font: inherit; font-weight: 700; cursor: pointer; border-radius: 999px;
+    padding: 12px 22px; border: 1px solid var(--accent-deep);
+    background: var(--accent); color: #fff;
+  }
+  .st-btn[disabled] { opacity: .45; cursor: not-allowed; }
+  .st-btn.is-quiet { background: var(--bg-cream); color: var(--ink-2); border-color: var(--border); }
+
+  /* ---- Exam chrome ---- */
+  .st-top {
+    position: sticky; top: 0; z-index: 20; margin: 0 calc(var(--s-16) * -1);
+    padding: var(--s-12) var(--s-16); background: var(--bg-cream);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; gap: var(--s-12);
+  }
+  .st-where { font-size: var(--fs-13); color: var(--muted); font-weight: 600; }
+  .st-where b { color: var(--ink); }
+  .st-clock {
+    font-size: var(--fs-20); font-weight: 700; font-variant-numeric: tabular-nums;
+    color: var(--ink); letter-spacing: 0.02em;
+  }
+  /* Under five minutes the clock is not just a colour change: it also
+     says the words, so it reads for anyone who cannot separate the hues. */
+  .st-clock.is-low { color: var(--accent-deep); }
+  .st-clock small { display: block; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
+
+  .st-qnum { font-family: var(--font-display); font-size: var(--fs-28); margin: var(--s-24) 0 2px; }
+  .st-qmeta { color: var(--muted); font-size: var(--fs-14); margin: 0 0 var(--s-20); }
+
+  .st-choices { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--s-8); }
+  .st-choices button {
+    font: inherit; font-weight: 700; font-size: var(--fs-18); cursor: pointer;
+    padding: 16px 0; border-radius: var(--r-soft);
+    background: var(--bg-cream); color: var(--ink-2); border: 1px solid var(--border);
+    transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+  }
+  .st-choices button.is-far { color: var(--muted); }
+  .st-choices button[aria-pressed="true"] {
+    background: var(--accent-deep); color: #fff; border-color: var(--accent-deep);
+  }
+  .st-choices button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .st-flagrow { margin-top: var(--s-16); display: flex; align-items: center; gap: var(--s-12); flex-wrap: wrap; }
+  .st-flag {
+    font: inherit; font-size: var(--fs-14); font-weight: 600; cursor: pointer;
+    padding: 8px 14px; border-radius: 999px;
+    background: transparent; color: var(--muted); border: 1px dashed var(--border);
+  }
+  .st-flag[aria-pressed="true"] { background: var(--accent-tint); color: var(--accent-deep); border-style: solid; border-color: var(--accent-soft); }
+  .st-keys { font-size: var(--fs-13); color: var(--muted); }
+
+  .st-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    background: var(--bg-cream); border-top: 1px solid var(--border);
+    padding: var(--s-12) var(--s-16) calc(var(--s-12) + env(safe-area-inset-bottom));
+    display: flex; gap: var(--s-12); align-items: center; justify-content: space-between;
+  }
+
+  /* ---- Block review grid ---- */
+  .st-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; margin: var(--s-16) 0; }
+  .st-cell {
+    aspect-ratio: 1; min-height: 34px; border-radius: 9px; cursor: pointer; position: relative;
+    font: inherit; font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums;
+    background: var(--bg-cream); color: var(--muted); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* Answered is carried by fill AND by the letter sitting in the cell, so
+     the state survives a greyscale print or a colour-blind reader. */
+  .st-cell.is-done { background: var(--accent-deep); color: #fff; border-color: var(--accent-deep); }
+  .st-cell.is-flag::after {
+    content: ''; position: absolute; top: 3px; right: 3px; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--accent);
+  }
+  .st-cell.is-done.is-flag::after { background: #fff; }
+  .st-legend { font-size: var(--fs-13); color: var(--muted); display: flex; gap: var(--s-16); flex-wrap: wrap; }
+
+  /* ---- Marking ---- */
+  .st-mark { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 6px; margin: var(--s-12) 0 var(--s-24); }
+  .st-mrow {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: 8px 10px; border-radius: 9px; cursor: pointer;
+    background: var(--bg-cream); border: 1px solid var(--border);
+    font-size: var(--fs-13); font-weight: 700; font-variant-numeric: tabular-nums;
+  }
+  .st-mrow .q { color: var(--muted); }
+  .st-mrow .a { color: var(--ink); }
+  /* A miss is marked by the word, not only by the fill. */
+  .st-mrow.is-wrong { background: var(--accent-deep); border-color: var(--accent-deep); }
+  .st-mrow.is-wrong .q, .st-mrow.is-wrong .a { color: #fff; }
+  .st-mrow .x { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: transparent; }
+  .st-mrow.is-wrong .x { color: #fff; }
+
+  .st-note {
+    background: var(--bg-soft); border: 1px solid var(--border);
+    border-radius: var(--r-soft); padding: var(--s-16); margin: var(--s-16) 0;
+    font-size: var(--fs-14); line-height: 1.6; color: var(--ink-2);
+  }
+  .st-note b { color: var(--ink); }
+  .st-big { font-family: var(--font-display); font-size: var(--fs-32); margin: 0 0 var(--s-4); }
+  code.st-code {
+    display: block; padding: var(--s-12); background: var(--bg-cream); border: 1px solid var(--border);
+    border-radius: var(--r-soft); font-size: 12px; word-break: break-all; margin-top: var(--s-8);
+  }
+
+  @media (max-width: 420px) {
+    .st-choices { grid-template-columns: repeat(5, 1fr); }
+    .st-grid { grid-template-columns: repeat(5, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="st-wrap">
+
+  <!-- 1. Setup -->
+  <section id="setup">
+    <h1 class="st-h">Sit an NBME</h1>
+    <p class="st-sub">
+      Open your NBME in another window or have the booklet in front of you. This page
+      keeps the clock and takes your answers, one question at a time, the way the real
+      thing does. It does not show you the questions.
+    </p>
+
+    <p class="st-lab">Which form</p>
+    <div class="st-pick" id="pick"></div>
+
+    <p class="st-lab">Minutes per block of 50</p>
+    <div class="st-pick" id="pace"></div>
+
+    <div class="st-note">
+      Four blocks of 50, 200 questions. The clock runs per block and does not stop,
+      so treat it as the real sitting: no looking anything up. You get a break
+      between blocks. If you close this page by accident your answers are kept on
+      this device and you can pick up where you left off.
+    </div>
+
+    <p id="resume" hidden class="st-note"><b>You have a sitting in progress.</b>
+      <span id="resumeWhat"></span></p>
+
+    <div class="st-flagrow">
+      <button class="st-btn" id="start" disabled>Start block 1</button>
+      <button class="st-btn is-quiet" id="resumeBtn" hidden>Pick up where I left off</button>
+    </div>
+    <p class="st-keys" id="setupHint" style="margin-top:12px">Pick a form to begin.</p>
+  </section>
+
+  <!-- 2. Exam -->
+  <section id="exam" hidden>
+    <div class="st-top">
+      <span class="st-where">Block <b id="bNum">1</b> &middot; item <b id="iNum">1</b> of 50</span>
+      <span class="st-clock" id="clock">60:00</span>
+    </div>
+
+    <h2 class="st-qnum" id="qnum">Question 1</h2>
+    <p class="st-qmeta" id="qmeta">Choose the letter you picked on the exam.</p>
+
+    <div class="st-choices" id="choices"></div>
+
+    <div class="st-flagrow">
+      <button class="st-flag" id="flag" aria-pressed="false">Mark for review</button>
+      <button class="st-btn is-quiet" id="toReview">Review this block</button>
+    </div>
+    <p class="st-keys">Keyboard: <b>A</b> to <b>J</b> to answer, <b>&rarr;</b> next, <b>&larr;</b> back, <b>M</b> to mark for review.</p>
+
+    <div class="st-bar">
+      <button class="st-btn is-quiet" id="prev">Back</button>
+      <button class="st-btn" id="next">Next</button>
+    </div>
+  </section>
+
+  <!-- 3. Block review -->
+  <section id="review" hidden>
+    <h2 class="st-h" id="revH">Block 1 review</h2>
+    <p class="st-sub" id="revSub"></p>
+    <div class="st-grid" id="revGrid"></div>
+    <p class="st-legend">
+      <span>Filled = answered, and shows your letter</span>
+      <span>Dot = flagged</span>
+    </p>
+    <div class="st-bar">
+      <button class="st-btn is-quiet" id="backToQ">Back to questions</button>
+      <button class="st-btn" id="endBlock">End block</button>
+    </div>
+  </section>
+
+  <!-- 4. Break between blocks -->
+  <section id="brk" hidden>
+    <h2 class="st-h" id="brkH">Block 1 done</h2>
+    <p class="st-sub" id="brkSub"></p>
+    <div class="st-bar">
+      <button class="st-btn" id="nextBlock">Start the next block</button>
+    </div>
+  </section>
+
+  <!-- 5. Marking -->
+  <section id="marking" hidden>
+    <h2 class="st-h">Mark your answers</h2>
+    <p class="st-sub" id="markSub"></p>
+    <div class="st-mark" id="markGrid"></div>
+    <div class="st-bar">
+      <span class="st-where"><b id="markTally">0</b> wrong &middot; <span id="markPct">&mdash;</span></span>
+      <button class="st-btn" id="send">Send my result</button>
+    </div>
+  </section>
+
+  <!-- 6. Receipt -->
+  <section id="done" hidden>
+    <p class="st-big" id="doneScore"></p>
+    <p class="st-sub" id="doneSub"></p>
+    <div class="st-note" id="doneBackup" hidden>
+      <b>It did not send.</b> Copy this line and send it to Allan on WhatsApp.
+      <code class="st-code" id="doneCode"></code>
+    </div>
+    <p><a href="dashboard.html">Back to the dashboard</a></p>
+  </section>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var N = window.NBME || { forms: [] };
+  var TOTAL = 200, PER_BLOCK = 50, BLOCKS = 4;
+  var LETTERS = ['A','B','C','D','E','F','G','H','I','J'];
+  var SKEY = 'usmle.nbme.sit.v1';
+
+  var $ = function (id) { return document.getElementById(id); };
+  function show(id) {
+    ['setup','exam','review','brk','marking','done'].forEach(function (s) {
+      $(s).hidden = (s !== id);
+    });
+    window.scrollTo(0, 0);
+  }
+  function session() {
+    try { return JSON.parse(localStorage.getItem('usmle.session.v2') || 'null'); } catch (e) { return null; }
+  }
+  function two(n) { return (n < 10 ? '0' : '') + n; }
+  function mmss(ms) {
+    if (ms < 0) ms = 0;
+    var t = Math.round(ms / 1000);
+    return Math.floor(t / 60) + ':' + two(t % 60);
+  }
+
+  // ---- State ------------------------------------------------------
+  // answers[i] is the letter for question i+1, '' when skipped.
+  // secs[i] is seconds spent on it, which is the part a student cannot
+  // reconstruct afterwards and the part Allan can actually teach from.
+  var S = null;
+  function blank(form, mins) {
+    return {
+      form: form, mins: mins,
+      answers: new Array(TOTAL).fill(''),
+      secs: new Array(TOTAL).fill(0),
+      flags: {},
+      block: 0, idx: 0,
+      deadline: 0,
+      startedAt: new Date().toISOString(),
+      phase: 'exam'
+    };
+  }
+  function save() { try { localStorage.setItem(SKEY, JSON.stringify(S)); } catch (e) {} }
+  function load() {
+    try { return JSON.parse(localStorage.getItem(SKEY) || 'null'); } catch (e) { return null; }
+  }
+  function clearSaved() { try { localStorage.removeItem(SKEY); } catch (e) {} }
+
+  // ---- Setup ------------------------------------------------------
+  var formId = null, mins = 60;
+
+  var pick = $('pick');
+  N.forms.forEach(function (f) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.textContent = 'NBME ' + f.n;
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', function () {
+      formId = f.id;
+      [].forEach.call(pick.children, function (c) { c.setAttribute('aria-pressed', String(c === b)); });
+      $('start').disabled = false;
+      $('setupHint').textContent = '';
+    });
+    pick.appendChild(b);
+  });
+
+  var pace = $('pace');
+  [[45, 'Fast'], [60, 'Standard'], [75, 'Extended']].forEach(function (p) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.textContent = p[0] + ' min · ' + p[1];
+    b.setAttribute('aria-pressed', String(p[0] === 60));
+    b.addEventListener('click', function () {
+      mins = p[0];
+      [].forEach.call(pace.children, function (c) { c.setAttribute('aria-pressed', String(c === b)); });
+    });
+    pace.appendChild(b);
+  });
+
+  var saved = load();
+  if (saved && saved.answers && saved.answers.length === TOTAL) {
+    var ansd = saved.answers.filter(Boolean).length;
+    $('resume').hidden = false;
+    $('resumeWhat').textContent = saved.form.toUpperCase() + ', block ' + (saved.block + 1) +
+      ', ' + ansd + ' of 200 answered.';
+    $('resumeBtn').hidden = false;
+    $('resumeBtn').addEventListener('click', function () {
+      S = saved;
+      // A reload mid-block must not hand back a fresh hour.
+      if (S.phase === 'exam' && S.deadline < Date.now()) { toReview(true); return; }
+      if (S.phase === 'marking') { openMarking(); return; }
+      show('exam'); renderQ(); tick(); startTimer();
+    });
+  }
+
+  $('start').addEventListener('click', function () {
+    if (!formId) return;
+    if (saved && !confirm('Starting fresh will discard the sitting you have in progress. Continue?')) return;
+    S = blank(formId, mins);
+    S.deadline = Date.now() + mins * 60000;
+    save();
+    show('exam'); renderQ(); tick(); startTimer();
+  });
+
+  // ---- Exam -------------------------------------------------------
+  var timer = null, lastTick = 0;
+
+  function startTimer() {
+    lastTick = Date.now();
+    if (timer) clearInterval(timer);
+    timer = setInterval(tick, 500);
+  }
+  function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+
+  // Time is charged to whichever question is on screen when the tick fires.
+  function chargeTime() {
+    var now = Date.now();
+    if (lastTick) S.secs[S.idx] += Math.round((now - lastTick) / 1000);
+    lastTick = now;
+  }
+
+  function tick() {
+    chargeTime();
+    var left = S.deadline - Date.now();
+    var c = $('clock');
+    if (left <= 0) {
+      c.textContent = '0:00';
+      save();
+      toReview(true);
+      return;
+    }
+    c.textContent = mmss(left);
+    c.className = 'st-clock' + (left < 300000 ? ' is-low' : '');
+    c.innerHTML = mmss(left) + (left < 300000 ? '<small>under 5 min</small>' : '');
+  }
+
+  var choices = $('choices');
+  LETTERS.forEach(function (L, j) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.textContent = L;
+    b.className = j > 4 ? 'is-far' : '';
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', function () { answer(L); });
+    choices.appendChild(b);
+  });
+
+  function answer(L) {
+    chargeTime();
+    S.answers[S.idx] = (S.answers[S.idx] === L) ? '' : L;
+    save(); renderQ();
+  }
+
+  function renderQ() {
+    var n = S.idx + 1;
+    $('bNum').textContent = S.block + 1;
+    $('iNum').textContent = (S.idx % PER_BLOCK) + 1;
+    $('qnum').textContent = 'Question ' + n;
+    $('qmeta').textContent = S.answers[S.idx]
+      ? 'You picked ' + S.answers[S.idx] + '. Tap it again to clear it.'
+      : 'Choose the letter you picked on the exam.';
+    [].forEach.call(choices.children, function (b) {
+      b.setAttribute('aria-pressed', String(b.textContent === S.answers[S.idx]));
+    });
+    $('flag').setAttribute('aria-pressed', String(!!S.flags[n]));
+    $('prev').disabled = (S.idx % PER_BLOCK) === 0;
+    $('next').textContent = (S.idx % PER_BLOCK) === PER_BLOCK - 1 ? 'Review block' : 'Next';
+  }
+
+  function goto(i) {
+    chargeTime();
+    S.idx = i; save(); renderQ();
+  }
+
+  $('prev').addEventListener('click', function () {
+    if ((S.idx % PER_BLOCK) > 0) goto(S.idx - 1);
+  });
+  $('next').addEventListener('click', function () {
+    if ((S.idx % PER_BLOCK) === PER_BLOCK - 1) toReview(false);
+    else goto(S.idx + 1);
+  });
+  $('flag').addEventListener('click', function () {
+    var n = S.idx + 1;
+    if (S.flags[n]) delete S.flags[n]; else S.flags[n] = 1;
+    save(); renderQ();
+  });
+  $('toReview').addEventListener('click', function () { toReview(false); });
+
+  document.addEventListener('keydown', function (e) {
+    if ($('exam').hidden) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var k = e.key.toUpperCase();
+    if (LETTERS.indexOf(k) >= 0) { e.preventDefault(); answer(k); return; }
+    if (e.key === 'ArrowRight') { e.preventDefault(); $('next').click(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); $('prev').click(); }
+    // Not F: F is an answer choice, and a flag that quietly overwrites
+    // the answer is worse than no shortcut at all.
+    else if (k === 'M') { e.preventDefault(); $('flag').click(); }
+  });
+
+  // ---- Block review ----------------------------------------------
+  var timedOut = false;
+
+  function toReview(auto) {
+    chargeTime(); stopTimer(); save();
+    timedOut = !!auto;
+    var start = S.block * PER_BLOCK;
+    var unans = 0;
+    $('revH').textContent = 'Block ' + (S.block + 1) + ' review';
+    var grid = $('revGrid'); grid.innerHTML = '';
+    for (var i = start; i < start + PER_BLOCK; i++) {
+      (function (i) {
+        var n = i + 1, a = S.answers[i];
+        if (!a) unans++;
+        var c = document.createElement('button');
+        c.type = 'button';
+        c.className = 'st-cell' + (a ? ' is-done' : '') + (S.flags[n] ? ' is-flag' : '');
+        c.textContent = a || n;
+        c.setAttribute('aria-label', 'Question ' + n + (a ? ', answered ' + a : ', not answered'));
+        c.addEventListener('click', function () {
+          if (timedOut) return;
+          S.idx = i; show('exam'); renderQ(); startTimer();
+        });
+        grid.appendChild(c);
+      })(i);
+    }
+    $('revSub').textContent = timedOut
+      ? 'Time is up on this block. ' + unans + ' left unanswered.'
+      : unans + ' of 50 still unanswered. Tap any square to go back to it.';
+    $('backToQ').hidden = timedOut;
+    $('endBlock').textContent = timedOut ? 'Continue' : 'End block';
+    show('review');
+  }
+
+  $('backToQ').addEventListener('click', function () {
+    show('exam'); renderQ(); startTimer();
+  });
+
+  $('endBlock').addEventListener('click', function () {
+    if (!timedOut) {
+      var start = S.block * PER_BLOCK;
+      var un = S.answers.slice(start, start + PER_BLOCK).filter(function (a) { return !a; }).length;
+      if (un && !confirm(un + ' question' + (un === 1 ? '' : 's') +
+          ' in this block have no answer. End the block anyway?')) return;
+    }
+    if (S.block === BLOCKS - 1) { S.phase = 'marking'; save(); openMarking(); return; }
+    $('brkH').textContent = 'Block ' + (S.block + 1) + ' done';
+    $('brkSub').textContent = 'Take a breath. The clock for block ' + (S.block + 2) +
+      ' starts when you tap below, and it does not stop until the block is over.';
+    show('brk');
+  });
+
+  $('nextBlock').addEventListener('click', function () {
+    S.block++;
+    S.idx = S.block * PER_BLOCK;
+    S.deadline = Date.now() + S.mins * 60000;
+    save();
+    show('exam'); renderQ(); tick(); startTimer();
+  });
+
+  // ---- Marking ----------------------------------------------------
+  // If Allan has loaded the answer key for this form the misses are
+  // filled in already and the student only checks them. If not, the
+  // student ticks their own misses against the NBME's answer page,
+  // which is what they do today, only now they can see what they put.
+  var wrong = new Set();
+
+  function key() {
+    var k = (N.key || {})[S.form];
+    return (Array.isArray(k) && k.length === TOTAL) ? k : null;
+  }
+
+  function openMarking() {
+    stopTimer();
+    var K = key();
+    wrong.clear();
+    for (var i = 0; i < TOTAL; i++) {
+      // A blank is never right, with or without a key. Pre-marking it
+      // stops a timed-out block from being sent as a clean 200.
+      if (!S.answers[i]) { wrong.add(i + 1); continue; }
+      if (K && S.answers[i].toUpperCase() !== String(K[i]).toUpperCase()) wrong.add(i + 1);
+    }
+    var blanks = S.answers.filter(function (a) { return !a; }).length;
+    $('markSub').textContent = K
+      ? 'Marked against the answer key. Every miss is filled in already, so check it over and send.'
+      : 'Open the NBME answer page and tap every question you got wrong. Your own letter is on each square.' +
+        (blanks ? ' The ' + blanks + ' you never answered are counted wrong already.' : '');
+
+    var g = $('markGrid'); g.innerHTML = '';
+    for (var j = 0; j < TOTAL; j++) {
+      (function (j) {
+        var n = j + 1;
+        var r = document.createElement('button');
+        r.type = 'button';
+        r.className = 'st-mrow' + (wrong.has(n) ? ' is-wrong' : '');
+        r.innerHTML = '<span class="q">' + n + '</span>' +
+                      '<span class="a">' + (S.answers[j] || '&ndash;') + '</span>' +
+                      '<span class="x">wrong</span>';
+        r.setAttribute('aria-pressed', String(wrong.has(n)));
+        r.addEventListener('click', function () {
+          if (wrong.has(n)) wrong.delete(n); else wrong.add(n);
+          r.className = 'st-mrow' + (wrong.has(n) ? ' is-wrong' : '');
+          r.setAttribute('aria-pressed', String(wrong.has(n)));
+          tally();
+        });
+        g.appendChild(r);
+      })(j);
+    }
+    tally();
+    show('marking');
+  }
+
+  function tally() {
+    var w = wrong.size, right = TOTAL - w;
+    $('markTally').textContent = w;
+    $('markPct').textContent = right + ' of ' + TOTAL + ' correct, ' + Math.round(right * 100 / TOTAL) + '%';
+  }
+
+  // ---- Send -------------------------------------------------------
+  $('send').addEventListener('click', function () {
+    var s = session();
+    var email = (s && s.email) || '';
+    var list = Array.from(wrong).sort(function (a, b) { return a - b; });
+    if (!wrong.size && !confirm('Nothing is marked wrong. Send a clean 200 out of 200?')) return;
+
+    var payload = {
+      form: S.form, email: email, name: (s && s.name) || '',
+      wrong: list, total: TOTAL, at: new Date().toISOString(),
+      // Extras the mark-only form could never capture. The collector
+      // ignores fields it does not have a column for, so sending these
+      // is safe before the sheet is widened for them.
+      // Padded, not joined raw: an empty string collapses and would shift
+      // every later answer, making the string impossible to read back.
+      answers: S.answers.map(function (a) { return a || '-'; }).join(''),
+      seconds: S.secs.join(','),
+      flagged: Object.keys(S.flags).map(Number).sort(function (a, b) { return a - b; }).join(','),
+      minutesPerBlock: S.mins,
+      source: 'sit'
+    };
+
+    var right = TOTAL - list.length;
+    var line = S.form.toUpperCase() + ' | ' + (email || 'your email') + ' | wrong: ' + list.join(',');
+    var url = (typeof USMLE_CONFIG !== 'undefined' ? USMLE_CONFIG : {}).NBME_COLLECTOR_URL;
+    var send = $('send');
+
+    function receipt(ok) {
+      $('doneScore').textContent = right + ' of ' + TOTAL + ', ' + Math.round(right * 100 / TOTAL) + '%';
+      $('doneSub').textContent = ok
+        ? 'Sent. Your breakdown by system and by discipline is on the dashboard under NBMEs.'
+        : 'Your result could not be sent just now.';
+      $('doneBackup').hidden = ok;
+      $('doneCode').textContent = line;
+      if (ok) clearSaved();
+      show('done');
+    }
+
+    if (!url) { receipt(false); return; }
+    send.disabled = true; send.textContent = 'Sending...';
+    fetch(url, { method: 'POST', mode: 'no-cors',
+                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                 body: JSON.stringify(payload) })
+      .then(function () { receipt(true); })
+      .catch(function () { send.disabled = false; send.textContent = 'Send my result'; receipt(false); });
+  });
+
+  // A half-finished block should not be lost to a stray tab close.
+  window.addEventListener('beforeunload', function (e) {
+    if (!S || $('exam').hidden) return;
+    chargeTime(); save();
+    e.preventDefault(); e.returnValue = '';
+  });
+})();
+</script>
+</body>
+</html>

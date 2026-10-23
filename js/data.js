@@ -945,6 +945,16 @@ window.NBME = {
     ]
   },
 
+  // ---- Answer keys -----------------------------------------------
+  // 200 letters per form, in order, so key[formId][0] is question 1.
+  // Only needed to mark a sitting automatically. With a key, nbme-sit.html
+  // fills in the misses itself; without one the student ticks their own
+  // misses against the NBME's answer page, seeing the letters they gave.
+  // Nothing else in the dashboard reads this.
+  key: {
+    // nbme27: ["A", "C", "E", ...200 entries...]
+  },
+
   // ---- What each student submits ---------------------------------
   // results[email][formId] = { wrong: [12, 45, 88], score: 205 }
   //   wrong  the question numbers they got WRONG (1-based). Everything

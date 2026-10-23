@@ -324,11 +324,14 @@
           nbmeDayLabel(nextUp.sit[0]) + ' or ' + nbmeDayLabel(nextUp.sit[1]) + '.</span></div>';
     }
 
-    // --- Link to the marking form ---------------------------------
-    html += '<a class="nbme-cta" href="nbme-form.html">' +
-      '<span>Mark an NBME you have sat</span>' +
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>' +
-      '</a>';
+    // --- Links out ------------------------------------------------
+    // Sitting it with the timer is the one we want them to take, so it
+    // leads; marking afterwards stays for anyone who sat it on paper.
+    var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+    html += '<div class="nbme-ctas">' +
+      '<a class="nbme-cta" href="nbme-sit.html"><span>Sit one with the timer</span>' + ARROW + '</a>' +
+      '<a class="nbme-cta is-quiet" href="nbme-form.html"><span>Mark one you have sat</span>' + ARROW + '</a>' +
+      '</div>';
 
     // --- Trend ----------------------------------------------------
     var chart = nbmeTrendSvg(forms, series, anyScore ? (N.target || 196) : null, unit);

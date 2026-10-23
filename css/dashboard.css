@@ -2368,4 +2368,8 @@
   transition: background var(--t-fast);
 }
 .nbme-cta:hover, .nbme-cta:focus-visible { background: var(--accent-deep); color: #fff; }
+.nbme-ctas { display: flex; flex-wrap: wrap; gap: var(--s-8); }
+/* Second place, not second class: same shape, quieter fill. */
+.nbme-cta.is-quiet { background: var(--bg-cream); color: var(--ink-2); border: 1px solid var(--border); }
+.nbme-cta.is-quiet:hover, .nbme-cta.is-quiet:focus-visible { background: var(--bg-soft); color: var(--ink); }
 .nbme-cta svg { width: 17px; height: 17px; }
