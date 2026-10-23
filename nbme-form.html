@@ -81,6 +81,35 @@
 <script src="js/config.js"></script>
 <script src="js/data.js"></script>
 <script>
+// NBME lock. These pages sit on their own URLs, so the dashboard tab being
+// gone is not enough; they have to check for themselves.
+(function () {
+  var N = window.NBME || {};
+  if (!N.locked) return;
+  var who = '';
+  try {
+    var s = JSON.parse(localStorage.getItem('usmle.session.v2') || 'null');
+    who = (s && s.email || '').toLowerCase();
+  } catch (e) {}
+  var allowed = (N.unlockFor || []).map(String).map(function (x) { return x.toLowerCase(); });
+  if (allowed.indexOf(who) !== -1) return;
+  document.documentElement.innerHTML =
+    '<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' +
+    '<title>Not open yet &middot; USMLE Classes</title>' +
+    '<link rel="stylesheet" href="css/redesign-tokens.css"><link rel="stylesheet" href="css/site.css"></head>' +
+    '<body style="background:var(--bg);color:var(--ink);font-family:var(--font-body);margin:0">' +
+    '<div style="max-width:560px;margin:0 auto;padding:18vh 24px 0;text-align:center">' +
+    '<h1 style="font-family:var(--font-display);font-weight:400;font-size:34px;line-height:1.15;margin:0 0 14px">' +
+    'The NBME phase is not open yet</h1>' +
+    '<p style="color:var(--muted);font-size:15px;line-height:1.6;margin:0 0 24px">' +
+    'We are still putting this part together. It opens before the first form. ' +
+    'Nothing you need to do in the meantime.</p>' +
+    '<a href="dashboard.html" style="display:inline-block;font-weight:700;text-decoration:none;' +
+    'padding:13px 24px;border-radius:999px;background:var(--accent);color:#fff">Back to the dashboard</a>' +
+    '</div></body>';
+})();
+</script>
+<script>
 (function () {
   'use strict';
   var N = window.NBME || { forms: [] };

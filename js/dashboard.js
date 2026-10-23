@@ -1401,7 +1401,24 @@
   function renderCalendar() { renderProgress(); }
 
   // ---------------- TABS ----------------
+  // ---- NBME lock ---------------------------------------------------
+  // One flag in data.js closes the whole phase off while it is being
+  // built. Addresses in NBME.unlockFor still get through.
+  function nbmeLocked() {
+    var N = window.NBME || {};
+    if (!N.locked) return false;
+    var who = '';
+    try {
+      var s = JSON.parse(localStorage.getItem('usmle.session.v2') || 'null');
+      who = (s && s.email || '').toLowerCase();
+    } catch (e) {}
+    return (N.unlockFor || []).map(String).map(function (x) {
+      return x.toLowerCase();
+    }).indexOf(who) === -1;
+  }
+
   function activateTab(key) {
+    if (key === 'nbme' && nbmeLocked()) key = 'sessions';
     document.querySelectorAll('[data-tab]').forEach(t => t.classList.toggle('active', t.dataset.tab === key));
     document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.dataset.panel === key));
     if (key === 'sessions')   { currentBlockView = 'all'; renderSessions(); }
@@ -1410,6 +1427,16 @@
     if (key === 'progress')   renderProgress();
     if (key === 'nbme')       renderNBME();
   }
+  // Taken out of the DOM rather than merely hidden, so the panel cannot be
+  // reached by keyboard, by a stale hash, or by reading the page source.
+  function applyNbmeLock() {
+    if (!nbmeLocked()) return;
+    var tab = document.querySelector('[data-tab="nbme"]');
+    if (tab && tab.parentNode) tab.parentNode.removeChild(tab);
+    var panel = document.querySelector('[data-panel="nbme"]');
+    if (panel && panel.parentNode) panel.parentNode.removeChild(panel);
+  }
+
   function bindTabs() {
     document.querySelectorAll('[data-tab]').forEach(tab => {
       tab.addEventListener('click', () => activateTab(tab.dataset.tab));
@@ -1526,6 +1553,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     wireLinks();
     paintWelcome();
+    applyNbmeLock();
     renderPlan();
     bindTabs();
     bindBlocksRoot();

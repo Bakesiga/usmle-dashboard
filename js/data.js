@@ -848,6 +848,15 @@ window.UPCOMING = [
 // -------------------------------------------------------------
 window.NBME = {
   label: "NBME phase",
+
+  // ---- Temporary lock -------------------------------------------
+  // While the NBME phase is being built, students should not reach
+  // the tab or either tool page. Set locked to false to reopen it;
+  // nothing else needs changing. Addresses in unlockFor still get
+  // through, so the phase can be worked on and tested live.
+  locked: true,
+  unlockFor: ["allanbakesiga@gmail.com"],
+
   blurb: "Eight NBME self-assessments across November and December, each followed by a week of corrections.",
   forms: [
     { id: "nbme27", n: 27, sit: ["2026-10-31", "2026-11-01"], week: ["2026-11-02", "2026-11-06"] },
