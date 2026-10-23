@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>The Carey Coombs cohort · USMLE Classes</title>
+<meta name="description" content="Eight NBMEs over eight weekends, timed, marked, and broken down by system and discipline. A new Step 1 cohort starting 31 October." />
+<link rel="icon" href="favicon.ico" />
+<link rel="stylesheet" href="css/redesign-tokens.css" />
+<style>
+  /* Editorial, not card soup: a measured column, hairline rules, numbered
+     sections, and one accent. Nothing here is decorative for its own sake. */
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--ink); font-family: var(--font-body);
+    margin: 0; -webkit-font-smoothing: antialiased;
+  }
+  .cc { max-width: 760px; margin: 0 auto; padding: 0 var(--s-20) 96px; }
+
+  .cc-top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: var(--s-20) 0; border-bottom: 1px solid var(--border);
+    font-size: var(--fs-12); letter-spacing: .14em; text-transform: uppercase;
+    font-weight: 700; color: var(--muted);
+  }
+  .cc-top a { color: var(--accent-deep); text-decoration: none; }
+
+  .cc-kicker {
+    font-size: var(--fs-12); letter-spacing: .16em; text-transform: uppercase;
+    font-weight: 700; color: var(--accent-deep); margin: 56px 0 var(--s-12);
+  }
+  h1 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(38px, 8vw, 68px); line-height: 1.02;
+    margin: 0 0 var(--s-20); letter-spacing: -0.01em;
+  }
+  .cc-stand {
+    font-size: clamp(17px, 2.4vw, 20px); line-height: 1.6; color: var(--ink-2);
+    margin: 0 0 var(--s-20); max-width: 56ch;
+  }
+  .cc-stand b { color: var(--ink); }
+
+  /* ---- Countdown ---- */
+  .cc-clock {
+    border-top: 2px solid var(--ink); border-bottom: 1px solid var(--border);
+    padding: var(--s-20) 0; margin: 40px 0;
+    display: flex; gap: clamp(16px, 5vw, 44px); align-items: baseline; flex-wrap: wrap;
+  }
+  .cc-unit { display: flex; flex-direction: column; gap: 2px; }
+  .cc-unit b {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(30px, 7vw, 46px); line-height: 1; font-variant-numeric: tabular-nums;
+  }
+  .cc-unit span {
+    font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+    font-weight: 700; color: var(--muted);
+  }
+  .cc-clock .cc-when { margin-left: auto; font-size: var(--fs-15); color: var(--muted); max-width: 22ch; line-height: 1.5; }
+
+  /* ---- Numbered sections ---- */
+  .cc-sec { margin-top: 64px; }
+  .cc-sec > h2 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(25px, 4.4vw, 34px); line-height: 1.12; margin: 0 0 var(--s-20);
+    padding-top: var(--s-12); border-top: 1px solid var(--border);
+    display: flex; gap: var(--s-16); align-items: baseline;
+  }
+  .cc-sec > h2 i {
+    font-style: normal; font-family: var(--font-body); font-weight: 800;
+    font-size: var(--fs-12); letter-spacing: .1em; color: var(--accent);
+    flex: 0 0 auto; padding-top: 6px;
+  }
+
+  /* ---- Included list ---- */
+  .cc-inc { list-style: none; margin: 0; padding: 0; }
+  .cc-inc li {
+    display: grid; grid-template-columns: 22px 1fr; gap: var(--s-12);
+    padding: var(--s-16) 0; border-bottom: 1px solid var(--border);
+    font-size: var(--fs-15); line-height: 1.55; color: var(--ink-2);
+  }
+  .cc-inc li b { color: var(--ink); }
+  .cc-inc svg { width: 18px; height: 18px; color: var(--accent); margin-top: 3px; }
+
+  /* ---- Schedule ---- */
+  .cc-sched { border-top: 1px solid var(--border); }
+  .cc-row {
+    width: 100%; text-align: left; font: inherit; cursor: pointer;
+    display: grid; grid-template-columns: 62px 1fr auto; gap: var(--s-16); align-items: center;
+    padding: var(--s-16) var(--s-8); background: none;
+    border: none; border-bottom: 1px solid var(--border);
+    transition: background var(--t-fast);
+  }
+  .cc-row:hover, .cc-row:focus-visible { background: var(--bg-cream); outline: none; }
+  .cc-row[aria-expanded="true"] { background: var(--bg-cream); }
+  .cc-n { font-family: var(--font-display); font-size: var(--fs-28); line-height: 1; color: var(--accent-deep); }
+  .cc-d { font-weight: 600; font-size: var(--fs-15); }
+  .cc-d small { display: block; font-weight: 500; color: var(--muted); font-size: var(--fs-12); margin-top: 2px; }
+  .cc-chev { color: var(--muted); transition: transform var(--t-fast); }
+  .cc-row[aria-expanded="true"] .cc-chev { transform: rotate(90deg); }
+  .cc-panel {
+    display: none; padding: 0 var(--s-8) var(--s-20) calc(62px + var(--s-16));
+    border-bottom: 1px solid var(--border); background: var(--bg-cream);
+    font-size: var(--fs-15); line-height: 1.6; color: var(--ink-2);
+  }
+  .cc-panel.is-open { display: block; }
+
+  /* ---- Sample report ---- */
+  .cc-toggle { display: flex; gap: 6px; margin-bottom: var(--s-16); }
+  .cc-toggle button {
+    font: inherit; font-weight: 700; font-size: var(--fs-12); cursor: pointer;
+    letter-spacing: .06em; text-transform: uppercase;
+    padding: 9px 15px; border-radius: 999px;
+    background: var(--bg-cream); color: var(--ink-2); border: 1px solid var(--border);
+  }
+  .cc-toggle button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent-deep); }
+  .cc-demo { border: 1px solid var(--border); border-radius: var(--r-soft); background: var(--bg-cream); padding: var(--s-16); }
+  .cc-demo-note {
+    font-size: var(--fs-12); color: var(--muted); letter-spacing: .08em;
+    text-transform: uppercase; font-weight: 700; margin: 0 0 var(--s-12);
+  }
+  .cc-r { display: grid; grid-template-columns: 1fr; gap: 5px; padding: var(--s-12) 0; border-bottom: 1px solid var(--border); }
+  .cc-r:last-child { border-bottom: none; }
+  .cc-r-top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-12); }
+  .cc-r-name { font-weight: 600; font-size: var(--fs-15); }
+  .cc-r-band {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 999px; white-space: nowrap;
+  }
+  /* Band is never hue alone: bar length, chip depth and the word all carry it. */
+  .b-strong     { color: var(--accent-deep); background: var(--accent-tint); }
+  .b-borderline { color: #fff; background: var(--accent); }
+  .b-weak       { color: #fff; background: var(--accent-deep); }
+  .cc-bar { height: 7px; background: var(--border-2); border-radius: 999px; overflow: hidden; }
+  .cc-bar i { display: block; height: 100%; background: var(--accent); border-radius: 999px; transition: width .5s var(--ease-out); }
+  .cc-say { font-size: var(--fs-12); color: var(--muted); }
+
+  /* ---- CTA ---- */
+  .cc-cta {
+    margin-top: 72px; padding: var(--s-48) var(--s-20); text-align: center;
+    background: var(--ink); color: var(--bg); border-radius: var(--r-card);
+  }
+  .cc-cta h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 5vw, 38px); margin: 0 0 var(--s-12); line-height: 1.1; }
+  .cc-cta p { margin: 0 auto var(--s-20); max-width: 42ch; line-height: 1.6; opacity: .78; font-size: var(--fs-15); }
+  .cc-btn {
+    display: inline-block; font-weight: 700; text-decoration: none;
+    padding: 15px 30px; border-radius: 999px;
+    background: var(--accent); color: #fff; font-size: var(--fs-15);
+  }
+  .cc-btn:hover { background: var(--accent-deep); }
+  .cc-fine { margin-top: var(--s-16); font-size: var(--fs-12); opacity: .62; }
+  footer { margin-top: 56px; padding-top: var(--s-20); border-top: 1px solid var(--border); font-size: var(--fs-12); color: var(--muted); line-height: 1.7; }
+
+  @media (max-width: 560px) {
+    .cc-clock .cc-when { margin-left: 0; flex-basis: 100%; max-width: none; }
+    .cc-row { grid-template-columns: 46px 1fr auto; gap: var(--s-12); }
+    .cc-panel { padding-left: calc(46px + var(--s-12)); }
+  }
+</style>
+</head>
+<body>
+<div class="cc">
+
+  <div class="cc-top">
+    <span>USMLE Classes</span>
+    <a href="index.html">Back to the class</a>
+  </div>
+
+  <p class="cc-kicker">A new cohort &middot; two months</p>
+  <h1>The Carey&nbsp;Coombs cohort</h1>
+  <p class="cc-stand">
+    Eight NBMEs over eight weekends, timed and marked, each one followed by a
+    week of going through what the cohort got wrong. <b>Everyone starts on the
+    same day, so nobody is behind.</b> Built for anyone sitting Step 1 in
+    January, February or March.
+  </p>
+
+  <div class="cc-clock" id="clock" aria-live="polite">
+    <div class="cc-unit"><b id="cd-d">--</b><span>days</span></div>
+    <div class="cc-unit"><b id="cd-h">--</b><span>hours</span></div>
+    <div class="cc-unit"><b id="cd-m">--</b><span>minutes</span></div>
+    <p class="cc-when" id="cd-when">until the first form</p>
+  </div>
+
+  <section class="cc-sec">
+    <h2><i>01</i>What is included</h2>
+    <ul class="cc-inc" id="inc"></ul>
+  </section>
+
+  <section class="cc-sec">
+    <h2><i>02</i>The eight weekends</h2>
+    <p class="cc-stand" style="font-size:var(--fs-15);margin-bottom:var(--s-20)">
+      You sit each form on your own, on either day of the weekend. Tap one to
+      see the week of classes that follows it.
+    </p>
+    <div class="cc-sched" id="sched"></div>
+  </section>
+
+  <section class="cc-sec">
+    <h2><i>03</i>What you get back</h2>
+    <p class="cc-stand" style="font-size:var(--fs-15);margin-bottom:var(--s-20)">
+      Your paper is marked for you, and the report comes back on the same two
+      axes the real Step 1 score report uses. Weakest first, with every area
+      linking to the classes that cover it. Switch the view below.
+    </p>
+    <div class="cc-toggle" id="toggle">
+      <button type="button" data-axis="system" aria-pressed="true">By system</button>
+      <button type="button" data-axis="discipline" aria-pressed="false">By discipline</button>
+    </div>
+    <div class="cc-demo">
+      <p class="cc-demo-note">Example report &middot; not real student data</p>
+      <div id="demo"></div>
+    </div>
+  </section>
+
+  <div class="cc-cta">
+    <h2>Enrolment closes 1 November</h2>
+    <p>The first form is sat on 31 October or 1 November. Sign up before then and you start with everyone else.</p>
+    <a class="cc-btn" id="signup" href="#">Sign up for the cohort</a>
+    <p class="cc-fine">The fee depends on which country you are sitting from. Write to Allan and he will tell you what it comes to for you.</p>
+  </div>
+
+  <footer>
+    Allan Bakesiga, MD, MScGH &middot; PGY-1 Neurology Resident, Creighton University<br />
+    MSc Health Informatics, Creighton University &middot; Research Assistant, Duke Global Neurosurgery and Neurology
+  </footer>
+</div>
+
+<script src="js/data.js"></script>
+<script>
+(function () {
+  'use strict';
+  var N = window.NBME || { forms: [] };
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  var MONTH = ['January','February','March','April','May','June','July',
+               'August','September','October','November','December'];
+  function parseYMD(s) { var p = String(s).split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
+  function dayName(d) { return ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][d.getDay()]; }
+  function nice(s) { var d = parseYMD(s); return d.getDate() + ' ' + MONTH[d.getMonth()]; }
+  function pair(a, b) {
+    var x = parseYMD(a), y = parseYMD(b);
+    // "31 October or 1 November", but "7 or 8 November" inside one month.
+    return x.getMonth() === y.getMonth()
+      ? x.getDate() + ' or ' + y.getDate() + ' ' + MONTH[y.getMonth()]
+      : nice(a) + ' or ' + nice(b);
+  }
+
+  // ---- 01 What is included -----------------------------------------
+  var TICK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12.5 10 17.5 19 7"/></svg>';
+  var INCLUDED = [
+    ['Eight NBMEs, one every weekend.', '200 questions, four blocks of 50, sat under time.'],
+    ['Five classes a week.', 'Monday to Friday we work through the questions the cohort got wrong, going into the content behind them.'],
+    ['A score report after every form.', 'Broken down by the eight systems and the ten disciplines, weakest first.'],
+    ['The timed exam player.', 'It holds the clock for each block, takes your answers one at a time, and marks your paper for you.'],
+    ['Every recording since June.', 'Sixteen systems already covered, so a weak area has somewhere to send you.'],
+    ['Your own group and dashboard.', 'The cohort starts fresh on day one.']
+  ];
+  $('inc').innerHTML = INCLUDED.map(function (r) {
+    return '<li>' + TICK + '<span><b>' + esc(r[0]) + '</b> ' + esc(r[1]) + '</span></li>';
+  }).join('');
+
+  // ---- Countdown to the first form ---------------------------------
+  var first = N.forms.length ? parseYMD(N.forms[0].sit[0]) : null;
+  if (first) {
+    $('cd-when').textContent = 'until the first form, on ' + pair(N.forms[0].sit[0], N.forms[0].sit[1]);
+    (function tickClock() {
+      var ms = first - new Date();
+      if (ms <= 0) {
+        $('clock').innerHTML = '<div class="cc-unit"><b>Now</b><span>the cohort has started</span></div>';
+        return;
+      }
+      var mins = Math.floor(ms / 60000);
+      $('cd-d').textContent = Math.floor(mins / 1440);
+      $('cd-h').textContent = Math.floor(mins % 1440 / 60);
+      $('cd-m').textContent = mins % 60;
+      setTimeout(tickClock, 30000);
+    })();
+  } else {
+    $('clock').style.display = 'none';
+  }
+
+  // ---- 02 The eight weekends ---------------------------------------
+  var CHEV = '<svg class="cc-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+  var sched = $('sched');
+  N.forms.forEach(function (f, i) {
+    var id = 'p' + i;
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'cc-row';
+    b.setAttribute('aria-expanded', 'false');
+    b.setAttribute('aria-controls', id);
+    b.innerHTML = '<span class="cc-n">' + f.n + '</span>' +
+      '<span class="cc-d">NBME ' + f.n + '<small>' + pair(f.sit[0], f.sit[1]) + '</small></span>' + CHEV;
+    var p = document.createElement('div');
+    p.className = 'cc-panel'; p.id = id;
+    var a = parseYMD(f.week[0]), z = parseYMD(f.week[1]);
+    p.textContent = 'Classes ' + dayName(a) + ' ' + nice(f.week[0]) + ' to ' +
+                    dayName(z) + ' ' + nice(f.week[1]) +
+                    ', going through the questions the cohort got wrong on this form.';
+    b.addEventListener('click', function () {
+      var open = b.getAttribute('aria-expanded') === 'true';
+      b.setAttribute('aria-expanded', String(!open));
+      p.classList.toggle('is-open', !open);
+    });
+    sched.appendChild(b); sched.appendChild(p);
+  });
+
+  // ---- 03 Sample report --------------------------------------------
+  // Illustrative figures, labelled as such on the page. They show the shape
+  // of the report, not any student's result.
+  var DEMO = {
+    system: [
+      ['Reproductive and Endocrine', 11, 22],
+      ['Multisystem Processes and Disorders', 17, 27],
+      ['Blood and Lymphoreticular/Immune', 18, 26],
+      ['Respiratory and Renal/Urinary', 23, 29],
+      ['Behavioral Health and Nervous/Special Senses', 26, 32],
+      ['Cardiovascular', 11, 13],
+      ['Gastrointestinal', 19, 22],
+      ['Musculoskeletal, Skin and Subcutaneous', 26, 29]
+    ],
+    discipline: [
+      ['Biochemistry and Nutrition', 9, 17],
+      ['Physiology', 19, 30],
+      ['Pathology', 28, 40],
+      ['Anatomy and Embryology', 18, 25],
+      ['Biostatistics and Behavioral science', 16, 21],
+      ['Microbiology', 10, 13],
+      ['Genetics', 7, 9],
+      ['Pharmacology', 22, 26],
+      ['Immunology', 12, 14],
+      ['Histology and Cell biology', 5, 5]
+    ]
+  };
+  function band(p) { return p >= 75 ? 'strong' : (p >= 60 ? 'borderline' : 'weak'); }
+  function drawDemo(axis) {
+    var rows = DEMO[axis].map(function (r) {
+      return { label: r[0], right: r[1], total: r[2], pct: Math.round(r[1] * 100 / r[2]) };
+    }).sort(function (a, b) { return a.pct - b.pct; });
+    $('demo').innerHTML = rows.map(function (r) {
+      var w = band(r.pct);
+      return '<div class="cc-r">' +
+        '<div class="cc-r-top"><span class="cc-r-name">' + esc(r.label) + '</span>' +
+        '<span class="cc-r-band b-' + w + '">' + r.pct + '% &middot; ' + w.charAt(0).toUpperCase() + w.slice(1) + '</span></div>' +
+        '<div class="cc-bar"><i style="width:' + Math.max(r.pct, 3) + '%"></i></div>' +
+        '<div class="cc-say">There were ' + r.total + ' questions from this section and you passed ' + r.right + '.</div>' +
+        '</div>';
+    }).join('');
+  }
+  drawDemo('system');
+  $('toggle').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-axis]');
+    if (!b) return;
+    [].forEach.call(this.children, function (c) { c.setAttribute('aria-pressed', String(c === b)); });
+    drawDemo(b.dataset.axis);
+  });
+
+  // ---- Sign up ------------------------------------------------------
+  var signup = (window.LINKS || {}).signup;
+  if (signup) { $('signup').href = signup; $('signup').target = '_blank'; $('signup').rel = 'noopener'; }
+  else { $('signup').textContent = 'Write to Allan to join'; $('signup').href = 'mailto:allanbakesiga@gmail.com'; }
+})();
+</script>
+</body>
+</html>
