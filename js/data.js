@@ -952,7 +952,31 @@ window.NBME = {
   // misses against the NBME's answer page, seeing the letters they gave.
   // Nothing else in the dashboard reads this.
   key: {
-    // nbme27: ["A", "C", "E", ...200 entries...]
+    // NBME 27, read off the answers version. Two questions, 29 and
+    // 200, are not in that file at all, so they stay "?" and the
+    // marking screen leaves them for the student to check.
+    nbme27: [
+      "B", "E", "B", "G", "D", "C", "C", "D", "F", "E",
+      "C", "B", "D", "A", "E", "B", "A", "A", "E", "D",
+      "D", "C", "D", "F", "C", "B", "D", "D", "?", "D",
+      "B", "D", "B", "D", "E", "E", "B", "A", "B", "D",
+      "C", "E", "A", "A", "D", "D", "B", "D", "E", "D",
+      "B", "E", "A", "A", "E", "E", "E", "B", "C", "E",
+      "E", "A", "A", "E", "E", "E", "E", "C", "E", "D",
+      "A", "B", "B", "B", "C", "B", "A", "B", "D", "C",
+      "D", "E", "D", "B", "C", "B", "B", "A", "A", "D",
+      "D", "D", "F", "D", "B", "B", "B", "B", "E", "B",
+      "D", "F", "D", "E", "B", "E", "A", "A", "D", "C",
+      "B", "C", "B", "C", "B", "B", "D", "A", "E", "E",
+      "A", "C", "A", "A", "C", "E", "D", "C", "A", "E",
+      "E", "B", "A", "A", "B", "F", "B", "B", "C", "E",
+      "A", "F", "B", "D", "E", "C", "D", "B", "F", "E",
+      "E", "C", "A", "B", "E", "B", "A", "B", "A", "C",
+      "D", "F", "C", "E", "E", "B", "E", "A", "B", "D",
+      "E", "C", "D", "E", "C", "E", "A", "A", "F", "D",
+      "B", "D", "B", "D", "C", "E", "B", "E", "E", "B",
+      "B", "F", "D", "E", "E", "A", "B", "D", "B", "?"
+    ]
   },
 
   // ---- What each student submits ---------------------------------

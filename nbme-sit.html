@@ -515,16 +515,28 @@
   function openMarking() {
     stopTimer();
     var K = key();
+    var unkeyed = [];
     wrong.clear();
     for (var i = 0; i < TOTAL; i++) {
       // A blank is never right, with or without a key. Pre-marking it
       // stops a timed-out block from being sent as a clean 200.
       if (!S.answers[i]) { wrong.add(i + 1); continue; }
-      if (K && S.answers[i].toUpperCase() !== String(K[i]).toUpperCase()) wrong.add(i + 1);
+      if (!K) continue;
+      var want = String(K[i]).toUpperCase();
+      // "?" means the key does not cover this question. Leaving it alone
+      // would silently score it correct, so hand it back to the student.
+      if (want === '?') { unkeyed.push(i + 1); continue; }
+      if (S.answers[i].toUpperCase() !== want) wrong.add(i + 1);
     }
     var blanks = S.answers.filter(function (a) { return !a; }).length;
     $('markSub').textContent = K
-      ? 'Marked against the answer key. Every miss is filled in already, so check it over and send.'
+      ? 'Marked against the answer key. Every miss is filled in already, so check it over and send.' +
+        (unkeyed.length
+          ? ' The key does not cover question' + (unkeyed.length > 1 ? 's ' : ' ') +
+            unkeyed.join(' and ') + ', so check ' + (unkeyed.length > 1 ? 'those' : 'that') +
+            ' against your own answer page and tap ' + (unkeyed.length > 1 ? 'them' : 'it') +
+            ' if you got ' + (unkeyed.length > 1 ? 'them' : 'it') + ' wrong.'
+          : '')
       : 'Open the NBME answer page and tap every question you got wrong. Your own letter is on each square.' +
         (blanks ? ' The ' + blanks + ' you never answered are counted wrong already.' : '');
 
