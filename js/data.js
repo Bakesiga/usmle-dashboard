@@ -810,7 +810,8 @@ window.BLOCKS = [
         recordings: [
           { title: "Molecular biochemistry, part 1: chromatin structure, the nucleotides, and de novo and salvage synthesis", date: "2026-10-18", url: "https://us06web.zoom.us/rec/share/NDsCMflISQQlgVPS4kJkbm0-5EyWBh-L5aTslKJOLK6KuBUhrjOU6AuK1MncR7ul.v1ulR-XUA2hXfRbM" },
           { title: "Molecular biochemistry, part 2: the genetic code, DNA replication and telomerase", date: "2026-10-20", url: "https://us06web.zoom.us/rec/share/18U9F3BbKd1w41E_ruKSYTGgQqkaxr78k1YDyV-biggCUpmMEOdREhzkpy_7sCNY.Q5Ns15rtw4jWU_zO" },
-          { title: "Molecular biochemistry, part 3: DNA repair, mutations, the lac operon and regulation of gene expression", date: "2026-10-21", url: "https://us06web.zoom.us/rec/share/9KYAMSrXBJUioowK4YCCA6Ss9GuH2E8ceMDRPLs9xSiieAmffYR7RZS1NJldsZ0n.a-dy6qkiz1ovK_jQ" }
+          { title: "Molecular biochemistry, part 3: DNA repair, mutations, the lac operon and regulation of gene expression", date: "2026-10-21", url: "https://us06web.zoom.us/rec/share/9KYAMSrXBJUioowK4YCCA6Ss9GuH2E8ceMDRPLs9xSiieAmffYR7RZS1NJldsZ0n.a-dy6qkiz1ovK_jQ" },
+          { title: "Molecular biochemistry, part 4: RNA processing, tRNA and protein synthesis", date: "2026-10-22", url: "https://us06web.zoom.us/rec/share/xtK7cAs3nUtfoxD6wwgfBXRZuCOk5SXpxRZ-bVHj_ru2VP1_-pNa4Rmkbo7KhQzc.15IwCguIKnAZX6ep" }
         ]
       }
     ]
