@@ -803,7 +803,7 @@ window.BLOCKS = [
     label: "Biochemistry",
     subject: "biochem",
     dateRange: "From 18 October",
-    dayRange: [140, 143],
+    dayRange: [140, 144],
     start: "2026-10-18",
     subBlocks: [
       { id: "biochem-molecular", label: "Molecular", days: [],
@@ -812,6 +812,11 @@ window.BLOCKS = [
           { title: "Molecular biochemistry, part 2: the genetic code, DNA replication and telomerase", date: "2026-10-20", url: "https://us06web.zoom.us/rec/share/18U9F3BbKd1w41E_ruKSYTGgQqkaxr78k1YDyV-biggCUpmMEOdREhzkpy_7sCNY.Q5Ns15rtw4jWU_zO" },
           { title: "Molecular biochemistry, part 3: DNA repair, mutations, the lac operon and regulation of gene expression", date: "2026-10-21", url: "https://us06web.zoom.us/rec/share/9KYAMSrXBJUioowK4YCCA6Ss9GuH2E8ceMDRPLs9xSiieAmffYR7RZS1NJldsZ0n.a-dy6qkiz1ovK_jQ" },
           { title: "Molecular biochemistry, part 4: RNA processing, tRNA and protein synthesis", date: "2026-10-22", url: "https://us06web.zoom.us/rec/share/xtK7cAs3nUtfoxD6wwgfBXRZuCOk5SXpxRZ-bVHj_ru2VP1_-pNa4Rmkbo7KhQzc.15IwCguIKnAZX6ep" }
+        ]
+      },
+      { id: "biochem-genetics", label: "Genetics", days: [],
+        recordings: [
+          { title: "Genetics, part 1: genetic terms, Hardy-Weinberg, imprinting and modes of inheritance", date: "2026-10-23", url: "https://us06web.zoom.us/rec/share/H16S3v8T76Srs9OuClcKTGe7dxzz5ZPHPIjgQJv21hFufXA2PcFZcjnf0xiqxoLX.Uc5pBMYZy3RgxEC_" }
         ]
       }
     ]
