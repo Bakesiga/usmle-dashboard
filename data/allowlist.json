@@ -153,13 +153,17 @@
       "tracks": [
         "step1"
       ],
-      "accessFrom": "2026-07-22",
+      "accessFrom": "2026-06-01",
       "onlyRecordings": {
         "heme": {
           "from": "Platelet disorders"
         }
       },
-      "zoomLink": "https://us06web.zoom.us/w/81397383545?tk=dCwP7CB9Y-mNPqk2WRmPqTGDu-JlZklmHoLrahFmIWI.DQkAAAAS86mBeRZRQk9jWm0xWFQ4U2hwUHE5SkpKWElRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      "zoomLink": "https://us06web.zoom.us/w/81397383545?tk=dCwP7CB9Y-mNPqk2WRmPqTGDu-JlZklmHoLrahFmIWI.DQkAAAAS86mBeRZRQk9jWm0xWFQ4U2hwUHE5SkpKWElRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "lockedBlocks": [
+        "cns",
+        "imm"
+      ]
     },
     {
       "email": "juliannajjuma@gmail.com",
@@ -329,7 +333,7 @@
       "tracks": [
         "step1"
       ],
-      "accessFrom": "2026-09-01"
+      "accessFrom": "2026-10-01"
     },
     {
       "email": "rcsinei@gmail.com",
