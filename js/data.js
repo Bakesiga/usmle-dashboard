@@ -803,7 +803,7 @@ window.BLOCKS = [
     label: "Biochemistry",
     subject: "biochem",
     dateRange: "From 18 October",
-    dayRange: [140, 144],
+    dayRange: [140, 145],
     start: "2026-10-18",
     subBlocks: [
       { id: "biochem-molecular", label: "Molecular", days: [],
@@ -816,7 +816,8 @@ window.BLOCKS = [
       },
       { id: "biochem-genetics", label: "Genetics", days: [],
         recordings: [
-          { title: "Genetics, part 1: genetic terms, Hardy-Weinberg, imprinting and modes of inheritance", date: "2026-10-23", url: "https://us06web.zoom.us/rec/share/H16S3v8T76Srs9OuClcKTGe7dxzz5ZPHPIjgQJv21hFufXA2PcFZcjnf0xiqxoLX.Uc5pBMYZy3RgxEC_" }
+          { title: "Genetics, part 1: genetic terms, Hardy-Weinberg, imprinting and modes of inheritance", date: "2026-10-23", url: "https://us06web.zoom.us/rec/share/H16S3v8T76Srs9OuClcKTGe7dxzz5ZPHPIjgQJv21hFufXA2PcFZcjnf0xiqxoLX.Uc5pBMYZy3RgxEC_" },
+          { title: "Genetics, part 2: working through the questions", date: "2026-10-24", url: "https://us06web.zoom.us/rec/share/F031Z7x7_zau45fNxL1BvSVAraxRsDsHNaZ9WkgxFDeDnVgXj_9ipWv4DUNs5JWZ.vLdQ2RVuyZ2TQD3q" }
         ]
       }
     ]
