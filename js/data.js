@@ -803,7 +803,7 @@ window.BLOCKS = [
     label: "Biochemistry",
     subject: "biochem",
     dateRange: "From 18 October",
-    dayRange: [140, 146],
+    dayRange: [140, 147],
     start: "2026-10-18",
     subBlocks: [
       { id: "biochem-molecular", label: "Molecular", days: [],
@@ -823,6 +823,11 @@ window.BLOCKS = [
       { id: "biochem-nutrition", label: "Nutrition", days: [],
         recordings: [
           { title: "Vitamins", date: "2026-10-25", url: "https://us06web.zoom.us/rec/share/8c65fpcDyxobpO7Zx9551OwnULQ_DI7Ha3REsAtL54BCd31x_NyiImwuSoMZRBkE.V2hvmnVfdRpiCaSp" }
+        ]
+      },
+      { id: "biochem-metabolism", label: "Metabolism", days: [],
+        recordings: [
+          { title: "Glycolysis and its regulation", date: "2026-10-26", url: "https://us06web.zoom.us/rec/share/RHzgmaFIH__2bHwZFf6d9QSvFfIsXdGzGgBv8HDUsAk9jMhEIScAleQJXiuhheLP.qkljJWczwJpQ3kAn" }
         ]
       }
     ]
