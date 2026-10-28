@@ -803,7 +803,7 @@ window.BLOCKS = [
     label: "Biochemistry",
     subject: "biochem",
     dateRange: "From 18 October",
-    dayRange: [140, 147],
+    dayRange: [140, 148],
     start: "2026-10-18",
     subBlocks: [
       { id: "biochem-molecular", label: "Molecular", days: [],
@@ -827,7 +827,8 @@ window.BLOCKS = [
       },
       { id: "biochem-metabolism", label: "Metabolism", days: [],
         recordings: [
-          { title: "Glycolysis and its regulation", date: "2026-10-26", url: "https://us06web.zoom.us/rec/share/RHzgmaFIH__2bHwZFf6d9QSvFfIsXdGzGgBv8HDUsAk9jMhEIScAleQJXiuhheLP.qkljJWczwJpQ3kAn" }
+          { title: "Glycolysis and its regulation", date: "2026-10-26", url: "https://us06web.zoom.us/rec/share/RHzgmaFIH__2bHwZFf6d9QSvFfIsXdGzGgBv8HDUsAk9jMhEIScAleQJXiuhheLP.qkljJWczwJpQ3kAn" },
+          { title: "The pyruvate dehydrogenase complex, the TCA cycle, the electron transport chain and gluconeogenesis", date: "2026-10-28", url: "https://us06web.zoom.us/rec/share/EpeuuGiiVCN9sXAxTDHiAii7amPyxyxDGiU8AzNds_W9sAkPnbWFnBYAVY0vUifn.e5_9qUvozdibyzHx" }
         ]
       }
     ]
