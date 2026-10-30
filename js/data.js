@@ -829,7 +829,8 @@ window.BLOCKS = [
         recordings: [
           { title: "Glycolysis and its regulation", date: "2026-10-26", url: "https://us06web.zoom.us/rec/share/RHzgmaFIH__2bHwZFf6d9QSvFfIsXdGzGgBv8HDUsAk9jMhEIScAleQJXiuhheLP.qkljJWczwJpQ3kAn" },
           { title: "The pyruvate dehydrogenase complex, the TCA cycle, the electron transport chain and gluconeogenesis", date: "2026-10-28", url: "https://us06web.zoom.us/rec/share/EpeuuGiiVCN9sXAxTDHiAii7amPyxyxDGiU8AzNds_W9sAkPnbWFnBYAVY0vUifn.e5_9qUvozdibyzHx" },
-          { title: "Carbohydrate metabolism: the HMP shunt and G6PD deficiency, essential fructosuria and hereditary fructose intolerance, galactokinase deficiency and classic galactosemia, the sorbitol pathway, lactase deficiency, then glycogenesis and glycogenolysis", date: "2026-10-28", url: "https://us06web.zoom.us/rec/share/XLm6_oUjulZBSUKjhF0-Z_uLgXNk33cnq-PTwkS8yCjzPSYsxDkJfTNGD6k4gqxR.ch5jtHGs9yFq06jB" }
+          { title: "Carbohydrate metabolism: the HMP shunt and G6PD deficiency, essential fructosuria and hereditary fructose intolerance, galactokinase deficiency and classic galactosemia, the sorbitol pathway, lactase deficiency, then glycogenesis and glycogenolysis", date: "2026-10-28", url: "https://us06web.zoom.us/rec/share/XLm6_oUjulZBSUKjhF0-Z_uLgXNk33cnq-PTwkS8yCjzPSYsxDkJfTNGD6k4gqxR.ch5jtHGs9yFq06jB" },
+          { title: "Amino acid metabolism: the essential, acidic and basic amino acids, the urea cycle and hyperammonemia, N-acetylglutamate synthase and ornithine transcarbamylase deficiency, the amino acid derivatives and catecholamine synthesis, then phenylketonuria, maple syrup urine disease, alkaptonuria, homocystinuria, cystinuria and Hartnup disease", date: "2026-10-29", url: "https://us06web.zoom.us/rec/share/i5spCabrrbcvMGFdZxavbYiY8H0itIcmE_yUncX_5kMohLlfxaT3XyQpd_kQz6RS._iDN8eyohB2K31Jv" }
         ]
       }
     ]
