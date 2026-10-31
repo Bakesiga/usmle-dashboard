@@ -164,7 +164,15 @@ const USMLE_AUTH = (() => {
       const s = getSession();
       if (!s || !Array.isArray(students)) return;
       const live = students.find((x) => x.email === s.email);
-      if (!live) return;
+      // Taken off the allowlist: end the session instead of letting a stale
+      // localStorage entry keep the dashboard open indefinitely. Removal
+      // otherwise only blocks a fresh sign-in. Guarded on a non-empty list,
+      // because loadAllowlist returns [] when the fetch failed with nothing
+      // cached, and that must never sign the whole class out.
+      if (!live) {
+        if (students.length) signOut();
+        return;
+      }
       const next = Object.assign({}, s, {
         tracks: live.tracks,
         accessFrom: live.accessFrom || null,
