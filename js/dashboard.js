@@ -286,12 +286,39 @@
   }
 
   // ---------------- SIDE RAIL: countdown + cohort position ----------------
-  // Counts down to the next 05:00 East Africa Time (UTC+3 => 02:00 UTC).
+  // Counts down to the next class, 05:00 East Africa Time (UTC+3 => 02:00 UTC).
+  //
+  // Class days used to be every day, so the countdown just aimed at the next
+  // 05:00. The NBME phase breaks that: the sit days are the student's own, with
+  // no class, and the dashboard must not promise one. A day the month plan
+  // marks noClass is skipped. Dates the plan does not cover count as class
+  // days, so behaviour outside the current month is unchanged.
+
+  // The calendar date in East Africa of a UTC instant. Every class target is
+  // 02:00 UTC, which is 05:00 the same day in EAT, so the UTC date is the
+  // East African one. Reading local date parts here would be wrong for any
+  // student west of UTC.
+  function eatYmd(ms) {
+    var d = new Date(ms + 3 * 3600000);
+    var p2 = function (n) { return String(n).padStart(2, '0'); };
+    return d.getUTCFullYear() + '-' + p2(d.getUTCMonth() + 1) + '-' + p2(d.getUTCDate());
+  }
+
+  function planNoClass(iso) {
+    var days = (window.PLAN && window.PLAN.days) || [];
+    var hit = days.filter(function (d) { return d.date === iso; });
+    // Only a day the plan covers and marks throughout counts as a day off, so
+    // an extra class scheduled onto a sit day still brings the countdown back.
+    return hit.length > 0 && hit.every(function (d) { return d.noClass; });
+  }
+
   function nextClassUTC(now) {
     var t = new Date(now.getTime());
     // 02:00 UTC today
     var target = Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate(), 2, 0, 0, 0);
     if (target <= now.getTime()) target += 86400000;   // already passed, aim at tomorrow
+    // Bounded, so a plan that is somehow all days off can never spin.
+    for (var i = 0; i < 21 && planNoClass(eatYmd(target)); i++) target += 86400000;
     return target;
   }
 
@@ -308,7 +335,18 @@
     el.textContent = pad2(h) + ':' + pad2(m) + ':' + pad2(sec);
 
     var lab = document.querySelector('[data-countdown-label]');
-    if (lab) lab.textContent = (h < 12 ? 'Today' : 'Tomorrow') + ', 5:00 AM EAT';
+    if (lab) {
+      // Named against the East African calendar, the one the class runs on, and
+      // by weekday once the next class is further off than tomorrow.
+      var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      var tgt = eatYmd(nextClassUTC(now));
+      var todayEat = eatYmd(now.getTime());
+      var tomorrowEat = eatYmd(now.getTime() + 86400000);
+      var when = tgt === todayEat ? 'Today'
+               : tgt === tomorrowEat ? 'Tomorrow'
+               : dayNames[new Date(tgt + 'T00:00:00Z').getUTCDay()];
+      lab.textContent = when + ', 5:00 AM EAT';
+    }
   }
 
   function paintRailPosition() {
@@ -820,9 +858,15 @@
   function currentBlockId() {
     var today = ymd(window.getNow());
     var id = null;
-    (window.BLOCKS || []).forEach(function (b) {
+    var blocks = window.BLOCKS || [];
+    blocks.forEach(function (b) {
       if (b.start && b.start <= today) id = b.id;
     });
+    // A block carrying an "end" already past is finished, so once the last one
+    // closes nothing is running: every block reads as covered and the rail
+    // points at UPCOMING instead of freezing forever on the final block.
+    var last = blocks.filter(function (b) { return b.id === id; })[0];
+    if (last && last.end && last.end < today) return null;
     return id;
   }
 
@@ -929,10 +973,6 @@
       if (!locked) { openBlocks++; totalAvail += recs.length; }
       return { b: b, locked: locked, total: recs.length };
     });
-
-    var upcoming = window.UPCOMING || [];
-    var coveredCount = 0;
-    rows.forEach(function (r) { if (!r.locked && r.b.id !== curId) coveredCount++; });
 
     var upcoming = window.UPCOMING || [];
     var coveredCount = 0;

@@ -487,7 +487,7 @@ window.BLOCKS = [
     short: "HEME",
     label: "Hematology & Oncology",
     subject: "heme",
-    dateRange: "From Jul 22",
+    dateRange: "Jul 22 to Jul 30",
     dayRange: [51, 62],
     start: "2026-07-22",
     subBlocks: [
@@ -514,7 +514,7 @@ window.BLOCKS = [
     short: "RENAL",
     label: "Renal",
     subject: "renal",
-    dateRange: "From Aug 1",
+    dateRange: "Aug 01 to Aug 08",
     dayRange: [62, 70],
     start: "2026-08-01",
     subBlocks: [
@@ -551,7 +551,7 @@ window.BLOCKS = [
     short: "ENDO",
     label: "Endocrine",
     subject: "endo",
-    dateRange: "From Aug 9",
+    dateRange: "Aug 09 to Aug 16",
     dayRange: [71, 76],
     start: "2026-08-09",
     subBlocks: [
@@ -596,7 +596,7 @@ window.BLOCKS = [
     short: "REPRO",
     label: "Reproductive",
     subject: "repro",
-    dateRange: "From Aug 16",
+    dateRange: "Aug 16 to Aug 23",
     dayRange: [77, 84],
     start: "2026-08-16",
     subBlocks: [
@@ -638,7 +638,7 @@ window.BLOCKS = [
     short: "PHARM",
     label: "General Pharmacology",
     subject: "pharm",
-    dateRange: "From Aug 24",
+    dateRange: "Aug 24 to Aug 31",
     dayRange: [85, 92],
     start: "2026-08-24",
     subBlocks: [
@@ -662,7 +662,7 @@ window.BLOCKS = [
     short: "MSK",
     label: "Musculoskeletal and Skin",
     subject: "msk",
-    dateRange: "From Sep 1",
+    dateRange: "Sep 01 to Sep 13",
     dayRange: [93, 105],
     start: "2026-09-01",
     subBlocks: [
@@ -749,7 +749,7 @@ window.BLOCKS = [
     short: "ETH",
     label: "Ethics",
     subject: "ethics",
-    dateRange: "From Sep 25",
+    dateRange: "Sep 25 to Sep 28",
     dayRange: [117, 122],
     start: "2026-09-25",
     subBlocks: [
@@ -802,9 +802,13 @@ window.BLOCKS = [
     short: "BIO",
     label: "Biochemistry",
     subject: "biochem",
-    dateRange: "From 18 October",
-    dayRange: [140, 149],
+    dateRange: "18 to 30 October",
+    dayRange: [140, 152],
     start: "2026-10-18",
+    // The taught curriculum ends here. An "end" already past tells
+    // currentBlockId that nothing is running now, so every block reads
+    // as finished and the rail points at the NBME phase instead.
+    end: "2026-10-30",
     subBlocks: [
       { id: "biochem-molecular", label: "Molecular", days: [],
         recordings: [
@@ -822,7 +826,7 @@ window.BLOCKS = [
       },
       { id: "biochem-nutrition", label: "Nutrition", days: [],
         recordings: [
-          { title: "Vitamins", date: "2026-10-25", url: "https://us06web.zoom.us/rec/share/8c65fpcDyxobpO7Zx9551OwnULQ_DI7Ha3REsAtL54BCd31x_NyiImwuSoMZRBkE.V2hvmnVfdRpiCaSp" }
+          { title: "Vitamins: the fat-soluble vitamins A, D, E and K, the water-soluble B vitamins and vitamin C, and their deficiency and excess syndromes", date: "2026-10-25", url: "https://us06web.zoom.us/rec/share/8c65fpcDyxobpO7Zx9551OwnULQ_DI7Ha3REsAtL54BCd31x_NyiImwuSoMZRBkE.V2hvmnVfdRpiCaSp" }
         ]
       },
       { id: "biochem-metabolism", label: "Metabolism", days: [],
@@ -841,15 +845,16 @@ window.BLOCKS = [
 /* The "today" the dashboard uses. Defaults to real now, but the Tweaks
    panel can override it for previewing different states. */
 /* ------------------------------------------------------------------
-   UPCOMING — curriculum still ahead of the cohort.
-   These have no recordings yet, so they cannot live in BLOCKS. The
-   "Where we are" tab renders them after the current block so students
-   can see the whole road, not just the part already travelled.
-   Move an entry into BLOCKS once its first class is recorded.
+   UPCOMING, what is still ahead of the cohort. These have no
+   recordings of their own, so they cannot live in BLOCKS. The
+   "Where we are" tab renders them after the current block so a
+   student sees the whole road, not just the part already travelled.
+   The taught curriculum closed on 30 October 2026 with the last
+   biochemistry class, so all that remains is the NBME phase, which
+   has its own tab and never moves into BLOCKS.
    ------------------------------------------------------------------ */
 window.UPCOMING = [
-  { label: "Psychiatry",              when: "October" },
-  { label: "Putting it all together", when: "November", note: "2 weeks, full recap" }
+  { label: "NBME phase", when: "November and December", note: "8 self-assessments, each followed by a week of corrections" }
 ];
 
 // -------------------------------------------------------------
@@ -869,12 +874,12 @@ window.UPCOMING = [
 window.NBME = {
   label: "NBME phase",
 
-  // ---- Temporary lock -------------------------------------------
-  // While the NBME phase is being built, students should not reach
-  // the tab or either tool page. Set locked to false to reopen it;
-  // nothing else needs changing. Addresses in unlockFor still get
-  // through, so the phase can be worked on and tested live.
-  locked: true,
+  // ---- Tab lock -------------------------------------------------
+  // Opened to the class on 31 October 2026, the first day of the
+  // NBME 27 sit window. Set locked back to true to close the tab and
+  // both tool pages while something is being rebuilt; addresses in
+  // unlockFor still get through either way.
+  locked: false,
   unlockFor: ["allanbakesiga@gmail.com"],
 
   blurb: "Eight NBME self-assessments across November and December, each followed by a week of corrections.",
@@ -1040,20 +1045,45 @@ window.getNow = function () {
 // To roll the dashboard into a new month, replace this object wholesale.
 // ---------------------------------------------------------------------------
 window.PLAN = {
-  label: "October 2026",
+  label: "November 2026",
   blocks: [
-    { id: "micro", label: "Microbiology", range: "1 to 10 October" }
+    { id: "nbme27", label: "NBME 27", range: "31 October to 6 November" },
+    { id: "nbme28", label: "NBME 28", range: "7 to 13 November" },
+    { id: "nbme29", label: "NBME 29", range: "14 to 20 November" },
+    { id: "nbme30", label: "NBME 30", range: "21 to 27 November" },
+    { id: "nbme31", label: "NBME 31", range: "28 November to 4 December" }
   ],
   days: [
-    { date: "2026-10-01", block: "micro", title: "Bacteriology, general principles: structures, stains, culture media, classification, virulence factors, bacterial genetics, and exotoxins versus endotoxins" },
-    { date: "2026-10-02", block: "micro", title: "Gram-positive bacteria: the lab algorithm, staphylococci, streptococci, enterococci, Bacillus, the clostridia, Corynebacterium, Listeria, Nocardia, Actinomyces and the mycobacteria" },
-    { date: "2026-10-03", block: "micro", title: "Gram-negative bacteria and the atypicals: the lab algorithm, the enterics, the spirochetes, Chlamydiae, Rickettsiae and Mycoplasma" },
-    { date: "2026-10-04", block: "micro", title: "Antibacterials: cell wall, protein synthesis, nucleic acid and folate inhibitors, resistance, prophylaxis, and the antimycobacterial drugs" },
-    { date: "2026-10-05", block: "micro", title: "Mycology and antifungals: systemic, cutaneous and opportunistic mycoses, then amphotericin, the azoles, the echinocandins and the rest" },
-    { date: "2026-10-06", block: "micro", title: "Parasitology: protozoa, nematodes, cestodes, trematodes, ectoparasites and the antiparasitic drugs" },
-    { date: "2026-10-07", block: "micro", title: "Virology foundations and the DNA viruses: structure, genetics, replication, classification, and the herpesviruses" },
-    { date: "2026-10-08", block: "micro", title: "RNA viruses, part 1: picornaviruses, paramyxoviruses, orthomyxoviruses, rhabdovirus and the arboviruses" },
-    { date: "2026-10-09", block: "micro", title: "RNA viruses, part 2, and antivirals: hepatitis, HIV, prions, then the antiviral drugs" },
-    { date: "2026-10-10", block: "micro", title: "Systems-based infections and block review: the bugs causing tables, pneumonia, meningitis, osteomyelitis, urinary tract and sexually transmitted infections, and TORCH" }
+    { date: "2026-10-31", block: "nbme27", title: "Sit NBME 27 at home, timed and in one sitting. No class today.", noClass: true },
+    { date: "2026-11-01", block: "nbme27", title: "Last day for NBME 27. Send Allan your score report when you finish. No class today.", noClass: true },
+    { date: "2026-11-02", block: "nbme27", title: "NBME 27 corrections, day 1 of 5: starting with the questions most of the class got wrong." },
+    { date: "2026-11-03", block: "nbme27", title: "NBME 27 corrections, day 2 of 5." },
+    { date: "2026-11-04", block: "nbme27", title: "NBME 27 corrections, day 3 of 5." },
+    { date: "2026-11-05", block: "nbme27", title: "NBME 27 corrections, day 4 of 5." },
+    { date: "2026-11-06", block: "nbme27", title: "NBME 27 corrections, day 5 of 5." },
+    { date: "2026-11-07", block: "nbme28", title: "Sit NBME 28 at home, timed and in one sitting. No class today.", noClass: true },
+    { date: "2026-11-08", block: "nbme28", title: "Last day for NBME 28. Send Allan your score report when you finish. No class today.", noClass: true },
+    { date: "2026-11-09", block: "nbme28", title: "NBME 28 corrections, day 1 of 5: starting with the questions most of the class got wrong." },
+    { date: "2026-11-10", block: "nbme28", title: "NBME 28 corrections, day 2 of 5." },
+    { date: "2026-11-11", block: "nbme28", title: "NBME 28 corrections, day 3 of 5." },
+    { date: "2026-11-12", block: "nbme28", title: "NBME 28 corrections, day 4 of 5." },
+    { date: "2026-11-13", block: "nbme28", title: "NBME 28 corrections, day 5 of 5." },
+    { date: "2026-11-14", block: "nbme29", title: "Sit NBME 29 at home, timed and in one sitting. No class today.", noClass: true },
+    { date: "2026-11-15", block: "nbme29", title: "Last day for NBME 29. Send Allan your score report when you finish. No class today.", noClass: true },
+    { date: "2026-11-16", block: "nbme29", title: "NBME 29 corrections, day 1 of 5: starting with the questions most of the class got wrong." },
+    { date: "2026-11-17", block: "nbme29", title: "NBME 29 corrections, day 2 of 5." },
+    { date: "2026-11-18", block: "nbme29", title: "NBME 29 corrections, day 3 of 5." },
+    { date: "2026-11-19", block: "nbme29", title: "NBME 29 corrections, day 4 of 5." },
+    { date: "2026-11-20", block: "nbme29", title: "NBME 29 corrections, day 5 of 5." },
+    { date: "2026-11-21", block: "nbme30", title: "Sit NBME 30 at home, timed and in one sitting. No class today.", noClass: true },
+    { date: "2026-11-22", block: "nbme30", title: "Last day for NBME 30. Send Allan your score report when you finish. No class today.", noClass: true },
+    { date: "2026-11-23", block: "nbme30", title: "NBME 30 corrections, day 1 of 5: starting with the questions most of the class got wrong." },
+    { date: "2026-11-24", block: "nbme30", title: "NBME 30 corrections, day 2 of 5." },
+    { date: "2026-11-25", block: "nbme30", title: "NBME 30 corrections, day 3 of 5." },
+    { date: "2026-11-26", block: "nbme30", title: "NBME 30 corrections, day 4 of 5." },
+    { date: "2026-11-27", block: "nbme30", title: "NBME 30 corrections, day 5 of 5." },
+    { date: "2026-11-28", block: "nbme31", title: "Sit NBME 31 at home, timed and in one sitting. No class today.", noClass: true },
+    { date: "2026-11-29", block: "nbme31", title: "Last day for NBME 31. Send Allan your score report when you finish. No class today.", noClass: true },
+    { date: "2026-11-30", block: "nbme31", title: "NBME 31 corrections, day 1 of 5: starting with the questions most of the class got wrong." }
   ]
 };
