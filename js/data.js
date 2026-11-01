@@ -911,6 +911,15 @@ window.NBME = {
   // The passing mark Allan holds the class to. Drawn on the trend.
   target: 196,
 
+  // ---- Corrections recordings -----------------------------------
+  // One week of classes to a form, Monday to Friday, going through the
+  // questions the cohort got wrong. Keyed by form id, same row shape as a
+  // block's recordings: { title, date, url }. A form with no key here, or
+  // an empty list, reads as "not recorded yet" rather than disappearing.
+  classes: {
+    nbme27: []
+  },
+
   // ---- Question -> topic maps ------------------------------------
   // Two axes, both taken from the real Step 1 score report: the eight
   // systems and the ten disciplines. One entry per question, in order,

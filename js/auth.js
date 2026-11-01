@@ -74,10 +74,16 @@ const USMLE_AUTH = (() => {
         // locked, including blocks added later, while the rest of the
         // dashboard stays visible. Use for a lapsed subscription.
         recordingsPaused: s.recordingsPaused === true,
+        // The NBME phase (Carey Coombs) is paid for by the month and sits
+        // behind its own gate: only a student with a November payment on the
+        // tracker gets it. Absent means no, so a new entry is out until it is
+        // paid for, and the same flag drives who the corrections recordings
+        // are shared with. Tutors are let in by data.js, not by this.
+        nbme: s.nbme === true,
       }));
     }
     if (Array.isArray(json.emails)) {
-      return json.emails.map((e) => ({ email: String(e).toLowerCase().trim(), tracks: ["step1", "step2"], accessFrom: null, accessUntil: null, onlyRecordings: null, lockedBlocks: null, recordingsPaused: false, zoomLink: null }));
+      return json.emails.map((e) => ({ email: String(e).toLowerCase().trim(), tracks: ["step1", "step2"], accessFrom: null, accessUntil: null, onlyRecordings: null, lockedBlocks: null, recordingsPaused: false, zoomLink: null, nbme: false }));
     }
     return [];
   }
@@ -126,6 +132,7 @@ const USMLE_AUTH = (() => {
       lockedBlocks: entry.lockedBlocks || null,
       recordingsPaused: entry.recordingsPaused === true,
       zoomLink: entry.zoomLink || null,
+      nbme: entry.nbme === true,
       name: claims.name || entry.email,
       picture: claims.picture || "",
       signedInAt: Date.now(),
@@ -181,6 +188,7 @@ const USMLE_AUTH = (() => {
         lockedBlocks: live.lockedBlocks || null,
         recordingsPaused: live.recordingsPaused === true,
         zoomLink: live.zoomLink || null,
+        nbme: live.nbme === true,
       });
       if (JSON.stringify(next) !== JSON.stringify(s)) localStorage.setItem(SESSION_KEY, JSON.stringify(next));
     } catch (e) {}

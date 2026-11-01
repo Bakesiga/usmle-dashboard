@@ -65,48 +65,38 @@
 
     <!-- ============================ TABS ============================ -->
     <nav class="dash-tabs" role="tablist" aria-label="Dashboard sections">
-      <span class="dash-nav-label">Dashboard</span>
-      <button class="dash-tab active" data-tab="about" role="tab" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12" y2="8.01"/></svg>
-        About
+      <!-- One sign-in, two courses. data-phase decides which rail a tab
+           belongs to; setPhase in js/dashboard.js shows one rail at a time
+           and the tiles on the Home panel are the way in. The icons that
+           used to sit in these buttons were already hidden in CSS as noise,
+           so they are gone rather than carried along unseen. -->
+      <button class="dash-back" data-go-home type="button" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Dashboard
       </button>
-      <button class="dash-tab" data-tab="progress" role="tab" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="4" y2="12"/><line x1="10" y1="20" x2="10" y2="4"/><line x1="16" y1="20" x2="16" y2="9"/><line x1="22" y1="20" x2="22" y2="15"/></svg>
-        Where we are
-      </button>
-      <button class="dash-tab" data-tab="nbme" role="tab" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></svg>
-        NBMEs
-      </button>
-      <button class="dash-tab" data-tab="results" role="tab" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 7-7"/><polyline points="21 8 21 3 16 3"/><line x1="3" y1="21" x2="21" y2="21"/></svg>
-        My results
-        <span style="display:inline-flex;align-items:center;justify-content:center;background:var(--gold);color:#fff;font-size:10px;font-family:var(--font-body);font-weight:800;padding:1px 6px;border-radius:999px;letter-spacing:0.04em;">NEW</span>
-      </button>
-      <button class="dash-tab" data-tab="sessions" role="tab" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
-        Class recordings
-      </button>
-      <button class="dash-tab" data-tab="news" role="tab" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-9h4"/><path d="M18 14H10"/><path d="M15 18H10"/><path d="M10 6h8v4h-8z"/></svg>
+      <span class="dash-nav-label" data-nav-label hidden></span>
+
+      <button class="dash-tab active" data-tab="about" data-phase="home" role="tab" type="button">Home</button>
+      <button class="dash-tab" data-tab="news" data-phase="home" role="tab" type="button">
         Announcements
         <span style="display:inline-flex;align-items:center;justify-content:center;background:var(--gold);color:var(--ink);font-size:10px;font-family:var(--font-display);font-weight:700;padding:1px 6px;border-radius:999px;letter-spacing:0.04em;">NEW</span>
       </button>
-      <button class="dash-tab" data-tab="resources" role="tab" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        Extra resources
+      <button class="dash-tab" data-tab="office" data-phase="home" role="tab" type="button">Office hours</button>
+
+      <button class="dash-tab" data-tab="sessions" data-phase="gs" role="tab" type="button" hidden>Class recordings</button>
+      <button class="dash-tab" data-tab="progress" data-phase="gs" role="tab" type="button" hidden>Where we are</button>
+      <button class="dash-tab" data-tab="resources" data-phase="gs" role="tab" type="button" hidden>Extra resources</button>
+
+      <button class="dash-tab" data-tab="nbme" data-phase="nbme" role="tab" type="button" hidden>The eight forms</button>
+      <button class="dash-tab" data-tab="results" data-phase="nbme" role="tab" type="button" hidden>
+        My results
+        <span style="display:inline-flex;align-items:center;justify-content:center;background:var(--gold);color:#fff;font-size:10px;font-family:var(--font-body);font-weight:800;padding:1px 6px;border-radius:999px;letter-spacing:0.04em;">NEW</span>
       </button>
-      <button class="dash-tab" data-tab="office" role="tab" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9.5a3 3 0 0 1 6 0c0 2-3 3-3 3"/><line x1="12" y1="16" x2="12" y2="16.5"/></svg>
-        Office hours
-      </button>
+      <button class="dash-tab" data-tab="nbmeclasses" data-phase="nbme" role="tab" type="button" hidden>Class recordings</button>
       <!-- Tutor only. applyTutorNav in js/dashboard.js removes this outright
            for anyone not on NBME.tutors, so it is not reachable by keyboard
            or by reading the page. -->
-      <a class="dash-tab" data-tutor-only hidden href="tutor.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Cohort
-      </a>
+      <a class="dash-tab" data-tutor-only data-phase="nbme" hidden href="tutor.html">Cohort</a>
     </nav>
 
     <div class="dash-grid">
@@ -133,6 +123,23 @@
           <span class="tag-sage"><i></i>Welcome back</span>
           <h1 class="welcome-h">Welcome back, <span data-welcome-name>there</span></h1>
         </header>
+
+        <!-- The two front doors. Everything below them is the house: the
+             wins, what is on today, and who teaches it. -->
+        <div class="phase-tiles" data-phase-tiles>
+          <button class="phase-tile" type="button" data-open-phase="gs">
+            <span class="phase-tile-eyebrow">June to October</span>
+            <span class="phase-tile-name">Graham Steell</span>
+            <span class="phase-tile-line">The taught course. Sixteen systems, every class recorded, with the notes and the extra resources that go with them.</span>
+            <span class="phase-tile-meta" data-tile-meta="gs"></span>
+          </button>
+          <button class="phase-tile is-live" type="button" data-open-phase="nbme" data-tile="nbme" hidden>
+            <span class="phase-tile-eyebrow">November to December <i class="phase-live">Running now</i></span>
+            <span class="phase-tile-name">Carey Coombs</span>
+            <span class="phase-tile-line">The NBME phase. Eight forms, the timed player, your own score report, and the week of corrections classes after each one.</span>
+            <span class="phase-tile-meta" data-tile-meta="nbme"></span>
+          </button>
+        </div>
 
         <!-- Class wins. The most recent Step 1 passes, shown as the students'
              own score reports with the USMLE ID removed. The newest pass
@@ -314,7 +321,7 @@
         </div>
       </section>
 
-      <section class="panel" data-panel="sessions" role="tabpanel" aria-label="All class recordings">
+      <section class="panel" data-phase="gs" data-panel="sessions" role="tabpanel" aria-label="All class recordings">
         <div class="panel-head">
           <h1>Class recordings</h1>
           <p>Every recording, grouped by system. Pick a system to see its classes.</p>
@@ -331,7 +338,7 @@
       <!-- score trend, and the per-system evaluation. Rendered    -->
       <!-- by JS into [data-nbme-root] from window.NBME.           -->
       <!-- ====================================================== -->
-      <section class="panel" data-panel="nbme" role="tabpanel" aria-label="NBME self-assessments">
+      <section class="panel" data-phase="nbme" data-panel="nbme" role="tabpanel" aria-label="NBME self-assessments">
         <div class="nbme-wrap">
           <div class="prog-intro">
             <h3>The NBME phase</h3>
@@ -347,7 +354,7 @@
       <!-- systems and ten disciplines weakest first, and the      -->
       <!-- questions they missed. Rendered by renderMyResults.     -->
       <!-- ====================================================== -->
-      <section class="panel" data-panel="results" role="tabpanel" aria-label="Your own NBME results">
+      <section class="panel" data-phase="nbme" data-panel="results" role="tabpanel" aria-label="Your own NBME results">
         <div class="nbme-wrap">
           <div class="prog-intro">
             <h3>My results</h3>
@@ -357,7 +364,20 @@
         </div>
       </section>
 
-      <section class="panel" data-panel="progress" role="tabpanel" aria-label="Your progress">
+      <!-- ====================================================== -->
+      <!-- NBME CLASS RECORDINGS                                   -->
+      <!-- The corrections week for each form. Same row shape as a  -->
+      <!-- block's recordings, rendered by renderNbmeClasses.       -->
+      <!-- ====================================================== -->
+      <section class="panel" data-phase="nbme" data-panel="nbmeclasses" role="tabpanel" aria-label="NBME class recordings">
+        <div class="panel-head">
+          <h1>Class recordings</h1>
+          <p>The corrections classes, one week to each form. Monday to Friday we work through the questions the cohort got wrong.</p>
+        </div>
+        <div data-nbme-classes-root></div>
+      </section>
+
+      <section class="panel" data-phase="gs" data-panel="progress" role="tabpanel" aria-label="Your progress">
         <div class="prog-wrap">
           <div class="prog-intro">
             <h3>Where we are</h3>
@@ -441,7 +461,7 @@
       <!-- ====================================================== -->
       <!-- RESOURCES PANEL                                        -->
       <!-- ====================================================== -->
-      <section class="panel" data-panel="resources" role="tabpanel" aria-label="Extra resources">
+      <section class="panel" data-phase="gs" data-panel="resources" role="tabpanel" aria-label="Extra resources">
         <div class="res-grid">
           <a class="res-card" href="https://drive.google.com/drive/folders/1fiBDYx8UdjAa-swJMQda08sfKREgove8" target="_blank" rel="noopener">
             <span class="res-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>

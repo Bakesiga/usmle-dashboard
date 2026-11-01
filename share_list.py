@@ -5,6 +5,9 @@ The list is NOT simply everyone on data/allowlist.json. A student can hold
 dashboard access and still be off the recording list, so the exclusions live
 in the allowlist itself rather than in someone's notes:
 
+  nbme: true               entitled to the NBME phase, which is paid for by
+                           the month. From NBME_FROM onward a recording is
+                           only shared with students who hold this
   shareRecordings: false   never share new recordings with this student
   recordingsPaused: true   recordings locked on the dashboard, so no sharing
   accessFrom: "YYYY-MM-DD"  entitlement starts on that date; recordings from
@@ -19,6 +22,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 
 # The host owns the recording; adding self errors in the Zoom share panel.
 HOST = "allanbakesiga@gmail.com"
+
+# The NBME phase is a separate subscription. A recording on or after this
+# date is a corrections class and goes only to students who paid for it.
+NBME_FROM = "2026-11-01"
 
 
 def build(date):
@@ -36,6 +43,8 @@ def build(date):
             skip.append((e, "accessFrom %s, not yet entitled" % r["accessFrom"]))
         elif r.get("accessUntil") and r["accessUntil"] < date:
             skip.append((e, "accessUntil %s" % r["accessUntil"]))
+        elif date >= NBME_FROM and not r.get("nbme"):
+            skip.append((e, "no November payment, NBME phase"))
         else:
             send.append(e)
     return send, skip

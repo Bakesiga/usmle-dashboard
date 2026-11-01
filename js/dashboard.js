@@ -466,6 +466,23 @@
     } catch (e) {}
     return fromSession;
   }
+  // Mirror of studentAccessFrom for the NBME phase. It is a separate monthly
+  // subscription, so the flag is an opt-in: absent means no. Tutors are let
+  // through by nbmeEntitled, not by this.
+  function studentNbme() {
+    let email = null, fromSession = false;
+    try {
+      const sess = JSON.parse(localStorage.getItem('usmle.session.v2') || 'null');
+      if (sess) { email = sess.email; fromSession = sess.nbme === true; }
+    } catch (e) {}
+    if (!email) return false;
+    try {
+      const cache = JSON.parse(sessionStorage.getItem('usmle.allowlist.v2') || '[]');
+      const live = cache.find(s => s.email === email);
+      if (live) return live.nbme === true;
+    } catch (e) {}
+    return fromSession;
+  }
   // The student's own Zoom join link, or null. Read live-first like the other
   // per-student fields, so issuing a link does not require them to sign out.
   function studentZoomLink() {
@@ -1604,37 +1621,161 @@
     }).indexOf(who) === -1;
   }
 
+  // ---------------- PHASES ----------------
+  // Two courses behind one sign-in: Graham Steell, the taught course that
+  // ran June to October, and Carey Coombs, the NBME phase. Landing on a
+  // chooser instead of one long rail keeps a student in the one they came
+  // for, and keeps the two sets of recordings from being mistaken for each
+  // other. 'home' is the chooser itself and holds what belongs to neither.
+  var PHASES = { home: 'Dashboard', gs: 'Graham Steell', nbme: 'Carey Coombs' };
+  var phase = 'home';
+
+  function setPhase(p, tabKey) {
+    if (!PHASES[p]) p = 'home';
+    // Assigned before activateTab runs, so the phase check in there sees the
+    // new phase and does not call back into this.
+    phase = p;
+    document.querySelectorAll('.dash-tabs [data-phase]').forEach(function (el) {
+      el.hidden = el.dataset.phase !== p || el.dataset.gated === '1';
+    });
+    var label = document.querySelector('[data-nav-label]');
+    if (label) { label.textContent = p === 'home' ? '' : PHASES[p]; label.hidden = p === 'home'; }
+    var back = document.querySelector('[data-go-home]');
+    if (back) back.hidden = p === 'home';
+    var first = document.querySelector('.dash-tabs [data-phase="' + p + '"][data-tab]:not([hidden])');
+    activateTab(tabKey || (first && first.dataset.tab) || 'about');
+    window.scrollTo(0, 0);
+  }
+
   function activateTab(key) {
-    if ((key === 'nbme' || key === 'results') && nbmeLocked()) key = 'sessions';
+    var el = document.querySelector('[data-tab="' + key + '"]');
+    // A deep link from inside one phase to a tab in another, or a reload on a
+    // tab whose rail is not up, moves the rail first.
+    if (el && el.dataset.phase && el.dataset.phase !== phase) { setPhase(el.dataset.phase, key); return; }
     document.querySelectorAll('[data-tab]').forEach(t => t.classList.toggle('active', t.dataset.tab === key));
     document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.dataset.panel === key));
     if (key === 'sessions')   { currentBlockView = 'all'; renderSessions(); }
     // Re-render on entry so a tab left open overnight rolls onto the new day.
-    if (key === 'about')      renderPlan();
+    if (key === 'about')      { renderPlan(); paintTiles(); }
     if (key === 'progress')   renderProgress();
     if (key === 'nbme')       renderNBME();
     if (key === 'results')    renderMyResults();
+    if (key === 'nbmeclasses') renderNbmeClasses();
   }
-  // Taken out of the DOM rather than merely hidden, so the panel cannot be
-  // reached by keyboard, by a stale hash, or by reading the page source.
-  function applyNbmeLock() {
-    if (!nbmeLocked()) return;
-    var tab = document.querySelector('[data-tab="nbme"]');
-    if (tab && tab.parentNode) tab.parentNode.removeChild(tab);
-    var panel = document.querySelector('[data-panel="nbme"]');
-    if (panel && panel.parentNode) panel.parentNode.removeChild(panel);
-    // My results is the same phase seen from the student's side, so it goes
-    // with it rather than sitting there empty.
-    var rTab = document.querySelector('[data-tab="results"]');
-    if (rTab && rTab.parentNode) rTab.parentNode.removeChild(rTab);
-    var rPanel = document.querySelector('[data-panel="results"]');
-    if (rPanel && rPanel.parentNode) rPanel.parentNode.removeChild(rPanel);
+
+  // Who may see the NBME phase at all. It is a separate monthly
+  // subscription, so this is an opt-in read from the allowlist, plus the
+  // tutors, plus whatever the phase-wide lock says.
+  function nbmeEntitled() {
+    var who = '';
+    try {
+      var s = JSON.parse(localStorage.getItem('usmle.session.v2') || 'null');
+      who = (s && s.email || '').toLowerCase();
+    } catch (e) {}
+    var tutors = ((window.NBME || {}).tutors || []).map(function (x) { return String(x).toLowerCase(); });
+    if (tutors.indexOf(who) !== -1) return true;
+    return studentNbme();
+  }
+
+  // Two passes. The first runs against whatever allowlist copy the device
+  // already held, so it hides rather than deletes: a student whose November
+  // payment landed while they were signed in would otherwise have the phase
+  // torn out of the page before the fresh list arrived. The second, after
+  // the fetch settles, is final and takes it out of the DOM, where it cannot
+  // be reached by keyboard, by a stale hash, or by reading the source.
+  function applyNbmeGate(final) {
+    var ok = !nbmeLocked() && nbmeEntitled();
+    document.querySelectorAll('[data-phase="nbme"], [data-tile="nbme"]').forEach(function (el) {
+      if (ok) {
+        delete el.dataset.gated;
+        // The rail's own visibility belongs to setPhase; anything else that
+        // was hidden waiting on this answer, the tile, comes back now.
+        if (!el.closest('.dash-tabs')) el.hidden = false;
+        return;
+      }
+      if (final && el.parentNode) { el.parentNode.removeChild(el); return; }
+      el.dataset.gated = '1';
+      el.hidden = true;
+    });
+    if (!ok && phase === 'nbme') setPhase('home');
+    else if (ok && phase !== 'home') setPhase(phase);
   }
 
   function bindTabs() {
     document.querySelectorAll('[data-tab]').forEach(tab => {
       tab.addEventListener('click', () => activateTab(tab.dataset.tab));
     });
+    document.querySelectorAll('[data-open-phase]').forEach(function (tile) {
+      tile.addEventListener('click', function () { setPhase(tile.dataset.openPhase); });
+    });
+    var back = document.querySelector('[data-go-home]');
+    if (back) back.addEventListener('click', function () { setPhase('home'); });
+  }
+
+  // What each door is worth, counted rather than claimed.
+  function paintTiles() {
+    var gs = document.querySelector('[data-tile-meta="gs"]');
+    if (gs) {
+      var blocks = window.BLOCKS || [], recs = 0;
+      blocks.forEach(function (b) {
+        (b.subBlocks || []).forEach(function (s) { recs += (s.recordings || []).length; });
+      });
+      gs.textContent = blocks.length + ' systems, ' + recs + ' recordings';
+    }
+    var nb = document.querySelector('[data-tile-meta="nbme"]');
+    if (nb) {
+      var N = window.NBME || {}, forms = N.forms || [];
+      var res = nbmeResults();
+      var sat = forms.filter(function (f) { return !!res[f.id]; }).length;
+      nb.textContent = forms.length + ' forms, ' + (sat ? sat + ' sat so far' : 'none sat yet');
+    }
+  }
+
+  // ---------------- NBME CORRECTIONS RECORDINGS ----------------
+  // The other half of the phase: the week of classes after each form. Kept
+  // apart from the Graham Steell recordings because they are a different
+  // course taught against a different thing, and mixing them would bury
+  // sixteen systems under eight weeks of corrections.
+  function renderNbmeClasses() {
+    var root = document.querySelector('[data-nbme-classes-root]');
+    if (!root) return;
+    if (studentRecordingsPaused()) {
+      root.innerHTML = '<p class="ncl-empty">Your recordings are paused at the moment. Message Allan and they come straight back.</p>';
+      return;
+    }
+    var N = window.NBME || {}, forms = N.forms || [], all = N.classes || {};
+    var now = window.getNow();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+    var html = '';
+    forms.forEach(function (f) {
+      var rows = all[f.id] || [];
+      // A week that has not started is not a missing recording, so it stays
+      // off the list until there is something to say about it.
+      if (!rows.length && parseYMD(f.week[0]) > today) return;
+      html += '<section class="ncl-form">' +
+        '<div class="ncl-head">' +
+          '<span class="ncl-n">NBME ' + f.n + '</span>' +
+          '<span class="ncl-when">' + nbmeDayLabel(f.week[0]) + ' to ' + nbmeDayLabel(f.week[1]) + '</span>' +
+        '</div>';
+      if (!rows.length) {
+        html += '<p class="ncl-empty">This week is running. Each class goes up here after it is taught.</p>';
+      } else {
+        rows.forEach(function (r) {
+          html += '<a class="ncl-row" href="' + esc(r.url) + '" target="_blank" rel="noopener">' +
+            '<span class="ncl-title">' + esc(r.title) + '</span>' +
+            '<span class="ncl-date">' + (r.date ? nbmeDayLabel(r.date) : '') + '</span>' +
+            '<span class="ncl-go">' + ARROW + '</span>' +
+          '</a>';
+        });
+      }
+      html += '</section>';
+    });
+    if (!html) {
+      html = '<p class="ncl-empty">Nothing here yet. The first week of corrections starts ' +
+             (forms.length ? nbmeDayLabel(forms[0].week[0]) : 'soon') + '.</p>';
+    }
+    root.innerHTML = html;
   }
 
   // ---------------- Jump to a day from Sessions or Schedule ----------------
@@ -1747,10 +1888,15 @@
   document.addEventListener('DOMContentLoaded', () => {
     wireLinks();
     paintWelcome();
-    applyNbmeLock();
+    applyNbmeGate(false);
     applyTutorNav();
     renderPlan();
+    paintTiles();
     bindTabs();
+    // Normalise the rail from markup. applyTutorNav has just un-hidden the
+    // Cohort link, which belongs to the NBME rail, so the chooser has to be
+    // asserted rather than assumed.
+    setPhase('home');
     bindBlocksRoot();
     bindProgress();
     bindNbme();
@@ -1772,7 +1918,13 @@
     // up a corrected personal link and the recording gates any changed access,
     // without the student needing to sign out and in.
     if (typeof USMLE_AUTH !== 'undefined' && USMLE_AUTH.ready && typeof USMLE_AUTH.ready.then === 'function') {
-      USMLE_AUTH.ready.then(() => { wireLinks(); renderSessions(); }).catch(() => {});
+      USMLE_AUTH.ready.then(() => {
+        wireLinks();
+        renderSessions();
+        // Final word on the NBME phase, now that the live allowlist is in.
+        applyNbmeGate(true);
+        paintTiles();
+      }).catch(() => {});
     }
   });
 })();
