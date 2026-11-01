@@ -4,6 +4,15 @@ const USMLE_CONFIG = {
   // Paste the deployed URL here; the marking form posts submissions to it.
   NBME_COLLECTOR_URL: "https://script.google.com/macros/s/AKfycbyuqcwawDcrB9lnKjBpB_HTb88zophFO42NPLMXFMxYVPkTrDUaHpF1AhikW5BbBVOp/exec",
 
+  // Reader for the same submissions, used by the tutor view only. A second,
+  // read-only web app: see outputs/nbme/reader.gs for the code and the four
+  // setup steps. Deploying it separately means the tutor view can never
+  // break a student's submission. It answers only with the right key, and
+  // the key is typed into tutor.html once and kept in that browser, so it
+  // is never committed here. Left blank, the tutor view falls back to
+  // whatever is typed into window.NBME.results by hand.
+  NBME_READ_URL: "",
+
   // Get this from Google Cloud Console → APIs & Services → Credentials → Create OAuth client (Web)
   // Authorized JS origins must include your hosted URL (e.g. https://bakesiga.github.io) and http://localhost:5151 for local preview.
   GOOGLE_CLIENT_ID: "269521341031-mjkthkigvhiltjd9p8v6ogsiri0hfeqh.apps.googleusercontent.com",

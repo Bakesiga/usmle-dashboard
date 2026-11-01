@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Cohort · NBME phase</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" href="favicon.ico" />
+<link rel="stylesheet" href="css/redesign-tokens.css" />
+<link rel="stylesheet" href="css/site.css" />
+<link rel="stylesheet" href="css/dashboard.css" />
+<style>
+  /* Tutor view. Same editorial language as the cohort page: a measured
+     column, hairline rules, numbered sections, one accent. Tables here are
+     working documents, so numbers are tabular and the blanks are loud. */
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font-body); margin: 0; -webkit-font-smoothing: antialiased; }
+  .tv { max-width: 960px; margin: 0 auto; padding: 0 var(--s-20) 120px; }
+
+  .tv-top {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--s-16);
+    padding: var(--s-20) 0; border-bottom: 1px solid var(--border);
+    font-size: var(--fs-12); letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--muted);
+  }
+  .tv-top a { color: var(--accent-deep); text-decoration: none; }
+  .tv-top a:hover { color: var(--ink); }
+
+  .tv-kicker { font-size: var(--fs-12); letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--accent-deep); margin: 48px 0 var(--s-12); }
+  h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(34px, 6.5vw, 54px); line-height: 1.04; margin: 0 0 var(--s-16); letter-spacing: -0.01em; }
+  .tv-stand { font-size: var(--fs-17); line-height: 1.6; color: var(--ink-2); margin: 0 0 var(--s-24); max-width: 62ch; }
+
+  /* ---- Source strip: where these numbers came from ---- */
+  .tv-src {
+    display: flex; align-items: baseline; gap: var(--s-12); flex-wrap: wrap;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: var(--s-12) 0; margin: 0 0 var(--s-32); font-size: var(--fs-13); color: var(--muted);
+  }
+  .tv-src b { color: var(--ink); font-weight: 700; }
+  .tv-src button {
+    font: inherit; font-size: var(--fs-12); font-weight: 700; cursor: pointer;
+    background: none; border: none; padding: 0; color: var(--accent-deep); text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .tv-setup { background: var(--accent-tint); border: 1px solid var(--accent-soft); border-radius: var(--r-soft); padding: var(--s-16); margin: 0 0 var(--s-32); }
+  .tv-setup h3 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-20); margin: 0 0 var(--s-8); }
+  .tv-setup p { font-size: var(--fs-14); line-height: 1.6; color: var(--ink-2); margin: 0 0 var(--s-12); max-width: 70ch; }
+  .tv-setup form { display: flex; gap: var(--s-8); flex-wrap: wrap; }
+  .tv-setup input { font: inherit; font-size: var(--fs-14); flex: 1 1 260px; min-width: 0; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--r-soft); background: #fff; color: var(--ink); }
+  .tv-setup button[type="submit"] { font: inherit; font-weight: 800; cursor: pointer; padding: 10px 20px; border: none; border-radius: var(--r-btn); background: var(--accent); color: #fff; }
+
+  /* ---- Form picker ---- */
+  .tv-forms { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 var(--s-32); }
+  .tv-forms button {
+    font: inherit; font-size: var(--fs-13); font-weight: 700; cursor: pointer;
+    padding: 7px 13px; border-radius: var(--r-pill); background: var(--bg-cream);
+    color: var(--ink-2); border: 1px solid var(--border); font-variant-numeric: tabular-nums;
+  }
+  .tv-forms button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent-deep); }
+  .tv-forms button .tv-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--sage); margin-left: 6px; vertical-align: 1px; }
+
+  /* ---- Numbered section heads ---- */
+  .tv-sec { margin: 0 0 var(--s-48); }
+  .tv-sec > h2 {
+    display: flex; align-items: baseline; gap: var(--s-12);
+    font-family: var(--font-display); font-weight: 400; font-size: clamp(22px, 3.4vw, 30px);
+    line-height: 1.12; margin: 0 0 var(--s-8); padding-top: var(--s-20); border-top: 2px solid var(--ink);
+  }
+  .tv-sec > h2 i { font-style: normal; font-family: var(--font-body); font-size: var(--fs-12); font-weight: 800; letter-spacing: .1em; color: var(--accent-deep); }
+  .tv-note { font-size: var(--fs-14); line-height: 1.6; color: var(--muted); margin: 0 0 var(--s-20); max-width: 68ch; }
+
+  /* ---- Figures ---- */
+  .tv-figs { display: flex; flex-wrap: wrap; gap: clamp(20px, 5vw, 52px); align-items: baseline; margin: 0 0 var(--s-24); padding-bottom: var(--s-20); border-bottom: 1px solid var(--border); }
+  .tv-fig { display: flex; flex-direction: column; gap: 2px; }
+  .tv-fig b { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 5.5vw, 40px); line-height: 1; font-variant-numeric: tabular-nums; }
+  .tv-fig b small { font-family: var(--font-body); font-size: 45%; font-weight: 700; color: var(--muted); }
+  .tv-fig span { font-size: 10.5px; letter-spacing: .13em; text-transform: uppercase; font-weight: 700; color: var(--muted); }
+
+  /* ---- Tables ---- */
+  table.tv-t { width: 100%; border-collapse: collapse; font-size: var(--fs-14); }
+  table.tv-t th {
+    text-align: left; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
+    font-weight: 800; color: var(--muted); padding: 0 var(--s-8) var(--s-8) 0; border-bottom: 1px solid var(--ink);
+    white-space: nowrap;
+  }
+  table.tv-t th.num, table.tv-t td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  table.tv-t td { padding: 11px var(--s-8) 11px 0; border-bottom: 1px solid var(--border-2); vertical-align: baseline; }
+  table.tv-t tr:last-child td { border-bottom: 1px solid var(--border); }
+  table.tv-t .tv-who { font-weight: 700; }
+  table.tv-t .tv-mail { display: block; font-size: var(--fs-12); color: var(--muted); word-break: break-all; }
+  tr.is-missing td { background: color-mix(in srgb, var(--accent) 7%, transparent); }
+  tr.is-missing .tv-when { color: var(--accent-deep); font-weight: 700; }
+  .tv-when { font-size: var(--fs-13); color: var(--muted); white-space: nowrap; }
+  .tv-pc { font-family: var(--font-display); font-size: var(--fs-20); font-variant-numeric: tabular-nums; }
+  .tv-hand { font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; font-weight: 800; color: var(--muted); border: 1px solid var(--border); border-radius: var(--r-pill); padding: 1px 6px; margin-left: 6px; }
+  tr.tv-open { cursor: pointer; }
+  tr.tv-open:hover td { background: var(--bg-cream); }
+  tr.tv-open:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  td.tv-detail { background: var(--bg-cream); padding: var(--s-20) var(--s-16); }
+  td.tv-detail h4 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-18); margin: 0 0 var(--s-8); }
+  td.tv-detail .tv-qlist { font-size: var(--fs-13); line-height: 1.8; color: var(--ink-2); margin: var(--s-12) 0 0; font-variant-numeric: tabular-nums; }
+
+  /* ---- Miss bars ---- */
+  .tv-miss { display: grid; grid-template-columns: 46px 1fr minmax(96px, auto); gap: var(--s-12) var(--s-16); align-items: center; }
+  .tv-miss > * { padding: 9px 0; border-bottom: 1px solid var(--border-2); }
+  .tv-mq { font-family: var(--font-display); font-size: var(--fs-18); font-variant-numeric: tabular-nums; }
+  .tv-mbar { position: relative; }
+  .tv-mbar i { display: block; height: 10px; border-radius: 999px; background: var(--accent); min-width: 3px; }
+  .tv-mbar span { display: block; font-size: var(--fs-12); color: var(--muted); margin-top: 5px; }
+  .tv-mbar span b { color: var(--ink); }
+  .tv-mn { text-align: right; font-size: var(--fs-13); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .tv-mn small { display: block; font-weight: 600; color: var(--muted); }
+
+  /* ---- Axis toggle ---- */
+  .tv-toggle { display: inline-flex; gap: 4px; padding: 3px; border: 1px solid var(--border); border-radius: var(--r-pill); margin: 0 0 var(--s-20); background: var(--bg-cream); }
+  .tv-toggle button { font: inherit; font-size: var(--fs-13); font-weight: 700; cursor: pointer; padding: 6px 14px; border: none; border-radius: var(--r-pill); background: none; color: var(--muted); }
+  .tv-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+  /* ---- Matrix ---- */
+  .tv-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table.tv-m { border-collapse: collapse; font-size: var(--fs-13); min-width: 100%; }
+  table.tv-m th { text-align: center; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; font-weight: 800; color: var(--muted); padding: 0 var(--s-8) var(--s-8); border-bottom: 1px solid var(--ink); }
+  table.tv-m th:first-child { text-align: left; padding-left: 0; position: sticky; left: 0; background: var(--bg); }
+  table.tv-m td { text-align: center; padding: 9px var(--s-8); border-bottom: 1px solid var(--border-2); font-variant-numeric: tabular-nums; }
+  table.tv-m td:first-child { text-align: left; padding-left: 0; font-weight: 700; white-space: nowrap; position: sticky; left: 0; background: var(--bg); }
+  table.tv-m td.v { font-weight: 700; }
+  table.tv-m td.blank { color: var(--n-400); }
+  .tv-up { color: var(--sage-deep); font-weight: 700; }
+  .tv-down { color: var(--accent-deep); font-weight: 700; }
+
+  .tv-empty { font-size: var(--fs-15); line-height: 1.65; color: var(--muted); padding: var(--s-24) 0; border-bottom: 1px solid var(--border); max-width: 64ch; }
+  @media (max-width: 640px) {
+    .tv-miss { grid-template-columns: 38px 1fr; }
+    .tv-mn { grid-column: 2; text-align: left; padding-top: 0; border-bottom: 1px solid var(--border-2); }
+    .tv-mbar { border-bottom: none; padding-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+
+<script src="js/config.js"></script>
+<script>
+/* Gate. This page is for the tutor list in data.js and nobody else. It is
+   taken apart before anything renders rather than merely hidden, and the
+   same check runs again in tutor.js once data.js is in. A client-side gate
+   is a door, not a vault: see the note at the top of js/tutor.js. */
+(function () {
+  var s = null;
+  try { s = JSON.parse(localStorage.getItem('usmle.session.v2') || 'null'); } catch (e) {}
+  if (!s || !s.email) { location.replace('signin.html'); return; }
+  window.__TUTOR_EMAIL__ = String(s.email).toLowerCase().trim();
+})();
+</script>
+
+<div class="tv">
+  <div class="tv-top">
+    <span>Tutor view</span>
+    <a href="dashboard.html">Back to the dashboard &rarr;</a>
+  </div>
+
+  <p class="tv-kicker">NBME phase</p>
+  <h1 id="tv-h1">The cohort</h1>
+  <p class="tv-stand" id="tv-stand">Who has sent each form, how the class is doing, and the questions most of them got wrong.</p>
+
+  <div id="tv-setup"></div>
+  <div class="tv-src" id="tv-src"></div>
+  <div class="tv-forms" id="tv-forms" role="group" aria-label="Which form"></div>
+
+  <section class="tv-sec" id="tv-roster"></section>
+  <section class="tv-sec" id="tv-missed"></section>
+  <section class="tv-sec" id="tv-topics"></section>
+  <section class="tv-sec" id="tv-matrix"></section>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/data.js"></script>
+<script src="js/nbme.js"></script>
+<script src="js/cohort.js"></script>
+<script src="js/tutor.js"></script>
+</body>
+</html>

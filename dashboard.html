@@ -77,6 +77,10 @@
       <button class="dash-tab" data-tab="nbme" role="tab" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></svg>
         NBMEs
+      </button>
+      <button class="dash-tab" data-tab="results" role="tab" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 7-7"/><polyline points="21 8 21 3 16 3"/><line x1="3" y1="21" x2="21" y2="21"/></svg>
+        My results
         <span style="display:inline-flex;align-items:center;justify-content:center;background:var(--gold);color:#fff;font-size:10px;font-family:var(--font-body);font-weight:800;padding:1px 6px;border-radius:999px;letter-spacing:0.04em;">NEW</span>
       </button>
       <button class="dash-tab" data-tab="sessions" role="tab" type="button">
@@ -96,6 +100,13 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9.5a3 3 0 0 1 6 0c0 2-3 3-3 3"/><line x1="12" y1="16" x2="12" y2="16.5"/></svg>
         Office hours
       </button>
+      <!-- Tutor only. applyTutorNav in js/dashboard.js removes this outright
+           for anyone not on NBME.tutors, so it is not reachable by keyboard
+           or by reading the page. -->
+      <a class="dash-tab" data-tutor-only hidden href="tutor.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Cohort
+      </a>
     </nav>
 
     <div class="dash-grid">
@@ -327,6 +338,22 @@
             <p>Eight self-assessments across November and December. You sit each one on your own over the weekend, then we spend Monday to Friday on the questions most of the class got wrong.</p>
           </div>
           <div data-nbme-root></div>
+        </div>
+      </section>
+
+      <!-- ====================================================== -->
+      <!-- MY RESULTS PANEL                                       -->
+      <!-- The student's own report: figures, trend, the eight     -->
+      <!-- systems and ten disciplines weakest first, and the      -->
+      <!-- questions they missed. Rendered by renderMyResults.     -->
+      <!-- ====================================================== -->
+      <section class="panel" data-panel="results" role="tabpanel" aria-label="Your own NBME results">
+        <div class="nbme-wrap">
+          <div class="prog-intro">
+            <h3>My results</h3>
+            <p>Your own forms, nobody else's. How you are moving, and which sections are costing you marks.</p>
+          </div>
+          <div data-results-root></div>
         </div>
       </section>
 

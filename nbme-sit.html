@@ -140,9 +140,10 @@
   <section id="setup">
     <h1 class="st-h">Sit an NBME</h1>
     <p class="st-sub">
-      Open your NBME in another window or have the booklet in front of you. This page
-      keeps the clock and takes your answers, one question at a time, the way the real
-      thing does. It does not show you the questions.
+      Open your NBME in another window or have the booklet in front of you. All eight
+      forms are in <a id="papers" href="#" target="_blank" rel="noopener">the class Drive folder</a>.
+      This page keeps the clock and takes your answers, one question at a time, the way
+      the real thing does. It does not show you the questions.
     </p>
 
     <p class="st-lab">Which form</p>
@@ -242,6 +243,17 @@
 
 <script src="js/config.js"></script>
 <script src="js/data.js"></script>
+<script>
+// The papers link in the standfirst, taken from data.js so the folder URL
+// lives in one place. No folder set, no link: the sentence still reads.
+(function () {
+  var a = document.getElementById('papers');
+  var url = (window.NBME || {}).papers;
+  if (!a) return;
+  if (url) { a.href = url; return; }
+  a.replaceWith(document.createTextNode('the class Drive folder'));
+})();
+</script>
 <script>
 // NBME lock. These pages sit on their own URLs, so the dashboard tab being
 // gone is not enough; they have to check for themselves.

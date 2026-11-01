@@ -331,6 +331,8 @@
     html += '<div class="nbme-ctas">' +
       '<a class="nbme-cta" href="nbme-sit.html"><span>Sit one with the timer</span>' + ARROW + '</a>' +
       '<a class="nbme-cta is-quiet" href="nbme-form.html"><span>Mark one you have sat</span>' + ARROW + '</a>' +
+      (N.papers ? '<a class="nbme-cta is-quiet" href="' + N.papers + '" target="_blank" rel="noopener">' +
+                  '<span>Open the NBME papers</span>' + ARROW + '</a>' : '') +
       '</div>';
 
     // --- Trend ----------------------------------------------------

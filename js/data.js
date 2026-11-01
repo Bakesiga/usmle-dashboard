@@ -882,7 +882,20 @@ window.NBME = {
   locked: false,
   unlockFor: ["allanbakesiga@gmail.com"],
 
+  // ---- Who sees the tutor view ----------------------------------
+  // tutor.html, and the Cohort tab on the dashboard, exist only for
+  // these addresses. Everyone else never gets the tab and the page
+  // takes itself apart on load. Tutors are also left out of the
+  // submission roster, so your own test runs do not read as a
+  // student who has not sent anything.
+  tutors: ["allanbakesiga@gmail.com"],
+
   blurb: "Eight NBME self-assessments across November and December, each followed by a week of corrections.",
+
+  // The papers themselves. Shared Drive folder holding the eight forms, so
+  // a student can open the questions beside the timer. Linked from the NBME
+  // tab and from the timer page.
+  papers: "https://drive.google.com/drive/folders/1vShFVF1CwuMZrCign4lxsi4FXE16loVa",
   forms: [
     { id: "nbme27", n: 27, sit: ["2026-10-31", "2026-11-01"], week: ["2026-11-02", "2026-11-06"] },
     { id: "nbme28", n: 28, sit: ["2026-11-07", "2026-11-08"], week: ["2026-11-09", "2026-11-13"] },
@@ -1015,6 +1028,12 @@ window.NBME = {
   },
 
   // ---- What each student submits ---------------------------------
+  // Submissions from nbme-sit.html and nbme-form.html go to the
+  // collector web app, land in the "Carey Coombs — NBME Submissions"
+  // sheet, and are read back live by the tutor view. This object is
+  // the hand-typed channel on top of that: a result someone sent on
+  // WhatsApp instead of through the form. The live rows win per form;
+  // anything here fills the gaps.
   // results[email][formId] = { wrong: [12, 45, 88], score: 205 }
   //   wrong  the question numbers they got WRONG (1-based). Everything
   //          not listed counts as correct, so a clean form is [].

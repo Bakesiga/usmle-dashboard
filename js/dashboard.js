@@ -1285,46 +1285,12 @@
     var now = window.getNow();
     var res = nbmeResults();
     var forms = N.forms;
-
-    // A form counts as sat once a submission exists, with or without a
-    // 3-digit score. Plot 3-digit scores if any form carries one;
-    // otherwise plot percent correct. Never both on one axis.
-    var anyScore = forms.some(function (f) { return res[f.id] && typeof res[f.id].score === 'number'; });
-    var series = [];
-    forms.forEach(function (f, i) {
-      var r = res[f.id];
-      if (!r) return;
-      var v = null;
-      if (anyScore) {
-        if (typeof r.score === 'number') v = r.score;
-      } else {
-        var rep = nbmeTopicReport(f.id, r);
-        if (rep) v = rep.pct;
-        else if (Array.isArray(r.wrong)) v = Math.round((200 - r.wrong.length) * 100 / 200);
-      }
-      if (v !== null) series.push({ i: i, n: f.n, v: v });
-    });
-
     var satCount = forms.filter(function (f) { return !!res[f.id]; }).length;
-    var latest = series.length ? series[series.length - 1].v : null;
-    var prev   = series.length > 1 ? series[series.length - 2].v : null;
-    var delta  = (latest !== null && prev !== null) ? latest - prev : null;
-    var unit   = anyScore ? '' : '%';
 
-    // --- Headline -------------------------------------------------
-    var html = '<div class="stat-row">';
-    if (latest !== null) {
-      html += '<div class="stat is-now"><div class="stat-n">' + latest + unit + '</div>' +
-              '<div class="stat-l">' + (anyScore ? 'Your latest NBME' : 'Correct on your latest form') + '</div></div>' +
-              '<div class="stat"><div class="stat-n">' +
-              (delta === null ? '&mdash;' : (delta > 0 ? '+' + delta : String(delta))) + (delta === null ? '' : unit) + '</div>' +
-              '<div class="stat-l">' + (delta === null ? 'No earlier form yet' : 'Since the form before') + '</div></div>';
-    } else {
-      html += '<div class="stat is-now"><div class="stat-n">8</div>' +
-              '<div class="stat-l">Forms in this phase</div></div>';
-    }
-    html += '<div class="stat"><div class="stat-n">' + satCount + '<span class="stat-of">/8</span></div>' +
-            '<div class="stat-l">Sat so far</div></div></div>';
+    // The student's own figures, trend and topic report moved to the My
+    // results tab, so this one is the phase and not the person: what is
+    // happening this week, the two tools, and the eight forms.
+    var html = '';
 
     // --- Where we are this week ----------------------------------
     var live = null;
@@ -1358,17 +1324,10 @@
     html += '<div class="nbme-ctas">' +
       '<a class="nbme-cta" href="nbme-sit.html"><span>Sit one with the timer</span>' + ARROW + '</a>' +
       '<a class="nbme-cta is-quiet" href="nbme-form.html"><span>Mark one you have sat</span>' + ARROW + '</a>' +
+      // The papers themselves, so nobody has to ask where the forms are.
+      (N.papers ? '<a class="nbme-cta is-quiet" href="' + N.papers + '" target="_blank" rel="noopener">' +
+                  '<span>Open the NBME papers</span>' + ARROW + '</a>' : '') +
       '</div>';
-
-    // --- Trend ----------------------------------------------------
-    var chart = nbmeTrendSvg(forms, series, anyScore ? (N.target || 196) : null, unit);
-    if (chart) {
-      html += '<h2 class="sec-h">' + (anyScore ? 'Your scores' : 'Your percent correct') + '</h2>' +
-              '<div class="nbme-chart-wrap">' + chart + '</div>';
-    }
-
-    // --- Systems --------------------------------------------------
-    html += nbmeSystemsBlock(res, forms);
 
     // --- The eight forms ------------------------------------------
     html += '<h2 class="sec-h">All eight forms</h2><div class="fin-list nbme-list">';
@@ -1398,15 +1357,144 @@
     html += '</div>';
 
     if (!satCount) {
-      html += '<p class="nbme-note nbme-foot">Your scores appear here once you send me each report. ' +
-              'I will add the per-system breakdown at the same time.</p>';
+      html += '<p class="nbme-note nbme-foot">Mark a form and it is scored the moment you send it. ' +
+              'Your own breakdown, system by system, waits for you under ' +
+              '<a class="nbme-gotolink" data-goto-tab="results" role="link" tabindex="0">My results</a>.</p>';
     }
 
     root.innerHTML = html;
   }
 
-  function bindNbme() {
-    var root = document.querySelector('[data-nbme-root]');
+  // ---------------- MY RESULTS ----------------
+  // The student's own report, split off the NBMEs tab so the two read
+  // differently: that tab is the phase, this one is them. Their figures,
+  // their trend, both topic axes weakest first, and the questions they
+  // actually lost, which is where the review starts.
+  function renderMyResults() {
+    var root = document.querySelector('[data-results-root]');
+    if (!root) return;
+    var N = window.NBME;
+    if (!N || !N.forms) { root.innerHTML = ''; return; }
+
+    var res = nbmeResults();
+    var forms = N.forms;
+
+    // A form counts as sat once a submission exists, with or without a
+    // 3-digit score. Plot 3-digit scores if any form carries one;
+    // otherwise plot percent correct. Never both on one axis.
+    var anyScore = forms.some(function (f) { return res[f.id] && typeof res[f.id].score === 'number'; });
+    var series = [];
+    forms.forEach(function (f, i) {
+      var r = res[f.id];
+      if (!r) return;
+      var v = null;
+      if (anyScore) {
+        if (typeof r.score === 'number') v = r.score;
+      } else {
+        var rep = nbmeTopicReport(f.id, r);
+        if (rep) v = rep.pct;
+        else if (Array.isArray(r.wrong)) v = Math.round((200 - r.wrong.length) * 100 / 200);
+      }
+      if (v !== null) series.push({ i: i, n: f.n, v: v });
+    });
+
+    var satCount = forms.filter(function (f) { return !!res[f.id]; }).length;
+    var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+
+    // Nothing sent yet: say what will appear and how to make it appear,
+    // rather than an empty page with a shrug.
+    if (!satCount) {
+      root.innerHTML =
+        '<p class="nbme-note">This page is yours alone. The moment you send a form, it fills with ' +
+        'your score, how you are moving form to form, and the eight systems and ten disciplines ' +
+        'your Step 1 score report uses, weakest first, with a link back to the class that covers each one.</p>' +
+        '<div class="nbme-ctas">' +
+        '<a class="nbme-cta" href="nbme-sit.html"><span>Sit one with the timer</span>' + ARROW + '</a>' +
+        '<a class="nbme-cta is-quiet" href="nbme-form.html"><span>Mark one you have sat</span>' + ARROW + '</a>' +
+        (N.papers ? '<a class="nbme-cta is-quiet" href="' + N.papers + '" target="_blank" rel="noopener">' +
+                    '<span>Open the NBME papers</span>' + ARROW + '</a>' : '') +
+        '</div>';
+      return;
+    }
+
+    var latest = series.length ? series[series.length - 1].v : null;
+    var prev   = series.length > 1 ? series[series.length - 2].v : null;
+    var delta  = (latest !== null && prev !== null) ? latest - prev : null;
+    var unit   = anyScore ? '' : '%';
+
+    var html = '<div class="stat-row">';
+    if (latest !== null) {
+      html += '<div class="stat is-now"><div class="stat-n">' + latest + unit + '</div>' +
+              '<div class="stat-l">' + (anyScore ? 'Your latest NBME' : 'Correct on your latest form') + '</div></div>' +
+              '<div class="stat"><div class="stat-n">' +
+              (delta === null ? '&mdash;' : (delta > 0 ? '+' + delta : String(delta))) + (delta === null ? '' : unit) + '</div>' +
+              '<div class="stat-l">' + (delta === null ? 'No earlier form yet' : 'Since the form before') + '</div></div>';
+    }
+    html += '<div class="stat"><div class="stat-n">' + satCount + '<span class="stat-of">/8</span></div>' +
+            '<div class="stat-l">Sat so far</div></div></div>';
+
+    var chart = nbmeTrendSvg(forms, series, anyScore ? (N.target || 196) : null, unit);
+    if (chart) {
+      html += '<h2 class="sec-h">' + (anyScore ? 'Your scores' : 'Your percent correct') + '</h2>' +
+              '<div class="nbme-chart-wrap">' + chart + '</div>';
+    }
+
+    html += nbmeSystemsBlock(res, forms);
+    html += myMissesBlock(res, forms);
+
+    root.innerHTML = html;
+  }
+
+  // The questions they lost on their newest form, gathered under the system
+  // each one belongs to. The topic rows above say how they did; this says
+  // which items to go back and re-read, which is the part they can act on.
+  function myMissesBlock(res, forms) {
+    var N = window.NBME || {};
+    var hit = null;
+    for (var i = forms.length - 1; i >= 0; i--) {
+      var r = res[forms[i].id];
+      if (r && Array.isArray(r.wrong) && (N.map || {})[forms[i].id]) { hit = { f: forms[i], r: r }; break; }
+    }
+    if (!hit || !hit.r.wrong.length) return '';
+
+    var map = N.map[hit.f.id] || [];
+    var table = N.systems || {};
+    var byId = {}; (window.BLOCKS || []).forEach(function (b) { byId[b.id] = b; });
+
+    var groups = {};
+    hit.r.wrong.map(Number).sort(function (a, b) { return a - b; }).forEach(function (q) {
+      var sid = map[q - 1] || 'unmapped';
+      if (!groups[sid]) groups[sid] = [];
+      groups[sid].push(q);
+    });
+
+    var ids = Object.keys(groups).sort(function (a, b) { return groups[b].length - groups[a].length; });
+    var html = '<h2 class="sec-h">Where you lost marks on NBME ' + hit.f.n + '</h2>' +
+      '<p class="nbme-note">Your own question numbers, heaviest section first. Open the form again and ' +
+      'read these back before the corrections class reaches them.</p><div class="nbme-sys">';
+
+    ids.forEach(function (sid) {
+      var qs = groups[sid];
+      var meta = table[sid] || {};
+      var label = sid === 'unmapped' ? 'Not yet mapped to a section' : (meta.label || sid);
+      var blocks = (meta.blocks || []).filter(function (b) { return byId[b]; });
+      html += '<div class="nbme-sysrow">' +
+        '<span class="nbme-sysname">' + esc(label) + '</span>' +
+        '<span class="nbme-band">' + qs.length + ' question' + (qs.length === 1 ? '' : 's') + '</span>' +
+        '<span class="nbme-say">' + qs.join(', ') + '</span>';
+      if (blocks.length) {
+        html += '<span class="nbme-goto">Review ' + blocks.map(function (b) {
+          return '<a class="nbme-gotolink" data-goto-block="' + byId[b].id + '" role="link" tabindex="0">' +
+                 esc(byId[b].label) + '</a>';
+        }).join(' &middot; ') + '</span>';
+      }
+      html += '</div>';
+    });
+    return html + '</div>';
+  }
+
+  function bindMyResults() {
+    var root = document.querySelector('[data-results-root]');
     if (!root) return;
     function go(t) { activateTab('sessions'); setBlockView(t.dataset.gotoBlock); }
     root.addEventListener('click', function (e) {
@@ -1417,6 +1505,45 @@
       if (e.key !== 'Enter' && e.key !== ' ') return;
       var t = e.target.closest('[data-goto-block]');
       if (t) { e.preventDefault(); go(t); }
+    });
+  }
+
+  // The tutor entry in the nav. Removed from the DOM for everyone else, the
+  // same treatment the NBME lock gives, so it is not reachable by keyboard
+  // or by reading the page source.
+  function applyTutorNav() {
+    var el = document.querySelector('[data-tutor-only]');
+    if (!el) return;
+    var who = '';
+    try {
+      var sess = JSON.parse(localStorage.getItem('usmle.session.v2') || 'null');
+      who = (sess && sess.email || '').toLowerCase();
+    } catch (e) {}
+    var list = ((window.NBME || {}).tutors || []).map(function (x) { return String(x).toLowerCase().trim(); });
+    if (list.indexOf(who) === -1) {
+      if (el.parentNode) el.parentNode.removeChild(el);
+      return;
+    }
+    el.hidden = false;
+  }
+
+  function bindNbme() {
+    var root = document.querySelector('[data-nbme-root]');
+    if (!root) return;
+    function go(t) { activateTab('sessions'); setBlockView(t.dataset.gotoBlock); }
+    root.addEventListener('click', function (e) {
+      var t = e.target.closest('[data-goto-block]');
+      if (t) { go(t); return; }
+      // Rendered after bindLauncher has run, so it needs delegation.
+      var tab = e.target.closest('[data-goto-tab]');
+      if (tab) activateTab(tab.dataset.gotoTab);
+    });
+    root.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var t = e.target.closest('[data-goto-block]');
+      if (t) { e.preventDefault(); go(t); return; }
+      var tab = e.target.closest('[data-goto-tab]');
+      if (tab) { e.preventDefault(); activateTab(tab.dataset.gotoTab); }
     });
   }
 
@@ -1458,7 +1585,7 @@
   }
 
   function activateTab(key) {
-    if (key === 'nbme' && nbmeLocked()) key = 'sessions';
+    if ((key === 'nbme' || key === 'results') && nbmeLocked()) key = 'sessions';
     document.querySelectorAll('[data-tab]').forEach(t => t.classList.toggle('active', t.dataset.tab === key));
     document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.dataset.panel === key));
     if (key === 'sessions')   { currentBlockView = 'all'; renderSessions(); }
@@ -1466,6 +1593,7 @@
     if (key === 'about')      renderPlan();
     if (key === 'progress')   renderProgress();
     if (key === 'nbme')       renderNBME();
+    if (key === 'results')    renderMyResults();
   }
   // Taken out of the DOM rather than merely hidden, so the panel cannot be
   // reached by keyboard, by a stale hash, or by reading the page source.
@@ -1475,6 +1603,12 @@
     if (tab && tab.parentNode) tab.parentNode.removeChild(tab);
     var panel = document.querySelector('[data-panel="nbme"]');
     if (panel && panel.parentNode) panel.parentNode.removeChild(panel);
+    // My results is the same phase seen from the student's side, so it goes
+    // with it rather than sitting there empty.
+    var rTab = document.querySelector('[data-tab="results"]');
+    if (rTab && rTab.parentNode) rTab.parentNode.removeChild(rTab);
+    var rPanel = document.querySelector('[data-panel="results"]');
+    if (rPanel && rPanel.parentNode) rPanel.parentNode.removeChild(rPanel);
   }
 
   function bindTabs() {
@@ -1594,11 +1728,13 @@
     wireLinks();
     paintWelcome();
     applyNbmeLock();
+    applyTutorNav();
     renderPlan();
     bindTabs();
     bindBlocksRoot();
     bindProgress();
     bindNbme();
+    bindMyResults();
     bindLauncher();
     bindUserMenu();
     bindDayJumps();
