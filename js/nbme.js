@@ -56,6 +56,14 @@
     return d.getDate() + ' ' + mon;
   }
 
+  // A deadline is easier to hold to with the weekday on it: "Wednesday 4 Nov"
+  // is a day of your week, "4 Nov" is a date you have to look up.
+  function nbmeDueLabel(ymdStr) {
+    var d = parseYMD(ymdStr);
+    var day = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][d.getDay()];
+    return day + ' ' + nbmeDayLabel(ymdStr);
+  }
+
   // ---- Score trend ------------------------------------------------
   // One series, so no legend: the heading names it. Target line is a
   // recessive reference, not a second series.
@@ -310,12 +318,23 @@
       if (nbmeFormStatus(forms[i], now, res) === 'ahead') { nextUp = forms[i]; break; }
     }
     if (live) {
+      // A form with a "due" date can be split: block 1 on a sitting day, the
+      // other three any time before the date. Say so while the date is still
+      // ahead, including into the corrections week, which is where the last
+      // blocks of a split form actually land.
+      var dueLeft = live.f.due &&
+        new Date(now.getFullYear(), now.getMonth(), now.getDate()) <= parseYMD(live.f.due)
+          ? nbmeDueLabel(live.f.due) : null;
       html += '<div class="nbme-now">' +
         '<span class="nbme-now-k">This week</span>' +
         '<span class="nbme-now-v">' +
           (live.st === 'sitting'
-            ? 'Sit <b>NBME ' + live.f.n + '</b> on your own. 200 questions, 4 blocks of 50, 75 minutes a block. There is no class today.'
-            : 'Corrections for <b>NBME ' + live.f.n + '</b>, ' + nbmeDayLabel(live.f.week[0]) + ' to ' + nbmeDayLabel(live.f.week[1]) + '. Send me your report if you have not.') +
+            ? 'Sit <b>NBME ' + live.f.n + '</b> on your own. 200 questions, 4 blocks of 50, 75 minutes a block. ' +
+              (dueLeft ? 'You can do block 1 on its own and finish blocks 2 to 4 by <b>' + dueLeft + '</b>. ' : '') +
+              'There is no class today.'
+            : 'Corrections for <b>NBME ' + live.f.n + '</b>, ' + nbmeDayLabel(live.f.week[0]) + ' to ' + nbmeDayLabel(live.f.week[1]) + '. ' +
+              (dueLeft ? 'If you have blocks left on it, finish them by <b>' + dueLeft + '</b>. ' : '') +
+              'Send me your report if you have not.') +
         '</span></div>';
     } else if (nextUp) {
       html += '<div class="nbme-now">' +
@@ -354,6 +373,7 @@
       var repq = r ? nbmeTopicReport(f.id, r) : null;
       var pctq = repq ? repq.pct : (r && Array.isArray(r.wrong) ? Math.round((200 - r.wrong.length) * 100 / 200) : null);
       var meta = 'Sit ' + nbmeDayLabel(f.sit[0]) + ' or ' + nbmeDayLabel(f.sit[1]) +
+                 (f.due ? ' &middot; finish by ' + nbmeDayLabel(f.due) : '') +
                  ' &middot; corrections ' + nbmeDayLabel(f.week[0]) + ' to ' + nbmeDayLabel(f.week[1]);
       var mark = hasScore
         ? '<span class="nbme-score">' + r.score + '</span>'

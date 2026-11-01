@@ -22,6 +22,16 @@
     background: var(--bg-cream); color: var(--ink-2); border: 1px solid var(--border);
   }
   .st-pick button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent-deep); }
+  /* A figure that is not a choice. Reads in the same slot as the picker
+     above it without pretending there is something to tap. */
+  .st-fixed {
+    margin: 0; font-weight: 700; color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .st-fixed span { font-weight: 400; color: var(--muted); }
+  /* An author display rule beats the hidden attribute, so the flex rows
+     that get hidden in script have to be told twice. */
+  .st-bar[hidden] { display: none; }
 
   .st-btn {
     font: inherit; font-weight: 700; cursor: pointer; border-radius: 999px;
@@ -150,15 +160,17 @@
     <div class="st-pick" id="pick"></div>
 
     <p class="st-lab">Minutes per block of 50</p>
-    <div class="st-pick" id="pace"></div>
+    <p class="st-fixed">75 minutes <span>&middot; a minute and a half a question</span></p>
 
     <div class="st-note">
-      Four blocks of 50, 200 questions. Standard is a minute and a half a question,
-      so 75 minutes a block and five hours for the form. The clock runs per block and
-      does not stop, so treat it as the real sitting: no looking anything up. You get
-      a break between blocks. If you close this page by accident your answers are kept on
-      this device and you can pick up where you left off.
+      Four blocks of 50, 200 questions. Seventy five minutes a block, five hours for the
+      whole form. The clock runs per block and does not stop, so treat it as the real
+      sitting: no looking anything up. You get a break between blocks, and you can stop
+      at a break and pick the rest up later. Your answers are kept in this browser on
+      this device, so finish on the one you start on.
     </div>
+
+    <div class="st-note" id="splitNote" hidden></div>
 
     <p id="resume" hidden class="st-note"><b>You have a sitting in progress.</b>
       <span id="resumeWhat"></span></p>
@@ -174,7 +186,7 @@
   <section id="exam" hidden>
     <div class="st-top">
       <span class="st-where">Block <b id="bNum">1</b> &middot; item <b id="iNum">1</b> of 50</span>
-      <span class="st-clock" id="clock">60:00</span>
+      <span class="st-clock" id="clock">75:00</span>
     </div>
 
     <h2 class="st-qnum" id="qnum">Question 1</h2>
@@ -213,9 +225,11 @@
   <section id="brk" hidden>
     <h2 class="st-h" id="brkH">Block 1 done</h2>
     <p class="st-sub" id="brkSub"></p>
-    <div class="st-bar">
+    <div class="st-bar" id="brkBar">
+      <button class="st-btn is-quiet" id="stopHere">Save and come back later</button>
       <button class="st-btn" id="nextBlock">Start the next block</button>
     </div>
+    <div class="st-note" id="brkSaved" hidden></div>
   </section>
 
   <!-- 5. Marking -->
@@ -334,7 +348,41 @@
   function clearSaved() { try { localStorage.removeItem(SKEY); } catch (e) {} }
 
   // ---- Setup ------------------------------------------------------
-  var formId = null, mins = 75;
+  // One pace. A minute and a half a question is the Step 1 pace, so 75
+  // minutes to a block of 50 and five hours to the form. There is no picker
+  // any more: sitting it faster or slower than the real thing teaches you
+  // the wrong thing about your own timing, which is the whole point of
+  // doing it on a clock.
+  var MINS = 75;
+  var formId = null;
+
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'];
+  var WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  function dateWords(ymd) {
+    var p = String(ymd).split('-');
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    return WEEKDAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()];
+  }
+  function formOf(id) {
+    var hit = null;
+    (N.forms || []).forEach(function (f) { if (f.id === id) hit = f; });
+    return hit;
+  }
+
+  // A form carrying a "due" date may be split: block 1 on its own, the rest
+  // any time before that date. Without one the form is sat in a single run
+  // and this says nothing, which is the old behaviour.
+  function showSplit(id) {
+    var f = formOf(id), box = $('splitNote');
+    if (!box) return;
+    if (!f || !f.due) { box.hidden = true; box.innerHTML = ''; return; }
+    box.hidden = false;
+    box.innerHTML = '<b>NBME ' + f.n + ' can be split.</b> Sit block 1 on its own, then ' +
+      'finish blocks 2, 3 and 4 any time before <b>' + dateWords(f.due) + '</b>. Each ' +
+      'block is timed on its own, so stopping at a break costs you nothing. Your result ' +
+      'goes in once, after block 4, when you mark the whole form.';
+  }
 
   var pick = $('pick');
   N.forms.forEach(function (f) {
@@ -346,37 +394,40 @@
       [].forEach.call(pick.children, function (c) { c.setAttribute('aria-pressed', String(c === b)); });
       $('start').disabled = false;
       $('setupHint').textContent = '';
+      showSplit(formId);
     });
     pick.appendChild(b);
-  });
-
-  // Standard is a minute and a half a question, so 75 minutes to a block of
-  // 50. That is the default and the one the class is held to; the other two
-  // are there for someone building up to it or deliberately squeezing.
-  var pace = $('pace');
-  [[60, 'Tight'], [75, 'Standard'], [90, 'Generous']].forEach(function (p) {
-    var b = document.createElement('button');
-    b.type = 'button'; b.textContent = p[0] + ' min · ' + p[1];
-    b.setAttribute('aria-pressed', String(p[0] === 75));
-    b.addEventListener('click', function () {
-      mins = p[0];
-      [].forEach.call(pace.children, function (c) { c.setAttribute('aria-pressed', String(c === b)); });
-    });
-    pace.appendChild(b);
   });
 
   var saved = load();
   if (saved && saved.answers && saved.answers.length === TOTAL) {
     var ansd = saved.answers.filter(Boolean).length;
+    var sf = formOf(saved.form);
+    var done = saved.block + 1, left = BLOCKS - done;
+    // Where they stopped matters more than the question count: at a break
+    // nothing is lost, in the middle of a block the clock has kept running.
+    var atBreak = saved.phase === 'brk';
+    var stranded = saved.phase === 'exam' && saved.deadline < Date.now();
+    var where = saved.phase === 'marking'
+      ? 'all four blocks done, waiting to be marked'
+      : atBreak
+      ? (done === 1 ? 'block 1 done' : 'blocks 1 to ' + done + ' done') + ', ' + left + ' to go'
+      : 'part way through block ' + done;
     $('resume').hidden = false;
-    $('resumeWhat').textContent = saved.form.toUpperCase() + ', block ' + (saved.block + 1) +
-      ', ' + ansd + ' of 200 answered.';
+    $('resumeWhat').innerHTML = (sf ? 'NBME ' + sf.n : saved.form.toUpperCase()) + ', ' + where + ', ' +
+      ansd + ' of 200 answered.' +
+      (sf && sf.due ? ' Finish by <b>' + dateWords(sf.due) + '</b>.' : '') +
+      (stranded ? ' You stopped in the middle of a block, and that block&rsquo;s clock ' +
+                  'ran out while the page was closed, so it opens straight into review.' : '');
     $('resumeBtn').hidden = false;
     $('resumeBtn').addEventListener('click', function () {
       S = saved;
-      // A reload mid-block must not hand back a fresh hour.
-      if (S.phase === 'exam' && S.deadline < Date.now()) { toReview(true); return; }
       if (S.phase === 'marking') { openMarking(); return; }
+      // Stopped at a break: no clock is running, so land on the break screen
+      // rather than reopening the block they already closed.
+      if (S.phase === 'brk') { openBreak(); return; }
+      // A reload mid-block must not hand back a fresh hour.
+      if (S.deadline < Date.now()) { toReview(true); return; }
       show('exam'); renderQ(); tick(); startTimer();
     });
   }
@@ -384,8 +435,8 @@
   $('start').addEventListener('click', function () {
     if (!formId) return;
     if (saved && !confirm('Starting fresh will discard the sitting you have in progress. Continue?')) return;
-    S = blank(formId, mins);
-    S.deadline = Date.now() + mins * 60000;
+    S = blank(formId, MINS);
+    S.deadline = Date.now() + MINS * 60000;
     save();
     show('exam'); renderQ(); tick(); startTimer();
   });
@@ -531,18 +582,50 @@
           ' in this block have no answer. End the block anyway?')) return;
     }
     if (S.block === BLOCKS - 1) { S.phase = 'marking'; save(); openMarking(); return; }
-    $('brkH').textContent = 'Block ' + (S.block + 1) + ' done';
-    $('brkSub').textContent = 'Take a breath. The clock for block ' + (S.block + 2) +
-      ' starts when you tap below, and it does not stop until the block is over.';
-    show('brk');
+    // The break is its own phase, not a pause inside the block that just
+    // ended. Without it, closing the page here and coming back tomorrow
+    // would reopen that finished block with its clock already expired.
+    S.phase = 'brk';
+    save();
+    openBreak();
   });
+
+  function openBreak() {
+    stopTimer();
+    var f = formOf(S.form);
+    var left = BLOCKS - S.block - 1;
+    $('brkBar').hidden = false;
+    $('brkSaved').hidden = true;
+    $('brkH').textContent = 'Block ' + (S.block + 1) + ' done';
+    $('brkSub').textContent = left + ' block' + (left === 1 ? '' : 's') + ' left. The clock ' +
+      'for block ' + (S.block + 2) + ' starts when you tap below and does not stop until ' +
+      'the block is over, so start it when you have 75 clear minutes.' +
+      (f && f.due ? ' Or stop here and come back any time before ' + dateWords(f.due) + '.' : '');
+    show('brk');
+  }
 
   $('nextBlock').addEventListener('click', function () {
     S.block++;
     S.idx = S.block * PER_BLOCK;
+    S.phase = 'exam';
     S.deadline = Date.now() + S.mins * 60000;
     save();
     show('exam'); renderQ(); tick(); startTimer();
+  });
+
+  $('stopHere').addEventListener('click', function () {
+    S.phase = 'brk';
+    save();
+    var f = formOf(S.form);
+    var left = BLOCKS - S.block - 1;
+    $('brkBar').hidden = true;
+    $('brkSaved').hidden = false;
+    $('brkSaved').innerHTML = '<b>Saved.</b> ' + left + ' block' + (left === 1 ? '' : 's') +
+      ' left on NBME ' + (f ? f.n : S.form.toUpperCase()) + '.' +
+      (f && f.due ? ' Finish by <b>' + dateWords(f.due) + '</b>.' : '') +
+      ' Come back to this page in this browser, on this device, and tap ' +
+      '&ldquo;Pick up where I left off&rdquo;. Nothing is sent to me until you have ' +
+      'marked all four blocks. <a href="dashboard.html">Back to the dashboard</a>';
   });
 
   // ---- Marking ----------------------------------------------------

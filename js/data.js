@@ -897,7 +897,9 @@ window.NBME = {
   // tab and from the timer page.
   papers: "https://drive.google.com/drive/folders/1vShFVF1CwuMZrCign4lxsi4FXE16loVa",
   forms: [
-    { id: "nbme27", n: 27, sit: ["2026-10-31", "2026-11-01"], week: ["2026-11-02", "2026-11-06"] },
+    // "due" lets a form be split: block 1 on a sitting day, the other three
+    // any time before that date. Leave it off and the form is sat in one go.
+    { id: "nbme27", n: 27, sit: ["2026-10-31", "2026-11-01"], week: ["2026-11-02", "2026-11-06"], due: "2026-11-04" },
     { id: "nbme28", n: 28, sit: ["2026-11-07", "2026-11-08"], week: ["2026-11-09", "2026-11-13"] },
     { id: "nbme29", n: 29, sit: ["2026-11-14", "2026-11-15"], week: ["2026-11-16", "2026-11-20"] },
     { id: "nbme30", n: 30, sit: ["2026-11-21", "2026-11-22"], week: ["2026-11-23", "2026-11-27"] },
@@ -1073,11 +1075,11 @@ window.PLAN = {
     { id: "nbme31", label: "NBME 31", range: "28 November to 4 December" }
   ],
   days: [
-    { date: "2026-10-31", block: "nbme27", title: "Sit NBME 27 at home, timed and in one sitting. No class today.", noClass: true },
-    { date: "2026-11-01", block: "nbme27", title: "Last day for NBME 27. Send Allan your score report when you finish. No class today.", noClass: true },
-    { date: "2026-11-02", block: "nbme27", title: "NBME 27 corrections, day 1 of 5: starting with the questions most of the class got wrong." },
-    { date: "2026-11-03", block: "nbme27", title: "NBME 27 corrections, day 2 of 5." },
-    { date: "2026-11-04", block: "nbme27", title: "NBME 27 corrections, day 3 of 5." },
+    { date: "2026-10-31", block: "nbme27", title: "Sit NBME 27 at home, timed. Block 1 is enough today if you are splitting it. No class today.", noClass: true },
+    { date: "2026-11-01", block: "nbme27", title: "NBME 27, block 1 if you have not started. Blocks 2 to 4 any time up to Wednesday. No class today.", noClass: true },
+    { date: "2026-11-02", block: "nbme27", title: "NBME 27 corrections, day 1 of 5: starting with the questions most of the class got wrong. Blocks 2 to 4 still open." },
+    { date: "2026-11-03", block: "nbme27", title: "NBME 27 corrections, day 2 of 5. Blocks 2 to 4 due tomorrow." },
+    { date: "2026-11-04", block: "nbme27", title: "NBME 27 corrections, day 3 of 5. Last day for NBME 27: finish your blocks and send your result." },
     { date: "2026-11-05", block: "nbme27", title: "NBME 27 corrections, day 4 of 5." },
     { date: "2026-11-06", block: "nbme27", title: "NBME 27 corrections, day 5 of 5." },
     { date: "2026-11-07", block: "nbme28", title: "Sit NBME 28 at home, timed and in one sitting. No class today.", noClass: true },
