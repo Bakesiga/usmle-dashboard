@@ -91,6 +91,66 @@
     display: flex; gap: var(--s-12); align-items: center; justify-content: space-between;
   }
 
+  /* ---- Lab values ----
+     Docked, not modal: on a wide screen the page makes room for it and
+     they can answer with it open, which is the point of having it. Under
+     900px it takes the screen, the way the real window does on a laptop. */
+  .st-labs {
+    position: fixed; top: 0; right: 0; bottom: 0; width: var(--labs-w, 380px); z-index: 40;
+    background: var(--bg-cream); border-left: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    transform: translateX(100%); visibility: hidden;
+    transition: transform .2s ease, visibility 0s linear .2s;
+  }
+  body.labs-open .st-labs {
+    transform: none; visibility: visible;
+    transition: transform .2s ease, visibility 0s;
+  }
+  .st-labs-head {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--s-12);
+    padding: var(--s-16) var(--s-16) var(--s-12);
+    border-bottom: 1px solid var(--border);
+  }
+  .st-labs-t { font-family: var(--font-display); font-size: var(--fs-20); }
+  .st-labs-x {
+    font: inherit; font-size: var(--fs-13); font-weight: 700; cursor: pointer;
+    padding: 6px 12px; border-radius: 999px;
+    background: transparent; color: var(--muted); border: 1px solid var(--border);
+  }
+  .st-labs-tabs {
+    display: flex; gap: 4px; padding: var(--s-12) var(--s-16); flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+  }
+  .st-labs-tabs button {
+    font: inherit; font-size: var(--fs-13); font-weight: 700; cursor: pointer;
+    padding: 6px 11px; border-radius: 999px;
+    background: transparent; color: var(--muted); border: 1px solid var(--border);
+  }
+  .st-labs-tabs button[aria-selected="true"] {
+    background: var(--accent); color: #fff; border-color: var(--accent-deep);
+  }
+  .st-labs-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 0 var(--s-16) var(--s-24); }
+  .st-labs-body:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .st-labs-h { font-family: var(--font-display); font-size: var(--fs-18); margin: var(--s-16) 0 var(--s-4); }
+  .st-labs-note { font-size: var(--fs-13); color: var(--muted); margin: 0 0 var(--s-12); }
+  .st-lrow {
+    display: grid; grid-template-columns: 1fr auto; gap: var(--s-12); align-items: baseline;
+    padding: 7px 0; border-bottom: 1px solid var(--border); font-size: var(--fs-13);
+    color: var(--ink-2);
+  }
+  .st-lrow .v { text-align: right; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .st-lrow.is-head { border-bottom: 0; padding: var(--s-16) 0 2px; font-weight: 700; color: var(--ink); }
+  .st-lrow.d1 .l { padding-left: 14px; }
+  .st-lrow.d2 .l { padding-left: 28px; }
+
+  @media (min-width: 900px) {
+    body.labs-open { padding-right: var(--labs-w, 380px); }
+    body.labs-open .st-bar { right: var(--labs-w, 380px); }
+  }
+  @media (max-width: 899px) {
+    .st-labs { width: 100%; }
+  }
+
   /* ---- Block review grid ---- */
   .st-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; margin: var(--s-16) 0; }
   .st-cell {
@@ -165,7 +225,8 @@
     <div class="st-note">
       Four blocks of 50, 200 questions. Seventy five minutes a block, five hours for the
       whole form. The clock runs per block and does not stop, so treat it as the real
-      sitting: no looking anything up. You get a break between blocks, and you can stop
+      sitting: no looking anything up. The lab values table is on every question, the
+      same four tabs as the real thing. You get a break between blocks, and you can stop
       at a break and pick the rest up later. Your answers are kept in this browser on
       this device, so finish on the one you start on.
     </div>
@@ -196,9 +257,10 @@
 
     <div class="st-flagrow">
       <button class="st-flag" id="flag" aria-pressed="false">Mark for review</button>
+      <button class="st-flag" id="labsBtn" aria-pressed="false" aria-controls="labs">Lab values</button>
       <button class="st-btn is-quiet" id="toReview">Review this block</button>
     </div>
-    <p class="st-keys">Keyboard: <b>A</b> to <b>J</b> to answer, <b>&rarr;</b> next, <b>&larr;</b> back, <b>M</b> to mark for review.</p>
+    <p class="st-keys">Keyboard: <b>A</b> to <b>J</b> to answer, <b>&rarr;</b> next, <b>&larr;</b> back, <b>M</b> to mark for review, <b>L</b> for lab values.</p>
 
     <div class="st-bar">
       <button class="st-btn is-quiet" id="prev">Back</button>
@@ -254,10 +316,22 @@
     <p><a href="dashboard.html">Back to the dashboard</a></p>
   </section>
 
+  <!-- Lab values. Outside .st-wrap: it is docked to the window, not to
+       the column, and it stays put while the blocks come and go. -->
+  <aside class="st-labs" id="labs" aria-label="Lab values">
+    <div class="st-labs-head">
+      <span class="st-labs-t">Lab values</span>
+      <button class="st-labs-x" id="labsClose">Close</button>
+    </div>
+    <div class="st-labs-tabs" id="labTabs" role="tablist"></div>
+    <div class="st-labs-body" id="labBody" tabindex="0"></div>
+  </aside>
+
 </div>
 
 <script src="js/config.js"></script>
 <script src="js/data.js"></script>
+<script src="js/labs.js"></script>
 <script>
 // The papers link in the standfirst, taken from data.js so the folder URL
 // lives in one place. No folder set, no link: the sentence still reads.
@@ -308,10 +382,18 @@
   var SKEY = 'usmle.nbme.sit.v1';
 
   var $ = function (id) { return document.getElementById(id); };
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
   function show(id) {
     ['setup','exam','review','brk','marking','done'].forEach(function (s) {
       $(s).hidden = (s !== id);
     });
+    // Nothing to look up on the way in or on the way out. Inside a block
+    // it opens the way they left it: a student who wants the table up all
+    // day should not have to ask for it again every question.
+    if (id === 'setup' || id === 'done') setLabs(false);
+    else if (id === 'exam') setLabs(labsPref());
     window.scrollTo(0, 0);
   }
   function session() {
@@ -441,6 +523,69 @@
     show('exam'); renderQ(); tick(); startTimer();
   });
 
+  // ---- Lab values -------------------------------------------------
+  // Built once and left in the page. Whichever tab they were last on is
+  // the one that comes back, because on a renal question you open the
+  // same tab forty times.
+  var labTab = 0;
+  var LABSKEY = 'usmle.labs.open.v1';
+  function labsPref() {
+    try { return localStorage.getItem(LABSKEY) === '1'; } catch (e) { return false; }
+  }
+  function rememberLabs(open) {
+    try { localStorage.setItem(LABSKEY, open ? '1' : '0'); } catch (e) {}
+  }
+
+  function renderLabs() {
+    var L = window.LAB_VALUES;
+    if (!L || !L.tabs || !L.tabs.length) { $('labsBtn').hidden = true; return; }
+    var strip = $('labTabs');
+    strip.innerHTML = '';
+    L.tabs.forEach(function (tab, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = tab.label;
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', String(i === labTab));
+      b.addEventListener('click', function () { labTab = i; renderLabs(); $('labBody').scrollTop = 0; });
+      strip.appendChild(b);
+    });
+    var tab = L.tabs[labTab];
+    var html = '<h3 class="st-labs-h">' + esc(tab.head) + '</h3>' +
+               '<p class="st-labs-note">Reference range</p>';
+    tab.rows.forEach(function (r) {
+      var d = r[2] || 0;
+      var head = !r[1];
+      html += '<div class="st-lrow d' + d + (head ? ' is-head' : '') + '">' +
+                '<span class="l">' + esc(r[0]) + '</span>' +
+                (head ? '' : '<span class="v">' + esc(r[1]) + '</span>') +
+              '</div>';
+    });
+    $('labBody').innerHTML = html;
+  }
+
+  // Focus the list only when it was opened from the keyboard. Then the
+  // arrows scroll it straight away and the focus ring is earned; a mouse
+  // user gets the wheel and no ring round the whole panel.
+  function setLabs(open, byKey) {
+    document.body.classList.toggle('labs-open', !!open);
+    $('labsBtn').setAttribute('aria-pressed', String(!!open));
+    if (open && byKey) $('labBody').focus();
+  }
+  function labsOpen() { return document.body.classList.contains('labs-open'); }
+
+  // Opening and closing it by hand is a preference. show() moving it out
+  // of the way on the setup and done screens is not, so that goes through
+  // setLabs directly and leaves the preference alone.
+  function toggleLabs(byKey) {
+    var v = !labsOpen();
+    setLabs(v, byKey);
+    rememberLabs(v);
+  }
+
+  renderLabs();
+  $('labsBtn').addEventListener('click', function () { toggleLabs(false); });
+  $('labsClose').addEventListener('click', function () { setLabs(false); rememberLabs(false); $('labsBtn').focus(); });
+
   // ---- Exam -------------------------------------------------------
   var timer = null, lastTick = 0;
 
@@ -525,10 +670,16 @@
   $('toReview').addEventListener('click', function () { toReview(false); });
 
   document.addEventListener('keydown', function (e) {
-    if ($('exam').hidden) return;
     if (e.metaKey || e.ctrlKey || e.altKey) return;
+    // Escape shuts the lab window from anywhere, the way a window should.
+    if (e.key === 'Escape' && labsOpen()) { e.preventDefault(); setLabs(false); rememberLabs(false); $('labsBtn').focus(); return; }
+    if ($('exam').hidden) return;
     var k = e.key.toUpperCase();
+    if (k === 'L') { e.preventDefault(); toggleLabs(true); return; }
     if (LETTERS.indexOf(k) >= 0) { e.preventDefault(); answer(k); return; }
+    // With the table open the arrows belong to it: a student scrolling
+    // through the serum list must not land on the next question.
+    if (labsOpen()) return;
     if (e.key === 'ArrowRight') { e.preventDefault(); $('next').click(); }
     else if (e.key === 'ArrowLeft') { e.preventDefault(); $('prev').click(); }
     // Not F: F is an answer choice, and a flag that quietly overwrites
