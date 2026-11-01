@@ -314,7 +314,7 @@
         '<span class="nbme-now-k">This week</span>' +
         '<span class="nbme-now-v">' +
           (live.st === 'sitting'
-            ? 'Sit <b>NBME ' + live.f.n + '</b> on your own. 200 questions, 4 blocks of 50, timed. There is no class today.'
+            ? 'Sit <b>NBME ' + live.f.n + '</b> on your own. 200 questions, 4 blocks of 50, 75 minutes a block. There is no class today.'
             : 'Corrections for <b>NBME ' + live.f.n + '</b>, ' + nbmeDayLabel(live.f.week[0]) + ' to ' + nbmeDayLabel(live.f.week[1]) + '. Send me your report if you have not.') +
         '</span></div>';
     } else if (nextUp) {

@@ -153,9 +153,10 @@
     <div class="st-pick" id="pace"></div>
 
     <div class="st-note">
-      Four blocks of 50, 200 questions. The clock runs per block and does not stop,
-      so treat it as the real sitting: no looking anything up. You get a break
-      between blocks. If you close this page by accident your answers are kept on
+      Four blocks of 50, 200 questions. Standard is a minute and a half a question,
+      so 75 minutes a block and five hours for the form. The clock runs per block and
+      does not stop, so treat it as the real sitting: no looking anything up. You get
+      a break between blocks. If you close this page by accident your answers are kept on
       this device and you can pick up where you left off.
     </div>
 
@@ -333,7 +334,7 @@
   function clearSaved() { try { localStorage.removeItem(SKEY); } catch (e) {} }
 
   // ---- Setup ------------------------------------------------------
-  var formId = null, mins = 60;
+  var formId = null, mins = 75;
 
   var pick = $('pick');
   N.forms.forEach(function (f) {
@@ -349,11 +350,14 @@
     pick.appendChild(b);
   });
 
+  // Standard is a minute and a half a question, so 75 minutes to a block of
+  // 50. That is the default and the one the class is held to; the other two
+  // are there for someone building up to it or deliberately squeezing.
   var pace = $('pace');
-  [[45, 'Fast'], [60, 'Standard'], [75, 'Extended']].forEach(function (p) {
+  [[60, 'Tight'], [75, 'Standard'], [90, 'Generous']].forEach(function (p) {
     var b = document.createElement('button');
     b.type = 'button'; b.textContent = p[0] + ' min · ' + p[1];
-    b.setAttribute('aria-pressed', String(p[0] === 60));
+    b.setAttribute('aria-pressed', String(p[0] === 75));
     b.addEventListener('click', function () {
       mins = p[0];
       [].forEach.call(pace.children, function (c) { c.setAttribute('aria-pressed', String(c === b)); });
