@@ -60,6 +60,14 @@
     width: 100%; min-height: 88px; font-family: var(--font-body); font-size: var(--fs-13);
     border: 1px solid var(--border); border-radius: var(--r-soft); padding: 10px; background: #fff; color: var(--ink);
   }
+  .nf-warn {
+    margin: var(--s-16) 0 0; padding: var(--s-12) var(--s-16);
+    border-left: 3px solid var(--accent); background: var(--accent-tint);
+    font-size: var(--fs-13); line-height: 1.6; color: var(--ink-2);
+    border-radius: 0 var(--r-soft) var(--r-soft) 0;
+  }
+  .nf-warn[hidden] { display: none; }
+  .nf-warn b { color: var(--ink); }
   @media (max-width: 520px) { .nf-grid { grid-template-columns: repeat(5, 1fr); } }
 </style>
 </head>
@@ -69,6 +77,11 @@
   <p class="nf-sub">Tap only the questions you got <b>wrong</b>. Everything you leave alone counts as correct, so most people tap 40 to 70 of the 200. Your topic report is worked out from this.</p>
 
   <div class="nf-pick" id="pick" role="group" aria-label="Which form"></div>
+  <!-- A form that may be sat a block at a time can be half finished when
+       someone opens this page. Sending then scores the blocks they have not
+       touched as correct, which is how a 20 out of 50 on block 1 arrives
+       looking like 180 out of 200. -->
+  <div class="nf-warn" id="split" hidden></div>
   <div id="blocks"></div>
 
   <p class="nf-note" id="hint"></p>
@@ -174,10 +187,25 @@
     b.addEventListener('click', function () {
       formId = f.id;
       [].forEach.call(pick.children, function (c) { c.setAttribute('aria-pressed', String(c === b)); });
+      showSplit(f);
       update();
     });
     pick.appendChild(b);
   });
+
+  // Said once, where it matters, rather than in the standing copy: only a
+  // splittable form can be half done, and only its own deadline is useful.
+  function showSplit(f) {
+    var box = document.getElementById('split');
+    if (!box) return;
+    if (!f || !f.due) { box.hidden = true; box.innerHTML = ''; return; }
+    box.hidden = false;
+    box.innerHTML = '<b>Have you finished all four blocks?</b> NBME ' + f.n +
+      ' can be sat a block at a time, and this page marks the whole form at ' +
+      'once. Anything you have not sat yet is counted as correct, so sending ' +
+      'after block 1 alone would report a score you did not get. Finish all ' +
+      'four by <b>' + dateWords(f.due) + '</b>, then come back and mark the lot.';
+  }
 
   var blocks = document.getElementById('blocks');
   for (var k = 0; k < 4; k++) {
