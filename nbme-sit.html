@@ -22,6 +22,12 @@
     background: var(--bg-cream); color: var(--ink-2); border: 1px solid var(--border);
   }
   .st-pick button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent-deep); }
+  /* A form whose weekend has not come. Still listed, so the eight read as a
+     course rather than appearing one at a time, but plainly not a choice. */
+  .st-pick button:disabled {
+    cursor: default; opacity: .42; background: transparent;
+    border-style: dashed;
+  }
   /* A figure that is not a choice. Reads in the same slot as the picker
      above it without pretending there is something to tap. */
   .st-fixed {
@@ -463,6 +469,20 @@
     var d = new Date(+p[0], +p[1] - 1, +p[2]);
     return WEEKDAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()];
   }
+  // A form opens when its sitting weekend arrives and stays open after, so
+  // anyone catching up on an earlier one still can. Before that it cannot be
+  // picked at all: a result sent against a form nobody has sat is noise in
+  // the corrections list, and a student who picks the wrong one loses a day.
+  function ymd(s) {
+    var p = String(s).split('-');
+    return new Date(+p[0], +p[1] - 1, +p[2]);
+  }
+  function isOpen(f) {
+    if (!f || !f.sit || !f.sit[0]) return true;
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return ymd(f.sit[0]) <= today;
+  }
   function formOf(id) {
     var hit = null;
     (N.forms || []).forEach(function (f) { if (f.id === id) hit = f; });
@@ -484,10 +504,18 @@
   }
 
   var pick = $('pick');
+  var shut = [];
   N.forms.forEach(function (f) {
     var b = document.createElement('button');
     b.type = 'button'; b.textContent = 'NBME ' + f.n;
     b.setAttribute('aria-pressed', 'false');
+    if (!isOpen(f)) {
+      b.disabled = true;
+      b.title = 'Opens ' + dateWords(f.sit[0]);
+      shut.push(f);
+      pick.appendChild(b);
+      return;
+    }
     b.addEventListener('click', function () {
       formId = f.id;
       [].forEach.call(pick.children, function (c) { c.setAttribute('aria-pressed', String(c === b)); });
@@ -497,6 +525,10 @@
     });
     pick.appendChild(b);
   });
+  if (shut.length) {
+    $('setupHint').innerHTML = 'Only the form the class is on can be sat. ' +
+      'NBME ' + shut[0].n + ' opens on <b>' + dateWords(shut[0].sit[0]) + '</b>.';
+  }
 
   var saved = load();
   if (saved && saved.answers && saved.answers.length === TOTAL) {

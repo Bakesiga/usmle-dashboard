@@ -18,6 +18,11 @@
     background: var(--bg-cream); color: var(--ink-2); border: 1px solid var(--border);
   }
   .nf-pick button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent-deep); }
+  /* Not yet sat by the class, so not yet markable. */
+  .nf-pick button:disabled {
+    cursor: default; opacity: .42; background: transparent;
+    border-style: dashed;
+  }
   .nf-blk { margin-bottom: var(--s-24); }
   .nf-blk h2 {
     font-size: 11.5px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase;
@@ -134,11 +139,38 @@
   var wrong = new Set();
   var formId = null;
 
+  // Same rule as the timed page: a form opens when its sitting weekend
+  // arrives and stays open after. Marking a form nobody has sat yet would
+  // put a result in the corrections list for a week that has not happened.
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'];
+  var WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  function dateWords(s) {
+    var p = String(s).split('-');
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    return WEEKDAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()];
+  }
+  function isOpen(f) {
+    if (!f || !f.sit || !f.sit[0]) return true;
+    var p = String(f.sit[0]).split('-');
+    var now = new Date();
+    return new Date(+p[0], +p[1] - 1, +p[2]) <=
+           new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  }
+
   var pick = document.getElementById('pick');
+  var shut = [];
   N.forms.forEach(function (f) {
     var b = document.createElement('button');
     b.type = 'button'; b.textContent = 'NBME ' + f.n;
     b.setAttribute('aria-pressed', 'false'); b.dataset.form = f.id;
+    if (!isOpen(f)) {
+      b.disabled = true;
+      b.title = 'Opens ' + dateWords(f.sit[0]);
+      shut.push(f);
+      pick.appendChild(b);
+      return;
+    }
     b.addEventListener('click', function () {
       formId = f.id;
       [].forEach.call(pick.children, function (c) { c.setAttribute('aria-pressed', String(c === b)); });
@@ -182,7 +214,11 @@
       ? right + ' of ' + TOTAL + ' correct · ' + Math.round(right * 100 / TOTAL) + '%'
       : 'nothing marked wrong yet';
     send.disabled = !formId;
-    hint.textContent = formId ? '' : 'Pick which form you sat before you send.';
+    hint.textContent = formId ? ''
+      : (shut.length
+          ? 'Only the form the class is on can be marked. NBME ' + shut[0].n +
+            ' opens on ' + dateWords(shut[0].sit[0]) + '.'
+          : 'Pick which form you sat before you send.');
   }
   update();
 
