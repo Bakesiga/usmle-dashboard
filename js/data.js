@@ -920,6 +920,16 @@ window.NBME = {
     nbme27: []
   },
 
+  // ---- Orientation ----------------------------------------------
+  // The one class that is about the phase itself rather than about a
+  // form: how the eight run, how the timer works, what to send back.
+  // Kept out of classes{} because it belongs to no form, and shown
+  // first because it is the thing to watch before anything else.
+  orientation: [
+    { title: "Introduction and orientation",
+      url: "https://us06web.zoom.us/rec/share/PqZnAMxUCBekqG_-2rY5py88Lc5fqisw_7b5AP8f9yL_kaAmF5iNRyo7nEP3fGus.REPLmUoGuxRSmO_s" }
+  ],
+
   // ---- Question -> topic maps ------------------------------------
   // Two axes, both taken from the real Step 1 score report: the eight
   // systems and the ten disciplines. One entry per question, in order,

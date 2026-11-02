@@ -1747,7 +1747,28 @@
     var now = window.getNow();
     var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+    function rowHtml(r) {
+      return '<a class="ncl-row" href="' + esc(r.url) + '" target="_blank" rel="noopener">' +
+        '<span class="ncl-title">' + esc(r.title) + '</span>' +
+        '<span class="ncl-date">' + (r.date ? nbmeDayLabel(r.date) : '') + '</span>' +
+        '<span class="ncl-go">' + ARROW + '</span>' +
+      '</a>';
+    }
+
     var html = '';
+    // The phase's own class first. It is not a corrections week, so it
+    // is not in the loop below and it does not wait for a date.
+    var intro = N.orientation || [];
+    if (intro.length) {
+      html += '<section class="ncl-form">' +
+        '<div class="ncl-head">' +
+          '<span class="ncl-n">Start here</span>' +
+          '<span class="ncl-when">Before the first form</span>' +
+        '</div>';
+      intro.forEach(function (r) { html += rowHtml(r); });
+      html += '</section>';
+    }
+
     forms.forEach(function (f) {
       var rows = all[f.id] || [];
       // A week that has not started is not a missing recording, so it stays
@@ -1761,13 +1782,7 @@
       if (!rows.length) {
         html += '<p class="ncl-empty">This week is running. Each class goes up here after it is taught.</p>';
       } else {
-        rows.forEach(function (r) {
-          html += '<a class="ncl-row" href="' + esc(r.url) + '" target="_blank" rel="noopener">' +
-            '<span class="ncl-title">' + esc(r.title) + '</span>' +
-            '<span class="ncl-date">' + (r.date ? nbmeDayLabel(r.date) : '') + '</span>' +
-            '<span class="ncl-go">' + ARROW + '</span>' +
-          '</a>';
-        });
+        rows.forEach(function (r) { html += rowHtml(r); });
       }
       html += '</section>';
     });
