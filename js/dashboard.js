@@ -1697,6 +1697,11 @@
       el.dataset.gated = '1';
       el.hidden = true;
     });
+    // The sign goes up only on the final pass. On the first, run against
+    // whatever allowlist copy the device already held, an entitled student
+    // with a stale cache would see it flash before being told it was wrong.
+    var shut = document.querySelector('[data-nbme-closed]');
+    if (shut && (final || ok)) shut.hidden = ok;
     if (!ok && phase === 'nbme') setPhase('home');
     else if (ok && phase !== 'home') setPhase(phase);
   }
@@ -1863,6 +1868,13 @@
     document.querySelectorAll('[data-link="whatsapp"]').forEach(a => a.href = L.whatsapp);
     document.querySelectorAll('[data-link="ics"]').forEach(a => a.href = L.ics);
     document.querySelectorAll('[data-link="calendly"]').forEach(a => a.href = L.calendly);
+    // Allan himself, not the class group. The one place this is used is the
+    // note for a student who is not on the NBME phase, and that conversation
+    // is a private one about their own account.
+    var cfg = (typeof USMLE_CONFIG !== 'undefined' ? USMLE_CONFIG : {}) || {};
+    document.querySelectorAll('[data-link="allan"]').forEach(a => {
+      a.href = cfg.WHATSAPP_ALLAN_URL || L.whatsapp;
+    });
   }
 
   // ---------------- Prev/Next session navigation on the Today panel ----------------
