@@ -88,9 +88,11 @@ stop being clickable, and the only way on is Continue.
 
 ### 1.3 Block review
 
-A grid of 50 squares. A square shows **the letter they picked** if answered,
-**the number** if not, and is marked if flagged. The line above says how many of
-the 50 are still unanswered.
+A grid of 50 squares, numbered **1 to 50**, the way the block is numbered on
+the paper. An answered square keeps its number and adds the letter, reading as
+"12 then D". An unanswered square is pale and shows the number alone. A dot in
+the corner means flagged. The line above says how many of the 50 are still
+unanswered.
 
 - **Tap any square** to go back to that question, clock still running.
 - **Back to questions** returns to where they were.
@@ -114,8 +116,11 @@ After block 4 there is no break. It goes straight to marking.
 
 ### 1.5 Marking
 
-200 rows. Each row: the **question number**, **the letter they chose** (a dash
-if they left it blank), and a **wrong** toggle.
+Four sections, one to a block, each numbered **1 to 50** so it lines up with
+the answer page they are reading. Each row: the **question number**, **the letter
+they chose** (a dash if they left it blank), and a **wrong** toggle. The number
+sent to Allan is still 1 to 200, which is what the topic maps are keyed on. Only
+the label changes.
 
 - Blanks are marked wrong already, so a timed-out block can never be sent as a
   clean 200.
@@ -151,7 +156,8 @@ For a paper they did offline. Same sign-in and same gate.
    anything left alone counts as correct, most people tap 40 to 70 of the 200.
 2. **Pick the form.** Eight buttons, with the same rule: only a form the class has reached can be marked.
 3. **Four blocks of 50 numbered buttons.** Each block headed "Block N, questions
-   1 to 50". Tap a number to mark it wrong, tap again to clear.
+   1 to 50" and numbered 1 to 50 within itself. Tap a number to mark it wrong, tap
+   again to clear.
 4. **Running tally** at the bottom, the count and the percent.
 5. **Send my result.** Disabled until a form is picked. If nothing is marked it
    asks whether to send a clean 200.

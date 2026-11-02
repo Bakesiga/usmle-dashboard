@@ -168,6 +168,12 @@
   /* Answered is carried by fill AND by the letter sitting in the cell, so
      the state survives a greyscale print or a colour-blind reader. */
   .st-cell.is-done { background: var(--accent-deep); color: #fff; border-color: var(--accent-deep); }
+  /* Answered squares carry both, the number and the letter, reading as
+     "4 · A". The number is what they are looking for, the letter is what
+     they are checking, so neither can be dropped. */
+  .st-cell .n { font-weight: 600; opacity: .7; }
+  .st-cell .a { font-weight: 700; }
+  .st-cell .a::before { content: '·'; opacity: .55; margin: 0 3px; font-weight: 400; }
   .st-cell.is-flag::after {
     content: ''; position: absolute; top: 3px; right: 3px; width: 6px; height: 6px;
     border-radius: 50%; background: var(--accent);
@@ -176,7 +182,14 @@
   .st-legend { font-size: var(--fs-13); color: var(--muted); display: flex; gap: var(--s-16); flex-wrap: wrap; }
 
   /* ---- Marking ---- */
-  .st-mark { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 6px; margin: var(--s-12) 0 var(--s-24); }
+  .st-mark { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 6px; margin: 0; }
+  /* Marked block by block, because the answer page they are reading from is
+     block by block and nobody should be adding 150 in their head. */
+  .st-mblk { margin: 0 0 var(--s-24); }
+  .st-mblk h3 {
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.11em;
+    text-transform: uppercase; color: var(--muted); margin: var(--s-16) 0 var(--s-12);
+  }
   .st-mrow {
     display: flex; align-items: center; justify-content: space-between; gap: 8px;
     padding: 8px 10px; border-radius: 9px; cursor: pointer;
@@ -280,7 +293,7 @@
     <p class="st-sub" id="revSub"></p>
     <div class="st-grid" id="revGrid"></div>
     <p class="st-legend">
-      <span>Filled = answered, and shows your letter</span>
+      <span>Filled = answered, with the letter you put</span>
       <span>Dot = flagged</span>
     </p>
     <div class="st-bar">
@@ -304,7 +317,7 @@
   <section id="marking" hidden>
     <h2 class="st-h">Mark your answers</h2>
     <p class="st-sub" id="markSub"></p>
-    <div class="st-mark" id="markGrid"></div>
+    <div id="markGrid"></div>
     <div class="st-bar">
       <span class="st-where"><b id="markTally">0</b> wrong &middot; <span id="markPct">&mdash;</span></span>
       <button class="st-btn" id="send">Send my result</button>
@@ -687,7 +700,7 @@
     var n = S.idx + 1;
     $('bNum').textContent = S.block + 1;
     $('iNum').textContent = (S.idx % PER_BLOCK) + 1;
-    $('qnum').textContent = 'Question ' + n;
+    $('qnum').textContent = 'Question ' + ((S.idx % PER_BLOCK) + 1);
     $('qmeta').textContent = S.answers[S.idx]
       ? 'You picked ' + S.answers[S.idx] + '. Tap it again to clear it.'
       : 'Choose the letter you picked on the exam.';
@@ -748,13 +761,22 @@
     var grid = $('revGrid'); grid.innerHTML = '';
     for (var i = start; i < start + PER_BLOCK; i++) {
       (function (i) {
-        var n = i + 1, a = S.answers[i];
+        // n is the index into the form, 1 to 200, and is what a flag, the
+        // answer key and the sent result are all keyed on. shown is what the
+        // paper in front of them calls it: every block starts again at 1.
+        var n = i + 1, shown = (i % PER_BLOCK) + 1, a = S.answers[i];
         if (!a) unans++;
         var c = document.createElement('button');
         c.type = 'button';
         c.className = 'st-cell' + (a ? ' is-done' : '') + (S.flags[n] ? ' is-flag' : '');
-        c.textContent = a || n;
-        c.setAttribute('aria-label', 'Question ' + n + (a ? ', answered ' + a : ', not answered'));
+        // The number never leaves the square. Losing it on the answered ones
+        // made them unfindable: a student looking for question 34 could only
+        // count along the row. The letter joins the number, it does not
+        // replace it.
+        c.innerHTML = a
+          ? '<span class="n">' + shown + '</span><span class="a">' + a + '</span>'
+          : shown;
+        c.setAttribute('aria-label', 'Question ' + shown + (a ? ', answered ' + a : ', not answered'));
         c.addEventListener('click', function () {
           if (timedOut) return;
           S.idx = i; show('exam'); renderQ(); startTimer();
@@ -853,15 +875,16 @@
       var want = String(K[i]).toUpperCase();
       // "?" means the key does not cover this question. Leaving it alone
       // would silently score it correct, so hand it back to the student.
-      if (want === '?') { unkeyed.push(i + 1); continue; }
+      if (want === '?') { unkeyed.push('block ' + (Math.floor(i / PER_BLOCK) + 1) +
+                                        ' question ' + ((i % PER_BLOCK) + 1)); continue; }
       if (S.answers[i].toUpperCase() !== want) wrong.add(i + 1);
     }
     var blanks = S.answers.filter(function (a) { return !a; }).length;
     $('markSub').textContent = K
       ? 'Marked against the answer key. Every miss is filled in already, so check it over and send.' +
         (unkeyed.length
-          ? ' The key does not cover question' + (unkeyed.length > 1 ? 's ' : ' ') +
-            unkeyed.join(' and ') + ', so check ' + (unkeyed.length > 1 ? 'those' : 'that') +
+          ? ' The key does not cover ' + unkeyed.join(' and ') +
+            ', so check ' + (unkeyed.length > 1 ? 'those' : 'that') +
             ' against your own answer page and tap ' + (unkeyed.length > 1 ? 'them' : 'it') +
             ' if you got ' + (unkeyed.length > 1 ? 'them' : 'it') + ' wrong.'
           : '')
@@ -869,24 +892,35 @@
         (blanks ? ' The ' + blanks + ' you never answered are counted wrong already.' : '');
 
     var g = $('markGrid'); g.innerHTML = '';
-    for (var j = 0; j < TOTAL; j++) {
-      (function (j) {
-        var n = j + 1;
-        var r = document.createElement('button');
-        r.type = 'button';
-        r.className = 'st-mrow' + (wrong.has(n) ? ' is-wrong' : '');
-        r.innerHTML = '<span class="q">' + n + '</span>' +
-                      '<span class="a">' + (S.answers[j] || '&ndash;') + '</span>' +
-                      '<span class="x">wrong</span>';
-        r.setAttribute('aria-pressed', String(wrong.has(n)));
-        r.addEventListener('click', function () {
-          if (wrong.has(n)) wrong.delete(n); else wrong.add(n);
+    for (var b = 0; b < BLOCKS; b++) {
+      var sec = document.createElement('section');
+      sec.className = 'st-mblk';
+      var h = document.createElement('h3');
+      h.textContent = 'Block ' + (b + 1);
+      sec.appendChild(h);
+      var grid = document.createElement('div');
+      grid.className = 'st-mark';
+      for (var k = 0; k < PER_BLOCK; k++) {
+        (function (j, shown) {
+          var n = j + 1;          // 1 to 200: the key, the maps and the send
+          var r = document.createElement('button');
+          r.type = 'button';
           r.className = 'st-mrow' + (wrong.has(n) ? ' is-wrong' : '');
+          r.innerHTML = '<span class="q">' + shown + '</span>' +
+                        '<span class="a">' + (S.answers[j] || '&ndash;') + '</span>' +
+                        '<span class="x">wrong</span>';
           r.setAttribute('aria-pressed', String(wrong.has(n)));
-          tally();
-        });
-        g.appendChild(r);
-      })(j);
+          r.addEventListener('click', function () {
+            if (wrong.has(n)) wrong.delete(n); else wrong.add(n);
+            r.className = 'st-mrow' + (wrong.has(n) ? ' is-wrong' : '');
+            r.setAttribute('aria-pressed', String(wrong.has(n)));
+            tally();
+          });
+          grid.appendChild(r);
+        })(b * PER_BLOCK + k, k + 1);
+      }
+      sec.appendChild(grid);
+      g.appendChild(sec);
     }
     tally();
     show('marking');

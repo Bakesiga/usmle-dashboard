@@ -184,22 +184,26 @@
     var sec = document.createElement('section');
     sec.className = 'nf-blk';
     var h = document.createElement('h2');
-    h.textContent = 'Block ' + (k + 1) + ' · questions ' + (k * 50 + 1) + ' to ' + (k * 50 + 50);
+    // The paper restarts at 1 in every block, so this does too. The number
+    // sent to Allan is still 1 to 200, which is what the topic maps are
+    // keyed on: only the label changes.
+    h.textContent = 'Block ' + (k + 1) + ' · questions 1 to 50';
     sec.appendChild(h);
     var g = document.createElement('div'); g.className = 'nf-grid';
     for (var i = 1; i <= 50; i++) {
-      (function (n) {
+      (function (n, shown) {
         var q = document.createElement('button');
-        q.type = 'button'; q.className = 'nf-q'; q.textContent = n;
+        q.type = 'button'; q.className = 'nf-q'; q.textContent = shown;
         q.setAttribute('aria-pressed', 'false');
-        q.setAttribute('aria-label', 'Question ' + n + ', mark wrong');
+        q.setAttribute('aria-label', 'Block ' + (Math.floor((n - 1) / 50) + 1) +
+                       ', question ' + shown + ', mark wrong');
         q.addEventListener('click', function () {
           if (wrong.has(n)) { wrong.delete(n); q.setAttribute('aria-pressed', 'false'); }
           else { wrong.add(n); q.setAttribute('aria-pressed', 'true'); }
           update();
         });
         g.appendChild(q);
-      })(k * 50 + i);
+      })(k * 50 + i, i);
     }
     sec.appendChild(g); blocks.appendChild(sec);
   }
