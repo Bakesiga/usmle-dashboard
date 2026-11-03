@@ -131,7 +131,26 @@
     padding: 6px 12px; border-radius: 999px;
     background: transparent; color: var(--muted); border: 1px solid var(--border);
   }
-  .st-paper iframe { flex: 1; width: 100%; border: 0; }
+  .st-paper-tools { display: flex; align-items: center; gap: 6px; }
+  .st-paper-z {
+    font: inherit; font-size: var(--fs-14); font-weight: 700; cursor: pointer;
+    width: 28px; height: 28px; line-height: 1; border-radius: 999px;
+    background: #fff; color: var(--ink); border: 1px solid var(--border);
+  }
+  .st-paper-z:hover { border-color: var(--accent); color: var(--accent-deep); }
+  .st-paper-body { flex: 1; overflow: auto; -webkit-overflow-scrolling: touch; background: #ece5db; }
+  .st-paper-body canvas {
+    display: none; margin: 12px auto; background: #fff;
+    box-shadow: 0 2px 14px rgba(32, 30, 29, .16);
+  }
+  .st-paper iframe { display: none; width: 100%; height: 100%; border: 0; }
+  /* One of the two, never both: our own canvas when the Drive API answered,
+     Google's viewer when it did not. */
+  body.paper-pdf .st-paper-body canvas { display: block; }
+  body.paper-pdf .st-paper-z { display: inline-block; }
+  body:not(.paper-pdf) .st-paper iframe { display: block; }
+  body:not(.paper-pdf) .st-paper-z { display: none; }
+  body:not(.paper-pdf) .st-paper-body { overflow: hidden; }
   .st-paper-note {
     padding: 8px var(--s-16); font-size: var(--fs-13); color: var(--muted);
     border-top: 1px solid var(--border); background: var(--bg-cream);
@@ -447,10 +466,17 @@
            is showing, and will not be told which one to show, so the next
            best thing is to put the number they need right above their own
            page box. One question to a page, so it is the question number. -->
-      <span class="st-paper-pg" id="paperPg"></span>
+      <span class="st-paper-tools">
+        <button class="st-paper-z" id="paperOut" title="Smaller" aria-label="Smaller">&minus;</button>
+        <button class="st-paper-z" id="paperIn" title="Bigger" aria-label="Bigger">+</button>
+        <span class="st-paper-pg" id="paperPg"></span>
+      </span>
     </div>
-    <iframe id="paperFrame" title="The question paper" allow="autoplay"></iframe>
-    <p class="st-paper-note">Served from the class Drive folder. If it asks for access, message Allan.</p>
+    <div class="st-paper-body" id="paperHost">
+      <canvas id="paperCv"></canvas>
+      <iframe id="paperFrame" title="The question paper" allow="autoplay"></iframe>
+    </div>
+    <p class="st-paper-note" id="paperNote">Read from the class Drive folder under your own sign-in.</p>
   </aside>
 
   <!-- Calculator. Click only by default, so nothing it does can collide
@@ -498,6 +524,15 @@
 <script src="js/config.js"></script>
 <script src="js/data.js"></script>
 <script src="js/labs.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  if (window.pdfjsLib) {
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  }
+</script>
+<script src="js/paper.js"></script>
 <script>
 // The papers link in the standfirst, taken from data.js so the folder URL
 // lives in one place. No folder set, no link: the sentence still reads.
@@ -754,13 +789,58 @@
   // Pointed at the form's own file once, when the sitting starts or is
   // resumed, so moving between questions never reloads the PDF and never
   // throws away where they had scrolled to.
+  // Two ways to show the paper, and we would rather have the first.
+  //
+  //   1. Our own canvas, one page drawn per question, read from Drive through
+  //      the API with the student's own token. The page cannot be scrolled
+  //      away from the question, because it is the question.
+  //   2. Google's viewer in an iframe, which is what we had, and which is
+  //      still better than nothing if the token is refused, the browser is
+  //      old, or the student is not on the Drive folder.
+  function paperMode(pdf) { document.body.classList.toggle('paper-pdf', !!pdf); }
+
+  function paperTrouble(err) {
+    var why = (err && err.message) || '';
+    if (why === 'not-shared' || why === 'no-access') {
+      return 'You are not on the class Drive folder yet, so this is Google\u2019s ' +
+             'viewer. Message Allan to be added.';
+    }
+    if (why === 'token-refused' || why === 'no-token') {
+      return 'Without the Drive permission the paper cannot follow your questions. ' +
+             'Start the block again to be asked once more.';
+    }
+    return 'Showing Google\u2019s viewer. Keep its page number the same as the one above.';
+  }
+
   function preparePaper(id) {
     var f = formOf(id), frame = $('paperFrame');
     if (!f || !f.paperId) { frame.removeAttribute('src'); setPaper(false); return; }
+    $('paperT').textContent = 'NBME ' + f.n;
+
+    // The iframe is pointed at the file either way, so the fallback is
+    // already standing by rather than being built after a failure.
     var src = 'https://drive.google.com/file/d/' + f.paperId + '/preview';
     if (frame.src !== src) frame.src = src;
-    $('paperT').textContent = 'NBME ' + f.n;
+
+    if (!window.PAPER || !PAPER.usable()) {
+      paperMode(false);
+      $('paperNote').textContent = paperTrouble(null);
+      return;
+    }
+    PAPER.open(f.paperId).then(function () {
+      paperMode(true);
+      PAPER.show(S ? S.idx + 1 : 1);
+      $('paperNote').textContent = 'Page ' + (S ? S.idx + 1 : 1) + ' of ' + PAPER.pages() +
+                                   ', read from the class Drive folder.';
+    }).catch(function (err) {
+      paperMode(false);
+      $('paperNote').textContent = paperTrouble(err);
+    });
   }
+
+  PAPER.mount({ canvas: $('paperCv'), host: $('paperHost'), status: $('paperNote') });
+  $('paperIn').addEventListener('click', function () { PAPER.setZoom(PAPER.getZoom() + 0.2); });
+  $('paperOut').addEventListener('click', function () { PAPER.setZoom(PAPER.getZoom() - 0.2); });
 
   // ---- Calculator -------------------------------------------------
   // An ordinary four function calculator, the immediate execution kind
@@ -1035,6 +1115,13 @@
     // Same number, said again above the paper, so checking the two agree
     // is a glance rather than an act of memory.
     $('paperPg').textContent = 'Page ' + n;
+    // The whole point: the drawn page follows the question rather than
+    // being scrolled to by hand.
+    if (window.PAPER && PAPER.ready()) {
+      PAPER.show(n);
+      $('paperNote').textContent = 'Page ' + n + ' of ' + PAPER.pages() +
+                                   ', read from the class Drive folder.';
+    }
     [].forEach.call(choices.children, function (b) {
       b.setAttribute('aria-pressed', String(b.textContent === S.answers[S.idx]));
     });
