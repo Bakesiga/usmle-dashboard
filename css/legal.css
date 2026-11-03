@@ -1,0 +1,36 @@
+/* The two pages Google requires before an external app can be published,
+   and which anyone handing their Google account to a site is entitled to
+   read. Same tokens as the rest of the site, set narrow for reading. */
+body {
+  margin: 0;
+  background: var(--bg-cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+}
+.lg-wrap { max-width: 68ch; margin: 0 auto; padding: var(--s-40) var(--s-24) var(--s-56); }
+.lg-top {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--s-16); padding-bottom: var(--s-16);
+  border-bottom: 1.5px solid var(--border); margin-bottom: var(--s-32);
+}
+.lg-home { font-size: 14px; font-weight: 700; color: var(--accent-deep); text-decoration: none; }
+.lg-home:hover { text-decoration: underline; }
+.lg-kicker {
+  font-size: 11.5px; font-weight: 700; letter-spacing: .11em;
+  text-transform: uppercase; color: var(--n-600); margin: 0 0 6px;
+}
+h1 { font-family: var(--font-display); font-weight: 400; font-size: 38px; line-height: 1.12; margin: 0 0 var(--s-12); }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 23px; margin: var(--s-32) 0 var(--s-12); }
+p, li { color: var(--n-700); }
+p { margin: 0 0 var(--s-16); }
+ul { margin: 0 0 var(--s-16); padding-left: 1.25em; }
+li { margin-bottom: 7px; }
+strong { color: var(--ink); }
+a { color: var(--accent-deep); }
+.lg-date { font-size: 14px; color: var(--n-600); margin: 0 0 var(--s-32); }
+.lg-foot {
+  margin-top: var(--s-40); padding-top: var(--s-16);
+  border-top: 1px solid var(--border); font-size: 14px; color: var(--n-600);
+}
