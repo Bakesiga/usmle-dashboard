@@ -917,7 +917,10 @@ window.NBME = {
   // block's recordings: { title, date, url }. A form with no key here, or
   // an empty list, reads as "not recorded yet" rather than disappearing.
   classes: {
-    nbme27: []
+    nbme27: [
+      { title: "NBME 27 corrections, day 1", date: "2026-11-02",
+        url: "https://us06web.zoom.us/rec/share/vLoRTRipCWWNn5UAAIdMc__Du6B6Mx2lkQnSkaPK-x2xkcDZuKenerK37U10Nz-Z.s4Lr6ogaA59qbvrl" }
+    ]
   },
 
   // ---- Orientation ----------------------------------------------
