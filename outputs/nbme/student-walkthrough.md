@@ -1,9 +1,9 @@
 # Carey Coombs: what a student actually does
 
-Every screen, every control, in the order a student meets them. Two routes:
-**Sit one with the timer** (`nbme-sit.html`), where they answer in the page, and
-**Mark one you have sat** (`nbme-form.html`), where they only record what they
-got wrong on a paper they already did.
+Every screen, every control, in the order a student meets them. There is one
+route: **Sit one with the timer** (`nbme-sit.html`). Every form is sat on the
+clock, with the question paper open in the page. The old marking-only page is
+retired, and `nbme-form.html` now serves a stub pointing back here.
 
 ---
 
@@ -21,11 +21,10 @@ Same for both routes. There is no separate NBME account.
 4. **Carey Coombs, then The eight forms.** The panel shows the eight papers,
    which one is live this week, and three ways on:
    - *Sit one with the timer* → Part 1
-   - *Mark one you have sat* → Part 2
    - *The papers* → the shared Drive folder with the eight PDFs
-5. **Both pages check again.** `nbme-sit.html` and `nbme-form.html` sit on their
-   own URLs, so each re-reads the session and the allowlist. A student without
-   November gets a short page saying this is part of the NBME phase, not the exam.
+5. **The sitting page checks again.** `nbme-sit.html` sits on its own URL, so it
+   re-reads the session and the allowlist. A student without November gets a short
+   page saying this is part of the NBME phase, not the exam.
 
 ---
 
@@ -145,27 +144,6 @@ seconds on each question, the flagged list, 75, and `source: sit`.
 The done screen shows their score and confirms it was sent. If the send failed
 it shows a one-line backup, `NBME27 | their@email | wrong: 3,15,34...`, to send
 on WhatsApp.
-
----
-
-## Part 2. Mark one you have sat
-
-For a paper they did offline. Same sign-in and same gate.
-
-1. **Mark your NBME.** The line under it: tap only the questions you got wrong,
-   anything left alone counts as correct, most people tap 40 to 70 of the 200.
-2. **Pick the form.** Eight buttons, with the same rule: only a form the class has reached can be marked.
-3. **Four blocks of 50 numbered buttons.** Each block headed "Block N, questions
-   1 to 50" and numbered 1 to 50 within itself. Tap a number to mark it wrong, tap
-   again to clear.
-4. **Running tally** at the bottom, the count and the percent.
-5. **Send my result.** Disabled until a form is picked. If nothing is marked it
-   asks whether to send a clean 200.
-6. **Receipt**, with the score, and the same backup line if the send did not land.
-
-What this route does not have, by design: no timer, no answers captured, no
-seconds, no flags, no lab values, no marking against the key. It records misses
-only, which is all a paper sitting can give.
 
 ---
 

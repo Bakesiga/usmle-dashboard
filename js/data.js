@@ -1058,7 +1058,7 @@ window.NBME = {
   },
 
   // ---- What each student submits ---------------------------------
-  // Submissions from nbme-sit.html and nbme-form.html go to the
+  // Submissions from nbme-sit.html go to the
   // collector web app, land in the "Carey Coombs — NBME Submissions"
   // sheet, and are read back live by the tutor view. This object is
   // the hand-typed channel on top of that: a result someone sent on

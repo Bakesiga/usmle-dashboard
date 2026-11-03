@@ -1359,7 +1359,6 @@
     var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
     html += '<div class="nbme-ctas">' +
       '<a class="nbme-cta" href="nbme-sit.html"><span>Sit one with the timer</span>' + ARROW + '</a>' +
-      '<a class="nbme-cta is-quiet" href="nbme-form.html"><span>Mark one you have sat</span>' + ARROW + '</a>' +
       // The papers themselves, so nobody has to ask where the forms are.
       (N.papers ? '<a class="nbme-cta is-quiet" href="' + N.papers + '" target="_blank" rel="noopener">' +
                   '<span>Open the NBME papers</span>' + ARROW + '</a>' : '') +
@@ -1447,7 +1446,6 @@
         'your Step 1 score report uses, weakest first, with a link back to the class that covers each one.</p>' +
         '<div class="nbme-ctas">' +
         '<a class="nbme-cta" href="nbme-sit.html"><span>Sit one with the timer</span>' + ARROW + '</a>' +
-        '<a class="nbme-cta is-quiet" href="nbme-form.html"><span>Mark one you have sat</span>' + ARROW + '</a>' +
         (N.papers ? '<a class="nbme-cta is-quiet" href="' + N.papers + '" target="_blank" rel="noopener">' +
                     '<span>Open the NBME papers</span>' + ARROW + '</a>' : '') +
         '</div>';
