@@ -146,6 +146,54 @@
     body.paper-on .st-bar { left: 0; }
   }
 
+  /* ---- Calculator ----
+     The same keys in the same places as the one in the exam window, so
+     the muscle memory carries over. Styled in the house palette rather
+     than theirs: the layout is what matters, not the colours. */
+  .st-calc {
+    position: fixed; right: var(--s-16); bottom: 92px; z-index: 42;
+    width: 252px; background: var(--bg-cream);
+    border: 1.5px solid var(--border); border-radius: var(--r-soft);
+    box-shadow: 0 14px 40px rgba(32, 30, 29, .18);
+    display: none; flex-direction: column; overflow: hidden;
+  }
+  body.calc-open .st-calc { display: flex; }
+  body.labs-open .st-calc { right: calc(var(--labs-w, 380px) + var(--s-16)); }
+  .st-calc-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 8px 8px 14px; border-bottom: 1px solid var(--border);
+    cursor: grab; user-select: none; touch-action: none;
+  }
+  .st-calc-head:active { cursor: grabbing; }
+  .st-calc-t { font-family: var(--font-display); font-size: var(--fs-14); }
+  .st-calc-x {
+    font: inherit; font-size: var(--fs-13); font-weight: 700; cursor: pointer;
+    padding: 4px 10px; border-radius: 999px;
+    background: transparent; color: var(--muted); border: 1px solid var(--border);
+  }
+  .st-calc-out {
+    margin: 10px 10px 4px; padding: 9px 11px; min-height: 40px;
+    background: #fff; border: 1px solid var(--border); border-radius: 6px;
+    font-size: 21px; font-weight: 700; text-align: right; color: var(--ink);
+    font-variant-numeric: tabular-nums; overflow: hidden; white-space: nowrap;
+  }
+  .st-calc-mem {
+    padding: 0 12px 2px; height: 14px; font-size: 10.5px; font-weight: 700;
+    letter-spacing: .08em; color: var(--accent-deep);
+  }
+  .st-calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 6px 10px 12px; }
+  .st-calc-grid button {
+    font: inherit; font-size: var(--fs-14); font-weight: 700; cursor: pointer;
+    padding: 10px 0; border-radius: 6px;
+    background: #fff; color: var(--ink); border: 1px solid var(--border);
+  }
+  .st-calc-grid button:hover { border-color: var(--accent); color: var(--accent-deep); }
+  .st-calc-grid button.is-op { background: var(--accent-tint); border-color: var(--accent-soft); color: var(--accent-deep); }
+  .st-calc-grid button.is-mem { font-size: var(--fs-13); color: var(--muted); }
+  .st-calc-grid button.is-eq { grid-column: span 2; background: var(--accent); color: #fff; border-color: var(--accent-deep); }
+  .st-calc-grid button.is-clear { background: var(--bg-cream); }
+  @media (max-width: 999px) { .st-calc { bottom: 86px; right: 10px; } }
+
   /* ---- Lab values ----
      Docked, not modal: on a wide screen the page makes room for it and
      they can answer with it open, which is the point of having it. Under
@@ -326,6 +374,7 @@
     <div class="st-flagrow">
       <button class="st-flag" id="flag" aria-pressed="false">Mark for review</button>
       <button class="st-flag" id="labsBtn" aria-pressed="false" aria-controls="labs">Lab values</button>
+      <button class="st-flag" id="calcBtn" aria-pressed="false" aria-controls="calc">Calculator</button>
       <button class="st-btn is-quiet" id="toReview">Look at the question map</button>
     </div>
     <p class="st-keys">Keyboard: <b>A</b> to <b>J</b> to answer, <b>&rarr;</b> next, <b>&larr;</b> back, <b>M</b> to mark for review, <b>L</b> for lab values.</p>
@@ -392,6 +441,35 @@
     </div>
     <iframe id="paperFrame" title="The question paper" allow="autoplay"></iframe>
     <p class="st-paper-note">Served from the class Drive folder. If it asks for access, message Allan.</p>
+  </aside>
+
+  <!-- Calculator. Click only by default, so nothing it does can collide
+       with the answer keys; typing works once they click into it. -->
+  <aside class="st-calc" id="calc" aria-label="Calculator" tabindex="-1">
+    <div class="st-calc-head">
+      <span class="st-calc-t">Calculator</span>
+      <button class="st-calc-x" id="calcClose">Close</button>
+    </div>
+    <div class="st-calc-out" id="calcOut">0</div>
+    <div class="st-calc-mem" id="calcMem"></div>
+    <div class="st-calc-grid" id="calcKeys">
+      <button class="is-mem" data-k="M+">M+</button>
+      <button class="is-mem" data-k="MR">MR</button>
+      <button class="is-mem" data-k="MC">MC</button>
+      <button class="is-clear" data-k="C">C</button>
+      <button data-k="pm">&plusmn;</button>
+      <button data-k="sqrt">&radic;x</button>
+      <button data-k="inv">1/x</button>
+      <button class="is-op" data-k="/">&divide;</button>
+      <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button>
+      <button class="is-op" data-k="*">&times;</button>
+      <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
+      <button class="is-op" data-k="-">&minus;</button>
+      <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button>
+      <button class="is-op" data-k="+">+</button>
+      <button data-k="0">0</button><button data-k=".">.</button>
+      <button class="is-eq" data-k="=">=</button>
+    </div>
   </aside>
 
   <!-- Lab values. Outside .st-wrap: it is docked to the window, not to
@@ -490,6 +568,7 @@
     // The paper belongs to a running block. It goes away for the review,
     // the break and the marking, where there is nothing to read from it.
     setPaper(id === 'exam');
+    setCalc(id === 'exam' && calcPref());
     if (id === 'setup' || id === 'done') setLabs(false);
     else if (id === 'exam') setLabs(labsPref());
     window.scrollTo(0, 0);
@@ -672,6 +751,156 @@
     if (frame.src !== src) frame.src = src;
     $('paperT').textContent = 'NBME ' + f.n;
   }
+
+  // ---- Calculator -------------------------------------------------
+  // An ordinary four function calculator, the immediate execution kind
+  // the exam gives you: each operator settles whatever is pending before
+  // it starts the next one. Deliberately click driven. The answer keys
+  // are A to J and the page is listening for them, so a calculator that
+  // grabbed the keyboard would be a calculator that ate answers. Typing
+  // works once the student clicks into it, and not before.
+  var CALCKEY = 'usmle.calc.open.v1';
+  var cAcc = null, cOp = null, cFresh = true, cMem = 0, cErr = false;
+
+  function calcShow(v) {
+    if (cErr) { $('calcOut').textContent = 'Error'; return; }
+    var s = String(v);
+    // Long decimals are the usual way a display overflows, so trim the
+    // tail rather than the number.
+    if (s.indexOf('.') > -1 && s.replace('-', '').replace('.', '').length > 12) {
+      s = String(Number(Number(v).toFixed(10)));
+    }
+    if (s.length > 14) s = Number(v).toExponential(6);
+    $('calcOut').textContent = s;
+  }
+  function calcVal() { return cErr ? 0 : Number($('calcOut').textContent) || 0; }
+  function calcReset() {
+    cAcc = null; cOp = null; cFresh = true; cErr = false;
+    $('calcOut').textContent = '0';
+  }
+  function calcApply(op, a, b) {
+    if (op === '+') return a + b;
+    if (op === '-') return a - b;
+    if (op === '*') return a * b;
+    if (op === '/') { if (b === 0) { cErr = true; return 0; } return a / b; }
+    return b;
+  }
+  function calcSettle() {
+    var v = calcVal();
+    if (cOp !== null && cAcc !== null) v = calcApply(cOp, cAcc, v);
+    return v;
+  }
+  function calcKey(k) {
+    if (cErr && k !== 'C') return;                 // only C clears an error
+    if (k >= '0' && k <= '9') {
+      var cur = cFresh ? '' : $('calcOut').textContent;
+      if (cur === '0') cur = '';
+      calcShow(cur + k); cFresh = false; return;
+    }
+    if (k === '.') {
+      var s = cFresh ? '0' : $('calcOut').textContent;
+      if (s.indexOf('.') === -1) s += '.';
+      $('calcOut').textContent = s; cFresh = false; return;
+    }
+    if (k === 'C') { calcReset(); return; }
+    if (k === 'pm') { calcShow(calcVal() * -1); return; }
+    if (k === 'sqrt') {
+      var n = calcVal();
+      if (n < 0) { cErr = true; calcShow(0); return; }
+      calcShow(Math.sqrt(n)); cFresh = true; return;
+    }
+    if (k === 'inv') {
+      var d = calcVal();
+      if (d === 0) { cErr = true; calcShow(0); return; }
+      calcShow(1 / d); cFresh = true; return;
+    }
+    if (k === 'M+') { cMem += calcVal(); $('calcMem').textContent = cMem ? 'M' : ''; cFresh = true; return; }
+    if (k === 'MR') { calcShow(cMem); cFresh = true; return; }
+    if (k === 'MC') { cMem = 0; $('calcMem').textContent = ''; return; }
+    if (k === '=') {
+      var out = calcSettle();
+      cAcc = null; cOp = null; cFresh = true;
+      calcShow(cErr ? 0 : out);
+      return;
+    }
+    // An operator: settle what is pending, then wait for the next number.
+    var v = calcSettle();
+    cAcc = cErr ? 0 : v; cOp = k; cFresh = true;
+    calcShow(cErr ? 0 : v);
+  }
+
+  function calcOpen() { return document.body.classList.contains('calc-open'); }
+  function setCalc(open) {
+    document.body.classList.toggle('calc-open', !!open);
+    $('calcBtn').setAttribute('aria-pressed', String(!!open));
+    // Opening it again puts it back where it started, so a calculator
+    // dragged somewhere unhelpful is never lost.
+    if (!open) {
+      var b = $('calc');
+      b.style.left = ''; b.style.top = ''; b.style.right = ''; b.style.bottom = '';
+    }
+  }
+  function rememberCalc(open) {
+    try { localStorage.setItem(CALCKEY, open ? '1' : '0'); } catch (e) {}
+  }
+  function calcPref() {
+    try { return localStorage.getItem(CALCKEY) === '1'; } catch (e) { return false; }
+  }
+
+  // Draggable by its bar, like the one in the exam window. It floats over
+  // the question, so wherever it lands is going to be in the way of
+  // something: better that the student decides what.
+  (function () {
+    var box = $('calc'), head = box.querySelector('.st-calc-head');
+    var dx = 0, dy = 0, dragging = false;
+    head.addEventListener('pointerdown', function (e) {
+      if (e.target.closest('button')) return;
+      var r = box.getBoundingClientRect();
+      dx = e.clientX - r.left; dy = e.clientY - r.top;
+      // Switch from the right/bottom anchor to an explicit one, otherwise
+      // it would fight itself the moment we start setting left and top.
+      box.style.left = r.left + 'px'; box.style.top = r.top + 'px';
+      box.style.right = 'auto'; box.style.bottom = 'auto';
+      dragging = true;
+      head.setPointerCapture(e.pointerId);
+    });
+    head.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      var w = box.offsetWidth, h = box.offsetHeight;
+      var x = Math.max(4, Math.min(e.clientX - dx, window.innerWidth - w - 4));
+      var y = Math.max(4, Math.min(e.clientY - dy, window.innerHeight - h - 4));
+      box.style.left = x + 'px'; box.style.top = y + 'px';
+    });
+    head.addEventListener('pointerup', function (e) {
+      dragging = false;
+      try { head.releasePointerCapture(e.pointerId); } catch (err) {}
+    });
+  })();
+
+  $('calcKeys').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (b && b.dataset.k) calcKey(b.dataset.k);
+  });
+  $('calcBtn').addEventListener('click', function () {
+    var n = !calcOpen(); setCalc(n); rememberCalc(n);
+  });
+  $('calcClose').addEventListener('click', function () {
+    setCalc(false); rememberCalc(false); $('calcBtn').focus();
+  });
+  // Scoped to the calculator, so none of this reaches the answer keys.
+  $('calc').addEventListener('keydown', function (e) {
+    var k = e.key;
+    if (k === 'Enter' || k === '=') { e.preventDefault(); calcKey('='); return; }
+    if (k === 'Escape') { e.preventDefault(); setCalc(false); rememberCalc(false); $('calcBtn').focus(); return; }
+    if (k === 'Backspace') {
+      e.preventDefault();
+      var s = $('calcOut').textContent.slice(0, -1);
+      $('calcOut').textContent = s === '' || s === '-' ? '0' : s;
+      return;
+    }
+    if ('0123456789.+-*/'.indexOf(k) > -1 && k.length === 1) { e.preventDefault(); calcKey(k); return; }
+    if (k.toLowerCase() === 'c') { e.preventDefault(); calcKey('C'); }
+  });
 
   // ---- Lab values -------------------------------------------------
   // Built once and left in the page. Whichever tab they were last on is
