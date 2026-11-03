@@ -65,13 +65,13 @@
   .st-clock.is-low { color: var(--accent-deep); }
   .st-clock small { display: block; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
 
-  .st-qnum { font-family: var(--font-display); font-size: var(--fs-28); margin: var(--s-24) 0 2px; }
-  .st-qmeta { color: var(--muted); font-size: var(--fs-14); margin: 0 0 var(--s-20); }
+  .st-qnum { font-family: var(--font-display); font-size: var(--fs-24); margin: 0 0 2px; }
+  .st-qmeta { color: var(--muted); font-size: var(--fs-14); margin: 0 0 var(--s-16); }
 
-  .st-choices { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--s-8); }
+  .st-choices { display: grid; grid-template-columns: repeat(10, 1fr); gap: var(--s-8); }
   .st-choices button {
     font: inherit; font-weight: 700; font-size: var(--fs-18); cursor: pointer;
-    padding: 16px 0; border-radius: var(--r-soft);
+    padding: 14px 0; border-radius: var(--r-soft);
     background: var(--bg-cream); color: var(--ink-2); border: 1px solid var(--border);
     transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
   }
@@ -81,13 +81,24 @@
   }
   .st-choices button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  .st-flagrow { margin-top: var(--s-16); display: flex; align-items: center; gap: var(--s-12); flex-wrap: wrap; }
+  .st-ribbon {
+    position: fixed; top: 0; left: 0; right: 0; height: var(--ribbon-h); z-index: 44;
+    background: var(--bg-cream); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--s-12); padding: 0 var(--s-16);
+  }
+  body.labs-open .st-ribbon { right: var(--labs-w, 380px); }
+  .st-ribbon-tools { display: flex; align-items: center; gap: 8px; min-width: 0; flex-wrap: nowrap; overflow-x: auto; }
+  .st-ribbon-where { display: flex; align-items: center; gap: var(--s-16); flex: none; }
+  /* The answer deck: full width, so the ten letters sit on one row and the
+     paper above keeps the height it needs. */
+  .st-answer { max-width: 1180px; margin: 0 auto; padding: var(--s-16) var(--s-16) 0; }
   /* These two are tools a student reaches for under a clock, so they read
      as buttons rather than as footnotes: full weight, ink rather than grey,
      and a solid edge. The dashed outline said "not really a control". */
   .st-flag {
-    font: inherit; font-size: var(--fs-14); font-weight: 700; cursor: pointer;
-    padding: 9px 16px; border-radius: 999px;
+    font: inherit; font-size: var(--fs-13); font-weight: 700; cursor: pointer;
+    white-space: nowrap; padding: 7px 14px; border-radius: 999px;
     background: var(--bg-cream); color: var(--ink); border: 1.5px solid var(--border);
   }
   .st-flag:hover { border-color: var(--accent); color: var(--accent-deep); }
@@ -106,19 +117,30 @@
      were in some other window the student had to keep lined up by hand. On
      a phone that is not possible at all. Docked left, the paper and the
      answer sheet are one screen, which is what everyone assumed it was. */
-  :root { --paper-w: clamp(360px, 46vw, 820px); --paper-h: 52vh; }
+  :root {
+    --ribbon-h: 46px;
+    /* What the answer deck and the bottom bar need. The paper takes the
+       rest, so a tall window gives the question more room rather than
+       leaving a gap, and a short one is not pushed off the bottom. */
+    --deck-h: 322px;
+    --paper-h: clamp(200px, calc(100vh - var(--deck-h)), 760px);
+  }
+  /* Across the top, the full width of the window. A page of this paper is
+     landscape, so a wide short band is the shape that fits it, and the
+     question comes out far bigger than it did in a column. */
   .st-paper {
-    position: fixed; top: 0; left: 0; bottom: 0; width: var(--paper-w); z-index: 38;
-    background: #fff; border-right: 1px solid var(--border);
+    position: fixed; top: var(--ribbon-h); left: 0; right: 0; height: var(--paper-h); z-index: 38;
+    background: #fff; border-bottom: 1.5px solid var(--border);
     display: none; flex-direction: column;
   }
+  body.labs-open .st-paper { right: var(--labs-w, 380px); }
   /* Not a panel you open. While a block is running the paper is simply
      there, the way it is there on the desk in the real thing. */
   body.paper-on .st-paper { display: flex; }
   .st-paper-head {
     display: flex; align-items: center; justify-content: space-between; gap: var(--s-12);
-    padding: var(--s-12) var(--s-16); border-bottom: 1px solid var(--border);
-    background: var(--bg-cream);
+    padding: 5px 10px 5px 16px; border-bottom: 1px solid var(--border);
+    background: var(--bg-cream); flex: none;
   }
   .st-paper-t { font-family: var(--font-display); font-size: var(--fs-18); }
   .st-paper-pg {
@@ -138,9 +160,12 @@
     background: #fff; color: var(--ink); border: 1px solid var(--border);
   }
   .st-paper-z:hover { border-color: var(--accent); color: var(--accent-deep); }
-  .st-paper-body { flex: 1; overflow: auto; -webkit-overflow-scrolling: touch; background: #ece5db; }
+  .st-paper-body {
+    flex: 1; min-height: 0; overflow: auto; -webkit-overflow-scrolling: touch;
+    background: #ece5db; display: flex; align-items: center; justify-content: center;
+  }
   .st-paper-body canvas {
-    display: none; margin: 12px auto; background: #fff;
+    display: none; background: #fff;
     box-shadow: 0 2px 14px rgba(32, 30, 29, .16);
   }
   .st-paper iframe { display: none; width: 100%; height: 100%; border: 0; }
@@ -152,23 +177,11 @@
   body:not(.paper-pdf) .st-paper-z { display: none; }
   body:not(.paper-pdf) .st-paper-body { overflow: hidden; }
   .st-paper-note {
-    padding: 8px var(--s-16); font-size: var(--fs-13); color: var(--muted);
-    border-top: 1px solid var(--border); background: var(--bg-cream);
+    padding: 4px var(--s-16); font-size: 12px; color: var(--muted); margin: 0;
+    border-top: 1px solid var(--border); background: var(--bg-cream); flex: none;
   }
-  @media (min-width: 1000px) {
-    body.paper-on { padding-left: var(--paper-w); }
-    body.paper-on .st-bar { left: var(--paper-w); }
-  }
-  /* Too narrow to sit side by side, so it stacks: paper above, answers
-     below. Still constant, still both on screen, no toggling. */
-  @media (max-width: 999px) {
-    .st-paper {
-      width: 100%; right: 0; bottom: auto; height: var(--paper-h);
-      border-right: 0; border-bottom: 1px solid var(--border);
-    }
-    body.paper-on { padding-left: 0; padding-top: var(--paper-h); }
-    body.paper-on .st-bar { left: 0; }
-  }
+  body.paper-on { padding-top: calc(var(--ribbon-h) + var(--paper-h)); }
+  @media (max-width: 900px) { :root { --deck-h: 340px; } }
 
   /* ---- Calculator ----
      The same keys in the same places as the one in the exam window, so
@@ -337,8 +350,8 @@
     border-radius: var(--r-soft); font-size: 12px; word-break: break-all; margin-top: var(--s-8);
   }
 
+  @media (max-width: 900px) { .st-choices { grid-template-columns: repeat(5, 1fr); } }
   @media (max-width: 420px) {
-    .st-choices { grid-template-columns: repeat(5, 1fr); }
     .st-grid { grid-template-columns: repeat(5, 1fr); }
   }
 </style>
@@ -385,23 +398,28 @@
 
   <!-- 2. Exam -->
   <section id="exam" hidden>
-    <div class="st-top">
-      <span class="st-where">Block <b id="bNum">1</b> &middot; item <b id="iNum">1</b> of 50</span>
-      <span class="st-clock" id="clock">75:00</span>
+    <!-- The ribbon. Tools on the left, where you are and how long you have
+         on the right, pinned above the paper so neither the clock nor the
+         lab values ever scroll out of reach. -->
+    <div class="st-ribbon">
+      <div class="st-ribbon-tools">
+        <button class="st-flag" id="flag" aria-pressed="false">Mark for review</button>
+        <button class="st-flag" id="labsBtn" aria-pressed="false" aria-controls="labs">Lab values</button>
+        <button class="st-flag" id="calcBtn" aria-pressed="false" aria-controls="calc">Calculator</button>
+        <button class="st-flag" id="toReview">Question map</button>
+      </div>
+      <div class="st-ribbon-where">
+        <span class="st-where">Block <b id="bNum">1</b> &middot; item <b id="iNum">1</b> of 50</span>
+        <span class="st-clock" id="clock">75:00</span>
+      </div>
     </div>
 
-    <h2 class="st-qnum" id="qnum">Question 1</h2>
-    <p class="st-qmeta" id="qmeta">Choose the letter you picked on the exam.</p>
-
-    <div class="st-choices" id="choices"></div>
-
-    <div class="st-flagrow">
-      <button class="st-flag" id="flag" aria-pressed="false">Mark for review</button>
-      <button class="st-flag" id="labsBtn" aria-pressed="false" aria-controls="labs">Lab values</button>
-      <button class="st-flag" id="calcBtn" aria-pressed="false" aria-controls="calc">Calculator</button>
-      <button class="st-btn is-quiet" id="toReview">Look at the question map</button>
+    <div class="st-answer">
+      <h2 class="st-qnum" id="qnum">Question 1</h2>
+      <p class="st-qmeta" id="qmeta">Choose the letter you picked on the exam.</p>
+      <div class="st-choices" id="choices"></div>
+      <p class="st-keys">Keyboard: <b>A</b> to <b>J</b> to answer, <b>&rarr;</b> next, <b>&larr;</b> back, <b>M</b> to mark for review, <b>L</b> for lab values.</p>
     </div>
-    <p class="st-keys">Keyboard: <b>A</b> to <b>J</b> to answer, <b>&rarr;</b> next, <b>&larr;</b> back, <b>M</b> to mark for review, <b>L</b> for lab values.</p>
 
     <div class="st-bar">
       <button class="st-btn is-quiet" id="prev">Back</button>

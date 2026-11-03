@@ -147,10 +147,14 @@ window.PAPER = (function () {
     drawing = true;
     var target = page;
     doc.getPage(target).then(function (pg) {
-      var avail = Math.max(240, host.clientWidth - 24);
+      // Fit the whole page inside the band rather than to its width. The
+      // band is wide and short and a page of this paper is landscape, so
+      // whichever of the two runs out first is the one that sets the size.
+      var aw = Math.max(240, host.clientWidth - 24);
+      var ah = Math.max(180, host.clientHeight - 24);
       var base = pg.getViewport({ scale: 1 });
       var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      var s = (avail / base.width) * zoom;
+      var s = Math.min(aw / base.width, ah / base.height) * zoom;
       var vp = pg.getViewport({ scale: s * dpr });
       cv.width = vp.width; cv.height = vp.height;
       cv.style.width = (vp.width / dpr) + 'px';
