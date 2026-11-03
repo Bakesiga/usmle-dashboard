@@ -82,11 +82,15 @@
   .st-choices button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   .st-flagrow { margin-top: var(--s-16); display: flex; align-items: center; gap: var(--s-12); flex-wrap: wrap; }
+  /* These two are tools a student reaches for under a clock, so they read
+     as buttons rather than as footnotes: full weight, ink rather than grey,
+     and a solid edge. The dashed outline said "not really a control". */
   .st-flag {
-    font: inherit; font-size: var(--fs-14); font-weight: 600; cursor: pointer;
-    padding: 8px 14px; border-radius: 999px;
-    background: transparent; color: var(--muted); border: 1px dashed var(--border);
+    font: inherit; font-size: var(--fs-14); font-weight: 700; cursor: pointer;
+    padding: 9px 16px; border-radius: 999px;
+    background: var(--bg-cream); color: var(--ink); border: 1.5px solid var(--border);
   }
+  .st-flag:hover { border-color: var(--accent); color: var(--accent-deep); }
   .st-flag[aria-pressed="true"] { background: var(--accent-tint); color: var(--accent-deep); border-style: solid; border-color: var(--accent-soft); }
   .st-keys { font-size: var(--fs-13); color: var(--muted); }
 
@@ -102,18 +106,15 @@
      were in some other window the student had to keep lined up by hand. On
      a phone that is not possible at all. Docked left, the paper and the
      answer sheet are one screen, which is what everyone assumed it was. */
-  :root { --paper-w: clamp(360px, 46vw, 820px); }
+  :root { --paper-w: clamp(360px, 46vw, 820px); --paper-h: 52vh; }
   .st-paper {
     position: fixed; top: 0; left: 0; bottom: 0; width: var(--paper-w); z-index: 38;
     background: #fff; border-right: 1px solid var(--border);
-    display: flex; flex-direction: column;
-    transform: translateX(-100%); visibility: hidden;
-    transition: transform .2s ease, visibility 0s linear .2s;
+    display: none; flex-direction: column;
   }
-  body.paper-open .st-paper {
-    transform: none; visibility: visible;
-    transition: transform .2s ease, visibility 0s;
-  }
+  /* Not a panel you open. While a block is running the paper is simply
+     there, the way it is there on the desk in the real thing. */
+  body.paper-on .st-paper { display: flex; }
   .st-paper-head {
     display: flex; align-items: center; justify-content: space-between; gap: var(--s-12);
     padding: var(--s-12) var(--s-16); border-bottom: 1px solid var(--border);
@@ -131,11 +132,18 @@
     border-top: 1px solid var(--border); background: var(--bg-cream);
   }
   @media (min-width: 1000px) {
-    body.paper-open { padding-left: var(--paper-w); }
-    body.paper-open .st-bar { left: var(--paper-w); }
+    body.paper-on { padding-left: var(--paper-w); }
+    body.paper-on .st-bar { left: var(--paper-w); }
   }
+  /* Too narrow to sit side by side, so it stacks: paper above, answers
+     below. Still constant, still both on screen, no toggling. */
   @media (max-width: 999px) {
-    .st-paper { width: 100%; z-index: 45; }
+    .st-paper {
+      width: 100%; right: 0; bottom: auto; height: var(--paper-h);
+      border-right: 0; border-bottom: 1px solid var(--border);
+    }
+    body.paper-on { padding-left: 0; padding-top: var(--paper-h); }
+    body.paper-on .st-bar { left: 0; }
   }
 
   /* ---- Lab values ----
@@ -317,11 +325,10 @@
 
     <div class="st-flagrow">
       <button class="st-flag" id="flag" aria-pressed="false">Mark for review</button>
-      <button class="st-flag" id="paperBtn" aria-pressed="false" aria-controls="paper" hidden>The paper</button>
       <button class="st-flag" id="labsBtn" aria-pressed="false" aria-controls="labs">Lab values</button>
-      <button class="st-btn is-quiet" id="toReview">Review this block</button>
+      <button class="st-btn is-quiet" id="toReview">Look at the question map</button>
     </div>
-    <p class="st-keys">Keyboard: <b>A</b> to <b>J</b> to answer, <b>&rarr;</b> next, <b>&larr;</b> back, <b>M</b> to mark for review, <b>L</b> for lab values, <b>P</b> for the paper.</p>
+    <p class="st-keys">Keyboard: <b>A</b> to <b>J</b> to answer, <b>&rarr;</b> next, <b>&larr;</b> back, <b>M</b> to mark for review, <b>L</b> for lab values.</p>
 
     <div class="st-bar">
       <button class="st-btn is-quiet" id="prev">Back</button>
@@ -331,7 +338,7 @@
 
   <!-- 3. Block review -->
   <section id="review" hidden>
-    <h2 class="st-h" id="revH">Block 1 review</h2>
+    <h2 class="st-h" id="revH">Block 1 question map</h2>
     <p class="st-sub" id="revSub"></p>
     <div class="st-grid" id="revGrid"></div>
     <p class="st-legend">
@@ -382,7 +389,6 @@
   <aside class="st-paper" id="paper" aria-label="The question paper">
     <div class="st-paper-head">
       <span class="st-paper-t" id="paperT">The paper</span>
-      <button class="st-paper-x" id="paperClose">Hide</button>
     </div>
     <iframe id="paperFrame" title="The question paper" allow="autoplay"></iframe>
     <p class="st-paper-note">Served from the class Drive folder. If it asks for access, message Allan.</p>
@@ -481,8 +487,11 @@
     // Nothing to look up on the way in or on the way out. Inside a block
     // it opens the way they left it: a student who wants the table up all
     // day should not have to ask for it again every question.
-    if (id === 'setup' || id === 'done') { setLabs(false); setPaper(false); }
-    else if (id === 'exam') { setLabs(labsPref()); setPaper(paperPref()); }
+    // The paper belongs to a running block. It goes away for the review,
+    // the break and the marking, where there is nothing to read from it.
+    setPaper(id === 'exam');
+    if (id === 'setup' || id === 'done') setLabs(false);
+    else if (id === 'exam') setLabs(labsPref());
     window.scrollTo(0, 0);
   }
   function session() {
@@ -645,36 +654,24 @@
   // sign-in. We are not serving the file and we have not copied it: if
   // they are not on the folder, Google shows them its request-access
   // screen, which is exactly the behaviour we want.
-  var PAPERKEY = 'usmle.paper.open.v1';
-  function paperPref() {
-    if (!$('paperFrame').src) return false;      // nothing to show
-    try { return localStorage.getItem(PAPERKEY) !== '0'; } catch (e) { return true; }
+  // On while a block is running, off everywhere else. There is no toggle:
+  // the paper being there is the whole point, and a control that can hide
+  // it is a control someone hides it with by accident under a clock.
+  function setPaper(on) {
+    if (on && !$('paperFrame').src) on = false;
+    document.body.classList.toggle('paper-on', !!on);
   }
-  function rememberPaper(open) {
-    try { localStorage.setItem(PAPERKEY, open ? '1' : '0'); } catch (e) {}
-  }
-  function paperOpen() { return document.body.classList.contains('paper-open'); }
-  function setPaper(open) {
-    if (open && !$('paperFrame').src) open = false;
-    document.body.classList.toggle('paper-open', !!open);
-    $('paperBtn').setAttribute('aria-pressed', String(!!open));
-  }
-  function togglePaper() { var n = !paperOpen(); setPaper(n); rememberPaper(n); }
 
   // Pointed at the form's own file once, when the sitting starts or is
   // resumed, so moving between questions never reloads the PDF and never
   // throws away where they had scrolled to.
   function preparePaper(id) {
-    var f = formOf(id), frame = $('paperFrame'), btn = $('paperBtn');
-    if (!f || !f.paperId) { frame.removeAttribute('src'); btn.hidden = true; setPaper(false); return; }
+    var f = formOf(id), frame = $('paperFrame');
+    if (!f || !f.paperId) { frame.removeAttribute('src'); setPaper(false); return; }
     var src = 'https://drive.google.com/file/d/' + f.paperId + '/preview';
     if (frame.src !== src) frame.src = src;
     $('paperT').textContent = 'NBME ' + f.n;
-    btn.hidden = false;
   }
-
-  $('paperBtn').addEventListener('click', togglePaper);
-  $('paperClose').addEventListener('click', function () { setPaper(false); rememberPaper(false); $('paperBtn').focus(); });
 
   // ---- Lab values -------------------------------------------------
   // Built once and left in the page. Whichever tab they were last on is
@@ -800,7 +797,7 @@
     });
     $('flag').setAttribute('aria-pressed', String(!!S.flags[n]));
     $('prev').disabled = (S.idx % PER_BLOCK) === 0;
-    $('next').textContent = (S.idx % PER_BLOCK) === PER_BLOCK - 1 ? 'Review block' : 'Next';
+    $('next').textContent = (S.idx % PER_BLOCK) === PER_BLOCK - 1 ? 'Question map' : 'Next';
   }
 
   function goto(i) {
@@ -828,7 +825,6 @@
     if (e.key === 'Escape' && labsOpen()) { e.preventDefault(); setLabs(false); rememberLabs(false); $('labsBtn').focus(); return; }
     if ($('exam').hidden) return;
     var k = e.key.toUpperCase();
-    if (k === 'P') { e.preventDefault(); togglePaper(); return; }
     if (k === 'L') { e.preventDefault(); toggleLabs(true); return; }
     if (LETTERS.indexOf(k) >= 0) { e.preventDefault(); answer(k); return; }
     // With the table open the arrows belong to it: a student scrolling
@@ -849,7 +845,7 @@
     timedOut = !!auto;
     var start = S.block * PER_BLOCK;
     var unans = 0;
-    $('revH').textContent = 'Block ' + (S.block + 1) + ' review';
+    $('revH').textContent = 'Block ' + (S.block + 1) + ' question map';
     var grid = $('revGrid'); grid.innerHTML = '';
     for (var i = start; i < start + PER_BLOCK; i++) {
       (function (i) {
