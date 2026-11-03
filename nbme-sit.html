@@ -97,6 +97,47 @@
     display: flex; gap: var(--s-12); align-items: center; justify-content: space-between;
   }
 
+  /* ---- The paper ----
+     The complaint that started this: the clock was here and the questions
+     were in some other window the student had to keep lined up by hand. On
+     a phone that is not possible at all. Docked left, the paper and the
+     answer sheet are one screen, which is what everyone assumed it was. */
+  :root { --paper-w: clamp(360px, 46vw, 820px); }
+  .st-paper {
+    position: fixed; top: 0; left: 0; bottom: 0; width: var(--paper-w); z-index: 38;
+    background: #fff; border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    transform: translateX(-100%); visibility: hidden;
+    transition: transform .2s ease, visibility 0s linear .2s;
+  }
+  body.paper-open .st-paper {
+    transform: none; visibility: visible;
+    transition: transform .2s ease, visibility 0s;
+  }
+  .st-paper-head {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--s-12);
+    padding: var(--s-12) var(--s-16); border-bottom: 1px solid var(--border);
+    background: var(--bg-cream);
+  }
+  .st-paper-t { font-family: var(--font-display); font-size: var(--fs-18); }
+  .st-paper-x {
+    font: inherit; font-size: var(--fs-13); font-weight: 700; cursor: pointer;
+    padding: 6px 12px; border-radius: 999px;
+    background: transparent; color: var(--muted); border: 1px solid var(--border);
+  }
+  .st-paper iframe { flex: 1; width: 100%; border: 0; }
+  .st-paper-note {
+    padding: 8px var(--s-16); font-size: var(--fs-13); color: var(--muted);
+    border-top: 1px solid var(--border); background: var(--bg-cream);
+  }
+  @media (min-width: 1000px) {
+    body.paper-open { padding-left: var(--paper-w); }
+    body.paper-open .st-bar { left: var(--paper-w); }
+  }
+  @media (max-width: 999px) {
+    .st-paper { width: 100%; z-index: 45; }
+  }
+
   /* ---- Lab values ----
      Docked, not modal: on a wide screen the page makes room for it and
      they can answer with it open, which is the point of having it. Under
@@ -229,10 +270,10 @@
   <section id="setup">
     <h1 class="st-h">Sit an NBME</h1>
     <p class="st-sub">
-      Open your NBME in another window or have the booklet in front of you. All eight
-      forms are in <a id="papers" href="#" target="_blank" rel="noopener">the class Drive folder</a>.
-      This page keeps the clock and takes your answers, one question at a time, the way
-      the real thing does. It does not show you the questions.
+      The paper opens beside the clock, so there is nothing for you to line up by hand.
+      All eight forms live in <a id="papers" href="#" target="_blank" rel="noopener">the class Drive folder</a>,
+      and this page shows yours from there under your own sign-in. The clock and your
+      answers work the way the real thing does, one question at a time.
     </p>
 
     <p class="st-lab">Which form</p>
@@ -276,10 +317,11 @@
 
     <div class="st-flagrow">
       <button class="st-flag" id="flag" aria-pressed="false">Mark for review</button>
+      <button class="st-flag" id="paperBtn" aria-pressed="false" aria-controls="paper" hidden>The paper</button>
       <button class="st-flag" id="labsBtn" aria-pressed="false" aria-controls="labs">Lab values</button>
       <button class="st-btn is-quiet" id="toReview">Review this block</button>
     </div>
-    <p class="st-keys">Keyboard: <b>A</b> to <b>J</b> to answer, <b>&rarr;</b> next, <b>&larr;</b> back, <b>M</b> to mark for review, <b>L</b> for lab values.</p>
+    <p class="st-keys">Keyboard: <b>A</b> to <b>J</b> to answer, <b>&rarr;</b> next, <b>&larr;</b> back, <b>M</b> to mark for review, <b>L</b> for lab values, <b>P</b> for the paper.</p>
 
     <div class="st-bar">
       <button class="st-btn is-quiet" id="prev">Back</button>
@@ -334,6 +376,17 @@
     </div>
     <p><a href="dashboard.html">Back to the dashboard</a></p>
   </section>
+
+  <!-- The paper itself, streamed by Google Drive under the student's own
+       sign-in. Outside .st-wrap for the same reason the lab table is. -->
+  <aside class="st-paper" id="paper" aria-label="The question paper">
+    <div class="st-paper-head">
+      <span class="st-paper-t" id="paperT">The paper</span>
+      <button class="st-paper-x" id="paperClose">Hide</button>
+    </div>
+    <iframe id="paperFrame" title="The question paper" allow="autoplay"></iframe>
+    <p class="st-paper-note">Served from the class Drive folder. If it asks for access, message Allan.</p>
+  </aside>
 
   <!-- Lab values. Outside .st-wrap: it is docked to the window, not to
        the column, and it stays put while the blocks come and go. -->
@@ -428,8 +481,8 @@
     // Nothing to look up on the way in or on the way out. Inside a block
     // it opens the way they left it: a student who wants the table up all
     // day should not have to ask for it again every question.
-    if (id === 'setup' || id === 'done') setLabs(false);
-    else if (id === 'exam') setLabs(labsPref());
+    if (id === 'setup' || id === 'done') { setLabs(false); setPaper(false); }
+    else if (id === 'exam') { setLabs(labsPref()); setPaper(paperPref()); }
     window.scrollTo(0, 0);
   }
   function session() {
@@ -566,6 +619,7 @@
     $('resumeBtn').hidden = false;
     $('resumeBtn').addEventListener('click', function () {
       S = saved;
+      preparePaper(S.form);
       if (S.phase === 'marking') { openMarking(); return; }
       // Stopped at a break: no clock is running, so land on the break screen
       // rather than reopening the block they already closed.
@@ -582,8 +636,45 @@
     S = blank(formId, MINS);
     S.deadline = Date.now() + MINS * 60000;
     save();
+    preparePaper(S.form);
     show('exam'); renderQ(); tick(); startTimer();
   });
+
+  // ---- The paper --------------------------------------------------
+  // Drive's own preview, in an iframe, under the student's own Google
+  // sign-in. We are not serving the file and we have not copied it: if
+  // they are not on the folder, Google shows them its request-access
+  // screen, which is exactly the behaviour we want.
+  var PAPERKEY = 'usmle.paper.open.v1';
+  function paperPref() {
+    if (!$('paperFrame').src) return false;      // nothing to show
+    try { return localStorage.getItem(PAPERKEY) !== '0'; } catch (e) { return true; }
+  }
+  function rememberPaper(open) {
+    try { localStorage.setItem(PAPERKEY, open ? '1' : '0'); } catch (e) {}
+  }
+  function paperOpen() { return document.body.classList.contains('paper-open'); }
+  function setPaper(open) {
+    if (open && !$('paperFrame').src) open = false;
+    document.body.classList.toggle('paper-open', !!open);
+    $('paperBtn').setAttribute('aria-pressed', String(!!open));
+  }
+  function togglePaper() { var n = !paperOpen(); setPaper(n); rememberPaper(n); }
+
+  // Pointed at the form's own file once, when the sitting starts or is
+  // resumed, so moving between questions never reloads the PDF and never
+  // throws away where they had scrolled to.
+  function preparePaper(id) {
+    var f = formOf(id), frame = $('paperFrame'), btn = $('paperBtn');
+    if (!f || !f.paperId) { frame.removeAttribute('src'); btn.hidden = true; setPaper(false); return; }
+    var src = 'https://drive.google.com/file/d/' + f.paperId + '/preview';
+    if (frame.src !== src) frame.src = src;
+    $('paperT').textContent = 'NBME ' + f.n;
+    btn.hidden = false;
+  }
+
+  $('paperBtn').addEventListener('click', togglePaper);
+  $('paperClose').addEventListener('click', function () { setPaper(false); rememberPaper(false); $('paperBtn').focus(); });
 
   // ---- Lab values -------------------------------------------------
   // Built once and left in the page. Whichever tab they were last on is
@@ -737,6 +828,7 @@
     if (e.key === 'Escape' && labsOpen()) { e.preventDefault(); setLabs(false); rememberLabs(false); $('labsBtn').focus(); return; }
     if ($('exam').hidden) return;
     var k = e.key.toUpperCase();
+    if (k === 'P') { e.preventDefault(); togglePaper(); return; }
     if (k === 'L') { e.preventDefault(); toggleLabs(true); return; }
     if (LETTERS.indexOf(k) >= 0) { e.preventDefault(); answer(k); return; }
     // With the table open the arrows belong to it: a student scrolling

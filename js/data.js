@@ -899,7 +899,13 @@ window.NBME = {
   forms: [
     // "due" lets a form be split: block 1 on a sitting day, the other three
     // any time before that date. Leave it off and the form is sat in one go.
-    { id: "nbme27", n: 27, sit: ["2026-10-31", "2026-11-01"], week: ["2026-11-02", "2026-11-06"], due: "2026-11-04" },
+    // paperId is the Drive file id of the NO ANSWERS version. The sitting
+    // page embeds Drive's own preview of it, so the paper is served by
+    // Google to that student under their own sign-in and the folder's own
+    // sharing. Nothing is copied or rehosted here. A student without access
+    // gets Google's request-access screen, which is the right answer.
+    { id: "nbme27", n: 27, sit: ["2026-10-31", "2026-11-01"], week: ["2026-11-02", "2026-11-06"], due: "2026-11-04",
+      paperId: "1EyZfQUClkMgztU8C2yeAIP3YZD4nWG6H" },
     { id: "nbme28", n: 28, sit: ["2026-11-07", "2026-11-08"], week: ["2026-11-09", "2026-11-13"] },
     { id: "nbme29", n: 29, sit: ["2026-11-14", "2026-11-15"], week: ["2026-11-16", "2026-11-20"] },
     { id: "nbme30", n: 30, sit: ["2026-11-21", "2026-11-22"], week: ["2026-11-23", "2026-11-27"] },
