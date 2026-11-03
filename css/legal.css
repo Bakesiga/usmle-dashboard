@@ -9,7 +9,7 @@ body {
   font-size: 16px;
   line-height: 1.65;
 }
-.lg-wrap { max-width: 68ch; margin: 0 auto; padding: var(--s-40) var(--s-24) var(--s-56); }
+.lg-wrap { max-width: 68ch; margin: 0 auto; padding: var(--s-40) var(--s-24) calc(var(--s-40) * 1.4); }
 .lg-top {
   display: flex; align-items: baseline; justify-content: space-between;
   gap: var(--s-16); padding-bottom: var(--s-16);
