@@ -925,7 +925,9 @@ window.NBME = {
   classes: {
     nbme27: [
       { title: "NBME 27 corrections, day 1", date: "2026-11-02",
-        url: "https://us06web.zoom.us/rec/share/vLoRTRipCWWNn5UAAIdMc__Du6B6Mx2lkQnSkaPK-x2xkcDZuKenerK37U10Nz-Z.s4Lr6ogaA59qbvrl" }
+        url: "https://us06web.zoom.us/rec/share/vLoRTRipCWWNn5UAAIdMc__Du6B6Mx2lkQnSkaPK-x2xkcDZuKenerK37U10Nz-Z.s4Lr6ogaA59qbvrl" },
+      { title: "NBME 27 review, day 2", date: "2026-11-03",
+        url: "https://us06web.zoom.us/rec/share/2crzdq-XDogNjgPUVCt9omzJZCbWlneDlVYr98ey_nHA5cxxWH0UhJQWWehVraw1.MlrPgn9NQXuWfdC-" }
     ]
   },
 
