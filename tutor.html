@@ -66,13 +66,13 @@
   .tv-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 var(--s-28); }
   .tv-tabs button {
     font: inherit; font-weight: 700; font-size: var(--fs-14); cursor: pointer;
-    padding: 9px 16px; border-radius: 999px; border: 1px solid var(--border);
-    background: var(--paper); color: var(--ink-2);
+    padding: 9px 16px; border-radius: var(--r-pill); border: 1px solid var(--border);
+    background: var(--bg-cream); color: var(--ink-2);
   }
-  .tv-tabs button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .tv-tabs button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
   .tv-tabs button i {
-    font-style: normal; font-size: var(--fs-11); font-weight: 800; letter-spacing: .08em;
-    text-transform: uppercase; margin-left: 8px; opacity: .72;
+    font-style: normal; font-size: var(--fs-12); font-weight: 800; letter-spacing: .08em;
+    text-transform: uppercase; margin-left: 8px; opacity: .7;
   }
   [data-pane-body][hidden] { display: none; }
   .tv-private {
