@@ -64,7 +64,10 @@
   }
 
   var forms = N.forms || [];
-  var state = { form: null, axis: 'system', allMissed: false, open: null };
+  // pane always starts on 'class'. The page is screen shared in the
+  // corrections classes, so the tab carrying names and scores has to be
+  // chosen deliberately on every load rather than remembered.
+  var state = { form: null, axis: 'system', allMissed: false, open: null, pane: 'class' };
   var DATA = { results: {}, names: {}, roster: [], source: 'static', at: null, reason: null };
 
   function formStatus(f, now) {
@@ -245,7 +248,7 @@
     if (!f) { $('tv-missed').innerHTML = ''; return; }
 
     var mc = C.missCounts(f.id, DATA.results);
-    var head = '<h2><i>02</i> What the class got wrong</h2>';
+    var head = '<h2><i>01</i> What the class got wrong</h2>';
 
     if (!mc.submitters) {
       $('tv-missed').innerHTML = head +
@@ -298,7 +301,7 @@
     var f = forms.filter(function (x) { return x.id === state.form; })[0];
     if (!f) { $('tv-topics').innerHTML = ''; return; }
 
-    var head = '<h2><i>03</i> The cohort by topic</h2>';
+    var head = '<h2><i>02</i> The cohort by topic</h2>';
     var rep = C.cohortReport(f.id, DATA.results, state.axis);
     if (!rep) {
       $('tv-topics').innerHTML = head + '<p class="tv-empty">This needs submissions and a question map for ' +
@@ -343,7 +346,7 @@
 
   /* ---------------- 04 across the forms ---------------- */
   function renderMatrix() {
-    var head = '<h2><i>04</i> Across the forms</h2>';
+    var head = '<h2><i>02</i> Across the forms</h2>';
     var emails = DATA.roster.map(function (s) { return s.email; })
       .filter(function (e) { return DATA.results[e] && Object.keys(DATA.results[e]).length; });
 
@@ -391,6 +394,17 @@
     $('tv-matrix').innerHTML = head + note + table;
   }
 
+  /* ---------------- which pane is showing ---------------- */
+  function renderPane() {
+    [].forEach.call(document.querySelectorAll('[data-pane]'), function (b) {
+      b.setAttribute('aria-pressed', b.dataset.pane === state.pane ? 'true' : 'false');
+    });
+    [].forEach.call(document.querySelectorAll('[data-pane-body]'), function (d) {
+      if (d.dataset.paneBody === state.pane) d.removeAttribute('hidden');
+      else d.setAttribute('hidden', '');
+    });
+  }
+
   /* ---------------- plumbing ---------------- */
   function renderAll() {
     var f = forms.filter(function (x) { return x.id === state.form; })[0];
@@ -398,7 +412,8 @@
       $('tv-h1').textContent = 'The cohort on NBME ' + f.n;
       document.title = 'Cohort · NBME ' + f.n;
     }
-    renderSource(); renderForms(); renderRoster(); renderMissed(); renderTopics(); renderMatrix();
+    renderSource(); renderForms(); renderPane();
+    renderRoster(); renderMissed(); renderTopics(); renderMatrix();
   }
 
   function load() {
@@ -413,6 +428,17 @@
   }
 
   document.addEventListener('click', function (e) {
+    var pane = e.target.closest('[data-pane]');
+    if (pane) {
+      state.pane = pane.dataset.pane;
+      // An open student report is left open, but closing the pane on it
+      // means it is not sitting there the next time the tab is chosen.
+      if (state.pane === 'class') { state.open = null; renderRoster(); }
+      renderPane();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
     var btn = e.target.closest('[data-form]');
     if (btn) { state.form = btn.dataset.form; state.open = null; renderAll(); return; }
 

@@ -59,6 +59,26 @@
   .tv-forms button .tv-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--sage); margin-left: 6px; vertical-align: 1px; }
 
   /* ---- Numbered section heads ---- */
+  /* Two panes, because this page gets put on a projector. The teaching
+     list is meant to be seen by the class; the roster has every student's
+     name against their score and is not. An author display rule beats the
+     hidden attribute, so the rule below is explicit. */
+  .tv-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 var(--s-28); }
+  .tv-tabs button {
+    font: inherit; font-weight: 700; font-size: var(--fs-14); cursor: pointer;
+    padding: 9px 16px; border-radius: 999px; border: 1px solid var(--border);
+    background: var(--paper); color: var(--ink-2);
+  }
+  .tv-tabs button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .tv-tabs button i {
+    font-style: normal; font-size: var(--fs-11); font-weight: 800; letter-spacing: .08em;
+    text-transform: uppercase; margin-left: 8px; opacity: .72;
+  }
+  [data-pane-body][hidden] { display: none; }
+  .tv-private {
+    font-size: var(--fs-13); line-height: 1.6; font-weight: 700; color: var(--accent-deep);
+    border-left: 3px solid var(--accent); padding: 2px 0 2px 14px; margin: 0 0 var(--s-28);
+  }
   .tv-sec { margin: 0 0 var(--s-48); }
   .tv-sec > h2 {
     display: flex; align-items: baseline; gap: var(--s-12);
@@ -160,16 +180,27 @@
 
   <p class="tv-kicker">NBME phase</p>
   <h1 id="tv-h1">The cohort</h1>
-  <p class="tv-stand" id="tv-stand">Who has sent each form, how the class is doing, and the questions most of them got wrong.</p>
+  <p class="tv-stand" id="tv-stand">Two tabs. The teaching list is the one to put on the screen in class. Names and individual scores sit on the other one, and it opens closed every time.</p>
 
   <div id="tv-setup"></div>
   <div class="tv-src" id="tv-src"></div>
   <div class="tv-forms" id="tv-forms" role="group" aria-label="Which form"></div>
 
-  <section class="tv-sec" id="tv-roster"></section>
-  <section class="tv-sec" id="tv-missed"></section>
-  <section class="tv-sec" id="tv-topics"></section>
-  <section class="tv-sec" id="tv-matrix"></section>
+  <div class="tv-tabs" id="tv-tabs" role="group" aria-label="Which view">
+    <button type="button" data-pane="class" aria-pressed="true">What the class got wrong<i>safe to show</i></button>
+    <button type="button" data-pane="who" aria-pressed="false">Student performance<i>private</i></button>
+  </div>
+
+  <div data-pane-body="class">
+    <section class="tv-sec" id="tv-missed"></section>
+    <section class="tv-sec" id="tv-topics"></section>
+  </div>
+
+  <div data-pane-body="who" hidden>
+    <p class="tv-private">Every student by name against their own score. Do not put this tab on the screen.</p>
+    <section class="tv-sec" id="tv-roster"></section>
+    <section class="tv-sec" id="tv-matrix"></section>
+  </div>
 </div>
 
 <script src="js/auth.js"></script>
