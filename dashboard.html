@@ -23,7 +23,11 @@
 
   <link rel="stylesheet" href="css/redesign-tokens.css" />
   <link rel="stylesheet" href="css/site.css" />
-  <link rel="stylesheet" href="css/dashboard.css" />
+  <!-- Versioned so a cached stylesheet or script can never be paired with a
+       newer page. A browser holding yesterday's dashboard.js against today's
+       markup fails silently, which is worse than a slow load. Bump V on any
+       change to the files below. -->
+  <link rel="stylesheet" href="css/dashboard.css?v=20261104" />
   <!-- Panel styles live in css/dashboard.css. The old inline block carried
        hardcoded #0284C7, 8/12px radii and a grayscale(1) locked state; all
        three are superseded by the redesign tokens. -->
@@ -587,7 +591,7 @@
   <!-- Auth: must load BEFORE dashboard.js so the session is checked
        and the user-chip is populated before other code runs. -->
   <script src="js/config.js"></script>
-  <script src="js/auth.js"></script>
+  <script src="js/auth.js?v=20261104"></script>
   <script>
     (function () {
       var session = USMLE_AUTH.requireSession();
@@ -666,8 +670,8 @@
        lasts about an hour, and this lets a returning student get a fresh one
        in place instead of being bounced back to the sign-in page. -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script src="js/mine.js"></script>
-  <script src="js/dashboard.js"></script>
+  <script src="js/mine.js?v=20261104"></script>
+  <script src="js/dashboard.js?v=20261104"></script>
   <script src="js/fireworks.js"></script>
   <script src="js/tweaks.js"></script>
 </body>
