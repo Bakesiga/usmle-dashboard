@@ -25,6 +25,13 @@ HOST = "allanbakesiga@gmail.com"
 
 # The NBME phase is a separate subscription. A recording on or after this
 # date is a corrections class and goes only to students who paid for it.
+#
+# Standing rule, set by Allan on 4 Nov 2026: from here on the routine
+# recording share list is exactly the Carey Coombs class, nobody else. That
+# is what this date plus the nbme flag already produces, so the roster lives
+# in one place. Add somebody to the phase and they start getting recordings;
+# take the flag away and they stop. The "November Class" tab of the payment
+# tracker is the same roster in spreadsheet form.
 NBME_FROM = "2026-11-01"
 
 
