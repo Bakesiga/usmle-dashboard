@@ -226,8 +226,11 @@
     });
 
     if (rec.wrong.length) {
-      out += '<p class="tv-qlist"><b>Missed:</b> ' +
-             rec.wrong.slice().sort(function (a, b) { return a - b; }).join(', ') + '</p>';
+      // Block by block, renumbered 1 to 50 inside each, so the numbers
+      // match the paper they sat rather than the 1 to 200 we store.
+      out += '<p class="tv-qlist">' + C.byBlock(rec.wrong).map(function (g) {
+        return '<b>Block ' + g.block + ':</b> ' + g.qs.join(', ');
+      }).join('<br>') + '</p>';
     }
     if (!NBMEPanel.topicReport(f.id, { wrong: rec.wrong }, 'system')) {
       out += '<p class="tv-note" style="margin:12px 0 0">No question map is typed up for NBME ' + f.n +
@@ -271,7 +274,7 @@
 
     var list = '<div class="tv-miss">' + shown.map(function (r) {
       var topic = [r.system, r.discipline].filter(Boolean).join(' &middot; ');
-      return '<div class="tv-mq">' + r.q + '</div>' +
+      return '<div class="tv-mq"><small>Block ' + C.blockOf(r.q) + '</small>Q ' + C.inBlock(r.q) + '</div>' +
         '<div class="tv-mbar"><i style="width:' + Math.max(Math.round(r.missed * 100 / worst), 3) + '%"></i>' +
         '<span>' + (topic || 'No map for this question yet') +
         (r.blocks.length ? ' &middot; <b>' + r.blocks.map(function (b) { return esc(b.label); }).join(', ') + '</b>' : '') +

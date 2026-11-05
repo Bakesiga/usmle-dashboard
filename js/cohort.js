@@ -180,6 +180,29 @@
     };
   }
 
+  // ---- Saying a question number out loud ---------------------------
+  // The paper is four blocks of fifty and that is how a student meets it:
+  // the sitting page numbers every block 1 to 50, and so does the booklet
+  // on the desk. Stored question numbers run 1 to 200, which is right for
+  // the arithmetic and wrong for the eye, so every number shown to a human
+  // is translated here and nowhere else.
+  var PER_BLOCK = 50;
+  function blockOf(q) { return Math.floor((q - 1) / PER_BLOCK) + 1; }
+  function inBlock(q) { return ((q - 1) % PER_BLOCK) + 1; }
+
+  // A flat list of 1-to-200 numbers, folded into the blocks they sit in
+  // and renumbered inside each. Blocks nobody missed anything in are left
+  // out, so a block 1 only sitting reads as exactly that.
+  function byBlock(list) {
+    var seen = {}, order = [];
+    (list || []).slice().sort(function (a, b) { return a - b; }).forEach(function (q) {
+      var b = blockOf(q);
+      if (!seen[b]) { seen[b] = []; order.push(b); }
+      seen[b].push(inBlock(q));
+    });
+    return order.map(function (b) { return { block: b, qs: seen[b] }; });
+  }
+
   // ---- What the class got wrong ------------------------------------
   // The teaching list. One row per question, how many of the submitters
   // missed it, with the system and discipline that question belongs to.
@@ -262,6 +285,9 @@
   }
 
   window.USMLE_COHORT = {
+    blockOf: blockOf,
+    inBlock: inBlock,
+    byBlock: byBlock,
     isTutor: isTutor,
     session: session,
     getKey: getKey, setKey: setKey, clearKey: clearKey,
