@@ -2431,6 +2431,11 @@
 .nbme-note { font-size: var(--fs-14); color: var(--muted); margin: 0 0 var(--s-12); line-height: 1.5; }
 .nbme-foot { margin-top: var(--s-16); }
 
+/* Expired sign-in on My results: Google's own button, in place, so a student
+   coming back the next day does not lose their place to a redirect. */
+.nbme-reauth { margin: 0 0 var(--s-16); }
+.nbme-reauth .nbme-note { margin-bottom: var(--s-8); }
+
 .nbme-sys { display: flex; flex-direction: column; gap: 2px; }
 .nbme-sysrow {
   display: grid; grid-template-columns: minmax(104px, 1.1fr) minmax(70px, 1fr) auto;

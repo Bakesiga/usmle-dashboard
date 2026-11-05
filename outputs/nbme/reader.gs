@@ -25,11 +25,23 @@
  *   line the collector returns, so the URL gives a stranger nothing.
  *   The key lives in your browser only; it is never committed.
  *
+ * The second door: a student reading their own row
+ *   The dashboard is handed to every student, so it can never carry the key.
+ *   Instead it sends the Google credential the student signed in with, and
+ *   this script asks Google whether that credential is real, who it belongs
+ *   to, and whether it was issued for this class's sign-in. It then answers
+ *   with that one verified address's rows and nothing else. A student cannot
+ *   ask for anyone else's, because they cannot forge Google's signature. That
+ *   matters: the roster addresses sit in a public file, so a door that opened
+ *   on an address alone would open on all of them.
+ *
  * Setup, about four minutes, once
  *   1. script.google.com  ->  New project. Delete the sample and paste this file.
  *   2. Set READ_KEY below to any long string you make up. Keep a copy.
  *      SHEET_ID is already filled in.
- *   3. Run -> doGet once, approve the permissions prompt (your script, your sheet).
+ *   3. Run -> doGet once, approve the permissions prompt (your script, your
+ *      sheet, and an outside connection: that one is the call to Google that
+ *      checks a student's credential).
  *   4. Deploy -> New deployment -> Web app.
  *        Execute as:      Me
  *        Who has access:  Anyone
@@ -46,22 +58,74 @@ const READ_KEY = "PASTE_A_LONG_RANDOM_STRING_HERE";
 // Leave blank to read the first tab, whatever it is called.
 const TAB_NAME = "";
 
+// The class sign-in, from js/config.js. A credential is only accepted if
+// Google says it was issued for this client: one minted for some other site
+// is a valid Google token and still must not open this door.
+const CLIENT_ID = "269521341031-mjkthkigvhiltjd9p8v6ogsiri0hfeqh.apps.googleusercontent.com";
+
 function json(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+function bland() {
+  // The reply the collector gives. A wrong key, a missing credential and an
+  // expired one all land here, so none of them tells anyone anything.
+  return ContentService.createTextOutput("Carey Coombs collector is live. POST submissions here.");
+}
+
 function doGet(e) {
-  var key = (e && e.parameter && e.parameter.key) || "";
-  if (key !== READ_KEY) {
-    // Same reply the collector gives, so a wrong key reveals nothing.
-    return ContentService.createTextOutput("Carey Coombs collector is live. POST submissions here.");
+  var p = (e && e.parameter) || {};
+
+  // The tutor's door: the whole cohort, behind the shared key.
+  if (p.key) {
+    if (p.key !== READ_KEY) return bland();
+    try { return json(readAll()); }
+    catch (err) { return json({ ok: false, error: String(err) }); }
   }
-  try {
-    return json(readAll());
-  } catch (err) {
-    return json({ ok: false, error: String(err) });
+
+  // The student's door: their own row, behind their own Google credential.
+  if (p.token) {
+    var email;
+    try { email = verifiedEmail(p.token); }
+    catch (err) { return json({ ok: false, error: String(err) }); }
+    if (!email) return bland();
+    try { return json(readOne(email)); }
+    catch (err) { return json({ ok: false, error: String(err) }); }
   }
+
+  return bland();
+}
+
+// The address Google vouches for, or null. Anything short of a real, current,
+// verified credential issued for this class's sign-in is null.
+function verifiedEmail(idToken) {
+  var res = UrlFetchApp.fetch(
+    "https://oauth2.googleapis.com/tokeninfo?id_token=" + encodeURIComponent(idToken),
+    { muteHttpExceptions: true });
+  if (res.getResponseCode() !== 200) return null;
+
+  var c;
+  try { c = JSON.parse(res.getContentText()); } catch (err) { return null; }
+
+  if (!c || c.aud !== CLIENT_ID) return null;          // minted for somewhere else
+  if (String(c.email_verified) !== "true") return null; // Google has not checked it
+  if (!c.email) return null;
+  if (Number(c.exp) * 1000 < Date.now()) return null;   // an hour old, ask again
+
+  return String(c.email).toLowerCase().trim();
+}
+
+// One verified student's rows, shaped exactly like the key door's answer so
+// the page can read either without caring which it got.
+function readOne(email) {
+  var all = readAll();
+  var mine = all.results[email] || {};
+  var results = {}, names = {};
+  if (Object.keys(mine).length) results[email] = mine;
+  if (all.names[email]) names[email] = all.names[email];
+  return { ok: true, at: all.at, email: email,
+           results: results, names: names, rows: Object.keys(mine).length };
 }
 
 function readAll() {

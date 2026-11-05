@@ -136,9 +136,26 @@ const USMLE_AUTH = (() => {
       name: claims.name || entry.email,
       picture: claims.picture || "",
       signedInAt: Date.now(),
+      // The raw Google credential, kept so a page can prove to our own
+      // reader which student is asking without ever holding a shared key.
+      // The reader hands back that student's NBME results and no one
+      // else's. Google signs it, so it cannot be edited into someone
+      // else's address, and it expires after about an hour: see idToken().
+      idToken: jwt,
+      idTokenExp: typeof claims.exp === "number" ? claims.exp : null,
     };
     localStorage.setItem(SESSION_KEY, JSON.stringify(session));
     return { ok: true, session };
+  }
+
+  // A credential that is still valid, or null. Google's expire after about
+  // an hour, and the reader rejects a stale one; returning null instead lets
+  // the page ask for a fresh sign-in rather than show an error.
+  function idToken() {
+    const s = getSession();
+    if (!s || !s.idToken) return null;
+    if (typeof s.idTokenExp === "number" && Date.now() > (s.idTokenExp - 30) * 1000) return null;
+    return s.idToken;
   }
 
   function getSession() {
@@ -196,5 +213,5 @@ const USMLE_AUTH = (() => {
 
   const ready = loadAllowlist().then((students) => { syncSessionFromAllowlist(students); return students; });
 
-  return { handleCredential, getSession, signOut, requireSession, loadAllowlist, ready };
+  return { handleCredential, getSession, idToken, signOut, requireSession, loadAllowlist, ready };
 })();

@@ -1073,8 +1073,92 @@
     } catch (e) { return null; }
   }
 
-  // This student's results, or an empty object before anything is entered.
+  // This student's own results, read live from the submissions sheet.
+  //
+  // window.NBME.results is empty on purpose and must stay that way: this file
+  // is served to anyone who asks for it, so a result typed in there is a
+  // published result. The live read is the real source, and it proves who is
+  // asking with the student's own signed Google credential, so it can only
+  // ever return their row. See js/mine.js.
+  var mineState = { loading: false, loaded: false, reason: null, at: null, results: null };
+
+  function ensureMine() {
+    if (mineState.loaded || mineState.loading) return;
+    if (typeof USMLE_MINE === 'undefined') { mineState.loaded = true; mineState.reason = 'no-reader'; return; }
+    mineState.loading = true;
+    USMLE_MINE.load().then(function (r) {
+      mineState.loading = false;
+      mineState.loaded  = true;
+      mineState.reason  = r.reason;
+      mineState.at      = r.at;
+      mineState.results = r.ok ? r.results : null;
+      renderMyResults();
+    });
+  }
+
+  // Said plainly, because "nothing here" and "could not read it" are very
+  // different things to a student who knows they sent their form.
+  function myStatusBlock() {
+    if (mineState.loading) return '<p class="nbme-note">Reading your result from the submissions sheet&hellip;</p>';
+    if (mineState.reason === 'signed-out') {
+      return '<div class="nbme-reauth"><p class="nbme-note">Your Google sign-in has expired, which is the part that ' +
+             'keeps your results yours. Continue with Google and this fills straight back in.</p>' +
+             '<div data-mine-signin></div></div>';
+    }
+    if (mineState.reason === 'offline' || mineState.reason === 'reader-error') {
+      return '<p class="nbme-note">Your result is safe in the sheet, but this page cannot read it just now. ' +
+             'Try again in a moment.</p>';
+    }
+    if (mineState.results && mineState.at) {
+      return '<p class="nbme-note">Read from your own submission, ' + esc(whenRead(mineState.at)) + '.</p>';
+    }
+    return '';
+  }
+
+  function whenRead(iso) {
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return 'just now';
+    var hh = d.getHours(), mm = d.getMinutes();
+    return 'today ' + (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm;
+  }
+
+  // Could the sheet be read at all? Used to tell "you have not sent one yet"
+  // apart from "we could not look", which must never be shown as the former.
+  function mineUnread() {
+    return mineState.loading ||
+           mineState.reason === 'signed-out' ||
+           mineState.reason === 'offline' ||
+           mineState.reason === 'reader-error';
+  }
+
+  function mountMineSignIn(root) {
+    var el = root.querySelector('[data-mine-signin]');
+    if (!el || typeof USMLE_MINE === 'undefined') return;
+    USMLE_MINE.mountSignIn(el, function () {
+      mineState = { loading: false, loaded: false, reason: null, at: null, results: null };
+      ensureMine();
+    });
+  }
+
+  // The paper numbers each block 1 to 50; only the marking sheet runs 1 to
+  // 200. Say it the way the paper says it, the same as the tutor view does.
+  var PER_BLOCK = 50;
+  function blockOf(q) { return Math.floor((q - 1) / PER_BLOCK) + 1; }
+  function inBlock(q) { return ((q - 1) % PER_BLOCK) + 1; }
+  function byBlockLabel(list) {
+    var groups = {};
+    list.map(Number).sort(function (a, b) { return a - b; }).forEach(function (q) {
+      var b = blockOf(q);
+      (groups[b] = groups[b] || []).push(inBlock(q));
+    });
+    return Object.keys(groups)
+      .sort(function (a, b) { return Number(a) - Number(b); })
+      .map(function (b) { return 'Block ' + b + ', Q ' + groups[b].join(', '); })
+      .join(' &middot; ');
+  }
+
   function nbmeResults() {
+    if (mineState.results) return mineState.results;
     var N = window.NBME || {};
     var email = nbmeEmail();
     if (!email || !N.results) return {};
@@ -1412,6 +1496,8 @@
     var N = window.NBME;
     if (!N || !N.forms) { root.innerHTML = ''; return; }
 
+    ensureMine();
+    var status = myStatusBlock();
     var res = nbmeResults();
     var forms = N.forms;
 
@@ -1440,7 +1526,10 @@
     // Nothing sent yet: say what will appear and how to make it appear,
     // rather than an empty page with a shrug.
     if (!satCount) {
-      root.innerHTML =
+      // Still reading, or could not read: say so rather than telling someone
+      // who sent their form on time that they have not sat one.
+      if (mineUnread()) { root.innerHTML = status; mountMineSignIn(root); return; }
+      root.innerHTML = status +
         '<p class="nbme-note">This page is yours alone. The moment you send a form, it fills with ' +
         'your score, how you are moving form to form, and the eight systems and ten disciplines ' +
         'your Step 1 score report uses, weakest first, with a link back to the class that covers each one.</p>' +
@@ -1457,7 +1546,7 @@
     var delta  = (latest !== null && prev !== null) ? latest - prev : null;
     var unit   = anyScore ? '' : '%';
 
-    var html = '<div class="stat-row">';
+    var html = status + '<div class="stat-row">';
     if (latest !== null) {
       html += '<div class="stat is-now"><div class="stat-n">' + latest + unit + '</div>' +
               '<div class="stat-l">' + (anyScore ? 'Your latest NBME' : 'Correct on your latest form') + '</div></div>' +
@@ -1478,6 +1567,7 @@
     html += myMissesBlock(res, forms);
 
     root.innerHTML = html;
+    mountMineSignIn(root);
   }
 
   // The questions they lost on their newest form, gathered under the system
@@ -1505,7 +1595,8 @@
 
     var ids = Object.keys(groups).sort(function (a, b) { return groups[b].length - groups[a].length; });
     var html = '<h2 class="sec-h">Where you lost marks on NBME ' + hit.f.n + '</h2>' +
-      '<p class="nbme-note">Your own question numbers, heaviest section first. Open the form again and ' +
+      '<p class="nbme-note">Your own question numbers, as the paper numbers them, heaviest section first. ' +
+      'Open the form again and ' +
       'read these back before the corrections class reaches them.</p><div class="nbme-sys">';
 
     ids.forEach(function (sid) {
@@ -1516,7 +1607,7 @@
       html += '<div class="nbme-sysrow">' +
         '<span class="nbme-sysname">' + esc(label) + '</span>' +
         '<span class="nbme-band">' + qs.length + ' question' + (qs.length === 1 ? '' : 's') + '</span>' +
-        '<span class="nbme-say">' + qs.join(', ') + '</span>';
+        '<span class="nbme-say">' + byBlockLabel(qs) + '</span>';
       if (blocks.length) {
         html += '<span class="nbme-goto">Review ' + blocks.map(function (b) {
           return '<a class="nbme-gotolink" data-goto-block="' + byId[b].id + '" role="link" tabindex="0">' +
