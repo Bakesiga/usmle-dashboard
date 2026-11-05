@@ -927,7 +927,9 @@ window.NBME = {
       { title: "NBME 27 corrections, day 1", date: "2026-11-02",
         url: "https://us06web.zoom.us/rec/share/vLoRTRipCWWNn5UAAIdMc__Du6B6Mx2lkQnSkaPK-x2xkcDZuKenerK37U10Nz-Z.s4Lr6ogaA59qbvrl" },
       { title: "NBME 27 review, day 2", date: "2026-11-03",
-        url: "https://us06web.zoom.us/rec/share/2crzdq-XDogNjgPUVCt9omzJZCbWlneDlVYr98ey_nHA5cxxWH0UhJQWWehVraw1.MlrPgn9NQXuWfdC-" }
+        url: "https://us06web.zoom.us/rec/share/2crzdq-XDogNjgPUVCt9omzJZCbWlneDlVYr98ey_nHA5cxxWH0UhJQWWehVraw1.MlrPgn9NQXuWfdC-" },
+      { title: "NBME 27 review, day 3", date: "2026-11-04",
+        url: "https://us06web.zoom.us/rec/share/sEMYZsY1fl_ewKIoPvm4RP2uklIJPIWgRHvOyVDd-G1B2XGC29HnJwLeyvwzZRJH.4yR9z8sGkdWHmxUQ" }
     ]
   },
 
