@@ -339,7 +339,8 @@
       "tracks": [
         "step1"
       ],
-      "accessFrom": "2026-10-01"
+      "accessFrom": "2026-10-01",
+      "nbme": true
     },
     {
       "email": "rcsinei@gmail.com",
