@@ -76,10 +76,39 @@
     return out;
   }
 
+  // The anonymous aggregate, turned back into something the two cohort
+  // functions can read. If question q was missed by c of the submitters,
+  // put it in the wrong list of exactly c stand-in students. Pooled over
+  // all of them the sums come out identical to the real submissions, which
+  // is all the teaching list and the topic report ever use, and no name or
+  // address is involved. The keys cannot collide with a roster email, so
+  // stand-ins never appear in the who-has-sent table: without the reader
+  // the page genuinely does not know who sent what, and should not guess.
+  function aggregateResults() {
+    var out = {}, src = N().missed || {};
+    Object.keys(src).forEach(function (formId) {
+      var a = src[formId] || {};
+      var counts = a.counts || [], subs = a.submitters || 0;
+      for (var i = 0; i < subs; i++) {
+        var wrong = [];
+        for (var q = 0; q < counts.length; q++) if (counts[q] > i) wrong.push(q + 1);
+        var key = 'aggregate:' + formId + ':' + (i + 1);
+        if (!out[key]) out[key] = {};
+        out[key][formId] = { wrong: wrong, score: null, total: counts.length || 200,
+                             at: null, name: '', hand: false };
+      }
+    });
+    return out;
+  }
+
   function loadResults() {
     var url = cfg().NBME_READ_URL, key = getKey();
+    // Hand-typed rows first, then the aggregate for any form they do not
+    // cover, so a real result typed in by hand is never shadowed.
+    var base = staticResults(), agg = aggregateResults();
+    Object.keys(agg).forEach(function (k) { if (!base[k]) base[k] = agg[k]; });
     var fallback = {
-      source: 'static', results: staticResults(), names: {}, at: null, rows: null,
+      source: 'static', results: base, names: {}, at: null, rows: null,
       reason: !url ? 'no-url' : (!key ? 'no-key' : null)
     };
     if (!url || !key) return Promise.resolve(fallback);
@@ -95,7 +124,9 @@
         }
         if (!data || !data.ok) { fallback.reason = 'reader-error'; return fallback; }
 
-        // Live wins per form, hand-typed fills the gaps.
+        // Live wins per form, hand-typed fills the gaps. The anonymous
+        // aggregate is dropped entirely once there is a live read: it
+        // would double count against the real submitters.
         var merged = staticResults();
         Object.keys(data.results || {}).forEach(function (email) {
           var e = String(email).toLowerCase().trim();
