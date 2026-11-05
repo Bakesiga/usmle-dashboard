@@ -66,7 +66,10 @@
           total: r.total || 200,
           at: r.at || null,
           name: r.name || '',
-          hand: true                       // typed up by hand, not submitted
+          // Typed up by hand unless the entry says otherwise. A result
+          // copied off the submissions sheet came through the form and
+          // should not wear the badge, so it carries hand: false.
+          hand: r.hand !== false
         };
       });
     });
@@ -108,6 +111,13 @@
   }
 
   // The class roster, minus the tutors themselves.
+  //
+  // Only the Carey Coombs class. The allowlist carries every student who
+  // ever took the taught course, so an unfiltered roster listed fifty odd
+  // people against a form twenty four of them were ever asked to sit, and
+  // every one of the others read as "has not sent it". The nbme flag is the
+  // same one that opens the phase and drives the recording share, so the
+  // three stay in step on their own.
   function loadRoster() {
     var ready = (window.USMLE_AUTH && USMLE_AUTH.ready)
       ? USMLE_AUTH.ready
@@ -121,10 +131,13 @@
           return {
             email: String(s.email || '').toLowerCase().trim(),
             paused: s.recordingsPaused === true,
+            nbme: s.nbme === true,
             tracks: s.tracks || []
           };
         })
-        .filter(function (s) { return s.email && t.indexOf(s.email) === -1; });
+        .filter(function (s) {
+          return s.email && s.nbme && t.indexOf(s.email) === -1;
+        });
     });
   }
 

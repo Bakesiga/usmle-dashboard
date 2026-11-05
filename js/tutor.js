@@ -103,7 +103,7 @@
       bits.push('<button type="button" data-act="forget">Forget the key on this device</button>');
     } else {
       var why = {
-        'no-url': 'No reader is set up yet, so this is only what has been typed into data.js by hand.',
+        'no-url': 'No reader is set up yet, so this is the snapshot held in data.js rather than a live read.',
         'no-key': 'A reader is set up but this browser has no key, so this is only what has been typed in by hand.',
         'bad-key': 'That key was refused. Showing only what has been typed in by hand.',
         'reader-error': 'The reader answered with an error. Showing only what has been typed in by hand.',
