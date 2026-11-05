@@ -11,7 +11,7 @@ const USMLE_CONFIG = {
   // the key is typed into tutor.html once and kept in that browser, so it
   // is never committed here. Left blank, the tutor view falls back to
   // whatever is typed into window.NBME.results by hand.
-  NBME_READ_URL: "",
+  NBME_READ_URL: "https://script.google.com/macros/s/AKfycbyC570orHxnXuBUHAJGjPt9iBIHbYWMM4OTlM_r2AmfuYKMwLhP9cnAIjm5TPInqchjEw/exec",
 
   // Get this from Google Cloud Console → APIs & Services → Credentials → Create OAuth client (Web)
   // Authorized JS origins must include your hosted URL (e.g. https://bakesiga.github.io) and http://localhost:5151 for local preview.

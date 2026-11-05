@@ -33,3 +33,8 @@ outputs/flyers/
 outputs/posters/
 outputs/schedules/
 outputs/forms/
+
+# The NBME reader's key, and the copy of reader.gs that carries it. The
+# committed reader.gs keeps the placeholder; these two never go up.
+outputs/nbme/reader.key.txt
+outputs/nbme/reader.deploy.gs
