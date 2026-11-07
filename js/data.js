@@ -906,7 +906,8 @@ window.NBME = {
     // gets Google's request-access screen, which is the right answer.
     { id: "nbme27", n: 27, sit: ["2026-10-31", "2026-11-01"], week: ["2026-11-02", "2026-11-06"], due: "2026-11-04",
       paperId: "1EyZfQUClkMgztU8C2yeAIP3YZD4nWG6H" },
-    { id: "nbme28", n: 28, sit: ["2026-11-07", "2026-11-08"], week: ["2026-11-09", "2026-11-13"] },
+    { id: "nbme28", n: 28, sit: ["2026-11-07", "2026-11-08"], week: ["2026-11-09", "2026-11-13"],
+      paperId: "1cWwtkmfE6MvJMka_CZPiB1s1pdNaAXtZ" },
     { id: "nbme29", n: 29, sit: ["2026-11-14", "2026-11-15"], week: ["2026-11-16", "2026-11-20"] },
     { id: "nbme30", n: 30, sit: ["2026-11-21", "2026-11-22"], week: ["2026-11-23", "2026-11-27"] },
     { id: "nbme31", n: 31, sit: ["2026-11-28", "2026-11-29"], week: ["2026-11-30", "2026-12-04"] },
