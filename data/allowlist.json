@@ -340,8 +340,16 @@
       "tracks": [
         "step1"
       ],
-      "accessFrom": "2026-10-01",
-      "nbme": true
+      "accessFrom": "2026-06-01",
+      "lockedBlocks": [
+        "renal",
+        "endo",
+        "repro",
+        "pharm",
+        "msk",
+        "gi",
+        "ethics"
+      ]
     },
     {
       "email": "rcsinei@gmail.com",
