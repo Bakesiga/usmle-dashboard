@@ -1067,6 +1067,31 @@ window.NBME = {
       "E", "C", "D", "E", "C", "E", "A", "A", "F", "D",
       "B", "D", "B", "D", "C", "E", "B", "E", "E", "B",
       "B", "F", "D", "E", "E", "A", "B", "D", "B", "?"
+    ],
+    // NBME 28, read off the answers version. Every question carried a
+    // highlighted option and an explicit "Correct Answer" line, so
+    // unlike 27 there are no gaps.
+    nbme28: [
+      "F", "D", "A", "A", "A", "A", "C", "D", "D", "B",
+      "B", "B", "A", "A", "A", "A", "D", "A", "E", "D",
+      "A", "C", "B", "C", "E", "C", "A", "B", "A", "B",
+      "E", "A", "C", "C", "E", "C", "C", "F", "A", "C",
+      "B", "E", "C", "B", "B", "C", "E", "B", "A", "D",
+      "D", "F", "E", "E", "D", "C", "E", "A", "D", "A",
+      "B", "C", "F", "A", "B", "D", "D", "C", "C", "E",
+      "D", "C", "B", "C", "C", "C", "B", "A", "A", "A",
+      "B", "B", "C", "C", "E", "D", "B", "A", "E", "D",
+      "E", "D", "D", "D", "C", "D", "C", "F", "E", "C",
+      "E", "D", "C", "C", "C", "E", "A", "D", "E", "A",
+      "D", "A", "C", "A", "C", "D", "B", "D", "B", "D",
+      "D", "C", "C", "A", "B", "E", "A", "D", "E", "C",
+      "A", "E", "B", "B", "A", "C", "F", "B", "F", "C",
+      "E", "D", "B", "B", "D", "B", "C", "E", "C", "D",
+      "B", "A", "B", "B", "E", "C", "A", "D", "C", "D",
+      "A", "A", "B", "A", "D", "E", "E", "C", "B", "F",
+      "C", "C", "A", "B", "A", "D", "C", "A", "B", "B",
+      "E", "D", "C", "A", "E", "C", "E", "A", "F", "C",
+      "D", "D", "E", "B", "A", "B", "D", "B", "D", "B"
     ]
   },
 
