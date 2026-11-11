@@ -269,6 +269,7 @@ window.BLOCKS = [
     subBlocks: [
       { id: "cvs-anat-embryo",  label: "Anatomy and Embryology", days: [1, 2, 3],
         recordings: [
+          { title: "Day 1 opening: cohort introduction and CVS embryology", date: "2026-06-01", url: "https://duke.zoom.us/rec/share/eDvfRlyWzkPSPEbw-kL9CiAA7J0wc5jpX9peXx7wRrYakEZYxqk-QbZ2Eyh11ZAK.nzHpXb1mge0cXg_Y?startTime=1780279268000" },
           { title: "Anatomy & Embryology pt 1: heart tube and looping", date: "2026-06-01", url: "https://duke.zoom.us/rec/share/DhUMjps15chJ4Y4I0qSTG1I7OmVOOmRWKC_0Uy-vPms1vyEkpZVRrjOB7sSqnhSI.4Ztvh1pQK2NpkvTC" },
           { title: "Anatomy & Embryology pt 2: septation", date: "2026-06-02", url: "https://duke.zoom.us/rec/share/15YHfKk73pAv0VaTDnQ5oS12pWgFplnvfLwKm0ME7V8yEcfMp09EHyzaeL2skurn.U9NXhljcwdEp0cVf" },
           { title: "Anatomy & Embryology pt 3: fetal circulation and gross anatomy", date: "2026-06-03", url: "https://duke.zoom.us/rec/share/qEz4mHhm0m9ChA3WlgkMt8UBW0IzRqXqQJb7XcG5gUKquzW5nX_UV1gWFHI3EhYm.1WpIYWxYCl81qY99" }
