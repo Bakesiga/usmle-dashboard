@@ -1022,6 +1022,28 @@ window.NBME = {
       ,"repro-endo","repro-endo","multi","gi","blood-imm","blood-imm","msk-skin","resp-renal","neuro-behav","cvs"
       ,"repro-endo","neuro-behav","gi","resp-renal","blood-imm","blood-imm","neuro-behav","repro-endo","msk-skin","neuro-behav"
       
+    ],
+    nbme28: [
+      "resp-renal","neuro-behav","msk-skin","multi","repro-endo","multi","multi","neuro-behav","msk-skin","multi"
+      ,"resp-renal","cvs","blood-imm","repro-endo","gi","msk-skin","gi","multi","resp-renal","resp-renal"
+      ,"multi","multi","multi","blood-imm","blood-imm","cvs","cvs","gi","resp-renal","repro-endo"
+      ,"resp-renal","repro-endo","multi","multi","repro-endo","neuro-behav","repro-endo","blood-imm","cvs","multi"
+      ,"gi","cvs","gi","blood-imm","multi","gi","neuro-behav","resp-renal","cvs","multi"
+      ,"blood-imm","repro-endo","blood-imm","neuro-behav","resp-renal","neuro-behav","gi","repro-endo","resp-renal","resp-renal"
+      ,"blood-imm","multi","neuro-behav","gi","cvs","multi","msk-skin","blood-imm","multi","cvs"
+      ,"msk-skin","neuro-behav","multi","neuro-behav","multi","repro-endo","gi","multi","neuro-behav","resp-renal"
+      ,"cvs","cvs","cvs","repro-endo","gi","repro-endo","multi","blood-imm","resp-renal","resp-renal"
+      ,"multi","neuro-behav","blood-imm","msk-skin","cvs","cvs","repro-endo","msk-skin","multi","neuro-behav"
+      ,"resp-renal","gi","cvs","multi","multi","resp-renal","neuro-behav","repro-endo","cvs","repro-endo"
+      ,"blood-imm","blood-imm","blood-imm","gi","cvs","multi","blood-imm","resp-renal","msk-skin","msk-skin"
+      ,"resp-renal","repro-endo","multi","repro-endo","neuro-behav","blood-imm","msk-skin","msk-skin","resp-renal","neuro-behav"
+      ,"neuro-behav","neuro-behav","neuro-behav","gi","blood-imm","resp-renal","multi","blood-imm","blood-imm","resp-renal"
+      ,"repro-endo","msk-skin","neuro-behav","resp-renal","multi","blood-imm","blood-imm","repro-endo","repro-endo","multi"
+      ,"gi","resp-renal","repro-endo","blood-imm","resp-renal","gi","msk-skin","neuro-behav","neuro-behav","resp-renal"
+      ,"resp-renal","resp-renal","repro-endo","multi","multi","blood-imm","repro-endo","neuro-behav","resp-renal","repro-endo"
+      ,"resp-renal","msk-skin","msk-skin","cvs","blood-imm","multi","multi","neuro-behav","msk-skin","msk-skin"
+      ,"resp-renal","multi","cvs","blood-imm","multi","gi","neuro-behav","multi","neuro-behav","multi"
+      ,"resp-renal","gi","resp-renal","cvs","neuro-behav","resp-renal","multi","gi","neuro-behav","neuro-behav"
     ]
   },
   disc: {
@@ -1047,6 +1069,28 @@ window.NBME = {
       ,"pharm","path","behav","micro","micro","imm","anat","path","anat","pharm"
       ,"physio","anat","physio","anat","imm","imm","genetics","histo","path","behav"
       
+    ],
+    nbme28: [
+      "path","anat","anat","pharm","physio","biochem","pharm","genetics","path","behav"
+      ,"physio","path","physio","physio","path","anat","path","path","path","anat"
+      ,"behav","histo","behav","imm","path","pharm","path","path","physio","physio"
+      ,"path","physio","histo","physio","pharm","pharm","path","imm","pharm","genetics"
+      ,"path","path","anat","biochem","pharm","path","behav","physio","path","behav"
+      ,"micro","pharm","path","physio","path","anat","path","path","path","physio"
+      ,"imm","pharm","histo","path","path","behav","biochem","imm","genetics","physio"
+      ,"biochem","genetics","behav","behav","behav","genetics","path","biochem","anat","micro"
+      ,"path","anat","path","anat","path","anat","behav","genetics","path","histo"
+      ,"path","behav","imm","path","anat","micro","path","biochem","biochem","anat"
+      ,"anat","pharm","physio","biochem","behav","path","pharm","anat","path","path"
+      ,"imm","micro","path","anat","physio","behav","physio","genetics","path","biochem"
+      ,"micro","micro","micro","pharm","behav","imm","physio","anat","physio","biochem"
+      ,"anat","anat","anat","physio","genetics","pharm","behav","imm","imm","path"
+      ,"behav","path","behav","path","biochem","imm","imm","path","micro","behav"
+      ,"anat","physio","biochem","imm","physio","physio","path","pharm","biochem","path"
+      ,"micro","path","physio","pharm","micro","imm","pharm","behav","pharm","path"
+      ,"pharm","path","anat","path","imm","behav","behav","pharm","biochem","biochem"
+      ,"path","biochem","path","path","behav","anat","path","path","anat","micro"
+      ,"pharm","path","physio","physio","physio","pharm","pharm","pharm","anat","behav"
     ]
   },
 
