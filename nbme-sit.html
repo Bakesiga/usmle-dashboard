@@ -175,6 +175,14 @@
   body.paper-pdf .st-paper-z { display: inline-block; }
   body:not(.paper-pdf) .st-paper iframe { display: block; }
   body:not(.paper-pdf) .st-paper-z { display: none; }
+  /* The way out when Google's viewer comes up blank, which it does on some
+     phones. Only shown when we are on that viewer: with our own canvas the
+     page is drawn here and there is nothing to escape from. */
+  .st-paper-open {
+    display: none; font-size: 12px; text-decoration: underline;
+    color: var(--accent-deep); white-space: nowrap;
+  }
+  body:not(.paper-pdf) .st-paper-open { display: inline-block; }
   body:not(.paper-pdf) .st-paper-body { overflow: hidden; }
   .st-paper-note {
     padding: 4px var(--s-16); font-size: 12px; color: var(--muted); margin: 0;
@@ -487,6 +495,7 @@
       <span class="st-paper-tools">
         <button class="st-paper-z" id="paperOut" title="Smaller" aria-label="Smaller">&minus;</button>
         <button class="st-paper-z" id="paperIn" title="Bigger" aria-label="Bigger">+</button>
+        <a class="st-paper-open" id="paperOpen" target="_blank" rel="noopener">Open in a new tab</a>
         <span class="st-paper-pg" id="paperPg"></span>
       </span>
     </div>
@@ -830,23 +839,41 @@
   //      old, or the student is not on the Drive folder.
   function paperMode(pdf) { document.body.classList.toggle('paper-pdf', !!pdf); }
 
-  function paperTrouble(err) {
+  var paperFileId = null;
+
+  // Every one of these ends in the same place: the paper opens in a tab of
+  // its own. Google's viewer in an iframe comes up blank on some phones, and
+  // a blank box with an explanation under it is no use to someone with a
+  // clock running.
+  function paperOut(n) {
+    if (!paperFileId) return '';
+    return ' <a href="https://drive.google.com/file/d/' + paperFileId +
+           '/view" target="_blank" rel="noopener">Open the paper in a new tab</a>' +
+           (n ? ' and go to page ' + n + '.' : '.');
+  }
+
+  function paperTrouble(err, n) {
     var why = (err && err.message) || '';
     if (why === 'not-shared' || why === 'no-access') {
       return 'You are not on the class Drive folder yet, so this is Google\u2019s ' +
-             'viewer. Message Allan to be added.';
+             'viewer. Message Allan to be added.' + paperOut(n);
     }
     if (why === 'token-refused' || why === 'no-token') {
       return 'Without the Drive permission the paper cannot follow your questions. ' +
-             'Start the block again to be asked once more.';
+             'Start the block again to be asked once more.' + paperOut(n);
     }
-    return 'Showing Google\u2019s viewer. Keep its page number the same as the one above.';
+    return 'Showing Google\u2019s viewer. Keep its page number the same as the one ' +
+           'above. If it is blank or will not scroll,' + paperOut(n);
   }
 
   function preparePaper(id) {
     var f = formOf(id), frame = $('paperFrame');
-    if (!f || !f.paperId) { frame.removeAttribute('src'); setPaper(false); return; }
+    if (!f || !f.paperId) {
+      frame.removeAttribute('src'); paperFileId = null; setPaper(false); return;
+    }
     $('paperT').textContent = 'NBME ' + f.n;
+    paperFileId = f.paperId;
+    $('paperOpen').href = 'https://drive.google.com/file/d/' + f.paperId + '/view';
 
     // The iframe is pointed at the file either way, so the fallback is
     // already standing by rather than being built after a failure.
@@ -855,7 +882,7 @@
 
     if (!window.PAPER || !PAPER.usable()) {
       paperMode(false);
-      $('paperNote').textContent = paperTrouble(null);
+      $('paperNote').innerHTML = paperTrouble(null, S ? S.idx + 1 : 1);
       return;
     }
     PAPER.open(f.paperId).then(function () {
@@ -865,7 +892,7 @@
                                    ', read from the class Drive folder.';
     }).catch(function (err) {
       paperMode(false);
-      $('paperNote').textContent = paperTrouble(err);
+      $('paperNote').innerHTML = paperTrouble(err, S ? S.idx + 1 : 1);
     });
   }
 
@@ -1152,6 +1179,12 @@
       PAPER.show(n);
       $('paperNote').textContent = 'Page ' + n + ' of ' + PAPER.pages() +
                                    ', read from the class Drive folder.';
+    } else {
+      // On Google's viewer nothing follows the question for us, so the note
+      // has to carry the page number, and the way out has to carry it too.
+      $('paperNote').innerHTML = 'Showing Google\u2019s viewer. Keep its page number ' +
+                                 'the same as the one above. If it is blank or will ' +
+                                 'not scroll,' + paperOut(n);
     }
     [].forEach.call(choices.children, function (b) {
       b.setAttribute('aria-pressed', String(b.textContent === S.answers[S.idx]));
