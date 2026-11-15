@@ -722,6 +722,7 @@
 
   var pick = $('pick');
   var shut = [];
+  var open = [];
   N.forms.forEach(function (f) {
     var b = document.createElement('button');
     b.type = 'button'; b.textContent = 'NBME ' + f.n;
@@ -733,6 +734,7 @@
       pick.appendChild(b);
       return;
     }
+    open.push(f);
     b.addEventListener('click', function () {
       formId = f.id;
       [].forEach.call(pick.children, function (c) { c.setAttribute('aria-pressed', String(c === b)); });
@@ -742,9 +744,20 @@
     });
     pick.appendChild(b);
   });
-  if (shut.length) {
-    $('setupHint').innerHTML = 'Only the form the class is on can be sat. ' +
-      'NBME ' + shut[0].n + ' opens on <b>' + dateWords(shut[0].sit[0]) + '</b>.';
+  // A form opens on its sitting day and never shuts again, so anyone who
+  // missed one can still sit it. Saying only "the form the class is on"
+  // sent people away from papers that were open to them all along.
+  if (shut.length || open.length > 1) {
+    var hint = '';
+    if (open.length > 1) {
+      hint = 'A form stays open once its sitting day has passed, so you can still sit an ' +
+             'earlier one you missed. Open now: ' +
+             open.map(function (f) { return 'NBME ' + f.n; }).join(', ') + '. ';
+    }
+    if (shut.length) {
+      hint += 'NBME ' + shut[0].n + ' opens on <b>' + dateWords(shut[0].sit[0]) + '</b>.';
+    }
+    $('setupHint').innerHTML = hint;
   }
 
   var saved = load();
