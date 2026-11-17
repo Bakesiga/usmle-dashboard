@@ -953,6 +953,10 @@ window.NBME = {
         url: "https://us06web.zoom.us/rec/share/eFhhtUXBluhCPJNJ9peBSUExJJPgbVUm8P6f-oVc23yIf-Q6er9xeBOq-WQawj9_.yx9dgu92epXzUL8M" },
       { title: "NBME 27 review, extra Friday class", date: "2026-11-13",
         url: "https://us06web.zoom.us/rec/share/g1RgG0h0gkK0CurKI-c7qXglGj8ZUHneHIU78OF4ofD8EI1pCZF2T66DENhLbPQ6.ADD4hc6DnVN49ABG" }
+    ],
+    nbme28: [
+      { title: "NBME 28 corrections, day 1: cardiovascular", date: "2026-11-16",
+        url: "https://us06web.zoom.us/rec/share/bG1FgaYX_1ns5DxTtU7WeGupO13wLl5YUAphX71lJFKz7EoWyvzqstc-7N6L4h13.TZQQkOEqHpsBOb7r" }
     ]
   },
 
