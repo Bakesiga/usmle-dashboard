@@ -956,7 +956,9 @@ window.NBME = {
     ],
     nbme28: [
       { title: "NBME 28 corrections, day 1: cardiovascular", date: "2026-11-16",
-        url: "https://us06web.zoom.us/rec/share/bG1FgaYX_1ns5DxTtU7WeGupO13wLl5YUAphX71lJFKz7EoWyvzqstc-7N6L4h13.TZQQkOEqHpsBOb7r" }
+        url: "https://us06web.zoom.us/rec/share/bG1FgaYX_1ns5DxTtU7WeGupO13wLl5YUAphX71lJFKz7EoWyvzqstc-7N6L4h13.TZQQkOEqHpsBOb7r" },
+      { title: "NBME 28 corrections, day 2: renal and respiratory, part 1", date: "2026-11-17",
+        url: "https://us06web.zoom.us/rec/share/RfzxMhYE4M-zh2APmN-Qx3ljbgrfWdA-4uYNOp9EMMCuzXMTOADTmUDsjwTUaANS.EVbaQdM5kAomQ3_s" }
     ]
   },
 
