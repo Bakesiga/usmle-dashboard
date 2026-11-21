@@ -960,7 +960,9 @@ window.NBME = {
       { title: "NBME 28 corrections, day 2: renal and respiratory, part 1", date: "2026-11-17",
         url: "https://us06web.zoom.us/rec/share/RfzxMhYE4M-zh2APmN-Qx3ljbgrfWdA-4uYNOp9EMMCuzXMTOADTmUDsjwTUaANS.EVbaQdM5kAomQ3_s" },
       { title: "NBME 28 corrections, day 3: renal and respiratory, part 2", date: "2026-11-18",
-        url: "https://us06web.zoom.us/rec/share/alWXa9rkSqak5lN_IOqv0QibOVZq765O2iON6pbi4vjqhDEA8_-_-JJ_4Uy6mGyY.VTKpxClkncAEFWZl" }
+        url: "https://us06web.zoom.us/rec/share/alWXa9rkSqak5lN_IOqv0QibOVZq765O2iON6pbi4vjqhDEA8_-_-JJ_4Uy6mGyY.VTKpxClkncAEFWZl" },
+      { title: "NBME 28 corrections, day 5: immunology and haematology", date: "2026-11-20",
+        url: "https://us06web.zoom.us/rec/share/0W-CBmq1sNlvD7kaFcJ1rkyDVQS1cvJrITbtjpm7E02zROylelsBx5uDHlZi9Tt9.sf15SWkFk3MM6bHS" }
     ]
   },
 
