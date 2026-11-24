@@ -13,6 +13,13 @@ in the allowlist itself rather than in someone's notes:
   accessFrom: "YYYY-MM-DD"  entitlement starts on that date; recordings from
                            before it are not shared, matching the dashboard gate
   accessUntil: "YYYY-MM-DD" entitlement ends on that date, inclusive
+  shareFrom: "YYYY-MM-DD"  overrides accessFrom for this list only. Use it
+                           when the dashboard entitlement and the live
+                           recording entitlement start on different dates, as
+                           for a student who bought an old block of recordings
+                           outright but joined the live phase much later.
+                           Without it, opening an old block on the dashboard
+                           would silently add them to tonight's share.
 
 Usage:  python3 share_list.py [YYYY-MM-DD]     (defaults to today)
 """
@@ -46,8 +53,9 @@ def build(date):
             skip.append((e, "shareRecordings: false"))
         elif r.get("recordingsPaused"):
             skip.append((e, "recordingsPaused: true"))
-        elif r.get("accessFrom") and r["accessFrom"] > date:
-            skip.append((e, "accessFrom %s, not yet entitled" % r["accessFrom"]))
+        elif (r.get("shareFrom") or r.get("accessFrom")) and (r.get("shareFrom") or r["accessFrom"]) > date:
+            field = "shareFrom" if r.get("shareFrom") else "accessFrom"
+            skip.append((e, "%s %s, not yet entitled" % (field, r.get("shareFrom") or r["accessFrom"])))
         elif r.get("accessUntil") and r["accessUntil"] < date:
             skip.append((e, "accessUntil %s" % r["accessUntil"]))
         elif date >= NBME_FROM and not r.get("nbme"):
