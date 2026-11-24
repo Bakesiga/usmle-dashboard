@@ -1308,6 +1308,17 @@
   }
 
   // The most recent form that has both a map and a submission.
+  // Which form the My results breakdown is showing, plus the context needed
+  // to repaint just that block. Null means the most recent form sat.
+  var myPick = null, myCtx = null;
+
+  // Every form the student has actually sat, oldest first.
+  function nbmeSatForms(forms, res) {
+    return forms.filter(function (f) {
+      return !!nbmeTopicReport(f.id, res[f.id], 'system');
+    });
+  }
+
   function nbmeLatestReport(forms, res, axis) {
     for (var i = forms.length - 1; i >= 0; i--) {
       var rep = nbmeTopicReport(forms[i].id, res[forms[i].id], axis);
@@ -1364,17 +1375,40 @@
     return html;
   }
 
-  function nbmeSystemsBlock(res, forms) {
-    var bySystem = nbmeLatestReport(forms, res, 'system');
-    if (!bySystem) return '';
-    var byDisc = nbmeTopicReport(bySystem.form.id, res[bySystem.form.id], 'discipline');
+  function nbmeSystemsBlock(res, forms, pickId) {
+    var sat = nbmeSatForms(forms, res);
+    if (!sat.length) return '';
+    // A breakdown is kept for every form sat, not just the newest. Without
+    // this the previous form's report disappears the moment the next one
+    // lands, which is what students notice and ask about.
+    var form = null;
+    if (pickId) {
+      form = sat.filter(function (f) { return f.id === pickId; })[0] || null;
+    }
+    if (!form) form = sat[sat.length - 1];
 
-    var sysList = nbmeAxisList(bySystem.rep);
+    var rep = nbmeTopicReport(form.id, res[form.id], 'system');
+    if (!rep) return '';
+    var byDisc = nbmeTopicReport(form.id, res[form.id], 'discipline');
+
+    var sysList = nbmeAxisList(rep);
     if (!sysList) return '';
 
-    var html = '<h2 class="sec-h">Your systems after NBME ' + bySystem.form.n + '</h2>' +
+    var pick = '';
+    if (sat.length > 1) {
+      pick = '<div class="nbme-pick" role="group" aria-label="Which form to break down">';
+      sat.forEach(function (f) {
+        var on = f.id === form.id;
+        pick += '<button type="button" class="nbme-pickbtn' + (on ? ' is-on' : '') + '" ' +
+                'data-pick-form="' + f.id + '"' + (on ? ' aria-current="true"' : '') + '>' +
+                'NBME ' + f.n + '</button>';
+      });
+      pick += '</div>';
+    }
+
+    var html = '<h2 class="sec-h">Your systems on NBME ' + form.n + '</h2>' +
       '<p class="nbme-note">The same eight systems your Step 1 score report uses, weakest first, ' +
-      'out of the questions on this form.</p>' + sysList;
+      'out of the questions on this form.</p>' + pick + sysList;
 
     var discList = byDisc ? nbmeAxisList(byDisc) : '';
     if (discList) {
@@ -1563,7 +1597,11 @@
               '<div class="nbme-chart-wrap">' + chart + '</div>';
     }
 
-    html += nbmeSystemsBlock(res, forms);
+    myCtx = { res: res, forms: forms };
+    if (myPick && !nbmeSatForms(forms, res).some(function (f) { return f.id === myPick; })) {
+      myPick = null;
+    }
+    html += '<div class="nbme-sysslot">' + nbmeSystemsBlock(res, forms, myPick) + '</div>';
     html += myMissesBlock(res, forms);
 
     root.innerHTML = html;
@@ -1624,6 +1662,13 @@
     if (!root) return;
     function go(t) { activateTab('sessions'); setBlockView(t.dataset.gotoBlock); }
     root.addEventListener('click', function (e) {
+      var p = e.target.closest('[data-pick-form]');
+      if (p) {
+        myPick = p.dataset.pickForm;
+        var slot = root.querySelector('.nbme-sysslot');
+        if (slot && myCtx) slot.innerHTML = nbmeSystemsBlock(myCtx.res, myCtx.forms, myPick);
+        return;
+      }
       var t = e.target.closest('[data-goto-block]');
       if (t) go(t);
     });
