@@ -964,7 +964,9 @@ window.NBME = {
       { title: "NBME 28 corrections, day 5: immunology and haematology", date: "2026-11-20",
         url: "https://us06web.zoom.us/rec/share/0W-CBmq1sNlvD7kaFcJ1rkyDVQS1cvJrITbtjpm7E02zROylelsBx5uDHlZi9Tt9.sf15SWkFk3MM6bHS" },
       { title: "NBME 28 corrections, day 6: neurology and behavioural science", date: "2026-11-23",
-        url: "https://us06web.zoom.us/rec/share/ZNAzyehRtLL-vkhzC_HHskzn_bbW5qWDGNdIjw20JVQumaIWd2BcOmil8OVfL-S-.LTN_TyT7sf3KHra4" }
+        url: "https://us06web.zoom.us/rec/share/ZNAzyehRtLL-vkhzC_HHskzn_bbW5qWDGNdIjw20JVQumaIWd2BcOmil8OVfL-S-.LTN_TyT7sf3KHra4" },
+      { title: "NBME 28 corrections, day 7: neurology, part 2", date: "2026-11-24",
+        url: "https://us06web.zoom.us/rec/share/IpWfU_MqyOAwWkwuXEk91-1qweyDUjXEvuAuW6mXGDO0B6xT9AwRQ1ROUoAj7IPW.BbqmqnH27gQC4y54" }
     ]
   },
 
