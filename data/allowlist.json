@@ -124,11 +124,12 @@
       "tracks": [
         "step1"
       ],
-      "accessFrom": "2026-06-01",
+      "accessFrom": "2026-07-01",
       "lockedBlocks": [
-        "cns",
-        "imm",
-        "heme",
+        "cvs",
+        "resp",
+        "epi",
+        "path",
         "renal",
         "endo",
         "repro",
