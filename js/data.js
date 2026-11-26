@@ -966,7 +966,9 @@ window.NBME = {
       { title: "NBME 28 corrections, day 6: neurology and behavioural science", date: "2026-11-23",
         url: "https://us06web.zoom.us/rec/share/ZNAzyehRtLL-vkhzC_HHskzn_bbW5qWDGNdIjw20JVQumaIWd2BcOmil8OVfL-S-.LTN_TyT7sf3KHra4" },
       { title: "NBME 28 corrections, day 7: neurology, part 2", date: "2026-11-24",
-        url: "https://us06web.zoom.us/rec/share/IpWfU_MqyOAwWkwuXEk91-1qweyDUjXEvuAuW6mXGDO0B6xT9AwRQ1ROUoAj7IPW.BbqmqnH27gQC4y54" }
+        url: "https://us06web.zoom.us/rec/share/IpWfU_MqyOAwWkwuXEk91-1qweyDUjXEvuAuW6mXGDO0B6xT9AwRQ1ROUoAj7IPW.BbqmqnH27gQC4y54" },
+      { title: "NBME 28 corrections, day 8: reproductive and endocrine", date: "2026-11-25",
+        url: "https://us06web.zoom.us/rec/share/3usics4AQfvjU7st20GK1xw-UhCGvmtciJZVibuSCURqaIRVmgibhV8okA05P_AA.4ra6XgGKZ8MAymjd?startTime=1795659012000" }
     ]
   },
 
