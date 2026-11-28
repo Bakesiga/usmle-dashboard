@@ -31,6 +31,15 @@ const USMLE_ICS = (() => {
     return `${y}${pad(m)}${pad(d)}T${pad(hh)}${pad(mm)}00`;
   }
 
+  // The session date is the US evening; the class is the EAT morning
+  // after it. Callers pass nextDay so the exported event lands on the
+  // right day in a student's calendar.
+  function shiftDay(dateStr, n) {
+    const [y, m, d] = dateStr.split("-").map(Number);
+    const dt = new Date(Date.UTC(y, m - 1, d + n));
+    return `${dt.getUTCFullYear()}-${pad(dt.getUTCMonth() + 1)}-${pad(dt.getUTCDate())}`;
+  }
+
   function addMinutes(dateStr, timeStr, addMins) {
     const [y, m, d] = dateStr.split("-").map(Number);
     const [hh, mm] = timeStr.split(":").map(Number);
@@ -67,15 +76,17 @@ const USMLE_ICS = (() => {
   // Build a single VEVENT block for one session.
   function vevent(session, opts) {
     const o = Object.assign({
-      classTime:    "19:00",
-      durationMin:  90,
+      classTime:    "05:00",
+      durationMin:  150,
       tzid:         "Africa/Kampala",
+      nextDay:      false,
       zoomUrl:      "",
       zoomId:       "",
     }, opts || {});
 
-    const startLocal = localToICS(session.date, o.classTime);
-    const end = addMinutes(session.date, o.classTime, o.durationMin);
+    const base = o.nextDay ? shiftDay(session.date, 1) : session.date;
+    const startLocal = localToICS(base, o.classTime);
+    const end = addMinutes(base, o.classTime, o.durationMin);
     const endLocal = localToICS(end.date, end.time);
 
     const summary = `USMLE Step 1${session.chapter ? ` · ${session.chapter}` : ""}${
@@ -148,11 +159,12 @@ const USMLE_ICS = (() => {
   // "Add to Google Calendar" deep link (one-off event)
   function googleCalendarUrl(session, opts) {
     const o = Object.assign({
-      classTime: "19:00", durationMin: 90, tzid: "Africa/Kampala",
-      zoomUrl: "", zoomId: "",
+      classTime: "05:00", durationMin: 150, tzid: "Africa/Kampala",
+      nextDay: false, zoomUrl: "", zoomId: "",
     }, opts || {});
     // Google deep link uses UTC times, formatted as YYYYMMDDTHHMMSSZ
-    const [y, m, d] = session.date.split("-").map(Number);
+    const base = o.nextDay ? shiftDay(session.date, 1) : session.date;
+    const [y, m, d] = base.split("-").map(Number);
     const [hh, mm] = o.classTime.split(":").map(Number);
     // EAT is UTC+3 with no DST
     const startUTC = new Date(Date.UTC(y, m - 1, d, hh - 3, mm));

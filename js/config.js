@@ -23,9 +23,15 @@ const USMLE_CONFIG = {
 
   // ── Class logistics ────────────────────────────────
   // Daily class time in East Africa Time (UTC+3) — 24h "HH:MM"
-  CLASS_TIME_EAT:     "19:00",         // 7 PM EAT
-  CLASS_DURATION_MIN: 90,              // minutes
+  CLASS_TIME_EAT:     "05:00",         // 5 AM EAT
+  CLASS_DURATION_MIN: 150,             // minutes, two and a half hours
   CLASS_TZ:           "Africa/Kampala",
+  // Session dates in data.js are the US evening a class is taught on,
+  // which is why the Thanksgiving row sits on 26 November. The class
+  // itself is 5 AM in Kampala the morning after, so every start is one
+  // day on from its session date. Set false if those dates ever become
+  // East African dates, or the whole schedule shifts by a day.
+  CLASS_EAT_NEXT_DAY: true,
   ZOOM_URL:           "https://duke.zoom.us/j/96991939005",
   ZOOM_ID:            "969 9193 9005",
   // WhatsApp class group invite — students click the nav button to join.

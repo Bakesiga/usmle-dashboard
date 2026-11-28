@@ -104,14 +104,16 @@
   function sessionStartDate(sess) {
     if (!sess || !sess.date) return null;
     const [y, m, d] = sess.date.split("-").map(Number);
-    const [hh, mm] = (USMLE_CONFIG.CLASS_TIME_EAT || "19:00").split(":").map(Number);
-    // EAT is UTC+3 with no DST.
-    return new Date(Date.UTC(y, m - 1, d, hh - 3, mm));
+    const [hh, mm] = (USMLE_CONFIG.CLASS_TIME_EAT || "05:00").split(":").map(Number);
+    // EAT is UTC+3 with no DST. The class is the morning after the
+    // session date: see CLASS_EAT_NEXT_DAY in config.js.
+    return new Date(Date.UTC(y, m - 1, d, hh - 3, mm)
+                    + (USMLE_CONFIG.CLASS_EAT_NEXT_DAY ? 86400000 : 0));
   }
   function sessionEndDate(sess) {
     const start = sessionStartDate(sess);
     if (!start) return null;
-    return new Date(start.getTime() + (USMLE_CONFIG.CLASS_DURATION_MIN || 90) * 60000);
+    return new Date(start.getTime() + (USMLE_CONFIG.CLASS_DURATION_MIN || 150) * 60000);
   }
   function formatLocalTime(sess) {
     const start = sessionStartDate(sess);
@@ -127,7 +129,7 @@
     } catch (e) { return ""; }
   }
   function eatTimeLabel() {
-    const t = USMLE_CONFIG.CLASS_TIME_EAT || "19:00";
+    const t = USMLE_CONFIG.CLASS_TIME_EAT || "05:00";
     const [hh, mm] = t.split(":").map(Number);
     const ampm = hh >= 12 ? "PM" : "AM";
     const h12 = ((hh + 11) % 12) + 1;
@@ -152,9 +154,10 @@
 
   // ── ICS options shared across the page ───────────────
   const ICS_OPTS = {
-    classTime:   USMLE_CONFIG.CLASS_TIME_EAT || "19:00",
-    durationMin: USMLE_CONFIG.CLASS_DURATION_MIN || 90,
+    classTime:   USMLE_CONFIG.CLASS_TIME_EAT || "05:00",
+    durationMin: USMLE_CONFIG.CLASS_DURATION_MIN || 150,
     tzid:        USMLE_CONFIG.CLASS_TZ || "Africa/Kampala",
+    nextDay:     !!USMLE_CONFIG.CLASS_EAT_NEXT_DAY,
     zoomUrl:     USMLE_CONFIG.ZOOM_URL || "",
     zoomId:      USMLE_CONFIG.ZOOM_ID || "",
   };
@@ -463,7 +466,7 @@
       if (!t) { el.textContent = ""; return; }
       const ms = t - Date.now();
       if (ms <= 0) {
-        const endMs = ms + (USMLE_CONFIG.CLASS_DURATION_MIN || 90) * 60000;
+        const endMs = ms + (USMLE_CONFIG.CLASS_DURATION_MIN || 150) * 60000;
         if (endMs > 0) {
           const mins = Math.ceil(endMs / 60000);
           el.textContent = `class in progress — ${mins} min left`;
