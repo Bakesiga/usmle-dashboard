@@ -909,7 +909,8 @@ window.NBME = {
       paperId: "1EyZfQUClkMgztU8C2yeAIP3YZD4nWG6H" },
     { id: "nbme28", n: 28, sit: ["2026-11-07", "2026-11-08"], week: ["2026-11-16", "2026-11-27"],
       paperId: "1cWwtkmfE6MvJMka_CZPiB1s1pdNaAXtZ" },
-    { id: "nbme29", n: 29, sit: ["2026-11-28", "2026-11-29"], week: ["2026-11-30", "2026-12-11"] },
+    { id: "nbme29", n: 29, sit: ["2026-11-28", "2026-11-29"], week: ["2026-11-30", "2026-12-11"],
+      paperId: "1zMTtvXjllfFJLQKpQ9ngopw0bH_KICk0" },
     { id: "nbme30", n: 30, sit: ["2026-12-12", "2026-12-13"], week: ["2026-12-14", "2026-12-25"] },
     // Two weeks to a form puts 31 to 34 past Christmas. Left here with
     // January windows rather than deleted, so the decision to drop them or
