@@ -158,7 +158,7 @@
     <section class="l-wrap l-months" aria-label="What the class is working through">
       <div class="l-months-head">
         <span>Running daily since <b>1 June 2026</b></span>
-        <span>Live at <b>5:00 AM EAT</b>, 9:00 PM US Central</span>
+        <span>Live at <b>5:00 AM EAT</b>, <span data-tz="America/Chicago">8:00 PM</span> US Central</span>
       </div>
       <div class="l-month-row" data-months>
         <div class="l-month" data-month="5"><span class="m">June</span><span class="t">Cardiovascular, respiratory, epidemiology, general pathology</span></div>
@@ -261,7 +261,10 @@
           <article class="l-feat">
             <b class="n">01</b>
             <h3>Daily live classes</h3>
-            <p>Two and a half hours, every day of the week, 5:00 AM East Africa and 9:00 PM US Central.</p>
+            <p>Two and a half hours, every day of the week, 5:00 AM East
+              Africa, which is <span data-tz="America/Chicago">8:00 PM</span>
+              US Central and <span data-tz="America/New_York">9:00 PM</span>
+              US Eastern the evening before.</p>
           </article>
           <article class="l-feat">
             <b class="n">02</b>
@@ -342,7 +345,10 @@
               <span>The class time does not suit me. Is there another option?</span><span class="x" aria-hidden="true">+</span>
             </button>
             <div class="l-faq-a">
-              The live class is one time only, 5:00 AM in East Africa and 9:00 PM US Central. Plenty of
+              The live class is one time only, 5:00 AM in East Africa, which is
+              <span data-tz="America/Chicago">8:00 PM</span> US Central and
+              <span data-tz="America/New_York">9:00 PM</span> US Eastern the
+              evening before. Plenty of
               students watch the recording instead and use office hours for anything they want gone
               through in person.
             </div>
@@ -467,6 +473,33 @@
         if (el) el.textContent = (Math.floor(n / 10) * 10) + '+';
       };
       document.head.appendChild(script);
+    })();
+  </script>
+
+  <script>
+    // The class is anchored to 05:00 in Kampala, and East Africa keeps no
+    // daylight saving, so that instant is always 02:00 UTC. The US times
+    // are the ones that move, by an hour, twice a year. They are computed
+    // here rather than typed: a hard-coded "9:00 PM US Central" is wrong
+    // for the five months the United States is on standard time, which is
+    // exactly when the January cohort starts.
+    //
+    // The markup carries the winter value, so the page is still correct
+    // with scripting off for most of the enrolment season, and this only
+    // corrects it over the summer.
+    (function () {
+      var now = new Date();
+      var at5 = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(),
+                                  now.getUTCDate(), 2, 0));
+      Array.prototype.forEach.call(
+        document.querySelectorAll('[data-tz]'), function (el) {
+          try {
+            el.textContent = new Intl.DateTimeFormat('en-US', {
+              timeZone: el.getAttribute('data-tz'),
+              hour: 'numeric', minute: '2-digit', hour12: true
+            }).format(at5);
+          } catch (e) { /* leave the printed fallback in place */ }
+        });
     })();
   </script>
 </body>
