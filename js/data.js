@@ -968,7 +968,9 @@ window.NBME = {
       { title: "NBME 28 corrections, day 7: neurology, part 2", date: "2026-11-24",
         url: "https://us06web.zoom.us/rec/share/IpWfU_MqyOAwWkwuXEk91-1qweyDUjXEvuAuW6mXGDO0B6xT9AwRQ1ROUoAj7IPW.BbqmqnH27gQC4y54" },
       { title: "NBME 28 corrections, day 8: reproductive and endocrine", date: "2026-11-25",
-        url: "https://us06web.zoom.us/rec/share/3usics4AQfvjU7st20GK1xw-UhCGvmtciJZVibuSCURqaIRVmgibhV8okA05P_AA.4ra6XgGKZ8MAymjd?startTime=1795659012000" }
+        url: "https://us06web.zoom.us/rec/share/3usics4AQfvjU7st20GK1xw-UhCGvmtciJZVibuSCURqaIRVmgibhV8okA05P_AA.4ra6XgGKZ8MAymjd?startTime=1795659012000" },
+      { title: "NBME 28 corrections, day 9: the open class, questions from the class", date: "2026-11-27",
+        url: "https://us06web.zoom.us/rec/share/FB_HcV8MgV_NtXVxrzcos_XzYfEuWaQ2SxBAAKOumsLgGVcec-1gS3WBo6zAU34X.0jIKb7tqK86tRfK4" }
     ]
   },
 

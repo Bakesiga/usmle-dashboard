@@ -38,3 +38,7 @@ outputs/forms/
 # committed reader.gs keeps the placeholder; these two never go up.
 outputs/nbme/reader.key.txt
 outputs/nbme/reader.deploy.gs
+
+# Flyer source. Untracked and never committed: it carries Allan's
+# WhatsApp number, and this repo is public.
+advert.py
